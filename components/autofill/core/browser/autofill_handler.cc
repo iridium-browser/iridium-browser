@@ -110,10 +110,12 @@ AutofillHandler::AutofillHandler(
     : driver_(driver),
       log_manager_(log_manager),
       is_rich_query_enabled_(IsRichQueryEnabled(channel)) {
+#if 0
   if (enable_download_manager == ENABLE_AUTOFILL_DOWNLOAD_MANAGER) {
     download_manager_ = std::make_unique<AutofillDownloadManager>(
         driver, this, GetAPIKeyForUrl(channel), log_manager);
   }
+#endif
 }
 
 AutofillHandler::~AutofillHandler() = default;

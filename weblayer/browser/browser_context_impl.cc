@@ -262,7 +262,7 @@ void BrowserContextImpl::RegisterPrefs(
   // potential use cases in the future, as it is used for various purposes
   // through //chrome).
   pref_registry->RegisterBooleanPref(
-      embedder_support::kAlternateErrorPagesEnabled, true);
+      embedder_support::kAlternateErrorPagesEnabled, false);
   pref_registry->RegisterListPref(
       site_isolation::prefs::kUserTriggeredIsolatedOrigins);
 

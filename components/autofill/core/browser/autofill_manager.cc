@@ -1656,11 +1656,13 @@ AutofillManager::AutofillManager(
                                     : std::make_unique<CreditCardAccessManager>(
                                           driver, client_, personal_data_,
                                           credit_card_form_event_logger_.get());
+#if 0
   if (enable_download_manager == ENABLE_AUTOFILL_DOWNLOAD_MANAGER) {
     version_info::Channel channel = client_->GetChannel();
     download_manager_.reset(new AutofillDownloadManager(
         driver, this, GetAPIKeyForUrl(channel), client_->GetLogManager()));
   }
+#endif
   CountryNames::SetLocaleString(app_locale_);
   offer_manager_ = client_->GetAutofillOfferManager();
 }

@@ -210,7 +210,7 @@ void DnsProbeBrowserTest::SetUpOnMainThread() {
   NetErrorTabHelper::set_state_for_testing(NetErrorTabHelper::TESTING_DEFAULT);
 
   browser()->profile()->GetPrefs()->SetBoolean(
-      embedder_support::kAlternateErrorPagesEnabled, true);
+      embedder_support::kAlternateErrorPagesEnabled, false);
 
   ASSERT_TRUE(embedded_test_server()->Start());
 

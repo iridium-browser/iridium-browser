@@ -135,6 +135,7 @@ AutofillHandler::AutofillHandler(
       log_manager_(client ? client->GetLogManager() : nullptr),
       form_interactions_ukm_logger_(CreateFormInteractionsUkmLogger()),
       is_rich_query_enabled_(IsRichQueryEnabled(channel)) {
+#if 0
   if (enable_download_manager == ENABLE_AUTOFILL_DOWNLOAD_MANAGER) {
     download_manager_ = std::make_unique<AutofillDownloadManager>(
         driver, this, GetAPIKeyForUrl(channel),
@@ -142,6 +143,7 @@ AutofillHandler::AutofillHandler(
             IsRawMetadataUploadingEnabled(channel)),
         log_manager_);
   }
+#endif
   if (client) {
     translate::TranslateDriver* translate_driver = client->GetTranslateDriver();
     if (translate_driver) {

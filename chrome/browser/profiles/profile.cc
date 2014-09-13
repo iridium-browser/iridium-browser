@@ -248,7 +248,7 @@ const char Profile::kProfileKey[] = "__PROFILE__";
 void Profile::RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
   registry->RegisterBooleanPref(
       prefs::kSearchSuggestEnabled,
-      true,
+      false,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
 #if defined(OS_ANDROID)
   registry->RegisterStringPref(

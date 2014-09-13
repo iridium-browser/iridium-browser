@@ -209,6 +209,9 @@ void ExtensionSystemImpl::Shared::Init(bool extensions_enabled) {
   bool autoupdate_enabled = !profile_->IsGuestSession() &&
                             !profile_->IsEphemeralGuestProfile() &&
                             !profile_->IsSystemProfile();
+  if (autoupdate_enabled)
+    fprintf(stderr, "*** autoupdate was enabled, overriding with false\n");
+  autoupdate_enabled = false;
 #if BUILDFLAG(IS_CHROMEOS_ASH)
   if (!extensions_enabled ||
       chromeos::ProfileHelper::IsLockScreenAppProfile(profile_)) {

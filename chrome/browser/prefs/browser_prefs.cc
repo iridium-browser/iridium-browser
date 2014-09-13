@@ -600,9 +600,7 @@ void RegisterProfilePrefsForMigration(
   registry->RegisterDictionaryPref(kHashedAvailablePages);
 
   registry->RegisterDictionaryPref(kObservedSessionTime);
-
-  registry->RegisterBooleanPref(kBlockThirdPartyCookies, false);
-
+  registry->RegisterBooleanPref(kBlockThirdPartyCookies, true);
   registry->RegisterTimePref(kPluginsDeprecationInfobarLastShown, base::Time());
 
   registry->RegisterIntegerPref(kPasswordManagerOnboardingState, 0);

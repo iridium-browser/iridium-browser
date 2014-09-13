@@ -716,9 +716,7 @@ void RegisterProfilePrefsForMigration(
 #endif  // BUILDFLAG(IS_CHROMEOS_ASH)
 
   chrome_browser_net::secure_dns::RegisterProbesSettingBackupPref(registry);
-
-  registry->RegisterBooleanPref(kBlockThirdPartyCookies, false);
-
+  registry->RegisterBooleanPref(kBlockThirdPartyCookies, true);
   registry->RegisterTimePref(kPluginsDeprecationInfobarLastShown, base::Time());
 
   registry->RegisterIntegerPref(kPasswordManagerOnboardingState, 0);

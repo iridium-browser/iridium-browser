@@ -360,7 +360,7 @@ void BackgroundModeManager::RegisterPrefs(PrefRegistrySimple* registry) {
   registry->RegisterBooleanPref(prefs::kChromeCreatedLoginItem, false);
   registry->RegisterBooleanPref(prefs::kMigratedLoginItemPref, false);
 #endif
-  registry->RegisterBooleanPref(prefs::kBackgroundModeEnabled, true);
+  registry->RegisterBooleanPref(prefs::kBackgroundModeEnabled, false);
 }
 
 void BackgroundModeManager::RegisterProfile(Profile* profile) {

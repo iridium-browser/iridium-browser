@@ -23,7 +23,7 @@ enum class NetworkPredictionOptions {
   kWifiOnlyDeprecated = 1,
   kDisabled = 2,
   kExtended = 3,
-  kDefault = kWifiOnlyDeprecated,
+  kDefault = kDisabled,
 };
 
 // Enum representing possible values of the Preload Pages opt-in state. These

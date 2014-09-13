@@ -371,7 +371,7 @@ BackgroundModeManager::~BackgroundModeManager() {
 
 // static
 void BackgroundModeManager::RegisterPrefs(PrefRegistrySimple* registry) {
-  registry->RegisterBooleanPref(prefs::kBackgroundModeEnabled, true);
+  registry->RegisterBooleanPref(prefs::kBackgroundModeEnabled, false);
 }
 
 void BackgroundModeManager::RegisterProfile(Profile* profile) {

@@ -28,6 +28,7 @@ namespace {
 
 // Default (for countries with no better engine set)
 const PrepopulatedEngine* const engines_default[] = {
+    &duckduckgo,
     &google,
     &bing,
     &yahoo,
@@ -205,6 +206,7 @@ const PrepopulatedEngine* const engines_CN[] = {
     &bing,
     &google,
     &so_360,
+    &duckduckgo,
 };
 
 // Colombia
@@ -331,6 +333,7 @@ const PrepopulatedEngine* const engines_FR[] = {
     &yahoo_fr,
     &qwant,
     &ecosia,
+    &duckduckgo,
 };
 
 // United Kingdom
@@ -511,6 +514,7 @@ const PrepopulatedEngine* const engines_KR[] = {
     &daum,
     &bing,
     &yahoo,
+    &duckduckgo,
 };
 
 // Kuwait
@@ -610,6 +614,7 @@ const PrepopulatedEngine* const engines_MD[] = {
     &bing,
     &mail_ru,
     &yahoo,
+    &duckduckgo,
 };
 
 // Montenegro
@@ -880,6 +885,7 @@ const PrepopulatedEngine* const engines_TH[] = {
     &yahoo_th,
     &yandex_ru,
     &mail_ru,
+    &duckduckgo,
 };
 
 // Tunisia
@@ -970,6 +976,7 @@ const PrepopulatedEngine* const engines_VN[] = {
     &yahoo,
     &bing,
     &yandex_ru,
+    &duckduckgo,
 };
 
 // Yemen
@@ -1383,7 +1390,7 @@ std::vector<std::unique_ptr<TemplateURLData>> GetPrepopulatedEngines(
   if (default_search_provider_index) {
     const auto itr = std::find_if(
         t_urls.begin(), t_urls.end(),
-        [](const auto& t_url) { return t_url->prepopulate_id == google.id; });
+        [](const auto& t_url) { return t_url->prepopulate_id == duckduckgo.id; });
     *default_search_provider_index =
         itr == t_urls.end() ? 0 : std::distance(t_urls.begin(), itr);
   }

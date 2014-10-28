@@ -20,7 +20,7 @@
 
 namespace {
 const char kResetReportUrl[] =
-    "https://sb-ssl.google.com/safebrowsing/clientreport/chrome-reset";
+    "trk:275:about:blank"; //https://sb-ssl.google.com/safebrowsing/clientreport/chrome-reset";
 
 GURL GetClientReportUrl(const std::string& report_url) {
   GURL url(report_url);

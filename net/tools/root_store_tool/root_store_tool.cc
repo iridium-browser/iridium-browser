@@ -191,12 +191,24 @@ bool WriteRootCppFile(const RootStore& root_store,
 bool WriteEvCppFile(const RootStore& root_store,
                     const base::FilePath cpp_path) {
   // There should be at least one EV root.
-  CHECK_GT(root_store.trust_anchors_size(), 0);
+  //CHECK_GT(root_store.trust_anchors_size(), 0);
 
   std::string string_to_write =
       "// This file is auto-generated, DO NOT EDIT.\n\n"
       "static const EVMetadata kEvRootCaMetadata[] = {\n";
 
+	string_to_write +=
+"    // need some dummy thing to make compiler happy, because\n"
+"    // arraysize() is implemented as a convoluted template rather than\n"
+"    // the traditional sizeof(x)/sizeof(*x)\n"
+"    {\n"
+"        {{0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,\n"
+"          0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},\n"
+"        {\"0\"}\n"
+"    },\n"
+	;
+
+#if 0
   for (auto& anchor : root_store.trust_anchors()) {
     // Every trust anchor at this point should have a DER.
     CHECK(!anchor.der().empty());
@@ -258,6 +270,7 @@ bool WriteEvCppFile(const RootStore& root_store,
     string_to_write += "        },\n";
     string_to_write += "    },\n";
   }
+#endif
   string_to_write += "};\n";
   if (!base::WriteFile(cpp_path, string_to_write)) {
     PLOG(ERROR) << "Error writing cpp include file";

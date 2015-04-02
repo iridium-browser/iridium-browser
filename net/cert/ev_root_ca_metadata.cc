@@ -41,6 +41,15 @@ struct EVMetadata {
 
 // These certificates may be found in net/data/ssl/ev_roots.
 static const EVMetadata kEvRootCaMetadata[] = {
+    // need some dummy thing to make compiler happy, because
+    // arraysize() is implemented as a convoluted template rather than
+    // the traditional sizeof(x)/sizeof(*x)
+    {
+        {{0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+          0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}},
+        {"0"}
+    },
+#if 0
     // AC Camerfirma S.A. Chambers of Commerce Root - 2008
     // https://www.camerfirma.com
     {
@@ -590,7 +599,9 @@ static const EVMetadata kEvRootCaMetadata[] = {
           0xd2, 0x09, 0xb7, 0x37, 0xcb, 0xe2, 0xc1, 0x8c, 0xfb, 0x2c, 0x10,
           0xc0, 0xff, 0x0b, 0xcf, 0x0d, 0x32, 0x86, 0xfc, 0x1a, 0xa2}},
         {"2.16.840.1.114404.1.1.2.4.1", ""},
-    }};
+    },
+#endif
+};
 
 #endif  // defined(PLATFORM_USES_CHROMIUM_EV_METADATA)
 }  // namespace

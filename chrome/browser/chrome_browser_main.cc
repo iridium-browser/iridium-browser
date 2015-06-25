@@ -1693,11 +1693,13 @@ int ChromeBrowserMainParts::PreMainMessageLoopRunImpl() {
   // and preferences have been registered since some of the import code depends
   // on preferences.
   if (first_run::IsChromeFirstRun()) {
+#if 0
     // `profile` may be nullptr even on first run, for example when the
     // "BrowserSignin" policy is set to "Force". If so, skip the auto import.
     if (profile) {
       first_run::AutoImport(profile, master_prefs_->import_bookmarks_path);
     }
+#endif
 
     // Note: This can pop-up the first run consent dialog on Linux & Mac.
     first_run::DoPostImportTasks(master_prefs_->make_chrome_default_for_user);

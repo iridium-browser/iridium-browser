@@ -75,7 +75,7 @@ AutoConfirmForTest auto_confirm_for_test = DO_NOT_SKIP;
 // Returns true if the extension should be exposed via the chrome.management
 // API.
 bool ShouldExposeViaManagementAPI(const Extension& extension) {
-  return !Manifest::IsComponentLocation(extension.location());
+  return false;
 }
 
 std::vector<std::string> CreateWarningsList(const Extension* extension) {

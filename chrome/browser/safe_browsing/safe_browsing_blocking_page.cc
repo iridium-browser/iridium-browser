@@ -65,8 +65,7 @@ class SafeBrowsingBlockingPageFactoryImpl
     PrefService* prefs =
         Profile::FromBrowserContext(web_contents->GetBrowserContext())
             ->GetPrefs();
-    bool is_extended_reporting_opt_in_allowed =
-        IsExtendedReportingOptInAllowed(*prefs);
+    bool is_extended_reporting_opt_in_allowed = false;
     bool is_proceed_anyway_disabled =
         prefs->GetBoolean(prefs::kSafeBrowsingProceedAnywayDisabled);
 

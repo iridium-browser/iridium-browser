@@ -232,7 +232,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
     const std::string& access_token) {
   DCHECK_CURRENTLY_ON(BrowserThread::UI);
 
-  if (!enabled_) {
+  if (1) {
     if (!callback.is_null()) {
       std::move(callback).Run(GURL(request->url()), false);
     }

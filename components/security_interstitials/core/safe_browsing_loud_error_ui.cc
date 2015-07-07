@@ -26,6 +26,7 @@ namespace {
 // For malware interstitial pages, we link the problematic URL to Google's
 // diagnostic page.
 const char kSbDiagnosticUrl[] =
+/* trk:227 */
     "https://transparencyreport.google.com/safe-browsing/search?url=%s";
 
 // Constants for the V4 phishing string upgrades.

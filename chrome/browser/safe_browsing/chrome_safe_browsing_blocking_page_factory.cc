@@ -44,8 +44,7 @@ ChromeSafeBrowsingBlockingPageFactory::CreateSafeBrowsingPage(
       Profile::FromBrowserContext(web_contents->GetBrowserContext());
   // Create appropriate display options for this blocking page.
   PrefService* prefs = profile->GetPrefs();
-  bool is_extended_reporting_opt_in_allowed =
-      IsExtendedReportingOptInAllowed(*prefs);
+  bool is_extended_reporting_opt_in_allowed = false;
   bool is_proceed_anyway_disabled = IsSafeBrowsingProceedAnywayDisabled(*prefs);
 
   // Determine if any prefs need to be updated prior to showing the security

@@ -17,7 +17,11 @@
 namespace version_info {
 
 std::string GetProductNameAndVersionForUserAgent() {
-  return "Chrome/" + GetVersionNumber();
+	/*
+	 * Currently, the Iridium install base is arguably small enough that it
+	 * would users rather identifiable if the UA was changed.
+	 */
+	return "Chrome/88.0.4324.182";
 }
 
 std::string GetProductName() {

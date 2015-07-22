@@ -221,16 +221,12 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
     ClientReportPhishingRequestCallback callback) {
   DCHECK_CURRENTLY_ON(BrowserThread::UI);
 
-  if (!enabled_) {
+  if (1) {
     if (!callback.is_null())
       std::move(callback).Run(GURL(request->url()), false);
     return;
   }
 
-#if 1
-  if (!callback.is_null())
-    callback.Run(GURL(request->url()), false);
-#else
   // Fill in metadata about which model we used.
   request->set_model_filename(model_loader_->name());
   if (is_extended_reporting || is_enhanced_reporting) {
@@ -291,6 +287,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
   resource_request->url = GetClientReportUrl(kClientReportPhishingUrl);
   resource_request->method = "POST";
   resource_request->load_flags = net::LOAD_DISABLE_CACHE;
+  resource_request->credentials_mode = network::mojom::CredentialsMode::kOmit;
   auto loader = network::SimpleURLLoader::Create(std::move(resource_request),
                                                  traffic_annotation);
   loader->AttachStringForUpload(request_data, "application/octet-stream");
@@ -309,7 +306,6 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
 
   // Record that we made a request
   phishing_report_times_.push(base::Time::Now());
-#endif
 }
 
 void ClientSideDetectionService::HandlePhishingVerdict(

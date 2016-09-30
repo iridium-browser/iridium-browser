@@ -253,14 +253,14 @@ base::CallbackListSubscription AddSyncEnabledOrDisabledCallback(
 void PasswordManager::RegisterProfilePrefs(
     user_prefs::PrefRegistrySyncable* registry) {
   registry->RegisterBooleanPref(
-      prefs::kCredentialsEnableService, true,
+      prefs::kCredentialsEnableService, false,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PRIORITY_PREF);
 #if BUILDFLAG(IS_IOS)
   registry->RegisterBooleanPref(prefs::kCredentialProviderEnabledOnStartup,
                                 false);
 #endif  // BUILDFLAG(IS_IOS)
   registry->RegisterBooleanPref(
-      prefs::kCredentialsEnableAutosignin, true,
+      prefs::kCredentialsEnableAutosignin, false,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PRIORITY_PREF);
   registry->RegisterStringPref(prefs::kSyncPasswordHash, std::string(),
                                PrefRegistry::NO_REGISTRATION_FLAGS);

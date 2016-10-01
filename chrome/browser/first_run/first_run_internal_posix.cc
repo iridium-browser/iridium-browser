@@ -14,6 +14,7 @@
 #include "components/metrics/metrics_pref_names.h"
 #include "components/metrics/metrics_reporting_default_state.h"
 #include "components/startup_metric_utils/browser/startup_metric_utils.h"
+#include <cstdio>
 
 namespace first_run {
 
@@ -62,6 +63,9 @@ bool ShouldShowFirstRunDialog() {
   // For real first runs, Mac and Desktop Linux initialize the default metrics
   // reporting state when the first run dialog is shown.
   bool is_opt_in = first_run::IsMetricsReportingOptIn();
+      if (is_opt_in) {
+        fprintf(stderr, "*** metrics_reporting = 1\n");
+      }
   metrics::RecordMetricsReportingDefaultState(
       g_browser_process->local_state(),
       is_opt_in ? metrics::EnableMetricsDefault::OPT_IN

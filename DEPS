@@ -41,6 +41,7 @@ gclient_gn_args = [
   'checkout_google_benchmark',
   'checkout_ios_webkit',
   'checkout_nacl',
+  'checkout_never',
   'checkout_openxr',
   'checkout_rts_model',
   'checkout_src_internal',
@@ -67,6 +68,7 @@ vars = {
   # variables.
   # TODO(ehmaldonado): Remove this once the bug in gclient is fixed.
   'checkout_android': False,
+  'checkout_never': False,
 
   # By default, don't check out Fuchsia. Will be overridden by gclient
   # variables.
@@ -110,7 +112,7 @@ vars = {
 
   # Check out and download nacl by default, unless on an arm mac.
   # This can be disabled e.g. with custom_vars.
-  'checkout_nacl': 'not (host_os == "mac" and host_cpu == "arm64")',
+  'checkout_nacl': False,
 
   # By default, do not check out src-internal. This can be overridden e.g. with
   # custom_vars.
@@ -163,7 +165,7 @@ vars = {
   # support for other platforms may be added in the future.
   'checkout_openxr' : 'checkout_win',
 
-  'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration != "small"',
+  'checkout_instrumented_libraries': False,
 
   # By default bot checkouts the WPR archive files only when this
   # flag is set True.
@@ -3996,35 +3998,35 @@ hooks = [
   {
     'name': 'sysroot_arm',
     'pattern': '.',
-    'condition': 'checkout_linux and checkout_arm',
+    'condition': 'checkout_never',
     'action': ['python3', 'src/build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=arm'],
   },
   {
     'name': 'sysroot_arm64',
     'pattern': '.',
-    'condition': 'checkout_linux and checkout_arm64',
+    'condition': 'checkout_never',
     'action': ['python3', 'src/build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=arm64'],
   },
   {
     'name': 'sysroot_x86',
     'pattern': '.',
-    'condition': 'checkout_linux and (checkout_x86 or checkout_x64)',
+    'condition': 'checkout_never',
     'action': ['python3', 'src/build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=x86'],
   },
   {
     'name': 'sysroot_mips',
     'pattern': '.',
-    'condition': 'checkout_linux and checkout_mips',
+    'condition': 'checkout_never',
     'action': ['python3', 'src/build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=mips'],
   },
   {
     'name': 'sysroot_mips64',
     'pattern': '.',
-    'condition': 'checkout_linux and checkout_mips64',
+    'condition': 'checkout_never',
     'action': ['python3', 'src/build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=mips64el'],
   },
@@ -4032,7 +4034,7 @@ hooks = [
   {
     'name': 'sysroot_x64',
     'pattern': '.',
-    'condition': 'checkout_linux and checkout_x64',
+    'condition': 'checkout_never',
     'action': ['python3', 'src/build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=x64'],
   },
@@ -4068,7 +4070,7 @@ hooks = [
     # Note: On Win, this should run after win_toolchain, as it may use it.
     'name': 'clang',
     'pattern': '.',
-    'condition': 'not llvm_force_head_revision',
+    'condition': 'checkout_never',
     'action': ['python3', 'src/tools/clang/scripts/update.py'],
   },
   {
@@ -4083,7 +4085,7 @@ hooks = [
     # Note: On Win, this should run after win_toolchain, as it may use it.
     'name': 'clang_tot',
     'pattern': '.',
-    'condition': 'llvm_force_head_revision',
+    'condition': 'checkout_never',
     'action': ['python3', 'src/tools/clang/scripts/build.py',
                '--llvm-force-head-revision',
                '--with-android={checkout_android}',
@@ -4093,7 +4095,7 @@ hooks = [
     # This is supposed to support the same set of platforms as 'clang' above.
     'name': 'clang_coverage',
     'pattern': '.',
-    'condition': 'checkout_clang_coverage_tools',
+    'condition': 'checkout_never',
     'action': ['python3', 'src/tools/clang/scripts/update.py',
                '--package=coverage_tools'],
   },
@@ -4286,7 +4288,7 @@ hooks = [
   {
     'name': 'rc_linux',
     'pattern': '.',
-    'condition': 'checkout_win and host_os == "linux"',
+    'condition': 'checkout_never',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4298,6 +4300,7 @@ hooks = [
  {
     'name': 'test_fonts',
     'pattern': '.',
+    'condition': 'checkout_never',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4311,6 +4314,7 @@ hooks = [
   {
     'name': 'opus_test_files',
     'pattern': '.',
+    'condition': 'checkout_never',
     'action': ['python3',
                'src/third_party/depot_tools/download_from_google_storage.py',
                '--no_auth',
@@ -4336,7 +4340,7 @@ hooks = [
   {
     'name': 'msan_chained_origins_focal',
     'pattern': '.',
-    'condition': 'checkout_instrumented_libraries',
+    'condition': 'checkout_never',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4348,7 +4352,7 @@ hooks = [
   {
     'name': 'msan_no_origins_focal',
     'pattern': '.',
-    'condition': 'checkout_instrumented_libraries',
+    'condition': 'checkout_never',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4360,6 +4364,7 @@ hooks = [
   {
     'name': 'wasm_fuzzer',
     'pattern': '.',
+    'condition': 'checkout_never',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4374,7 +4379,7 @@ hooks = [
   {
     'name': 'node_linux64',
     'pattern': '.',
-    'condition': 'host_os == "linux"',
+    'condition': 'checkout_never',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4529,6 +4534,7 @@ hooks = [
   {
     'name': 'zucchini_testdata',
     'pattern': '.',
+    'condition': 'checkout_never',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4552,7 +4558,7 @@ hooks = [
   {
     'name': 'Fetch Android AFDO profile',
     'pattern': '.',
-    'condition': 'checkout_android',
+    'condition': 'checkout_never',
     'action': [ 'python3',
                 'src/tools/download_optimization_profile.py',
                 '--newest_state=src/chrome/android/profiles/newest.txt',

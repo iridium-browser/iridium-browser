@@ -13,6 +13,7 @@ namespace {
 // Linux toolkits only have a global setting for whether animations should be
 // enabled.  So use it for all of the specific settings that Chrome needs.
 bool AnimationsEnabled() {
+	return false;
   auto* linux_ui = ui::LinuxUi::instance();
   return !linux_ui || linux_ui->AnimationsEnabled();
 }

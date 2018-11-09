@@ -56,7 +56,7 @@ const base::Feature kHideFileUrlScheme{
     "OmniboxUIExperimentHideFileUrlScheme",
     // Android and iOS don't have the File security chip, and therefore still
     // need to show the file scheme.
-    enabled_by_default_desktop_only};
+    base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Feature used to force on the experiment of transmission of tail suggestions
 // from GWS to this client, currently testing for desktop.

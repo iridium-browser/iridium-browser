@@ -187,7 +187,7 @@ void RegisterLocalStatePrefs(PrefRegistrySimple* registry) {
   // Preferences related to Enterprise policies.
   registry->RegisterListPref(prefs::kRestrictAccountsToPatterns);
   registry->RegisterIntegerPref(prefs::kBrowserSigninPolicy,
-                                static_cast<int>(BrowserSigninMode::kEnabled));
+                                static_cast<int>(BrowserSigninMode::kDisabled));
 }
 
 void RegisterBrowserStatePrefs(user_prefs::PrefRegistrySyncable* registry) {
@@ -289,7 +289,7 @@ void RegisterBrowserStatePrefs(user_prefs::PrefRegistrySyncable* registry) {
   }
 
   // Preference related to the browser sign-in policy that is being deprecated.
-  registry->RegisterBooleanPref(kSigninAllowedByPolicy, true);
+  registry->RegisterBooleanPref(kSigninAllowedByPolicy, false);
 }
 
 // This method should be periodically pruned of year+ old migrations.

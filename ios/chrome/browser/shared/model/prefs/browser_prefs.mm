@@ -200,7 +200,7 @@ void RegisterLocalStatePrefs(PrefRegistrySimple* registry) {
   // Preferences related to Enterprise policies.
   registry->RegisterListPref(prefs::kRestrictAccountsToPatterns);
   registry->RegisterIntegerPref(prefs::kBrowserSigninPolicy,
-                                static_cast<int>(BrowserSigninMode::kEnabled));
+                                static_cast<int>(BrowserSigninMode::kDisabled));
   registry->RegisterBooleanPref(prefs::kAppStoreRatingPolicyEnabled, true);
 
   registry->RegisterBooleanPref(prefs::kLensCameraAssistedSearchPolicyAllowed,

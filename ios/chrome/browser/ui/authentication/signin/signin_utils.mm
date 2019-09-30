@@ -194,6 +194,7 @@ void RecordUpgradePromoSigninStarted(
 }
 
 bool IsSigninAllowedByPolicy() {
+  return false;
   BrowserSigninMode policy_mode = static_cast<BrowserSigninMode>(
       GetApplicationContext()->GetLocalState()->GetInteger(
           prefs::kBrowserSigninPolicy));

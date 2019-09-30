@@ -64,7 +64,7 @@ namespace ash::assistant {
 namespace {
 
 constexpr char kScopeAssistant[] =
-    "https://www.googleapis.com/auth/assistant-sdk-prototype";
+    "trk:230:https://www.googleapis.com/auth/assistant-sdk-prototype";
 
 constexpr char kServiceStateHistogram[] = "Assistant.ServiceState";
 

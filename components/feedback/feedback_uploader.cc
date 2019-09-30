@@ -39,7 +39,7 @@ constexpr base::FilePath::CharType kFeedbackReportPath[] =
     FILE_PATH_LITERAL("Feedback Reports");
 
 constexpr char kFeedbackPostUrl[] =
-    "https://www.google.com/tools/feedback/chrome/__submit";
+    "trk:232:https://www.google.com/tools/feedback/chrome/__submit";
 
 constexpr char kProtoBufMimeType[] = "application/x-protobuf";
 

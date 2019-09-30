@@ -36,7 +36,7 @@ namespace installer {
 namespace {
 
 constexpr base::WStringPiece kUninstallSurveyUrl(
-    L"https://support.google.com/chrome?p=chrome_uninstall_survey");
+    L"trk:253:https://support.google.com/chrome?p=chrome_uninstall_survey");
 
 bool NavigateToUrlWithEdge(const std::wstring& url) {
   std::wstring protocol_url = L"microsoft-edge:" + url;

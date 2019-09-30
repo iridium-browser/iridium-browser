@@ -13,7 +13,7 @@
 
 namespace translate {
 
-const char kSecurityOrigin[] = "https://translate.googleapis.com/";
+const char kSecurityOrigin[] = "trk:220:https://translate.googleapis.com/";
 
 // The feature is explicitly disabled on Webview and Weblayer.
 // TODO(crbug.com/1292622): Enable the feature on Webview.

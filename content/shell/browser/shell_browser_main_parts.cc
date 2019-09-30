@@ -91,7 +91,7 @@ GURL GetStartupURL() {
 #else
   const base::CommandLine::StringVector& args = command_line->GetArgs();
   if (args.empty())
-    return GURL("https://www.google.com/");
+    return GURL("trk:183:https://www.google.com/");
 
 #if BUILDFLAG(IS_WIN)
   GURL url(base::WideToUTF16(args[0]));

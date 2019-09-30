@@ -499,7 +499,7 @@ void WebRtcLogUploader::UploadCompressedLog(
           }
         })");
 
-  constexpr char kUploadURL[] = "https://clients2.google.com/cr/report";
+  constexpr char kUploadURL[] = "trk:301:https://clients2.google.com/cr/report";
   auto resource_request = std::make_unique<network::ResourceRequest>();
   resource_request->url = !upload_url_for_testing_.is_empty()
                               ? upload_url_for_testing_

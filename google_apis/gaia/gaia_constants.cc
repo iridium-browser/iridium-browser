@@ -14,21 +14,21 @@ const char kChromeSource[] = "ChromiumBrowser";
 const char kUnexpectedServiceResponse[] = "UnexpectedServiceResponse";
 
 // OAuth scopes.
-const char kOAuth1LoginScope[] = "https://www.google.com/accounts/OAuthLogin";
+const char kOAuth1LoginScope[] = "trk:181:https://www.google.com/accounts/OAuthLogin";
 
 // Service/scope names for device management (cloud-based policy) server.
 const char kDeviceManagementServiceOAuth[] =
-    "https://www.googleapis.com/auth/chromeosdevicemanagement";
+    "trk:102:https://www.googleapis.com/auth/chromeosdevicemanagement";
 
 // OAuth2 scope for access to all Google APIs.
-const char kAnyApiOAuth2Scope[] = "https://www.googleapis.com/auth/any-api";
+const char kAnyApiOAuth2Scope[] = "trk:103:https://www.googleapis.com/auth/any-api";
 
 // OAuth2 scope for access to Chrome sync APIs
 const char kChromeSyncOAuth2Scope[] =
-    "https://www.googleapis.com/auth/chromesync";
+    "trk:104:https://www.googleapis.com/auth/chromesync";
 // OAuth2 scope for access to the Chrome Sync APIs for managed profiles.
 const char kChromeSyncSupervisedOAuth2Scope[] =
-    "https://www.googleapis.com/auth/chromesync_playpen";
+    "trk:105:https://www.googleapis.com/auth/chromesync_playpen";
 
 // OAuth2 scope for parental consent logging for secondary account addition.
 const char kKidManagementPrivilegedOAuth2Scope[] =
@@ -36,17 +36,17 @@ const char kKidManagementPrivilegedOAuth2Scope[] =
 
 // OAuth2 scope for access to Google Family Link Supervision Setup.
 const char kKidsSupervisionSetupChildOAuth2Scope[] =
-    "https://www.googleapis.com/auth/kids.supervision.setup.child";
+    "trk:262:https://www.googleapis.com/auth/kids.supervision.setup.child";
 
 // OAuth2 scope for access to Google Talk APIs (XMPP).
 const char kGoogleTalkOAuth2Scope[] =
-    "https://www.googleapis.com/auth/googletalk";
+    "trk:106:https://www.googleapis.com/auth/googletalk";
 
 // OAuth2 scope for access to Google account information.
 const char kGoogleUserInfoEmail[] =
-    "https://www.googleapis.com/auth/userinfo.email";
+    "trk:107:https://www.googleapis.com/auth/userinfo.email";
 const char kGoogleUserInfoProfile[] =
-    "https://www.googleapis.com/auth/userinfo.profile";
+    "trk:260:https://www.googleapis.com/auth/userinfo.profile";
 
 // OAuth2 scope for IP protection proxy authentication
 const char kIpProtectionAuthScope[] =
@@ -58,7 +58,7 @@ const char kParentApprovalOAuth2Scope[] =
 
 // OAuth2 scope for access to the people API (read-only).
 const char kPeopleApiReadOnlyOAuth2Scope[] =
-    "https://www.googleapis.com/auth/peopleapi.readonly";
+    "trk:208:https://www.googleapis.com/auth/peopleapi.readonly";
 
 // OAuth2 scope for access to the programmatic challenge API (read-only).
 const char kProgrammaticChallengeOAuth2Scope[] =
@@ -142,21 +142,21 @@ const char kNearbyPresenceOAuth2Scope[] =
     "https://www.googleapis.com/auth/nearbypresence-pa";
 
 // OAuth2 scopes for access to GCM account tracker.
-const char kGCMGroupServerOAuth2Scope[] = "https://www.googleapis.com/auth/gcm";
+const char kGCMGroupServerOAuth2Scope[] = "trk:114:https://www.googleapis.com/auth/gcm";
 const char kGCMCheckinServerOAuth2Scope[] =
-    "https://www.googleapis.com/auth/android_checkin";
+    "trk:115:https://www.googleapis.com/auth/android_checkin";
 
 // OAuth2 scope for access to readonly Chrome web store.
 const char kChromeWebstoreOAuth2Scope[] =
-    "https://www.googleapis.com/auth/chromewebstore.readonly";
+    "trk:116:https://www.googleapis.com/auth/chromewebstore.readonly";
 
 // OAuth2 scope for access to Account Capabilities API.
 const char kAccountCapabilitiesOAuth2Scope[] =
-    "https://www.googleapis.com/auth/account.capabilities";
+    "trk:117:https://www.googleapis.com/auth/account.capabilities";
 
 // OAuth2 scope for support content API.
 const char kSupportContentOAuth2Scope[] =
-    "https://www.googleapis.com/auth/supportcontent";
+    "trk:118:https://www.googleapis.com/auth/supportcontent";
 
 // OAuth 2 scope for NTP Photos module API.
 const char kPhotosModuleOAuth2Scope[] =

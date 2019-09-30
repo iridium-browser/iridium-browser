@@ -40,11 +40,11 @@ using extensions::DictionaryBuilder;
 
 // OAuth2 Token scopes
 constexpr char kCloudDevicesOAuth2Scope[] =
-    "https://www.googleapis.com/auth/clouddevices";
+    "trk:233:https://www.googleapis.com/auth/clouddevices";
 constexpr char kChromotingRemoteSupportOAuth2Scope[] =
-    "https://www.googleapis.com/auth/chromoting.remote.support";
+    "trk:234:https://www.googleapis.com/auth/chromoting.remote.support";
 constexpr char kTachyonOAuth2Scope[] =
-    "https://www.googleapis.com/auth/tachyon";
+    "trk:235:https://www.googleapis.com/auth/tachyon";
 
 // Job parameters fields:
 

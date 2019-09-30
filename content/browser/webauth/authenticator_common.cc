@@ -190,9 +190,9 @@ base::Optional<std::string> ProcessAppIdExtension(std::string appid,
   // special-case AppIDs. Firefox also does this:
   // https://groups.google.com/forum/#!msg/mozilla.dev.platform/Uiu3fwnA2xw/201ynAiPAQAJ
   const GURL kGstatic1 =
-      GURL("https://www.gstatic.com/securitykey/origins.json");
+      GURL("trk:276:https://www.gstatic.com/securitykey/origins.json");
   const GURL kGstatic2 =
-      GURL("https://www.gstatic.com/securitykey/a/google.com/origins.json");
+      GURL("trk:277:https://www.gstatic.com/securitykey/a/google.com/origins.json");
   DCHECK(kGstatic1.is_valid() && kGstatic2.is_valid());
 
   if (origin.DomainIs("google.com") && !appid_url.has_ref() &&

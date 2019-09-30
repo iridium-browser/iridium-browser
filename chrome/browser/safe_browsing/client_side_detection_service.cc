@@ -57,7 +57,7 @@ const int ClientSideDetectionService::kNegativeCacheIntervalDays = 1;
 const int ClientSideDetectionService::kPositiveCacheIntervalMinutes = 30;
 
 const char ClientSideDetectionService::kClientReportPhishingUrl[] =
-    "https://sb-ssl.google.com/safebrowsing/clientreport/phishing";
+    "trk:148:https://sb-ssl.google.com/safebrowsing/clientreport/phishing";
 
 struct ClientSideDetectionService::ClientPhishingReportInfo {
   std::unique_ptr<network::SimpleURLLoader> loader;

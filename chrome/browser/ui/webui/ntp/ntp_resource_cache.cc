@@ -78,17 +78,17 @@ namespace {
 // The URL for the the Learn More page shown on incognito new tab.
 const char kLearnMoreIncognitoUrl[] =
 #if defined(OS_CHROMEOS)
-    "https://support.google.com/chromebook/?p=incognito";
+    "trk:246:https://support.google.com/chromebook/?p=incognito";
 #else
-    "https://support.google.com/chrome/?p=incognito";
+    "trk:247:https://support.google.com/chrome/?p=incognito";
 #endif
 
 // The URL for the Learn More page shown on guest session new tab.
 const char kLearnMoreGuestSessionUrl[] =
 #if defined(OS_CHROMEOS)
-    "https://support.google.com/chromebook/?p=chromebook_guest";
+    "trk:248:https://support.google.com/chromebook/?p=chromebook_guest";
 #else
-    "https://support.google.com/chrome/?p=ui_guest";
+    "trk:261:https://support.google.com/chrome/?p=ui_guest";
 #endif
 
 // The URL for the Learn More page shown on ephermal guest session new tab.

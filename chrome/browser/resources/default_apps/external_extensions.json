@@ -24,15 +24,15 @@
   },
   // Google Sheets
   "aapocclcgogkmnckokdopfmhonfmgoek" : {
-    "external_update_url": "https://clients2.google.com/service/update2/crx"
+    "external_update_url": "trk:03:https://clients2.google.com/service/update2/crx"
   },
   // Google Slides
   "felcaaldnbdncclmgdcncolpebgiejap" : {
-    "external_update_url": "https://clients2.google.com/service/update2/crx"
+    "external_update_url": "trk:04:https://clients2.google.com/service/update2/crx"
   },
   // Drive extension
   "ghbmnnjooekpmoecnnnilnnbdlolhkhi" : {
-    "external_update_url": "https://clients2.google.com/service/update2/crx"
+    "external_update_url": "trk:04:https://clients2.google.com/service/update2/crx"
   }
 }
 

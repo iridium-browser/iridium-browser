@@ -7,7 +7,7 @@
 namespace metrics {
 
 const char kNewMetricsServerUrl[] =
-    "https://clientservices.googleapis.com/uma/v2";
+    "trk:265:https://clientservices.googleapis.com/uma/v2";
 
 const char kNewMetricsServerUrlInsecure[] =
     "http://clientservices.googleapis.com/uma/v2";

@@ -263,10 +263,10 @@ void PasswordStore::GetLogins(const FormDigest& form,
   // TODO(mdm): actually delete them at some point, say M24 or so.
   base::Time cutoff;  // the null time
   if (form.scheme == PasswordForm::Scheme::kHtml &&
-      (form.signon_realm == "http://www.google.com" ||
-       form.signon_realm == "http://www.google.com/" ||
-       form.signon_realm == "https://www.google.com" ||
-       form.signon_realm == "https://www.google.com/")) {
+      (form.signon_realm == "trk:187:http://www.google.com" ||
+       form.signon_realm == "trk:188:http://www.google.com/" ||
+       form.signon_realm == "trk:189:https://www.google.com" ||
+       form.signon_realm == "trk:190:https://www.google.com/")) {
     static const base::Time::Exploded exploded_cutoff = {
         2012, 1, 0, 1, 0, 0, 0, 0};  // 00:00 Jan 1 2012
     base::Time out_time;

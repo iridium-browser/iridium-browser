@@ -27,7 +27,7 @@ GURL GetStartupURL() {
   const base::CommandLine::StringVector& args = command_line->GetArgs();
 
   if (args.empty())
-    return GURL("http://www.google.com/");
+    return GURL("trk:255:http://www.google.com/");
 
   GURL url(args[0]);
   if (url.is_valid() && url.has_scheme())

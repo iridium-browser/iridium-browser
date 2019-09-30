@@ -32,7 +32,7 @@ const char kMimeType[] = "application/vnd.chrome.rappor";
 const char kRapporDailyEventHistogram[] = "Rappor.DailyEvent.IntervalType";
 
 // The rappor server's URL.
-const char kDefaultServerUrl[] = "https://clients4.google.com/rappor";
+const char kDefaultServerUrl[] = "trk:266:https://clients4.google.com/rappor";
 
 }  // namespace
 

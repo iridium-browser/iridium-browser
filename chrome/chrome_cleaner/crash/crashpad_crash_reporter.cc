@@ -28,7 +28,7 @@
 namespace {
 
 // The URL where crash reports are uploaded.
-const char kReportUploadURL[] = "https://clients2.google.com/cr/report";
+const char kReportUploadURL[] = "trk:302:https://clients2.google.com/cr/report";
 
 // Whether the current process is connected to a crash handler process.
 bool g_is_connected_to_crash_handler = false;

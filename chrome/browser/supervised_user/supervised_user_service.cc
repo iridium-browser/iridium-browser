@@ -87,7 +87,7 @@ namespace {
 
 // The URL from which to download a host denylist if no local one exists yet.
 const char kDenylistURL[] =
-    "https://www.gstatic.com/chrome/supervised_user/denylist-20141001-1k.bin";
+    "trk:272:https://www.gstatic.com/chrome/supervised_user/denylist-20141001-1k.bin";
 // The filename under which we'll store the denylist (in the user data dir).
 const char kDenylistFilename[] = "su-denylist.bin";
 

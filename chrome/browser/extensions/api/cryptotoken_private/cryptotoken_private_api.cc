@@ -52,8 +52,8 @@ namespace {
 
 const char kGoogleDotCom[] = "google.com";
 constexpr const char* kGoogleGstaticAppIds[] = {
-    "https://www.gstatic.com/securitykey/origins.json",
-    "https://www.gstatic.com/securitykey/a/google.com/origins.json"};
+    "trk:273:https://www.gstatic.com/securitykey/origins.json",
+    "trk:274:https://www.gstatic.com/securitykey/a/google.com/origins.json"};
 
 // ContainsAppIdByHash returns true iff the SHA-256 hash of one of the
 // elements of |list| equals |hash|.

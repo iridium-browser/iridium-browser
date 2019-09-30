@@ -92,9 +92,9 @@ enum class RequestExtension {
 namespace {
 
 constexpr char kGstaticAppId[] =
-    "https://www.gstatic.com/securitykey/origins.json";
+    "trk:276:https://www.gstatic.com/securitykey/origins.json";
 constexpr char kGstaticCorpAppId[] =
-    "https://www.gstatic.com/securitykey/a/google.com/origins.json";
+    "trk:277:https://www.gstatic.com/securitykey/a/google.com/origins.json";
 
 WebAuthenticationDelegate* GetWebAuthenticationDelegate() {
   return GetContentClient()->browser()->GetWebAuthenticationDelegate();

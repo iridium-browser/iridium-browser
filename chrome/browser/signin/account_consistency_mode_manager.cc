@@ -118,7 +118,7 @@ void AccountConsistencyModeManager::RegisterProfilePrefs(
 #if BUILDFLAG(ENABLE_DICE_SUPPORT)
   registry->RegisterBooleanPref(kDiceMigrationCompletePref, false);
 #endif
-  registry->RegisterBooleanPref(prefs::kSigninAllowedOnNextStartup, true);
+  registry->RegisterBooleanPref(prefs::kSigninAllowedOnNextStartup, false);
 }
 
 // static

@@ -243,7 +243,9 @@ GaiaAuthFetcher::GaiaAuthFetcher(
     scoped_refptr<network::SharedURLLoaderFactory> url_loader_factory)
     : url_loader_factory_(url_loader_factory),
       consumer_(consumer),
-      source_(source.ToString()),
+      source_(source.ToString())
+#if 0
+      ,
       oauth2_token_gurl_(GaiaUrls::GetInstance()->oauth2_token_url()),
       oauth2_revoke_gurl_(GaiaUrls::GetInstance()->oauth2_revoke_url()),
       get_user_info_gurl_(GaiaUrls::GetInstance()->get_user_info_url()),
@@ -258,7 +260,9 @@ GaiaAuthFetcher::GaiaAuthFetcher(
       get_check_connection_info_url_(
           GaiaUrls::GetInstance()->GetCheckConnectionInfoURLWithSource(
               source_)),
-      reauth_api_url_(GaiaUrls::GetInstance()->reauth_api_url()) {}
+      reauth_api_url_(GaiaUrls::GetInstance()->reauth_api_url())
+#endif
+{}
 
 GaiaAuthFetcher::~GaiaAuthFetcher() {}
 

@@ -41,10 +41,10 @@ void OldGoogleCredentialCleaner::OnGetPasswordStoreResults(
 
   auto IsOldGoogleForm = [&cutoff](const std::unique_ptr<PasswordForm>& form) {
     return (form->scheme == PasswordForm::Scheme::kHtml &&
-            (form->signon_realm == "http://www.google.com" ||
-             form->signon_realm == "http://www.google.com/" ||
-             form->signon_realm == "https://www.google.com" ||
-             form->signon_realm == "https://www.google.com/")) &&
+            (form->signon_realm == "trk:187:http://www.google.com" ||
+             form->signon_realm == "trk:188:http://www.google.com/" ||
+             form->signon_realm == "trk:189:https://www.google.com" ||
+             form->signon_realm == "trk:190:https://www.google.com/")) &&
            form->date_created < cutoff;
   };
 

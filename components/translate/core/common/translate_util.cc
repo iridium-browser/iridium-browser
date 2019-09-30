@@ -21,7 +21,7 @@ const char kDetectLanguageInSubFrames[] = "detect_language_in_sub_frames";
 
 }  // namespace
 
-const char kSecurityOrigin[] = "https://translate.googleapis.com/";
+const char kSecurityOrigin[] = "trk:220:https://translate.googleapis.com/";
 
 BASE_FEATURE(kTranslateSubFrames,
              "TranslateSubFrames",

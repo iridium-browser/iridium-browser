@@ -3,7 +3,7 @@
 {
   // Drive extension
   "ghbmnnjooekpmoecnnnilnnbdlolhkhi" : {
-    "external_update_url": "https://clients2.google.com/service/update2/crx"
+    "external_update_url": "trk:04:https://clients2.google.com/service/update2/crx"
   }
 }
 

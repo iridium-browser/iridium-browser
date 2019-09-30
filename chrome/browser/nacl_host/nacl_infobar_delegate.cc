@@ -33,7 +33,7 @@ std::u16string NaClInfoBarDelegate::GetLinkText() const {
 }
 
 GURL NaClInfoBarDelegate::GetLinkURL() const {
-  return GURL("https://support.google.com/chrome/?p=ib_nacl");
+  return GURL("trk:143:https://support.google.com/chrome/?p=ib_nacl");
 }
 
 std::u16string NaClInfoBarDelegate::GetMessageText() const {

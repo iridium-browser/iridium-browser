@@ -26,7 +26,7 @@ const char kJabberNamespace[] = "jabber:client";
 const char kJingleNamespace[] = "urn:xmpp:jingle:1";
 
 // Namespace for transport messages when using standard ICE.
-const char kIceTransportNamespace[] = "google:remoting:ice";
+const char kIceTransportNamespace[] = "trk:100:google:remoting:ice";
 
 const char kWebrtcTransportNamespace[] = "google:remoting:webrtc";
 

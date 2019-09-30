@@ -273,7 +273,7 @@ GURL SpellcheckHunspellDictionary::GetDictionaryURL() {
   DCHECK(!bdict_file.empty());
 
   static const char kDownloadServerUrl[] =
-      "https://redirector.gvt1.com/edgedl/chrome/dict/";
+      "trk:173:https://redirector.gvt1.com/edgedl/chrome/dict/";
 
   return GURL(std::string(kDownloadServerUrl) +
               base::ToLowerASCII(bdict_file));

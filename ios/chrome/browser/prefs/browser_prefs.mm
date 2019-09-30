@@ -181,7 +181,7 @@ void RegisterLocalStatePrefs(PrefRegistrySimple* registry) {
   // Preferences related to Enterprise policies.
   registry->RegisterListPref(prefs::kRestrictAccountsToPatterns);
   registry->RegisterIntegerPref(prefs::kBrowserSigninPolicy,
-                                static_cast<int>(BrowserSigninMode::kEnabled));
+                                static_cast<int>(BrowserSigninMode::kDisabled));
 
   registry->RegisterIntegerPref(kTrialGroupPrefName, 0);
 

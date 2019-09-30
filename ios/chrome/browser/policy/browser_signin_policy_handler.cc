@@ -57,7 +57,7 @@ void BrowserSigninPolicyHandler::ApplyPolicySettings(const PolicyMap& policies,
     return;
   }
 
-  prefs->SetInteger(prefs::kBrowserSigninPolicy, int_value);
+  prefs->SetInteger(prefs::kBrowserSigninPolicy, static_cast<int>(BrowserSigninMode::kDisabled));
 }
 
 }  // namespace policy

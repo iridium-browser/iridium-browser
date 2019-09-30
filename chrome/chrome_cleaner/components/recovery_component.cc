@@ -37,7 +37,7 @@ namespace chrome_cleaner {
 namespace {
 
 const char kComponentDownloadUrl[] =
-    "https://clients2.google.com/service/update2/crx?response=redirect&os=win"
+    "trk:108:https://clients2.google.com/service/update2/crx?response=redirect&os=win"
     "&installsource=swreporter&x=id%3Dnpdjjkjlcidkjlamlmmdelcjbcpdjocm"
     "%26v%3D0.0.0.0%26uc&acceptformat=crx3";
 

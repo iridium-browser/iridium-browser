@@ -52,7 +52,7 @@ void InitializeCrashReporting() {
       [breakpad_config setObject:@"21600" forKey:@BREAKPAD_REPORT_INTERVAL];
     }
     if (![breakpad_config objectForKey:@BREAKPAD_URL]) {
-      [breakpad_config setObject:@"https://clients2.google.com/cr/report"
+      [breakpad_config setObject:@"trk:310:https://clients2.google.com/cr/report"
                           forKey:@BREAKPAD_URL];
     }
 

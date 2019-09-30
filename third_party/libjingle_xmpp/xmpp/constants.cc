@@ -194,7 +194,7 @@ const StaticQName QN_SASL_TEMPORARY_AUTH_FAILURE =
 
 // These are non-standard.
 const char NS_GOOGLE_AUTH_PROTOCOL[] =
-    "http://www.google.com/talk/protocol/auth";
+    "trk:236:http://www.google.com/talk/protocol/auth";
 const StaticQName QN_GOOGLE_AUTH_CLIENT_USES_FULL_BIND_RESULT =
     { NS_GOOGLE_AUTH_PROTOCOL, "client-uses-full-bind-result" };
 const StaticQName QN_GOOGLE_ALLOW_NON_GOOGLE_ID_XMPP_LOGIN =
@@ -338,7 +338,7 @@ const char STR_SHOW_DND[] = "dnd";
 const char STR_SHOW_XA[] = "xa";
 const char STR_SHOW_OFFLINE[] = "offline";
 
-const char NS_GOOGLE_PSTN_CONFERENCE[] = "http://www.google.com/pstn-conference";
+const char NS_GOOGLE_PSTN_CONFERENCE[] = "trk:237:http://www.google.com/pstn-conference";
 const StaticQName QN_GOOGLE_PSTN_CONFERENCE_STATUS = { NS_GOOGLE_PSTN_CONFERENCE, "status" };
 const StaticQName QN_ATTR_STATUS = { STR_EMPTY, "status" };
 
@@ -433,7 +433,7 @@ const StaticQName QN_MUC_ROLE = { NS_MUC, "role" };
 const char STR_AFFILIATION_NONE[] = "none";
 const char STR_ROLE_PARTICIPANT[] = "participant";
 
-const char NS_GOOGLE_SESSION[] = "http://www.google.com/session";
+const char NS_GOOGLE_SESSION[] = "trk:238:http://www.google.com/session";
 const StaticQName QN_GOOGLE_CIRCLE_ID = { STR_EMPTY, "google-circle-id" };
 const StaticQName QN_GOOGLE_USER_ID = { STR_EMPTY, "google-user-id" };
 const StaticQName QN_GOOGLE_SESSION_BLOCKED = { NS_GOOGLE_SESSION, "blocked" };

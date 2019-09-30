@@ -23,6 +23,7 @@
 namespace {
 
 // Gaia service constants
+//adding trk: here currently crashes the program
 const char kDefaultGoogleUrl[] = "http://google.com";
 const char kDefaultGaiaUrl[] = "https://accounts.google.com";
 const char kDefaultGoogleApisBaseUrl[] = "https://www.googleapis.com";

@@ -48,9 +48,9 @@ namespace assistant {
 
 namespace {
 
-constexpr char kScopeAuthGcm[] = "https://www.googleapis.com/auth/gcm";
+constexpr char kScopeAuthGcm[] = "trk:230:https://www.googleapis.com/auth/gcm";
 constexpr char kScopeAssistant[] =
-    "https://www.googleapis.com/auth/assistant-sdk-prototype";
+    "trk:230:https://www.googleapis.com/auth/assistant-sdk-prototype";
 
 constexpr base::TimeDelta kMinTokenRefreshDelay =
     base::TimeDelta::FromMilliseconds(1000);

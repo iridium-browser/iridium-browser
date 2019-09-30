@@ -240,7 +240,7 @@ void ToolbarView::Init() {
 
   std::unique_ptr<ToolbarAccountIconContainerView>
       toolbar_account_icon_container;
-  bool show_avatar_toolbar_button = true;
+  bool show_avatar_toolbar_button = false;
 #if defined(OS_CHROMEOS)
   if (!base::FeatureList::IsEnabled(chromeos::features::kAvatarToolbarButton)) {
     // ChromeOS only badges Incognito and Guest icons in the browser window.

@@ -35,17 +35,6 @@
         border-top: none;
       }
     </style>
-<if expr="not chromeos">
-    <settings-toggle-button id="signinAllowedToggle"
-        class="hr"
-        disabled="[[syncFirstSetupInProgress_]]"
-        pref="{{prefs.signin.allowed_on_next_startup}}"
-        label="$i18n{signinAllowedTitle}"
-        sub-label="$i18n{signinAllowedDescription}"
-        on-settings-boolean-control-change="onSigninAllowedChange_"
-        no-set-pref>
-    </settings-toggle-button>
-</if><!-- not chromeos -->
     <settings-toggle-button id="searchSuggestToggle"
         class="hr"
         hidden="[[!pageVisibility.searchPrediction]]"

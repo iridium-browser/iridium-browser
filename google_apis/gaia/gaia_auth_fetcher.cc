@@ -220,20 +220,8 @@ GaiaAuthFetcher::GaiaAuthFetcher(
     scoped_refptr<network::SharedURLLoaderFactory> url_loader_factory)
     : url_loader_factory_(url_loader_factory),
       consumer_(consumer),
-      source_(source.ToString()),
-      oauth2_token_gurl_(GaiaUrls::GetInstance()->oauth2_token_url()),
-      oauth2_revoke_gurl_(GaiaUrls::GetInstance()->oauth2_revoke_url()),
-      merge_session_gurl_(GaiaUrls::GetInstance()->merge_session_url()),
-      uberauth_token_gurl_(GaiaUrls::GetInstance()->oauth1_login_url().Resolve(
-          base::StringPrintf(kUberAuthTokenURLFormat, source_.c_str()))),
-      oauth_multilogin_gurl_(GaiaUrls::GetInstance()->oauth_multilogin_url()),
-      list_accounts_gurl_(
-          GaiaUrls::GetInstance()->ListAccountsURLWithSource(source_)),
-      logout_gurl_(GaiaUrls::GetInstance()->LogOutURLWithSource(source_)),
-      get_check_connection_info_url_(
-          GaiaUrls::GetInstance()->GetCheckConnectionInfoURLWithSource(
-              source_)),
-      reauth_api_url_(GaiaUrls::GetInstance()->reauth_api_url()) {}
+      source_(source.ToString())
+{}
 
 GaiaAuthFetcher::~GaiaAuthFetcher() = default;
 
@@ -270,8 +258,6 @@ void GaiaAuthFetcher::CreateAndStartGaiaFetcher(
   if (credentials_mode != network::mojom::CredentialsMode::kOmit &&
       credentials_mode !=
           network::mojom::CredentialsMode::kOmitBug_775438_Workaround) {
-    CHECK(gaia::HasGaiaSchemeHostPort(gaia_gurl)) << gaia_gurl;
-
     url::Origin origin = GaiaUrls::GetInstance()->gaia_origin();
     resource_request->site_for_cookies =
         net::SiteForCookies::FromOrigin(origin);

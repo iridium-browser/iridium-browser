@@ -71,23 +71,8 @@ void BrowserSigninPolicyHandler::ApplyPolicySettings(const PolicyMap& policies,
     return;
   }
 
-  switch (static_cast<BrowserSigninMode>(int_value)) {
-    case BrowserSigninMode::kForced:
-      if (IsForcedBrowserSigninEnabled()) {
-        prefs->SetInteger(prefs::kBrowserSigninPolicy,
-                          static_cast<int>(BrowserSigninMode::kForced));
-        break;
-      }
-      FALLTHROUGH;
-    case BrowserSigninMode::kEnabled:
-      prefs->SetInteger(prefs::kBrowserSigninPolicy,
-                        static_cast<int>(BrowserSigninMode::kEnabled));
-      break;
-    case BrowserSigninMode::kDisabled:
       prefs->SetInteger(prefs::kBrowserSigninPolicy,
                         static_cast<int>(BrowserSigninMode::kDisabled));
-      break;
-  }
 }
 
 }  // namespace policy

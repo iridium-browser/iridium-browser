@@ -209,6 +209,8 @@ void AuthenticationService::RemoveObserver(
 }
 
 AuthenticationService::ServiceStatus AuthenticationService::GetServiceStatus() {
+  return ServiceStatus::SigninDisabledByPolicy;
+#if 0
   if (!account_manager_service_->IsServiceSupported()) {
     return ServiceStatus::SigninDisabledByInternal;
   }
@@ -227,6 +229,7 @@ AuthenticationService::ServiceStatus AuthenticationService::GetServiceStatus() {
     return ServiceStatus::SigninDisabledByUser;
   }
   return ServiceStatus::SigninAllowed;
+#endif
 }
 
 void AuthenticationService::OnApplicationWillEnterForeground() {

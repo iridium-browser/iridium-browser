@@ -40,7 +40,7 @@ const char kSetDccResponseVariable[] = "set_dcc";
 //
 
 const char kFinancialPingPath[] = "/tools/pso/ping";
-const char kFinancialServer[]   = "clients1.google.com";
+const char kFinancialServer[]   = "cache.iridiumbrowser.de/clients1.google.com"; /* not using URLRequest! catch with cache.ir */
 const int kFinancialPort = 443;
 
 // Ping times in 100-nanosecond intervals.

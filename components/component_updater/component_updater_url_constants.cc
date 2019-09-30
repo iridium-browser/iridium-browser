@@ -18,6 +18,6 @@ const char kUpdaterJSONDefaultUrl[] =
     "trk:171:https://update.googleapis.com/service/update2/json";
 
 const char kUpdaterJSONFallbackUrl[] =
-    "trk:171:http://update.googleapis.com/service/update2/json";
+    "trk:101:http://update.googleapis.com/service/update2/json";
 
 }  // namespace component_updater

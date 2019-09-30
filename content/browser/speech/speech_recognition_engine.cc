@@ -33,7 +33,7 @@ namespace content {
 namespace {
 
 const char kWebServiceBaseUrl[] =
-    "https://www.google.com/speech-api/full-duplex/v1";
+    "trk:184:https://www.google.com/speech-api/full-duplex/v1";
 const char kDownstreamUrl[] = "/down?";
 const char kUpstreamUrl[] = "/up?";
 

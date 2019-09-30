@@ -185,6 +185,7 @@ void RecordUpgradePromoSigninStarted(
 }
 
 bool IsSigninAllowed(const PrefService* prefs) {
+  return false;
   ios::ChromeIdentityService* identityService =
       ios::GetChromeBrowserProvider().GetChromeIdentityService();
   return identityService->IsServiceSupported() &&
@@ -192,6 +193,7 @@ bool IsSigninAllowed(const PrefService* prefs) {
 }
 
 bool IsSigninAllowedByPolicy() {
+  return false;
   BrowserSigninMode policy_mode = static_cast<BrowserSigninMode>(
       GetApplicationContext()->GetLocalState()->GetInteger(
           prefs::kBrowserSigninPolicy));

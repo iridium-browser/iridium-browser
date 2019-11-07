@@ -38,7 +38,7 @@
   </if>
   <if expr="is_macosx">
     <message name="IDS_ABOUT_CHROME_AUTOUPDATE_ALL" desc="The 'Automatically update Chrome for all users.' button in the About window.  Mac-only.">
-      Automatically update Chrome for all users
+      Automatically update the browser for all users
     </message>
     <message name="IDS_ABOUT_CHROME_AUTOUPDATE_ALL_IS_ON" desc="The text in About Page to indicate automatic update is turned on.  Mac-only.">
       Automatic updates are turned on
@@ -62,17 +62,17 @@
     Get image descriptions from Google
   </message>
   <message name="IDS_SETTINGS_ACCESSIBLE_IMAGE_LABELS_SUBTITLE" desc="Subtitle for screen reader image labels feature.">
-    If an image doesn’t have a useful description, Chrome will try to provide one for you. To create descriptions, images are sent to Google.
+    If an image does not have a useful description, the browser will try to provide one for you. To create descriptions, images are sent to Google.
   </message>
   <message name="IDS_SETTINGS_CAPTIONS_ENABLE_LIVE_CAPTION_TITLE" desc="Name of the setting to enable Live Caption feature.">
     Live Caption
   </message>
   <if expr="chromeos_ash">
     <message name="IDS_SETTINGS_CAPTIONS_ENABLE_LIVE_CAPTION_SUBTITLE_ENGLISH_ONLY" desc="Description text for Live Caption feature. When audio or video is playing, the user will see captions on the screen. Only works in Chrome browser initially. Currently only works for English media.">
-      Automatically creates captions for media in Chrome browser (currently available in English). Audio and captions are processed locally and never leave the device.
+      Automatically creates captions for media in the browser (currently available in English). Audio and captions are processed locally and never leave the device.
     </message>
     <message name="IDS_SETTINGS_CAPTIONS_ENABLE_LIVE_CAPTION_SUBTITLE" desc="Description text for Live Caption feature. When audio or video is playing, the user will see captions on the screen. Only works in Chrome browser initially.">
-      Automatically creates captions for media in Chrome browser. Audio and captions are processed locally and never leave the device.
+      Automatically creates captions for media in the browser. Audio and captions are processed locally and never leave the device.
     </message>
   </if>
   <if expr="not chromeos_ash">
@@ -168,7 +168,7 @@
     </message>
   </if>
   <message name="IDS_SETTINGS_CHROME_COLORS" desc="Text of the label describing 'Chrome Colors' theme.">
-    Chrome Colors
+    Browser Colors
   </message>
   <message name="IDS_SETTINGS_SHOW_HOME_BUTTON" desc="Label for the checkbox which enables or disables showing the home button in the toolbar.">
     Show home button
@@ -232,7 +232,7 @@
     Settings
   </message>
   <message name="IDS_SETTINGS_ALT_PAGE_TITLE" desc="The settings page title for the about page.">
-    Settings - <ph name="SECTION_TITLE">$1<ex>About Chromium</ex></ph>
+    Settings - <ph name="SECTION_TITLE">$1<ex>About the browser</ex></ph>
   </message>
   <message name="IDS_SETTINGS_SUBPAGE_BUTTON" desc="Accessibility description for a button navigating the user from a settings page to one of the settings subpages.">
     Subpage button
@@ -895,7 +895,7 @@
   <message name="IDS_SETTINGS_PASSWORDS_EXPORT_MENU_ITEM" desc="A menu item in the More Actions menu above the password list in Chrome's settings. Selecting this action will open a dialog, through which the user can export their passwords outside of Chrome.">
     Export passwords
   </message>
-  <message name="IDS_SETTINGS_PASSWORDS_EXPORT_TITLE" desc="The title of a dialog, which offers to the user the ability to export passwords they've saved with Chrome.">
+  <message name="IDS_SETTINGS_PASSWORDS_EXPORT_TITLE" desc="The title of a dialog, which offers to the user the ability to export passwords they've saved with Iridium.">
     Export passwords
   </message>
   <message name="IDS_SETTINGS_PASSWORDS_EXPORT_DESCRIPTION" desc="Text shown to the user on the dialog for exporting passwords, before any passwords have been exported.">
@@ -904,10 +904,10 @@
   <message name="IDS_SETTINGS_PASSWORDS_EXPORT" desc="A button in the dialog for exporting passwords from Chrome. A password list will be written to a destination, which the user will be asked to choose after initiating this action.">
     Export passwords
   </message>
-  <message name="IDS_SETTINGS_PASSWORDS_EXPORT_TRY_AGAIN" desc="A button in the dialog for exporting passwords from Chrome. The action is to attempt to export the passwords again. A password list will be written to a destination, which the user will be asked to choose after initiating this action.">
+  <message name="IDS_SETTINGS_PASSWORDS_EXPORT_TRY_AGAIN" desc="A button in the dialog for exporting passwords from Iridium. The action is to attempt to export the passwords again. A password list will be written to a destination, which the user will be asked to choose after initiating this action.">
     Try again
   </message>
-  <message name="IDS_SETTINGS_PASSWORDS_EXPORTING_TITLE" desc="The title of a dialog for exporting passwords. This title is shown while Chrome is performing the export and the user should wait.">
+  <message name="IDS_SETTINGS_PASSWORDS_EXPORTING_TITLE" desc="The title of a dialog for exporting passwords. This title is shown while Iridium is performing the export and the user should wait.">
     Exporting passwords...
   </message>
   <message name="IDS_SETTINGS_PASSWORDS_EXPORTING_FAILURE_TITLE" desc="The title to a dialog, which is shown if exporting passwords to a folder has failed.">
@@ -919,7 +919,7 @@
   <message name="IDS_SETTINGS_PASSWORDS_EXPORTING_FAILURE_TIP_ENOUGH_SPACE" desc="Message that is shown when exporting passwords has failed. This is part of a list of things the user can try to resolve the problem. This advice implies that there isn't enough space on the disk for the new file to be written.">
     Make sure there is enough space on your device
   </message>
-  <message name="IDS_SETTINGS_PASSWORDS_EXPORTING_FAILURE_TIP_ANOTHER_FOLDER" desc="Message that is shown when exporting passwords has failed. This is part of a list of things the user can try to resolve the problem. This advice implies that Chrome couldn't write into the specified folder.">
+  <message name="IDS_SETTINGS_PASSWORDS_EXPORTING_FAILURE_TIP_ANOTHER_FOLDER" desc="Message that is shown when exporting passwords has failed. This is part of a list of things the user can try to resolve the problem. This advice implies that Iridium couldn't write into the specified folder.">
     Export your passwords to another folder
   </message>
   <message name="IDS_SETTINGS_PASSWORD_ROW_MORE_ACTIONS" desc="The ARIA (accessibility) message for the More Actions button, which sits in every row of the password list. It opens a menu with a list of actions, which apply to the username-password pair on this row.">
@@ -1005,7 +1005,7 @@
     <message name="IDS_SETTINGS_DEFAULT_BROWSER" desc="Name of the Default Browser page, which allows users to set which browser will open .html files within the OS.">
       Default browser
     </message>
-    <message name="IDS_SETTINGS_DEFAULT_BROWSER_MAKE_DEFAULT_BUTTON" desc="Text of the button used to make Chrome the default browser on the user's system.">
+    <message name="IDS_SETTINGS_DEFAULT_BROWSER_MAKE_DEFAULT_BUTTON" desc="Text of the button used to make Iridium the default browser on the user's system.">
       Make default
     </message>
   </if>
@@ -1972,7 +1972,7 @@
     Passwords
   </message>
   <message name="IDS_SETTINGS_SAFETY_CHECK_PASSWORDS_FEATURE_UNAVAILABLE" desc="Explains that the password check feature is not available in this version of the browser.">
-    Password check is not available in Chromium
+    Password check is not available in the browser
   </message>
   <message name="IDS_SETTINGS_SAFETY_CHECK_PASSWORDS_BUTTON_ARIA_LABEL" desc="Accessibility text for the button that allows users to review their passwords.">
     Review passwords
@@ -2095,37 +2095,37 @@
       Review device software
     </message>
     <message name="IDS_SETTINGS_SAFETY_CHECK_CHROME_CLEANER_NO_UWS_WITHOUT_TIMESTAMP" desc="This text describes that Chrome can check if any known harmful software is installed on the user's computer.">
-      Chrome can check your computer for harmful software
+      The browser can check your computer for harmful software
     </message>
     <message name="IDS_SETTINGS_SAFETY_CHECK_CHROME_CLEANER_NO_UWS_WITH_TIMESTAMP_AFTER_SECONDS" desc="This text describes that Chrome did not find any known harmful software installed on the user's computer, and that it checked for harmful softwrae the last time a certain time ago.">
-      Chrome didn't find harmful software on your computer • Checked just now
+      The browser did not find harmful software on your computer • Checked just now
     </message>
     <message name="IDS_SETTINGS_SAFETY_CHECK_CHROME_CLEANER_NO_UWS_WITH_TIMESTAMP_AFTER_MINUTES" desc="This text describes that Chrome did not find any known harmful software installed on the user's computer, and that it checked for harmful softwrae the last time a certain time ago.">
       {NUM_MINS, plural,
-       =1 {Chrome didn't find harmful software on your computer • Checked 1 minute ago}
-       other {Chrome didn't find harmful software on your computer • Checked {NUM_MINS} minutes ago}}
+       =1 {The browser did not find harmful software on your computer • Checked 1 minute ago}
+       other {The browser did not find harmful software on your computer • Checked {NUM_MINS} minutes ago}}
     </message>
     <message name="IDS_SETTINGS_SAFETY_CHECK_CHROME_CLEANER_NO_UWS_WITH_TIMESTAMP_AFTER_HOURS" desc="This text describes that Chrome did not find any known harmful software installed on the user's computer, and that it checked for harmful softwrae the last time a certain time ago.">
       {NUM_HOURS, plural,
-       =1 {Chrome didn't find harmful software on your computer • Checked 1 hour ago}
-       other {Chrome didn't find harmful software on your computer • Checked {NUM_HOURS} hours ago}}
+       =1 {The browser did not find harmful software on your computer • Checked 1 hour ago}
+       other {The browser did not find harmful software on your computer • Checked {NUM_HOURS} hours ago}}
     </message>
     <message name="IDS_SETTINGS_SAFETY_CHECK_CHROME_CLEANER_NO_UWS_WITH_TIMESTAMP_YESTERDAY" desc="This text describes that Chrome did not find any known harmful software installed on the user's computer, and that it checked for harmful softwrae the last time a certain time ago.">
-      Chrome didn't find harmful software on your computer • Checked yesterday
+      The browser did not find harmful software on your computer • Checked yesterday
     </message>
     <message name="IDS_SETTINGS_SAFETY_CHECK_CHROME_CLEANER_NO_UWS_WITH_TIMESTAMP_AFTER_DAYS" desc="This text describes that Chrome did not find any known harmful software installed on the user's computer, and that it checked for harmful softwrae the last time a certain time ago.">
       {NUM_DAYS, plural,
-       =1 {Chrome didn't find harmful software on your computer • Checked 1 day ago}
-       other {Chrome didn't find harmful software on your computer • Checked {NUM_DAYS} days ago}}
+       =1 {The browser did not find harmful software on your computer • Checked 1 day ago}
+       other {The browser did not find harmful software on your computer • Checked {NUM_DAYS} days ago}}
     </message>
     <message name="IDS_SETTINGS_SAFETY_CHECK_CHROME_CLEANER_INFECTED" desc="This text describes that Chrome found harmful software on the computer.">
-      Chrome found harmful software on your computer
+      The browser found harmful software on your computer
     </message>
     <message name="IDS_SETTINGS_SAFETY_CHECK_CHROME_CLEANER_SCANNING" desc="This text describes that Chrome is currently checking the user's device for unwanted software. This takes a couple of minutes.">
-      Chrome is checking your computer for harmful software...
+      The browser is checking your computer for harmful software...
     </message>
     <message name="IDS_SETTINGS_SAFETY_CHECK_CHROME_CLEANER_REMOVING" desc="This text describes that Chrome is currently removing unwanted software frrom the user.s device. This takes a couple of minutes.">
-      Chrome is removing harmful software from your computer...
+      The browser is removing harmful software from your computer...
     </message>
     <message name="IDS_SETTINGS_SAFETY_CHECK_CHROME_CLEANER_DISABLED_BY_ADMIN" desc="This text describes that Chrome can't check for unwanted software because an administrator disabled the feature.">
       <ph name="BEGIN_LINK">&lt;a target="_blank" href="$1"&gt;</ph>Your administrator<ph name="END_LINK">&lt;/a&gt;</ph> has turned off checking for harmful software
@@ -2142,12 +2142,12 @@
     Uses cookies to remember your preferences, even if you don’t visit those pages
   </message>
   <message name="IDS_SETTINGS_NETWORK_PREDICTION_ENABLED_DESC_COOKIES_PAGE" desc="On the cookies page, the secondary text next to the checkbox that enables prediction of network actions.">
-    Preloads pages that Chrome thinks you might visit. To do this, Chrome may use cookies, if you allow cookies, and may encrypt and send pages through Google to hide your identity from sites.
+    Preloads pages that The browser thinks you might visit. To do this, The browser may use cookies, if you allow cookies, and may encrypt and send pages through Google to hide your identity from sites.
   </message>
   <message name="IDS_SETTINGS_SAFEBROWSING_ENABLEPROTECTION" desc="The section title of 'Protects you and your device from dangerous sites'">
     Safe Browsing (protects you and your device from dangerous sites)
   </message>
-  <message name="IDS_SETTINGS_SAFEBROWSING_ENABLEPROTECTION_DESC" desc="Checkbox label: should Chrome protect user and user's device from dangerous sites">
+  <message name="IDS_SETTINGS_SAFEBROWSING_ENABLEPROTECTION_DESC" desc="Checkbox label: should Iridium protect user and user's device from dangerous sites">
     Sends URLs of some pages you visit to Google, when your security is at risk
   </message>
   <message name="IDS_SETTINGS_SAFEBROWSING_ENABLE_REPORTING_DESC" desc="Description for extended safe browsing">
@@ -2305,7 +2305,7 @@
   <message name="IDS_SETTINGS_SITE_SETTINGS" desc="Text of the button that takes a user to the enhanced settings page thats allows users to modify site settings. Also the title of that settings page. It follows sentence case.">
     Site settings
   </message>
-  <message name="IDS_SETTINGS_SITE_SETTINGS_DESCRIPTION" desc="Secondary, continued explanation of what content settings in Chrome do">
+  <message name="IDS_SETTINGS_SITE_SETTINGS_DESCRIPTION" desc="Secondary, continued explanation of what content settings in Iridium do">
     Control what information websites can use and what content they can show you
   </message>
   <message name="IDS_SETTINGS_CLEAR_DATA" desc="Text for clear browsing data button in Privacy options in the tabbed UI">
@@ -2364,7 +2364,7 @@
   <message name="IDS_SETTINGS_RESET_PROMPT_TITLE" desc="Title for a prompt that gives an explanation of what would be resetted by 'Reset and clean up' section of Chrome Settings. " meaning="Chrome Cleanup feature. Try to use the same translation for 'Reset' in 'Reset and cleanup' string.">
     Reset settings?
   </message>
-  <message name="IDS_SETTINGS_RESET" desc="Title for an item in the 'Reset and clean up' section of Chrome Settings. If the user clicks this option, browser settings will be returned to their default values, after a confirmation by the user." meaning="Chrome Cleanup feature. Try to use the same translation for 'Reset' in 'Reset and cleanup' string.">
+  <message name="IDS_SETTINGS_RESET" desc="Title for an item in the 'Reset and clean up' section of browser settings. If the user clicks this option, browser settings will be returned to their default values, after a confirmation by the user." meaning="Browser cleanup feature. Try to use the same translation for 'Reset' in 'Reset and cleanup' string.">
     Reset settings
   </message>
   <message name="IDS_SETTINGS_RESET_SETTINGS_TRIGGER" desc="The label describing the 'reset profile setting' feature">
@@ -2373,19 +2373,19 @@
   <message name="IDS_SETTINGS_RESET_AUTOMATED_DIALOG_TITLE" desc="The title of the dialog informing the user that automated resetting of some settings occurred.">
     Some settings were reset
   </message>
-  <message name="IDS_SETTINGS_RESET_BANNER_TEXT" desc="The text to show in a banner at the top of the chrome://settings page. The banner is displayed when Chrome detects that some settings have been tampered with and were reset to factory defaults.">
-    Chrome detected that some of your settings were corrupted by another program and reset them to their original defaults.
+  <message name="IDS_SETTINGS_RESET_BANNER_TEXT" desc="The text to show in a banner at the top of the chrome://settings page. The banner is displayed when Iridium detects that some settings have been tampered with and were reset to factory defaults.">
+    Iridium detected that some of your settings were corrupted by another program and reset them to their original defaults.
   </message>
   <message name="IDS_SETTINGS_RESET_BANNER_RESET_BUTTON_TEXT" desc="The text on the reset button in the Automatic Settings Reset Banner suggesting to reset ALL settings after an automatic reset of SOME settings.">
     Reset all settings
   </message>
 
-  <!-- Reset card title and Chrome Cleanup item on Windows -->
+  <!-- Reset card title and Iridium Cleanup item on Windows -->
   <if expr="is_win and _google_chrome">
-    <message name="IDS_SETTINGS_RESET_AND_CLEANUP" desc="Title of a section in Chrome Settings. Imperative. 'Reset' refers to resetting settings to defaults. 'Clean up' refers to cleaning up harmful software on the user's computer.">
+    <message name="IDS_SETTINGS_RESET_AND_CLEANUP" desc="Title of a section in Iridium Settings. Imperative. 'Reset' refers to resetting settings to defaults. 'Clean up' refers to cleaning up harmful software on the user's computer.">
       Reset and clean up
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEAN_UP_COMPUTER_TRIGGER" desc="Title for an item in the 'Reset and clean up' section of Chrome Settings. 'Clean up' refers to cleaning up harmful software on the user's computer. Imperative.">
+    <message name="IDS_SETTINGS_RESET_CLEAN_UP_COMPUTER_TRIGGER" desc="Title for an item in the 'Reset and clean up' section of Iridium Settings. 'Clean up' refers to cleaning up harmful software on the user's computer. Imperative.">
       Clean up computer
     </message>
   </if>
@@ -2442,10 +2442,10 @@
     Site search
   </message>
   <message name="IDS_SETTINGS_SEARCH_ENGINES_SITE_SEARCH_EXPLANATION" desc="Explanation for 'Site Search' section. Used interchangeably with IDS_SETTINGS_SEARCH_ENGINES_SITE_SEARCH_EXPLANATION_STARTER_PACK">
-    To search a specific site or part of Chrome, type its shortcut in the address bar, followed by your preferred keyboard shortcut.
+    To search a specific site or part of The browser, type its shortcut in the address bar, followed by your preferred keyboard shortcut.
   </message>
   <message name="IDS_SETTINGS_SEARCH_ENGINES_SITE_SEARCH_EXPLANATION_STARTER_PACK" desc="Explanation for 'Site Search' section">
-    To search a specific site or part of Chrome, type its shortcut in the address bar, followed by your preferred keyboard shortcut. For example, to search only Bookmarks, type "@bookmarks", then press Tab or Space.
+    To search a specific site or part of The browser, type its shortcut in the address bar, followed by your preferred keyboard shortcut. For example, to search only Bookmarks, type "@bookmarks", then press Tab or Space.
   </message>
   <message name="IDS_SETTINGS_SEARCH_ENGINES_NO_SITES_ADDED" desc="Text shown when the 'Site Search' section is empty">
     No sites added
@@ -2463,7 +2463,7 @@
     Extensions
   </message>
   <message name="IDS_SETTINGS_SEARCH_ENGINES_EXTENSION_ENGINES_EXPLANATION" desc="Explanation for a section that displays search engines added by extensions">
-    Some extensions can add search engines to Chrome
+    Some extensions can add search engines to the browser
   </message>
   <message name="IDS_SETTINGS_SEARCH_ENGINES_SEARCH_ENGINE" desc="Label for a table column that holds the name of a search engine">
     Search engine
@@ -2495,7 +2495,7 @@
   <message name="IDS_SETTINGS_SEARCH_ENGINES_REMOVE_FROM_LIST" desc="Label for a button that removes a search engine from the list of search engines">
     Remove from list
   </message>
-  <message name="IDS_SETTINGS_SEARCH_ENGINES_MANAGE_EXTENSION" desc="Text displayed for a button that allows the user to manage a Chrome extension">
+  <message name="IDS_SETTINGS_SEARCH_ENGINES_MANAGE_EXTENSION" desc="Text displayed for a button that allows the user to manage a Iridium extension">
     Manage
   </message>
   <message name="IDS_SETTINGS_SEARCH_ENGINES_KEYBOARD_SHORTCUTS_TITLE" desc="Label for scoped search mode trigger options section">
@@ -3158,7 +3158,7 @@
     Allow sites to install payment handlers (recommended)
   </message>
   <message name="IDS_SETTINGS_SITE_SETTINGS_PDF_DOWNLOAD_PDFS" desc="Label for downloading PDF documents instead of automatically opening them in Chrome.">
-    Download PDF files instead of automatically opening them in Chrome
+    Download PDF files instead of automatically opening them in the browser
   </message>
   <message name="IDS_SETTINGS_SITE_SETTINGS_VR_ASK_RECOMMENDED" desc="The ask label for the VR feature in site settings (with the 'recommended' suffix).">
     Ask when a site wants to use your virtual reality devices and data (recommended)
@@ -3558,8 +3558,8 @@
   <message name="IDS_SETTINGS_SITE_NO_SITES_ADDED" desc="Explanation for not showing a list of site exceptions">
     No sites added
   </message>
-  <message name="IDS_SETTINGS_SITE_SETTINGS_BLOCK_AUTOPLAY" desc="A label for a toggle in site settings to block autoplay. If the toggle is on then Chrome will block autoplay by default and use an algorithm to determine which sites should still be able to autoplay. If the toggle is off then autoplay will be enabled for all sites.">
-    Let Chrome choose when sites can play sound (recommended)
+  <message name="IDS_SETTINGS_SITE_SETTINGS_BLOCK_AUTOPLAY" desc="A label for a toggle in site settings to block autoplay. If the toggle is on then Iridium will block autoplay by default and use an algorithm to determine which sites should still be able to autoplay. If the toggle is off then autoplay will be enabled for all sites.">
+    Let Iridium choose when sites can play sound (recommended)
   </message>
   <message name="IDS_SETTINGS_SITE_SETTINGS_EMPTY_ALL_SITES_PAGE" desc="Explanation shown when there are no sites that have appeared yet on the All Sites page.">
     Sites you visit will appear here
@@ -3600,7 +3600,7 @@
   </message>
   <if expr="chromeos_ash">
     <message name="IDS_SETTINGS_ANDROID_SMS_NOTE" desc="Special note shown below Messages for Android entry in notification permissions to indicate use in ChromeOS Multidevice features.">
-      Allows Android Messages to relay texts from your phone to your Chromebook
+      Allows Android Messages to relay texts from your phone to your Iridiumbook
     </message>
   </if>
 
@@ -3740,7 +3740,7 @@
   <message name="IDS_SETTINGS_SYNC_DISCONNECT_AND_SIGN_OUT_EXPLANATION" desc="The text to display in the Sign out of Chrome dialog to stop syncing and sign-out for non-managed profiles.">
     This will sign you out of your Google Accounts. Your bookmarks, history, passwords, and more will no longer be synced.
   </message>
-  <message name="IDS_SETTINGS_SYNC_DISCONNECT_EXPAND_ACCESSIBILITY_LABEL" desc="Label for the button in the Sign out of Chrome dialog that toggles showing the profile stats. Only visible by screen reader software.">
+  <message name="IDS_SETTINGS_SYNC_DISCONNECT_EXPAND_ACCESSIBILITY_LABEL" desc="Label for the button in the Sign out of Iridium dialog that toggles showing the profile stats. Only visible by screen reader software.">
     Show profile stats
   </message>
   <message name="IDS_SETTINGS_SYNC_WILL_START" desc="The message to tell users that sync will start once they leave the sync setup page.">
@@ -3888,11 +3888,11 @@
     <message name="IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_LABEL" desc="Label for the control that opens the system network proxy settings. These settings apply to the entire computer.">
       Open your computer's proxy settings
     </message>
-    <message name="IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_EXTENSION_LABEL" desc="Non-interactive label that describes when Chrome's proxy settings are overwritten by an extension. This is used in place of IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_LABEL above.">
-      <ph name="IDS_SHORT_PRODUCT_NAME">$1<ex>Chrome</ex></ph> is using proxy settings from an extension
+    <message name="IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_EXTENSION_LABEL" desc="Non-interactive label that describes when Iridium's proxy settings are overwritten by an extension. This is used in place of IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_LABEL above.">
+      <ph name="IDS_SHORT_PRODUCT_NAME">$1<ex>Iridium</ex></ph> is using proxy settings from an extension
     </message>
-    <message name="IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_POLICY_LABEL" desc="Non-interactive label that describes when Chrome's proxy settings are overwritten by policy. This is used in place of IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_LABEL above.">
-      <ph name="IDS_SHORT_PRODUCT_NAME">$1<ex>Chrome</ex></ph> is using proxy settings from your administrator
+    <message name="IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_POLICY_LABEL" desc="Non-interactive label that describes when Iridium's proxy settings are overwritten by policy. This is used in place of IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_LABEL above.">
+      <ph name="IDS_SHORT_PRODUCT_NAME">$1<ex>Iridium</ex></ph> is using proxy settings from your administrator
     </message>
   </if>
   <if expr="chromeos_lacros">
@@ -3906,21 +3906,21 @@
 
   <!-- Chrome Cleanup Page -->
   <if expr="is_win and _google_chrome">
-    <message name="IDS_SETTINGS_RESET_CLEAN_UP_COMPUTER_PAGE_TITLE" desc="Title for an item in the 'Reset and clean up' section of Chrome Settings. 'Clean up' refers to cleaning up harmful software on the user's computer. Imperative.">
+    <message name="IDS_SETTINGS_RESET_CLEAN_UP_COMPUTER_PAGE_TITLE" desc="Title for an item in the 'Reset and clean up' section of Iridium Settings. 'Clean up' refers to cleaning up harmful software on the user's computer. Imperative.">
       Clean up computer
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_DETAILS_EXPLANATION" desc="Text that appears below the list of files, programs, and registry entries to be removed by Chrome as part of a cleanup process. 'privacy white paper' is a guide to Chrome's privacy policy and practices. In 'unwanted software protection,' the word 'unwanted' modifies 'software,' i.e. 'protection from unwanted software'.">
-      Items not listed here will also be removed, if needed. Learn more about &lt;a href=&quot;<ph name="URL">$1<ex>https://www.google.com/chrome/browser/privacy/whitepaper.html#unwantedsoftware</ex></ph>&quot;&gt;unwanted software protection&lt;/a&gt; in the Chrome privacy white paper.
+    <message name="IDS_SETTINGS_RESET_CLEANUP_DETAILS_EXPLANATION" desc="Text that appears below the list of files, programs, and registry entries to be removed by Iridium as part of a cleanup process. 'privacy white paper' is a guide to Iridium's privacy policy and practices. In 'unwanted software protection,' the word 'unwanted' modifies 'software,' i.e. 'protection from unwanted software'.">
+      Items not listed here will also be removed, if needed. Learn more about &lt;a href=&quot;<ph name="URL">$1<ex>https://www.google.com/chrome/browser/privacy/whitepaper.html#unwantedsoftware</ex></ph>&quot;&gt;unwanted software protection&lt;/a&gt; in the Iridium privacy white paper.
     </message>
     <message name="IDS_SETTINGS_RESET_CLEANUP_DETAILS_FILES_AND_PROGRAMS" desc="Introduces a bullet list containing the names of files and programs to be quarantined by Chrome (i.e. removed from the original location, moved and archived in the Quarantine folder).">
       Files and programs to be quarantined:
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_DETAILS_ITEMS_TO_BE_REMOVED" desc="Label for an expansion arrow. On expansion, the screen displays a list of files and programs that Chrome will remove or quarantine. Placeholder can be 2 or more items.">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_DETAILS_ITEMS_TO_BE_REMOVED" desc="Label for an expansion arrow. On expansion, the screen displays a list of files and programs that Iridium will remove or quarantine. Placeholder can be 2 or more items.">
       {NUM_ITEMS, plural,
         =1 {1 item}
         other {{NUM_ITEMS} items}}
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_DETAILS_REGISTRY_ENTRIES" desc="Introduces a bullet list containing the names of registry entries to be removed/changed by Chrome.">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_DETAILS_REGISTRY_ENTRIES" desc="Introduces a bullet list containing the names of registry entries to be removed/changed by Iridium.">
       Registry entries to be removed or changed:
     </message>
     <message name="IDS_SETTINGS_RESET_CLEANUP_DETAILS_MORE" desc="Link; on click, the screen shows items to be removed by Chrome. Items could include files, programs, or registry entries. This link is for advanced users. Placeholder can be 2 or more items.">
@@ -3929,10 +3929,10 @@
         other {{NUM_DOWNLOADS} more}}
     </message>
     <message name="IDS_SETTINGS_RESET_CLEANUP_EXPLANATION_CLEANUP_ERROR" desc="Body of a generic error message that could appear during the cleanup of harmful software. Multiple causes for the error are possible.">
-      An error occurred while Chrome was removing harmful software
+      An error occurred while Iridium was removing harmful software
     </message>
     <message name="IDS_SETTINGS_RESET_CLEANUP_EXPLANATION_FIND_AND_REMOVE" desc="Subtitle of the 'Find an remove harmful software' item. Imperative.">
-      Chrome can find harmful software on your computer and remove it
+      Iridium can find harmful software on your computer and remove it
     </message>
     <message name="IDS_SETTINGS_RESET_CLEANUP_EXPLANATION_NO_INTERNET_CONNECTION" desc="Body of error message that could appear during the cleanup of harmful software. Imperative instruction to user. This message will only appear on Windows desktop/laptop computers. Imperative.">
       Connect to a network and try again
@@ -3940,55 +3940,55 @@
     <message name="IDS_SETTINGS_RESET_CLEANUP_EXPLANATION_PERMISSIONS_NEEDED" desc="Body of error message that could appear during the cleanup of harmful software. Imperative. ">
       Click Try Again, and accept the prompt on your computer
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_EXPLANATION_CURRENTLY_REMOVING" desc="Description in the Chrome Cleanup web page that Chrome browser shows when unwanted software, like ad injectors or software that changes the user's settings without their knowledge, is being removed by Chrome from the user's computer. Appears under the title 'Removing harmful software...' Actor is Chrome; we are indicating that harmful software is currently being removed. 'it' is harmful software. Preferrably, the translation for this string should parallel IDS_CHROME_CLEANUP_PROMPT_EXPLANATION.">
-      There's harmful software on your computer. Chrome is removing it, restoring your settings, and disabling extensions. This will make your browser work normally again.
+    <message name="IDS_SETTINGS_RESET_CLEANUP_EXPLANATION_CURRENTLY_REMOVING" desc="Description in the Iridium Cleanup web page that Iridium browser shows when unwanted software, like ad injectors or software that changes the user's settings without their knowledge, is being removed by Iridium from the user's computer. Appears under the title 'Removing harmful software...' Actor is Iridium; we are indicating that harmful software is currently being removed. 'it' is harmful software. Preferrably, the translation for this string should parallel IDS_CHROME_CLEANUP_PROMPT_EXPLANATION.">
+      There's harmful software on your computer. Iridium is removing it, restoring your settings, and disabling extensions. This will make your browser work normally again.
     </message>
     <message name="IDS_SETTINGS_RESET_CLEANUP_EXPLANATION_SCAN_ERROR" desc="Body of error message that could appear during the cleanup of harmful software.">
-      An error occurred while Chrome was searching for harmful software
+      An error occurred while Iridium was searching for harmful software
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_FIND_BUTTON_LABEL" desc="Button for the 'Find harmful software' item in Chrome Settings. Imperative. On click, Chrome looks for harmful software on the user's computer. Imperative.">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_FIND_BUTTON_LABEL" desc="Button for the 'Find harmful software' item in Iridium Settings. Imperative. On click, Iridium looks for harmful software on the user's computer. Imperative.">
       Find
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_FOOTER_POWERED_BY" desc="Branding footer on the web page for Chrome Cleanup. COMPANY_NAME is the name of a technology service that Chrome uses to remove harmful software from the user's computer. It is not necessary to translate 'powered by' literally; use an appropriate word for your language to convey the meaning of 'uses'. A similar use in other Google products is 'Powered by Google Translate.'">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_FOOTER_POWERED_BY" desc="Branding footer on the web page for Iridium Cleanup. COMPANY_NAME is the name of a technology service that Iridium uses to remove harmful software from the user's computer. It is not necessary to translate 'powered by' literally; use an appropriate word for your language to convey the meaning of 'uses'. A similar use in other Google products is 'Powered by Google Translate.'">
       Powered by <ph name="COMPANY_NAME">$1<ex>Google</ex></ph>
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_LINK_SHOW_FILES" desc="A link, appearing on the Chrome Cleanup web page, that the user can click to show the files that will be removed. Imperative.">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_LINK_SHOW_FILES" desc="A link, appearing on the Iridium Cleanup web page, that the user can click to show the files that will be removed. Imperative.">
       Show files to be removed
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_REMOVE_BUTTON_LABEL" desc="Button on the Chrome Cleanup web page. Allows users to start a cleanup of unwanted software on their computer and restore browser settings to default values. 'Remove' is imperative.">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_REMOVE_BUTTON_LABEL" desc="Button on the Iridium Cleanup web page. Allows users to start a cleanup of unwanted software on their computer and restore browser settings to default values. 'Remove' is imperative.">
       Remove
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_RESTART_BUTTON_LABEL" desc="Button on the web page for Chrome Cleanup. Clicking this button causes the user's computer to turn off (shut down) and turn back on again. Imperative. ">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_RESTART_BUTTON_LABEL" desc="Button on the web page for Iridium Cleanup. Clicking this button causes the user's computer to turn off (shut down) and turn back on again. Imperative. ">
       Restart computer
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_DONE" desc="Message confirming that Chrome has removed harmful software. Exclamation point is nice in EN-US but is optional in your language; please use or omit as appropriate. The UI will also display a checkmark icon to indicate the operation is done. ">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_DONE" desc="Message confirming that Iridium has removed harmful software. Exclamation point is nice in EN-US but is optional in your language; please use or omit as appropriate. The UI will also display a checkmark icon to indicate the operation is done. ">
       Done! Harmful software removed. To turn extensions back on, visit &lt;a href=&quot;chrome://extensions&quot;&gt;Extensions&lt;/a&gt;.
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_ERROR_CANT_REMOVE" desc="An error message, appearing on the Chrome Cleanup web page, that Chrome tried to clean up unwanted software, as requested by the user, but was unsuccessful. Omits subject, i.e. Chrome can't remove harmful software.">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_ERROR_CANT_REMOVE" desc="An error message, appearing on the Iridium Cleanup web page, that Iridium tried to clean up unwanted software, as requested by the user, but was unsuccessful. Omits subject, i.e. Iridium can't remove harmful software.">
       Cleanup failed
     </message>
     <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_ERROR_PERMISSIONS_NEEDED" desc="Title of error message that could appear during the cleanup of harmful software. 'permission' refers to the user granting permission, e.g. from an operating system prompt, before the cleanup operation can continue.">
-      Chrome needs permission to continue
+      Iridium needs permission to continue
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_FIND_HARMFUL_SOFTWARE" desc="Title of an item in Chrome Settings. Imperative.">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_FIND_HARMFUL_SOFTWARE" desc="Title of an item in Iridium Settings. Imperative.">
       Find harmful software
     </message>
     <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_NO_INTERNET_CONNECTION" desc="Title of error message that could appear during the cleanup of harmful software.">
       No internet connection
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_NOTHING_FOUND" desc="Message displayed after Chrome looks for harmful software but doesn't find any. ">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_NOTHING_FOUND" desc="Message displayed after Iridium looks for harmful software but doesn't find any. ">
       No harmful software found
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_REMOVE" desc="Title of the Chrome Cleanup web page. Chrome browser shows the webpage when unwanted software, like ad injectors or software that changes the user's settings without their knowledge, is found on the user's computer. Appears above a description of what the cleanup does. 'Remove' is imperative.">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_REMOVE" desc="Title of the Iridium Cleanup web page. Iridium browser shows the webpage when unwanted software, like ad injectors or software that changes the user's settings without their knowledge, is found on the user's computer. Appears above a description of what the cleanup does. 'Remove' is imperative.">
       Remove harmful software
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_REMOVED" desc="A confirmation, appearing on the Chrome Cleanup web page, that the cleanup of unwanted software is finished. Omits 'was', i.e. Harmful software was removed. Appears next to a Done button, which lets user dismiss the confirmation.">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_REMOVED" desc="A confirmation, appearing on the Iridium Cleanup web page, that the cleanup of unwanted software is finished. Omits 'was', i.e. Harmful software was removed. Appears next to a Done button, which lets user dismiss the confirmation.">
       Harmful software removed
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_REMOVING" desc="A status message, appearing on the Chrome cleanup web page, that the cleanup of unwanted software initiated by the user is in progress. Omits subject, i.e. 'Chrome is removing harmful software.' If appropriate for your language, include ellipsis to show that the operation is in progress.">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_REMOVING" desc="A status message, appearing on the Iridium cleanup web page, that the cleanup of unwanted software initiated by the user is in progress. Omits subject, i.e. 'Iridium is removing harmful software.' If appropriate for your language, include ellipsis to show that the operation is in progress.">
       Removing harmful software...
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_RESTART" desc="A status message, appearing on the Chrome Cleanup web page, that the cleanup of unwanted software initiated by the user was performed but isn't finished. User must take additional action to finish the cleanup. 'Restart' is imperative. Short for 'To finish removing harmful software...'">
+    <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_RESTART" desc="A status message, appearing on the Iridium Cleanup web page, that the cleanup of unwanted software initiated by the user was performed but isn't finished. User must take additional action to finish the cleanup. 'Restart' is imperative. Short for 'To finish removing harmful software...'">
       To finish removing harmful software, restart your computer
     </message>
     <message name="IDS_SETTINGS_RESET_CLEANUP_TITLE_SCANNING" desc="Message displayed after the user clicks the 'Find' button to find harmful software. Ellipses indicate that the operation is in process.">
@@ -4018,8 +4018,8 @@
     </message>
     <message name="IDS_SETTINGS_INCOMPATIBLE_APPLICATIONS_SUBPAGE_SUBTITLE" desc="The subtitle shown in the subpage for incompatible applications.">
       {NUM_APPLICATIONS, plural,
-        =1 {This application could prevent Chrome from working properly.}
-        other {These applications could prevent Chrome from working properly.}}
+        =1 {This application could prevent Iridium from working properly.}
+        other {These applications could prevent Iridium from working properly.}}
     </message>
     <message name="IDS_SETTINGS_INCOMPATIBLE_APPLICATIONS_SUBPAGE_SUBTITLE_NO_ADMIN_RIGHTS" desc="The subtitle shown in the subpage for incompatible applications, when the user does not have administrator rights. This means that these users are incapable of updating or removing incompatible applications by themselves.">
       {NUM_APPLICATIONS, plural,
@@ -4293,7 +4293,7 @@
     Your devices
   </message>
   <message name="IDS_SETTINGS_SECURITY_KEYS_PHONES_SYNCED_DESC" desc="The description of a section on a settings page that lists phoens that are signed into (and syncing with) the user's Google account.">
-    You're signed in to Chrome on these devices, so you can use them as security keys.
+    You're signed in to the browser on these devices, so you can use them as security keys.
   </message>
   <message name="IDS_SETTINGS_SECURITY_KEYS_PHONES_LINKED_DEVICES" desc="The title of a section on a settings page that lists phoens that can be used for signing into websites. The word 'linked' was picked to be distinct from 'paired', as in 'Bluetooth pairing'. The technology does use Bluetooth, but is distinct from Bluetooth pairing.">
     Linked devices

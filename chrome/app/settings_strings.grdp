@@ -75,7 +75,7 @@
   </if>
   <if expr="is_macosx">
     <message name="IDS_ABOUT_CHROME_AUTOUPDATE_ALL" desc="The 'Automatically update Chrome for all users.' button in the About window.  Mac-only.">
-      Automatically update Chrome for all users
+      Automatically update the browser for all users
     </message>
     <message name="IDS_ABOUT_CHROME_AUTOUPDATE_ALL_IS_ON" desc="The text in About Page to indicate automatic update is turned on.  Mac-only.">
       Automatic updates are turned on.
@@ -102,7 +102,7 @@
     Get image descriptions from Google
   </message>
   <message name="IDS_SETTINGS_ACCESSIBLE_IMAGE_LABELS_SUBTITLE" desc="Subtitle for screen reader image labels feature.">
-    If an image doesn’t have a useful description, Chrome will try to provide one for you. To create descriptions, images are sent to Google.
+    If an image does not have a useful description, the browser will try to provide one for you. To create descriptions, images are sent to Google.
   </message>
   <message name="IDS_SETTINGS_PDF_OCR_DOWNLOAD_COMPLETE" desc="Success message when it has downloaded PDF OCR files.">
     Text recognition files downloaded
@@ -133,10 +133,10 @@
   </message>
   <if expr="chromeos_ash">
     <message name="IDS_SETTINGS_CAPTIONS_ENABLE_LIVE_CAPTION_SUBTITLE_BROWSER_ONLY_ENGLISH_ONLY" desc="Description text for Live Caption feature. When audio or video is playing, the user will see captions on the screen. Only works in Chrome browser initially. Currently only works for English media.">
-      Automatically creates captions for media in Chrome browser (currently available in English). Audio and captions are processed locally and never leave the device.
+      Automatically creates captions for media in the browser (currently available in English). Audio and captions are processed locally and never leave the device.
     </message>
     <message name="IDS_SETTINGS_CAPTIONS_ENABLE_LIVE_CAPTION_SUBTITLE_BROWSER_ONLY" desc="Description text for Live Caption feature. When audio or video is playing, the user will see captions on the screen. Only works in Chrome browser initially.">
-      Automatically creates captions for media in Chrome browser. Audio and captions are processed locally and never leave the device.
+      Automatically creates captions for media in the browser. Audio and captions are processed locally and never leave the device.
     </message>
   </if>
   <message name="IDS_SETTINGS_CAPTIONS_ENABLE_LIVE_CAPTION_SUBTITLE_ENGLISH_ONLY" desc="Description text for Live Caption feature. When audio or video is playing, the user will see captions on the screen. Currently only works for English media.">
@@ -248,7 +248,7 @@
     </message>
   </if>
   <message name="IDS_SETTINGS_CHROME_COLORS" desc="Text of the label describing 'Chrome Colors' theme.">
-    Chrome Colors
+    Browser Colors
   </message>
   <message name="IDS_SETTINGS_COLOR_SCHEME_MODE" desc="Text of the label for selecting a color scheme mode for the browser.">
     Mode
@@ -318,7 +318,7 @@
     Settings
   </message>
   <message name="IDS_SETTINGS_ALT_PAGE_TITLE" desc="The settings page title for the about page.">
-    Settings - <ph name="SECTION_TITLE">$1<ex>About Chromium</ex></ph>
+    Settings - <ph name="SECTION_TITLE">$1<ex>About the browser</ex></ph>
   </message>
   <message name="IDS_SETTINGS_SUBPAGE_BUTTON" desc="Accessibility description for a button navigating the user from a settings page to one of the settings subpages.">
     Subpage button
@@ -673,7 +673,7 @@
     <message name="IDS_SETTINGS_DEFAULT_BROWSER" desc="Name of the Default Browser page, which allows users to set which browser will open .html files within the OS.">
       Default browser
     </message>
-    <message name="IDS_SETTINGS_DEFAULT_BROWSER_MAKE_DEFAULT_BUTTON" desc="Text of the button used to make Chrome the default browser on the user's system.">
+    <message name="IDS_SETTINGS_DEFAULT_BROWSER_MAKE_DEFAULT_BUTTON" desc="Text of the button used to make Iridium the default browser on the user's system.">
       Make default
     </message>
   </if>
@@ -1975,7 +1975,7 @@
     Passwords
   </message>
   <message name="IDS_SETTINGS_SAFETY_CHECK_PASSWORDS_FEATURE_UNAVAILABLE" desc="Explains that the password check feature is not available in this version of the browser.">
-    Password check is not available in Chromium
+    Password check is not available in the browser
   </message>
   <message name="IDS_SETTINGS_SAFETY_CHECK_PASSWORDS_BUTTON_ARIA_LABEL" desc="Accessibility text for the button that allows users to review their passwords.">
     Review passwords
@@ -2104,12 +2104,12 @@
     Uses cookies to remember your preferences, even if you don’t visit those pages
   </message>
   <message name="IDS_SETTINGS_NETWORK_PREDICTION_ENABLED_DESC_COOKIES_PAGE" desc="On the cookies page, the secondary text next to the checkbox that enables prediction of network actions.">
-    Preloads pages that Chrome thinks you might visit. To do this, Chrome may use cookies, if you allow cookies, and may encrypt and send pages through Google to hide your identity from sites.
+    Preloads pages that The browser thinks you might visit. To do this, The browser may use cookies, if you allow cookies, and may encrypt and send pages through Google to hide your identity from sites.
   </message>
   <message name="IDS_SETTINGS_SAFEBROWSING_ENABLEPROTECTION" desc="The section title of 'Protects you and your device from dangerous sites'">
     Safe Browsing (protects you and your device from dangerous sites)
   </message>
-  <message name="IDS_SETTINGS_SAFEBROWSING_ENABLEPROTECTION_DESC" desc="Checkbox label: should Chrome protect user and user's device from dangerous sites">
+  <message name="IDS_SETTINGS_SAFEBROWSING_ENABLEPROTECTION_DESC" desc="Checkbox label: should Iridium protect user and user's device from dangerous sites">
     Sends URLs of some pages you visit to Google, when your security is at risk
   </message>
   <message name="IDS_SETTINGS_SAFEBROWSING_ENABLE_REPORTING_DESC" desc="Description for extended safe browsing">
@@ -2319,7 +2319,7 @@
   <message name="IDS_SETTINGS_SITE_SETTINGS" desc="Text of the button that takes a user to the enhanced settings page thats allows users to modify site settings. Also the title of that settings page. It follows sentence case.">
     Site settings
   </message>
-  <message name="IDS_SETTINGS_SITE_SETTINGS_DESCRIPTION" desc="Secondary, continued explanation of what content settings in Chrome do">
+  <message name="IDS_SETTINGS_SITE_SETTINGS_DESCRIPTION" desc="Secondary, continued explanation of what content settings in Iridium do">
     Control what information websites can use and what content they can show you
   </message>
   <message name="IDS_SETTINGS_CLEAR_DATA" desc="Text for clear browsing data button in Privacy options in the tabbed UI">
@@ -2378,7 +2378,7 @@
   <message name="IDS_SETTINGS_RESET_PROMPT_TITLE" desc="Title for a prompt that gives an explanation of what would be resetted by 'Reset and clean up' section of Chrome Settings. " meaning="Chrome Cleanup feature. Try to use the same translation for 'Reset' in 'Reset and cleanup' string.">
     Reset settings?
   </message>
-  <message name="IDS_SETTINGS_RESET" desc="Title for an item in the 'Reset and clean up' section of Chrome Settings. If the user clicks this option, browser settings will be returned to their default values, after a confirmation by the user." meaning="Chrome Cleanup feature. Try to use the same translation for 'Reset' in 'Reset and cleanup' string.">
+  <message name="IDS_SETTINGS_RESET" desc="Title for an item in the 'Reset and clean up' section of browser settings. If the user clicks this option, browser settings will be returned to their default values, after a confirmation by the user." meaning="Browser cleanup feature. Try to use the same translation for 'Reset' in 'Reset and cleanup' string.">
     Reset settings
   </message>
   <message name="IDS_SETTINGS_RESET_SETTINGS_TRIGGER" desc="The label describing the 'reset profile setting' feature">
@@ -2387,8 +2387,8 @@
   <message name="IDS_SETTINGS_RESET_AUTOMATED_DIALOG_TITLE" desc="The title of the dialog informing the user that automated resetting of some settings occurred.">
     Some settings were reset
   </message>
-  <message name="IDS_SETTINGS_RESET_BANNER_TEXT" desc="The text to show in a banner at the top of the chrome://settings page. The banner is displayed when Chrome detects that some settings have been tampered with and were reset to factory defaults.">
-    Chrome detected that some of your settings were corrupted by another program and reset them to their original defaults.
+  <message name="IDS_SETTINGS_RESET_BANNER_TEXT" desc="The text to show in a banner at the top of the chrome://settings page. The banner is displayed when Iridium detects that some settings have been tampered with and were reset to factory defaults.">
+    Iridium detected that some of your settings were corrupted by another program and reset them to their original defaults.
   </message>
   <message name="IDS_SETTINGS_RESET_BANNER_RESET_BUTTON_TEXT" desc="The text on the reset button in the Automatic Settings Reset Banner suggesting to reset ALL settings after an automatic reset of SOME settings.">
     Reset all settings
@@ -2397,12 +2397,12 @@
     Learn more about resetting settings
   </message>
 
-  <!-- Reset card title and Chrome Cleanup item on Windows -->
+  <!-- Reset card title and Iridium Cleanup item on Windows -->
   <if expr="is_win and _google_chrome">
-    <message name="IDS_SETTINGS_RESET_AND_CLEANUP" desc="Title of a section in Chrome Settings. Imperative. 'Reset' refers to resetting settings to defaults. 'Clean up' refers to cleaning up harmful software on the user's computer.">
+    <message name="IDS_SETTINGS_RESET_AND_CLEANUP" desc="Title of a section in Iridium Settings. Imperative. 'Reset' refers to resetting settings to defaults. 'Clean up' refers to cleaning up harmful software on the user's computer.">
       Reset and clean up
     </message>
-    <message name="IDS_SETTINGS_RESET_CLEAN_UP_COMPUTER_TRIGGER" desc="Title for an item in the 'Reset and clean up' section of Chrome Settings. 'Clean up' refers to cleaning up harmful software on the user's computer. Imperative.">
+    <message name="IDS_SETTINGS_RESET_CLEAN_UP_COMPUTER_TRIGGER" desc="Title for an item in the 'Reset and clean up' section of Iridium Settings. 'Clean up' refers to cleaning up harmful software on the user's computer. Imperative.">
       Clean up computer
     </message>
   </if>
@@ -2459,10 +2459,10 @@
     Site search
   </message>
   <message name="IDS_SETTINGS_SEARCH_ENGINES_SITE_SEARCH_EXPLANATION" desc="Explanation for 'Site Search' section. Used interchangeably with IDS_SETTINGS_SEARCH_ENGINES_SITE_SEARCH_EXPLANATION_STARTER_PACK">
-    To search a specific site or part of Chrome, type its shortcut in the address bar, followed by your preferred keyboard shortcut.
+    To search a specific site or part of The browser, type its shortcut in the address bar, followed by your preferred keyboard shortcut.
   </message>
   <message name="IDS_SETTINGS_SEARCH_ENGINES_SITE_SEARCH_EXPLANATION_STARTER_PACK" desc="Explanation for 'Site Search' section">
-    To search a specific site or part of Chrome, type its shortcut in the address bar, followed by your preferred keyboard shortcut. For example, to search only Bookmarks, type "@bookmarks", then press Tab or Space.
+    To search a specific site or part of The browser, type its shortcut in the address bar, followed by your preferred keyboard shortcut. For example, to search only Bookmarks, type "@bookmarks", then press Tab or Space.
   </message>
   <message name="IDS_SETTINGS_SEARCH_ENGINES_NO_SITES_ADDED" desc="Text shown when the 'Site Search' section is empty">
     No sites added
@@ -2477,7 +2477,7 @@
     Extensions
   </message>
   <message name="IDS_SETTINGS_SEARCH_ENGINES_EXTENSION_ENGINES_EXPLANATION" desc="Explanation for a section that displays search engines added by extensions">
-    Some extensions can add search engines to Chrome
+    Some extensions can add search engines to the browser
   </message>
   <message name="IDS_SETTINGS_SEARCH_ENGINES_SEARCH_ENGINE" desc="Label for a table column that holds the name of a search engine">
     Search engine
@@ -3235,7 +3235,7 @@
     Insecure content is blocked by default on secure sites
   </message>
   <message name="IDS_SETTINGS_SITE_SETTINGS_PDF_DOWNLOAD_PDFS" desc="Label for downloading PDF documents instead of automatically opening them in Chrome.">
-    Download PDF files instead of automatically opening them in Chrome
+    Download PDF files instead of automatically opening them in the browser
   </message>
   <message name="IDS_SETTINGS_SITE_SETTINGS_RECENT_ACTIVITY" desc="Label for the section which contains the user's recent permissions changes">
     Recent activity
@@ -3531,8 +3531,8 @@
   <message name="IDS_SETTINGS_SITE_NO_SITES_ADDED" desc="Explanation for not showing a list of site exceptions">
     No sites added
   </message>
-  <message name="IDS_SETTINGS_SITE_SETTINGS_BLOCK_AUTOPLAY" desc="A label for a toggle in site settings to block autoplay. If the toggle is on then Chrome will block autoplay by default and use an algorithm to determine which sites should still be able to autoplay. If the toggle is off then autoplay will be enabled for all sites.">
-    Let Chrome choose when sites can play sound (recommended)
+  <message name="IDS_SETTINGS_SITE_SETTINGS_BLOCK_AUTOPLAY" desc="A label for a toggle in site settings to block autoplay. If the toggle is on then Iridium will block autoplay by default and use an algorithm to determine which sites should still be able to autoplay. If the toggle is off then autoplay will be enabled for all sites.">
+    Let Iridium choose when sites can play sound (recommended)
   </message>
   <message name="IDS_SETTINGS_SITE_SETTINGS_EMPTY_ALL_SITES_PAGE" desc="Explanation shown when there are no sites that have appeared yet on the All Sites page.">
     Sites you visit will appear here
@@ -3700,7 +3700,7 @@
   </message>
   <if expr="chromeos_ash">
     <message name="IDS_SETTINGS_ANDROID_SMS_NOTE" desc="Special note shown below Messages for Android entry in notification permissions to indicate use in ChromeOS Multidevice features.">
-      Allows Android Messages to relay texts from your phone to your Chromebook
+      Allows Android Messages to relay texts from your phone to your Iridiumbook
     </message>
   </if>
 
@@ -3777,7 +3777,7 @@
   <message name="IDS_SETTINGS_SYNC_DISCONNECT_AND_SIGN_OUT_EXPLANATION" desc="The text to display in the Sign out of Chrome dialog to stop syncing and sign-out for non-managed profiles.">
     This will sign you out of your Google Accounts. Your bookmarks, history, passwords, and more will no longer be synced.
   </message>
-  <message name="IDS_SETTINGS_SYNC_DISCONNECT_EXPAND_ACCESSIBILITY_LABEL" desc="Label for the button in the Sign out of Chrome dialog that toggles showing the profile stats. Only visible by screen reader software.">
+  <message name="IDS_SETTINGS_SYNC_DISCONNECT_EXPAND_ACCESSIBILITY_LABEL" desc="Label for the button in the Sign out of Iridium dialog that toggles showing the profile stats. Only visible by screen reader software.">
     Show profile stats
   </message>
   <message name="IDS_SETTINGS_SYNC_WILL_START" desc="The message to tell users that sync will start once they leave the sync setup page.">
@@ -3928,11 +3928,11 @@
     <message name="IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_LABEL" desc="Label for the control that opens the system network proxy settings. These settings apply to the entire computer.">
       Open your computer's proxy settings
     </message>
-    <message name="IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_EXTENSION_LABEL" desc="Non-interactive label that describes when Chrome's proxy settings are overwritten by an extension. This is used in place of IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_LABEL above.">
-      <ph name="IDS_SHORT_PRODUCT_NAME">$1<ex>Chrome</ex></ph> is using proxy settings from an extension
+    <message name="IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_EXTENSION_LABEL" desc="Non-interactive label that describes when Iridium's proxy settings are overwritten by an extension. This is used in place of IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_LABEL above.">
+      <ph name="IDS_SHORT_PRODUCT_NAME">$1<ex>Iridium</ex></ph> is using proxy settings from an extension
     </message>
-    <message name="IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_POLICY_LABEL" desc="Non-interactive label that describes when Chrome's proxy settings are overwritten by policy. This is used in place of IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_LABEL above.">
-      <ph name="IDS_SHORT_PRODUCT_NAME">$1<ex>Chrome</ex></ph> is using proxy settings from your administrator
+    <message name="IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_POLICY_LABEL" desc="Non-interactive label that describes when Iridium's proxy settings are overwritten by policy. This is used in place of IDS_SETTINGS_SYSTEM_PROXY_SETTINGS_LABEL above.">
+      <ph name="IDS_SHORT_PRODUCT_NAME">$1<ex>Iridium</ex></ph> is using proxy settings from your administrator
     </message>
   </if>
   <if expr="chromeos_lacros">
@@ -3951,8 +3951,8 @@
     </message>
     <message name="IDS_SETTINGS_INCOMPATIBLE_APPLICATIONS_SUBPAGE_SUBTITLE" desc="The subtitle shown in the subpage for incompatible applications.">
       {NUM_APPLICATIONS, plural,
-        =1 {This application could prevent Chrome from working properly.}
-        other {These applications could prevent Chrome from working properly.}}
+        =1 {This application could prevent Iridium from working properly.}
+        other {These applications could prevent Iridium from working properly.}}
     </message>
     <message name="IDS_SETTINGS_INCOMPATIBLE_APPLICATIONS_SUBPAGE_SUBTITLE_NO_ADMIN_RIGHTS" desc="The subtitle shown in the subpage for incompatible applications, when the user does not have administrator rights. This means that these users are incapable of updating or removing incompatible applications by themselves.">
       {NUM_APPLICATIONS, plural,
@@ -4226,7 +4226,7 @@
     Your devices
   </message>
   <message name="IDS_SETTINGS_SECURITY_KEYS_PHONES_SYNCED_DESC" desc="The description of a section on a settings page that lists phoens that are signed into (and syncing with) the user's Google account.">
-    You're signed in to Chrome on these devices, so you can use them as security keys.
+    You're signed in to the browser on these devices, so you can use them as security keys.
   </message>
   <message name="IDS_SETTINGS_SECURITY_KEYS_PHONES_LINKED_DEVICES" desc="The title of a section on a settings page that lists phoens that can be used for signing into websites. The word 'linked' was picked to be distinct from 'paired', as in 'Bluetooth pairing'. The technology does use Bluetooth, but is distinct from Bluetooth pairing.">
     Linked devices

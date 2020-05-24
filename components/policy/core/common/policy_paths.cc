@@ -15,9 +15,9 @@ namespace policy {
 #if BUILDFLAG(IS_POSIX) && !BUILDFLAG(IS_MAC)
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING) || \
     BUILDFLAG(GOOGLE_CHROME_FOR_TESTING_BRANDING)
-const char kPolicyPath[] = "/etc/opt/chrome/policies";
+const char kPolicyPath[] = "/etc/iridium-browser/policies";
 #else
-const char kPolicyPath[] = "/etc/chromium/policies";
+const char kPolicyPath[] = "/etc/iridium-browser/policies";
 #endif  // BUILDFLAG(GOOGLE_CHROME_BRANDING) || \
         // BUILDFLAG(GOOGLE_CHROME_FOR_TESTING_BRANDING)
 #endif  // BUILDFLAG(IS_POSIX) && !BUILDFLAG(IS_MAC)

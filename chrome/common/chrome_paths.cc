@@ -584,10 +584,10 @@ bool PathProvider(int key, base::FilePath* result) {
 #else  // BUILDFLAG(IS_MAC)
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
       cur = base::FilePath(
-          FILE_PATH_LITERAL("/etc/opt/chrome/native-messaging-hosts"));
+          FILE_PATH_LITERAL("/etc/iridium-browser/native-messaging-hosts"));
 #else
       cur = base::FilePath(
-          FILE_PATH_LITERAL("/etc/chromium/native-messaging-hosts"));
+          FILE_PATH_LITERAL("/etc/iridium-browser/native-messaging-hosts"));
 #endif
 #endif  // !BUILDFLAG(IS_MAC)
       break;

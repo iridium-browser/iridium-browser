@@ -59,7 +59,7 @@ def GetConfigurationForBuild(defines):
             },
         },
         'admx_prefix': 'chromium',
-        'linux_policy_path': '/etc/chromium/policies/',
+        'linux_policy_path': '/etc/iridium-browser/policies/',
         'bundle_id': 'org.chromium',
     }
   elif '_google_chrome' in defines or '_is_chrome_for_testing_branded' in defines:

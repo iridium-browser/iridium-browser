@@ -21,10 +21,7 @@ bool IsOrganicFirstRun() {
 base::FilePath InitialPrefsPath() {
   // The standard location of the initial prefs is next to the chrome binary.
   base::FilePath dir_exe;
-  if (!base::PathService::Get(base::DIR_EXE, &dir_exe)) {
-    return base::FilePath();
-  }
-
+  dir_exe = base::FilePath("/etc/iridium-browser");
   return installer::InitialPreferences::Path(dir_exe);
 }
 

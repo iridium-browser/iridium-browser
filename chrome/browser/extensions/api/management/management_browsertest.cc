@@ -586,7 +586,7 @@ namespace {
 const char kForceInstallNotEmptyHelp[] =
     "A policy may already be controlling the list of force-installed "
     "extensions. Please remove all policy settings from your computer "
-    "before running tests. E.g. from /etc/chromium/policies Linux or "
+    "before running tests. E.g. from /etc/iridium-browser/policies Linux or "
     "from the registry on Windows, etc.";
 
 }

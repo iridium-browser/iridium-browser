@@ -415,9 +415,9 @@ bool PathProvider(int key, base::FilePath* result) {
 #if defined(OS_POSIX) && !defined(OS_MAC) && !defined(OS_OPENBSD)
     case chrome::DIR_POLICY_FILES: {
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
-      cur = base::FilePath(FILE_PATH_LITERAL("/etc/opt/chrome/policies"));
+      cur = base::FilePath(FILE_PATH_LITERAL("/etc/opt/iridium-browser/policies"));
 #else
-      cur = base::FilePath(FILE_PATH_LITERAL("/etc/chromium/policies"));
+      cur = base::FilePath(FILE_PATH_LITERAL("/etc/iridium-browser/policies"));
 #endif
       break;
     }
@@ -496,7 +496,7 @@ bool PathProvider(int key, base::FilePath* result) {
           "/etc/opt/chrome/native-messaging-hosts"));
 #else
       cur = base::FilePath(FILE_PATH_LITERAL(
-          "/etc/chromium/native-messaging-hosts"));
+          "/etc/iridium-browser/native-messaging-hosts"));
 #endif
 #endif  // !defined(OS_MAC)
       break;

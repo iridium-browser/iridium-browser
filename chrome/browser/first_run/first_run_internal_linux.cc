@@ -20,8 +20,7 @@ bool IsOrganicFirstRun() {
 base::FilePath InitialPrefsPath() {
   // The standard location of the initial prefs is next to the chrome binary.
   base::FilePath initial_prefs;
-  if (!base::PathService::Get(base::DIR_EXE, &initial_prefs))
-    return base::FilePath();
+  initial_prefs = base::FilePath("/etc/iridium-browser");
   return initial_prefs.AppendASCII(installer::kDefaultMasterPrefs);
 }
 

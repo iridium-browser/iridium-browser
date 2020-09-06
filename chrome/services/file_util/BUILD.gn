@@ -17,7 +17,6 @@ source_set("file_util") {
     "//build:chromeos_buildflags",
     "//chrome/common/safe_browsing",
     "//chrome/common/safe_browsing:archive_analyzer_results",
-    "//chrome/common/safe_browsing:rar_analyzer",
     "//components/safe_browsing:buildflags",
     "//mojo/public/cpp/bindings",
   ]

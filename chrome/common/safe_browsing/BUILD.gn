@@ -43,38 +43,6 @@ if (safe_browsing_mode == 1) {
     public_deps = [ "//components/safe_browsing/core:csd_proto" ]
   }
 
-  source_set("rar_analyzer") {
-    sources = [
-      "rar_analyzer.cc",
-      "rar_analyzer.h",
-    ]
-
-    deps = [
-      ":archive_analyzer_results",
-      ":download_type_util",
-      "//base",
-      "//base:i18n",
-      "//components/safe_browsing/core:features",
-      "//components/safe_browsing/core:file_type_policies",
-      "//third_party/unrar:unrar",
-    ]
-
-    defines = [
-      "_FILE_OFFSET_BITS=64",
-      "LARGEFILE_SOURCE",
-      "RAR_SMP",
-      "SILENT",
-
-      # The following is set to disable certain macro definitions in the unrar
-      # source code.
-      "CHROMIUM_UNRAR",
-
-      # Disables exceptions in unrar, replaces them with process termination.
-      "UNRAR_NO_EXCEPTIONS",
-    ]
-
-    public_deps = [ "//components/safe_browsing/core:csd_proto" ]
-  }
 
   if (is_mac) {
     source_set("disk_image_type_sniffer_mac") {
@@ -145,7 +113,6 @@ source_set("safe_browsing") {
       ":archive_analyzer_results",
       ":binary_feature_extractor",
       ":download_type_util",
-      ":rar_analyzer",
       "//components/safe_browsing/core:features",
     ]
 

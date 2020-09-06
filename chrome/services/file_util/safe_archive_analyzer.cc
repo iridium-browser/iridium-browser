@@ -45,10 +45,14 @@ void SafeArchiveAnalyzer::AnalyzeDmgFile(base::File dmg_file,
 void SafeArchiveAnalyzer::AnalyzeRarFile(base::File rar_file,
                                          base::File temporary_file,
                                          AnalyzeRarFileCallback callback) {
+#if 0
   DCHECK(rar_file.IsValid());
 
   safe_browsing::ArchiveAnalyzerResults results;
   safe_browsing::rar_analyzer::AnalyzeRarFile(
       std::move(rar_file), std::move(temporary_file), &results);
   std::move(callback).Run(results);
+#else
+  NOTREACHED();
+#endif
 }

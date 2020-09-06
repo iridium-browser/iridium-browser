@@ -1,6 +1,5 @@
 include_rules = [
   "+components/safe_browsing",
   "+third_party/protobuf",
-  "+third_party/unrar",
   "+third_party/zlib",
 ]

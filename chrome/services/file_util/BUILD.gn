@@ -15,7 +15,6 @@ source_set("file_util") {
     "//base",
     "//chrome/common/safe_browsing",
     "//chrome/common/safe_browsing:archive_analyzer_results",
-    "//chrome/common/safe_browsing:rar_analyzer",
     "//components/safe_browsing:buildflags",
     "//mojo/public/cpp/bindings",
   ]

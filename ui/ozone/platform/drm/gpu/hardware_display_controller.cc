@@ -5,6 +5,7 @@
 #include "ui/ozone/platform/drm/gpu/hardware_display_controller.h"
 
 #include <drm.h>
+#include <drm_fourcc.h>
 #include <string.h>
 #include <xf86drm.h>
 #include <memory>
@@ -14,7 +15,6 @@
 #include "base/logging.h"
 #include "base/stl_util.h"
 #include "base/trace_event/trace_event.h"
-#include "third_party/libdrm/src/include/drm/drm_fourcc.h"
 #include "third_party/skia/include/core/SkCanvas.h"
 #include "ui/gfx/geometry/point.h"
 #include "ui/gfx/geometry/size.h"

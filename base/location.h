@@ -23,7 +23,7 @@ namespace base {
 #define SUPPORTS_LOCATION_BUILTINS                                       \
   (__has_builtin(__builtin_FUNCTION) && __has_builtin(__builtin_FILE) && \
    __has_builtin(__builtin_LINE))
-#elif defined(COMPILER_GCC) && __GNUC__ >= 7
+#elif defined(COMPILER_GCC) && __GNUC__ >= 10
 // GCC has supported these for a long time, but they point at the function
 // declaration in the case of default arguments, rather than at the call site.
 #define SUPPORTS_LOCATION_BUILTINS 1

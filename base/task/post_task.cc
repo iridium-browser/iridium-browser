@@ -72,8 +72,10 @@ bool PostDelayedTask(const Location& from_here,
                      const TaskTraits& traits,
                      OnceClosure task,
                      TimeDelta delay) {
-  return GetTaskExecutorForTraits(traits)->PostDelayedTask(
-      from_here, traits, std::move(task), delay);
+	auto e = GetTaskExecutorForTraits(traits);
+	if (e == nullptr)
+		return false;
+	return e->PostDelayedTask(from_here, traits, std::move(task), delay);
 }
 
 bool PostTaskAndReply(const Location& from_here,
@@ -85,12 +87,18 @@ bool PostTaskAndReply(const Location& from_here,
 }
 
 scoped_refptr<TaskRunner> CreateTaskRunner(const TaskTraits& traits) {
-  return GetTaskExecutorForTraits(traits)->CreateTaskRunner(traits);
+	auto e = GetTaskExecutorForTraits(traits);
+	if (e == nullptr)
+		return nullptr;
+	return e->CreateTaskRunner(traits);
 }
 
 scoped_refptr<SequencedTaskRunner> CreateSequencedTaskRunner(
     const TaskTraits& traits) {
-  return GetTaskExecutorForTraits(traits)->CreateSequencedTaskRunner(traits);
+	auto e = GetTaskExecutorForTraits(traits);
+	if (e == nullptr)
+		return nullptr;
+	return e->CreateSequencedTaskRunner(traits);
 }
 
 scoped_refptr<UpdateableSequencedTaskRunner>
@@ -113,16 +121,20 @@ CreateUpdateableSequencedTaskRunner(const TaskTraits& traits) {
 scoped_refptr<SingleThreadTaskRunner> CreateSingleThreadTaskRunner(
     const TaskTraits& traits,
     SingleThreadTaskRunnerThreadMode thread_mode) {
-  return GetTaskExecutorForTraits(traits)->CreateSingleThreadTaskRunner(
-      traits, thread_mode);
+	auto e = GetTaskExecutorForTraits(traits);
+	if (e == nullptr)
+		return nullptr;
+	return e->CreateSingleThreadTaskRunner(traits, thread_mode);
 }
 
 #if defined(OS_WIN)
 scoped_refptr<SingleThreadTaskRunner> CreateCOMSTATaskRunner(
     const TaskTraits& traits,
     SingleThreadTaskRunnerThreadMode thread_mode) {
-  return GetTaskExecutorForTraits(traits)->CreateCOMSTATaskRunner(traits,
-                                                                  thread_mode);
+	auto e = GetTaskExecutorForTraits(traits);
+	if (e == nullptr)
+		return nullptr;
+	return e->CreateCOMSTATaskRunner(traits, thread_mode);
 }
 #endif  // defined(OS_WIN)
 

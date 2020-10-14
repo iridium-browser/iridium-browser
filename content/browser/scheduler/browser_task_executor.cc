@@ -260,7 +260,8 @@ void BrowserTaskExecutor::Shutdown() {
 void BrowserTaskExecutor::RunAllPendingTasksOnThreadForTesting(
     BrowserThread::ID identifier) {
   DCHECK(Get());
-
+  if (Get() == nullptr)
+    return;
   base::RunLoop run_loop(base::RunLoop::Type::kNestableTasksAllowed);
 
   switch (identifier) {
@@ -282,6 +283,8 @@ void BrowserTaskExecutor::RunAllPendingTasksOnThreadForTesting(
 
 // static
 void BrowserTaskExecutor::EnableAllQueues() {
+  if (Get() == nullptr)
+    return;
   Get()->browser_ui_thread_handle_->EnableAllQueues();
   Get()->browser_io_thread_handle_->EnableAllQueues();
 }
@@ -289,21 +292,29 @@ void BrowserTaskExecutor::EnableAllQueues() {
 // static
 scoped_refptr<base::SingleThreadTaskRunner>
 BrowserTaskExecutor::GetUIThreadTaskRunner(const BrowserTaskTraits& traits) {
+  if (Get() == nullptr)
+    return nullptr;
   return Get()->GetTaskRunner(BrowserThread::UI, traits);
 }
 
 // static
 scoped_refptr<base::SingleThreadTaskRunner>
 BrowserTaskExecutor::GetIOThreadTaskRunner(const BrowserTaskTraits& traits) {
+  if (Get() == nullptr)
+    return nullptr;
   return Get()->GetTaskRunner(BrowserThread::IO, traits);
 }
 
 // static
 void BrowserTaskExecutor::InitializeIOThread() {
+  if (Get() == nullptr)
+    return;
   Get()->browser_io_thread_handle_->EnableAllExceptBestEffortQueues();
 }
 
 std::unique_ptr<BrowserProcessSubThread> BrowserTaskExecutor::CreateIOThread() {
+  if (Get() == nullptr)
+    return nullptr;
   DCHECK(Get()->io_thread_executor_);
 
   std::unique_ptr<BrowserIOThreadDelegate> browser_io_thread_delegate =

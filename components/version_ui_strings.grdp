@@ -7,7 +7,7 @@
     Official Build
   </message>
   <message name="IDS_VERSION_UI_UNOFFICIAL" desc="unofficial build on the about:version page">
-    Developer Build
+    Iridium Build
   </message>
   <message name="IDS_VERSION_UI_32BIT" desc="32-bit on the chrome://version page">
     (32-bit)

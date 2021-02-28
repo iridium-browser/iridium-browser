@@ -11,15 +11,7 @@
 
 #define FPL FILE_PATH_LITERAL
 
-#if defined(OS_MAC)
-#if BUILDFLAG(GOOGLE_CHROME_BRANDING)
-#define PRODUCT_STRING "Google Chrome"
-#elif BUILDFLAG(CHROMIUM_BRANDING)
-#define PRODUCT_STRING "Chromium"
-#else
-#error Unknown branding
-#endif
-#endif  // defined(OS_MAC)
+#define PRODUCT_STRING "Iridium"
 
 namespace chrome {
 

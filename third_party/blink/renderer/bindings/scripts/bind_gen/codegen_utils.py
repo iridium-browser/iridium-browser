@@ -171,12 +171,4 @@ def write_code_node_to_file(code_node, filepath):
 
     rendered_text = render_code_node(code_node)
 
-    format_result = style_format.auto_format(rendered_text, filename=filepath)
-    if not format_result.did_succeed:
-        raise RuntimeError("Style-formatting failed: filename = {filename}\n"
-                           "---- stderr ----\n"
-                           "{stderr}:".format(
-                               filename=format_result.filename,
-                               stderr=format_result.error_message))
-
-    web_idl.file_io.write_to_file_if_changed(filepath, format_result.contents)
+    web_idl.file_io.write_to_file_if_changed(filepath, rendered_text)

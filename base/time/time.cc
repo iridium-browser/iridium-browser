@@ -61,8 +61,7 @@ struct ParsedDecimal {
 //
 // Adapted from absl:
 // https://cs.chromium.org/chromium/src/third_party/abseil-cpp/absl/time/duration.cc?l=807&rcl=2c22e9135f107a4319582ae52e2e3e6b201b6b7c
-constexpr Optional<ParsedDecimal> ConsumeDurationNumber(
-    StringPiece& number_string) {
+Optional<ParsedDecimal> ConsumeDurationNumber(StringPiece& number_string) {
   ParsedDecimal res;
   StringPiece::const_iterator orig_start = number_string.begin();
   // Parse contiguous digits.

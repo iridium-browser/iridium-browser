@@ -141,7 +141,7 @@ void GtkKeyBindingsHandler::HandlerClassInit(HandlerClass* klass) {
 }
 
 GType GtkKeyBindingsHandler::HandlerGetType() {
-  static volatile gsize type_id_volatile = 0;
+  static gsize type_id_volatile = 0;
   if (g_once_init_enter(&type_id_volatile)) {
     GType type_id = g_type_register_static_simple(
         GTK_TYPE_TEXT_VIEW, g_intern_static_string("GtkKeyBindingsHandler"),

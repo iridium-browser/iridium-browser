@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#include <cstddef>
+
 #include "components/bookmarks/browser/base_bookmark_model_observer.h"
 
 namespace bookmarks {

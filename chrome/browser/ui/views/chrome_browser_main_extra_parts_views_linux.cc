@@ -7,16 +7,13 @@
 #include "chrome/browser/themes/theme_service_aura_linux.h"
 #include "chrome/browser/ui/browser_list.h"
 #include "chrome/browser/ui/views/theme_profile_key.h"
+#include "ui/base/cursor/cursor_factory.h"
 #include "ui/display/screen.h"
 #include "ui/views/linux_ui/linux_ui.h"
 
 #if BUILDFLAG(USE_GTK)
 #include "ui/gtk/gtk_ui.h"
 #include "ui/gtk/gtk_ui_delegate.h"
-#endif
-
-#if defined(USE_OZONE)
-#include "ui/base/cursor/cursor_factory.h"
 #endif
 
 #if defined(USE_X11)

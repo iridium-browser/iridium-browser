@@ -245,7 +245,7 @@ static void AXPlatformAtkHyperlinkInit(AXPlatformAtkHyperlink* self, gpointer) {
 }
 
 GType ax_platform_atk_hyperlink_get_type() {
-  static volatile gsize type_volatile = 0;
+  static gsize type_volatile = 0;
 
   AXPlatformNodeAuraLinux::EnsureGTypeInit();
 

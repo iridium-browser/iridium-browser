@@ -5,6 +5,9 @@
 #ifndef UI_ACCESSIBILITY_PLATFORM_INSPECT_TREE_FORMATTER_H_
 #define UI_ACCESSIBILITY_PLATFORM_INSPECT_TREE_FORMATTER_H_
 
+#include <memory>
+#include <vector>
+
 #include "ui/accessibility/platform/inspect/inspect.h"
 
 #include "ui/gfx/native_widget_types.h"

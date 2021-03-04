@@ -3587,15 +3587,21 @@ const char kVideoToolboxVp9DecodingDescription[] =
 
 #endif
 
-// Chrome OS -------------------------------------------------------------------
+// Chrome OS and Linux ---------------------------------------------------------
 
-#if defined(OS_CHROMEOS)
+#if defined(OS_CHROMEOS) || (defined(OS_LINUX) && !defined(OS_ANDROID)) 
 
 const char kAcceleratedMjpegDecodeName[] =
     "Hardware-accelerated mjpeg decode for captured frame";
 const char kAcceleratedMjpegDecodeDescription[] =
     "Enable hardware-accelerated mjpeg decode for captured frame where "
     "available.";
+
+#endif
+
+// Chrome OS -------------------------------------------------------------------
+
+#if defined(OS_CHROMEOS)
 
 const char kAllowDisableMouseAccelerationName[] =
     "Allow disabling mouse acceleration";

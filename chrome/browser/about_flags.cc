@@ -3362,12 +3362,12 @@ const FeatureEntry kFeatureEntries[] = {
      flag_descriptions::kWebXrForceRuntimeDescription, kOsDesktop,
      MULTI_VALUE_TYPE(kWebXrForceRuntimeChoices)},
 #endif  // ENABLE_VR
-#if defined(OS_CHROMEOS)
+#if defined(OS_CHROMEOS) || defined(OS_LINUX)
     {"disable-accelerated-mjpeg-decode",
      flag_descriptions::kAcceleratedMjpegDecodeName,
-     flag_descriptions::kAcceleratedMjpegDecodeDescription, kOsCrOS,
+     flag_descriptions::kAcceleratedMjpegDecodeDescription, kOsCrOS | kOsLinux,
      SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedMjpegDecode)},
-#endif  // OS_CHROMEOS
+#endif  // OS_CHROMEOS || OS_LINUX
     {"system-keyboard-lock", flag_descriptions::kSystemKeyboardLockName,
      flag_descriptions::kSystemKeyboardLockDescription, kOsDesktop,
      FEATURE_VALUE_TYPE(features::kSystemKeyboardLock)},

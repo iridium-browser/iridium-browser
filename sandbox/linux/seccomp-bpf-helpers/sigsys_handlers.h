@@ -62,6 +62,10 @@ SANDBOX_EXPORT intptr_t SIGSYSPtraceFailure(const arch_seccomp_data& args,
 // sched_setparam(), sched_setscheduler()
 SANDBOX_EXPORT intptr_t SIGSYSSchedHandler(const arch_seccomp_data& args,
                                            void* aux);
+// If the fstatat syscall is actually a disguised fstat, calls the regular fstat
+// syscall, otherwise, crashes in the same way as CrashSIGSYS_Handler.
+SANDBOX_EXPORT intptr_t SIGSYSFstatatHandler(const struct arch_seccomp_data& args, 
+                                             void* aux);
 
 // Variants of the above functions for use with bpf_dsl.
 SANDBOX_EXPORT bpf_dsl::ResultExpr CrashSIGSYS();
@@ -72,6 +76,7 @@ SANDBOX_EXPORT bpf_dsl::ResultExpr CrashSIGSYSKill();
 SANDBOX_EXPORT bpf_dsl::ResultExpr CrashSIGSYSFutex();
 SANDBOX_EXPORT bpf_dsl::ResultExpr CrashSIGSYSPtrace();
 SANDBOX_EXPORT bpf_dsl::ResultExpr RewriteSchedSIGSYS();
+SANDBOX_EXPORT bpf_dsl::ResultExpr RewriteFstatatSIGSYS();
 
 // Allocates a crash key so that Seccomp information can be recorded.
 void AllocateCrashKeys();

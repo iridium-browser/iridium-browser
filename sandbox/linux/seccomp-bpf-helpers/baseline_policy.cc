@@ -257,6 +257,18 @@ ResultExpr EvaluateSyscallImpl(int fs_denied_errno,
     return RestrictKillTarget(current_pid, sysno);
   }
 
+#if defined(__NR_newfstatat)
+  if (sysno == __NR_newfstatat) {
+    return RewriteFstatatSIGSYS();
+  }
+#endif
+
+#if defined(__NR_fstatat64)
+  if (sysno == __NR_fstatat64) {
+    return RewriteFstatatSIGSYS();
+  }
+#endif
+
   if (SyscallSets::IsFileSystem(sysno) ||
       SyscallSets::IsCurrentDirectory(sysno)) {
     return Error(fs_denied_errno);

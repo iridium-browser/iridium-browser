@@ -17,6 +17,7 @@ struct sock_fprog;
 struct rlimit64;
 struct cap_hdr;
 struct cap_data;
+struct stat64;
 
 namespace sandbox {
 
@@ -83,6 +84,9 @@ SANDBOX_EXPORT int sys_sigprocmask(int how,
 SANDBOX_EXPORT int sys_sigaction(int signum,
                                  const struct sigaction* act,
                                  struct sigaction* oldact);
+
+// Recent glibc rewrites fstat to fstatat.
+SANDBOX_EXPORT int sys_fstat64(int fd, struct stat64 *buf);
 
 }  // namespace sandbox
 

@@ -6,6 +6,8 @@
 
 #include "sandbox/linux/seccomp-bpf-helpers/sigsys_handlers.h"
 
+#include <errno.h>
+#include <fcntl.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <string.h>
@@ -355,6 +357,35 @@ intptr_t SIGSYSSchedHandler(const struct arch_seccomp_data& args,
   return -ENOSYS;
 }
 
+intptr_t SIGSYSFstatatHandler(const struct arch_seccomp_data& args,
+                              void* aux) {
+  switch (args.nr) {
+#if defined(__NR_newfstatat)
+    case __NR_newfstatat:
+#endif
+#if defined(__NR_fstatat64)
+    case __NR_fstatat64:
+#endif
+#if defined(__NR_newfstatat) || defined(__NR_fstatat64)
+      if (*reinterpret_cast<const char *>(args.args[1]) == '\0'
+          && args.args[3] == static_cast<uint64_t>(AT_EMPTY_PATH)) {
+        return sandbox::sys_fstat64(static_cast<int>(args.args[0]),
+                                    reinterpret_cast<struct stat64 *>(args.args[2]));
+      } else {
+        errno = EACCES;
+        return -1;
+      }
+      break;
+#endif
+  }
+
+  CrashSIGSYS_Handler(args, aux);
+
+  // Should never be reached.
+  RAW_CHECK(false);
+  return -ENOSYS;
+}
+
 bpf_dsl::ResultExpr CrashSIGSYS() {
   return bpf_dsl::Trap(CrashSIGSYS_Handler, NULL);
 }
@@ -385,6 +416,10 @@ bpf_dsl::ResultExpr CrashSIGSYSPtrace() {
 
 bpf_dsl::ResultExpr RewriteSchedSIGSYS() {
   return bpf_dsl::Trap(SIGSYSSchedHandler, NULL);
+}
+
+bpf_dsl::ResultExpr RewriteFstatatSIGSYS() {
+  return bpf_dsl::Trap(SIGSYSFstatatHandler, NULL);
 }
 
 void AllocateCrashKeys() {

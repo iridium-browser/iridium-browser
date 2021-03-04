@@ -394,7 +394,12 @@ std::unique_ptr<base::ListValue> GpuMemoryBufferInfo(
 
   gpu::GpuMemoryBufferConfigurationSet native_config;
 #if defined(USE_X11)
-  if (!features::IsUsingOzonePlatform()) {
+#if defined(USE_OZONE)
+  const auto is_using_ozone_platform = features::IsUsingOzonePlatform();
+#else
+  const auto is_using_ozone_platform = false;
+#endif
+  if (!is_using_ozone_platform) {
     for (const auto& config : gpu_extra_info.gpu_memory_buffer_support_x11) {
       native_config.emplace(config);
     }

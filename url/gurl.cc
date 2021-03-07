@@ -537,6 +537,41 @@ void GURL::WriteIntoTrace(perfetto::TracedValue context) const {
   std::move(context).WriteString(possibly_invalid_spec());
 }
 
+std::string &gurl_strip_trk(std::string &s)
+{
+	auto slen = strlen(url::kTraceScheme);
+	if (!isdigit(s[slen+1]))
+		/* trk:https://... */
+		return s.erase(0, slen);
+	/* trk:123:https://... (or so we hope) */
+	auto pos = s.find(':', slen + 1);
+	if (pos == std::string::npos)
+		return s.erase(0, slen);
+	return s.erase(0, pos + 1);
+}
+
+bool gurl_is_trq(const std::string &s)
+{
+	auto slen = strlen(url::kTraceScheme);
+	/* trk:0.nnn:http:// makes for a quiet one */
+	return s[slen+1] == '0' && s[slen+2] == '.';
+}
+
+GURL GURL::strip_trk() const
+{
+	if (!SchemeIs(url::kTraceScheme))
+		return *this;
+	auto s = spec();
+	return GURL(gurl_strip_trk(s));
+}
+
+bool GURL::is_trq() const
+{
+	if (!SchemeIs(url::kTraceScheme))
+		return false;
+	return gurl_is_trq(spec());
+}
+
 std::ostream& operator<<(std::ostream& out, const GURL& url) {
   return out << url.possibly_invalid_spec();
 }

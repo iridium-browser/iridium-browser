@@ -184,6 +184,7 @@ class InfoBarDelegate {
     AUTOFILL_VIRTUAL_CARD_ENROLLMENT_INFOBAR_DELEGATE_MOBILE = 110,
     TAILORED_SECURITY_SERVICE_INFOBAR_DELEGATE = 111,
     CHROME_FOR_TESTING_INFOBAR_DELEGATE = 112,
+    TRACKING_ALERT_INFOBAR_DELEGATE = 9001,
   };
 
   // Describes navigation events, used to decide whether infobars should be

@@ -58,6 +58,7 @@ ChromeAutocompleteSchemeClassifier::GetInputTypeForScheme(
   if (base::IsStringASCII(scheme) &&
       (ProfileIOData::IsHandledProtocol(scheme) ||
        base::EqualsCaseInsensitiveASCII(scheme, content::kViewSourceScheme) ||
+       base::EqualsCaseInsensitiveASCII(scheme, url::kTraceScheme) ||
        base::EqualsCaseInsensitiveASCII(scheme, url::kJavaScriptScheme) ||
        base::EqualsCaseInsensitiveASCII(scheme, url::kDataScheme))) {
     return metrics::OmniboxInputType::URL;

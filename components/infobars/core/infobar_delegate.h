@@ -179,6 +179,7 @@ class InfoBarDelegate {
     IOS_PERMISSIONS_INFOBAR_DELEGATE = 108,
     SUPPORTED_LINKS_INFOBAR_DELEGATE_CHROMEOS = 109,
     AUTOFILL_VIRTUAL_CARD_ENROLLMENT_INFOBAR_DELEGATE_MOBILE = 110,
+    TRACKING_ALERT_INFOBAR_DELEGATE = 9001,
   };
 
   // Describes navigation events, used to decide whether infobars should be

@@ -149,6 +149,7 @@ QueueType BaseBrowserTaskExecutor::GetQueueType(
     case base::TaskPriority::USER_BLOCKING:
       return QueueType::kUserBlocking;
   }
+  printf("UNREACHED prio %d\n", traits.priority());
 }
 
 BrowserTaskExecutor::BrowserTaskExecutor(
@@ -195,6 +196,8 @@ void BrowserTaskExecutor::CreateInternal(
   g_browser_task_executor =
       new BrowserTaskExecutor(std::move(browser_ui_thread_scheduler),
                               std::move(browser_io_thread_delegate));
+  printf("new browser task executor this%p.%p pid %d\n",
+  	nullptr, (void*)g_browser_task_executor, getpid());
   base::RegisterTaskExecutor(BrowserTaskTraitsExtension::kExtensionId,
                              g_browser_task_executor);
 
@@ -225,6 +228,7 @@ void BrowserTaskExecutor::ResetForTesting() {
     RunAllPendingTasksOnThreadForTesting(BrowserThread::IO);
     base::UnregisterTaskExecutorForTesting(
         BrowserTaskTraitsExtension::kExtensionId);
+    printf("taskexecutor %p.%p delted\n", nullptr, (void*)g_browser_task_executor);
     delete g_browser_task_executor;
     g_browser_task_executor = nullptr;
   }

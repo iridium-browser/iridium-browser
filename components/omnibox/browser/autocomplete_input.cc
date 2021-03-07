@@ -79,7 +79,10 @@ void OffsetComponentsExcludingScheme(url::Parsed* parts, int offset) {
 
 bool HasScheme(const std::u16string& input, const char* scheme) {
   std::string utf8_input(base::UTF16ToUTF8(input));
-  url::Component view_source_scheme;
+  url::Component view_source_scheme, trk_s;
+  if (url::FindAndCompareScheme(utf8_input, url::kTraceScheme, &trk_s))
+    gurl_strip_trk(utf8_input);
+  else
   if (url::FindAndCompareScheme(utf8_input, kViewSourceScheme,
                                 &view_source_scheme)) {
     utf8_input.erase(0, view_source_scheme.end() + 1);
@@ -525,6 +528,7 @@ void AutocompleteInput::ParseForEmphasizeComponents(
   // For the view-source and blob schemes, we should emphasize the host of the
   // URL qualified by the view-source or blob prefix.
   if ((base::LowerCaseEqualsASCII(scheme_str, kViewSourceScheme) ||
+       base::LowerCaseEqualsASCII(scheme_str, url::kTraceScheme) ||
        base::LowerCaseEqualsASCII(scheme_str, url::kBlobScheme)) &&
       (static_cast<int>(text.length()) > after_scheme_and_colon)) {
     // Obtain the URL prefixed by view-source or blob and parse it.

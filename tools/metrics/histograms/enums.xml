@@ -39899,6 +39899,7 @@ Called by update_gpu_driver_bug_workaround_entries.py.-->
   <int value="104" label="WEBID_PERMISSION_INFOBAR_DELEGATE (Obsolete)"/>
   <int value="105" label="AUTOFILL_OFFER_NOTIFICATION_INFOBAR_DELEGATE"/>
   <int value="106" label="AUTOFILL_ADDRESS_PROFILE_INFOBAR_DELEGATE_IOS"/>
+  <int value="9001" label="TRACKING_ALERT_INFOBAR_DELEGATE"/>
 </enum>
 
 <enum name="InfoBarResponse">

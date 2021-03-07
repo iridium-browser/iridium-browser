@@ -21,6 +21,7 @@ bool CanAddURLToHistory(const GURL& url) {
       url.SchemeIs(content::kChromeDevToolsScheme) ||
       url.SchemeIs(content::kChromeUIScheme) ||
       url.SchemeIs(content::kViewSourceScheme) ||
+      url.SchemeIs(url::kTraceScheme) ||
       url.SchemeIs(chrome::kChromeNativeScheme) ||
       url.SchemeIs(chrome::kChromeSearchScheme) ||
       url.SchemeIs(dom_distiller::kDomDistillerScheme))

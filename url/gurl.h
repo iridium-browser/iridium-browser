@@ -434,6 +434,9 @@ class COMPONENT_EXPORT(URL) GURL {
   // See base/trace_event/memory_usage_estimator.h for more info.
   size_t EstimateMemoryUsage() const;
 
+  GURL strip_trk(void) const;
+  bool is_trq(void) const;
+
  private:
   // Variant of the string parsing constructor that allows the caller to elect
   // retain trailing whitespace, if any, on the passed URL spec, but only if
@@ -482,6 +485,8 @@ class COMPONENT_EXPORT(URL) GURL {
 // Stream operator so GURL can be used in assertion statements.
 COMPONENT_EXPORT(URL)
 std::ostream& operator<<(std::ostream& out, const GURL& url);
+COMPONENT_EXPORT(URL) std::string &gurl_strip_trk(std::string &);
+COMPONENT_EXPORT(URL) bool gurl_is_trq(const std::string &);
 
 COMPONENT_EXPORT(URL) bool operator==(const GURL& x, const GURL& y);
 COMPONENT_EXPORT(URL) bool operator!=(const GURL& x, const GURL& y);

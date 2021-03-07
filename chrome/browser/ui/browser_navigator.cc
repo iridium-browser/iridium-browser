@@ -793,7 +793,12 @@ bool IsURLAllowedInIncognito(const GURL& url,
     return stripped_url.is_valid() &&
            IsURLAllowedInIncognito(stripped_url, browser_context);
   }
-
+	if (url.SchemeIs(url::kTraceScheme)) {
+		/* Same as view-source:, strip prefix and re-check. */
+		auto url2 = url.strip_trk();
+		return url2.is_valid() &&
+		       IsURLAllowedInIncognito(url2, browser_context);
+	}
   return IsHostAllowedInIncognito(url);
 }
 

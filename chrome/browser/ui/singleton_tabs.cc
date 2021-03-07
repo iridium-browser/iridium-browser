@@ -99,7 +99,8 @@ int GetIndexOfExistingTab(Browser* browser, const NavigateParams& params) {
 
     // Skip view-source tabs. This is needed because RewriteURLIfNecessary
     // removes the "view-source:" scheme which leads to incorrect matching.
-    if (tab_url.SchemeIs(content::kViewSourceScheme))
+    if (tab_url.SchemeIs(content::kViewSourceScheme) ||
+        tab_url.SchemeIs(url::kTraceScheme))
       continue;
 
     GURL rewritten_tab_url = tab_url;

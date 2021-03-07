@@ -5,6 +5,10 @@
 #include "net/url_request/url_request.h"
 
 #include <utility>
+#include <cstdio>
+#ifdef __unix__
+#	include <unistd.h>
+#endif
 
 #include "base/bind.h"
 #include "base/callback.h"
@@ -43,6 +47,33 @@
 
 using base::Time;
 using std::string;
+
+namespace iridium {
+
+void textlog_request(const char *caller, const GURL &url)
+{
+#ifdef __linux__
+	bool tty = isatty(fileno(stderr));
+#else
+	bool tty = false;
+#endif
+	const char *xred   = tty ? "\033[1;37;41m" : ""; // ]
+	const char *xfruit = tty ? "\033[33m"      : ""; // ]
+	const char *xdark  = tty ? "\033[1;30m"    : ""; // ]
+	const char *xreset = tty ? "\033[0m"       : ""; // ]
+
+	if (url.scheme() == url::kTraceScheme)
+		fprintf(stderr, "%s*** %s(%s)%s\n", xred, caller,
+		        url.possibly_invalid_spec().c_str(), xreset);
+	else
+		fprintf(stderr, "%s***%s %s(%s)%s\n", xfruit, xdark,
+		        caller, url.possibly_invalid_spec().c_str(),
+		        xreset);
+}
+
+void (*log_request)(const char *, const GURL &) = textlog_request;
+
+}
 
 namespace net {
 
@@ -566,6 +597,10 @@ URLRequest::URLRequest(const GURL& url,
   // Sanity check out environment.
   DCHECK(base::ThreadTaskRunnerHandle::IsSet());
 
+	/* network runs in a separate process with no graphics */
+	iridium::textlog_request("URLRequest", url);
+	if (url.scheme() == url::kTraceScheme)
+		url_chain_[0] = url.strip_trk();
   context->url_requests()->insert(this);
   net_log_.BeginEvent(NetLogEventType::REQUEST_ALIVE, [&] {
     return NetLogURLRequestConstructorParams(url, priority_,

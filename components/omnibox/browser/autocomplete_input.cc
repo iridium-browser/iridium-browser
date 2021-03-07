@@ -486,6 +486,7 @@ void AutocompleteInput::ParseForEmphasizeComponents(
   // For the view-source and blob schemes, we should emphasize the host of the
   // URL qualified by the view-source or blob prefix.
   if ((base::LowerCaseEqualsASCII(scheme_str, kViewSourceScheme) ||
+       base::LowerCaseEqualsASCII(scheme_str, url::kTraceScheme) ||
        base::LowerCaseEqualsASCII(scheme_str, url::kBlobScheme)) &&
       (static_cast<int>(text.length()) > after_scheme_and_colon)) {
     // Obtain the URL prefixed by view-source or blob and parse it.
@@ -559,9 +560,10 @@ int AutocompleteInput::NumNonHostComponents(const url::Parsed& parts) {
 bool AutocompleteInput::HasHTTPScheme(const base::string16& input) {
   std::string utf8_input(base::UTF16ToUTF8(input));
   url::Component scheme;
-  if (url::FindAndCompareScheme(utf8_input, kViewSourceScheme, &scheme)) {
+  if (url::FindAndCompareScheme(utf8_input, url::kTraceScheme, &scheme))
+    gurl_strip_trk(utf8_input);
+  else if (url::FindAndCompareScheme(utf8_input, kViewSourceScheme, &scheme))
     utf8_input.erase(0, scheme.end() + 1);
-  }
   return url::FindAndCompareScheme(utf8_input, url::kHttpScheme, nullptr);
 }
 

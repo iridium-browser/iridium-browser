@@ -37,6 +37,7 @@
 #include "net/base/request_priority.h"
 #include "net/http/http_request_headers.h"
 #include "net/traffic_annotation/network_traffic_annotation.h"
+#include "net/url_request/url_request.h"
 #include "services/network/public/cpp/data_element.h"
 #include "services/network/public/cpp/resource_request.h"
 #include "services/network/public/cpp/simple_url_loader_stream_consumer.h"
@@ -1506,6 +1507,8 @@ void SimpleURLLoaderImpl::Start(mojom::URLLoaderFactory* url_loader_factory) {
   DCHECK(!request_state_->finished);
   DCHECK(!url_loader_);
   DCHECK(!request_state_->body_started);
+
+  iridium::log_request("SimpleURLLoaderImpl", resource_request_->url);
 
   // If retries are enabled, stash the information needed to retry a request.
   if (remaining_retries_ > 0) {

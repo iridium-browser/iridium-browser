@@ -16,8 +16,38 @@
 #include "content/public/common/url_utils.h"
 #include "third_party/blink/public/common/chrome_debug_urls.h"
 #include "url/gurl.h"
+#include "net/url_request/url_request.h"
+
+#include "chrome/browser/ui/browser.h"
+#include "chrome/browser/ui/browser_finder.h"
+#include "chrome/browser/ui/tabs/tab_strip_model.h"
+#include "components/infobars/core/infobar.h"
+#include "components/infobars/core/confirm_infobar_delegate.h"
+#include "components/infobars/content/content_infobar_manager.h"
+#include "chrome/browser/infobars/confirm_infobar_creator.h"
+#include "content/public/browser/browser_task_traits.h"
+#include "content/public/browser/browser_thread.h"
+#include "base/strings/utf_string_conversions.h"
+#include "services/network/public/cpp/simple_url_loader.h"
 
 namespace content {
+
+static bool handle_trace_scheme(GURL *url, BrowserContext *)
+{
+	if (!url->SchemeIs(url::kTraceScheme))
+		return false;
+	iridium::log_request("handle_trace_scheme", *url);
+	*url = url->strip_trk();
+	return false;
+}
+
+static bool trace_scheme_revlookup(GURL *url, BrowserContext *)
+{
+	if (url->SchemeIs(url::kTraceScheme))
+		return false;
+	*url = GURL(url::kTraceScheme + (":" + url->spec()));
+	return true;
+}
 
 // Handles rewriting view-source URLs for what we'll actually load.
 static bool HandleViewSource(GURL* url, BrowserContext* browser_context) {
@@ -100,6 +130,7 @@ BrowserURLHandlerImpl::BrowserURLHandlerImpl() {
   AddHandlerPair(&HandleViewSource, &ReverseViewSource);
 
   GetContentClient()->browser()->BrowserURLHandlerCreated(this);
+  AddHandlerPair(&handle_trace_scheme, &trace_scheme_revlookup);
 }
 
 BrowserURLHandlerImpl::~BrowserURLHandlerImpl() {
@@ -184,4 +215,88 @@ void BrowserURLHandlerImpl::RemoveHandlerForTesting(URLHandler handler) {
   url_handlers_.erase(it);
 }
 
+class TrkBar : public ConfirmInfoBarDelegate {
+	public:
+	static void Create(infobars::InfoBarManager *, const GURL &);
+	bool ShouldExpire(const NavigationDetails &) const override;
+	bool EqualsDelegate(infobars::InfoBarDelegate *) const override;
+
+	private:
+	TrkBar(const GURL &);
+	std::u16string GetMessageText() const override;
+	int GetButtons() const override;
+	infobars::InfoBarDelegate::InfoBarIdentifier GetIdentifier(void) const override;
+
+	GURL m_url;
+	TrkBar(TrkBar &&) noexcept = delete;
+	void operator=(TrkBar &&) noexcept = delete;
+};
+
+void TrkBar::Create(infobars::InfoBarManager *mgr, const GURL &url)
+{
+	std::unique_ptr<ConfirmInfoBarDelegate> tb(new TrkBar(url));
+	mgr->AddInfoBar(CreateConfirmInfoBar(std::move(tb)), true);
+}
+
+bool TrkBar::ShouldExpire(const NavigationDetails &) const
+{
+	return false;
+}
+
+bool TrkBar::EqualsDelegate(infobars::InfoBarDelegate *ov) const
+{
+	/*
+	 * Make each TrkBar considered equal to any other TrkBar for
+	 * the purposes of AddInfoBar(,replace:true).
+	 */
+	return ov->GetIdentifier() == TRACKING_ALERT_INFOBAR_DELEGATE;
+}
+
+TrkBar::TrkBar(const GURL &url) :
+	ConfirmInfoBarDelegate(), m_url(url)
+{}
+
+std::u16string TrkBar::GetMessageText(void) const
+{
+	return base::ASCIIToUTF16("A graylisted transmission was made (please report me): " + m_url.spec());
+}
+
+int TrkBar::GetButtons() const
+{
+	return BUTTON_NONE;
+}
+
+infobars::InfoBarDelegate::InfoBarIdentifier TrkBar::GetIdentifier() const
+{
+	return TRACKING_ALERT_INFOBAR_DELEGATE;
+}
+
 }  // namespace content
+
+namespace iridium {
+
+static void gfxlog_request2(const std::string &caller, const GURL &url)
+{
+	auto browser = chrome::FindLastActive();
+	if (browser == nullptr)
+		return;
+	auto svc = infobars::ContentInfoBarManager::FromWebContents(browser->tab_strip_model()->GetActiveWebContents());
+	content::TrkBar::Create(svc, url);
+}
+
+void gfxlog_request(const char *caller, const GURL &url)
+{
+	textlog_request(caller, url);
+	if (url.scheme() != url::kTraceScheme && !url.is_trq())
+		return;
+	auto e = content::GetUIThreadTaskRunner({});
+	if (e != nullptr)
+		e->PostTask(FROM_HERE, base::BindOnce(&gfxlog_request2,
+			std::string(caller), GURL(url)));
+}
+
+static struct log_install {
+	log_install() { iridium::log_request = gfxlog_request; }
+} log_installer;
+
+}

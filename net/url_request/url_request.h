@@ -58,6 +58,11 @@
 #include "url/gurl.h"
 #include "url/origin.h"
 
+namespace iridium {
+extern void textlog_request(const char *caller, const GURL &);
+extern void (*log_request)(const char *, const GURL &);
+}
+
 namespace net {
 
 class CookieOptions;

@@ -176,6 +176,7 @@ class InfoBarDelegate {
     AUTOFILL_OFFER_NOTIFICATION_INFOBAR_DELEGATE = 105,
     AUTOFILL_ADDRESS_PROFILE_INFOBAR_DELEGATE_IOS = 106,
     ADD_TO_READING_LIST_IOS = 107,
+    TRACKING_ALERT_INFOBAR_DELEGATE = 9001,
   };
 
   // Describes navigation events, used to decide whether infobars should be

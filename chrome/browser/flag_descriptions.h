@@ -2138,8 +2138,20 @@ extern const char kVideoToolboxVp9DecodingDescription[];
 extern const char kAccountManagementFlowsV2Name[];
 extern const char kAccountManagementFlowsV2Description[];
 
+#endif
+
+// Chrome OS and Linux --------------------------------------------------------
+
+#if BUILDFLAG(IS_CHROMEOS_ASH) || (defined(OS_LINUX) && !defined(OS_ANDROID))
+
 extern const char kAcceleratedMjpegDecodeName[];
 extern const char kAcceleratedMjpegDecodeDescription[];
+
+#endif
+
+#if BUILDFLAG(IS_CHROMEOS_ASH)
+
+// Chrome OS ------------------------------------------------------------------
 
 extern const char kAllowDisableMouseAccelerationName[];
 extern const char kAllowDisableMouseAccelerationDescription[];

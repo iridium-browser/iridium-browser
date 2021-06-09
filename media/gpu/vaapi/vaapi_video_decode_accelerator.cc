@@ -59,6 +59,7 @@ unsigned int GetVaFormatForVideoCodecProfile(VideoCodecProfile profile) {
   return VA_RT_FORMAT_YUV420;
 }
 
+#if defined(OS_ANDROID) || BUILDFLAG(IS_CHROMEOS_ASH)
 // Returns true if the CPU is an Intel Gemini Lake or later (including Kaby
 // Lake) Cpu platform id's are referenced from the following file in kernel
 // source arch/x86/include/asm/intel-family.h
@@ -71,6 +72,7 @@ bool IsGeminiLakeOrLater() {
       cpuid.model() >= kGeminiLakeModelId;
   return is_geminilake_or_later;
 }
+#endif
 
 }  // namespace
 
@@ -1231,6 +1233,8 @@ VaapiVideoDecodeAccelerator::DecideBufferAllocationMode() {
   if (output_mode_ == VideoDecodeAccelerator::Config::OutputMode::IMPORT)
     return BufferAllocationMode::kNormal;
 
+#if defined(OS_ANDROID) || BUILDFLAG(IS_CHROMEOS_ASH)
+  // Move this to chromeOs only as it is causing problem in some intel linux drivers
   // On Gemini Lake, Kaby Lake and later we can pass to libva the client's
   // PictureBuffers to decode onto, which skips the use of the Vpp unit and its
   // associated format reconciliation copy, avoiding all internal buffer
@@ -1246,6 +1250,7 @@ VaapiVideoDecodeAccelerator::DecideBufferAllocationMode() {
       num_extra_pics_ = 3;
     return BufferAllocationMode::kNone;
   }
+#endif
 
   // For H.264 on older devices, another +1 is experimentally needed for
   // high-to-high resolution changes.

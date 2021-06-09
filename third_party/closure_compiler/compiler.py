@@ -13,8 +13,7 @@ import subprocess
 
 
 _CURRENT_DIR = os.path.join(os.path.dirname(__file__))
-_JAVA_PATH = os.path.join(_CURRENT_DIR, "..", "jdk", "current", "bin", "java")
-assert os.path.isfile(_JAVA_PATH), "java only allowed in android builds"
+_JAVA_PATH = "java"
 
 class Compiler(object):
   """Runs the Closure compiler on given source files to typecheck them

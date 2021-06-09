@@ -261,4 +261,13 @@ int sys_sigaction(int signum,
 
 #endif  // defined(MEMORY_SANITIZER)
 
+SANDBOX_EXPORT int sys_fstat64(int fd, struct stat64 *buf)
+{
+#if defined(__NR_fstat64)
+    return syscall(__NR_fstat64, fd, buf);
+#else
+    return syscall(__NR_fstat, fd, buf);
+#endif
+}
+
 }  // namespace sandbox

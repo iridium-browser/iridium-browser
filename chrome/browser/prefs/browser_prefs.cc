@@ -740,7 +740,7 @@ void RegisterLocalStatePrefsForMigration(PrefRegistrySimple* registry) {
   registry->RegisterListPref(prefs::kUsedPolicyCertificates);
 #endif  // BUILDFLAG(IS_CHROMEOS_ASH)
 
-  registry->RegisterBooleanPref(kUserAgentClientHintsEnabled, true);
+  registry->RegisterBooleanPref(kUserAgentClientHintsEnabled, false);
 
   registry->RegisterBooleanPref(kCloudPolicyOverridesPlatformPolicy, false);
 

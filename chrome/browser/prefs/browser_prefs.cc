@@ -696,9 +696,7 @@ void RegisterLocalStatePrefsForMigration(PrefRegistrySimple* registry) {
   registry->RegisterIntegerPref(kStabilityBreakpadRegistrationSuccess, 0);
   registry->RegisterIntegerPref(kStabilityDebuggerPresent, 0);
   registry->RegisterIntegerPref(kStabilityDebuggerNotPresent, 0);
-
-  registry->RegisterBooleanPref(kUserAgentClientHintsEnabled, true);
-
+  registry->RegisterBooleanPref(kUserAgentClientHintsEnabled, false);
 #if BUILDFLAG(ENABLE_EXTENSIONS)
   registry->RegisterBooleanPref(kPinnedExtensionsMigrationComplete, false);
 #endif

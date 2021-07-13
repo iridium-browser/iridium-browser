@@ -742,9 +742,7 @@ void RegisterLocalStatePrefsForMigration(PrefRegistrySimple* registry) {
   // Deprecated 10/2021.
   registry->RegisterListPref(prefs::kUsedPolicyCertificates);
 #endif  // BUILDFLAG(IS_CHROMEOS_ASH)
-
-  registry->RegisterBooleanPref(kUserAgentClientHintsEnabled, true);
-
+  registry->RegisterBooleanPref(kUserAgentClientHintsEnabled, false);
   registry->RegisterBooleanPref(kCloudPolicyOverridesPlatformPolicy, false);
 
   registry->RegisterStringPref(kPrivacyBudgetActiveSurfaces, std::string());

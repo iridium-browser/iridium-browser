@@ -58,12 +58,9 @@ std::u16string LocationBarModelImpl::GetURLForDisplay() const {
   format_types |= url_formatter::kFormatUrlTrimAfterHost;
 #endif
 
-  format_types |= url_formatter::kFormatUrlOmitHTTPS;
-  format_types |= url_formatter::kFormatUrlOmitTrivialSubdomains;
 
 #if !BUILDFLAG(IS_ANDROID) && !BUILDFLAG(IS_IOS)
   // On desktop, the File chip makes the scheme redundant in the steady state.
-  format_types |= url_formatter::kFormatUrlOmitFileScheme;
 #endif
 
   if (dom_distiller::url_utils::IsDistilledPage(GetURL())) {

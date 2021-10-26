@@ -79,7 +79,11 @@ sk_sp<SkData> SubsetFont(SkTypeface* typeface, const GlyphUsage& usage) {
   // Retain all variation information for OpenType variation fonts. See:
   // https://docs.microsoft.com/en-us/typography/opentype/spec/otvaroverview
   hb_set_t* skip_subset =
+#if HB_VERSION_ATLEAST(3,0,0)
+      hb_subset_input_set(input.get(), HB_SUBSET_SETS_NO_SUBSET_TABLE_TAG);
+#else
       hb_subset_input_no_subset_tables_set(input.get());  // Owned by |input|.
+#endif
   hb_set_add(skip_subset, HB_TAG('a', 'v', 'a', 'r'));
   hb_set_add(skip_subset, HB_TAG('c', 'v', 'a', 'r'));
   hb_set_add(skip_subset, HB_TAG('f', 'v', 'a', 'r'));

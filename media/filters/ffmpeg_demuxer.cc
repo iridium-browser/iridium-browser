@@ -49,7 +49,13 @@
 #include "media/formats/webm/webm_crypto_helpers.h"
 #include "media/media_buildflags.h"
 #include "third_party/ffmpeg/ffmpeg_features.h"
+#include <libavcodec/version.h>
+#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(58, 78, 100)
 #include "third_party/ffmpeg/libavcodec/packet.h"
+#else
+#include "third_party/ffmpeg/libavcodec/avcodec.h"
+#endif
+
 
 #if BUILDFLAG(ENABLE_PLATFORM_HEVC)
 #include "media/filters/ffmpeg_h265_to_annex_b_bitstream_converter.h"

@@ -19,6 +19,7 @@
 #include <sys/syscall.h>
 #include <unistd.h>
 
+#include <cstring>
 #include <memory>
 #include <string>
 #include <utility>

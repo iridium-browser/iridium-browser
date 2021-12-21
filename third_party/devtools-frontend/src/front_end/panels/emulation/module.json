@@ -1,0 +1,12 @@
+{
+  "dependencies": [
+    "ui/legacy",
+    "panels/mobile_throttling"
+  ],
+    "resources": [
+    "deviceModeToolbar.css",
+    "deviceModeView.css",
+    "inspectedPagePlaceholder.css",
+    "mediaQueryInspector.css"
+  ]
+}

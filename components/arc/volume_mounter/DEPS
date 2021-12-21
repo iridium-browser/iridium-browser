@@ -1,0 +1,6 @@
+include_rules = [
+    "+chromeos/disks",
+    "+third_party/re2",
+    "+ui/base/l10n",
+    "+ui/chromeos/strings",
+]

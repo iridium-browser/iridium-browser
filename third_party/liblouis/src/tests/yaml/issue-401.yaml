@@ -1,0 +1,63 @@
+table: |
+  display | 456
+  display ; 56
+  display # 3456
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  include tables/litdigits6Dots.uti
+  include tables/braille-patterns.cti
+  numsign            3456
+  begcapsword        456
+  # endcapsword before nocontractsign
+  endcapsword        56
+  nocontractsign     56
+  numericnocontchars abcdefghij
+
+flags: {testmode: backward}
+tests:
+  # ";" must work as endcapsword
+  - - "|ABC;abc"
+    - "ABCabc"
+  # ";" must also work as nocontractsign and cancel number mode
+  - - "abc#abc;abc"
+    - "abc123abc"
+  - - "#abc;abc"
+    - "123abc"
+  # nocontractsign is not necessary below, as "k" it not in numericmodechars
+  - - "#abckabc"
+    - "123kabc"
+  # it shouldn't cause issues though
+  - - "#abc;kabc"
+    - "123kabc"
+
+table: |
+  display | 456
+  display ; 56
+  display # 3456
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  include tables/litdigits6Dots.uti
+  include tables/braille-patterns.cti
+  numsign            3456
+  begcapsword        456
+  # nocontractsign before endcapsword
+  nocontractsign     56
+  endcapsword        56
+  numericnocontchars abcdefghij
+
+flags: {testmode: backward}
+tests:
+  # ";" must work as endcapsword
+  - - "|abc;abc"
+    - "ABCabc"
+  # ";" must also work as nocontractsign and cancel number mode
+  - - "abc#abc;abc"
+    - "abc123abc"
+  - - "#abc;abc"
+    - "123abc"
+  # nocontractsign is not necessary below, as "k" it not in numericmodechars
+  - - "#abckabc"
+    - "123kabc"
+  # it shouldn't cause issues though
+  - - "#abc;kabc"
+    - "123kabc"

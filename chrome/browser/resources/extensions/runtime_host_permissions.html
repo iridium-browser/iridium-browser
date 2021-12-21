@@ -1,0 +1,146 @@
+<style include="cr-shared-style action-link md-select shared-style">
+  iron-icon {
+    --iron-icon-height: var(--cr-icon-size);
+    --iron-icon-width: var(--cr-icon-size);
+  }
+
+  #section-heading {
+    --md-select-width: 160px;
+    align-items: center;
+    display: flex;
+  }
+
+  #section-heading-heading {
+    display: flex;
+    flex: 1;
+  }
+
+  #section-heading .link-icon-button {
+    margin-inline-start: 6px;
+  }
+
+  #host-access {
+    margin-inline-start: 12px;
+    width: 100%;
+  }
+
+  #hosts {
+    margin-bottom: 0;
+    padding-inline-start: calc(
+        var(--cr-section-indent-padding) - var(--cr-section-padding));
+  }
+
+  #hosts li {
+    align-items: center;
+    border-bottom: var(--cr-separator-line);
+    display: flex;
+    height: var(--cr-section-min-height);
+    justify-content: space-between;
+  }
+
+  #hosts li:last-child {
+    border-bottom: none;
+  }
+
+  #add-host {
+    font-weight: 500;
+    width: 100%;
+  }
+
+  #permissions-mode {
+    color: var(--cr-primary-text-color);
+    margin-top: 12px;
+  }
+
+  cr-radio-button.multi-row {
+    align-items: normal;
+  }
+
+  cr-icon-button {
+    margin: 0;
+  }
+</style>
+<div id="permissions-mode">
+  <div id="section-heading">
+    <div id="section-heading-heading">
+      <span id="section-heading-text">
+        [[getHostPermissionsHeading_(extensionsMenuAccessControlEnabled_)]]
+      </span>
+      <a class="link-icon-button" aria-label="$i18n{learnMore}"
+          href="$i18n{hostPermissionsLearnMoreLink}" target="_blank"
+          on-click="onLearnMoreClick_">
+        <iron-icon icon="cr:help-outline"></iron-icon>
+      </a>
+    </div>
+
+    <div>
+      <select id="host-access" class="md-select" on-change="onHostAccessChange_"
+          value="[[permissions.hostAccess]]"
+          aria-labelledby="section-heading-text">
+        <template is="dom-if" if="[[!extensionsMenuAccessControlEnabled_]]">
+          <option value="[[HostAccess_.ON_CLICK]]">
+            $i18n{hostAccessOnClick}
+          </option>
+          <option value="[[HostAccess_.ON_SPECIFIC_SITES]]">
+            $i18n{hostAccessOnSpecificSites}
+          </option>
+          <option value="[[HostAccess_.ON_ALL_SITES]]">
+            $i18n{hostAccessOnAllSites}
+          </option>
+        </template>
+        <template is="dom-if" if="[[extensionsMenuAccessControlEnabled_]]">
+          <option value="[[HostAccess_.ON_CLICK]]">
+            $i18n{newHostAccessOnClick}
+          </option>
+          <option value="[[HostAccess_.ON_SPECIFIC_SITES]]">
+            $i18n{hostAccessCustomizeForEachSite}
+          </option>
+          <option value="[[HostAccess_.ON_ALL_SITES]]">
+            $i18n{newHostAccessOnAllSites}
+          </option>
+        </template>
+      </select>
+    </div>
+  </div>
+</div>
+
+<template is="dom-if" if="[[showSpecificSites_(permissions.*)]]">
+  <ul id="hosts">
+    <template is="dom-repeat"
+        items="[[getRuntimeHosts_(permissions.hosts)]]">
+      <li>
+        <div>[[item]]</div>
+        <cr-icon-button class="icon-more-vert edit-host"
+            on-click="onEditHostClick_"
+            title="$i18n{hostPermissionsEdit}"></cr-icon-button>
+      </li>
+    </template>
+    <li>
+      <a id="add-host" is="action-link" on-click="onAddHostClick_">
+        $i18n{itemSiteAccessAddHost}
+      </a>
+    </li>
+  </ul>
+</template>
+
+<cr-action-menu id="hostActionMenu"
+    role-description="$i18n{menu}"
+    on-close="onActionMenuClose_">
+  <button class="dropdown-item" id="action-menu-edit"
+      on-click="onActionMenuEditClick_">
+    $i18n{hostPermissionsEdit}
+  </button>
+  <button class="dropdown-item" id="action-menu-remove"
+      on-click="onActionMenuRemoveClick_">
+    $i18n{remove}
+  </button>
+</cr-action-menu>
+<template is="dom-if" if="[[showHostDialog_]]" restamp>
+  <extensions-runtime-hosts-dialog
+      delegate="[[delegate]]" item-id="[[itemId]]"
+      current-site="[[hostDialogModel_]]"
+      update-host-access="[[dialogShouldUpdateHostAccess_(oldHostAccess_)]]"
+      on-close="onHostDialogClose_"
+      on-cancel="onHostDialogCancel_">
+  </extensions-runtime-hosts-dialog>
+</template>

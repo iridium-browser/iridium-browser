@@ -1,0 +1,65 @@
+# see issue https://github.com/liblouis/liblouis/issues/787
+#
+# These examples refer to the Malay braille system so should probably
+# be moved to a "ms-g2.yaml" file in the future. Some more targeted
+# regression tests for repword should then be added to this file.
+
+display: tables/unicode.dis
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  repword - 123456
+  always an 12456
+  always ang 1-346
+  always ber 23
+  always jalan 245-123-1345
+  always ng 346
+  always ny 246
+  always se 1456
+  contraction jln
+tests:
+
+  # 1. Repeated word
+  #
+  # When encountering a repeated word that is separated by a dash
+  # without any spaces in between them, replace the dash with a repeat
+  # sign (dots 123456) and eliminate the following repeated word.
+  - - tasik-tasik
+    - ⠞⠁⠎⠊⠅⠿
+  - - barang-barang
+    - ⠃⠁⠗⠁⠬⠿
+
+  # 2. Repeated word with prefix
+  #
+  # When encountering a repeated word that is separated by a dash
+  # without any spaces in between them which has a prefix, replace the
+  # dash with repeat sign (dots 123456) and eliminate the following
+  # repeated word, but retaining the prefix (for this example "ber")
+  # separated by dots 25 from the word ("jalan") without any spaces in
+  # between.
+  - - berjalan-jalan
+    - ⠆⠒⠚⠇⠝⠿
+    - xfail: "repword does not work with prefix (and dots 25 is missing)"
+
+  # 3. Repeated word with suffix
+  #
+  # When encountering a repeated word that is separated by a dash
+  # without any spaces in between them which has a suffix, replace the
+  # dash with a repeat sign (dots 123456) and eliminate the following
+  # repeated word, but retaining the suffix (for this example is an)
+  # without any spaces after the repeat sign.
+  - - besar-besaran
+    - ⠃⠑⠎⠁⠗⠿⠻
+
+  # 4. Repeated word with prefix and suffix
+  #
+  # When encountering a repeated word that is separated by a dash
+  # without any spaces in between them which has a prefix and a
+  # suffix, replace the dash with a repeat sign (dots 123456) and
+  # eliminate the following repeated word, but retaining the prefix
+  # and the suffix (for this example "se" and "nya"). Dots 25 has to
+  # be placed between the prefix ("se") and the word ("kurang"). The
+  # suffix "nya" will come immediately after the repeat sign.
+  - - sekurang-kurangnya
+    - ⠹⠒⠅⠥⠗⠁⠬⠿⠪⠁
+    - xfail: "repword does not work with prefix (and dots 25 is missing)"

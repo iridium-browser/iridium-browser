@@ -1,0 +1,43 @@
+# Converted from capitalization.c
+ 
+table: |
+  include tables/spaces.uti
+  uplow Aa 1
+  uplow Bb 2
+  uplow Cc 3
+  uplow Xx 4
+  uplow Yy 5
+  uplow Zz 6
+  sign - 23
+  seqdelimiter -
+  sign + 12
+  sign [ 13
+  sign ] 14
+  sign < 15
+  sign > 16
+  capsletter 12
+  begcapsword 13
+  endcapsword 14
+  lencapsphrase 3
+  begcaps 15
+  endcaps 16
+
+flags: {testmode: bothDirections}
+tests:
+  - [Abc, '+abc']
+  - [ABC, '[abc']
+  - [AbcXyz, '+abc+xyz']
+  - [ABcXYz, '[ab]c[xy]z']
+  - [ABC-XYZ, '[abc-[xyz']
+  - [ABC XYZ ABC, '<abc xyz abc>']
+  - [ABC-XYZ-ABC, '[abc-[xyz-[abc']
+  - [ABC XYZ-ABC, '[abc [xyz-[abc']
+  - ['ABC XYZ ABC   ', '<abc xyz abc>   ']
+  - [ABC XYZ ABC XYZ, '<abc xyz abc xyz>']
+  - [ABC-XYZ-ABC-XYZ, '[abc-[xyz-[abc-[xyz']
+  - [ABC XYZ-ABC-XYZ, '[abc [xyz-[abc-[xyz']
+  - [ABC XYZ ABC-XYZ, '<abc xyz abc-xyz>']
+  - [A B C, '<a b c>']
+  - ['A B C ', '<a b c> ']
+  - [A-B-C, '+a-+b-+c']
+  - [AB-X-BC, '[ab-+x-[bc']

@@ -1,0 +1,24 @@
+#include <metal_stdlib>
+
+using namespace metal;
+struct Constants {
+  /* 0x0000 */ int level;
+};
+struct Result {
+  /* 0x0000 */ float values[1];
+};
+
+void tint_symbol_inner(device Result& result, uint3 GlobalInvocationID, texture2d_array<float, access::sample> tint_symbol_1) {
+  uint flatIndex = ((((2u * 2u) * GlobalInvocationID.z) + (2u * GlobalInvocationID.y)) + GlobalInvocationID.x);
+  flatIndex = (flatIndex * 1u);
+  float4 texel = tint_symbol_1.read(uint2(int2(GlobalInvocationID.xy)), 0, 0);
+  for(uint i = 0u; (i < 1u); i = (i + 1u)) {
+    result.values[(flatIndex + i)] = texel.r;
+  }
+}
+
+kernel void tint_symbol(texture2d_array<float, access::sample> tint_symbol_2 [[texture(0)]], uint3 GlobalInvocationID [[thread_position_in_grid]], device Result& result [[buffer(0)]]) {
+  tint_symbol_inner(result, GlobalInvocationID, tint_symbol_2);
+  return;
+}
+

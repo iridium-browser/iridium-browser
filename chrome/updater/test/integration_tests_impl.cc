@@ -1,0 +1,282 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#include "chrome/updater/test/integration_tests_impl.h"
+
+#include <cstdlib>
+#include <memory>
+#include <string>
+
+#include "base/bind.h"
+#include "base/callback.h"
+#include "base/command_line.h"
+#include "base/files/file_enumerator.h"
+#include "base/files/file_path.h"
+#include "base/files/file_util.h"
+#include "base/files/scoped_temp_dir.h"
+#include "base/logging.h"
+#include "base/memory/scoped_refptr.h"
+#include "base/numerics/checked_math.h"
+#include "base/process/launch.h"
+#include "base/process/process.h"
+#include "base/run_loop.h"
+#include "base/strings/strcat.h"
+#include "base/synchronization/waitable_event.h"
+#include "base/task/post_task.h"
+#include "base/task/task_traits.h"
+#include "base/task/thread_pool.h"
+#include "base/test/bind.h"
+#include "base/test/test_timeouts.h"
+#include "base/time/time.h"
+#include "base/version.h"
+#include "chrome/updater/constants.h"
+#include "chrome/updater/persisted_data.h"
+#include "chrome/updater/prefs.h"
+#include "chrome/updater/registration_data.h"
+#include "chrome/updater/update_service.h"
+#include "chrome/updater/updater_scope.h"
+#include "chrome/updater/updater_version.h"
+#include "chrome/updater/util.h"
+#include "testing/gtest/include/gtest/gtest.h"
+#include "third_party/abseil-cpp/absl/types/optional.h"
+
+namespace updater {
+namespace test {
+
+int CountDirectoryFiles(const base::FilePath& dir) {
+  base::FileEnumerator it(dir, false, base::FileEnumerator::FILES);
+  int res = 0;
+  for (base::FilePath name = it.Next(); !name.empty(); name = it.Next())
+    ++res;
+  return res;
+}
+
+void RegisterApp(const std::string& app_id) {
+  scoped_refptr<UpdateService> update_service = CreateUpdateService();
+  RegistrationRequest registration;
+  registration.app_id = app_id;
+  registration.version = base::Version("0.1");
+  base::RunLoop loop;
+  update_service->RegisterApp(
+      registration, base::BindOnce(base::BindLambdaForTesting(
+                        [&loop](const RegistrationResponse& response) {
+                          EXPECT_EQ(response.status_code, 0);
+                          loop.Quit();
+                        })));
+  loop.Run();
+}
+
+void ExpectVersionActive(const std::string& version) {
+  scoped_refptr<GlobalPrefs> prefs = CreateGlobalPrefs(GetUpdaterScope());
+  ASSERT_NE(prefs, nullptr) << "Failed to acquire GlobalPrefs.";
+  EXPECT_EQ(prefs->GetActiveVersion(), version);
+}
+
+void ExpectVersionNotActive(const std::string& version) {
+  scoped_refptr<GlobalPrefs> prefs = CreateGlobalPrefs(GetUpdaterScope());
+  ASSERT_NE(prefs, nullptr) << "Failed to acquire GlobalPrefs.";
+  EXPECT_NE(prefs->GetActiveVersion(), version);
+}
+
+void PrintLog(UpdaterScope scope) {
+  std::string contents;
+  absl::optional<base::FilePath> path = GetDataDirPath(scope);
+  EXPECT_TRUE(path);
+  if (path &&
+      base::ReadFileToString(path->AppendASCII("updater.log"), &contents)) {
+    VLOG(0) << "Contents of updater.log:";
+    VLOG(0) << contents;
+    VLOG(0) << "End contents of updater.log.";
+  } else {
+    VLOG(0) << "Failed to read updater.log file.";
+  }
+}
+
+const testing::TestInfo* GetTestInfo() {
+  return testing::UnitTest::GetInstance()->current_test_info();
+}
+
+base::FilePath GetLogDestinationDir() {
+  // Fetch path to ${ISOLATED_OUTDIR} env var.
+  // ResultDB reads logs and test artifacts info from there.
+  const char* var = std::getenv("ISOLATED_OUTDIR");
+  return var ? base::FilePath::FromUTF8Unsafe(var) : base::FilePath();
+}
+
+void CopyLog(const base::FilePath& src_dir) {
+  // TODO(crbug.com/1159189): copy other test artifacts.
+  base::FilePath dest_dir = GetLogDestinationDir();
+  if (!dest_dir.empty() && base::PathExists(dest_dir) &&
+      base::PathExists(src_dir)) {
+    base::FilePath test_name_path = dest_dir.AppendASCII(base::StrCat(
+        {GetTestInfo()->test_suite_name(), ".", GetTestInfo()->name()}));
+    EXPECT_TRUE(base::CreateDirectory(test_name_path));
+
+    base::FilePath dest_file_path = test_name_path.AppendASCII("updater.log");
+    base::FilePath log_path = src_dir.AppendASCII("updater.log");
+    VLOG(0) << "Copying updater.log file. From: " << log_path
+            << ". To: " << dest_file_path;
+    EXPECT_TRUE(base::CopyFile(log_path, dest_file_path));
+  }
+}
+
+void RunWake(UpdaterScope scope, int expected_exit_code) {
+  const absl::optional<base::FilePath> installed_executable_path =
+      GetInstalledExecutablePath(scope);
+  ASSERT_TRUE(installed_executable_path);
+  EXPECT_TRUE(base::PathExists(*installed_executable_path));
+  base::CommandLine command_line(*installed_executable_path);
+  command_line.AppendSwitch(kWakeSwitch);
+  command_line.AppendSwitch(kEnableLoggingSwitch);
+  command_line.AppendSwitchASCII(kLoggingModuleSwitch,
+                                 kLoggingModuleSwitchValue);
+  int exit_code = -1;
+  ASSERT_TRUE(Run(scope, command_line, &exit_code));
+  EXPECT_EQ(exit_code, expected_exit_code);
+}
+
+void Update(const std::string& app_id) {
+  // CreateUpdateService implicitly relies on GetUpdaterScope.
+  scoped_refptr<UpdateService> update_service = CreateUpdateService();
+  base::RunLoop loop;
+  update_service->Update(
+      app_id, UpdateService::Priority::kForeground, base::DoNothing(),
+      base::BindOnce(base::BindLambdaForTesting(
+          [&loop](UpdateService::Result result_unused) { loop.Quit(); })));
+  loop.Run();
+}
+
+void UpdateAll() {
+  // CreateUpdateService implicitly relies on GetUpdaterScope.
+  scoped_refptr<UpdateService> update_service = CreateUpdateService();
+  base::RunLoop loop;
+  update_service->UpdateAll(
+      base::DoNothing(),
+      base::BindOnce(base::BindLambdaForTesting(
+          [&loop](UpdateService::Result result_unused) { loop.Quit(); })));
+  loop.Run();
+}
+
+void SetupFakeUpdaterPrefs(const base::Version& version) {
+  scoped_refptr<GlobalPrefs> global_prefs =
+      CreateGlobalPrefs(GetUpdaterScope());
+  ASSERT_TRUE(global_prefs) << "No global prefs.";
+  global_prefs->SetActiveVersion(version.GetString());
+  global_prefs->SetSwapping(false);
+  PrefsCommitPendingWrites(global_prefs->GetPrefService());
+
+  ASSERT_EQ(version.GetString(), global_prefs->GetActiveVersion());
+}
+
+void SetupFakeUpdaterInstallFolder(UpdaterScope scope,
+                                   const base::Version& version) {
+  const absl::optional<base::FilePath> folder_path =
+      GetFakeUpdaterInstallFolderPath(scope, version);
+  ASSERT_TRUE(folder_path);
+  ASSERT_TRUE(base::CreateDirectory(*folder_path));
+}
+
+void SetupFakeUpdater(UpdaterScope scope, const base::Version& version) {
+  SetupFakeUpdaterPrefs(version);
+  SetupFakeUpdaterInstallFolder(scope, version);
+}
+
+void SetupFakeUpdaterVersion(UpdaterScope scope, int offset) {
+  ASSERT_NE(offset, 0);
+  std::vector<uint32_t> components =
+      base::Version(kUpdaterVersion).components();
+  base::CheckedNumeric<uint32_t> new_version = components[0];
+  new_version += offset;
+  ASSERT_TRUE(new_version.AssignIfValid(&components[0]));
+  SetupFakeUpdater(scope, base::Version(std::move(components)));
+}
+
+void SetupFakeUpdaterLowerVersion(UpdaterScope scope) {
+  SetupFakeUpdaterVersion(scope, -1);
+}
+
+void SetupFakeUpdaterHigherVersion(UpdaterScope scope) {
+  SetupFakeUpdaterVersion(scope, 1);
+}
+
+void SetExistenceCheckerPath(const std::string& app_id,
+                             const base::FilePath& path) {
+  scoped_refptr<GlobalPrefs> global_prefs =
+      CreateGlobalPrefs(GetUpdaterScope());
+  base::MakeRefCounted<PersistedData>(global_prefs->GetPrefService())
+      ->SetExistenceCheckerPath(app_id, path);
+  PrefsCommitPendingWrites(global_prefs->GetPrefService());
+}
+
+void SetServerStarts(int value) {
+  scoped_refptr<GlobalPrefs> global_prefs =
+      CreateGlobalPrefs(GetUpdaterScope());
+  for (int i = 0; i <= value; ++i) {
+    global_prefs->CountServerStarts();
+  }
+  PrefsCommitPendingWrites(global_prefs->GetPrefService());
+}
+
+void ExpectAppUnregisteredExistenceCheckerPath(const std::string& app_id) {
+  scoped_refptr<GlobalPrefs> global_prefs =
+      CreateGlobalPrefs(GetUpdaterScope());
+  auto persisted_data =
+      base::MakeRefCounted<PersistedData>(global_prefs->GetPrefService());
+  EXPECT_EQ(base::FilePath(FILE_PATH_LITERAL("")).value(),
+            persisted_data->GetExistenceCheckerPath(app_id).value());
+}
+
+void ExpectAppVersion(UpdaterScope scope,
+                      const std::string& app_id,
+                      const base::Version& version) {
+  const base::Version app_version =
+      base::MakeRefCounted<PersistedData>(
+          CreateGlobalPrefs(scope)->GetPrefService())
+          ->GetProductVersion(app_id);
+  EXPECT_TRUE(app_version.IsValid() && version == app_version);
+}
+
+bool Run(UpdaterScope scope, base::CommandLine command_line, int* exit_code) {
+  base::ScopedAllowBaseSyncPrimitivesForTesting allow_wait_process;
+  command_line.AppendSwitch(kEnableLoggingSwitch);
+  command_line.AppendSwitchASCII(kLoggingModuleSwitch,
+                                 kLoggingModuleSwitchValue);
+  if (scope == UpdaterScope::kSystem) {
+    command_line.AppendSwitch(kSystemSwitch);
+    command_line = MakeElevated(command_line);
+  }
+  VLOG(0) << " Run command: " << command_line.GetCommandLineString();
+  base::Process process = base::LaunchProcess(command_line, {});
+  if (!process.IsValid())
+    return false;
+
+  // TODO(crbug.com/1096654): Get the timeout from TestTimeouts.
+  return process.WaitForExitWithTimeout(base::Seconds(45), exit_code);
+}
+
+void SleepFor(int seconds) {
+  VLOG(2) << "Sleeping " << seconds << " seconds...";
+  base::WaitableEvent sleep(base::WaitableEvent::ResetPolicy::MANUAL,
+                            base::WaitableEvent::InitialState::NOT_SIGNALED);
+  base::ThreadPool::PostDelayedTask(
+      FROM_HERE, {base::MayBlock()},
+      base::BindOnce(&base::WaitableEvent::Signal, base::Unretained(&sleep)),
+      base::Seconds(seconds));
+  sleep.Wait();
+  VLOG(2) << "Sleep complete.";
+}
+
+bool WaitFor(base::RepeatingCallback<bool()> predicate) {
+  base::TimeTicks deadline =
+      base::TimeTicks::Now() + TestTimeouts::action_max_timeout();
+  while (base::TimeTicks::Now() < deadline) {
+    if (predicate.Run())
+      return true;
+    base::PlatformThread::Sleep(base::Milliseconds(200));
+  }
+  return false;
+}
+
+}  // namespace test
+}  // namespace updater

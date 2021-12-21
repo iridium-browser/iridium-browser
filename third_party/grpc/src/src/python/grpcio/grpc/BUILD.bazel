@@ -1,0 +1,105 @@
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "auth",
+    srcs = ["_auth.py"],
+)
+
+py_library(
+    name = "compression",
+    srcs = ["_compression.py"],
+)
+
+py_library(
+    name = "channel",
+    srcs = ["_channel.py"],
+    deps = [
+        ":common",
+        ":compression",
+        ":grpcio_metadata",
+    ],
+)
+
+py_library(
+    name = "common",
+    srcs = ["_common.py"],
+)
+
+py_library(
+    name = "grpcio_metadata",
+    srcs = ["_grpcio_metadata.py"],
+)
+
+py_library(
+    name = "interceptor",
+    srcs = ["_interceptor.py"],
+)
+
+py_library(
+    name = "plugin_wrapping",
+    srcs = ["_plugin_wrapping.py"],
+    deps = [
+        ":common",
+    ],
+)
+
+py_library(
+    name = "server",
+    srcs = ["_server.py"],
+    deps = [
+        ":common",
+        ":compression",
+        ":interceptor",
+    ],
+)
+
+py_library(
+    name = "utilities",
+    srcs = ["_utilities.py"],
+    deps = [
+        ":common",
+    ],
+)
+
+py_library(
+    name = "_simple_stubs",
+    srcs = ["_simple_stubs.py"],
+)
+
+py_library(
+    name = "aio",
+    srcs = glob(["aio/**/*.py"]),
+)
+
+py_library(
+    name = "_runtime_protos",
+    srcs = ["_runtime_protos.py"],
+)
+
+py_library(
+    name = "grpcio",
+    srcs = ["__init__.py"],
+    data = [
+        "//:grpc",
+    ],
+    imports = ["../"],
+    deps = [
+        ":aio",
+        ":utilities",
+        ":auth",
+        ":plugin_wrapping",
+        ":channel",
+        ":interceptor",
+        ":server",
+        ":compression",
+        ":_simple_stubs",
+        ":_runtime_protos",
+        "//src/python/grpcio/grpc/_cython:cygrpc",
+        "//src/python/grpcio/grpc/experimental",
+        "//src/python/grpcio/grpc/framework",
+        "@six//:six",
+    ] + select({
+        "//conditions:default": ["@enum34//:enum34"],
+        "//:python3": [],
+    }),
+)

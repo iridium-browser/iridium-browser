@@ -1,0 +1,14 @@
+{
+  "dependencies": [
+    "ui/legacy",
+    "panels/search",
+    "ui/legacy/components/source_frame",
+    "panels/snippets",
+    "ui/legacy/components/quick_open",
+    "ui/legacy/components/inline_editor",
+    "ui/legacy/components/color_picker",
+    "panels/event_listeners",
+    "ui/legacy/components/object_ui",
+    "panels/coverage"
+  ]
+}

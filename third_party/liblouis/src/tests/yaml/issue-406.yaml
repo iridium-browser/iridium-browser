@@ -1,0 +1,16 @@
+# according to https://github.com/liblouis/liblouis/issues/406
+# backtranslation for "ó" (lowercase o acute) doesn't seem to work
+
+table: [tables/unicode.dis, tables/Es-Es-G0.utb]
+flags: {testmode: forward}
+tests:
+  # forward translation works
+  - [ó, ⠬]
+
+table: [tables/unicode.dis, tables/Es-Es-G0.utb]
+flags: {testmode: backward}
+tests:
+  # backward translation seems to fail
+  - [⠬, ó]
+  - [⣬, 0]
+

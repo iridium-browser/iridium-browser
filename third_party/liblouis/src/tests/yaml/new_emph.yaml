@@ -1,0 +1,83 @@
+table: [tables/nl-BE.dis, tests/tables/new_emph.utb]
+tests:
+  - - o
+    - o
+    - {typeform: {italic: '+'}}
+  - - o n e
+    - o n e
+    - {typeform: {italic: '+ + +'}}
+  - - o . e
+    - o / e
+    - {typeform: {italic: '+ + +'}}
+  - - one
+    - one
+    - {typeform: {italic: '+++'}}
+  - - one two three
+    - one two three
+    - {typeform: {italic: '+++++++++++++'}}
+  - - one two three four
+    - one two three four
+    - {typeform: {italic: '++++++++++++++++++'}}
+  - - one two three
+    - one two three
+    - {typeform: {italic: '+++ +++ +++++'}}
+  - - one two three four
+    - one two three four
+    - {typeform: {italic: '+++ +++ +++++ ++++'}}
+  - - one two three.
+    - one two three/
+    - {typeform: {italic: '++++++++++++++'}}
+  - - one two three.
+    - one two three/
+    - {typeform: {italic: '+++++++++++++ '}}
+  - - one two three four.
+    - one two three four/
+    - {typeform: {italic: '+++++++++++++++++++'}}
+  - - one two three four.
+    - one two three four/
+    - {typeform: {italic: '++++++++++++++++++ '}}
+  - - one two ... four
+    - one two /// four
+    - {typeform: {italic: '++++++++++++++++'}}
+  - - ... two three
+    - /// two three
+    - {typeform: {italic: '+++++++++++++'}}
+  - - one two ...
+    - one two ///
+    - {typeform: {italic: '+++++++++++'}}
+  - - o.n.e
+    - o/n/e
+    - {typeform: {italic: '+++++'}}
+  - - o.n.e
+    - o/n/e
+    - {typeform: {italic: '+ + +'}}
+  - - o-n-e
+    - o-n-e
+    - {typeform: {italic: ' + + '}}
+  - - one.
+    - one/
+    - {typeform: {italic: '   +'}}
+  - - one...
+    - one///
+    - {typeform: {italic: '   +++'}}
+  - - one...
+    - one///
+    - {typeform: {italic: '++++  '}}
+  - - -one
+    - -one
+    - {typeform: {italic: '+   '}}
+  - - -one
+    - -one
+    - {typeform: {italic: '++++'}}
+  - - three
+    - three
+    - {typeform: {italic: ' ++  '}}
+  - - thr-ee
+    - thr-ee
+    - {typeform: {italic: '  +++ '}}
+  - - one -two- three
+    - one -two- three
+    - {typeform: {italic: '+++++++++++++++'}}
+  - - four three two one
+    - four three two one
+    - {typeform: {italic: '  ++++++++++++++++'}}

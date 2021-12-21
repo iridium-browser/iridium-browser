@@ -1,0 +1,42 @@
+// Copyright 2021 The Chromium OS Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+package hps;
+option go_package = "chromiumos/system_api/hps_proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// Configuration of an HPS feature for the Enable method
+// More FilterConfigs will be added here as more filters are added
+message FeatureConfig {
+  // The simplest filter with a default threshold
+  message BasicFilterConfig {}
+  // A filter that changes state when 'count' number of consecutive inference
+  // results have either been above or below the threshold value.
+  message ConsecutiveResultsFilterConfig {
+    // 'count' is the number of consecutive results that must be either above
+    // or below the threshold value for the filter to change state and raise a
+    // signal.
+    int32 count = 1;
+    // 'threshold' is the value that the inference result is compared against.
+    // If the inference result is > than the threshold it is considered a
+    // positive result, if the inference result is <= to the threshold then it
+    // is considered a negative result.
+    // Note: The inference result is a value from [0, 256), so due to the
+    // comparison being 'inference value > threshold', the threshold value
+    // passed must be in the range of [0,255). A threshold value outside of this
+    // range will result in the filter never changing state.
+    int32 threshold = 2;
+    // 'initial_state' can be used to set the filter to initially be true or
+    // false. This is so that client and the filter can be in sync on the
+    // initial state of the filter.
+    bool initial_state = 3;
+  }
+  oneof filter_config {
+    BasicFilterConfig basic_filter_config = 1;
+    ConsecutiveResultsFilterConfig consecutive_results_filter_config = 2;
+  }
+}

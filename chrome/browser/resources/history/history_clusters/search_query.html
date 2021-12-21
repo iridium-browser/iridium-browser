@@ -1,0 +1,45 @@
+<style include="history-clusters-shared-style">
+  :host {
+    display: block;
+    min-width: 0;
+  }
+
+  a {
+    align-items: center;
+    color: inherit;
+    display: flex;
+    outline: none;
+    text-decoration: none;
+  }
+
+  :host(:hover) a {
+    background-color: var(--cr-hover-background-color);
+  }
+
+  :host(:active) a {
+    background-color: var(--cr-active-background-color);
+  }
+
+  :host-context(.focus-outline-visible) a:focus {
+    box-shadow: inset 0 0 0 2px var(--cr-focus-outline-color);
+  }
+
+  #icon {
+    -webkit-mask-image: url(chrome://resources/images/icon_search.svg);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100%;
+    background-color: var(--icon-color);
+    flex-shrink: 0;
+    height: var(--cr-icon-size);
+    width: var(--cr-icon-size);
+  }
+
+  #text {
+    margin-inline-start: 8px;
+  }
+</style>
+<a class="pill pill-icon-start" href$="[[searchQuery.url.url]]"
+    on-click="onClick_" on-auxclick="onAuxClick_" on-keydown="onKeydown_">
+  <div id="icon"></div>
+  <div id="text" class="truncate">[[searchQuery.query]]</div>
+</a>

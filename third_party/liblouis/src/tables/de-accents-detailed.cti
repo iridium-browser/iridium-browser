@@ -1,0 +1,38 @@
+# liblouis: Letters with accents (without ä ö ü) - detailed representation of french and italian accents
+#
+#  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-------------------------------------------------------------------------------
+
+uplow        \x00C0\x00E0      4-12356       Àà  &#192;&#224;   LATIN LETTER A WITH GRAVE
+uplow        \x00C2\x00E2      4-16          Ââ  &#194;&#226;   LATIN LETTER A WITH CIRCUMFLEX
+uplow        \x00C7\x00E7      4-12346       Çç  &#199;&#231;   LATIN LETTER C WITH CEDILLA
+uplow        \x00C8\x00E8      4-2346        Èè  &#200;&#232;   LATIN LETTER E WITH GRAVE
+uplow        \x00C9\x00E9      4-123456      Éé  &#201;&#233;   LATIN LETTER E WITH ACUTE
+uplow        \x00CA\x00EA      4-126         Êê  &#202;&#234;   LATIN LETTER E WITH CIRCUMFLEX
+uplow        \x00CB\x00EB      4-1246        Ëë  &#203;&#235;   LATIN LETTER E WITH DIAERESIS
+uplow        \x00CC\x00EC      4-34          Ìì  &#204;&#236;   LATIN LETTER I WITH GRAVE
+uplow        \x00CE\x00EE      4-146         Îî  &#206;&#238;   LATIN LETTER I WITH CIRCUMFLEX
+uplow        \x00CF\x00EF      4-12456       Ïï  &#207;&#239;   LATIN LETTER I WITH DIAERESIS
+uplow        \x00D2\x00F2      4-346         Òò  &#210;&#242;   LATIN LETTER O WITH GRAVE
+uplow        \x00D4\x00F4      4-1456        Ôô  &#212;&#244;   LATIN LETTER O WITH CIRCUMFLEX
+uplow        \x00D9\x00F9      4-23456       Ùù  &#217;&#249;   LATIN LETTER U WITH GRAVE
+uplow        \x00DB\x00FB      4-156         Ûû  &#219;&#251;   LATIN LETTER U WITH CIRCUMFLEX
+uplow        \x0152\x0153      4-246         Œœ  &#338;&#339;   LATIN LIGATURE OE
+

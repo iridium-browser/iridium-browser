@@ -1,0 +1,51 @@
+// Copyright 2019 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef CC_LAYERS_SCROLLBAR_LAYER_BASE_H_
+#define CC_LAYERS_SCROLLBAR_LAYER_BASE_H_
+
+#include "cc/cc_export.h"
+#include "cc/layers/layer.h"
+
+namespace cc {
+
+class CC_EXPORT ScrollbarLayerBase : public Layer {
+ public:
+  static scoped_refptr<ScrollbarLayerBase> CreateOrReuse(
+      scoped_refptr<Scrollbar>,
+      ScrollbarLayerBase* existing_layer);
+
+  void SetScrollElementId(ElementId element_id);
+  ElementId scroll_element_id() const { return scroll_element_id_; }
+
+  ScrollbarOrientation orientation() const { return orientation_; }
+  bool is_left_side_vertical_scrollbar() const {
+    return is_left_side_vertical_scrollbar_;
+  }
+
+  void PushPropertiesTo(LayerImpl* layer) override;
+
+  enum ScrollbarLayerType {
+    kSolidColor,
+    kPainted,
+    kPaintedOverlay,
+  };
+  virtual ScrollbarLayerType GetScrollbarLayerType() const = 0;
+
+ protected:
+  ScrollbarLayerBase(ScrollbarOrientation orientation,
+                     bool is_left_side_vertical_scrollbar);
+  ~ScrollbarLayerBase() override;
+
+ private:
+  bool IsScrollbarLayerForTesting() const final;
+
+  const ScrollbarOrientation orientation_;
+  const bool is_left_side_vertical_scrollbar_;
+  ElementId scroll_element_id_;
+};
+
+}  // namespace cc
+
+#endif  // CC_LAYERS_SCROLLBAR_LAYER_BASE_H_

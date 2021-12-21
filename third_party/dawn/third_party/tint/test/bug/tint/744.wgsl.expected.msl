@@ -1,0 +1,31 @@
+#include <metal_stdlib>
+
+using namespace metal;
+struct Uniforms {
+  /* 0x0000 */ uint2 aShape;
+  /* 0x0008 */ uint2 bShape;
+  /* 0x0010 */ uint2 outShape;
+};
+struct Matrix {
+  /* 0x0000 */ uint numbers[1];
+};
+
+void tint_symbol_inner(constant Uniforms& uniforms, const device Matrix& firstMatrix, const device Matrix& secondMatrix, device Matrix& resultMatrix, uint3 global_id) {
+  uint2 const resultCell = uint2(global_id.y, global_id.x);
+  uint const dimInner = uniforms.aShape.y;
+  uint const dimOutter = uniforms.outShape.y;
+  uint result = 0u;
+  for(uint i = 0u; (i < dimInner); i = (i + 1u)) {
+    uint const a = (i + (resultCell.x * dimInner));
+    uint const b = (resultCell.y + (i * dimOutter));
+    result = (result + (firstMatrix.numbers[a] * secondMatrix.numbers[b]));
+  }
+  uint const index = (resultCell.y + (resultCell.x * dimOutter));
+  resultMatrix.numbers[index] = result;
+}
+
+kernel void tint_symbol(uint3 global_id [[thread_position_in_grid]], constant Uniforms& uniforms [[buffer(0)]], const device Matrix& firstMatrix [[buffer(2)]], const device Matrix& secondMatrix [[buffer(3)]], device Matrix& resultMatrix [[buffer(1)]]) {
+  tint_symbol_inner(uniforms, firstMatrix, secondMatrix, resultMatrix, global_id);
+  return;
+}
+

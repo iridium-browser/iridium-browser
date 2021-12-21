@@ -1,0 +1,31 @@
+# Copyright 2018-2019 by
+# Armin Hasitzka.
+#
+# This file is part of the FreeType project, and may only be used, modified,
+# and distributed under the terms of the FreeType project license,
+# LICENSE.TXT.  By continuing to use, modify, or distribute this file you
+# indicate that you have read the license and understand and accept it
+# fully.
+
+git:
+  depth: 1
+  submodules: false
+
+matrix:
+  include:
+    - os: linux
+      language: cpp
+      compiler: clang
+      env:
+        - TRAVIS_CI_ROW="regression-suite"
+    - os: linux
+      sudo: required
+      services: docker
+      env:
+        - TRAVIS_CI_ROW="oss-fuzz-build"
+
+before_install:
+  - sudo apt-get -qq update && sudo apt-get install -y autoconf cmake libtool
+
+script:
+  - bash fuzzing/scripts/run-travis-ci.sh

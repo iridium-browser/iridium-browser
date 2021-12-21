@@ -1,0 +1,17 @@
+display: unicode-without-blank.dis
+table:
+  locale: cmn-Hans-CN
+  system: cmn-traditional
+  variant: no-tone
+  __assert-match: zh_CHN.tbl # zh-chn.ctb
+tests:
+  - [八,⠃⠔]
+  - [白,⠃⠪]
+  - [门,⠍⠴]
+  - [特,⠞⠢]
+  - [丸,⠻]
+  - [鱼,⠬]
+  - [贵,⠛⠺]
+  - [兞,⠍⠖]
+  - [8,⠼⠓]
+  - [？,⠐⠄]

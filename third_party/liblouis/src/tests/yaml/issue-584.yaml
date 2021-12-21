@@ -1,0 +1,8 @@
+# see https://github.com/liblouis/liblouis/issues/584
+table: |
+  include tables/en-ueb-g1.ctb
+flags: {testmode: backward}
+tests:
+  - - ">>"
+    - "\\\\345/\\\\345/"
+    - inputPos: [0,0,0,0,0,1,1,1,1,1]

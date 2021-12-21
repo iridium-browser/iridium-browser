@@ -1,0 +1,98 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#include "sandbox/policy/mac/sandbox_mac.h"
+
+#include <fcntl.h>
+#include <sys/param.h>
+
+#include <string>
+
+#include "base/files/scoped_file.h"
+#include "base/logging.h"
+#include "base/posix/eintr_wrapper.h"
+#include "sandbox/policy/mac/audio.sb.h"
+#include "sandbox/policy/mac/cdm.sb.h"
+#include "sandbox/policy/mac/common.sb.h"
+#include "sandbox/policy/mac/gpu.sb.h"
+#include "sandbox/policy/mac/mirroring.sb.h"
+#include "sandbox/policy/mac/nacl_loader.sb.h"
+#include "sandbox/policy/mac/network.sb.h"
+#include "sandbox/policy/mac/ppapi.sb.h"
+#include "sandbox/policy/mac/print_backend.sb.h"
+#include "sandbox/policy/mac/print_compositor.sb.h"
+#include "sandbox/policy/mac/renderer.sb.h"
+#include "sandbox/policy/mac/speech_recognition.sb.h"
+#include "sandbox/policy/mac/utility.sb.h"
+
+namespace sandbox {
+namespace policy {
+
+base::FilePath GetCanonicalPath(const base::FilePath& path) {
+  base::ScopedFD fd(HANDLE_EINTR(open(path.value().c_str(), O_RDONLY)));
+  if (!fd.is_valid()) {
+    DPLOG(ERROR) << "GetCanonicalSandboxPath() failed for: " << path.value();
+    return path;
+  }
+
+  base::FilePath::CharType canonical_path[MAXPATHLEN];
+  if (HANDLE_EINTR(fcntl(fd.get(), F_GETPATH, canonical_path)) != 0) {
+    DPLOG(ERROR) << "GetCanonicalSandboxPath() failed for: " << path.value();
+    return path;
+  }
+
+  return base::FilePath(canonical_path);
+}
+
+std::string GetSandboxProfile(SandboxType sandbox_type) {
+  std::string profile = std::string(kSeatbeltPolicyString_common);
+
+  switch (sandbox_type) {
+    case SandboxType::kAudio:
+      profile += kSeatbeltPolicyString_audio;
+      break;
+    case SandboxType::kCdm:
+      profile += kSeatbeltPolicyString_cdm;
+      break;
+    case SandboxType::kGpu:
+      profile += kSeatbeltPolicyString_gpu;
+      break;
+    case SandboxType::kMirroring:
+      profile += kSeatbeltPolicyString_mirroring;
+      break;
+    case SandboxType::kNaClLoader:
+      profile += kSeatbeltPolicyString_nacl_loader;
+      break;
+    case SandboxType::kNetwork:
+      profile += kSeatbeltPolicyString_network;
+      break;
+    case SandboxType::kPpapi:
+      profile += kSeatbeltPolicyString_ppapi;
+      break;
+#if BUILDFLAG(ENABLE_PRINTING)
+    case SandboxType::kPrintBackend:
+      profile += kSeatbeltPolicyString_print_backend;
+      break;
+#endif
+    case SandboxType::kPrintCompositor:
+      profile += kSeatbeltPolicyString_print_compositor;
+      break;
+    case SandboxType::kSpeechRecognition:
+      profile += kSeatbeltPolicyString_speech_recognition;
+      break;
+    case SandboxType::kUtility:
+      profile += kSeatbeltPolicyString_utility;
+      break;
+    case SandboxType::kRenderer:
+      profile += kSeatbeltPolicyString_renderer;
+      break;
+    case SandboxType::kNoSandbox:
+      CHECK(false);
+      break;
+  }
+  return profile;
+}
+
+}  // namespace policy
+}  // namespace sandbox

@@ -1,0 +1,22 @@
+include_rules = [
+    # Don't depend on platform/.
+    "-third_party/blink/renderer/platform",
+
+    # Module.
+    "+third_party/blink/renderer/platform/transforms",
+
+    # Dependencies.
+    "+third_party/blink/renderer/platform/cpu/mips/common_macros_msa.h",
+    "+third_party/blink/renderer/platform/geometry",
+    "+third_party/blink/renderer/platform/json",
+    "+third_party/blink/renderer/platform/wtf",
+]
+
+specific_include_rules = {
+    # Additional allowed includes for tests.
+    ".*_test(_.*)?\.(cc|h)" : [
+        # Test harness may use cc geometry test utilities.
+        # Avoid reimplementing fuzzy matrix comparison.
+        "+cc/test/geometry_test_utils.h"
+    ],
+}

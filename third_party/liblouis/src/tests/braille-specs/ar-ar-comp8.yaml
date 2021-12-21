@@ -1,0 +1,39 @@
+display: unicode.dis
+table:
+  locale: ar
+  type: computer
+  dots: 8
+  __assert-match: ar-ar-comp8.utb
+
+flags: {testmode: bothDirections}
+tests:
+- - ابتثجحخدذرز
+  - ⠁⠃⠞⠹⠚⠱⠭⠙⠮⠗⠵
+- - سشصضطظعغفقكلمنه
+  - ⠎⠩⠯⠫⠾⠿⠷⠣⠋⠟⠅⠇⠍⠝⠓
+- - ويىةءأإؤئآ
+  - ⠺⠊⠕⠡⠄⠌⠨⠳⠽⠜
+- - ًٌٍَُِّْ
+  - ⠂⠆⠥⠢⠑⠔⠒⠠
+- - ABCDEFGHIJKLMNOPQRSTUVWXYZ
+  - ⡁⡃⡉⡙⡑⡋⡛⡓⡊⡚⡅⡇⡍⡝⡕⡏⡟⡗⡎⡞⡥⡧⡺⡭⡽⡵
+- - (){}[]
+  - ⠦⠴⡶⢶⡷⢾
+- - +-÷×=<>*/\\
+  - ⢖⠤⢲⢦⣶⡪⢕⢔⢌⡌
+- - '۔؟ـ،:"'
+  - ⠲⠬⢐⠐⡒⠶
+- - '!@#$%^&_'
+  - ⠖⠈⠼⠸⠘⢮⡯⢰
+- - 1234567890
+  - ⢁⢃⢉⢙⢑⢋⢛⢓⢊⢚
+
+flags: {testmode: backward}
+tests:
+# adding dots 78 to input small latin characters
+- - ⣁⣃⣉⣙⣑⣋⣛⣓⣊⣚⣅⣇⣍⣝⣕⣏⣟⣗⣎⣞⣥⣧⣺⣭⣽⣵
+  - abcdefghijklmnopqrstuvwxyz
+- - ⣊⣞⢄⣎
+  - "it's"
+
+

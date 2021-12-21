@@ -1,0 +1,314 @@
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+module apps.mojom;
+
+import "components/services/app_service/public/mojom/types.mojom";
+
+// An intermediary between M app consumers (e.g. app launcher UI, intent
+// pickers) and N app providers (also known as app platforms, e.g. Android
+// apps, Linux apps and Web apps). It abstracts over platform-specific
+// implementations and allow consumers to issue generic queries (e.g. for an
+// app's name and icon) that are satisfied by the appropriate provider.
+//
+// See components/services/app_service/README.md.
+interface AppService {
+  // Called by a publisher of apps to register itself and its apps with the App
+  // Service.
+  RegisterPublisher(pending_remote<Publisher> publisher, AppType app_type);
+
+  // Called by a consumer that wishes to know about available apps to register
+  // itself with the App Service.
+  RegisterSubscriber(pending_remote<Subscriber> subscriber, ConnectOptions? opts);
+
+  // App Icon Factory methods.
+  LoadIcon(
+      AppType app_type,
+      string app_id,
+      IconKey icon_key,
+      IconType icon_type,
+      int32 size_hint_in_dip,
+      bool allow_placeholder_icon) => (IconValue icon_value);
+
+  // App Runner methods.
+  Launch(
+      AppType app_type,
+      string app_id,
+      int32 event_flags,
+      LaunchSource launch_source,
+      WindowInfo? window_info);
+
+  // Launches an app with |app_id| and |file_path|
+  LaunchAppWithFiles(
+      AppType app_type,
+      string app_id,
+      int32 event_flags,
+      LaunchSource launch_source,
+      FilePaths file_paths);
+
+  // Launches an app with |app_id| and Chrome OS generic |intent| irrespective
+  // of app platform.
+  LaunchAppWithIntent(
+      AppType app_type,
+      string app_id,
+      int32 event_flags,
+      Intent intent,
+      LaunchSource launch_source,
+      WindowInfo? window_info);
+
+  SetPermission(
+      AppType app_type,
+      string app_id,
+      Permission permission);
+
+  // Directly uninstalls |app_id| without prompting the user.
+  // |clear_site_data| is available for bookmark apps only. If true, any site
+  // data associated with the app will be removed..
+  // |report_abuse| is available for Chrome Apps only. If true, the app will be
+  // reported for abuse to the Web Store.
+  Uninstall(
+      AppType app_type,
+      string app_id,
+      UninstallSource uninstall_source,
+      bool clear_site_data,
+      bool report_abuse);
+
+  // Pauses an app to stop the current running app, and apply the icon effect.
+  PauseApp(
+      AppType app_type,
+      string app_id);
+
+  // Unpauses an app, and recover the icon effect for the app.
+  UnpauseApp(
+      AppType app_type,
+      string app_id);
+
+  // Stops the current running app for the given |app_id|.
+  StopApp(
+      AppType app_type,
+      string app_id);
+
+  // Returns the menu items for an app with |app_id|.
+  GetMenuModel(
+      AppType app_type,
+      string app_id,
+      MenuType menu_type,
+      int64 display_id) => (MenuItems menu_items);
+
+  // Executes the menu item command for an app with |app_id|.
+  ExecuteContextMenuCommand(
+      AppType app_type,
+      string app_id,
+      int32 command_id,
+      string shortcut_id,
+      int64 display_id);
+
+  // Opens native settings for the app with |app_id|.
+  OpenNativeSettings(
+      AppType app_type,
+      string app_id);
+
+  // Sets app identified by |app_id| as preferred app for |intent_filter|.
+  // |intent| is needed to set the preferred app in ARC.
+  // If the request is |from_publisher|, we would not sync the preferred
+  // app back to the publisher.
+  AddPreferredApp(
+      AppType app_type,
+      string app_id,
+      IntentFilter intent_filter,
+      Intent? intent,
+      bool from_publisher);
+
+  // Removes all preferred app setting for an |app_id|.
+  RemovePreferredApp(AppType app_type, string app_id);
+
+  // Resets app identified by |app_id| as preferred app for |intent_filter|.
+  RemovePreferredAppForFilter(
+      AppType app_type,
+      string app_id,
+      IntentFilter intent_filter);
+
+  // Set |app_id| as preferred app for all its supported link filters. Supported
+  // link filters, which have the http/https scheme and at least one host, are
+  // always enabled/disabled as a group. |all_link_filters| should contain all
+  // of the apps' Supported Link intent filters.
+  // Any apps with overlapping preferred app preferences will have all their
+  // supported link filters unset, as if RemoveSupportedLinksPreference was
+  // called for that app.
+  SetSupportedLinksPreference(
+    AppType app_type,
+    string app_id,
+    array<IntentFilter> all_link_filters);
+
+  // Removes all supported link filters from the preferred app list for an
+  // |app_id|.
+  RemoveSupportedLinksPreference(
+    AppType app_type,
+    string app_id);
+
+  // Enables resize lock mode for the app identified by |app_id| with the given
+  // |app_type|.
+  SetResizeLocked(
+      AppType app_type,
+      string app_id,
+      OptionalBool locked);
+
+  // Set the window display mode for the app identified by |app_id|.
+  SetWindowMode(
+      AppType app_type,
+      string app_id,
+      WindowMode window_mode);
+};
+
+interface Publisher {
+  // App Registry methods.
+  Connect(pending_remote<Subscriber> subscriber, ConnectOptions? opts);
+
+  // App Icon Factory methods.
+  LoadIcon(
+      string app_id,
+      IconKey icon_key,
+      IconType icon_type,
+      int32 size_hint_in_dip,
+      bool allow_placeholder_icon) => (IconValue icon_value);
+
+  // App Runner methods.
+  Launch(
+      string app_id,
+      int32 event_flags,
+      LaunchSource launch_source,
+      WindowInfo? window_info);
+
+  // Launches an app with |app_id| and |file_path|
+  LaunchAppWithFiles(
+      string app_id,
+      int32 event_flags,
+      LaunchSource launch_source,
+      FilePaths file_paths);
+
+  // Launches an app with |app_id| and Chrome OS generic |intent| irrespective
+  // of app platform.
+  LaunchAppWithIntent(
+    string app_id,
+    int32 event_flags,
+    Intent intent,
+    LaunchSource launch_source,
+    WindowInfo? window_info);
+
+  SetPermission(
+      string app_id,
+      Permission permission);
+
+  // Directly uninstalls |app_id| without prompting the user.
+  // |clear_site_data| is available for bookmark apps only. If true, any site
+  // data associated with the app will be removed..
+  // |report_abuse| is available for Chrome Apps only. If true, the app will be
+  // reported for abuse to the Web Store.
+  Uninstall(
+      string app_id,
+      UninstallSource uninstall_source,
+      bool clear_site_data,
+      bool report_abuse);
+
+  // Pauses an app to stop the current running app, and apply the icon effect.
+  PauseApp(
+      string app_id);
+
+  // Unpauses an app, and recover the icon effect for the app.
+  UnpauseApp(
+      string app_id);
+
+  // Stops the current running app for the given |app_id|.
+  StopApp(
+      string app_id);
+
+  // Returns the menu items for an app with |app_id|.
+  GetMenuModel(
+      string app_id,
+      MenuType menu_type,
+      int64 display_id) => (MenuItems menu_items);
+
+  // Executes the menu item command for an app with |app_id|.
+  ExecuteContextMenuCommand(
+      string app_id,
+      int32 command_id,
+      string shortcut_id,
+      int64 display_id);
+
+  // Opens native settings for the app with |app_id|.
+  OpenNativeSettings(
+      string app_id);
+
+  // Indicates that the app identified by |app_id| has been set as a preferred
+  // app for |intent_filter|, and the |replaced_app_preferences| is the apps
+  // that are no longer preferred apps for their corresponding |intent_filters|.
+  // This method is used by the App Service to sync the change to publishers.
+  // |intent| is needed to set the preferred app in ARC.
+  OnPreferredAppSet(
+      string app_id,
+      IntentFilter intent_filter,
+      Intent intent,
+      ReplacedAppPreferences replaced_app_preferences);
+
+  // Indicates that the app identified by |app_id| has had its supported links
+  // preference changed, so that all supported link filters are either preferred
+  // (|open_in_app| is true) or not preferred (|open_in_app| is false). This
+  // method is used by the App Service to sync changes to publishers, and is
+  // called instead of OnPreferredAppSet for supported links changes.
+  OnSupportedLinksPreferenceChanged(
+    string app_id,
+    bool open_in_app);
+
+  // Enables resize lock mode for the app identified by |app_id|.
+  SetResizeLocked(
+      string app_id,
+      OptionalBool locked);
+
+  // Set the window display mode for the app identified by |app_id|.
+  SetWindowMode(
+      string app_id,
+      WindowMode window_mode);
+};
+
+// Subscriber works as a proxy, to receive a stream of apps from publishers,
+// and save to AppRegistryCache.
+interface Subscriber {
+  // Receives a stream of apps from publishers, and save to AppRegistryCache.
+  // If |should_notify_initialized| is true, notifies observers that |app_type|
+  // has finished initiating apps.
+  OnApps(array<App> deltas, AppType app_type, bool should_notify_initialized);
+
+  // Receives a stream of accesses from publishers, and save to
+  // AppCapabilityAccess.
+  OnCapabilityAccesses(array<CapabilityAccess> deltas);
+
+  // Binds this to the given receiver (message pipe endpoint), being to Mojo
+  // interfaces what POSIX's dup is to file descriptors.
+  //
+  // See https://groups.google.com/a/chromium.org/d/msg/chromium-mojo/nFhBzGsb5Pg/V7t_8kNRAgAJ
+  Clone(pending_receiver<Subscriber> receiver);
+
+  // Indicates that the app identified by |app_id| has been set as a preferred
+  // app for |intent_fitler|. This method is used by the App Service to sync
+  // the change from one subscriber to the others.
+  OnPreferredAppSet(string app_id,
+                    IntentFilter intent_filter);
+
+  // Indicates that the app identified by |app_id| is no longer a preferred
+  // app for |intent_filter|. This method is used by the App Service to sync
+  // the change to all subscribers.
+  OnPreferredAppRemoved(string app_id, IntentFilter intent_filter);
+
+  // Indicates that a changes have been made by App Service to the preferred
+  // apps list. All of the changes should be applied to the subscriber's copy of
+  // the list using PreferredAppsList::ApplyBulkUpdate.
+  OnPreferredAppsChanged(PreferredAppChanges changes);
+
+  // Initialize the |preferred_apps| in the subscribers from the app service.
+  InitializePreferredApps(array<PreferredApp> preferred_apps);
+};
+
+struct ConnectOptions {
+  // TODO: some way to represent l10n info such as the UI language.
+};

@@ -1,0 +1,49 @@
+# Copyright 2018 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/ui_mode.gni")
+import("//third_party/closure_compiler/compile_js.gni")
+import("//tools/polymer/html_to_js.gni")
+import("../settings.gni")
+
+js_type_check("closure_compile") {
+  is_polymer3 = true
+  closure_flags = settings_closure_flags + mojom_js_args
+  deps = [
+    ":account_manager_browser_proxy",
+    ":profile_info_browser_proxy",
+    ":sync_browser_proxy",
+  ]
+}
+
+js_library("account_manager_browser_proxy") {
+  deps = [ "//ui/webui/resources/js:cr.m" ]
+}
+
+js_library("profile_info_browser_proxy") {
+  deps = [ "//ui/webui/resources/js:cr.m" ]
+}
+
+js_library("sync_browser_proxy") {
+  deps = [ "//ui/webui/resources/js:cr.m" ]
+  externs_list = [ "$externs_path/metrics_private.js" ]
+}
+
+html_to_js("web_components") {
+  js_files = [
+    "people_page.ts",
+    "signout_dialog.ts",
+    "sync_account_control.ts",
+    "sync_controls.ts",
+    "sync_encryption_options.ts",
+    "sync_page.ts",
+  ]
+
+  if (!is_chromeos_ash) {
+    js_files += [
+      "import_data_dialog.ts",
+      "manage_profile.ts",
+    ]
+  }
+}

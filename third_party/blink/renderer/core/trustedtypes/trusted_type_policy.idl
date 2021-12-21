@@ -1,0 +1,17 @@
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// https://github.com/wicg/trusted-types
+
+typedef (DOMString or TrustedHTML or TrustedScript or TrustedScriptURL) TrustedString;
+
+[
+    Exposed=(Window, Worker),
+    RuntimeEnabled=TrustedDOMTypes
+] interface TrustedTypePolicy {
+    readonly attribute DOMString name;
+    [CallWith=ScriptState, RaisesException] TrustedHTML createHTML(DOMString input, any... args);
+    [CallWith=ScriptState, RaisesException] TrustedScript createScript(DOMString input, any... args);
+    [CallWith=ScriptState, RaisesException] TrustedScriptURL createScriptURL(DOMString input, any... args);
+};

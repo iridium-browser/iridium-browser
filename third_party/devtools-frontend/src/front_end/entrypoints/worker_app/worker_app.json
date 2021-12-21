@@ -1,0 +1,17 @@
+{
+  "modules" : [
+    { "name": "panels/mobile_throttling", "type": "autostart"  },
+
+    { "name": "panels/browser_debugger" },
+    { "name": "ui/legacy/components/cookie_table" },
+    { "name": "panels/elements" },
+    { "name": "panels/help" },
+    { "name": "panels/issues" },
+    { "name": "panels/developer_resources" },
+    { "name": "panels/layer_viewer" },
+    { "name": "panels/network" },
+    { "name": "panels/application" },
+    { "name": "panels/timeline" }
+  ],
+  "extends": "shell"
+}

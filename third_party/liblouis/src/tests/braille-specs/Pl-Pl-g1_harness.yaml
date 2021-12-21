@@ -1,0 +1,46 @@
+# Based on http://liblouis.org/braille-specs/polish
+#
+# Copyright © 2019 by Łukasz Golonka <wulfryk1@gmail.com>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+table:
+  locale: pl
+  grade: 1
+  __assert-match: pl.tbl
+tests:
+# For consecutive capital letters
+  - [BIP, ⠨⠨⠃⠊⠏]
+  - [HACCP, ⠨⠨⠓⠁⠉⠉⠏]
+# For consecutive capitals with lover case letter between them
+  - [WSiP, ⠨⠺⠨⠎⠊⠨⠏, {xfail: Not implemented yet.}]
+# for digits with comma between them
+  - ["22,333", ⠼⠃⠃⠂⠉⠉⠉]
+# For digits with dot between them
+  - [22.333, ⠼⠃⠃⠄⠉⠉⠉]
+# For minus sign with white spaces on both sides
+  - [" - "," ⠤ "]
+# Dollar sign
+  - ["22$","⠼⠃⠃⠈⠙"]
+# Percent sign
+  - ["22%","⠼⠃⠃⠼⠚⠴"]
+# Apostrophe when translating forward.
+  - ["Tomorrow is John's birthday","⠨⠞⠕⠍⠕⠗⠗⠕⠺ ⠊⠎ ⠨⠚⠕⠓⠝⠄⠎ ⠃⠊⠗⠞⠓⠙⠁⠽"]
+# Mathematical operators, and signs between numbers
+  - ["2+2=4","⠼⠃⠖⠼⠃⠶⠼⠙"]
+  - ["2*2=4","⠼⠃⠔⠼⠃⠶⠼⠙"]
+  - ["2-2=0","⠼⠃⠤⠼⠃⠶⠼⠚"]
+  - ["1/2+1/2=1","⠼⠁⠲⠼⠃⠖⠼⠁⠲⠼⠃⠶⠼⠁"]
+  - ["2:22","⠼⠃⠒⠼⠃⠃"]
+# Unicode multiplication symbol.
+  - ["2×2=4","⠼⠃⠄⠼⠃⠶⠼⠙"]
+# Backslash
+  - [\\,"⠌"]
+# At sign
+  - ["aa@a.com","⠁⠁⠜⠁⠄⠉⠕⠍"]

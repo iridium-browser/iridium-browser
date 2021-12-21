@@ -1,0 +1,43 @@
+# Test if the emphasis handling works as advertised (using just
+# begemph and endemph without any context)
+
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/spaces.uti
+  include tables/en-chardefs.cti
+
+  emphclass italic
+
+  begemph italic 46-3
+  endemph italic 46-36
+
+tests:
+  - # no emphasis, just warming up
+    - abcdefg
+    - ⠁⠃⠉⠙⠑⠋⠛
+  - # plain old emphasis
+    - abcdefg
+    - ⠨⠄⠁⠃⠉⠙⠑⠋⠛⠨⠤
+    - typeform:
+        italic: '+++++++'
+  - # emphasis just one word
+    - abc defg
+    - ⠨⠄⠁⠃⠉⠨⠤ ⠙⠑⠋⠛
+    - typeform:
+        italic: '+++     '
+  - # emphasis across multiple words
+    - abc defg
+    - ⠨⠄⠁⠃⠉ ⠙⠑⠋⠛⠨⠤
+    - typeform:
+        italic: '++++++++'
+  - # emphasis within word
+    - abcdefg
+    - ⠁⠃⠨⠄⠉⠙⠨⠤⠑⠋⠛
+    - typeform:
+        italic: '  ++   '
+  - # emphasis across multiple words
+    - abc abc abc defg defg
+    - ⠨⠄⠁⠃⠉ ⠁⠃⠉ ⠁⠃⠉ ⠙⠑⠋⠛⠨⠤ ⠙⠑⠋⠛
+    - typeform:
+        italic: '++++++++++++++++     '
+

@@ -1,0 +1,130 @@
+#
+#  Copyright (C) 2010, 2011 by DocArch <http://www.docarch.be>
+#  Copyright (C) 2014 by Bert Frees
+#  Copyright (C) 2014 by CBB <http://www.cbb.nl>
+#  Copyright (C) 2015, 2016, 2018 by Dedicon <http://www.dedicon.nl>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# -------------------------------------------------------------------------------
+#
+#  Dutch Braille as used in the Netherlands
+#
+#     Created by Bert Frees <bertfrees@gmail.com>
+#     Modified by Henri Apperloo <h.apperloo@cbb.nl>
+#     Modified by Davy Kager <DavyKager@dedicon.nl>
+#
+#     See also: « Braillestandaard voor algemeen gebruik in het Nederlandse taalgebied,
+#                Van toepassing vanaf 19 april 2018 »
+#              (Braille Autoriteit, 2018)
+#               [http://liblouis.org/braille-specs/dutch][1]
+#          and: « World Braille Usage (3rd edition) »
+#               [http://liblouis.org/braille-specs/world-braille-usage-third-edition.pdf][2]
+#
+# ----------------------------------------------------------------------------------------------
+
+include nl-g0.uti
+
+# Rules where nl-NL-g0.utb and nl-BE-g0.utb differ from each other,
+# because either not or ambiguously defined in the Dutch braille
+# standard of 2005.
+
+# Foreign letters Ã, Õ (Portuguese), Å, Æ, Ø (Norwegian/Danish/Finnish), Ì (Italian)
+# Clear definition missing from standard
+# Belgium uses the definitions from the various languages, see [2]
+# CBB uses the letters without accent, see §2.7 Beklemtoonde klinkers [1]
+# CBB suggests dots "246" for letter o with stroke, see Norway, p. 101 [2]
+
+uplow       \x00C3\x00E3  1,1                 Ãã                  LATIN CAPITAL LETTER A WITH TILDE - LATIN SMALL LETTER A WITH TILDE
+uplow       \x00C5\x00E5  1,1                 Åå                  LATIN CAPITAL LETTER A WITH RING ABOVE - LATIN SMALL LETTER A WITH RING ABOVE
+uplow       \x00C6\x00E6  1-15,1-15           Ææ                  LATIN CAPITAL LETTER AE - LATIN SMALL LETTER AE
+uplow       \x00CC\x00EC  24,24               Ìì                  LATIN CAPITAL LETTER I WITH GRAVE - LATIN SMALL LETTER I WITH GRAVE
+uplow       \x00D5\x00F5  135,135             Õõ                  LATIN CAPITAL LETTER O WITH TILDE - LATIN SMALL LETTER O WITH TILDE
+uplow       \x00D8\x00F8  246,246             Øø                  LATIN CAPITAL LETTER O WITH STROKE - LATIN SMALL LETTER O WITH STROKE
+
+# Left and right curly brackets
+# Definition missing from standard
+# Belgium and Dedicon use dots "12356" and "23456"
+# CBB uses "46" and "3456" but suggests dots "6-12356" and "6-23456", see Norway, p. 101 [2]
+
+punctuation \x007B        12356               {                   LEFT CURLY BRACKET
+# punctuation \x007B        46                  {                   LEFT CURLY BRACKET
+# punctuation \x007B        6-12356             {                   LEFT CURLY BRACKET
+punctuation \x007D        23456               }                   RIGHT CURLY BRACKET
+# punctuation \x007D        3456                }                   RIGHT CURLY BRACKET
+# punctuation \x007D        6-23456             }                   RIGHT CURLY BRACKET
+
+# Greek letters
+# Clear definition missing from standard
+# The Netherlands use the definitions from Greek (International), p. 185 [2] and rule §2.2 Alfabetwisselingsteken [1]
+# Belgium uses prefix "456" for capital letters
+# Belgium uses dots "345" for letter eta
+# Belgium uses dots "13456" for letter upsilon
+# Belgium uses dots "125" for letter chi
+# Belgium uses dots "12346" for letter psi
+# Belgium uses dots "245" for letter omega
+
+letter      \x0391        56-46-1             Α                   GREEK CAPITAL LETTER ALPHA
+letter      \x0392        56-46-12            Β                   GREEK CAPITAL LETTER BETA
+letter      \x0393        56-46-1245          Γ                   GREEK CAPITAL LETTER GAMMA
+letter      \x0394        56-46-145           Δ                   GREEK CAPITAL LETTER DELTA
+letter      \x0395        56-46-15            Ε                   GREEK CAPITAL LETTER EPSILON
+letter      \x0396        56-46-1356          Ζ                   GREEK CAPITAL LETTER ZETA
+letter      \x0397        56-46-156           Η                   GREEK CAPITAL LETTER ETA
+letter      \x0398        56-46-1456          Θ                   GREEK CAPITAL LETTER THETA
+letter      \x0399        56-46-24            Ι                   GREEK CAPITAL LETTER IOTA
+letter      \x039A        56-46-13            Κ                   GREEK CAPITAL LETTER KAPPA
+letter      \x039B        56-46-123           Λ                   GREEK CAPITAL LETTER LAMDA
+letter      \x039C        56-46-134           Μ                   GREEK CAPITAL LETTER MU
+letter      \x039D        56-46-1345          Ν                   GREEK CAPITAL LETTER NU
+letter      \x039E        56-46-1346          Ξ                   GREEK CAPITAL LETTER XI
+letter      \x039F        56-46-135           Ο                   GREEK CAPITAL LETTER OMICRON
+letter      \x03A0        56-46-1234          Π                   GREEK CAPITAL LETTER PI
+letter      \x03A1        56-46-1235          Ρ                   GREEK CAPITAL LETTER RHO
+letter      \x03A3        56-46-234           Σ                   GREEK CAPITAL LETTER SIGMA
+letter      \x03A4        56-46-2345          Τ                   GREEK CAPITAL LETTER TAU
+letter      \x03A5        56-46-136           Υ                   GREEK CAPITAL LETTER UPSILON
+letter      \x03A6        56-46-124           Φ                   GREEK CAPITAL LETTER PHI
+letter      \x03A7        56-46-12346         Χ                   GREEK CAPITAL LETTER CHI
+letter      \x03A8        56-46-13456         Ψ                   GREEK CAPITAL LETTER PSI
+letter      \x03A9        56-46-2456          Ω                   GREEK CAPITAL LETTER OMEGA
+lowercase   \x03B1        56-1                α                   GREEK SMALL LETTER ALPHA
+lowercase   \x03B2        56-12               β                   GREEK SMALL LETTER BETA
+lowercase   \x03B3        56-1245             γ                   GREEK SMALL LETTER GAMMA
+lowercase   \x03B4        56-145              δ                   GREEK SMALL LETTER DELTA
+lowercase   \x03B5        56-15               ε                   GREEK SMALL LETTER EPSILON
+lowercase   \x03B6        56-1356             ζ                   GREEK SMALL LETTER ZETA
+lowercase   \x03B7        56-156              η                   GREEK SMALL LETTER ETA
+lowercase   \x03B8        56-1456             θ                   GREEK SMALL LETTER THETA
+lowercase   \x03B9        56-24               ι                   GREEK SMALL LETTER IOTA
+lowercase   \x03BA        56-13               κ                   GREEK SMALL LETTER KAPPA
+lowercase   \x03BB        56-123              λ                   GREEK SMALL LETTER LAMDA
+lowercase   \x03BC        56-134              μ                   GREEK SMALL LETTER MU
+lowercase   \x03BD        56-1345             ν                   GREEK SMALL LETTER NU
+lowercase   \x03BE        56-1346             ξ                   GREEK SMALL LETTER XI
+lowercase   \x03BF        56-135              ο                   GREEK SMALL LETTER OMICRON
+lowercase   \x03C0        56-1234             π                   GREEK SMALL LETTER PI
+lowercase   \x03C1        56-1235             ρ                   GREEK SMALL LETTER RHO
+lowercase   \x03C2        56-234              ς                   GREEK SMALL LETTER FINAL SIGMA
+lowercase   \x03C3        56-234              σ                   GREEK SMALL LETTER SIGMA
+lowercase   \x03C4        56-2345             τ                   GREEK SMALL LETTER TAU
+lowercase   \x03C5        56-136              υ                   GREEK SMALL LETTER UPSILON
+lowercase   \x03C6        56-124              φ                   GREEK SMALL LETTER PHI
+lowercase   \x03C7        56-12346            χ                   GREEK SMALL LETTER CHI
+lowercase   \x03C8        56-13456            ψ                   GREEK SMALL LETTER PSI
+lowercase   \x03C9        56-2456             ω                   GREEK SMALL LETTER OMEGA
+lowercase   \x03D5        56-124              ϕ                   GREEK PHI SYMBOL

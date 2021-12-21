@@ -1,0 +1,100 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+module ash.quick_pair.mojom;
+
+// Type values for Fast Pair messages.
+enum MessageType {
+  // Key-based Pairing Request.
+  kKeyBasedPairingRequest,
+  // Key-based Pairing Response.
+  kKeyBasedPairingResponse,
+  // Seeker's passkey.
+  kSeekersPasskey,
+  // Provider's passkey.
+  kProvidersPasskey,
+};
+
+// Decrypted response value.
+struct DecryptedResponse {
+  // Message type.
+  MessageType message_type;
+  // Provider's public (BR/EDR) address.
+  array<uint8, 6> address_bytes;
+  // Random value.
+  array<uint8, 9> salt;
+};
+
+// Decrypted passkey value.
+struct DecryptedPasskey {
+  // Message type.
+  MessageType message_type;
+  // 6 digit passkey.
+  uint32 passkey;
+  // Random value.
+  array<uint8, 12> salt;
+};
+
+// 'Not discoverable' advertisements may contaion battery information, see
+// https://developers.google.com/nearby/fast-pair/spec#BatteryNotification.
+struct BatteryInfo {
+  // Whether or not the device is charging.
+  bool is_charging;
+  // Battery level ranging from 0 to 100. -1 if unknown.
+  int8 percentage;
+};
+
+// 'Not discoverable' advertisements may contaion battery information, see
+// https://developers.google.com/nearby/fast-pair/spec#BatteryNotification.
+struct BatteryNotification {
+  // Whether or not to show UI based on this notification.
+  bool show_ui;
+  // Battery information for the left bud.
+  BatteryInfo left_bud_info;
+  // Battery information for the right bud.
+  BatteryInfo right_bud_info;
+  // Battery information for the case.
+  BatteryInfo case_info;
+};
+
+// Advertisement payload for Fast Pair 'not discoverable' devices. See
+// https://developers.google.com/nearby/fast-pair/spec#advertising_payload_fast_pair_account_data
+// for additional details (note: not all fields in the spec are in use, thus
+// aren't included in this struct).
+struct NotDiscoverableAdvertisement {
+  // Bytes in the account key filter.
+  array<uint8> account_key_filter;
+  // Random value generate by the Bluetooth device.
+  uint8 salt;
+  // Whether or not to show UI based on this advertisement.
+  bool show_ui;
+  // Optional battery notification information.
+  BatteryNotification? battery_notification;
+};
+
+// Parses untrusted bytes from a Bluetooth device during Fast Pair. Lives in a
+// sandboxed utility process which is launched by Ash. Instances should be
+// retrieved via QuickPairService.
+interface FastPairDataParser {
+  // Gets the hex string representation of the device's model ID from the
+  // service data.
+  GetHexModelIdFromServiceData(array<uint8> service_data) => (string? model_id);
+
+  // Decrypts |encrypted_response_bytes| using |aes_key| and parses a
+  // DecryptedResponse instance if possible.
+  ParseDecryptedResponse(
+    array<uint8, 16> aes_key,
+    array<uint8, 16> encrypted_response_bytes) => (DecryptedResponse? response);
+
+  // Decrypts |encrypted_passkey_bytes| using |aes_key| and parses a
+  // DecryptedPasskey instance if possible.
+  ParseDecryptedPasskey(
+    array<uint8, 16> aes_key,
+    array<uint8, 16> encrypted_passkey_bytes) => (DecryptedPasskey? passkey);
+
+  // Parses a 'not discoverable' advertisement instance from |service_data| if
+  // possible.
+  ParseNotDiscoverableAdvertisement(array<uint8> service_data)
+      => (NotDiscoverableAdvertisement? advertisement);
+};

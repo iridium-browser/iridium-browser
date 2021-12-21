@@ -1,0 +1,45 @@
+<custom-style>
+<style>
+  /* Colors: */
+  html {
+    /* TODO(crbug.com/1173908): Move to cr_elements/shared_vars_css.html once verified. */
+    --google-green-50-rgb: 230, 244, 234;  /* #e6f4ea */
+    --google-green-50: rgb(var(--google-green-50-rgb));
+    --google-green-600-rgb: 30, 142, 62;  /* #1e8e3e */
+    --google-green-600: rgb(var(--google-green-600-rgb));
+
+    --annotation-background-color: var(--google-green-50);
+    --annotation-text-color: var(--google-green-600);
+    --border-color: var(--google-grey-refresh-300);
+    --grey-fill-color: var(--google-grey-refresh-100);
+    --icon-color: var(--google-grey-600);
+    --url-hostname-color: var(--google-blue-600);
+  }
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --annotation-background-color: var(--google-green-600);
+    --annotation-text-color: var(--google-green-50);
+    --border-color: var(--google-grey-refresh-700);
+    --grey-fill-color: var(--google-grey-refresh-700);
+    --icon-color: white;
+    --url-hostname-color: var(--google-blue-refresh-300);
+  }
+}
+
+  /* Sizes: */
+  html {
+    --cluster-max-width: var(--card-max-width);
+    --cluster-min-width: var(--card-min-width);
+    --cluster-padding-horizontal: var(--card-padding-side);
+    --cluster-padding-vertical: var(--card-padding-between);
+    --favicon-margin: 16px;
+    --favicon-size: 16px;
+    --first-cluster-padding-top: var(--first-card-padding-top);
+    --pill-height: 34px;
+    --pill-padding-icon: 12px;
+    --pill-padding-text: 16px;
+    --top-visit-favicon-size: 24px;
+  }
+</style>
+</custom-style>

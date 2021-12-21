@@ -1,0 +1,15 @@
+{
+  "dependencies": [
+    "ui/legacy",
+    "ui/legacy/components/source_frame",
+    "ui/legacy/components/text_editor"
+  ],
+    "resources": [
+    "chartViewport.css",
+    "filmStripView.css",
+    "flameChart.css",
+    "overviewGrid.css",
+    "timelineGrid.css",
+    "timelineOverviewInfo.css"
+  ]
+}

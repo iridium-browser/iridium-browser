@@ -1,0 +1,132 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package cast.v2;
+
+option optimize_for = LITE_RUNTIME;
+
+// A collection of rules.
+message UrlRequestRewriteRules {
+  // The order of rules specifies the order in which they will be applied.
+  repeated UrlRequestRewriteRule rules = 1;
+}
+
+message UrlRequestRewriteRule {
+  // Specifies the action to be taken for a UrlRequestRewriteRule.
+  enum UrlRequestAction {
+    // Default value.
+    ACTION_UNSPECIFIED = 0;
+    // Allow the request to be processed.
+    ALLOW = 1;
+    // Block the request.
+    DENY = 2;
+  }
+
+  // Set of hosts to apply the rules to. If not set, the rule will apply to
+  // every request, independent of host.
+  repeated string host_filters = 1;
+
+  // Set of schemes to apply the rules to. If not set, the rule will apply to
+  // every request, independent of scheme.
+  repeated string scheme_filters = 2;
+
+  // URL request rewrites to apply.
+  repeated UrlRequestRewrite rewrites = 3;
+
+  // Specifies the action to take for requests matching the filter criteria.
+  // Requests are allowed by default.
+  UrlRequestAction action = 4;
+}
+
+message UrlRequestRewrite {
+  oneof action {
+    // Adds a set of headers to a URL request.
+    UrlRequestRewriteAddHeaders add_headers = 1;
+
+    // Removes a header based on the presence of a pattern in the URL query.
+    UrlRequestRewriteRemoveHeader remove_header = 2;
+
+    // Substitutes a pattern in the URL query.
+    UrlRequestRewriteSubstituteQueryPattern substitute_query_pattern = 3;
+
+    // Replaces a URL if the original URL ends with a pattern.
+    UrlRequestRewriteReplaceUrl replace_url = 4;
+
+    // Appends to the URL query.
+    UrlRequestRewriteAppendToQuery append_to_query = 5;
+  }
+}
+
+// An HTTP header field.
+message UrlHeader {
+  string name = 1;
+  string value = 2;
+}
+
+// Adds `headers` to the URL request. If a header is already present in the
+// original URL request, it will be overwritten.
+// - `headers` must be set.
+// - Each [`UrlHeader`] in `headers` must have a valid HTTP header name and
+// value,
+//   per [RFC 7230
+//   section  3.2](https://tools.ietf.org/html/rfc7230#section-3.2).
+message UrlRequestRewriteAddHeaders {
+  repeated UrlHeader headers = 1;
+}
+
+// If `query_pattern` is in the URL query, removes `header_name` from the list
+// of headers. If `query_pattern` is not set, removes `header_name` from the
+// list of headers unconditionally.
+// - `header_name` must be set.
+// - `header_name` must be a valid HTTP header name, per
+//   [RFC 7230 section 3.2](https://tools.ietf.org/html/rfc7230#section-3.2).
+message UrlRequestRewriteRemoveHeader {
+  string query_pattern = 1;
+  string header_name = 2;
+}
+
+// If `pattern` is found in the URL request query, replaces it with
+// `substitution`.
+// - `pattern` and `substitution` must be set.
+// - `substitution` must be a valid
+//   [URL-query string](https://url.spec.whatwg.org/#url-query-string).
+message UrlRequestRewriteSubstituteQueryPattern {
+  string pattern = 1;
+  string substitution = 2;
+}
+
+// If the URL in the URL request ends with `url_ends_with`, rewrites the URL to
+// `new_url`.
+// - `url_ends_with` and `new_url` must be set.
+// - `url_ends_with` must be a valid
+//   [path-relative-URL
+//   string](https://url.spec.whatwg.org/#path-relative-url-string).
+// - `new_url` must be a [valid URL
+// string](https://url.spec.whatwg.org/#valid-url-string).
+message UrlRequestRewriteReplaceUrl {
+  string url_ends_with = 1;
+  string new_url = 2;
+}
+
+// Appends `query` to the URL query. If the URL request already has a query,
+// `query` will be appended to it, preceded by `&`. Otherwise, the URL's query
+// will be set to `query`.
+// - `query` must be set.
+// - `query` must be a valid [URL-query
+// string](https://url.spec.whatwg.org/#url-query-string).
+message UrlRequestRewriteAppendToQuery {
+  string query = 1;
+}

@@ -1,0 +1,17 @@
+display: unicode.dis
+table:
+  locale: pl
+  grade: 1
+  __assert-match: pl.tbl
+flags: {testmode: backward}
+tests:
+  - [⠏⠉⠓⠝⠡⠩ ⠺ ⠞⠱ ⠣⠬⠙⠮ ⠚⠑⠯⠁ ⠇⠥⠃ ⠕⠪⠍ ⠎⠅⠗⠵⠽⠹ ⠋⠊⠛, pchnąć w tę łódź jeża lub ośm skrzyń fig]
+  - [⠨⠡, Ą]
+  - [⠨⠩, Ć]
+  - [⠨⠱, Ę]
+  - [⠨⠣, Ł]
+  - [⠨⠹, Ń]
+  - [⠨⠬, Ó]
+  - [⠨⠪, Ś]
+  - [⠨⠯, Ż]
+  - [⠨⠮, Ź]

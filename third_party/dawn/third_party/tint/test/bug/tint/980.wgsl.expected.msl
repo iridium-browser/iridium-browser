@@ -1,0 +1,34 @@
+#include <metal_stdlib>
+
+using namespace metal;
+
+template<typename T, int N, int M>
+inline auto operator*(matrix<T, N, M> lhs, packed_vec<T, N> rhs) {
+  return lhs * vec<T, N>(rhs);
+}
+
+template<typename T, int N, int M>
+inline auto operator*(packed_vec<T, M> lhs, matrix<T, N, M> rhs) {
+  return vec<T, M>(lhs) * rhs;
+}
+
+struct S {
+  /* 0x0000 */ packed_float3 v;
+  /* 0x000c */ uint i;
+};
+
+float3 Bad(uint index, float3 rd) {
+  float3 normal = float3(0.0f);
+  normal[index] = -(sign(rd[index]));
+  return normalize(normal);
+}
+
+void tint_symbol_inner(device S& io, uint idx) {
+  io.v = Bad(io.i, io.v);
+}
+
+kernel void tint_symbol(uint idx [[thread_index_in_threadgroup]], device S& io [[buffer(0)]]) {
+  tint_symbol_inner(io, idx);
+  return;
+}
+

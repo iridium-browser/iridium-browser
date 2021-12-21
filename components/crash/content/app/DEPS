@@ -1,0 +1,5 @@
+include_rules = [
+  "+sandbox",
+
+  "+content/public/common/result_codes.h",
+]

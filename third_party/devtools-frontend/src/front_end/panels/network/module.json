@@ -1,0 +1,12 @@
+{
+  "dependencies": [
+    "ui/legacy/components/cookie_table",
+    "ui/legacy/components/data_grid",
+    "panels/mobile_throttling",
+    "ui/legacy/components/object_ui",
+    "ui/legacy/components/perf_ui",
+    "panels/search",
+    "ui/legacy/components/source_frame",
+    "ui/legacy"
+  ]
+}

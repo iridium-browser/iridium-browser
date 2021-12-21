@@ -1,0 +1,10 @@
+display: unicode.dis
+table:
+  locale: hu
+  grade: 2
+  __assert-match: hu-hu-g2.ctb
+flags: {testmode: backward}
+tests:
+- [⠍⠈⠚⠥⠎ ⠼⠁⠤⠑⠊, "május 1-ei", xfail: true]
+- [⠚⠬⠝⠊⠥⠎ ⠼⠃⠤⠁⠊, "június 2-ai", xfail: true]
+- [⠁⠥⠛⠥⠱⠞⠥⠎ ⠼⠃⠚⠤⠊, "augusztus 20-i", xfail: true]

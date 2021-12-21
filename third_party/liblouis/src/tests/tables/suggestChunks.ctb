@@ -1,0 +1,35 @@
+include ../../tables/de-eurobrl6u.dis
+include ../../tables/de-chardefs6.cti
+
+nocross foo 124-136
+nocross bar 12-1235
+
+# German grade 1 rules
+nocross    au      16         1
+nocross    eu      126        2
+nocross    ei      146        3
+nocross    ch      1456       4
+nocross    sch     156        5
+nocross    st      23456      ]
+nocross    äu      34         \ 
+nocross    ie      346        0
+
+# Some German grade 2 rules
+
+prfword    or      135-1235   OR
+nocross    or      26         ?
+word       mal     134-1-123  MAL
+nocross    mal     134        M
+prfword    al      1-123      AL
+nocross    al      25         :
+prfword    all     1-12345    AQ
+nocross    all     1          A
+sufword    ll      123-123    LL
+nocross    ll      12345      Q
+begword    lich    123-3456   L#
+nocross    lich    456        _
+nocross    ich     3456       #
+word       ch      6-1456     '4
+nocross    ch      1456       4
+always     q       6-12345    'Q
+nocross    el      13456      Y

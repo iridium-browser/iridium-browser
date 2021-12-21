@@ -1,0 +1,9 @@
+{
+  "dependencies": [
+    "ui/legacy",
+    "ui/legacy/components/data_grid"
+  ],
+    "resources": [
+    "cookiesTable.css"
+  ]
+}

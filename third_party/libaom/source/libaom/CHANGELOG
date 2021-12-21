@@ -1,0 +1,194 @@
+2021-07-20 v3.1.2
+  This release includes several bug fixes.
+
+  - Bug fixes:
+    exports.cmake: use APPLE and WIN32 and use def for mingw-w64
+    https://aomedia-review.googlesource.com/c/aom/+/139882
+
+    Issue 2993: Incorrect spatial_id when decoding base layer of
+    multi-layer stream
+
+    Issue 3080: Chroma Resampling by Encoder on Y4M Inputs Files Tagged
+    as C420mpeg2
+
+    Issue 3081: Use of uninitialized value $version_extra in
+    concatenation (.) or string at aom/build/cmake/version.pl line 88.
+
+2021-06-08 v3.1.1
+  This release includes several bug fixes.
+
+  - Bug fixes:
+    Issue 2965: Cherry-picked the following four commits for the
+    tune=butteraugli mode.
+      1. Add libjxl to pkg_config if enabled:
+         https://aomedia-review.googlesource.com/c/aom/+/136044
+      2. Declare set_mb_butteraugli_rdmult_scaling static:
+         https://aomedia-review.googlesource.com/c/aom/+/134506
+      3. Add color range detection in tune=butteraugli mode:
+         https://aomedia-review.googlesource.com/c/aom/+/135521
+      4. Enable tune=butteraugli in all-intra mode:
+         https://aomedia-review.googlesource.com/c/aom/+/136082
+
+    Issue 3021: Fix vmaf model initialization error when not set to
+    tune=vmaf
+
+    Issue 3050: Compilation fails with -DCONFIG_TUNE_VMAF=1
+
+    Issue 3054: Consistent crash on near-static screen content, keyframe
+    related
+
+2021-05-03 v3.1.0
+  This release adds an "all intra" mode to the encoder, which significantly
+  speeds up the encoding of AVIF still images at speed 6.
+
+  - Upgrading:
+    All intra mode for encoding AVIF still images and AV1 all intra videos:
+    AOM_USAGE_ALL_INTRA (2) can be passed as the 'usage' argument to
+    aom_codec_enc_config_default().
+
+    New encoder control IDs added:
+      - AV1E_SET_ENABLE_DIAGONAL_INTRA: Enable diagonal (D45 to D203) intra
+        prediction modes (0: false, 1: true (default)). Also available as
+        "enable-diagonal-intra" for the aom_codec_set_option() function.
+
+    New aom_tune_metric enum value: AOM_TUNE_BUTTERAUGLI. The new aomenc option
+    --tune=butteraugli was added to optimize the encoder’s perceptual quality by
+    optimizing the Butteraugli metric. Install libjxl (JPEG XL) and then pass
+    -DCONFIG_TUNE_BUTTERAUGLI=1 to the cmake command to enable it.
+
+    Addition of support for libvmaf 2.x.
+
+  - Enhancements:
+    Heap memory consumption for encoding AVIF still images is significantly
+    reduced.
+
+  - Bug fixes:
+    Issue 2601: third_party/libaom fails licensecheck
+
+    Issue 2950: Conditional expression for rc->this_key_frame_forced is always
+    true in find_next_key_frame()
+
+    Issue 2988: "make install" installs the aom.h header twice
+
+    Issue 2992: Incorrectly printing the temporal_id twice in dump_obu tool
+
+    Issue 2998:
+
+    Issue 2999:
+
+    Issue 3000:
+
+2021-02-24 v3.0.0
+  This release includes compression efficiency improvement, speed improvement
+  for realtime mode, as well as some new APIs.
+
+  - Upgrading:
+    Support for PSNR calculation based on stream bit-depth.
+
+    New encoder control IDs added:
+      - AV1E_SET_ENABLE_RECT_TX
+      - AV1E_SET_VBR_CORPUS_COMPLEXITY_LAP
+      - AV1E_GET_BASELINE_GF_INTERVAL
+      - AV1E_SET_ENABLE_DNL_DENOISING
+
+    New decoder control IDs added:
+      - AOMD_GET_FWD_KF_PRESENT
+      - AOMD_GET_FRAME_FLAGS
+      - AOMD_GET_ALTREF_PRESENT
+      - AOMD_GET_TILE_INFO
+      - AOMD_GET_SCREEN_CONTENT_TOOLS_INFO
+      - AOMD_GET_STILL_PICTURE
+      - AOMD_GET_SB_SIZE
+      - AOMD_GET_SHOW_EXISTING_FRAME_FLAG
+      - AOMD_GET_S_FRAME_INFO
+
+    New aom_tune_content enum value: AOM_CONTENT_FILM
+
+    New aom_tune_metric enum value: AOM_TUNE_VMAF_NEG_MAX_GAIN
+
+    Coefficient and mode update can be turned off via
+    AV1E_SET_{COEFF/MODE}_COST_UPD_FREQ.
+
+    New key & value API added, available with aom_codec_set_option() function.
+
+    Scaling API expanded to include 1/4, 3/4 and 1/8.
+
+  - Enhancements:
+    Better multithreading performance with realtime mode.
+
+    New speed 9 setting for faster realtime encoding.
+
+    Smaller binary size with low bitdepth and realtime only build.
+
+    Temporal denoiser and its optimizations on x86 and Neon.
+
+    Optimizations for scaling.
+
+    Faster encoding with speed settings 2 to 6 for good encoding mode.
+
+    Improved documentation throughout the library, with function level
+    documentation, tree view and support for the dot tool.
+
+  - Bug fixes:
+    Aside from those mentioned in v2.0.1 and v2.0.2, this release includes the
+    following bug fixes:
+
+    Issue 2940: Segfault when encoding with --use-16bit-internal and --limit > 1
+
+    Issue 2941: Decoder mismatch with --rt --bit-depth=10 and --cpu-used=8
+
+    Issue 2895: mingw-w64 i686 gcc fails to build
+
+    Issue 2874: Separate ssse3 functions from sse2 file.
+
+2021-02-09 v2.0.2
+  This release includes several bug fixes.
+
+  - Bug fixes:
+    Issue 2643: Modify the assertion in temporal filter intrinsics.
+
+    Issue 2648: Fix unit test ThreadTestLarge.EncoderResultTest/49
+    assertion failure.
+
+    Issue 2869: Add -Wimplicit-function-declaration as C flag only.
+
+    Issue 2878: Avoid memset in the av1_filter_intra_predictor module
+    functions.
+
+    Issue 2903: Fix a typo bug in apply_temporal_filter_planewise.
+
+    Call av1_setup_frame_size() when dropping a frame in the
+    encode_frame_to_data_rate() function in av1/encoder/encoder.c.
+
+2020-11-25 v2.0.1
+  This release includes two bug fixes.
+
+  - Bug fixes:
+    Issue 2723: Fix crash in chroma_check() when generating a monochrome
+    encoded stream in real-time mode.
+
+    Issue 2833: Fix crash on some input when reduced still picture header is
+    used in real-time mode and speed >=7.
+
+2020-05-07 v2.0.0 "Applejack"
+  First official release of libaom.
+  This release includes new real-time mode and SVC support.
+
+  - Upgrading:
+    AOM_SET_POSTPROC, AOM_CODEC_CAP_POSTPROC and AOM_CODEC_USE_POSTPROC are
+    removed.
+
+    AOM_SET_DBG_* is removed.
+
+    Multi-resolution encoding is removed.
+
+    put_frame and put_slice callbacks are removed.
+
+  - Enhancements:
+    Full-sweep document update for codec controls.
+
+2018-06-28 v1.0.0
+  AOMedia Codec Workgroup Approved version 1.0
+
+2016-04-07 v0.1.0 "AOMedia Codec 1"
+  This release is the first Alliance for Open Media codec.

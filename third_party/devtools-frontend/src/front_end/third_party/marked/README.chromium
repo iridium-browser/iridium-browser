@@ -1,0 +1,17 @@
+Name: marked
+Short Name: marked
+URL: https://github.com/markedjs/marked
+Version: 2.0.3
+License: MIT
+Security Critical: no
+
+Description:
+Light-weight markdown parser and renderer.
+
+To update this package, run the following command (replace version number with updated version number):
+```bash
+wget -qO- https://registry.npmjs.org/marked/-/marked-2.0.3.tgz | tar xzf -
+```
+
+Local Modifications:
+- Add marked.esm.d.ts for TypeScript typechecking.

@@ -1,0 +1,24 @@
+# Dutch Braille based on the standard of 2017: see «Braillestandaard voor algemeen
+# gebruik in het Nederlandse taalgebied, Van toepassing vanaf 19 april 2018» (Braille
+# Autoriteit, 2018) http://liblouis.org/braille-specs/dutch
+#
+# Copyright © 2015 by Dedicon <http://www.dedicon.nl>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+table:
+  locale: nl
+  grade: 0
+  __assert-match: nl.tbl # nl-NL-g0.utb
+tests:
+  # §2.2 Alfabetwisselingsteken
+  # §2.12 Hoofdletters
+  - - Some Greek uppercase
+    - Α Β Γ
+    - ⠰⠨⠁ ⠰⠨⠃ ⠰⠨⠛

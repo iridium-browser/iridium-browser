@@ -1,0 +1,318 @@
+# Copyright 2014 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("./config/gni/all_devtools_files.gni")
+import("./config/gni/devtools_grd_files.gni")
+import("./config/gni/devtools_image_files.gni")
+import("./front_end/emulated_devices/optimized/optimized_images.gni")
+import("./scripts/build/ninja/node.gni")
+import("./scripts/build/ninja/vars.gni")
+import("./third_party/blink/public/public_features.gni")
+
+devtools_test_files = [
+  "front_end/third_party/axe-core/axe.js",
+  "front_end/legacy_test_runner/accessibility_test_runner/accessibility_test_runner.js",
+  "front_end/legacy_test_runner/bindings_test_runner/bindings_test_runner.js",
+  "front_end/legacy_test_runner/application_test_runner/application_test_runner.js",
+  "front_end/legacy_test_runner/application_test_runner/CacheStorageTestRunner.js",
+  "front_end/legacy_test_runner/application_test_runner/IndexedDBTestRunner.js",
+  "front_end/legacy_test_runner/application_test_runner/ResourcesTestRunner.js",
+  "front_end/legacy_test_runner/application_test_runner/ResourceTreeTestRunner.js",
+  "front_end/legacy_test_runner/application_test_runner/ServiceWorkersTestRunner.js",
+  "front_end/legacy_test_runner/application_test_runner/StorageTestRunner.js",
+  "front_end/legacy_test_runner/lighthouse_test_runner/lighthouse_test_runner.js",
+  "front_end/legacy_test_runner/axe_core_test_runner/axe_core_test_runner.js",
+  "front_end/legacy_test_runner/bindings_test_runner/AutomappingTestRunner.js",
+  "front_end/legacy_test_runner/bindings_test_runner/BindingsTestRunner.js",
+  "front_end/legacy_test_runner/bindings_test_runner/IsolatedFilesystemTestRunner.js",
+  "front_end/legacy_test_runner/bindings_test_runner/OverridesTestRunner.js",
+  "front_end/legacy_test_runner/bindings_test_runner/PersistenceTestRunner.js",
+  "front_end/legacy_test_runner/console_test_runner/console_test_runner.js",
+  "front_end/legacy_test_runner/coverage_test_runner/coverage_test_runner.js",
+  "front_end/legacy_test_runner/cpu_profiler_test_runner/cpu_profiler_test_runner.js",
+  "front_end/legacy_test_runner/data_grid_test_runner/data_grid_test_runner.js",
+  "front_end/legacy_test_runner/device_mode_test_runner/device_mode_test_runner.js",
+  "front_end/legacy_test_runner/elements_test_runner/elements_test_runner.js",
+  "front_end/legacy_test_runner/elements_test_runner/EditDOMTestRunner.js",
+  "front_end/legacy_test_runner/elements_test_runner/ElementsPanelShadowSelectionOnRefreshTestRunner.js",
+  "front_end/legacy_test_runner/elements_test_runner/ElementsTestRunner.js",
+  "front_end/legacy_test_runner/elements_test_runner/SetOuterHTMLTestRunner.js",
+  "front_end/legacy_test_runner/elements_test_runner/StylesUpdateLinksTestRunner.js",
+  "front_end/legacy_test_runner/extensions_test_runner/extensions_test_runner.js",
+  "front_end/legacy_test_runner/extensions_test_runner/ExtensionsNetworkTestRunner.js",
+  "front_end/legacy_test_runner/extensions_test_runner/ExtensionsTestRunner.js",
+  "front_end/legacy_test_runner/heap_profiler_test_runner/heap_profiler_test_runner.js",
+  "front_end/integration_test_runner.html",
+  "front_end/legacy_test_runner/layers_test_runner/layers_test_runner.js",
+  "front_end/legacy_test_runner/network_test_runner/network_test_runner.js",
+  "front_end/legacy_test_runner/performance_test_runner/performance_test_runner.js",
+  "front_end/legacy_test_runner/performance_test_runner/TimelineDataTestRunner.js",
+  "front_end/legacy_test_runner/performance_test_runner/TimelineTestRunner.js",
+  "front_end/legacy_test_runner/sdk_test_runner/sdk_test_runner.js",
+  "front_end/legacy_test_runner/security_test_runner/security_test_runner.js",
+  "front_end/legacy_test_runner/sources_test_runner/sources_test_runner.js",
+  "front_end/legacy_test_runner/sources_test_runner/AutocompleteTestRunner.js",
+  "front_end/legacy_test_runner/sources_test_runner/DebuggerTestRunner.js",
+  "front_end/legacy_test_runner/sources_test_runner/EditorTestRunner.js",
+  "front_end/legacy_test_runner/sources_test_runner/LiveEditTestRunner.js",
+  "front_end/legacy_test_runner/sources_test_runner/SearchTestRunner.js",
+  "front_end/legacy_test_runner/sources_test_runner/SourcesTestRunner.js",
+]
+
+application_templates = [ "front_end/entrypoint_template.html" ]
+
+devtools_applications = [
+  "devtools_app",
+  "inspector",
+  "js_app",
+  "ndb_app",
+  "node_app",
+  "shell",
+  "worker_app",
+]
+
+gen_generated_applications_js = []
+applications_js = []
+
+foreach(application, devtools_applications) {
+  applications_js += [ "entrypoints/$application/$application.js" ]
+  gen_generated_applications_js +=
+      [ "$target_gen_dir/front_end/entrypoints/$application/$application.js" ]
+}
+
+non_autostart_non_remote_modules = [
+  "panels/accessibility/accessibility_module.js",
+  "panels/browser_debugger/browser_debugger_module.js",
+  "panels/changes/changes_module.js",
+  "ui/legacy/components/color_picker/color_picker_module.js",
+  "panels/console/console_module.js",
+  "ui/legacy/components/cookie_table/cookie_table_module.js",
+  "panels/coverage/coverage_module.js",
+  "panels/css_overview/css_overview_module.js",
+  "ui/legacy/components/data_grid/data_grid_module.js",
+  "panels/elements/elements_module.js",
+  "panels/event_listeners/event_listeners_module.js",
+  "panels/help/help_module.js",
+  "ui/legacy/components/inline_editor/inline_editor_module.js",
+  "panels/input/input_module.js",
+  "panels/js_profiler/js_profiler_module.js",
+  "panels/layer_viewer/layer_viewer_module.js",
+  "panels/layers/layers_module.js",
+  "panels/lighthouse/lighthouse_module.js",
+  "panels/media/media_module.js",
+  "panels/network/network_module.js",
+  "ui/legacy/components/object_ui/object_ui_module.js",
+  "ui/legacy/components/perf_ui/perf_ui_module.js",
+  "panels/performance_monitor/performance_monitor_module.js",
+  "panels/profiler/profiler_module.js",
+  "panels/issues/issues_module.js",
+  "panels/developer_resources/developer_resources_module.js",
+  "panels/protocol_monitor/protocol_monitor_module.js",
+  "ui/legacy/components/quick_open/quick_open_module.js",
+  "panels/application/application_module.js",
+  "panels/search/search_module.js",
+  "panels/security/security_module.js",
+  "panels/settings/settings_module.js",
+  "panels/snippets/snippets_module.js",
+  "ui/legacy/components/source_frame/source_frame_module.js",
+  "panels/sources/sources_module.js",
+  "ui/legacy/components/text_editor/text_editor_module.js",
+  "panels/timeline/timeline_module.js",
+  "panels/web_audio/web_audio_module.js",
+  "panels/webauthn/webauthn_module.js",
+  "emulated_devices/emulated_devices_module.js",
+]
+
+gen_non_autostart_non_remote_modules = []
+
+foreach(module_file, non_autostart_non_remote_modules) {
+  gen_non_autostart_non_remote_modules +=
+      [ "$target_gen_dir/front_end/$module_file" ]
+}
+
+#-------------------------------------------------------------------------------
+
+devtools_frontend_resources_deps = [
+  ":build_release_devtools",
+  "front_end",
+  "test",
+]
+
+group("devtools_all_files") {
+  testonly = true
+  data = all_devtools_files
+  data += [
+    # This enables us to test bots with whitespace changes.
+    "scripts/whitespaces.txt",
+  ]
+  data_deps = devtools_frontend_resources_deps
+
+  public_deps = [ "front_end/ui/components/docs" ]
+}
+
+group("devtools_frontend_resources") {
+  public_deps = devtools_frontend_resources_deps
+  deps = [ ":assert_grd" ]
+}
+
+group("generate_devtools_inspector_overlay_resources") {
+  public_deps = [ "inspector_overlay:build_inspector_overlay" ]
+}
+
+action("assert_grd") {
+  script = "scripts/build/assert_grd.py"
+
+  deps = [
+    ":expected_grd_files",
+    ":input_grd_files",
+  ]
+
+  inputs = [
+    "$target_gen_dir/expected_grd_files.json",
+    "$target_gen_dir/input_grd_files.json",
+  ]
+
+  args = [
+    rebase_path("$target_gen_dir/expected_grd_files.json", root_build_dir),
+    rebase_path("$target_gen_dir/input_grd_files.json", root_build_dir),
+    rebase_path("$target_gen_dir/assert_grd.stamp", root_build_dir),
+  ]
+
+  outputs = [ "$target_gen_dir/assert_grd.stamp" ]
+}
+
+_expected_grd_files = []
+_expected_grd_files += grd_files_release_sources
+if (is_debug) {
+  _expected_grd_files += grd_files_debug_sources
+}
+
+generated_file("expected_grd_files") {
+  outputs = [ "$target_gen_dir/expected_grd_files.json" ]
+
+  contents = _expected_grd_files
+
+  output_conversion = "json"
+}
+
+generated_file("input_grd_files") {
+  outputs = [ "$target_gen_dir/input_grd_files.json" ]
+
+  data_keys = [ "grd_files" ]
+
+  output_conversion = "json"
+  rebase = target_gen_dir
+
+  deps = [
+    ":build_release_devtools",
+    "front_end",
+  ]
+}
+
+_compressable_grd_files = filter_include(_expected_grd_files,
+                                         [
+                                           "*.css",
+                                           "*.html",
+                                           "*.js",
+                                           "*.svg",
+                                           "*.json",
+                                           "*.md",
+                                         ])
+
+if (!is_debug) {
+  node_action("compress") {
+    script = "scripts/build/compress_files.js"
+    public_deps = [ ":devtools_frontend_resources" ]
+
+    sources = []
+    foreach(_grd_file, _compressable_grd_files) {
+      sources += [ "$target_gen_dir/$_grd_file" ]
+    }
+
+    response_file_contents = rebase_path(sources, root_build_dir)
+
+    outputs = []
+    foreach(_grd_file, _compressable_grd_files) {
+      outputs += [
+        "$target_gen_dir/$_grd_file.compressed",
+        "$target_gen_dir/$_grd_file.hash",
+      ]
+    }
+
+    args = [
+      "--file_list",
+      "{{response_file_name}}",
+    ]
+  }
+} else {
+  not_needed([ "_compressable_grd_files" ])
+}
+
+action("generate_devtools_grd") {
+  script = "scripts/build/generate_devtools_grd.py"
+
+  response_file_contents = rebase_path(_expected_grd_files, "front_end")
+  outfile = "$target_gen_dir/front_end/devtools_resources.grd"
+  outputs = [ outfile ]
+
+  args = [
+    "--file_list",
+    "{{response_file_name}}",
+    "--output",
+    rebase_path(outfile, root_build_dir),
+  ]
+
+  inputs = []
+
+  if (is_debug) {
+    deps = [ ":devtools_frontend_resources" ]
+    foreach(_grd_file, _expected_grd_files) {
+      inputs += [ "$target_gen_dir/$_grd_file" ]
+    }
+  } else {
+    deps = [ ":compress" ]
+    foreach(_grd_file, _expected_grd_files) {
+      inputs += [ "$target_gen_dir/$_grd_file" ]
+    }
+    foreach(_grd_file, _compressable_grd_files) {
+      inputs += [ "$target_gen_dir/$_grd_file.compressed" ]
+    }
+
+    # Compression is slow, particularly in debug builds, so only compress in
+    # non-debug builds.
+    args += [ "--compress" ]
+  }
+}
+
+build_release_devtools_args = []
+
+if (!is_debug) {
+  build_release_devtools_args += [ "--rollup" ]
+}
+
+action("build_release_devtools") {
+  script = "scripts/build/build_release_applications.py"
+
+  helper_scripts = [
+    "scripts/build/modular_build.py",
+    "scripts/build/rjsmin.py",
+  ]
+
+  deps = [ "front_end" ]
+
+  inputs = helper_scripts + all_devtools_files + devtools_test_files +
+           application_templates
+  outputs = gen_generated_applications_js + gen_non_autostart_non_remote_modules
+
+  args = devtools_applications + [
+           "--input_path",
+           rebase_path("front_end", root_build_dir),
+           "--output_path_gen",
+           rebase_path("$target_gen_dir/front_end", root_build_dir),
+         ] + build_release_devtools_args
+
+  metadata = {
+    grd_files = outputs
+  }
+}

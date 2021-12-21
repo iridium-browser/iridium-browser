@@ -1,0 +1,11 @@
+rust-std-x86_64-unknown-linux-gnu
+rust-std-i686-unknown-linux-gnu
+rust-std-aarch64-linux-android
+rust-std-armv7-linux-androideabi
+rust-std-x86_64-linux-android
+rust-std-i686-linux-android
+cargo
+rust-analyzer-preview
+rustfmt-preview
+clippy-preview
+rustc

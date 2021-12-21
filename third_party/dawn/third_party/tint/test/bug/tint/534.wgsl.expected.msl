@@ -1,0 +1,46 @@
+#include <metal_stdlib>
+
+using namespace metal;
+struct Uniforms {
+  /* 0x0000 */ uint dstTextureFlipY;
+  /* 0x0004 */ uint isFloat16;
+  /* 0x0008 */ uint isRGB10A2Unorm;
+  /* 0x000c */ uint channelCount;
+};
+struct OutputBuf {
+  /* 0x0000 */ uint result[1];
+};
+
+uint ConvertToFp16FloatValue(float fp32) {
+  return 1u;
+}
+
+void tint_symbol_inner(constant Uniforms& uniforms, device OutputBuf& output, uint3 GlobalInvocationID, texture2d<float, access::sample> tint_symbol_1, texture2d<float, access::sample> tint_symbol_2) {
+  int2 size = int2(tint_symbol_1.get_width(), tint_symbol_1.get_height());
+  int2 dstTexCoord = int2(GlobalInvocationID.xy);
+  int2 srcTexCoord = dstTexCoord;
+  if ((uniforms.dstTextureFlipY == 1u)) {
+    srcTexCoord.y = as_type<int>((as_type<uint>(as_type<int>((as_type<uint>(size.y) - as_type<uint>(dstTexCoord.y)))) - as_type<uint>(1)));
+  }
+  float4 srcColor = tint_symbol_1.read(uint2(srcTexCoord), 0);
+  float4 dstColor = tint_symbol_2.read(uint2(dstTexCoord), 0);
+  bool success = true;
+  uint4 srcColorBits = 0u;
+  uint4 dstColorBits = uint4(dstColor);
+  for(uint i = 0u; (i < uniforms.channelCount); i = (i + 1u)) {
+    srcColorBits[i] = ConvertToFp16FloatValue(srcColor[i]);
+    success = (success && (srcColorBits[i] == dstColorBits[i]));
+  }
+  uint outputIndex = ((GlobalInvocationID.y * uint(size.x)) + GlobalInvocationID.x);
+  if (success) {
+    output.result[outputIndex] = uint(1);
+  } else {
+    output.result[outputIndex] = uint(0);
+  }
+}
+
+kernel void tint_symbol(texture2d<float, access::sample> tint_symbol_3 [[texture(0)]], texture2d<float, access::sample> tint_symbol_4 [[texture(1)]], uint3 GlobalInvocationID [[thread_position_in_grid]], constant Uniforms& uniforms [[buffer(0)]], device OutputBuf& output [[buffer(1)]]) {
+  tint_symbol_inner(uniforms, output, GlobalInvocationID, tint_symbol_3, tint_symbol_4);
+  return;
+}
+

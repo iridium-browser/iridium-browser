@@ -1,0 +1,178 @@
+# Copyright © 2018 Ikrami Ahmad
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table:
+  locale: ar
+  grade: 2
+  __assert-match: ar-ar-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  # 1) first rule: these should be abbreviated everywhere, whether as stand alone word or part of a
+  # bigger word.
+  
+  # stand alone
+  - [بعيد, ⠘⠃]
+  - [برنامج, ⠸⠃]
+  - [تعليم, ⠈⠞]
+  - [ثاني, ⠘⠹]
+  - [جميع, ⠐⠚]
+  - [مكفوف, ⠈⠍]
+  - [اللائي, ⠈⠉]
+  - [كان, ⠛]
+  - [كريم, ⠘⠛]
+  - [آفاق, ⠠⠜]
+  - [أدنى, ⠠⠕]
+  - [إنسان, ⠐⠪]
+  # some are contractions for two words
+  - - لم يكن
+    - ⠐⠑
+  - - ما زال
+    - ⠈⠏
+  - - لا يزال
+    - ⠸⠧
+  # they can be part of a word
+  - - ثقافة
+    - ⠈⠹⠡
+  - - ومرة
+    - ⠺⠐⠍
+  - - وتقطعت
+    - ⠺⠞⠈⠟⠞
+  # a word can have two contractions
+  - - الثالث
+    - ⠉⠸⠹
+  - - كبيرهم
+    - ⠘⠅⠻
+  # they can be used alongside punctuation marks
+  - - "ثانيا:"
+    - ⠘⠹⠁⠐⠂
+  - - (صغير)
+    - ⠦⠘⠯⠴
+
+  # 2) second rule: these should be abbreviated if they come as a single word only, they can't be
+  # abbreviated if part of bigger word.
+  
+  # abbreviated
+  - - أو
+    - ⠁
+  - - قد
+    - ⠄
+  # not abbreviated
+  - - لقد
+    - ⠇⠟⠙
+  - - كلهم
+    - ⠅⠇⠻
+  - - ثمرة
+    - ⠹⠐⠍
+
+  # 3) third rule: these should be abbreviated if they are a word or at the beginning of a word
+  # only, because of their similarity with diacritic symbols.
+  
+  # abbreviated
+  - - لم
+    - ⠑
+  - - إلى
+    - ⠢
+  - - عنوان
+    - ⠔⠺⠁⠝
+  - - معمعة
+    - ⠆⠍⠷⠡
+  - - حيثما
+    - ⠥⠏
+  # not abbreviated
+  - - ملل
+    - ⠍⠇⠇
+  - - لعنة
+    - ⠇⠷⠝⠡
+
+  # 4) fourth rule: these should be abbreviated if they came as a seperate word and if they came in
+  # the middle of words only, because of their similarity to punctuation marks.
+  
+  # abbreviated
+  - - هو
+    - ⠦
+  - - متى
+    - ⠶
+  - - مهووس
+    - ⠍⠦⠺⠎
+  - - هو الذي جاء
+    - ⠦ ⠐⠉ ⠚⠁⠄
+  # not abbreviated
+  - - ومتى
+    - ⠺⠍⠞⠕
+  - - هوشة
+    - ⠓⠺⠩⠡
+  - - من هو؟
+    - ⠴ ⠓⠺⠦
+  - - (متى هذا
+    - ⠦⠍⠞⠕ ⠐⠓
+  
+  # 5) fifth rule: these should be abbreviated if they come as a word or part of a word at the
+  # beginning or the middle, because of their similarity with punctuation marks that close
+  # sentences.
+  
+  # abbreviated
+  - - من
+    - ⠴
+  - - في
+    - ⠖
+  - - منتهى
+    - ⠴⠞⠓⠕
+  - - مستنقع
+    - ⠍⠲⠝⠟⠷
+  # not abbreviated
+  - - وفي
+    - ⠺⠋⠊
+  - - لبست
+    - ⠇⠃⠎⠞
+  - - مدمن
+    - ⠍⠙⠍⠝
+  - - (ثم من)
+    - ⠦⠹ ⠍⠝⠴
+  
+  # 6) sixth rule: if the following abbriviations come as single words, they should be abbreviated
+  # normally. but if they come as a part of bigger word, dots 36 must be placed before the character
+  # that represents the abbreviated word.
+  
+  # as a seperate word
+  - - ليس
+    - ⠇
+  - - مثل
+    - ⠍
+  - - ذاكر
+    - ⠮
+  - - شيء نحو الهدف
+    - ⠩ ⠝ ⠉⠓⠙⠋
+  # due to the use of "lowword", they will not be translated next to punctuations.
+  - - قريب جدا
+    - ⠘⠟ ⠚
+  # as part of a word:
+  - - الخير
+    - ⠉⠤⠭
+  - - فإذا
+    - ⠋⠤⠪
+  - - مثلما
+    - ⠤⠍⠏
+  - - ونحوه
+    - ⠺⠤⠝⠓
+  
+  # 7) seventh rule: if the letter that procedes any of these abbreviations consists of dots 1 2 and
+  # 3 only, they should not be abbreviated.
+  - - علية
+    - ⠷⠇⠊⠡
+  - - تائبون
+    - ⠞⠁⠽⠃⠺⠝
+  - - مرتبات
+    - ⠍⠗⠞⠃⠁⠞
+  
+  # 8) eighth rule: those should be abbreviated only at the end of word.
+  - - بنات
+    - ⠃⠝⠨
+  - - قائمون
+    - ⠘⠽⠸
+  - - قالوا
+    - ⠟⠉⠼

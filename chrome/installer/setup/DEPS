@@ -1,0 +1,17 @@
+include_rules = [
+  "+chrome/browser/enterprise/connectors/device_trust/attestation/desktop/signing_key_pair.h",
+  "+chrome/chrome_elf/chrome_elf_constants.h",
+  "+chrome/install_static",
+  "+components/base32",
+  "+components/metrics",
+  "+components/version_info/channel.h",
+  "+components/zucchini",
+  "+courgette",
+  "+third_party/crashpad",
+]
+
+specific_include_rules = {
+  ".*_unittest\.cc": [
+    "+chrome/chrome_elf/nt_registry/nt_registry.h",
+  ],
+}

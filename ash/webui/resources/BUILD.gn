@@ -1,0 +1,255 @@
+# Copyright 2021 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//ash/webui/help_app_ui/help_app_ui.gni")
+import("//ash/webui/media_app_ui/media_app_ui.gni")
+import("//tools/grit/grit_rule.gni")
+
+assert(is_chromeos_ash, "Non-ChromeOS builds cannot depend on //ash")
+
+# Convenience template for WebUIs using generate_grd.
+template("ash_generated_grit") {
+  grit(target_name) {
+    forward_variables_from(invoker,
+                           [
+                             "deps",
+                             "source",
+                           ])
+
+    # These arguments are needed since the grd is generated at build time.
+    enable_input_discovery_for_gn_analyze = false
+    outputs = [
+      "ash_$target_name.pak",
+      "grit/ash_$target_name.h",
+      "grit/ash_${target_name}_map.cc",
+      "grit/ash_${target_name}_map.h",
+    ]
+    output_dir = "$root_gen_dir/ash"
+  }
+}
+
+# Resources used by chrome://os-feedback
+ash_generated_grit("os_feedback_resources") {
+  os_feedback_gen_dir = "$root_gen_dir/ash/webui/os_feedback_ui/resources"
+  source = "$os_feedback_gen_dir/ash_os_feedback_resources.grd"
+  deps = [
+    "//ash/webui/os_feedback_ui/resources:build_grd",
+    "//ash/webui/os_feedback_ui/resources:web_components",
+  ]
+}
+
+ash_generated_grit("shortcut_customization_app_resources") {
+  shortcut_customization_app_gen_dir =
+      "$root_gen_dir/ash/webui/shortcut_customization_ui/resources"
+  source = "$shortcut_customization_app_gen_dir/ash_shortcut_customization_app_resources.grd"
+  deps = [ "//ash/webui/shortcut_customization_ui/resources:build_grd" ]
+}
+
+# Resources used by shimless rma flow
+ash_generated_grit("shimless_rma_resources") {
+  shimless_rma_resource_gen_dir =
+      "$root_gen_dir/ash/webui/shimless_rma/resources"
+  source = "$shimless_rma_resource_gen_dir/ash_shimless_rma_resources.grd"
+  deps = [ "//ash/webui/shimless_rma/resources:build_grd" ]
+}
+
+if (!is_official_build) {
+  # Resources used by chrome://demo-mode-app
+  ash_generated_grit("demo_mode_app_resources") {
+    source = "$root_gen_dir/ash/webui/demo_mode_app_ui/ash_demo_mode_app_resources.grd"
+    deps = [ "//ash/webui/demo_mode_app_ui:build_grd" ]
+  }
+
+  # Resources used by chrome://sample-system-web-app
+  ash_generated_grit("sample_system_web_app_resources") {
+    source = "$root_gen_dir/ash/webui/sample_system_web_app_ui/ash_sample_system_web_app_resources.grd"
+    deps = [ "//ash/webui/sample_system_web_app_ui:build_trusted_grd" ]
+  }
+
+  # Resources used by chrome-untrusted://sample-system-web-app
+  ash_generated_grit("sample_system_web_app_untrusted_resources") {
+    source = "$root_gen_dir/ash/webui/sample_system_web_app_ui/ash_sample_system_web_app_untrusted_resources.grd"
+    deps = [ "//ash/webui/sample_system_web_app_ui:build_untrusted_grd" ]
+  }
+}
+
+grit("scanning_app_resources") {
+  source = "//ash/webui/scanning/resources/scanning_app_resources.grd"
+
+  deps = [
+    "//ash/webui/scanning/mojom:mojom_js",
+    "//ash/webui/scanning/resources:web_components",
+  ]
+
+  outputs = [
+    "ash_scanning_app_resources.pak",
+    "grit/ash_scanning_app_resources.h",
+    "grit/ash_scanning_app_resources_map.cc",
+    "grit/ash_scanning_app_resources_map.h",
+  ]
+
+  output_dir = "$root_gen_dir/ash"
+}
+
+grit("diagnostics_app_resources") {
+  source = "//ash/webui/diagnostics_ui/resources/diagnostics_app_resources.grd"
+
+  deps = [
+    "//ash/webui/diagnostics_ui/mojom:mojom_js",
+    "//ash/webui/diagnostics_ui/resources:web_components",
+  ]
+
+  outputs = [
+    "ash_diagnostics_app_resources.pak",
+    "grit/ash_diagnostics_app_resources.h",
+    "grit/ash_diagnostics_app_resources_map.cc",
+    "grit/ash_diagnostics_app_resources_map.h",
+  ]
+
+  output_dir = "$root_gen_dir/ash"
+}
+
+# Resources used by chrome://telemetry-extension
+grit("telemetry_extension_resources") {
+  source = "//ash/webui/telemetry_extension_ui/resources/telemetry_extension_resources.grd"
+
+  deps = [ "//ash/webui/telemetry_extension_ui/mojom:mojom_js" ]
+
+  outputs = [
+    "grit/ash_telemetry_extension_resources.h",
+    "grit/ash_telemetry_extension_resources_map.cc",
+    "grit/ash_telemetry_extension_resources_map.h",
+    "ash_telemetry_extension_resources.pak",
+  ]
+
+  output_dir = "$root_gen_dir/ash"
+}
+
+# Resources used by chrome://help-app, and parts of the sandboxed app it hosts
+# that do not come from the app bundle (below).
+grit("help_app_resources") {
+  source = "//ash/webui/help_app_ui/resources/help_app_resources.grd"
+
+  outputs = [
+    "grit/ash_help_app_resources.h",
+    "grit/ash_help_app_resources_map.cc",
+    "grit/ash_help_app_resources_map.h",
+    "ash_help_app_resources.pak",
+  ]
+  output_dir = "$root_gen_dir/ash"
+
+  deps = [
+    "//ash/webui/help_app_ui:mojo_bindings_js",
+    "//ash/webui/help_app_ui/resources:browser_proxy_rollup",
+    "//ash/webui/help_app_ui/resources:receiver_rollup",
+    "//ash/webui/help_app_ui/search:mojo_bindings_js",
+    "//chromeos/components/local_search_service/public/mojom:mojom_js",
+  ]
+}
+
+# Resources automatically served by the chrome://help-app bundle, obtained via DEPS.
+grit("help_app_bundle_resources") {
+  if (enable_cros_help_app) {
+    # Obtained via an internal CIPD package in src/DEPS.
+    source =
+        "//ash/webui/help_app_ui/resources/prod/help_app_bundle_resources.grd"
+  } else {
+    source = "//ash/webui/help_app_ui/resources/mock/help_app_bundle_mock_resources.grd"
+  }
+
+  use_brotli = true
+
+  # TODO(https://crbug.com/1164001): Prefix of outputs should be changed to ash
+  # when .grd from internal CIPD package is updated.
+  outputs = [
+    "grit/chromeos_help_app_bundle_resources.h",
+    "grit/chromeos_help_app_bundle_resources_map.cc",
+    "grit/chromeos_help_app_bundle_resources_map.h",
+    "chromeos_help_app_bundle_resources.pak",
+  ]
+  output_dir = "$root_gen_dir/chromeos"
+}
+
+grit("help_app_kids_magazine_bundle_resources") {
+  if (enable_cros_help_app) {
+    source = "//ash/webui/help_app_ui/resources/prod/help_app_kids_magazine_bundle_resources.grd"
+  } else {
+    source = "//ash/webui/help_app_ui/resources/mock/help_app_kids_magazine_bundle_mock_resources.grd"
+  }
+
+  use_brotli = true
+
+  # TODO(https://crbug.com/1164001): Prefix of outputs should be changed to ash
+  # when .grd from internal CIPD package is updated.
+  outputs = [
+    "grit/chromeos_help_app_kids_magazine_bundle_resources.h",
+    "grit/chromeos_help_app_kids_magazine_bundle_resources_map.cc",
+    "grit/chromeos_help_app_kids_magazine_bundle_resources_map.h",
+    "chromeos_help_app_kids_magazine_bundle_resources.pak",
+  ]
+  output_dir = "$root_gen_dir/chromeos"
+}
+
+# Resources used by chrome://media-app, and parts of the sandboxed app it hosts
+# that do not come from the app bundle (below).
+grit("media_app_resources") {
+  source = "//ash/webui/media_app_ui/resources/media_app_resources.grd"
+
+  outputs = [
+    "grit/ash_media_app_resources.h",
+    "ash_media_app_resources.pak",
+  ]
+  output_dir = "$root_gen_dir/ash"
+
+  use_brotli = true
+
+  deps = [
+    "//ash/webui/media_app_ui:mojo_bindings_js",
+    "//ash/webui/media_app_ui/resources/js:launch_rollup",
+    "//ash/webui/media_app_ui/resources/js:piex_rollup",
+    "//ash/webui/media_app_ui/resources/js:receiver_rollup",
+  ]
+}
+
+# Resources automatically served by the chrome://media-app bundle, obtained via DEPS.
+grit("media_app_bundle_resources") {
+  if (enable_cros_media_app) {
+    # Obtained via an internal CIPD package in src/DEPS.
+    source =
+        "//ash/webui/media_app_ui/resources/prod/media_app_bundle_resources.grd"
+  } else {
+    source = "//ash/webui/media_app_ui/resources/mock/media_app_bundle_mock_resources.grd"
+  }
+
+  use_brotli = true
+
+  # TODO(https://crbug.com/1164001): Prefix of outputs should be changed to ash
+  # when .grd from internal CIPD package is updated.
+  outputs = [
+    "grit/chromeos_media_app_bundle_resources.h",
+    "grit/chromeos_media_app_bundle_resources_map.cc",
+    "grit/chromeos_media_app_bundle_resources_map.h",
+    "chromeos_media_app_bundle_resources.pak",
+  ]
+  output_dir = "$root_gen_dir/chromeos"
+}
+
+grit("print_management_resources") {
+  source =
+      "//ash/webui/print_management/resources/print_management_resources.grd"
+
+  deps = [
+    "//ash/webui/print_management/mojom:mojom_js",
+    "//ash/webui/print_management/resources:web_components",
+  ]
+
+  outputs = [
+    "grit/ash_print_management_resources.h",
+    "grit/ash_print_management_resources_map.cc",
+    "grit/ash_print_management_resources_map.h",
+    "ash_print_management_resources.pak",
+  ]
+
+  output_dir = "$root_gen_dir/ash"
+}

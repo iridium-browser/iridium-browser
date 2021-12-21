@@ -1,0 +1,58 @@
+<style include="cr-hidden-style">
+  :host {
+    color: var(--cr-primary-text-color);
+    display: block;
+    font-size: 0.875rem;  /* 14px */
+    overflow-y: scroll;
+  }
+
+  #clusters,
+  #header {
+    margin: 0 auto;
+    max-width: var(--cluster-max-width);
+    min-width: var(--cluster-min-width);
+    padding: var(--first-cluster-padding-top) var(--cluster-padding-horizontal) 0;
+  }
+
+  #header {
+    font-size: 1.75rem;  /* 28px */
+  }
+</style>
+<div id="header" hidden="[[!result_.query]]">[[headerText_]]</div>
+<iron-list id="clusters"
+    items="[[result_.clusters]]"
+    on-remove-visits="onRemoveVisits_">
+  <template>
+    <history-cluster cluster="[[item]]" index="[[index]]"
+        tabindex$="[[tabIndex]]"
+        on-remove-cluster="onRemoveCluster_">
+    </history-cluster>
+  </template>
+</iron-list>
+<iron-scroll-threshold id="scrollThreshold"
+    lower-threshold="500" on-lower-threshold="onScrolledToBottom_">
+</iron-scroll-threshold>
+
+<cr-lazy-render id="confirmationDialog">
+  <template>
+    <cr-dialog consume-keydown-event on-cancel="onConfirmationDialogCancel_">
+      <div slot="title">$i18n{removeSelected}</div>
+      <div slot="body">$i18n{deleteWarning}</div>
+      <div slot="button-container">
+        <cr-button class="cancel-button" on-click="onCancelButtonClick_">
+          $i18n{cancel}
+        </cr-button>
+        <cr-button class="action-button" on-click="onRemoveButtonClick_">
+          $i18n{deleteConfirm}
+        </cr-button>
+      </div>
+    </cr-dialog>
+  </template>
+</cr-lazy-render>
+<cr-lazy-render id="confirmationToast">
+  <template>
+    <cr-toast duration="5000">
+      <div>$i18n{removeFromHistoryToast}</div>
+    </cr-toast>
+  </template>
+</cr-lazy-render>

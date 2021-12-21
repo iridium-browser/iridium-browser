@@ -1,0 +1,8 @@
+include_rules = [
+  "+components/crx_file",
+  "+components/update_client",
+  "+components/version_info",
+  "+services/service_manager/public",
+  "+ui",
+  "+url",
+]

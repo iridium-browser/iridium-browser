@@ -1,0 +1,27 @@
+From 60780034d9ef3d627b16725c197403a5fe1b6a27 Mon Sep 17 00:00:00 2001
+From: Andrew Grieve <agrieve@chromium.org>
+Date: Mon, 1 Feb 2021 15:09:52 -0500
+Subject: [PATCH 1/4] Statefull lambdas regress dex size.
+
+Bug: b/129997269
+---
+ src/main/java/com/android/tools/r8/ir/desugar/LambdaClass.java | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/main/java/com/android/tools/r8/ir/desugar/LambdaClass.java b/src/main/java/com/android/tools/r8/ir/desugar/LambdaClass.java
+index 3b5a40b65..ddb1d7955 100644
+--- a/src/main/java/com/android/tools/r8/ir/desugar/LambdaClass.java
++++ b/src/main/java/com/android/tools/r8/ir/desugar/LambdaClass.java
+@@ -145,7 +145,8 @@ public final class LambdaClass {
+   }
+ 
+   public final boolean isStateless() {
+-    return descriptor.isStateless();
++    return false;
++    // return descriptor.isStateless();
+   }
+ 
+   // Synthesize virtual methods.
+-- 
+2.32.0.288.g62a8d224e6-goog
+

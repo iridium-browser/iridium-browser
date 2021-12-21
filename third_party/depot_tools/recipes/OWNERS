@@ -1,0 +1,5 @@
+iannucci@google.com
+tandrii@google.com
+
+per-file README.recipes.md=*
+per-file recipes.py=recipe-mega-autoroller@chops-service-accounts.iam.gserviceaccount.com

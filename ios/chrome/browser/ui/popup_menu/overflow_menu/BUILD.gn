@@ -1,0 +1,45 @@
+# Copyright 2021 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/ios/swift_source_set.gni")
+
+source_set("overflow_menu") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  sources = [
+    "overflow_menu_mediator.h",
+    "overflow_menu_mediator.mm",
+  ]
+  deps = [
+    ":overflow_menu_swift",
+    "//ios/chrome/app/strings:ios_strings_grit",
+    "//ios/chrome/browser/policy",
+    "//ui/base",
+  ]
+}
+
+swift_source_set("overflow_menu_swift") {
+  sources = [
+    "overflow_menu_action.swift",
+    "overflow_menu_action_list.swift",
+    "overflow_menu_action_row.swift",
+    "overflow_menu_destination.swift",
+    "overflow_menu_model.swift",
+    "overflow_menu_view.swift",
+    "overflow_menu_view_provider.swift",
+  ]
+
+  frameworks = [
+    "Foundation.framework",
+    "SwiftUI.framework",
+  ]
+}
+
+source_set("feature_flags") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  sources = [
+    "feature_flags.h",
+    "feature_flags.mm",
+  ]
+  deps = [ "//base" ]
+}

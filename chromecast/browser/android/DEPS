@@ -1,0 +1,7 @@
+include_rules = [
+  "+components/embedder_support/android",
+  "+components/minidump_uploader",
+  "+content/public/android",
+  "+jni",
+  "+ui/android",
+]

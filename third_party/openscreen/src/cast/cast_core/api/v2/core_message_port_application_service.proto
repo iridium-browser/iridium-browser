@@ -1,0 +1,30 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+//
+// **** DO NOT EDIT - this file was automatically generated. ****
+syntax = "proto3";
+
+package cast.v2;
+
+import "cast/cast_core/api/bindings/api_bindings.proto";
+import "cast/cast_core/api/web/message_channel.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// This service runs in Cast Core for a particular app. It uses a MessagePort to
+// communicate with the app.
+service CoreMessagePortApplicationService {
+  // Posts messages between MessagePorts. MessagePorts are connected using other
+  // services (e.g. ApiBindings), then registered with the
+  // MessageConnectorService to communicate over IPC.
+  rpc PostMessage(cast.web.Message) returns (cast.web.MessagePortStatus);
+
+  // Gets the list of bindings to early-inject into javascript at page load.
+  rpc GetAll(cast.bindings.GetAllRequest)
+      returns (cast.bindings.GetAllResponse);
+
+  // Connects to a binding returned by GetAll.
+  rpc Connect(cast.bindings.ConnectRequest)
+      returns (cast.bindings.ConnectResponse);
+}

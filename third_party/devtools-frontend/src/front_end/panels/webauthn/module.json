@@ -1,0 +1,6 @@
+{
+  "dependencies": [
+    "ui/legacy/components/data_grid",
+    "ui/legacy"
+  ]
+}

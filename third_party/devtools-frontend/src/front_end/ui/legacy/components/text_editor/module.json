@@ -1,0 +1,10 @@
+{
+  "dependencies": [
+    "ui/legacy"
+  ],
+  "resources": [
+    "../../../../third_party/codemirror/codemirror.css",
+    "autocompleteTooltip.css",
+    "cmdevtools.css"
+  ]
+}

@@ -1,0 +1,199 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef ASH_APP_LIST_MODEL_SEARCH_SEARCH_RESULT_H_
+#define ASH_APP_LIST_MODEL_SEARCH_SEARCH_RESULT_H_
+
+#include <stddef.h>
+
+#include <memory>
+#include <string>
+#include <utility>
+#include <vector>
+
+#include "ash/app_list/model/app_list_model_export.h"
+#include "ash/public/cpp/app_list/app_list_types.h"
+#include "base/observer_list.h"
+#include "third_party/abseil-cpp/absl/types/optional.h"
+#include "ui/gfx/image/image_skia.h"
+#include "ui/gfx/range/range.h"
+
+namespace ui {
+class ImageModel;
+}  // namespace ui
+
+namespace ash {
+
+class SearchResultObserver;
+
+// SearchResult consists of an icon, title text and details text. Title and
+// details text can have tagged ranges that are displayed differently from
+// default style.
+class APP_LIST_MODEL_EXPORT SearchResult {
+ public:
+  using ResultType = ash::AppListSearchResultType;
+  using DisplayType = ash::SearchResultDisplayType;
+  using MetricsType = ash::SearchResultType;
+  using Tag = ash::SearchResultTag;
+  using Tags = ash::SearchResultTags;
+  using Action = ash::SearchResultAction;
+  using Actions = ash::SearchResultActions;
+  using DisplayIndex = ash::SearchResultDisplayIndex;
+  using OmniboxType = ash::SearchResultOmniboxDisplayType;
+  using IconInfo = ash::SearchResultIconInfo;
+  using IconShape = ash::SearchResultIconShape;
+
+  SearchResult();
+  SearchResult(const SearchResult&) = delete;
+  SearchResult& operator=(const SearchResult&) = delete;
+  virtual ~SearchResult();
+
+  const IconInfo& icon() const { return metadata_->icon; }
+  void SetIcon(const IconInfo& icon);
+
+  size_t IconDimension() const;
+
+  const gfx::ImageSkia& chip_icon() const { return metadata_->chip_icon; }
+  void SetChipIcon(const gfx::ImageSkia& chip_icon);
+
+  const ui::ImageModel& badge_icon() const { return metadata_->badge_icon; }
+  void SetBadgeIcon(const ui::ImageModel& badge_icon);
+
+  const std::u16string& title() const { return metadata_->title; }
+  void set_title(const std::u16string& title);
+
+  const Tags& title_tags() const { return metadata_->title_tags; }
+  void set_title_tags(const Tags& tags) { metadata_->title_tags = tags; }
+
+  const std::u16string& details() const { return metadata_->details; }
+  void set_details(const std::u16string& details) {
+    metadata_->details = details;
+  }
+
+  const Tags& details_tags() const { return metadata_->details_tags; }
+  void set_details_tags(const Tags& tags) { metadata_->details_tags = tags; }
+
+  const std::u16string& accessible_name() const {
+    return metadata_->accessible_name;
+  }
+  void set_accessible_name(const std::u16string& name) {
+    metadata_->accessible_name = name;
+  }
+
+  float rating() const { return metadata_->rating; }
+  void SetRating(float rating);
+
+  const std::u16string& formatted_price() const {
+    return metadata_->formatted_price;
+  }
+  void SetFormattedPrice(const std::u16string& formatted_price);
+
+  const absl::optional<GURL>& query_url() const { return metadata_->query_url; }
+  void set_query_url(const GURL& url) { metadata_->query_url = url; }
+
+  const absl::optional<std::string>& equivalent_result_id() const {
+    return metadata_->equivalent_result_id;
+  }
+  void set_equivalent_result_id(const std::string& equivalent_result_id) {
+    metadata_->equivalent_result_id = equivalent_result_id;
+  }
+
+  const std::string& id() const { return metadata_->id; }
+
+  double display_score() const { return metadata_->display_score; }
+  void set_display_score(double display_score) {
+    metadata_->display_score = display_score;
+  }
+
+  DisplayType display_type() const { return metadata_->display_type; }
+  void set_display_type(DisplayType display_type) {
+    metadata_->display_type = display_type;
+  }
+
+  ResultType result_type() const { return metadata_->result_type; }
+  void set_result_type(ResultType result_type) {
+    metadata_->result_type = result_type;
+  }
+
+  MetricsType metrics_type() const { return metadata_->metrics_type; }
+  void set_metrics_type(MetricsType metrics_type) {
+    metadata_->metrics_type = metrics_type;
+  }
+
+  DisplayIndex display_index() const { return metadata_->display_index; }
+  void set_display_index(DisplayIndex display_index) {
+    metadata_->display_index = display_index;
+  }
+
+  OmniboxType omnibox_type() const { return metadata_->omnibox_type; }
+  void set_omnibox_type(OmniboxType omnibox_type) {
+    metadata_->omnibox_type = omnibox_type;
+  }
+
+  float position_priority() const { return metadata_->position_priority; }
+  void set_position_priority(float position_priority) {
+    metadata_->position_priority = position_priority;
+  }
+
+  const Actions& actions() const { return metadata_->actions; }
+  void SetActions(const Actions& sets);
+
+  bool notify_visibility_change() const {
+    return metadata_->notify_visibility_change;
+  }
+
+  void set_notify_visibility_change(bool notify_visibility_change) {
+    metadata_->notify_visibility_change = notify_visibility_change;
+  }
+
+  bool is_omnibox_search() const { return metadata_->is_omnibox_search; }
+  void set_is_omnibox_search(bool is_omnibox_search) {
+    metadata_->is_omnibox_search = is_omnibox_search;
+  }
+
+  bool is_visible() const { return is_visible_; }
+  void set_is_visible(bool is_visible) { is_visible_ = is_visible; }
+
+  bool is_recommendation() const { return metadata_->is_recommendation; }
+  void set_is_recommendation(bool is_recommendation) {
+    metadata_->is_recommendation = is_recommendation;
+  }
+
+  bool use_badge_icon_background() const {
+    return metadata_->use_badge_icon_background;
+  }
+
+  void AddObserver(SearchResultObserver* observer);
+  void RemoveObserver(SearchResultObserver* observer);
+
+  // Invokes a custom action on the result. It does nothing by default.
+  virtual void InvokeAction(int action_index, int event_flags);
+
+  void SetMetadata(std::unique_ptr<SearchResultMetadata> metadata);
+  std::unique_ptr<SearchResultMetadata> TakeMetadata() {
+    return std::move(metadata_);
+  }
+  std::unique_ptr<SearchResultMetadata> CloneMetadata() const {
+    return std::make_unique<SearchResultMetadata>(*metadata_);
+  }
+
+ protected:
+  void set_id(const std::string& id) { metadata_->id = id; }
+
+ private:
+  friend class SearchController;
+
+  // Opens the result. Clients should use AppListViewDelegate::OpenSearchResult.
+  virtual void Open(int event_flags);
+
+  bool is_visible_ = true;
+
+  std::unique_ptr<SearchResultMetadata> metadata_;
+
+  base::ObserverList<SearchResultObserver> observers_;
+};
+
+}  // namespace ash
+
+#endif  // ASH_APP_LIST_MODEL_SEARCH_SEARCH_RESULT_H_

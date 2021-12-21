@@ -1,0 +1,47 @@
+import("//third_party/grpc/grpc_library.gni")
+import("//third_party/protobuf/proto_library.gni")
+
+# For .proto files without RPC definitions.
+template("cast_core_proto_library") {
+  proto_library(target_name + "_proto") {
+    proto_in_dir = "//third_party/cast_core/public/src"
+    proto_out_dir = "third_party/cast_core/public/src"
+    generate_python = false
+
+    # NOTE: For using built-in proto files like empty.proto.
+    import_dirs = [ "//third_party/protobuf/src" ]
+
+    forward_variables_from(invoker,
+                           [
+                             "deps",
+                             "sources",
+                           ])
+    if (!defined(deps)) {
+      deps = []
+    }
+    deps += [ "//third_party/cast_core/public/src/proto:base_protos" ]
+    extra_configs = [ "//third_party/cast_core/public/src/proto:force_local_well_known_protos" ]
+  }
+}
+
+# For .proto files with RPC definitions.
+template("cast_core_grpc_library") {
+  grpc_library(target_name + "_proto") {
+    proto_in_dir = "//third_party/cast_core/public/src"
+    proto_out_dir = "third_party/cast_core/public/src"
+
+    # NOTE: For using built-in proto files like empty.proto.
+    import_dirs = [ "//third_party/protobuf/src" ]
+
+    forward_variables_from(invoker,
+                           [
+                             "deps",
+                             "sources",
+                           ])
+    if (!defined(deps)) {
+      deps = []
+    }
+    deps += [ "//third_party/cast_core/public/src/proto:base_protos" ]
+    extra_configs = [ "//third_party/cast_core/public/src/proto:force_local_well_known_protos" ]
+  }
+}

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocol name="weston_direct_display">
+
+  <copyright>
+    Copyright © 2019 Collabora Ltd.
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the "Software"),
+    to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+    and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice (including the next
+    paragraph) shall be included in all copies or substantial portions of the
+    Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE SOFTWARE.
+  </copyright>
+
+  <interface name="weston_direct_display_v1" version="1">
+    <description summary="weston direct display">
+      Weston extension to instruct the compositor to avoid any import
+      of the dmabuf created by 'linux-dmabuf' protocol other than the display
+      controller.
+
+      Compositors are already going to use direct scan-out as much as possible but
+      there's no assurance that while doing so, they won't first import the dmabuf
+      in to the GPU. This extension assures the client that the compositor will
+      never attempt to import in to the GPU and pass it directly to the display
+      controller.
+
+      Clients can make use of this extension to pass the dmabuf buffer to the
+      display controller, potentially increasing the performance and lowering the
+      bandwidth usage.
+
+      Lastly, clients can make use of this extension in tandem with content-protection
+      one thus avoiding any GPU interaction and providing a secure-content path.
+      Also, in some cases, the memory where dmabuf are allocated are in specially
+      crafted memory zone which would be seen as an illegal memory access when the
+      GPU will attempt to read it.
+
+      WARNING: This interface by design might break screenshoting functionality
+      as compositing might be involved while doing that. Also, do note, that in
+      case the dmabufer provided can't be imported by KMS, the client connection
+      will be terminated.
+
+      WARNING: This extension requires 'linux-dmabuf' protocol and
+      'zwp_linux_buffer_params_v1' be already created by 'zwp_linux_buffer_v1'.
+    </description>
+
+    <request name="enable">
+      <description summary="forward buffer to display controller">
+      This request tells the compositor not to import the dmabuf to the GPU
+      in order to bypass it entirely, such that the buffer will be directly
+      scanned-out by the display controller. If HW is not capable/or there
+      aren't any available resources to directly scan-out the buffer, a
+      placeholder should be installed in-place by the compositor. The
+      compositor may perform checks on the dmabuf and refuse to create a
+      wl_buffer if the dmabuf seems unusable for being used directly.
+
+      Assumes that 'zwp_linux_buffer_params_v1' was already created
+      by 'zwp_linux_dmabuf_v1_create_params'.
+      </description>
+      <arg name="dmabuf" type="object" interface="zwp_linux_buffer_params_v1"
+           summary="enable direct-display for dmabuf buffer"/>
+    </request>
+
+    <request name="destroy" type="destructor">
+      <description summary="destroy factory object">
+        Destroys the factory object, but does not affect any other objects.
+      </description>
+    </request>
+  </interface>
+
+</protocol>

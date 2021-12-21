@@ -1,0 +1,96 @@
+// Copyright 2016 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// https://drafts.css-houdini.org/css-paint-api/#paintrenderingcontext2d
+
+[
+    Exposed=PaintWorklet
+] interface PaintRenderingContext2D {
+    // state
+    void save(); // push state on state stack
+    void restore(); // pop state stack if top state was pushed by save, and restore state
+    [RuntimeEnabled=Canvas2dLayers] void beginLayer(); // push state on state stack and creates bitmap for subsequent draw ops
+    [RuntimeEnabled=Canvas2dLayers] void endLayer(); // pop state stack if top state was pushed by beginLayer, restore state and draw the bitmap
+
+    // transformations (default transform is the identity matrix)
+    void scale(unrestricted double x, unrestricted double y);
+    [RuntimeEnabled=NewCanvas2DAPI] void scale(unrestricted double x, unrestricted double y, unrestricted double z);
+    void rotate(unrestricted double angle);
+    [RuntimeEnabled=NewCanvas2DAPI] void rotate3d(unrestricted double angleX, unrestricted double angleY, unrestricted double angleZ);
+    [RuntimeEnabled=NewCanvas2DAPI] void rotateAxis(unrestricted double axisX, unrestricted double axisY, unrestricted double axisZ, unrestricted double angle);
+    void translate(unrestricted double x, unrestricted double y);
+    [RuntimeEnabled=NewCanvas2DAPI] void translate(unrestricted double x, unrestricted double y, unrestricted double z);
+    [RuntimeEnabled=NewCanvas2DAPI] void perspective(unrestricted double length);
+    void transform(unrestricted double a, unrestricted double b, unrestricted double c, unrestricted double d, unrestricted double e, unrestricted double f);
+    [RuntimeEnabled=NewCanvas2DAPI] void transform(
+        unrestricted double m11, unrestricted double m12, unrestricted double m13, unrestricted double m14,
+        unrestricted double m21, unrestricted double m22, unrestricted double m23, unrestricted double m24,
+        unrestricted double m31, unrestricted double m32, unrestricted double m33, unrestricted double m34,
+        unrestricted double m41, unrestricted double m42, unrestricted double m43, unrestricted double m44
+    );
+    void setTransform(unrestricted double a, unrestricted double b, unrestricted double c, unrestricted double d, unrestricted double e, unrestricted double f);
+    void resetTransform();
+    [RaisesException] void setTransform(optional DOMMatrixInit transform = {});
+    DOMMatrix getTransform();
+
+
+    // compositing
+    attribute unrestricted double globalAlpha; // (default 1.0)
+    attribute DOMString globalCompositeOperation; // (default source-over)
+    [MeasureAs=Canvas2DFilter, SetterCallWith=ExecutionContext] attribute (DOMString or CanvasFilter)? filter; // (default 'none')
+
+    // image smoothing
+    attribute boolean imageSmoothingEnabled; // (default True)
+    [RuntimeEnabled=CanvasImageSmoothing] attribute ImageSmoothingQuality imageSmoothingQuality; // (default "low")
+
+    // colors and styles (see also the CanvasDrawingStyles interface)
+    attribute (DOMString or CanvasGradient or CanvasPattern or CSSColorValue) strokeStyle; // (default black)
+    attribute (DOMString or CanvasGradient or CanvasPattern or CSSColorValue) fillStyle; // (default black)
+    CanvasGradient createLinearGradient(double x0, double y0, double x1, double y1);
+    [RaisesException] CanvasGradient createRadialGradient(double x0, double y0, double r0, double x1, double y1, double r1);
+    [CallWith=ScriptState, RaisesException] CanvasPattern? createPattern(CanvasImageSource image, [TreatNullAs=EmptyString] DOMString repetitionType);
+
+    // shadows
+    attribute unrestricted double shadowOffsetX;
+    attribute unrestricted double shadowOffsetY;
+    attribute unrestricted double shadowBlur;
+    attribute DOMString shadowColor;
+
+    // rects
+    void clearRect(unrestricted double x, unrestricted double y, unrestricted double width, unrestricted double height);
+    void fillRect(unrestricted double x, unrestricted double y, unrestricted double width, unrestricted double height);
+    void strokeRect(unrestricted double x, unrestricted double y, unrestricted double width, unrestricted double height);
+
+    // path API (see also CanvasPath)
+    void beginPath();
+    void fill(optional CanvasFillRule winding);
+    void fill(Path2D path, optional CanvasFillRule winding);
+    void stroke();
+    void stroke(Path2D path);
+
+    void clip(optional CanvasFillRule winding);
+    void clip(Path2D path, optional CanvasFillRule winding);
+    [HighEntropy, Measure] boolean isPointInPath(unrestricted double x, unrestricted double y, optional CanvasFillRule winding);
+    [HighEntropy, Measure] boolean isPointInPath(Path2D path, unrestricted double x, unrestricted double y, optional CanvasFillRule winding);
+    [HighEntropy, Measure] boolean isPointInStroke(unrestricted double x, unrestricted double y);
+    [HighEntropy, Measure] boolean isPointInStroke(Path2D path, unrestricted double x, unrestricted double y);
+
+    // drawing images
+    [CallWith=ScriptState, RaisesException] void drawImage(CanvasImageSource image, unrestricted double x, unrestricted double y);
+    [CallWith=ScriptState, RaisesException] void drawImage(CanvasImageSource image, unrestricted double x, unrestricted double y, unrestricted double width, unrestricted double height);
+    [CallWith=ScriptState, RaisesException] void drawImage(CanvasImageSource image, unrestricted double sx, unrestricted double sy, unrestricted double sw, unrestricted double sh, unrestricted double dx, unrestricted double dy, unrestricted double dw, unrestricted double dh);
+
+    // FIXME: factor out to CanvasDrawingStyles
+    // line caps/joins
+    attribute unrestricted double lineWidth; // (default 1)
+    attribute DOMString lineCap; // "butt", "round", "square" (default "butt")
+    attribute DOMString lineJoin; // "round", "bevel", "miter" (default "miter")
+    attribute unrestricted double miterLimit; // (default 10)
+
+    // dashed lines
+    void setLineDash(sequence<unrestricted double> dash);
+    sequence<unrestricted double> getLineDash();
+    attribute unrestricted double lineDashOffset;
+};
+PaintRenderingContext2D includes CanvasPath;

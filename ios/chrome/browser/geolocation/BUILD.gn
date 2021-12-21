@@ -1,0 +1,44 @@
+# Copyright 2016 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+source_set("geolocation") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  sources = [
+    "omnibox_geolocation_controller.h",
+    "omnibox_geolocation_controller.mm",
+  ]
+  deps = [
+    "//base",
+    "//components/google/core/common",
+    "//components/prefs",
+    "//components/strings",
+    "//ios/chrome/app:tests_hook",
+    "//ios/chrome/app/strings",
+    "//ios/chrome/browser",
+    "//ios/chrome/browser/browser_state",
+    "//ios/chrome/browser/tabs",
+    "//ios/chrome/browser/ui/util",
+    "//ios/public/provider/chrome/browser",
+    "//ios/web/public",
+    "//ios/web/public/navigation",
+    "//ui/base",
+    "//url",
+  ]
+  frameworks = [ "CoreLocation.framework" ]
+}
+
+source_set("unit_tests") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  testonly = true
+  sources = [ "omnibox_geolocation_controller_unittest.mm" ]
+  deps = [
+    ":geolocation",
+    "//base",
+    "//components/prefs:test_support",
+    "//ios/chrome/test:test_support",
+    "//ios/public/provider/chrome/browser",
+    "//ios/testing:block_swizzler",
+    "//testing/gtest",
+  ]
+}

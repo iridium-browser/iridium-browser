@@ -1,0 +1,32 @@
+# Suppress sorting based on comment.
+
+# NOSORT
+sources = []
+
+# NOSORT
+sources = [
+  "a",
+]
+
+# NOSORT
+sources += [
+  "a",
+]
+
+# NOSORT
+# This is NOSORT because reason.
+sources = [
+  "z",
+  "z2",
+  "a",
+  "y.cc",
+]
+
+# This is NOSORT because reason:
+# NOSORT
+sources += [
+  "z",
+  "z2",
+  "a",
+  "y.cc",
+]

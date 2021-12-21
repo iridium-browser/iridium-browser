@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2014 The Chromium Authors. All rights reserved.
+     Use of this source code is governed by a BSD-style license that can be
+     found in the LICENSE file. -->
+
+<resources>
+    <declare-styleable name="HyperlinkPreference">
+        <!-- The URL to load when the preference is clicked -->
+        <attr name="url" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="BookmarkTextInputLayout">
+        <attr name="emptyErrorMessage" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="TileGridLayout">
+        <attr name="minHorizontalSpacing" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="ExploreSitesTileView">
+        <attr name="iconCornerRadius" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="SectionHeaderView">
+       <attr name="animatePaddingWhenDisabled" format="boolean"/>
+       <!-- This is used by the BadgeDrawable used by this view, declared here
+       because its attr definition is not part of the official Material
+       library release yet (1.4.0). This will be unread in public Chromium, but
+       public Chromium should not be triggering the code that makes this
+       necessary. -->
+       <attr name="badgeRadius" format="dimension"/>
+    </declare-styleable>
+</resources>

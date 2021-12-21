@@ -1,0 +1,13 @@
+#-name: Norsk litterær punktskrift, 6-punkt, kortskrift nivå 3
+#-index-name: Norwegian, contracted, grade 3
+#-display-name: Norwegian grade 3 contracted braille
+#
+#+locale:no
+#+type:literary
+#+direction:both
+#+dots:6
+#+contraction:full
+#+grade:3
+
+include no-no-g3.ctb
+include braille-patterns.cti

@@ -1,0 +1,14 @@
+include_rules = [
+  "+components/google/core",
+  "+components/pref_registry",
+  "+components/reporting",
+  "+components/strings/grit/components_strings.h",
+  "+components/url_formatter",
+  "+components/url_matcher",
+  "+components/version_info",
+  "+extensions/buildflags",
+  "+third_party/icu",
+  "+ui/base/l10n",
+  "+ui/base/resource",
+  "+ui/base/webui/web_ui_util.h",
+]

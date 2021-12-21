@@ -1,0 +1,14 @@
+{
+  "dependencies": [
+    "ui/legacy"
+  ],
+    "resources": [
+    "bezierEditor.css",
+    "colorSwatch.css",
+    "bezierSwatch.css",
+    "cssShadowSwatch.css",
+    "cssShadowEditor.css",
+    "fontEditor.css",
+    "swatchPopover.css"
+  ]
+}

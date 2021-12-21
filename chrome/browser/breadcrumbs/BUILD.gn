@@ -1,0 +1,32 @@
+# Copyright 2021 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+source_set("breadcrumbs") {
+  deps = [
+    "//base",
+    "//chrome/browser/profiles",
+    "//components/breadcrumbs/core",
+    "//components/keyed_service/content",
+    "//content/public/browser",
+  ]
+
+  sources = [
+    "breadcrumb_manager_keyed_service_factory.cc",
+    "breadcrumb_manager_keyed_service_factory.h",
+  ]
+}
+
+source_set("unit_tests") {
+  testonly = true
+  deps = [
+    ":breadcrumbs",
+    "//chrome/test:test_support",
+    "//components/breadcrumbs/core",
+    "//components/crash/core/common:crash_key",
+    "//content/test:test_support",
+    "//testing/gtest",
+  ]
+
+  sources = [ "crash_reporter_breadcrumb_observer_unittest.cc" ]
+}

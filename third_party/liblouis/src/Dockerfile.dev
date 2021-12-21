@@ -1,0 +1,29 @@
+FROM debian:jessie
+
+MAINTAINER Liblouis Maintainers "liblouis-liblouisxml@freelists.org"
+
+# developer environment
+RUN apt-get update
+RUN apt-get install -y make autoconf automake libtool pkg-config curl
+
+# for cross-compiling
+RUN apt-get install -y mingw32 mingw-w64 libc6-dev-i386
+
+# for running cross-compiled tests
+RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y wine32 wine64
+
+# for check_yaml
+WORKDIR /root/src/
+RUN curl -L https://github.com/yaml/libyaml/archive/0.2.2.tar.gz | tar zx
+WORKDIR /root/src/libyaml-0.2.2
+RUN ./bootstrap
+RUN ./configure --host i586-mingw32msvc --prefix=/root/build/win32/libyaml
+RUN make
+RUN make install
+
+ADD . /root/src/liblouis
+WORKDIR /root/src/liblouis
+
+# create Makefile
+RUN ./autogen.sh
+RUN ./configure

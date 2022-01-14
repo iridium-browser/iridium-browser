@@ -1,0 +1,165 @@
+#
+#  Copyright (C) 2019 by the Dutch Braille Authority <http://braille-autoriteit.org>
+#  Copyright (C) 2019 by Dedicon <http://www.dedicon.nl>
+#  Copyright (C) 2019 by Babbage B.V. <http://www.babbage.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# -------------------------------------------------------------------------------
+#
+#  Dutch Computer Braille as proposed to be used in Belgium and the Netherlands
+#  This braille table is currently in draft
+#  Please consult the Dutch Braille Authority website for more information
+#
+
+#-index-name: Dutch, computer, 8-dot
+#-display-name: Dutch 8-dot computer braille draft
+
+#+locale:nl
+#+type:computer
+#+dots:8
+#+direction:both
+#+version:2019.11.15
+
+include spaces.uti
+
+punctuation ! 235		exclamation mark
+punctuation " 2356		quotation mark
+punctuation # 3456		number sign
+sign $ 1458		dollar sign
+sign % 123456		percent sign
+sign & 12346		ampersand
+sign ' 3		apostrophe
+sign ( 236		left parenthesis
+sign ) 356		right parenthesis
+sign * 35		asterisk
+math + 2358		plus sign
+punctuation , 2		comma
+math - 36		hyphen-minus
+punctuation . 256		full stop
+sign / 34		solidus
+
+include digits6DotsPlusDot6.uti
+
+punctuation : 25		colon
+punctuation ; 23		semicolon
+math < 358		less-than sign
+math = 23568		equals sign
+math > 267		greater-than sign
+punctuation ? 26		question mark
+sign @ 345		commercial at
+
+include latinLetterDef8Dots.uti
+
+sign [ 12356		left square bracket
+sign \\ 167		reverse solidus
+sign ] 23456		right square bracket
+sign ^ 3467		circumflex accent
+sign _ 456		low line
+sign ` 6		grave accent
+sign { 23678		left curly bracket
+sign | 4568		vertical line
+sign } 35678		right curly bracket
+sign ~ 268		tilde
+punctuation ¡ 12478		inverted exclamation mark
+sign £ 12348		pound sign
+sign ¤ 13468		currency sign
+sign ¥ 134568		yen sign
+sign ¦ 458		broken bar
+sign § 578		section sign
+sign ¨ 4		diaeresis
+sign © 148		copyright sign
+noback sign « 2378		left-pointing double angle quotation mark
+sign ¬ 25678		not sign
+replace ­		# soft hyphen
+sign ® 12358		registered sign
+sign ° 12458		degree sign
+math ± 23578		plus-minus sign
+sign ² 1278		superscript two
+sign ³ 1478		superscript three
+sign ´ 8		acute accent
+sign µ 1348		micro sign
+sign ¶ 7		pilcrow sign
+sign · 5		middle dot
+sign ¸ 28		cedilla
+noback sign » 5678		right-pointing double angle quotation mark
+sign ¼ 12567		vulgar fraction one quarter
+sign ½ 1238		vulgar fraction one half
+sign ¾ 124567		vulgar fraction three quarters
+punctuation ¿ 1578		inverted question mark
+uplow Àà 1235678,123568		Latin letter a with grave
+uplow Áá 178,18		Latin letter a with acute
+uplow Ââ 1678,168		Latin letter a with circumflex
+uplow Ãã 478,48		Latin letter a with tilde
+uplow Ää 34578,3458		Latin letter a with diaeresis
+uplow Ææ 1378,138		Latin letter ae
+uplow Çç 1234678,123468		Latin letter c with cedilla
+uplow Èè 234678,23468	Latin letter e with grave
+uplow Éé 12345678,1234568		Latin letter e with acute
+uplow Êê 12678,1268		Latin letter e with circumflex
+uplow Ëë 124678,12468		Latin letter e with diaeresis
+uplow Ìì 2478,248		Latin letter i with grave
+uplow Íí 3478,348		Latin letter i with acute
+uplow Îî 14678,1468		Latin letter i with circumflex
+uplow Ïï 1245678,124568		Latin letter i with diaeresis
+uplow Ññ 134578,13458		Latin letter n with tilde
+uplow Òò 13578,1358		Latin letter o with grave
+uplow Óó 34678,3468		Latin letter o with acute
+uplow Ôô 145678,14568		Latin letter o with circumflex
+uplow Õõ 24578,2458		Latin letter o with tilde
+uplow Öö 24678,2468		Latin letter o with diaeresis
+math × 2368		multiplication sign
+uplow Øø 135678,13568		Latin letter o with stroke
+uplow Ùù 2345678,234568		Latin letter u with grave
+uplow Úú 13678,1368		Latin letter u with acute
+uplow Ûû 15678,1568		Latin letter u with circumflex
+uplow Üü 125678,12568		Latin letter u with diaeresis
+letter ß 2346		Latin small letter sharp s
+math ÷ 2568		division sign
+uplow Œœ 245678,24568		latin ligature oe
+sign – 367		en dash
+sign — 78		em dash
+sign ‘ 378		left single quotation mark
+sign ’ 678		right single quotation mark
+sign ‚ 67		single low-9 quotation mark
+sign “ 2378		left double quotation mark
+sign ” 5678		right double quotation mark
+sign „ 2367		double low-9 quotation mark
+sign † 2357		dagger
+sign • 3678		bullet
+punctuation … 2567		horizontal ellipsis
+sign ‰ 1234567		per mille sign
+math ′ 38		prime
+noback sign ‹ 378		single left-pointing angle quotation mark
+noback sign › 678		single right-pointing angle quotation mark
+sign € 158		euro sign
+sign ™ 23458		trade mark sign
+sign ← 2348		leftwards arrow
+sign ↑ 134678
+sign → 1567		rightwards arrow
+sign ↓ 124578		downwards arrow
+noback sign ⇒ 3678		rightwards double arrow
+noback sign ⇨ 3678		rightwards white arrow
+math − 368		minus sign
+noback sign ■ 3678		black square
+noback sign ♣ 3678		black club suit
+noback sign ♦ 3678		black diamond suit
+noback sign ✔ 3678		heavy check mark
+noback sign ❖ 3678		black diamond minus white x
+noback sign ➢ 3678		three-d top-lighted rightwards arrowhead
+
+include braille-patterns.cti

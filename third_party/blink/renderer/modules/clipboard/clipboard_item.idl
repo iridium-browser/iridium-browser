@@ -1,0 +1,18 @@
+// Copyright 2019 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// https://w3c.github.io/clipboard-apis/#clipboard-interface
+
+[
+  SecureContext,
+  Exposed=Window
+] interface ClipboardItem {
+  [RaisesException] constructor(record<DOMString, Blob> items,
+              optional ClipboardItemOptions options = {});
+  readonly attribute FrozenArray<DOMString> types;
+
+  [
+    CallWith=ScriptState
+  ] Promise<Blob> getType(DOMString type);
+};

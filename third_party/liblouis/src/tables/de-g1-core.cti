@@ -1,0 +1,32 @@
+# liblouis: German grade 1 braille
+#
+#  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-------------------------------------------------------------------------------
+
+include de-g1-core-patterns.dic
+
+nocross    au         16                           # 1 #
+nocross    eu         126                          # 2 #
+nocross    ei         146                          # 3 #
+nocross    ch         1456                         # 4 #
+nocross    sch        156                          # 5 #
+nocross    st         23456                        # ] #
+nocross    äu         34                           # \ #
+nocross    ie         346                          # 0 #

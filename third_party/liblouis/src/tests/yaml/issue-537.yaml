@@ -1,0 +1,26 @@
+# https://github.com/liblouis/liblouis/issues/537
+
+table: |
+  include tables/braille-patterns.cti
+  letter \x4EA4 13-246-3
+  letter \x6A02 14-2346-5
+  letter \x97FF 15-46-4
+  noback context "\x4EA4\x97FF"["\x6A02"] @236-5
+
+tests:
+  - - 交
+    - ⠅⠪⠄
+    - outputPos: [0]
+      inputPos: [0,0,0]
+  - - 響
+    - ⠑⠨⠈
+    - outputPos: [0]
+      inputPos: [0,0,0]
+  - - 樂
+    - ⠉⠮⠐
+    - outputPos: [0]
+      inputPos: [0,0,0]
+  - - 交響樂
+    - ⠅⠪⠄⠑⠨⠈⠦⠐
+    - outputPos: [0,3,6]
+      inputPos: [0,0,0,1,1,1,2,2]

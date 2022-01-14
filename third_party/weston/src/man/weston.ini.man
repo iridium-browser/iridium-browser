@@ -1,0 +1,663 @@
+.\" shorthand for double quote that works everywhere.
+.ds q \N'34'
+.TH weston.ini 5 "2019-03-26" "Weston @version@"
+.SH NAME
+weston.ini \- configuration file for
+.B Weston
+\- the reference Wayland
+compositor
+.SH INTRODUCTION
+.B Weston
+obtains configuration from its command line parameters and the configuration
+file described here.
+.SH DESCRIPTION
+.B Weston
+uses a configuration file called
+.I weston.ini
+for its setup.
+The
+.I weston.ini
+configuration file is searched for in one of the following places when the
+server is started:
+.PP
+.RS 4
+.nf
+.BR "$XDG_CONFIG_HOME/weston.ini   " "(if $XDG_CONFIG_HOME is set)"
+.BR "$HOME/.config/weston.ini      " "(if $HOME is set)"
+.B  "weston/weston.ini in each"
+.BR "\ \ \ \ $XDG_CONFIG_DIR           " "(if $XDG_CONFIG_DIRS is set)"
+.BR "/etc/xdg/weston/weston.ini    " "(if $XDG_CONFIG_DIRS is not set)"
+.fi
+.RE
+.PP
+where environment variable
+.B $HOME
+is the user's home directory, and
+.B $XDG_CONFIG_HOME
+is the user specific configuration directory, and
+.B $XDG_CONFIG_DIRS
+is a colon
+.B ':'
+delimited listed of configuration base directories, such as
+.BR /etc/xdg-foo:/etc/xdg .
+.PP
+The
+.I weston.ini
+file is composed of a number of sections which may be present in any order, or
+omitted to use default configuration values. Each section has the form:
+.PP
+.RS 4
+.nf
+.BI [ SectionHeader ]
+.RI Key1=Value1
+.RI Key2=Value2
+    ...
+.fi
+.RE
+.PP
+The spaces are significant.
+Comment lines are ignored:
+.PP
+.RS 4
+.nf
+.IR "#comment"
+.fi
+.RE
+.PP
+The section headers are:
+.PP
+.RS 4
+.nf
+.BR "core           " "The core modules and options"
+.BR "libinput       " "Input device configuration"
+.BR "shell          " "Desktop customization"
+.BR "launcher       " "Add launcher to the panel"
+.BR "output         " "Output configuration"
+.BR "input-method   " "Onscreen keyboard input"
+.BR "keyboard       " "Keyboard layouts"
+.BR "terminal       " "Terminal application options"
+.BR "xwayland       " "XWayland options"
+.BR "screen-share   " "Screen sharing options"
+.fi
+.RE
+.PP
+Possible value types are string, signed and unsigned 32-bit
+integer, and boolean. Strings must not be quoted, do not support any
+escape sequences, and run till the end of the line. Integers can
+be given in decimal (e.g. 123), octal (e.g. 0173), and hexadecimal
+(e.g. 0x7b) form. Boolean values can be only 'true' or 'false'.
+.RE
+.SH "CORE SECTION"
+The
+.B core
+section is used to select the startup compositor modules and general options.
+.TP 7
+.BI "shell=" desktop-shell.so
+specifies a shell to load (string). This can be used to load your own
+implemented shell or one with Weston as default. Available shells
+in the
+.IR "@weston_modules_dir@"
+directory are:
+.PP
+.RS 10
+.nf
+.BR desktop-shell.so
+.fi
+.RE
+.TP 7
+.BI "xwayland=" true
+ask Weston to load the XWayland module (boolean).
+.RE
+.TP 7
+.BI "modules=" cms-colord.so,screen-share.so
+specifies the modules to load (string). Available modules in the
+.IR "@weston_modules_dir@"
+directory are:
+.PP
+.RS 10
+.nf
+.BR cms-colord.so
+.BR screen-share.so
+.fi
+.RE
+.TP 7
+.BI "backend=" headless-backend.so
+overrides defaults backend. Available backend modules in the
+.IR "@libweston_modules_dir@"
+directory are:
+.PP
+.RS 10
+.nf
+.BR drm-backend.so
+.BR fbdev-backend.so
+.BR headless-backend.so
+.BR rdp-backend.so
+.BR wayland-backend.so
+.BR x11-backend.so
+.fi
+.RE
+.TP 7
+.BI "repaint-window=" N
+Set the approximate length of the repaint window in milliseconds. The repaint
+window is used to control and reduce the output latency for clients. If the
+window is longer than the output refresh period, the repaint will be done
+immediately when the previous repaint finishes, not processing client requests
+in between. If the repaint window is too short, the compositor may miss the
+target vertical blank, increasing output latency. The default value is 7
+milliseconds. The allowed range is from -10 to 1000 milliseconds. Using a
+negative value will force the compositor to always miss the target vblank.
+.TP 7
+.BI "gbm-format="format
+sets the GBM format used for the framebuffer for the GBM backend. Can be
+.B xrgb8888,
+.B xrgb2101010,
+.B rgb565.
+By default, xrgb8888 is used.
+.RS
+.PP
+.RE
+.TP 7
+.BI "idle-time="seconds
+sets Weston's idle timeout in seconds. This idle timeout is the time
+after which Weston will enter an "inactive" mode and screen will fade to
+black. A value of 0 disables the timeout.
+
+.IR Important
+: This option may also be set via Weston's '-i' command
+line option and will take precedence over the current .ini option. This
+means that if both weston.ini and command line define this idle-timeout
+time, the one specified in the command-line will be used. On the other
+hand, if none of these sets the value, default idle timeout will be
+set to 300 seconds.
+.RS
+.PP
+.RE
+.TP 7
+.BI "require-input=" true
+require an input device for launch
+.TP 7
+.BI "pageflip-timeout="milliseconds
+sets Weston's pageflip timeout in milliseconds.  This sets a timer to exit
+gracefully with a log message and an exit code of 1 in case the DRM driver is
+non-responsive.  Setting it to 0 disables this feature.
+.TP 7
+.BI "wait-for-debugger=" true
+Raises SIGSTOP before initializing the compositor. This allows the user to
+attach with a debugger and continue execution by sending SIGCONT. This is
+useful for debugging a crash on start-up when it would be inconvenient to
+launch weston directly from a debugger. Boolean, defaults to
+.BR false .
+There is also a command line option to do the same.
+.TP 7
+.BI "remoting="remoting-plugin.so
+specifies a plugin for remote output to load (string). This can be used to load
+your own implemented remoting plugin or one with Weston as default. Available
+remoting plugins in the
+.IR "__libweston_modules_dir__"
+directory are:
+.PP
+.RS 10
+.nf
+.BR remoting-plugin.so
+.fi
+.RE
+.TP 7
+.BI "use-pixman=" true
+Enables pixman-based rendering for all outputs on backends that support it.
+Boolean, defaults to
+.BR false .
+There is also a command line option to do the same.
+
+.SH "LIBINPUT SECTION"
+The
+.B libinput
+section is used to configure input devices when using the libinput input device
+backend. The defaults are determined by libinput and vary according to what is
+most sensible for any given device.
+.PP
+Available configuration are:
+.TP 7
+.BI "enable-tap=" false
+Enables tap to click on touchpad devices.
+.TP 7
+.BI "tap-and-drag=" false
+For touchpad devices with \fBenable-tap\fR enabled. If the user taps, then
+taps a second time, this time holding, the virtual mouse button stays down for
+as long as the user keeps their finger on the touchpad, allowing the user to
+click and drag with taps alone.
+.TP 7
+.BI "tap-and-drag-lock=" false
+For touchpad devices with \fBenable-tap\fR and \fBtap-and-drag\fR enabled.
+In the middle of a tap-and-drag, if the user releases the touchpad for less
+than a certain number of milliseconds, then touches it again, the virtual mouse
+button will remain pressed and the drag can continue.
+.TP 7
+.BI "disable-while-typing=" true
+For devices that may be accidentally triggered while typing on the keyboard,
+causing a disruption of the typing.  Disables them while the keyboard is in
+use.
+.TP 7
+.BI "middle-button-emulation=" false
+For pointer devices with left and right buttons, but no middle button.  When
+enabled, a middle button event is emitted when the left and right buttons are
+pressed simultaneously.
+.TP 7
+.BI "left-handed=" false
+Configures the device for use by left-handed people. Exactly what this option
+does depends on the device. For pointers with left and right buttons, the
+buttons are swapped. On tablets, the tablet is logically turned upside down,
+because it will be physically turned upside down.
+.TP 7
+.BI "rotation=" n
+Changes the direction of the logical north, rotating it \fIn\fR degrees
+clockwise away from the default orientation, where \fIn\fR is a whole
+number between 0 and 359 inclusive. Needed for trackballs, mainly. Allows the
+user to orient the trackball sideways, for example.
+.TP 7
+.BI "accel-profile=" "{flat,adaptive}"
+Set the pointer acceleration profile. The pointer's screen speed is
+proportional to the physical speed with a certain constant of proportionality.
+Call that constant alpha. \fIflat\fR keeps alpha fixed. See \fBaccel-speed\fR.
+\fIadaptive\fR causes alpha to increase with physical speed, giving the user
+more control when the speed is slow, and more reach when the speed is high.
+\fIadaptive\fR is the default.
+.TP 7
+.BI "accel-speed=" v
+If \fBaccel-profile\fR is set to \fIflat\fR, it simply sets the value of alpha.
+If \fBaccel-profile\fR is set to \fIadaptive\fR, the effect is more
+complicated, but generally speaking, it will change the pointer's speed.
+\fIv\fR is normalised and must lie in the range [-1, 1]. The exact mapping
+between \fIv\fR and alpha is hardware-dependent, but higher values cause higher
+cursor speeds.
+.TP 7
+.BI "natural-scroll=" false
+Enables natural scrolling, mimicking the behaviour of touchscreen scrolling.
+That is, if the wheel, finger, or fingers are moved down, the surface is
+scrolled up instead of down, as if the finger, or fingers were in contact with
+the surface being scrolled.
+.TP 7
+.BI "scroll-method=" {two-finger,edge,button,none}
+Sets the scroll method. \fItwo-finger\fR scrolls with two fingers on a
+touchpad. \fIedge\fR scrolls with one finger on the right edge of a touchpad.
+\fIbutton\fR scrolls when the pointer is moved while a certain button is
+pressed. See \fBscroll-button\fR. \fInone\fR disables scrolling altogether.
+.TP 7
+.BI "scroll-button=" {BTN_LEFT,BTN_RIGHT,BTN_MIDDLE,...}
+For devices with \fBscroll-method\fR set to \fIbutton\fR. Specifies the
+button that will trigger scrolling. See /usr/include/linux/input-event-codes.h
+for the complete list of possible values.
+.TP 7
+.BI "touchscreen_calibrator=" true
+Advertise the touchscreen calibrator interface to all clients. This is a
+potential denial-of-service attack vector, so it should only be enabled on
+trusted userspace. Boolean, defaults to
+.BR false .
+
+The interface is required for running touchscreen calibrator applications. It
+provides the application raw touch events, bypassing the normal touch handling.
+It also allows the application to upload a new calibration into the compositor.
+
+Even though this option is listed in the libinput section, it does affect all
+Weston configurations regardless of the used backend. If the backend does not
+use libinput, the interface can still be advertised, but it will not list any
+devices.
+.TP 7
+.BI "calibration_helper=" /bin/echo
+An optional calibration helper program to permanently save a new touchscreen
+calibration. String, defaults to unset.
+
+The given program will be executed with seven arguments when a calibrator
+application requests the server to take a new calibration matrix into use.
+The program is executed synchronously and will therefore block Weston for its
+duration. If the program exit status is non-zero, Weston will not apply the
+new calibration. If the helper is unset or the program exit status is zero,
+Weston will use the new calibration immediately.
+
+The program is invoked as:
+.PP
+.RS 10
+.I calibration_helper syspath m1 m2 m3 m4 m5 m6
+.RE
+.RS
+.PP
+.RI "where " syspath
+is the udev sys path for the device and
+.IR m1 "  through " m6
+are the calibration matrix elements in libinput's
+.BR LIBINPUT_CALIBRATION_MATRIX " udev property format."
+The sys path is an absolute path and starts with the sys mount point.
+.RE
+
+.SH "SHELL SECTION"
+The
+.B shell
+section is used to customize the compositor. Some keys may not be handled by
+different shell plugins.
+.PP
+The entries that can appear in this section are:
+.TP 7
+.BI "client=" file
+sets the path for the shell client to run. If not specified
+.I @weston_shell_client@
+is launched (string).
+.TP 7
+.BI "background-image=" file
+sets the path for the background image file (string).
+.TP 7
+.BI "background-type=" tile
+determines how the background image is drawn (string). Can be
+.BR centered ", " scale ", " scale-crop " or " tile " (default)."
+Centered shows the image once centered. If the image is smaller than the
+output, the rest of the surface will be in background color. If the image
+size does fit the output it will be cropped left and right, or top and bottom.
+Scale means scaled to fit the output precisely, not preserving aspect ratio.
+Scale-crop preserves aspect ratio, scales the background image just big
+enough to cover the output, and centers it. The image ends up cropped from
+left and right, or top and bottom, if the aspect ratio does not match the
+output. Tile repeats the background image to fill the output.
+.TP 7
+.BI "background-color=" 0xAARRGGBB
+sets the color of the background (unsigned integer). The hexadecimal
+digit pairs are in order alpha, red, green, and blue.
+.TP 7
+.BI "clock-format=" format
+sets the panel clock format (string). Can be
+.BR "none" ","
+.BR "minutes" ","
+.BR "seconds" "."
+By default, minutes format is used.
+.TP 7
+.BI "panel-color=" 0xAARRGGBB
+sets the color of the panel (unsigned integer). The hexadecimal
+digit pairs are in order transparency, red, green, and blue. Examples:
+.PP
+.RS 10
+.nf
+.BR "0xffff0000    " "Red"
+.BR "0xff00ff00    " "Green"
+.BR "0xff0000ff    " "Blue"
+.BR "0x00ffffff    " "Fully transparent"
+.fi
+.RE
+.TP 7
+.BI "panel-position=" top
+sets the position of the panel (string). Can be
+.B top,
+.B bottom,
+.B left,
+.B right,
+.B none.
+.TP 7
+.BI "locking=" true
+enables screen locking (boolean).
+.TP 7
+.BI "animation=" zoom
+sets the effect used for opening new windows (string). Can be
+.B zoom,
+.B fade,
+.B none.
+By default, no animation is used.
+.TP 7
+.BI "close-animation=" fade
+sets the effect used when closing windows (string). Can be
+.B fade,
+.B none.
+By default, the fade animation is used.
+.TP 7
+.BI "startup-animation=" fade
+sets the effect used for opening new windows (string). Can be
+.B fade,
+.B none.
+By default, the fade animation is used.
+.TP 7
+.BI "focus-animation=" dim-layer
+sets the effect used with the focused and unfocused windows. Can be
+.B dim-layer,
+.B none.
+By default, no animation is used.
+.TP 7
+.BI "allow-zap=" true
+whether the shell should quit when the Ctrl-Alt-Backspace key combination is
+pressed
+.TP 7
+.BI "binding-modifier=" ctrl
+sets the modifier key used for common bindings (string), such as moving
+surfaces, resizing, rotating, switching, closing and setting the transparency
+for windows, controlling the backlight and zooming the desktop. See
+.BR weston-bindings (7).
+Possible values: none, ctrl, alt, super (default)
+.TP 7
+.BI "num-workspaces=" 6
+defines the number of workspaces (unsigned integer). The user can switch
+workspaces by using the
+binding+F1, F2 keys. If this key is not set, fall back to one workspace.
+.TP 7
+.BI "cursor-theme=" theme
+sets the cursor theme (string).
+.TP 7
+.BI "cursor-size=" 24
+sets the cursor size (unsigned integer).
+.TP 7
+.BI "lockscreen-icon=" path
+sets the path to lock screen icon image (string). (tablet shell only)
+.TP 7
+.BI "lockscreen=" path
+sets the path to lock screen background image (string). (tablet shell only)
+.TP 7
+.BI "homescreen=" path
+sets the path to home screen background image (string). (tablet shell only)
+.RE
+.SH "LAUNCHER SECTION"
+There can be multiple launcher sections, one for each launcher.
+.TP 7
+.BI "icon=" icon
+sets the path to icon image (string). Svg images are not currently supported.
+.TP 7
+.BI "path=" program
+sets the path to the program that is run by clicking on this launcher (string).
+It is possible to pass arguments and environment variables to the program. For
+example:
+.nf
+.in +4n
+
+path=GDK_BACKEND=wayland gnome-terminal --full-screen
+.in
+.fi
+.PP
+.SH "OUTPUT SECTION"
+There can be multiple output sections, each corresponding to one output. It is
+currently only recognized by the drm and x11 backends.
+.TP 7
+.BI "name=" name
+sets a name for the output (string). The backend uses the name to
+identify the output. All X11 output names start with a letter X.  All
+Wayland output names start with the letters WL.  The available
+output names for DRM backend are listed in the
+.B "weston-launch(1)"
+output.
+Examples of usage:
+.PP
+.RS 10
+.nf
+.BR "LVDS1    " "DRM backend, Laptop internal panel no.1"
+.BR "VGA1     " "DRM backend, VGA connector no.1"
+.BR "X1       " "X11 backend, X window no.1"
+.BR "WL1      " "Wayland backend, Wayland window no.1"
+.fi
+.RE
+.RS
+.PP
+See
+.B "weston-drm(7)"
+for more details.
+.RE
+.TP 7
+.BI "mode=" mode
+sets the output mode (string). The mode parameter is handled differently
+depending on the backend. On the X11 backend, it just sets the WIDTHxHEIGHT of
+the weston window.
+The DRM backend accepts different modes, along with an option of a modeline string.
+
+See
+.B "weston-drm(7)"
+for examples of modes-formats supported by DRM backend.
+.RE
+.TP 7
+.BI "transform=" normal
+How you have rotated your monitor from its normal orientation (string).
+The transform key can be one of the following 8 strings:
+.PP
+.RS 10
+.nf
+.BR  "normal               " "Normal output."
+.BR  "rotate-90            " "90 degrees clockwise."
+.BR  "rotate-180           " "Upside down."
+.BR  "rotate-270           " "90 degrees counter clockwise."
+.BR  "flipped              " "Horizontally flipped"
+.BR  "flipped-rotate-90    " "Flipped and 90 degrees clockwise"
+.BR  "flipped-rotate-180   " "Flipped and upside down"
+.BR  "flipped-rotate-270   " "Flipped and 90 degrees counter clockwise"
+.fi
+.RE
+.TP 7
+.BI "scale=" factor
+The scaling multiplier applied to the entire output, in support of high
+resolution ("HiDPI" or "retina") displays, that roughly corresponds to the
+pixel ratio of the display's physical resolution to the logical resolution.
+Applications that do not support high resolution displays typically appear tiny
+and unreadable. Weston will scale the output of such applications by this
+multiplier, to make them readable. Applications that do support their own output
+scaling can draw their content in high resolution, in which case they avoid
+compositor scaling. Weston will not scale the output of such applications, and
+they are not affected by this multiplier.
+.RE
+.RS
+.PP
+An integer, 1 by default, typically configured as 2 or higher when needed,
+denoting the scaling multiplier for the output.
+.RE
+.TP 7
+.BI "seat=" name
+The logical seat name that this output should be associated with. If this
+is set then the seat's input will be confined to the output that has the seat
+set on it. The expectation is that this functionality will be used in a
+multiheaded environment with a single compositor for multiple output and input
+configurations. The default seat is called "default" and will always be
+present. This seat can be constrained like any other.
+.RE
+.TP 7
+.BI "allow_hdcp=" true
+Allows HDCP support for this output. If set to true, HDCP can be tried for the
+content-protection, provided by the backends, on this output. By
+default, HDCP support is always allowed for an output. The
+content-protection can actually be realized, only if the hardware
+(source and sink) support HDCP, and the backend has the implementation
+of content-protection protocol. Currently, HDCP is supported by drm-backend.
+.RE
+.TP 7
+.BI "app-ids=" app-id[,app_id]*
+A comma separated list of the IDs of applications to place on this output.
+These IDs should match the application IDs as set with the xdg_shell.set_app_id
+request. Currently, this option is supported by kiosk-shell.
+.RE
+.SH "INPUT-METHOD SECTION"
+.TP 7
+.BI "path=" "@weston_libexecdir@/weston-keyboard"
+sets the path of the on screen keyboard input method (string).
+.RE
+.RE
+.SH "KEYBOARD SECTION"
+This section contains the following keys:
+.TP 7
+.BI "keymap_rules=" "evdev"
+sets the keymap rules file (string). Used to map layout and model to input
+device.
+.RE
+.RE
+.TP 7
+.BI "keymap_model=" "pc105"
+sets the keymap model (string). See the Models section in
+.B "xkeyboard-config(7)."
+.RE
+.RE
+.TP 7
+.BI "keymap_layout=" "us,de,gb"
+sets the comma separated list of keyboard layout codes (string). See the
+Layouts section in
+.B "xkeyboard-config(7)."
+.RE
+.RE
+.TP 7
+.BI "keymap_variant=" "euro,,intl"
+sets the comma separated list of keyboard layout variants (string). The number
+of variants must be the same as the number of layouts above. See the Layouts
+section in
+.B "xkeyboard-config(7)."
+.RE
+.RE
+.TP 7
+.BI "keymap_options=" "grp:alt_shift_toggle,grp_led:scroll"
+sets the keymap options (string). See the Options section in
+.B "xkeyboard-config(7)."
+.RE
+.RE
+.TP 7
+.BI "repeat-rate=" "40"
+sets the rate of repeating keys in characters per second (unsigned integer)
+.RE
+.RE
+.TP 7
+.BI "repeat-delay=" "400"
+sets the delay in milliseconds since key down until repeating starts (unsigned
+integer)
+.RE
+.RE
+.TP 7
+.BI "numlock-on=" "false"
+sets the default state of the numlock on weston startup for the backends which
+support it.
+.RE
+.RE
+.TP 7
+.BI "vt-switching=" "true"
+Whether to allow the use of Ctrl+Alt+Fn key combinations to switch away from
+the compositor's virtual console.
+.RE
+.RE
+.SH "TERMINAL SECTION"
+Contains settings for the weston terminal application (weston-terminal). It
+allows to customize the font and shell of the command line interface.
+.TP 7
+.BI "font=" "DejaVu Sans Mono"
+sets the font of the terminal (string). For a good experience it is recommended
+to use monospace fonts. In case the font is not found, the default one is used.
+.RE
+.RE
+.TP 7
+.BI "font-size=" "14"
+sets the size of the terminal font (unsigned integer).
+.RE
+.RE
+.TP 7
+.BI "term=" "xterm-256color"
+The terminal shell (string). Sets the $TERM variable.
+.RE
+.RE
+.SH "XWAYLAND SECTION"
+.TP 7
+.BI "path=" "@xserver_path@"
+sets the path to the xserver to run (string).
+.RE
+.RE
+.SH "SCREEN-SHARE SECTION"
+.TP 7
+.BI "command=" "@weston_bindir@/weston --backend=rdp-backend.so \
+--shell=fullscreen-shell.so --no-clients-resize"
+sets the command to start a fullscreen-shell server for screen sharing (string).
+.RE
+.RE
+.SH "SEE ALSO"
+.BR weston (1),
+.BR weston-bindings (7),
+.BR weston-drm (7),
+.BR xkeyboard-config (7)

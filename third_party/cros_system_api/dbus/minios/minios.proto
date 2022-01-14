@@ -1,0 +1,17 @@
+// Copyright 2021 The Chromium OS Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package minios;
+
+// This is the message that is returned from MiniOs via |GetState| method
+// and indicates what state MiniOs is in.
+message State {
+  // Indicates what state MiniOs is in.
+  enum States { IDLE = 0; }
+  States state = 1;
+}

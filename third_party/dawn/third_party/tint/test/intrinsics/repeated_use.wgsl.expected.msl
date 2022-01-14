@@ -1,0 +1,19 @@
+#include <metal_stdlib>
+
+using namespace metal;
+kernel void tint_symbol() {
+  isnormal(float4());
+  isnormal(float4(1.0f));
+  isnormal(float4(1.0f, 2.0f, 3.0f, 4.0f));
+  isnormal(float3());
+  isnormal(float3(1.0f));
+  isnormal(float3(1.0f, 2.0f, 3.0f));
+  isnormal(float2());
+  isnormal(float2(1.0f));
+  isnormal(float2(1.0f, 2.0f));
+  isnormal(1.0f);
+  isnormal(2.0f);
+  isnormal(3.0f);
+  return;
+}
+

@@ -1,0 +1,44 @@
+<link rel="import" href="../../html/polymer.html">
+<link rel="import" href="cr_fingerprint_icon.html">
+<link rel="import" href="../cr_lottie/cr_lottie.html">
+
+<dom-module id="cr-fingerprint-progress-arc">
+  <template>
+    <style>
+      :host {
+        user-select: none;
+      }
+
+      .translucent {
+        opacity: 0.3;
+      }
+
+      #canvasDiv {
+        height: 240px;
+        overflow: hidden;
+        position: relative;
+        width:  460px;
+      }
+
+      cr-lottie {
+        display: inline-block;
+        position: absolute;
+      }
+
+      #enrollmentDone {
+        position: absolute;
+      }
+    </style>
+
+    <div id="canvasDiv">
+      <canvas id="canvas" height="240" width="460"></canvas>
+      <cr-lottie id="scanningAnimation" aria-hidden="true"
+          autoplay="[[autoplay]]">
+      </cr-lottie>
+      <iron-icon id="enrollmentDone" icon="cr-fingerprint-icon:enrollment-done"
+          hidden>
+      </iron-icon>
+    </div>
+  </template>
+  <script src="cr_fingerprint_progress_arc.js"></script>
+</dom-module>

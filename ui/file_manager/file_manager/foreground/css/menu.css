@@ -1,0 +1,126 @@
+/* Copyright 2013 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file. */
+
+/* Derived from /ui/webui/resources/css/menu.css. */
+
+cr-menu {
+  position: fixed;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+cr-menu:not(.decorated) {
+  display: none;
+}
+
+cr-menu > * {
+  box-sizing: border-box;
+  display: block;
+  text-align: start;
+  width: 100%;
+}
+
+cr-menu > hr {
+  border: 0;
+  height: 1px;
+}
+
+cr-menu > [hidden] {
+  display: none;
+}
+
+cr-menu > [shortcutText]::after {
+  color: var(--cros-menu-shortcut-color);
+  content: attr(shortcutText);
+  float: right;
+  padding-inline-start: 30px;
+}
+
+cr-menu > [shortcutText][disabled]::after {
+  color: var(--cros-text-color-disabled);
+}
+
+html[dir='rtl'] cr-menu > [shortcutText]::after {
+  float: left;
+}
+
+cr-menu > [sub-menu]::after {
+  color: var(--cros-menu-shortcut-color);
+  content: '▶' / '';
+  float: right;
+  font-size: 0.7em;
+}
+
+html[dir='rtl'] cr-menu > [sub-menu]::after {
+  content: '◀' / '';
+  float: left;
+}
+
+cr-menu > [sub-menu][disabled]::after {
+  color: var(--cros-text-color-disabled);
+}
+
+/* Keeps menu visibile while animating. Fade out animation is performed by
+   Javascript. */
+cr-menu[hidden].files-menu.animating {
+  opacity: 1;
+  visibility: visible;
+}
+
+cr-menu.files-menu > cr-menu-item {
+  background-size: 16px 16px;
+  position: relative;
+}
+
+/* Icon on the left of the item label for cr.ui.FilesMenuItem.
+   TODO(mtomasz): Upstream to cr.ui.MenuItem. */
+cr-menu.files-menu.has-icon-start cr-menu-item .icon.start {
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 16px;
+  margin-inline-end: 8px;
+  vertical-align: middle;
+  width: 16px;
+}
+
+cr-menu.files-menu:not(.has-icon-start) cr-menu-item .icon.start {
+  display: none;
+}
+
+cr-menu.files-menu > cr-menu-item > .icon {
+  position: relative;
+  z-index: 1;
+}
+
+cr-menu.files-menu > cr-menu-item > span {
+  position: relative;
+  vertical-align: middle;
+  z-index: 1;
+}
+
+cr-menu.files-menu > cr-menu-item > paper-ripple {
+  z-index: 0;
+}
+
+html.files-ng cr-menu.files-menu > cr-menu-item {
+  padding: 0 16px;
+}
+
+html.files-ng:not(.pointer-active) cr-menu-item > paper-ripple {
+  display: none;
+}
+
+html.files-ng.pointer-active cr-menu-item > paper-ripple {
+  --paper-ripple-opacity: 100%;
+  color: var(--cros-ripple-color);
+}
+
+html.files-ng cr-menu.files-menu > cr-menu-item:not([disabled])[selected] {
+  background-color: var(--cros-menu-item-background-hover);
+}
+
+html.files-ng:not(.pointer-active) cr-menu.files-menu > cr-menu-item:not([disabled]):active[selected] {
+  background-color: var(--cros-menu-item-background-hover);
+}

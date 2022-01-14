@@ -1,0 +1,217 @@
+# liblouis: Vietnamese 6 dot braille table
+#
+# Based on the braille contraction modules in BRLTTY
+#
+# Copyright (C) 1995-2004 by The BRLTTY Team.
+# Copyright (C) 2004 ViewPlus Technologies, Inc., www.viewplustech.com
+# Copyright (C) 2004 Computers to Help People, Inc., www.chpi.org
+# Copyright (C) 2015 Harri Pasanen <harri@mpaja.com>
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# liblouis  comes with ABSOLUTELY NO WARRANTY.
+
+# Created by Harri Pasanen harri@mpaja.com, based on fr-fr-g1.utb
+
+# Vietnamese (UTF-8)
+
+include text_nabcc.dis
+
+include spaces.uti
+
+include latinLetterDef6Dots.uti
+
+uplow Đđ 2346  
+
+uplow Áá 35-1          a accent grave
+uplow Àà 56-1
+uplow Ảả 26-1
+uplow Ãã 36-1
+uplow Ạạ 6-1
+uplow Ăă 345
+uplow Ắắ 35-345
+uplow Ằằ 56-345
+uplow Ẳẳ 26-345
+uplow Ẵẵ 36-345
+uplow Ặặ 6-345
+uplow Ââ 16
+uplow Ấấ 35-16
+uplow Ầầ 56-16
+uplow Ẩẩ 26-16
+uplow Ẫẫ 36-16
+uplow Ậậ 6-16
+uplow Éé 35-15
+uplow Èè 56-15
+uplow Ẻẻ 26-15
+uplow Ẽẽ 36-15
+uplow Ẹẹ 6-15
+uplow Êê 126
+uplow Ếế 35-126
+uplow Ềề 56-126
+uplow Ểể 26-126
+uplow Ễễ 36-126
+uplow Ệệ 6-126
+uplow Íí 35-24
+uplow Ìì 56-24
+uplow Ỉỉ 26-24
+uplow Ĩĩ 36-24
+uplow Ịị 6-24
+uplow Óó 35-135
+uplow Òò 56-135 
+uplow Ỏỏ 26-135 
+uplow Õõ 36-135
+uplow Ọọ 6-135
+uplow Ôô 1456
+uplow Ốố 35-1456
+uplow Ồồ 56-1456
+uplow Ổổ 26-1456
+uplow Ỗỗ 36-1456
+uplow Ộộ 6-1456
+uplow Ơơ 246
+uplow Ớớ 35-246
+uplow Ờờ 56-246
+uplow Ởở 26-246
+uplow Ỡỡ 36-246
+uplow Ợợ 6-246
+uplow Úú 35-136
+uplow Ùù 56-136
+uplow Ủủ 26-136
+uplow Ũũ 36-136
+uplow Ụụ 6-136
+uplow Ưư 1256
+uplow Ứứ 35-1256
+uplow Ừừ 56-1256
+uplow Ửử 26-1256
+uplow Ữữ 36-1256
+uplow Ựự 6-1256
+uplow Ýý 35-13456
+uplow Ỳỳ 56-13456
+uplow Ỷỷ 26-13456
+uplow Ỹỹ 36-13456
+uplow Ỵỵ 6-13456
+
+# TODO: below always list requires completion, not all combinations are yet enumerated
+always iế 35-24-126
+always iề 56-24-126
+always iỂ 26-24-126
+always iễ 36-24-126
+always iệ 6-24-126
+always oá 35-135-1
+always oà 56-135-1
+always oả 26-135-1
+always oã 36-135-1
+always oạ 6-135-1
+always oắ 35-135-345
+always oằ 56-135-345
+always oẳ 26-135-345
+always oẵ 36-135-345
+always oặ 6-135-345
+always uấ 35-136-16
+always uầ 56-136-16
+always uẩ 26-136-16
+always uẫ 36-136-16
+always uậ 6-136-16
+always uế 35-136-126
+always uề 56-136-126
+always uể 26-136-126
+always uễ 36-136-126
+always uệ 6-136-126
+always uyế 35-136-13456-126
+always uyề 56-136-13456-126
+always uyể 26-136-13456-126
+always uyễ 36-136-13456-126
+always uyệ 6-136-13456-126
+always ướ 35-1256-246
+always ườ 56-1256-246
+always ưở 26-1256-246
+always ưỡ 36-1256-246
+always ượ 6-1256-246
+
+punctuation , 2                 virgule
+punctuation ; 23                point-virgule
+punctuation : 25                deux-points
+punctuation . 256               point
+punctuation ? 26                point d'interrogation
+punctuation ! 235               point d'exclamation
+punctuation " 236      guillemt                        
+punctuation " 356      guillemt                        
+punctuation ( 2356               parenthèse ouvrante
+punctuation ) 2356               parenthèse fermante
+punctuation ' 3                 apostrophe
+math / 34                                               barre oblique
+sign % 346                                      pour cent
+punctuation - 36                trait d'union
+sign # 3456                                     dièse
+
+# override zero
+digit 0 3456
+include digits6DotsPlusDot6.uti
+litdigit 0 3456
+include litdigits6DotsPlusDot6.uti
+
+sign \x00A8 46                  diaeresis sign
+math \x00F7 6-256               divisé par
+        
+math + 5-235                            plus            
+math = 5-2356                           égal            
+math × 6-35                                     multiplié par
+math < 46-126                           inférieur à
+math > 46-345                           supérieur à
+
+sign © 5-14                                                     copyright
+sign ° 5-135                                            degré
+sign & 5-123456                                 perluète (et commercial)
+sign ¢ 45-14                                            cent
+sign € 45-15                                            euro                         
+sign £ 45-123                                           livre                   
+sign § 45-1234                                  paragraphe              
+sign $ 4-234                                            dollar                  
+sign ¥ 45-13456                                 yen                     
+punctuation « 45-2356           guillemet français ouvrant  
+punctuation » 2356-12           guillemet français fermant  
+punctuation [ 46-126            crochet droit ouvrant   
+punctuation ] 45-345            crochet droit fermant   
+punctuation { 6-236                     accolade de gauche  
+punctuation } 356-3                     accolade de droite   
+
+sign ¹ 4-6-16                                           exposant 1                      
+sign ² 4-6-126                                  exposant 2      
+sign ³ 4-6-146                                  exposant 3
+sign ¼ 6-16-34-1456                     un quart        
+sign ½ 6-16-34-126                      un demi         
+sign ¾ 6-126-34-1456            trois quarts   
+
+capsletter 46                                                              indicateur de majuscule
+begcapsword 46-46                                                   succession de majuscules
+
+numsign 3456                                                    préfixe pour les chiffres
+midnum \s 3                                                             espace entre les chiffres
+midnum , 2
+midnum . 256
+midnum - 36
+midnum + 346                                                    plus
+midnum / 34
+midnum : 25
+
+sign \x00B8 45
+# endnum # 56-3456
+
+sign _ 456                                                              souligné
+
+repeated ... 3-3-3                              points de suite
+repeated --- 36-36-36
+repeated ___ 456-456-456                                
+
+always \s--\s 36-36     tiret
+

@@ -1,0 +1,79 @@
+# define liblouis so that Travis CI service can build and test it
+
+# require Trusty so we have a modern version of texinfo (> 5.0) and
+# automake (> 1.14)
+sudo: required
+dist: xenial
+
+language: c
+
+services:
+  - docker
+
+env:
+  global:
+    # COVERITY_SCAN_TOKEN
+    - secure: "k2AM90pXF/IqX8CRSUPD3dkMktu9IUtFafDVvA1iC4p7hMfwOM4UIC/0E5Dqxwv4ULc7yqbWVchZwHMqteEqcJX8xbxsGqt4s1LtNosV2xjikbGmXVl3cp0qqv3exVcUaxtzxDs2Ee379sTUpVDK314M9oH5ky4N2L+971c1v84="
+    # GITHUB_TOKEN
+    - secure: "FbDvOO7Nqih9z0S+9RL/cvz/VTM5nlEUgJdUT7MefFjIAh+YCfv5sw6FkQpaiOx4xkd63tLrUvjJXi7fy4oERLDO2Qk4OOsntJUfNZqWlsGHZWUTfvgYkcNyNhXe2P4lKnnFaZbqui9Ec9OdnsR1DmrtIoq24BKTxYXCsxdux04="
+
+matrix:
+  include:
+    - compiler: gcc
+      env: MODE=build-gcc
+    - compiler: gcc
+      env: MODE=build-gcc ENABLE_UCS4=--enable-ucs4
+    - compiler: i686-w64-mingw32-gcc
+      env: MODE=build-mingw ENABLE_UCS4=--enable-ucs4 ARCH=32
+    - compiler: x86_64-w64-mingw32-gcc
+      env: MODE=build-mingw ENABLE_UCS4=--enable-ucs4 ARCH=64
+    - compiler: gcc
+      env: MODE=build-js
+    - env: MODE=check-format
+
+before_install:
+  - sudo apt-get update -qq
+  - 'chmod +x ./.travis/before_install/*.sh'
+  - 'chmod +x ./.travis/script/*.sh'
+  - 'chmod +x ./.travis/after_success/*.sh'
+  - case "$MODE" in
+      build-mingw)  source .travis/before_install/mingw.sh ;;
+      build-js)     source .travis/before_install/emscripten.sh ;;
+      build-gcc)    source .travis/before_install/gcc.sh ;;
+      check-format) sudo apt-get install -y clang-format-3.9 ;;
+    esac
+  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+script:
+  - cd $TRAVIS_BUILD_DIR
+  - case "$MODE" in
+      build-mingw)  source .travis/script/mingw.sh ;;
+      build-js)     source .travis/script/emscripten.sh ;;
+      build-gcc)    source .travis/script/gcc.sh ;;
+      check-format) source .travis/script/check-format.sh ;;
+    esac
+
+after_failure:
+  - case "$MODE" in
+      build-mingw|build-gcc) cat tests/test-suite.log ;;
+    esac
+
+after_success:
+  - case "$MODE" in
+      build-mingw)  source .travis/after_success/mingw.sh ;;
+      build-js)     source .travis/after_success/emscripten.sh ;;
+    esac
+
+# tell the irc channel about the results of the build
+notifications:
+   irc: "irc.oftc.net#liblouis"
+
+addons:
+  coverity_scan:
+    project:
+      name: "liblouis/liblouis"
+      description: "Build submitted via Travis CI"
+    notification_email: liblouis-liblouisxml@freelists.org
+    build_command_prepend: "./autogen.sh && ./configure && make clean"
+    build_command:   "make"
+    branch_pattern: coverity_scan

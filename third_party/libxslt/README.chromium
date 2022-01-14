@@ -1,0 +1,13 @@
+Name: libxslt
+URL: http://xmlsoft.org/XSLT
+Version: 50f9c9cd3b7dfe9b3c8c795247752d1fdcadcac8
+CPEPrefix: cpe:/a:xmlsoft:libxslt:1.1.34
+Security Critical: yes
+License: MIT
+License File: src/Copyright
+
+Description:
+
+libxslt from libxml.org.
+
+Modifications: Apply the patches in chromium/*.patch

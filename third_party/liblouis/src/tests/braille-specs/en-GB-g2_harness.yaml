@@ -1,0 +1,269 @@
+display: unicode-without-blank.dis
+table:
+  locale: en-GB
+  grade: 2
+  __assert-match: en_GB.tbl # en-GB-g2.ctb
+tests:
+  - [Parthenoi, ⠠⠐⠏⠓⠢⠕⠊]
+  - [Parthenon, ⠠⠐⠏⠓⠢⠕⠝]
+  - [Parthenon's, ⠠⠐⠏⠓⠢⠕⠝⠄⠎]
+  - [Parthenopaeus, ⠠⠐⠏⠓⠢⠕⠏⠁⠑⠥⠎]
+  - [Parthenope, ⠠⠐⠏⠓⠢⠕⠏⠑]
+  - [Parthenos, ⠠⠐⠏⠓⠢⠕⠎]
+  - [Parthia, ⠠⠐⠏⠓⠊⠁]
+  - [Parthia's, ⠠⠐⠏⠓⠊⠁⠄⠎]
+  - [Parthian, ⠠⠐⠏⠓⠊⠁⠝]
+  - [Parthian's, ⠠⠐⠏⠓⠊⠁⠝⠄⠎]
+  - [Parthians, ⠠⠐⠏⠓⠊⠁⠝⠎]
+  - [Partitur, ⠠⠐⠏⠊⠞⠥⠗]
+  - [Partitur's, ⠠⠐⠏⠊⠞⠥⠗⠄⠎]
+  - [Partlow, ⠠⠐⠏⠇⠪]
+  - [Partlow's, ⠠⠐⠏⠇⠪⠄⠎]
+  - [part, ⠐⠏]
+  - [part's, ⠐⠏⠄⠎]
+  - [partake, ⠐⠏⠁⠅⠑]
+  - [partaken, ⠐⠏⠁⠅⠢]
+  - [partaker, ⠐⠏⠁⠅⠻]
+  - [partaker's, ⠐⠏⠁⠅⠻⠄⠎]
+  - [partakers, ⠐⠏⠁⠅⠻⠎]
+  - [partakes, ⠐⠏⠁⠅⠑⠎]
+  - [partaking, ⠐⠏⠁⠅⠬]
+  - [partakings, ⠐⠏⠁⠅⠬⠎]
+  - [partan, ⠐⠏⠁⠝]
+  - [partans, ⠐⠏⠁⠝⠎]
+  - [parted, ⠐⠏⠫]
+  - [parter, ⠐⠏⠻]
+  - [parterre, ⠐⠏⠻⠗⠑]
+  - [parterre's, ⠐⠏⠻⠗⠑⠄⠎]
+  - [parterres, ⠐⠏⠻⠗⠑⠎]
+  - [parters, ⠐⠏⠻⠎]
+  - [parthenocarpic, ⠐⠏⠓⠢⠕⠉⠜⠏⠊⠉]
+  - [parthenocarpically, ⠐⠏⠓⠢⠕⠉⠜⠏⠊⠉⠠⠽]
+  - [parthenocarpies, ⠐⠏⠓⠢⠕⠉⠜⠏⠊⠑⠎]
+  - [parthenocarpy, ⠐⠏⠓⠢⠕⠉⠜⠏⠽]
+  - [parthenogeneses, ⠐⠏⠓⠢⠕⠛⠢⠑⠎⠑⠎]
+  - [parthenogenesis, ⠐⠏⠓⠢⠕⠛⠢⠑⠎⠊⠎]
+  - [parthenogenesis's, ⠐⠏⠓⠢⠕⠛⠢⠑⠎⠊⠎⠄⠎]
+  - [parthenogenetic, ⠐⠏⠓⠢⠕⠛⠢⠑⠞⠊⠉]
+  - [parthenogenetically, ⠐⠏⠓⠢⠕⠛⠢⠑⠞⠊⠉⠠⠽]
+  - [parti, ⠐⠏⠊]
+  - [partial, ⠐⠏⠊⠁⠇]
+  - [partial's, ⠐⠏⠊⠁⠇⠄⠎]
+  - [partialise, ⠐⠏⠊⠁⠇⠊⠎⠑]
+  - [partialised, ⠐⠏⠊⠁⠇⠊⠎⠫]
+  - [partialises, ⠐⠏⠊⠁⠇⠊⠎⠑⠎]
+  - [partialising, ⠐⠏⠊⠁⠇⠊⠎⠬]
+  - [partialism, ⠐⠏⠊⠁⠇⠊⠎⠍]
+  - [partialist, ⠐⠏⠊⠁⠇⠊⠌]
+  - [partialists, ⠐⠏⠊⠁⠇⠊⠌⠎]
+  - [partialities, ⠐⠏⠊⠁⠇⠊⠞⠊⠑⠎]
+  - [partiality, ⠐⠏⠊⠁⠇⠰⠽]
+  - [partiality's, ⠐⠏⠊⠁⠇⠰⠽⠄⠎]
+  - [partially, ⠐⠏⠊⠠⠽]
+  - [partialness, ⠐⠏⠊⠁⠇⠰⠎]
+  - [partialness's, ⠐⠏⠊⠁⠇⠰⠎⠄⠎]
+  - [partialnesses, ⠐⠏⠊⠁⠇⠰⠎⠑⠎]
+  - [partials, ⠐⠏⠊⠁⠇⠎]
+  - [partibilities, ⠐⠏⠊⠃⠊⠇⠊⠞⠊⠑⠎]
+  - [partibility, ⠐⠏⠊⠃⠊⠇⠰⠽]
+  - [partible, ⠐⠏⠊⠼]
+  - [participable, ⠐⠏⠊⠉⠊⠏⠁⠼]
+  - [participance, ⠐⠏⠊⠉⠊⠏⠨⠑]
+  - [participances, ⠐⠏⠊⠉⠊⠏⠨⠑⠎]
+  - [participant, ⠐⠏⠊⠉⠊⠏⠁⠝⠞]
+  - [participant's, ⠐⠏⠊⠉⠊⠏⠁⠝⠞⠄⠎]
+  - [participantly, ⠐⠏⠊⠉⠊⠏⠁⠝⠞⠇⠽]
+  - [participants, ⠐⠏⠊⠉⠊⠏⠁⠝⠞⠎]
+  - [participate, ⠐⠏⠊⠉⠊⠏⠁⠞⠑]
+  - [participated, ⠐⠏⠊⠉⠊⠏⠁⠞⠫]
+  - [participates, ⠐⠏⠊⠉⠊⠏⠁⠞⠑⠎]
+  - [participating, ⠐⠏⠊⠉⠊⠏⠁⠞⠬]
+  - [participation, ⠐⠏⠊⠉⠊⠏⠠⠝]
+  - [participation's, ⠐⠏⠊⠉⠊⠏⠠⠝⠄⠎]
+  - [participational, ⠐⠏⠊⠉⠊⠏⠠⠝⠁⠇]
+  - [participations, ⠐⠏⠊⠉⠊⠏⠠⠝⠎]
+  - [participative, ⠐⠏⠊⠉⠊⠏⠁⠞⠊⠧⠑]
+  - [participator, ⠐⠏⠊⠉⠊⠏⠁⠞⠕⠗]
+  - [participator's, ⠐⠏⠊⠉⠊⠏⠁⠞⠕⠗⠄⠎]
+  - [participators, ⠐⠏⠊⠉⠊⠏⠁⠞⠕⠗⠎]
+  - [participatory, ⠐⠏⠊⠉⠊⠏⠁⠞⠕⠗⠽]
+  - [participial, ⠐⠏⠊⠉⠊⠏⠊⠁⠇]
+  - [participial's, ⠐⠏⠊⠉⠊⠏⠊⠁⠇⠄⠎]
+  - [participially, ⠐⠏⠊⠉⠊⠏⠊⠠⠽]
+  - [participle, ⠐⠏⠊⠉⠊⠏⠇⠑]
+  - [participle's, ⠐⠏⠊⠉⠊⠏⠇⠑⠄⠎]
+  - [participles, ⠐⠏⠊⠉⠊⠏⠇⠑⠎]
+  - [particle, ⠐⠏⠊⠉⠇⠑]
+  - [particle's, ⠐⠏⠊⠉⠇⠑⠄⠎]
+  - [particleboard, ⠐⠏⠊⠉⠇⠑⠃⠕⠜⠙]
+  - [particleboard's, ⠐⠏⠊⠉⠇⠑⠃⠕⠜⠙⠄⠎]
+  - [particleboards, ⠐⠏⠊⠉⠇⠑⠃⠕⠜⠙⠎]
+  - [particles, ⠐⠏⠊⠉⠇⠑⠎]
+  - [particoloured, ⠐⠏⠊⠉⠕⠇⠳⠗⠫]
+  - [particular, ⠐⠏⠊⠉⠥⠇⠜]
+  - [particular's, ⠐⠏⠊⠉⠥⠇⠜⠄⠎]
+  - [particularisation, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠠⠝]
+  - [particularisation's, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠠⠝⠄⠎]
+  - [particularisations, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠠⠝⠎]
+  - [particularise, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠑]
+  - [particularised, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠫]
+  - [particulariser, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠻]
+  - [particularises, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠑⠎]
+  - [particularising, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠬]
+  - [particularism, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠍]
+  - [particularism's, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠍⠄⠎]
+  - [particularisms, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠍⠎]
+  - [particularist, ⠐⠏⠊⠉⠥⠇⠜⠊⠌]
+  - [particularistic, ⠐⠏⠊⠉⠥⠇⠜⠊⠌⠊⠉]
+  - [particularists, ⠐⠏⠊⠉⠥⠇⠜⠊⠌⠎]
+  - [particularities, ⠐⠏⠊⠉⠥⠇⠜⠊⠞⠊⠑⠎]
+  - [particularity, ⠐⠏⠊⠉⠥⠇⠜⠰⠽]
+  - [particularity's, ⠐⠏⠊⠉⠥⠇⠜⠰⠽⠄⠎]
+  - [particularizers, ⠐⠏⠊⠉⠥⠇⠜⠊⠵⠻⠎]
+  - [particularly, ⠐⠏⠊⠉⠥⠇⠜⠇⠽]
+  - [particularness, ⠐⠏⠊⠉⠥⠇⠜⠰⠎]
+  - [particulars, ⠐⠏⠊⠉⠥⠇⠜⠎]
+  - [particulate, ⠐⠏⠊⠉⠥⠇⠁⠞⠑]
+  - [particulate's, ⠐⠏⠊⠉⠥⠇⠁⠞⠑⠄⠎]
+  - [particulates, ⠐⠏⠊⠉⠥⠇⠁⠞⠑⠎]
+  - [partied, ⠐⠏⠊⠫]
+  - [partier, ⠐⠏⠊⠻]
+  - [partiers, ⠐⠏⠊⠻⠎]
+  - [parties, ⠐⠏⠊⠑⠎]
+  - [partim, ⠐⠏⠊⠍]
+  - [parting, ⠐⠏⠬]
+  - [parting's, ⠐⠏⠬⠄⠎]
+  - [partings, ⠐⠏⠬⠎]
+  - [partisan, ⠐⠏⠊⠎⠁⠝]
+  - [partisan's, ⠐⠏⠊⠎⠁⠝⠄⠎]
+  - [partisanly, ⠐⠏⠊⠎⠁⠝⠇⠽]
+  - [partisans, ⠐⠏⠊⠎⠁⠝⠎]
+  - [partisanship, ⠐⠏⠊⠎⠁⠝⠩⠊⠏]
+  - [partisanship's, ⠐⠏⠊⠎⠁⠝⠩⠊⠏⠄⠎]
+  - [partisanships, ⠐⠏⠊⠎⠁⠝⠩⠊⠏⠎]
+  - [partita, ⠐⠏⠊⠞⠁]
+  - [partitas, ⠐⠏⠊⠞⠁⠎]
+  - [partite, ⠐⠏⠊⠞⠑]
+  - [partition, ⠐⠏⠊⠰⠝]
+  - [partition's, ⠐⠏⠊⠰⠝⠄⠎]
+  - [partitioned, ⠐⠏⠊⠰⠝⠫]
+  - [partitioner, ⠐⠏⠊⠰⠝⠻]
+  - [partitioners, ⠐⠏⠊⠰⠝⠻⠎]
+  - [partitioning, ⠐⠏⠊⠰⠝⠬]
+  - [partitionist, ⠐⠏⠊⠰⠝⠊⠌]
+  - [partitionist's, ⠐⠏⠊⠰⠝⠊⠌⠄⠎]
+  - [partitionists, ⠐⠏⠊⠰⠝⠊⠌⠎]
+  - [partitionment, ⠐⠏⠊⠰⠝⠰⠞]
+  - [partitionments, ⠐⠏⠊⠰⠝⠰⠞⠎]
+  - [partitions, ⠐⠏⠊⠰⠝⠎]
+  - [partitive, ⠐⠏⠊⠞⠊⠧⠑]
+  - [partitive's, ⠐⠏⠊⠞⠊⠧⠑⠄⠎]
+  - [partitively, ⠐⠏⠊⠞⠊⠧⠑⠇⠽]
+  - [partitives, ⠐⠏⠊⠞⠊⠧⠑⠎]
+  - [partitura, ⠐⠏⠊⠞⠥⠗⠁]
+  - [partizan, ⠐⠏⠊⠵⠁⠝]
+  - [partizan's, ⠐⠏⠊⠵⠁⠝⠄⠎]
+  - [partizans, ⠐⠏⠊⠵⠁⠝⠎]
+  - [partlet, ⠐⠏⠇⠑⠞]
+  - [partlets, ⠐⠏⠇⠑⠞⠎]
+  - [partly, ⠐⠏⠇⠽]
+  - [partner, ⠐⠏⠝⠻]
+  - [partner's, ⠐⠏⠝⠻⠄⠎]
+  - [partnered, ⠐⠏⠝⠻⠫]
+  - [partnering, ⠐⠏⠝⠻⠬]
+  - [partnerless, ⠐⠏⠝⠻⠨⠎]
+  - [partners, ⠐⠏⠝⠻⠎]
+  - [partnership, ⠐⠏⠝⠻⠩⠊⠏]
+  - [partnership's, ⠐⠏⠝⠻⠩⠊⠏⠄⠎]
+  - [partnerships, ⠐⠏⠝⠻⠩⠊⠏⠎]
+  - [parton, ⠐⠏⠕⠝]
+  - [partons, ⠐⠏⠕⠝⠎]
+  - [partook, ⠐⠏⠕⠕⠅]
+  - [partridge, ⠐⠏⠗⠊⠙⠛⠑]
+  - [partridge's, ⠐⠏⠗⠊⠙⠛⠑⠄⠎]
+  - [partridgeberries, ⠐⠏⠗⠊⠙⠛⠑⠃⠻⠗⠊⠑⠎]
+  - [partridgeberry, ⠐⠏⠗⠊⠙⠛⠑⠃⠻⠗⠽]
+  - [partridgeberry's, ⠐⠏⠗⠊⠙⠛⠑⠃⠻⠗⠽⠄⠎]
+  - [partridges, ⠐⠏⠗⠊⠙⠛⠑⠎]
+  - [partridgewood, ⠐⠏⠗⠊⠙⠛⠑⠺⠕⠕⠙]
+  - [parts, ⠐⠏⠎]
+  - [partsong, ⠐⠏⠎⠰⠛]
+  - [partsong's, ⠐⠏⠎⠰⠛⠄⠎]
+  - [parture, ⠐⠏⠥⠗⠑]
+  - [parturiencies, ⠐⠏⠥⠗⠊⠢⠉⠊⠑⠎]
+  - [parturiency, ⠐⠏⠥⠗⠊⠢⠉⠽]
+  - [parturiency's, ⠐⠏⠥⠗⠊⠢⠉⠽⠄⠎]
+  - [parturient, ⠐⠏⠥⠗⠊⠢⠞]
+  - [parturients, ⠐⠏⠥⠗⠊⠢⠞⠎]
+  - [parturifacient, ⠐⠏⠥⠗⠊⠋⠁⠉⠊⠢⠞]
+  - [parturifacients, ⠐⠏⠥⠗⠊⠋⠁⠉⠊⠢⠞⠎]
+  - [parturition, ⠐⠏⠥⠗⠊⠰⠝]
+  - [parturition's, ⠐⠏⠥⠗⠊⠰⠝⠄⠎]
+  - [parturitions, ⠐⠏⠥⠗⠊⠰⠝⠎]
+  - [partway, ⠐⠏⠺⠁⠽]
+  - [partwork, ⠐⠏⠐⠺]
+  - [partworks, ⠐⠏⠐⠺⠎]
+  - [party, ⠐⠏⠽]
+  - [party's, ⠐⠏⠽⠄⠎]
+  - [partyer, ⠐⠏⠽⠻]
+  - [partyers, ⠐⠏⠽⠻⠎]
+  - [partygoer, ⠐⠏⠽⠛⠕⠻]
+  - [partygoer's, ⠐⠏⠽⠛⠕⠻⠄⠎]
+  - [partygoers, ⠐⠏⠽⠛⠕⠻⠎]
+  - [partying, ⠐⠏⠽⠬]
+  - [partyism, ⠐⠏⠽⠊⠎⠍]
+  - # an example of a simple message being forward translated, and
+    # contractions expected.
+    - the cat sat on the mat
+    - ⠮ ⠉⠁⠞ ⠎⠁⠞ ⠕⠝ ⠮ ⠍⠁⠞
+  - # same as above example.
+    - to the moon
+    - ⠖⠮ ⠍⠕⠕⠝
+  - # an example of where text should generally be contracted, except
+    # at the point of the cursor. also specify where the computer
+    # cursor is at, and where we expect the braille cursor to be.
+    - you went to
+    - ⠽ ⠺⠑⠝⠞ ⠞⠕
+    - mode: [compbrlAtCursor]
+      cursorPos: [4,2]
+  - # An example to reproduce:
+    # https://bugzilla.gnome.org/show_bug.cgi?id=651217 note that the
+    # braille cursor is very squeued. computer cursor is at pos 13,
+    # expected braille cursor at 15, but actually at 17.
+    - Pappa Pappa help me.
+    - ⠠⠏⠁⠏⠏⠁ ⠠⠏⠁⠏⠏⠁ ⠓⠑⠇⠏ ⠍⠑⠲
+    - mode: [compbrlAtCursor]
+      cursorPos: [13,15]
+      xfail: Braille cursor is very squeued
+  - # this testcase tests cursor position when mode is 0. The word
+    # 'about' is contracted to 'ab'. The user presses cursor routing 1
+    # on their display, which should land on letter 'b', but instead
+    # it lands on letter 'a' (index 0).
+    - about
+    - ⠁⠃
+    - mode: [compbrlAtCursor]
+      cursorPos: [1,1]
+      xfail: true
+
+  # Converted from en_gb_g1_italics.c
+  - - This is a Test
+    - ⠠⠹ ⠊⠎ ⠁ ⠠⠞⠑⠌
+    - typeform:
+        italic: '              '
+  - - This is a Test in Italic.
+    - ⠨⠨⠠⠹ ⠊⠎ ⠁ ⠠⠞⠑⠌ ⠔ ⠠⠊⠞⠁⠇⠊⠉⠲⠨⠄
+    - typeform:
+        italic: '+++++++++++++++++++++++++'
+      xfail: true
+  - - This is a Test
+    - ⠠⠹ ⠨⠊⠎ ⠨⠁ ⠠⠞⠑⠌
+    - typeform:
+        italic: '     ++++     '
+      xfail: true
+  - # Test case requested here:
+    # http://www.freelists.org/post/liblouis-liblouisxml/Mesar-here-are-some-test-possibilities
+    - time and spirit
+    - ⠨⠐⠞ ⠨⠯ ⠨⠸⠎
+    - typeform:
+        italic: '+++++++++++++++'
+      xfail: true

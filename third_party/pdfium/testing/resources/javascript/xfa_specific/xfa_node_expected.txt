@@ -1,0 +1,264 @@
+Alert: xfa
+Alert: | config
+Alert: | | agent
+Alert: | | | destination
+Alert: | | | | #text
+Alert: | | | pdf
+Alert: | | | | fontInfo
+Alert: | | present
+Alert: | | | pdf
+Alert: | | | | version
+Alert: | | | | | #text
+Alert: | | | | adobeExtensionLevel
+Alert: | | | | | #text
+Alert: | | | | renderPolicy
+Alert: | | | | | #text
+Alert: | | | | scriptModel
+Alert: | | | | | #text
+Alert: | | | | interactive
+Alert: | | | | | #text
+Alert: | | | xdp
+Alert: | | | | packets
+Alert: | | | | | #text
+Alert: | | | destination
+Alert: | | | | #text
+Alert: | | | script
+Alert: | | | | #text
+Alert: | | acrobat
+Alert: | | | acrobat7
+Alert: | | | | dynamicRender
+Alert: | | | | | #text
+Alert: | | | validate
+Alert: | | | | #text
+Alert: | packet
+Alert: | template
+Alert: | | subform
+Alert: | | | event
+Alert: | | | | script
+Alert: | | | | | #text
+Alert: | localeSet
+Alert: | | locale
+Alert: | | | calendarSymbols
+Alert: | | | | monthNames
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | monthNames
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | | month
+Alert: | | | | | | #text
+Alert: | | | | dayNames
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | dayNames
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | | day
+Alert: | | | | | | #text
+Alert: | | | | meridiemNames
+Alert: | | | | | meridiem
+Alert: | | | | | | #text
+Alert: | | | | | meridiem
+Alert: | | | | | | #text
+Alert: | | | | eraNames
+Alert: | | | | | era
+Alert: | | | | | | #text
+Alert: | | | | | era
+Alert: | | | | | | #text
+Alert: | | | datePatterns
+Alert: | | | | datePattern
+Alert: | | | | | #text
+Alert: | | | | datePattern
+Alert: | | | | | #text
+Alert: | | | | datePattern
+Alert: | | | | | #text
+Alert: | | | | datePattern
+Alert: | | | | | #text
+Alert: | | | timePatterns
+Alert: | | | | timePattern
+Alert: | | | | | #text
+Alert: | | | | timePattern
+Alert: | | | | | #text
+Alert: | | | | timePattern
+Alert: | | | | | #text
+Alert: | | | | timePattern
+Alert: | | | | | #text
+Alert: | | | dateTimeSymbols
+Alert: | | | | #text
+Alert: | | | numberPatterns
+Alert: | | | | numberPattern
+Alert: | | | | | #text
+Alert: | | | | numberPattern
+Alert: | | | | | #text
+Alert: | | | | numberPattern
+Alert: | | | | | #text
+Alert: | | | numberSymbols
+Alert: | | | | numberSymbol
+Alert: | | | | | #text
+Alert: | | | | numberSymbol
+Alert: | | | | | #text
+Alert: | | | | numberSymbol
+Alert: | | | | | #text
+Alert: | | | | numberSymbol
+Alert: | | | | | #text
+Alert: | | | | numberSymbol
+Alert: | | | | | #text
+Alert: | | | currencySymbols
+Alert: | | | | currencySymbol
+Alert: | | | | | #text
+Alert: | | | | currencySymbol
+Alert: | | | | | #text
+Alert: | | | | currencySymbol
+Alert: | | | | | #text
+Alert: | | | typefaces
+Alert: | | | | typeface
+Alert: | | | | typeface
+Alert: | | | | typeface
+Alert: | | | | typeface
+Alert: | | | | typeface
+Alert: | | | | typeface
+Alert: | | | | typeface
+Alert: | | | | typeface
+Alert: | | | | typeface
+Alert: | | | | typeface
+Alert: | | | | typeface
+Alert: | | | | typeface
+Alert: | dataModel
+Alert: | | dataGroup
+Alert: | | | dataGroup
+Alert: | form
+Alert: | | subform
+Alert: | | | event
+Alert: | | | | script
+Alert: | | | | | #text
+Alert: PASS: isContainer = true
+Alert: PASS: isContainer threw Error: Invalid property set operation.
+Alert: PASS: isNull = false
+Alert: PASS: isNull threw Error: Invalid property set operation.
+Alert: PASS: model = [object XFAObject]
+Alert: PASS: model threw Error: Invalid property set operation.
+Alert: PASS: ns = 
+Alert: PASS: ns threw Error: Invalid property set operation.
+Alert: FAIL: oneOfChild = undefined, expected = false
+Alert: PASS: oneOfChild threw Error: Invalid property set operation.
+Alert: PASS: typeof my_doc.applyXSL = function
+Alert: PASS: typeof my_doc.assignNode = function
+Alert: PASS: typeof my_doc.clone = function
+Alert: PASS: typeof my_doc.getAttribute = function
+Alert: PASS: typeof my_doc.getElement = function
+Alert: PASS: typeof my_doc.isPropertySpecified = function
+Alert: PASS: typeof my_doc.loadXML = function
+Alert: PASS: typeof my_doc.saveFilteredXML = function
+Alert: PASS: typeof my_doc.saveXML = function
+Alert: PASS: typeof my_doc.setAttribute = function
+Alert: PASS: typeof my_doc.setElement = function
+Alert: PASS: my_doc.applyXSL() threw XFAObject.applyXSL: Incorrect number of parameters passed to function.
+Alert: PASS: my_doc.applyXSL(42) = undefined
+Alert: PASS: my_doc.assignNode() threw XFAObject.assignNode: Incorrect number of parameters passed to function.
+Alert: PASS: my_doc.assignNode(42) = undefined
+Alert: PASS: my_doc.clone() threw XFAObject.clone: Incorrect number of parameters passed to function.
+Alert: PASS: my_doc.clone(true) = [object XFAObject]
+Alert: PASS: my_doc.clone(false) = [object XFAObject]
+Alert: PASS: my_doc.getAttribute() threw XFAObject.getAttribute: Incorrect number of parameters passed to function.
+Alert: PASS: my_doc.getAttribute('bogus') = 
+Alert: PASS: my_doc.getAttribute('layout') = tb
+Alert: PASS: my_doc.getElement() threw XFAObject.getElement: Incorrect number of parameters passed to function.
+Alert: PASS: my_doc.getElement('bogus') = null
+Alert: PASS: my_doc.getElement('pageSet') = [object XFAObject]
+Alert: PASS: my_doc.isPropertySpecified() threw XFAObject.isPropertySpecified: Incorrect number of parameters passed to function.
+Alert: PASS: my_doc.isPropertySpecified('bogus') = false
+Alert: PASS: my_doc.isPropertySpecified('pageSet') = true
+Alert: PASS: my_doc.loadXML() threw XFAObject.loadXML: Incorrect number of parameters passed to function.
+Alert: PASS: my_doc.loadXML('bogus') = undefined
+Alert: PASS: my_doc.loadXML('<pageSet>=/pageSet>') = undefined
+Alert: PASS: my_doc.saveFilteredXML('undefined', 'regardless', 'of', 'args') = undefined
+Alert: PASS: my_doc.saveXML().length > 9000 = true
+Alert: PASS: my_doc.saveXML('pretty').length > 9000 = true
+Alert: PASS: my_doc.saveXML('bogus') threw XFAObject.saveXML: Incorrect parameter value.
+Alert: PASS: my_doc.setAttribute() threw XFAObject.setAttribute: Incorrect number of parameters passed to function.
+Alert: PASS: my_doc.setElement() threw XFAObject.setElement: Incorrect number of parameters passed to function.
+Alert: PASS: my_doc.setElement('ns', 'something') = undefined
+Alert: PASS: my_doc.setAttribute('something', 'ns') = undefined
+Alert: PASS: my_doc.getAttribute('ns') = something
+Alert: PASS: my_doc.setAttribute('fake_value', 'fake_attr') = undefined
+Alert: PASS: my_doc.getAttribute('fake_attr') = fake_value
+Alert: PASS: my_doc.xfa == xfa = true
+Alert: PASS: goop = undefined
+Alert: PASS: goop.className = packet
+Alert: PASS: goop.viscosity = undefined
+Alert: PASS: goop.getAttribute() threw XFAObject.getAttribute: Incorrect number of parameters passed to function.
+Alert: PASS: goop.getAttribute(1, 2) threw XFAObject.getAttribute: Incorrect number of parameters passed to function.
+Alert: PASS: goop.getAttribute('nonesuch') = 
+Alert: PASS: goop.getAttribute('viscosity') = sludge
+Alert: PASS: goop.setAttribute() threw XFAObject.setAttribute: Incorrect number of parameters passed to function.
+Alert: PASS: goop.setAttribute(1) threw XFAObject.setAttribute: Incorrect number of parameters passed to function.
+Alert: PASS: goop.setAttribute(1, 2, 3) threw XFAObject.setAttribute: Incorrect number of parameters passed to function.
+Alert: PASS: goop.setAttribute(7, 'ph') = null
+Alert: PASS: goop.getAttribute('ph') = 7
+Alert: PASS: goop.content = Spurious Nonsense
+Alert: PASS: goop.content = ' for All' =  for All
+Alert: PASS: goop.content = Spurious Nonsense for All

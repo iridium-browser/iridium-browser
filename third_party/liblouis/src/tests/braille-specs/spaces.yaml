@@ -1,0 +1,2156 @@
+display: |
+  include unicode-without-blank.dis
+  display 9 9
+  display a a
+
+table: Es-Es-G0.utb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+table: afr-za-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x200b', '\x0020']
+  - ['\x202f', '\x0020']
+table: ar-ar-comp8.utb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+table: ar-ar-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+table: ar.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+table: as.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: awa.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: bg.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x000a', '⣀']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000d', '\x0020']
+table: bh.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: bn.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: bo.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: bra.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: ca.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: chr-us-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x200b', '\x0020']
+  - ['\x202f', '\x0020']
+table: ckb.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+table: cs-comp8.utb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⢽']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '9']
+table: cs.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: cy-cy-g1.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: cy.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: da-dk-g08.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣠']
+  - ['\x000b', '⢥']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⡒']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', '⢞']
+table: da-dk-g16-lit.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣠']
+  - ['\x000b', '⢥']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⡒']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+table: da-dk-g16.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣠']
+  - ['\x000b', '⢥']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⡒']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+table: da-dk-g18.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣠']
+  - ['\x000b', '⢥']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⡒']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', '⢞']
+table: da-dk-g26-lit.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣠']
+  - ['\x000b', '⢥']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⡒']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+table: da-dk-g26.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣠']
+  - ['\x000b', '⢥']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⡒']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+table: da-dk-g26l-lit.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣠']
+  - ['\x000b', '⢥']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⡒']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+table: da-dk-g26l.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣠']
+  - ['\x000b', '⢥']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⡒']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+table: da-dk-g28.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣠']
+  - ['\x000b', '⢥']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⡒']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', '⢞']
+table: da-dk-g28l.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣠']
+  - ['\x000b', '⢥']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⡒']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', '⢞']
+table: da-lt.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: de-de-comp8.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', '⡀']
+flags: {testmode: forward}
+tests:
+  - ['\x202f', '⡀']
+table: de-g0.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: de-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: de-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: dra.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: el.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: en-gb-comp8.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x000a', '⣚']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+table: en-gb-g1.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: en-ueb-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x202f', '\x0020']
+table: en-ueb-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x200b', '\x0020']
+  - ['\x200b', '\x0020']
+  - ['\x202f', '\x0020']
+table: en-us-comp8.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x000a', '⣀']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000d', '\x0020']
+table: en-us-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: en_CA.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: en_GB.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: en_US-comp8-ext.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '⣀']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x200b', '']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: en_US.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: eo-g1-x-system.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: eo.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: es-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: es.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: et-g0.utb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: et.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: fa-ir-comp8.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⡠']
+  - ['\x000a', '⣀']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000d', '\x0020']
+table: fa-ir-g1.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+table: fi-fi-8dot.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣔']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: fi.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+table: fi1.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: fi2.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: fr-bfu-comp6.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: fr-bfu-comp8.utb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣫']
+  - ['\x000a', '⢺']
+  - ['\x000b', '⢅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', '⡀']
+flags: {testmode: forward}
+tests:
+  - ['\x202f', '⡀']
+table: fr-bfu-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: {locale: ga, grade: 1}
+table: {locale: ga, grade: 2}
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+  - ['\x0009', '9']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: gd.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: gez.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: gon.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: grc-international-en.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⡀']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', '9']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+table: gu.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+table: haw-us-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200b', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x202f', '\x0020']
+table: he.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x205f', '\x0020']
+table: hi.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: hr-comp8.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: hr-g1.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '\x0020\x0020']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: hy.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: is.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: is.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+table: it-it-comp8.utb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x00a0', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x202f', '\x0020']
+table: it.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+table: iu-ca-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x200b', '\x0020']
+  - ['\x202f', '\x0020']
+table: kha.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: kn.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+table: ko-2006-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: ko-2006-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: ko-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: ko-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: kok.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+  - ['\x205f', '\x0020']
+table: kru.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: lt-6dot.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: lt.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', '⡀']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: lv.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+table: mao-nz-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x200b', '\x0020']
+  - ['\x202f', '\x0020']
+table: ml.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: mni.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: mr.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: mt.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: mun.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: mwr.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x205f', '\x0020']
+table: ne.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: nl.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: nl_BE.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: no-no-8dot-fallback-6dot-g0.utb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '⢀']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+table: no-no-8dot.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '⢀']
+table: no-no-comp8.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '⢀']
+table: no-no-g0.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+table: no-no-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+table: no-no-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+table: no-no-generic.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', '⣈']
+table: no.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+table: or.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: pa.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: pi.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: pl-pl-comp8.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x00a0', '⢂']
+table: pl.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+table: pt-pt-comp8.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x000a', '⣀']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000d', '\x0020']
+table: pt-pt-g1.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+table: pt.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+table: ro.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: ru-compbrl.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: ru-ru-g1.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: ru.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⢪']
+  - ['\x000a', '⣠']
+  - ['\x000b', '⣼']
+  - ['\x000c', '⡧']
+  - ['\x000d', '⢘']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: ru.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: sa.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: sd.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: se-se.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '\x0020\x0020\x0020\x0020']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: sk-sk-g1.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: sk-sk.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+table: sk.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: sl-si-comp8.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: sl.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+table: sr.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+table: sv-1989.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: sv-1996.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: sv.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+table: ta-ta-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+table: ta.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: te.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+table: tr.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: ur-pk-g1.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+table: ur-pk-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+table: vi.ctb,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '⣊']
+  - ['\x000a', '⣚']
+  - ['\x000b', '⣅']
+  - ['\x000c', '⣇']
+  - ['\x000d', '⣍']
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x00a0', '\x0020']
+table: vi.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+table: zh_CHN.tbl
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '⠈']
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+  - ['\x2009', '\x0020']
+table: zh_HK.tbl,spaces.uti
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x000a', '⣀']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000d', '\x0020']
+table: zhcn-g1.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x200b', '\x0020']
+  - ['\x202f', '\x0020']
+table: zhcn-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x200b', '\x0020']
+  - ['\x202f', '\x0020']

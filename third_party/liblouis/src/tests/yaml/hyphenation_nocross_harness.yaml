@@ -1,0 +1,21 @@
+table: [tables/unicode.dis, tests/tables/nocross.ctb]
+
+# First check hyphenation.
+flags: {testmode: hyphenate}
+tests:
+  - [deadened, dead-ened]
+  - [emboldened, em-bold-ened]
+  - [gardener, gar-den-er]
+  - [denounce, de-nounce]
+  - [denial, de-nial]
+  - [dental, den-tal]
+
+# Then test nocross rules
+flags: {testmode: forward}
+tests:
+  - [deadened, ⠙⠑⠁⠙⠢⠫] # dead-ened
+  - [emboldened, ⠑⠍⠃⠕⠇⠙⠢⠫] # em-bold-ened
+  - [gardener, ⠛⠁⠗⠿⠑⠗] # gar-den-er
+  - [denounce, ⠙⠑⠝⠕⠥⠝⠉⠑] # de-nounce
+  - [denial, ⠙⠑⠝⠊⠁⠇] # de-nial
+  - [dental, ⠿⠞⠁⠇] # den-tal

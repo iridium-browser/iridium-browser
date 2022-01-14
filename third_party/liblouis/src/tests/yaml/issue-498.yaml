@@ -1,0 +1,21 @@
+# regression tests for bug #498
+# see https://github.com/liblouis/liblouis/issues/498
+
+table: |
+  space \s 0
+  include tables/latinLetterDef8Dots.uti
+tests:
+  - - AB cd Ef gH
+    - AB cd Ef gH
+
+table: |
+  display - 36
+  space \s 0
+  include tables/latinLetterDef8Dots.uti
+  noback context $l[]$l @36
+tests:
+  - [AB, A-B]
+  - [cd, c-d]
+  - [Ef, E-f]
+  - [gH, g-H]
+

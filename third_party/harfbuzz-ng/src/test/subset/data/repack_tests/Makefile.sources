@@ -1,0 +1,13 @@
+TESTS = \
+	basic.tests \
+	prioritization.tests \
+	table_duplication.tests \
+        isolation.tests \
+	$(NULL)
+
+XFAIL_TESTS = \
+	advanced_prioritization.tests \
+	$(NULL)
+
+DISABLED_TESTS = \
+	$(NULL)

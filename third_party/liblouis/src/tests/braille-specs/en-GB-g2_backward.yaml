@@ -1,0 +1,33 @@
+display: unicode-without-blank.dis
+table:
+  locale: en-GB
+  grade: 2
+  __assert-match: en_GB.tbl # en-GB-g2.ctb
+flags: {testmode: backward}
+tests:
+  - # an example of testing simple backtranslation.
+    - ⠮ ⠉⠁⠞ ⠎⠁⠞ ⠕⠝ ⠮ ⠍⠁⠞
+    - the cat sat on the mat
+  - # same as above example.
+    - ⠖⠮ ⠍⠕⠕⠝
+    - to the moon
+  - # an example where the text to be backtranslated is grade 2, but the word at the cursor is grade 1.
+    - ⠽ ⠺⠑⠝⠞ ⠞⠕
+    - you went to
+    - mode: [compbrlAtCursor]
+      cursorPos: [2,4]
+
+  # Issue 572: "ll" erroneously treated as "little" contraction in all words
+  # Tests based on UKAAF Standards Rule 8.10.6 and Appendix III
+flags: {testmode: bothDirections}
+tests:
+  - [ball, ⠃⠁⠇⠇]
+  - [little, ⠇⠇]
+  - [littler, ⠇⠇⠗]
+  - [belittle, ⠆⠇⠊⠞⠞⠇⠑]
+  - [belittled, ⠆⠇⠇⠙]
+  - [littlewood, ⠇⠇⠺⠕⠕⠙]
+  - [Dolittle, ⠠⠙⠕⠇⠊⠞⠞⠇⠑]
+  - [Doolittle, ⠠⠙⠕⠕⠇⠊⠞⠞⠇⠑]
+  - [Littlejohn, ⠠⠇⠇⠚⠕⠓⠝]
+  - [Littleover, ⠠⠇⠇⠕⠧⠻]

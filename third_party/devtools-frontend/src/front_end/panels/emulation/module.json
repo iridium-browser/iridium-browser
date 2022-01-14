@@ -1,0 +1,11 @@
+{
+  "dependencies": [
+    "ui/legacy"
+  ],
+    "resources": [
+    "deviceModeToolbar.css",
+    "deviceModeView.css",
+    "inspectedPagePlaceholder.css",
+    "mediaQueryInspector.css"
+  ]
+}

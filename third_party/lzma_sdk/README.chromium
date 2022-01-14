@@ -1,0 +1,27 @@
+Name: LZMA SDK
+Short Name: lzma
+URL: http://www.7-zip.org/sdk.html
+Version: 19.00
+Date: 2019-02-21
+License: Public Domain
+Security Critical: yes
+CPEPrefix: unknown
+
+Description:
+This contains a part of LZMA SDK 19.00.
+
+Local Modifications:
+The original code can be found at http://7-zip.org/a/lzma1900.7z.  Only parts
+of this archive are copied here.  More specifically:
+
+1/ C code required to open 7z archive files and uncompress LZMA
+2/ 7za.exe and 7zr.exe executables (amd64 version)
+3/ source code for SfxSetup, a utility for creating self extracting archives
+4/ C code required for xz decompression (split into its own static library)
+
+The patch in Util/SfxSetup/chromium.patch was applied so that:
+
+1/ Fix for includes file names, since the original code causes an include
+   file violation during git cl presubmit.
+2/ Extended search range for 7z archive signature to accomodate
+   increased sfx binary size in debug builds.

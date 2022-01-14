@@ -1,0 +1,18 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+//
+// **** DO NOT EDIT - this file was automatically generated. ****
+syntax = "proto3";
+
+package cast.common;
+
+option optimize_for = LITE_RUNTIME;
+
+// A Cast service info.
+message ServiceInfo {
+  oneof endpoint_address {
+    // gRPC endpoint (http://, unix:/ etc).
+    string grpc_endpoint = 1;
+  }
+}

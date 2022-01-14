@@ -1,0 +1,51 @@
+# Copyright 2021 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+import("../../../scripts/build/ninja/devtools_entrypoint.gni")
+import("../../../third_party/typescript/typescript.gni")
+import("../visibility.gni")
+
+devtools_entrypoint("devtools_app-meta-files") {
+  entrypoint = "devtools_app-meta-files.ts"
+
+  deps = [
+    "../../entrypoints/inspector_main:meta",
+    "../../panels/accessibility:meta",
+    "../../panels/animation:meta",
+    "../../panels/application:meta",
+    "../../panels/browser_debugger:meta",
+    "../../panels/css_overview:meta",
+    "../../panels/developer_resources:meta",
+    "../../panels/elements:meta",
+    "../../panels/emulation:meta",
+    "../../panels/help:meta",
+    "../../panels/issues:meta",
+    "../../panels/layer_viewer:meta",
+    "../../panels/layers:meta",
+    "../../panels/lighthouse:meta",
+    "../../panels/media:meta",
+    "../../panels/mobile_throttling:meta",
+    "../../panels/network:meta",
+    "../../panels/performance_monitor:meta",
+    "../../panels/security:meta",
+    "../../panels/sensors:meta",
+    "../../panels/timeline:meta",
+    "../../panels/web_audio:meta",
+    "../../panels/webauthn:meta",
+  ]
+
+  visibility = [ ":*" ]
+
+  visibility += devtools_entrypoints_visibility
+}
+
+ts_library("devtools_app") {
+  no_emit = true
+  sources = [ "devtools_app.js" ]
+
+  deps = [
+    ":devtools_app-meta-files",
+    "../../entrypoints/startup:bundle",
+    "../shell",
+  ]
+}

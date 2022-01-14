@@ -1,0 +1,7 @@
+table: [tables/unicode-without-blank.dis, tables/en-ueb-g1.ctb]
+tests:
+  # if the following line ("three italic words") is commented out the
+  # last line ("three bold words") will will pass. It appears that the
+  # first translation is somehow influencing the second one
+  - [three italic words, ⠨⠶⠞⠓⠗⠑⠑ ⠊⠞⠁⠇⠊⠉ ⠺⠕⠗⠙⠎⠨⠄, {typeform: {italic: '++++++++++++++++++'}}]
+  - [three bold words, ⠘⠶⠞⠓⠗⠑⠑ ⠃⠕⠇⠙ ⠺⠕⠗⠙⠎⠘⠄, {typeform: {bold: '++++++++++++++++'}}]

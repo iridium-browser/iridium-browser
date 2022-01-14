@@ -1,0 +1,6 @@
+{
+  "dependencies": [
+    "panels/network",
+    "ui/legacy"
+  ]
+}

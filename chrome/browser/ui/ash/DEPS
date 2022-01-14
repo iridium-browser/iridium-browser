@@ -1,0 +1,24 @@
+include_rules = [
+  # //chrome/browser/ui/ash is conceptually part of "ash". See the "Lacros:
+  # ChromeOS source code directory migration" design doc at
+  # https://docs.google.com/document/d/1g-98HpzA8XcoGBWUv1gQNr4rbnD5yfvbtYZyPDDbkaE
+  "+ash",
+
+  # ash depends on views, so code in ui/ash is allowed to depend on ui/views.
+  "+chrome/browser/ui/views",
+
+  "+media",
+  "+components/desks_storage"
+]
+
+specific_include_rules = {
+  ".*test.*": [
+    "+ui/message_center/message_center.h",
+  ],
+  "assistant_timers_browsertest\.cc": [
+    "+ui/message_center",
+  ],
+  "chrome_shell_delegate\.cc": [
+    "+cc/input/touch_action.h",
+  ],
+}

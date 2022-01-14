@@ -1,0 +1,61 @@
+<!-- Copyright 2018 The Chromium Authors. All rights reserved.
+     Use of this source code is governed by a BSD-style license that can be
+     found in the LICENSE file. -->
+
+<link rel="import" href="chrome://resources/cr_elements/cr_expand_button/cr_expand_button.html">
+<link rel="import" href="chrome://resources/cr_elements/cr_toggle/cr_toggle.html">
+<link rel="import" href="chrome://resources/polymer/v1_0/iron-collapse/iron-collapse.html">
+
+<link rel="import" href="/components/common_styles/common_styles.html">
+
+<dom-module id="setting-zippy">
+  <template>
+    <style include="oobe-common-styles"></style>
+    <link rel="stylesheet" href="setting_zippy.css">
+    <link rel="stylesheet" href="assistant_shared_styles.css">
+    <template is="dom-if" if="[[expandStyle]]">
+      <cr-expand-button expanded="{{expanded_}}">
+        <div id="container" class="flex layout horizontal"
+            expandStyle$="[[expandStyle]]">
+          <div class="icon">
+            <webview class="icon-view" src="[[iconSrc]]" tabindex="-1">
+            </webview>
+          </div>
+          <div>
+            <div class="sub-title">
+              <slot name="title"></slot>
+            </div>
+            <div class="content">
+              <slot name="content"></slot>
+            </div>
+          </div>
+        </div>
+      </cr-expand-button>
+      <iron-collapse opened="[[expanded_]]">
+        <div class="content indent">
+          <slot name="additional"></slot>
+        </div>
+      </iron-collapse>
+    </template>
+    <template is="dom-if" if="[[!expandStyle]]">
+      <div id="container" class="flex layout horizontal"
+          expandStyle$="[[expandStyle]]" cardStyle$="[[cardStyle]]">
+        <div class="icon">
+          <webview class="icon-view" src="[[iconSrc]]" tabindex="-1"></webview>
+        </div>
+        <div>
+          <div class="sub-title">
+            <slot name="title"></slot>
+          </div>
+          <div id="description" class="content">
+            <slot name="content"></slot>
+          </div>
+        </div>
+        <div class="toggle">
+          <slot name="toggle"></slot>
+        </div>
+      </div>
+    </template>
+    <div class="line" hidden="[[hideLine]]"></div>
+  </template>
+</dom-module>

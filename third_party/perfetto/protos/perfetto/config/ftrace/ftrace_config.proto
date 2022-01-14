@@ -1,0 +1,51 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto2";
+
+package perfetto.protos;
+
+message FtraceConfig {
+  repeated string ftrace_events = 1;
+  repeated string atrace_categories = 2;
+  repeated string atrace_apps = 3;
+  // *Per-CPU* buffer size.
+  optional uint32 buffer_size_kb = 10;
+  optional uint32 drain_period_ms = 11;
+
+  // Configuration for compact encoding of scheduler events. When enabled (and
+  // recording the relevant ftrace events), specific high-volume events are
+  // encoded in a denser format than normal.
+  message CompactSchedConfig {
+    // If true, and sched_switch or sched_waking ftrace events are enabled,
+    // record those events in the compact format.
+    optional bool enabled = 1;
+  }
+  optional CompactSchedConfig compact_sched = 12;
+
+  // Enables symbol name resolution against /proc/kallsyms.
+  // It requires that either traced_probes is running as root or that
+  // kptr_restrict has been manually lowered.
+  // It does not disclose KASLR, symbol addresses are mangled.
+  optional bool symbolize_ksyms = 13;
+
+  // By default the kernel symbolizer is lazily initialized on a deferred task
+  // to reduce ftrace's time-to-start-recording. Unfortunately that makes
+  // ksyms integration tests hard. This flag forces the kernel symbolizer to be
+  // initialized synchronously on the data source start and hence avoiding
+  // timing races in tests.
+  optional bool initialize_ksyms_synchronously_for_testing = 14;
+}

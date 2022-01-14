@@ -1,0 +1,10 @@
+include_rules = [
+  "+chromeos/dbus",
+  "+dbus",
+  "+services/device/public",
+  "+ui/android",
+  "+ui/gfx",
+  "+ui/base/ui_base_features.h",
+  "+ui/base/x",
+  "+ui/display",
+]

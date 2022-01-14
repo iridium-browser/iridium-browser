@@ -1,0 +1,75 @@
+android_startup {
+  startup {
+    startup_id: 1
+    package_name: "com.some.app"
+    process_name: "com.some.app"
+    zygote_new_process: false
+    to_first_frame {
+      dur_ns: 999999900
+      main_thread_by_task_state {
+        running_dur_ns: 0
+        runnable_dur_ns: 0
+        uninterruptible_sleep_dur_ns: 0
+        interruptible_sleep_dur_ns: 0
+      }
+      other_processes_spawned_count: 0
+      time_activity_manager {
+        dur_ns: 2
+        dur_ms: 2e-06
+      }
+      dur_ms: 999.9999
+      time_dex_open {
+        dur_ns: 20
+        dur_ms: 2e-05
+      }
+      time_verify_class {
+        dur_ns: 40
+        dur_ms: 4e-05
+      }
+      mcycles_by_core_type {
+      }
+      jit_compiled_methods: 2
+      time_jit_thread_pool_on_cpu {
+        dur_ns: 20
+        dur_ms: 2e-05
+      }
+      time_gc_total {
+        dur_ns: 130
+        dur_ms: 0.00013
+      }
+      time_gc_on_cpu {
+        dur_ns: 50
+        dur_ms: 5e-05
+      }
+    }
+    activity_hosting_process_count: 1
+    process {
+      name: "com.some.app"
+    }
+    event_timestamps {
+      intent_received: 100
+      first_frame: 1000000000
+    }
+    long_binder_transactions {
+      duration {
+        dur_ns: 100000000
+        dur_ms: 100
+      }
+      thread: "Binder"
+      destination_process: "system_server"
+      flags: "0x00 No Flags Set"
+      code: "0x00 Java Layer Dependent"
+    }
+    long_binder_transactions {
+      duration {
+        dur_ns: 200000000
+        dur_ms: 200
+      }
+      thread: "fonts"
+      destination_thread: "Binder"
+      destination_process: "com.some.app"
+      flags: "0x00 No Flags Set"
+      code: "0x00 Java Layer Dependent"
+    }
+  }
+}

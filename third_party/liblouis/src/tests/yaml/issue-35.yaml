@@ -1,0 +1,20 @@
+# see https://github.com/liblouis/liblouis/issues/35
+
+table: |
+  include tables/spaces.uti
+  include tables/text_nabcc.dis
+  uplow Aa 1
+  punctuation ' 3
+  punctuation , 6
+  punctuation ; 56
+  multind 56-6 letsign capsletter
+  letsign 56
+  capsletter 6
+  begcapsword 6-6
+  endcapsword 6-3
+
+tests:
+  - - "A Aa AAa AAAa"
+    - ";,a ,aa ,,aa,'a ,,aaa,'a"
+  - - "AAa AAa"
+    - ",,aa,'a ,,aa,'a"

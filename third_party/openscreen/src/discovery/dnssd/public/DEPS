@@ -1,0 +1,6 @@
+# -*- Mode: Python; -*-
+
+include_rules = [
+  # Layering rule.
+  '-discovery/dnssd/impl',
+]

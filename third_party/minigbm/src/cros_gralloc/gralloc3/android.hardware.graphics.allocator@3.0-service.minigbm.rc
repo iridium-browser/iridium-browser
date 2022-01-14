@@ -1,0 +1,14 @@
+#
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+#
+
+service vendor.graphics.allocator-3-0 /vendor/bin/hw/android.hardware.graphics.allocator@3.0-service.minigbm
+    interface android.hardware.graphics.allocator@3.0::IAllocator default
+    class hal animation
+    user system
+    group graphics drmrpc
+    capabilities SYS_NICE
+    onrestart restart surfaceflinger
+    writepid /dev/cpuset/system-background/tasks

@@ -1,0 +1,100 @@
+# liblouis: Irish Braille Code Grade 1 uncontracted
+# Version: INBAF May 2019 
+# -----------
+#-index-name: Irish, uncontracted
+#-display-name: Irish uncontracted braille
+#
+#+locale:ga
+#+type:literary
+#+contraction:no
+#+grade:1
+#+system:INBAF
+#
+# Updated Irish Braille (UIB) version 2019 by INBAF (ratified May 27 2019):
+# http://liblouis.org/braille-specs/irish/#updated-irish-braille-2019
+# -----------
+#
+#  Copyright (C) 2004-2006 JJB Software, Inc. www.jjb-software.com
+#  Copyright (C) 2016 American Printing House for the Blind, Inc. www.aph.org
+#  Copyright (C) 2019 Ronan McGuirk <ronan.p.mcguirk@gmail.com>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#  Maintained by Ronan McGuirk
+
+
+# This table is based on UEB Grade 1 and has a small number of
+# override rules below. Apart from these rules, Irish Grade 1 is the
+# same as UEB Grade 1.
+
+include text_nabcc.dis All display opcodes
+
+# Note that the uplow rules need to be placed before AND after the "en-ueb-g1.ctb"
+# include in order for both the lower- and uppercase part to take precedence
+# (see issue https://github.com/liblouis/liblouis/issues/384)
+
+# Irish Long accent signs (sínte fada)
+uplow \x00c1\x00e1 12346 Áá
+uplow \x00c9\x00e9 123456 Éé
+uplow \x00cd\x00ed 12356 Íí
+uplow \x00d3\x00f3 2346 Óó
+uplow \x00da\x00fa 23456 Úú
+# old Irish script characters seanchló
+noback uplow \x1E02\x1E03 12-125 Ḃḃ   
+noback uplow \x010A\x010B 16 Ċċ   
+noback uplow \x1E0A\x1E0B 145-125 Ḋḋ   
+noback uplow \x1E1E\x1E1F 124-125 Ḟḟ    
+noback uplow \x0120\x0121 126 Ġġ    
+noback uplow \x1E40\x1E41 134-125 Ṁṁ    
+noback uplow \x1E56\x1E57 1234-125 Ṗṗ     
+noback uplow \x1E60\x1E61 146 Ṡṡ     
+
+noback uplow \x1E6A\x1E6B 1456 Ṫṫ     
+
+include en-ueb-g1.ctb
+noback sign \x204A 234 tironian eth 
+begword m\x0027 134-3
+begword b\x0027 12-3
+begword b\x2019 12-3
+begword d\x0027 145-3
+begword d\x2019 145-3
+begword m\x2019 134-3
+begword n\x0027 1345-3
+begword n\x2019 1345-3
+begword s\x0027 234-3
+begword s\x2019 234-3
+
+begword n- 1345-36
+begword t- 2345-36
+
+
+
+## repeat uplow rules
+uplow \x00c1\x00e1 12346 Áá
+uplow \x00c9\x00e9 123456 Éé
+uplow \x00cd\x00ed 12356 Íí
+uplow \x00d3\x00f3 2346 Óó
+uplow \x00da\x00fa 23456 Úú
+noback uplow \x1E02\x1E03 12-125 Ḃḃ
+noback uplow \x010A\x010B 16 Ċċ
+noback uplow \x1E0A\x1E0B 145-125 Ḋḋ
+noback uplow \x1E1E\x1E1F 124-125 Ḟḟ
+noback uplow \x0120\x0121 126 Ġġ
+noback uplow \x1E40\x1E41 134-125 Ṁṁ
+noback uplow \x1E56\x1E57 1234-125 Ṗṗ
+noback uplow \x1E60\x1E61 146 Ṡṡ
+noback uplow \x1E6A\x1E6B 1456 Ṫṫ

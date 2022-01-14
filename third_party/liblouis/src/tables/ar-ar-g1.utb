@@ -1,0 +1,299 @@
+# liblouis: Generic Arabic Grade 1 table
+#
+# Copyright (C) 1995-2004 by The BRLTTY Team. 
+# Copyright (C) 2004 by ViewPlus Technologies, Inc.,  www.viewplustech.com
+# Copyright (C) 2004 by Computers to Help People, Inc., www.chpi.org  
+# Copyright (C) 2011-2012 by Mesar Hameed <mesar.hameed@gmail.com>
+# Copyright (C) 2018 by Ikrami Ahmad <ikrami.ahmad@gmail.com>
+
+# This file is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+
+# You should have received a copy of the GNU Lesser General Public
+# License along with this file; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+# This table was originally built by Leon Ungier <Leon.Ungier@ViewPlus.com>
+# with help and guidance from Mohammed R. Ramadan <mramadan@nattiq.com>
+
+include text_nabcc.dis All display opcodes
+include spaces.uti
+include braille-patterns.cti # unicode braille.
+
+# Arabic characters
+letter ء 3 # arabic individual hamza (\x0621)
+letter آ 345 # arabic alef madd (\x0622)
+letter أ 34 # arabic hamza above alef (\x0623)
+letter ؤ 1256 # arabic hamza on waw (\x0624)
+letter إ 46 # arabic hamza below alef (\x0625)
+letter ئ 13456 # arabic hamza on iaa (\x0626)
+letter ا 1 # arabic Alef (\x0626)
+letter ب 12 # arabic baa (\x0628)
+letter ة 16 # arabic taa marbuta (\x0629)
+letter ث 1456 # arabic thaa (\x062B)
+letter ت 2345 # arabic Taa (\x062A)
+letter ج 245 # arabic jeem (\x062C)
+letter ح 156 # arabic strong haa (\x062D)
+letter خ 1346 # arabic Khaa (\x062E)
+letter د 145 # arabic dal (\x062F)
+letter ذ 2346 # arabic thal (\x0630)
+letter ر 1235 # arabic raa (\x0631)
+letter ز 1356 # arabic zaai (\x0632)
+letter س 234 # arabic seen (\x0633)
+letter ش 146 # arabic sheen (\x0634)
+letter ص 12346 # arabic saad (\x0635)
+letter ض 1246 # arabic dhaad (\x0636)
+letter ط 23456 # arabic strong taa (\x0637)
+letter ظ 123456 # arabic strong thaa (\x0638)
+letter ع 12356 # arabic ayn (\x0639)
+letter غ 126 # arabic ghayn (\x063A)
+letter ف 124 # arabic faa (\x0641)
+letter ق 12345 # arabic strong qaaf (\x0642)
+letter ك 13 # arabic kaaf (\x0643)
+letter ل 123 # arabic laam (\x0644)
+letter م 134 # arabic meem (\x0645)
+letter ن 1345 # arabic noon (\x0646)
+letter ه 125 # arabic soft haa (\x0647)
+letter و 2456 # arabic waaw (\x0648)
+letter ى 135 # arabic alef maqsoora (\x0649)
+letter ي 24 # arabic iaa (\x064A)
+letter َ 2 # arabic diacritic symbol fathah (\x064E)
+letter ِ 15 # arabic diacritic symbol kasrah (\x0650)
+letter ً 23 # arabic diacritic symbol tanween fath (\x064B)
+letter ٌ 26 # arabic diacritic symbol tanween dham (\x064C)
+letter ٍ 35 # arabic diacritic symbol tanween kasr (\x064D)
+letter ُ 136 # arabic diacritic symbol dhamma (\x064F)
+letter ّ 6 # arabic diacritic symbol shadda (\x0651)
+letter ْ 25 # arabic diacritic symbol sukoon (\x0652)
+noback sign ـ 2 # arabic tatweel (\x0640)
+
+always \x0644\x0627 1236 # to join lam and alef together in one cell if they come in one word
+midendword \x0651 6 # to indicate that Shadda can never come at the beginning of a word
+midendword \x0652 25 # arabic diacritic symbol sukoon (\x0652)
+midendword َ 2
+
+#the following to correct Shadda symbol, which should be written before the character in Arabic braille code. this will consists of every arabic character followed by the Shadda diacritic symbol, and a dot pattern of the braille shadda followed by the character.
+noback always ءّ 6-3
+noback always آّ 6-345
+noback always أّ 6-34
+noback always ؤّ 6-1256
+noback always إّ 6-46
+noback always ئّ 6-13456
+noback always اّ 6-1
+noback always بّ 6-12
+noback always ةّ 6-16
+noback always ثّ 6-1456
+noback always تّ 6-2345
+noback always جّ 6-245
+noback always حّ 6-156
+noback always خّ 6-1346
+noback always دّ 6-145
+noback always ذّ 6-2346
+noback always رّ 6-1235
+noback always زّ 6-1356
+noback always سّ 6-234
+noback always شّ 6-146
+noback always صّ 6-12346
+noback always ضّ 6-1246
+noback always طّ 6-23456
+noback always ظّ 6-123456
+noback always عّ 6-12356
+noback always غّ 6-126
+noback always فّ 6-124
+noback always قّ 6-12345
+noback always كّ 6-13
+noback always لّ 6-123
+noback always مّ 6-134
+noback always نّ 6-1345
+noback always هّ 6-125
+noback always وّ 6-2456
+noback always يّ 6-24
+noback always لاّ 6-1236
+
+punctuation ، 5 # Arabic comma (\x060C)
+punctuation \x061B 56 # Arabic semiColon
+punctuation ; 56
+punctuation : 5-2
+punctuation \x061F 236 # Arabic question mark ؟
+punctuation ? 236
+punctuation \x06D4 256 # Arabic Full stop
+punctuation . 256
+punctuation , 2
+punctuation ! 235
+punctuation " 2356
+sign # 3456
+sign $ 4-234
+punctuation % 25-1234
+sign & 4-12346
+punctuation ' 3 # apostrophe
+punctuation ) 356
+punctuation ( 236
+sign * 56-35
+math + 56-235
+punctuation - 36-36
+math / 456-36 # changed from the unified braille code, so that it does not conflict with the letter \x0623
+
+# Braille indicators
+numsign 3456 number sign, just a dots operand
+noback multind 56-6 letsign capsletter
+# letsign 56
+noback capsletter 6
+noback begcapsword 6-6
+noback endcapsword 6-3
+emphclass italic
+emphclass underline
+emphclass bold
+noback begemph italic 46
+noback endemph italic 46-46
+noback begemph bold 456
+noback endemph bold 456-456
+noback begcomp 456-346
+noback endcomp 456-156
+
+# Arabic numbers
+digit \x0660 245 # 0 (٠)
+digit \x0661 1 # 1 (١)
+digit \x0662 12 # 2 (٢)
+digit \x0663 14 # 3 (٣)
+digit \x0664 145 # 4 (٤)
+digit \x0665 15 # 5 (٥)
+digit \x0666 124 # 6 (٦)
+digit \x0667 1245 # 7 (٧)
+digit \x0668 125 # 8 (٨)
+digit \x0669 24 # 9 (٩)
+litdigit \x0660 245 # 0 (٠)
+litdigit \x0661 1 # 1 (١)
+litdigit \x0662 12 # 2 (٢)
+litdigit \x0663 14 # 3 (٣)
+litdigit \x0664 145 # 4 (٤)
+litdigit \x0665 15 # 5 (٥)
+litdigit \x0666 124 # 6 (٦)
+litdigit \x0667 1245 # 7 (٧)
+litdigit \x0668 125 # 8 (٨)
+litdigit \x0669 24 # 9 (٩)
+
+# Latin numbers
+include loweredDigits6Dots.uti
+include litdigits6Dots.uti
+
+math < 0-246-0
+math = 56-2356 
+math > 0-135-0
+sign @ 4-1 # the unified braille code used dot 4 only to represent it. i changed it as it is written in the unified english code, so that it can be read in grade2 as well.
+
+include latinLetterDef6Dots.uti
+punctuation [ 6-236
+sign \\ 45-36 # not mentioned in the Unified arabic braille code.
+punctuation ] 356-3 
+sign ^ 346 # circumflex accent
+sign _ 6-36 # underscore
+noback sign ` 4 # grave accent
+punctuation { 5-236
+sign | 5-25 # changed so that it is not confused with number seven or the latin letter g
+punctuation } 356-2
+math ~ 45-25 # changed so that it can be read in grade2 context
+sign \x00A2 4-14 # ¢ cents sign
+sign \x00A3 4-123 # £ pounds sign
+noback sign \x00A5 4-13456 # ¥ yen sign
+noback sign \x00A7 4-234-3 # section sign §
+noback sign \x00A9 2356-6-14-2356 # © copyright sign
+noback sign \x00AE 16-256 # ® Registered mark
+punctuation \x00Ad 36-36 # soft hyphen
+noback sign \x00B0 356 # ° degrees sign
+noback sign \x00B5 46-134 # µ micro sign
+noback sign \x00B6 4-1234-345 # ¶ pilcrow sign
+sign \x00AB 2356 # LEFT-POINTING DOUBLE ANGLE QUOTATION
+sign \x00BB 2356 # RIGHT-POINTING DOUBLE ANGLE QUOTATION
+punctuation \x2018 2356 # smart single left quotation mark
+punctuation \x2019 2356 # smart single right quotation mark
+punctuation \x201C 2356 # smart opening double quote
+punctuation \x201D 2356 # smart closing double quote
+punctuation \x201E 2356 # smart double low quotation mark
+punctuation \x201F 2356 # smart double high reverse quotation mark
+
+sign \x00BF 236 # inverted question mark
+math \x00D7 56-236 # × multiplication sign
+math \x00F7 56-256 # ÷ division sign
+sign \x200C 9 # ZERO WIDTH NON-JOINER
+punctuation \x2010 36-36 # hyphen
+punctuation \x2011 36-36 #  non-breaking hyphen
+punctuation \x2013 4-36 # en dash
+punctuation \x2026 3-3-3 # smart ellipsis
+sign \x20AC 4-15 # Euro sign
+noback sign \x25CF 35 # BLACK CIRCLE
+
+include countries.cti
+postpunc ) 356
+prepunc ( 236
+prepunc " 2356
+postpunc " 2356
+word 'em = 
+word 'tis =
+word 'twas =
+begnum # 3456-4 print number sign before number
+midnum . 46
+midnum , 2
+postpunc , 2
+decpoint . 46
+midnum - 36-36
+hyphen - 36-36
+#capsnocont
+postpunc ، 5 # Arabic comma (\x060C)
+postpunc . 256
+postpunc \x06D4 256 # Arabic Full stop
+postpunc ; 56
+postpunc \x061B 56 # Arabic semiColon
+midnum : 5-2
+postpunc : 5-2
+postpunc ! 235
+midnum / 456-36
+always / 456-36
+always < 0-246-0
+always > 0-135-0
+postpunc \x061F 236 # Arabic question mark ؟
+postpunc ? 236
+endnum % 25-1234
+midnum ^ 346
+noback always ^ 346
+always ~ 45-25
+always & 4-12346
+midnum * 56-35
+always * 56-35
+always [ 6-236
+always ] 356-3
+always { 5-236
+always } 356-2
+always @ 4-1
+always \\ 45-36
+always | 5-25
+always ... 3-3-3
+always $ 4-234
+
+# special character sequences
+compbrl :// URLs
+compbrl www.
+compbrl .com
+compbrl .edu
+compbrl .gov
+compbrl .mil
+compbrl .net
+compbrl .org
+# include countries.cti
+compbrl .doc
+compbrl .htm
+compbrl .html
+compbrl .tex
+compbrl .txt
+compbrl .gif
+compbrl .jpg
+compbrl .png
+compbrl .wav
+compbrl .tar
+compbrl .zip

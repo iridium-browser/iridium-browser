@@ -1,0 +1,62 @@
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/spaces.uti
+  uplow Aa 1
+
+  uppercase B 12
+  uppercase B 1
+  lowercase b 12
+  lowercase b 1
+
+  uplow Cc 14
+
+  uplow Dd 145
+  uplow Dd 14
+
+  uplow Ee 15
+
+  uplow Ff 124
+  uplow Ff 15,15
+
+  uplow Gg 1245
+
+  uplow Hh 125,125
+  uplow Hh 1245,1245
+
+tests:
+  - - The topmost definition for each letter must be honored.
+    - Aa Bb Cc Dd Ee Ff Gg Hh
+    - ⠁⠁ ⠃⠃ ⠉⠉ ⠙⠙ ⠑⠑ ⠋⠋ ⠛⠛ ⠓⠓
+
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/spaces.uti
+  uplow Aa 1
+
+  uppercase B 12
+  uppercase B 1
+  lowercase b 12
+  lowercase b 1
+
+  uplow Cc 14
+
+  uplow Dd 145
+  uplow Dd 14
+
+  uplow Ee 15
+
+  uplow Ff 124
+  uplow Ff 15,15
+
+  uplow Gg 1245
+
+  uplow Hh 125,125
+  uplow Hh 1245,1245
+
+  capsletter 6
+
+tests:
+  - - The topmost definition (lowecase in case of uplow) must be honored.
+    - Aa Bb Cc Dd Ee Ff Gg Hh
+    - ⠠⠁⠁ ⠠⠃⠃ ⠠⠉⠉ ⠠⠙⠙ ⠠⠑⠑ ⠠⠋⠋ ⠠⠛⠛ ⠠⠓⠓
+    - {xfail: true}

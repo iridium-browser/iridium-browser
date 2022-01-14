@@ -1,0 +1,43 @@
+# Test case for Consistency between for and back trans with capsword
+# and punctuation/math (see also #361)
+
+table: |
+  include tables/unicode.dis
+  punctuation . 3
+  punctuation , 2
+  punctuation - 36
+  math + 235
+  include tables/latinLetterDef6Dots.uti
+  include tables/braille-patterns.cti
+  capsletter 6
+  begcapsword 6-6
+  endcapsword 6-3
+
+tests:
+  - [Foobar, ⠠⠋⠕⠕⠃⠁⠗]
+  - [FOOBAR, ⠠⠠⠋⠕⠕⠃⠁⠗]
+  - [FOObar, ⠠⠠⠋⠕⠕⠠⠄⠃⠁⠗]
+  - [FOO-bar, ⠠⠠⠋⠕⠕⠤⠃⠁⠗]
+  - [FOO.bar, ⠠⠠⠋⠕⠕⠄⠃⠁⠗]
+  - [FOO+bar, ⠠⠠⠋⠕⠕⠖⠃⠁⠗]
+
+table: |
+  include tables/unicode.dis
+  punctuation . 3
+  punctuation , 2
+  punctuation - 36
+  math + 235
+  include tables/latinLetterDef6Dots.uti
+  include tables/braille-patterns.cti
+  capsletter 6
+  begcapsword 6-6
+  endcapsword 6-3
+
+flags: {testmode: backward}
+tests:
+  - [⠠⠋⠕⠕⠃⠁⠗, Foobar]
+  - [⠠⠠⠋⠕⠕⠃⠁⠗, FOOBAR]
+  - [⠠⠠⠋⠕⠕⠠⠄⠃⠁⠗, FOObar]
+  - [⠠⠠⠋⠕⠕⠤⠃⠁⠗, FOO-bar]
+  - [⠠⠠⠋⠕⠕⠄⠃⠁⠗, FOO.bar]
+  - [⠠⠠⠋⠕⠕⠖⠃⠁⠗, FOO+bar]

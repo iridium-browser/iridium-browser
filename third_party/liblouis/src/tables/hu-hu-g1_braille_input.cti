@@ -1,0 +1,104 @@
+# liblouis: Hungarian Grade 1 Braille input subtable
+#
+#  Copyright (C) 2018-2019 Attila Hammer from IT Foundation for the Visually Impaired - Hungary. www.infoalap.hu
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#  Maintained by Attila Hammer  hammer.attila@infoalap.hu
+#
+# If you found bugs with hungarian grade1 table, report it with following address:
+# Attila Hammer <hammer.attila@infoalap.hu
+#If you have a Launchpad account, report table related requests with following bug tracker address: https://bugs.launchpad.net/belin
+
+#Hungarian Braille input related rules
+#Exceptions for two simple equals special letter rules related (for example two literary cscs letter, two literary gygy letter, etc)
+#cscs letter related input rules
+nofor always cscs 146-5-146
+noback always cscs 146-5-146
+noback pass2 @146-5-146 @146-146
+
+#gygy letter related input rules
+nofor always gygy 1456-5-1456
+noback always gygy 1456-5-1456
+noback pass2 @1456-5-1456 @1456-1456
+
+#nyny related input rules
+nofor always nyny 1246-5-1246
+noback always nyny 1246-5-1246
+noback pass2 @1246-5-1246 @1246-1246
+
+#Exceptions for lyly letter related input rules
+nofor always lyly 456-5-456
+noback always lyly 456-5-456
+noback pass2 @456-5-456 @456-456
+
+#Exceptions for tyty lrelated rules
+nofor always tyty 1256-5-1256
+noback always tyty 1256-5-1256
+noback pass2 @1256-5-1256 @1256-1256
+
+#Exception  for szsz related input
+nofor always szsz 156-5-156
+noback always szsz 156-5-156
+noback pass2 @156-5-156 @156-156
+
+#Exception rules for zszs input related
+nofor always zszs 345-5-345
+noback always zszs 345-5-345
+noback pass2 @345-5-345 @345-345
+
+#punctuation related exceptions
+nofor always – 5-36
+nofor context @8 "\n"
+nofor context @235-8 "!\n"
+nofor context @235-0 "! "
+
+#for plus sign related rule
+nofor context @5-235 "+"
+noback context $a["+"] @5-235
+noback pass2 @5-235 @235
+
+#for [ and ] character input related old dot combinations related rules, need keeping this rules with compatibility purposes
+nofor always [ 5-12356
+noback always [ 5-12356
+noback pass2 @5-12356 @46-2346
+nofor always ] 5-23456
+noback always ] 5-23456
+noback pass2 @5-23456 @46-1356
+
+#\ character related rule related exception
+nofor always \\ 5-16
+noback always \\ 5-16
+noback pass2 @5-16 @16
+
+#for ` related exception rules
+nofor always ` 5-4
+noback always ` 5-4
+noback pass2 @5-4 @4
+
+#for { and } related old rules, need keeping this rules with compatibility purposes:
+nofor always { 5-12345
+noback always { 5-12345
+noback pass2 @5-12345 @5-2345
+nofor always } 5-12456
+noback always } 5-12456
+noback pass2 @5-12456 @5-1356
+
+#For | punctuation character related input rule related exception
+nofor always | 5-45
+noback always | 5-45
+noback pass2 @5-45 @45

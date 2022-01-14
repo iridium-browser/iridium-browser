@@ -1,0 +1,51 @@
+# Dutch Computer Braille as proposed to be used in Belgium and the Netherlands
+# This braille table is currently in draft
+# Please consult the Dutch Braille Authority website for more information
+#
+# Copyright (C) 2019 by the Dutch Braille Authority <http://braille-autoriteit.org>
+# Copyright (C) 2019 by Dedicon <http://www.dedicon.nl>
+# Copyright (C) 2019 by Babbage B.V. <http://www.babbage.com>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+table:
+  locale: nl
+  type: computer
+  dots: 8
+  __assert-match: nl-comp8.utb
+flags: {testmode: bothDirections}
+tests:
+  - - Ons voorstel is bij uitstek geschikt voor complexe (technische en wiskundige) teksten, al dan niet op een brailleleesregel.
+    - ⡕⠝⠎ ⠧⠕⠕⠗⠎⠞⠑⠇ ⠊⠎ ⠃⠊⠚ ⠥⠊⠞⠎⠞⠑⠅ ⠛⠑⠎⠉⠓⠊⠅⠞ ⠧⠕⠕⠗ ⠉⠕⠍⠏⠇⠑⠭⠑ ⠦⠞⠑⠉⠓⠝⠊⠎⠉⠓⠑ ⠑⠝ ⠺⠊⠎⠅⠥⠝⠙⠊⠛⠑⠴ ⠞⠑⠅⠎⠞⠑⠝⠂ ⠁⠇ ⠙⠁⠝ ⠝⠊⠑⠞ ⠕⠏ ⠑⠑⠝ ⠃⠗⠁⠊⠇⠇⠑⠇⠑⠑⠎⠗⠑⠛⠑⠇⠲
+  - - Voorlooptekens zijn niet nodig, alle karakters passen in 1 braillecel.
+    - ⡧⠕⠕⠗⠇⠕⠕⠏⠞⠑⠅⠑⠝⠎ ⠵⠊⠚⠝ ⠝⠊⠑⠞ ⠝⠕⠙⠊⠛⠂ ⠁⠇⠇⠑ ⠅⠁⠗⠁⠅⠞⠑⠗⠎ ⠏⠁⠎⠎⠑⠝ ⠊⠝ ⠡ ⠃⠗⠁⠊⠇⠇⠑⠉⠑⠇⠲
+  - - Een cijfer bestaat uit het "reguliere" cijfer met toevoeging van braillepunt 6.
+    - ⡑⠑⠝ ⠉⠊⠚⠋⠑⠗ ⠃⠑⠎⠞⠁⠁⠞ ⠥⠊⠞ ⠓⠑⠞ ⠶⠗⠑⠛⠥⠇⠊⠑⠗⠑⠶ ⠉⠊⠚⠋⠑⠗ ⠍⠑⠞ ⠞⠕⠑⠧⠕⠑⠛⠊⠝⠛ ⠧⠁⠝ ⠃⠗⠁⠊⠇⠇⠑⠏⠥⠝⠞ ⠫⠲
+  - - Alle voortekens verdwijnen, d.w.z. geen (permanent) hoofdletterteken, cijferteken, herstelteken etc.
+    - ⡁⠇⠇⠑ ⠧⠕⠕⠗⠞⠑⠅⠑⠝⠎ ⠧⠑⠗⠙⠺⠊⠚⠝⠑⠝⠂ ⠙⠲⠺⠲⠵⠲ ⠛⠑⠑⠝ ⠦⠏⠑⠗⠍⠁⠝⠑⠝⠞⠴ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠞⠑⠅⠑⠝⠂ ⠉⠊⠚⠋⠑⠗⠞⠑⠅⠑⠝⠂ ⠓⠑⠗⠎⠞⠑⠇⠞⠑⠅⠑⠝ ⠑⠞⠉⠲
+  - - 503,2 + 498,5 = 1001,7.
+    - ⠱⠬⠩⠂⠣ ⢖ ⠹⠪⠳⠂⠱ ⢶ ⠡⠬⠬⠡⠂⠻⠲
+  - - (8 -3) *5 =25. 2%=2/100.
+    - ⠦⠳ ⠤⠩⠴ ⠔⠱ ⢶⠣⠱⠲ ⠣⠿⢶⠣⠌⠡⠬⠬⠲
+  - - =SUM(B4:OFFSET(B4,0,E2-1))
+    - ⢶⡎⡥⡍⠦⡃⠹⠒⡕⡋⡋⡎⡑⡞⠦⡃⠹⠂⠬⠂⡑⠣⠤⠡⠴⠴
+  - - =IF(AND(C2>=C4,C2<=C5),C6)
+    - ⢶⡊⡋⠦⡁⡝⡙⠦⡉⠣⡢⢶⡉⠹⠂⡉⠣⢔⢶⡉⠱⠴⠂⡉⠫⠴
+  - - déjà vu, 2 fietsen à €500,
+    - ⠙⢿⠚⢷ ⠧⠥⠂ ⠣ ⠋⠊⠑⠞⠎⠑⠝ ⢷ ⢑⠱⠬⠬⠂
+  - - crèche, gêne, paté, reëel,
+    - ⠉⠗⢮⠉⠓⠑⠂ ⠛⢣⠝⠑⠂ ⠏⠁⠞⢿⠂ ⠗⠑⢫⠑⠇⠂
+  - - ruïne, vóórkomen, reçu,
+    - ⠗⠥⢻⠝⠑⠂ ⠧⢬⢬⠗⠅⠕⠍⠑⠝⠂ ⠗⠑⢯⠥⠂
+  - - "Röntgen. Jan zei: “De bal was ín!”."
+    - ⡗⢪⠝⠞⠛⠑⠝⠲ ⡚⠁⠝ ⠵⠑⠊⠒ ⣆⡙⠑ ⠃⠁⠇ ⠺⠁⠎ ⢌⠝⠖⣰⠲
+  - - Jan_Adams07@g-mail.com
+    - ⡚⠁⠝⠸⡁⠙⠁⠍⠎⠬⠻⠜⠛⠤⠍⠁⠊⠇⠲⠉⠕⠍
+  - - https://braille-autoriteit.org/
+    - ⠓⠞⠞⠏⠎⠒⠌⠌⠃⠗⠁⠊⠇⠇⠑⠤⠁⠥⠞⠕⠗⠊⠞⠑⠊⠞⠲⠕⠗⠛⠌

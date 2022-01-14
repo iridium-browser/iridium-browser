@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--
+Copyright 2017 The Chromium Authors. All rights reserved.
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file.
+-->
+
+<link rel="import" href="/elements/base-style.html">
+<link rel="import" href="/elements/job-page/exception-details.html">
+
+<dom-module id="execution-details">
+  <template>
+    <style include="base-style">
+      #exception {
+        font-size: 0.8em;
+        margin: 1em 0;
+        white-space: pre-wrap;
+      }
+
+      table {
+        table-layout: fixed;
+        width: 100%;
+      }
+
+      th {
+        text-align: right;
+        width: 4em;
+      }
+
+      td {
+        overflow-wrap: break-word;
+      }
+    </style>
+
+    <template is="dom-if" if="[[hasExecutionDetails(execution)]]">
+      <table>
+        <template is="dom-repeat" items="[[executionDetails(execution)]]">
+          <tr>
+            <th>[[item.key]]
+            <td>
+              <template is="dom-if" if="[[item.url]]">
+                <a href="[[item.url]]" target="_blank">[[item.value]]</a>
+              </template>
+              <template is="dom-if" if="[[!item.url]]">
+                [[item.value]]
+              </template>
+          </tr>
+        </template>
+      </table>
+    </template>
+    <exception-details exception="[[exception(execution)]]"></exception-details>
+  </template>
+
+  <script>
+    'use strict';
+    Polymer({
+      is: 'execution-details',
+
+      properties: {
+        execution: {
+          type: Object,
+        },
+      },
+
+      exception(execution) {
+        if (!execution) {
+          return null;
+        }
+        return execution.exception;
+      },
+
+      hasExecutionDetails(execution) {
+        return this.executionDetails(execution).length;
+      },
+
+      executionDetails(execution) {
+        if (!execution) {
+          return [];
+        }
+        return execution.details;
+      },
+    });
+  </script>
+</dom-module>

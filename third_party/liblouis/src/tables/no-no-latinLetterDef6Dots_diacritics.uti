@@ -1,0 +1,567 @@
+# liblouis: sub table for defining latin letters with diacritics, 6 dots.
+#
+#  Copyright (C) 2015-2016 NLB Norwegian library of talking books and braille, http://www.nlb.no/
+#  Copyright (C) 2019 Lars Bjørndal <lars@lamasti.net>
+#
+#-copyright: 2015, Norwegian library of talking books and braille (NLB), www.nlb.no
+#-license: LGPLv2.1
+#
+# This table maps letters with diacritics to their closest matching
+# letter a-z, including a dot 4 prefix as required by norwegian braille.
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+
+
+uplow Áá 4-1          # Latin Letter a with Acute
+uplow Ćć 4-14         # Latin Letter C with Acute
+# Commented out to get É become 6-123456 correct, defined in no-no-chardefs6.uti. More equivalent later in this file.
+#uplow Éé 4-15         # Latin Letter E with Acute
+uplow Ǵǵ 4-1245       # Latin Letter G with Acute
+uplow Íí 4-24         # Latin Letter I with Acute
+uplow Ḱḱ 4-13         # Latin Letter K with Acute
+uplow Ĺĺ 4-123        # Latin Letter L with Acute
+uplow Ḿḿ 4-134        # Latin Letter M with Acute
+uplow Ńń 4-1345       # Latin Letter N with Acute
+uplow Óó 4-135        # Latin Letter O with Acute
+uplow Ṕṕ 4-1234       # Latin Letter P with Acute
+uplow Ŕŕ 4-1235       # Latin Letter R with Acute
+uplow Śś 4-234        # Latin Letter S with Acute
+uplow Úú 4-136        # Latin Letter U with Acute
+uplow Ẃẃ 4-2456       # Latin Letter W with Acute
+uplow Ýý 4-13456      # Latin Letter Y with Acute
+uplow Źź 4-1356       # Latin Letter Z with Acute
+uplow Ƚƚ 4-123        # Latin Letter L with Bar
+uplow Ꞓꞓ 4-14       # Latin Letter C with Bar
+uplow Ɬɬ 4-123        # Latin Letter L with Belt
+uplow Ắắ 4-1          # Latin Letter a with Breve and Acute
+uplow Ặặ 4-1          # Latin Letter a with Breve and Dot Below
+uplow Ằằ 4-1          # Latin Letter a with Breve and Grave
+uplow Ẳẳ 4-1          # Latin Letter a with Breve and Hook Above
+uplow Ẵẵ 4-1          # Latin Letter a with Breve and Tilde
+uplow Ḫḫ 4-125        # Latin Letter H with Breve Below
+uplow Ăă 4-1          # Latin Letter a with Breve
+uplow Ĕĕ 4-15         # Latin Letter E with Breve
+uplow Ğğ 4-1245       # Latin Letter G with Breve
+uplow Ĭĭ 4-24         # Latin Letter I with Breve
+uplow Ŏŏ 4-135        # Latin Letter O with Breve
+uplow Ŭŭ 4-136        # Latin Letter U with Breve
+uplow Ṧṧ 4-234        # Latin Letter S with Caron and Dot Above
+uplow Ǎǎ 4-1          # Latin Letter a with Caron
+uplow Čč 4-14         # Latin Letter C with Caron
+uplow Ďď 4-145        # Latin Letter D with Caron
+uplow Ěě 4-15         # Latin Letter E with Caron
+uplow Ǧǧ 4-1245       # Latin Letter G with Caron
+uplow Ȟȟ 4-125        # Latin Letter H with Caron
+uplow Ǐǐ 4-24         # Latin Letter I with Caron
+lowercase  ǰ  4-245   # Latin Small Letter J with Caron
+uplow Ǩǩ 4-13         # Latin Letter K with Caron
+uplow Ľľ 4-123        # Latin Letter L with Caron
+uplow Ňň 4-1345       # Latin Letter N with Caron
+uplow Ǒǒ 4-135        # Latin Letter O with Caron
+uplow Řř 4-1235       # Latin Letter R with Caron
+uplow Ťť 4-2345       # Latin Letter T with Caron
+uplow Ǔǔ 4-136        # Latin Letter U with Caron
+sign  ǅ  4-1356       # Latin Capital Letter D with Small Letter Z with Caron
+uplow Žž 4-1356       # Latin Letter Z with Caron
+uplow Ḉḉ 4-14         # Latin Letter C with Cedilla and Acute
+uplow Ḝḝ 4-15         # Latin Letter E with Cedilla and Breve
+#uplow Çç 4-14         # Latin Letter C with Cedilla
+uplow Ḑḑ 4-145        # Latin Letter D with Cedilla
+uplow Ȩȩ 4-15         # Latin Letter E with Cedilla
+uplow Ģģ 4-1245       # Latin Letter G with Cedilla
+uplow Ḩḩ 4-125        # Latin Letter H with Cedilla
+uplow Ķķ 4-13         # Latin Letter K with Cedilla
+uplow Ļļ 4-123        # Latin Letter L with Cedilla
+uplow Ņņ 4-1345       # Latin Letter N with Cedilla
+uplow Ŗŗ 4-1235       # Latin Letter R with Cedilla
+uplow Şş 4-234        # Latin Letter S with Cedilla
+uplow Ţţ 4-2345       # Latin Letter T with Cedilla
+uplow Ấấ 4-1          # Latin Letter a with Circumflex and Acute
+uplow Ếế 4-15         # Latin Letter E with Circumflex and Acute
+uplow Ốố 4-135        # Latin Letter O with Circumflex and Acute
+uplow Ậậ 4-1          # Latin Letter a with Circumflex and Dot Below
+uplow Ệệ 4-15         # Latin Letter E with Circumflex and Dot Below
+uplow Ộộ 4-135        # Latin Letter O with Circumflex and Dot Below
+uplow Ầầ 4-1          # Latin Letter a with Circumflex and Grave
+uplow Ềề 4-15         # Latin Letter E with Circumflex and Grave
+uplow Ồồ 4-135        # Latin Letter O with Circumflex and Grave
+uplow Ẩẩ 4-1          # Latin Letter a with Circumflex and Hook Above
+uplow Ểể 4-15         # Latin Letter E with Circumflex and Hook Above
+uplow Ổổ 4-135        # Latin Letter O with Circumflex and Hook Above
+uplow Ẫẫ 4-1          # Latin Letter a with Circumflex and Tilde
+uplow Ễễ 4-15         # Latin Letter E with Circumflex and Tilde
+uplow Ỗỗ 4-135        # Latin Letter O with Circumflex and Tilde
+uplow Ḓḓ 4-145        # Latin Letter D with Circumflex Below
+uplow Ḙḙ 4-15         # Latin Letter E with Circumflex Below
+uplow Ḽḽ 4-123        # Latin Letter L with Circumflex Below
+uplow Ṋṋ 4-1345       # Latin Letter N with Circumflex Below
+uplow Ṱṱ 4-2345       # Latin Letter T with Circumflex Below
+uplow Ṷṷ 4-136        # Latin Letter U with Circumflex Below
+uplow Ââ 4-1          # Latin Letter a with Circumflex
+uplow Ĉĉ 4-14         # Latin Letter C with Circumflex
+#uplow Êê 4-15         # Latin Letter E with Circumflex
+uplow Ĝĝ 4-1245       # Latin Letter G with Circumflex
+uplow Ĥĥ 4-125        # Latin Letter H with Circumflex
+uplow Îî 4-24         # Latin Letter I with Circumflex
+uplow Ĵĵ 4-245        # Latin Letter J with Circumflex
+uplow Ôô 4-135        # Latin Letter O with Circumflex
+uplow Ŝŝ 4-234        # Latin Letter S with Circumflex
+uplow Ûû 4-136        # Latin Letter U with Circumflex
+uplow Ŵŵ 4-2456       # Latin Letter W with Circumflex
+uplow Ŷŷ 4-13456      # Latin Letter Y with Circumflex
+uplow Ẑẑ 4-1356       # Latin Letter Z with Circumflex
+uplow Șș 4-234        # Latin Letter S with Comma Below
+uplow Țț 4-2345       # Latin Letter T with Comma Below
+lowercase  ʝ  4-245   # Latin Small Letter J with Crossed-Tail
+lowercase  ꬺ  4-134   # Latin Small Letter M with Crossed-Tail
+lowercase  ꬻ  4-1345  # Latin Small Letter N with Crossed-Tail
+lowercase  ꭉ  4-1235  # Latin Small Letter R with Crossed-Tail
+lowercase  ɕ  4-14    # Latin Small Letter C with Curl
+lowercase  ȡ  4-145   # Latin Small Letter D with Curl
+lowercase  ȴ  4-123   # Latin Small Letter L with Curl
+lowercase  ȵ  4-1345  # Latin Small Letter N with Curl
+lowercase  ȶ  4-2345  # Latin Small Letter T with Curl
+lowercase  ⱴ  4-1236  # Latin Small Letter V with Curl
+lowercase  ʑ  4-1356  # Latin Small Letter Z with Curl
+uplow Ⱨⱨ 4-125        # Latin Letter H with Descender
+uplow Ⱪⱪ 4-13         # Latin Letter K with Descender
+uplow Ꞑꞑ 4-1345       # Latin Letter N with Descender
+uplow Ⱬⱬ 4-1356       # Latin Letter Z with Descender
+uplow Ḯḯ 4-24         # Latin Letter I with Diaeresis and Acute
+uplow Ǘǘ 4-136        # Latin Letter U with Diaeresis and Acute
+uplow Ǚǚ 4-136        # Latin Letter U with Diaeresis and Caron
+uplow Ǜǜ 4-136        # Latin Letter U with Diaeresis and Grave
+uplow Ǟǟ 4-1          # Latin Letter a with Diaeresis and Macron
+uplow Ȫȫ 4-135        # Latin Letter O with Diaeresis and Macron
+uplow Ǖǖ 4-136        # Latin Letter U with Diaeresis and Macron
+uplow Ṳṳ 4-136        # Latin Letter U with Diaeresis Below
+#uplow Ää 4-1          # Latin Letter a with Diaeresis
+uplow Ëë 4-15         # Latin Letter E with Diaeresis
+uplow Ḧḧ 4-125        # Latin Letter H with Diaeresis
+uplow Ïï 4-24         # Latin Letter I with Diaeresis
+#uplow Öö 4-135        # Latin Letter O with Diaeresis
+lowercase  ẗ  4-2345  # Latin Small Letter T with Diaeresis
+#uplow Üü 4-136        # Latin Letter U with Diaeresis
+uplow Ẅẅ 4-2456       # Latin Letter W with Diaeresis
+uplow Ẍẍ 4-1346       # Latin Letter X with Diaeresis
+uplow Ÿÿ 4-13456      # Latin Letter Y with Diaeresis
+uplow Ꝃꝃ 4-13         # Latin Letter K with Diagonal Stroke
+uplow Ꝙꝙ 4-12345      # Latin Letter Q with Diagonal Stroke
+uplow Ⱦⱦ 4-2345       # Latin Letter T with Diagonal Stroke
+uplow Ꝟꝟ 4-1236       # Latin Letter V with Diagonal Stroke
+uppercase  İ  4-24    # Latin Capital Letter I with Dot Above : i dot
+uplow Ǡǡ 4-1          # Latin Letter a with Dot Above and Macron
+uplow Ȱȱ 4-135        # Latin Letter O with Dot Above and Macron
+uplow Ȧȧ 4-1          # Latin Letter a with Dot Above
+uplow Ḃḃ 4-12         # Latin Letter B with Dot Above
+uplow Ċċ 4-14         # Latin Letter C with Dot Above
+uplow Ḋḋ 4-145        # Latin Letter D with Dot Above
+uplow Ėė 4-15         # Latin Letter E with Dot Above
+uplow Ḟḟ 4-124        # Latin Letter F with Dot Above
+uplow Ġġ 4-1245       # Latin Letter G with Dot Above
+uplow Ḣḣ 4-125        # Latin Letter H with Dot Above
+uplow Ṁṁ 4-134        # Latin Letter M with Dot Above
+uplow Ṅṅ 4-1345       # Latin Letter N with Dot Above
+uplow Ȯȯ 4-135        # Latin Letter O with Dot Above
+uplow Ṗṗ 4-1234       # Latin Letter P with Dot Above
+uplow Ṙṙ 4-1235       # Latin Letter R with Dot Above
+uplow Ṡṡ 4-234        # Latin Letter S with Dot Above
+uplow Ṫṫ 4-2345       # Latin Letter T with Dot Above
+uplow Ẇẇ 4-2456       # Latin Letter W with Dot Above
+uplow Ẋẋ 4-1346       # Latin Letter X with Dot Above
+uplow Ẏẏ 4-13456      # Latin Letter Y with Dot Above
+uplow Żż 4-1356       # Latin Letter Z with Dot Above
+uplow Ṩṩ 4-234        # Latin Letter S with Dot Below and Dot Above
+uplow Ḹḹ 4-123        # Latin Letter L with Dot Below and Macron
+uplow Ṝṝ 4-1235       # Latin Letter R with Dot Below and Macron
+uplow Ạạ 4-1          # Latin Letter a with Dot Below
+uplow Ḅḅ 4-12         # Latin Letter B with Dot Below
+uplow Ḍḍ 4-145        # Latin Letter D with Dot Below
+uplow Ẹẹ 4-15         # Latin Letter E with Dot Below
+uplow Ḥḥ 4-125        # Latin Letter H with Dot Below
+uplow Ịị 4-24         # Latin Letter I with Dot Below
+uplow Ḳḳ 4-13         # Latin Letter K with Dot Below
+uplow Ḷḷ 4-123        # Latin Letter L with Dot Below
+uplow Ṃṃ 4-134        # Latin Letter M with Dot Below
+uplow Ṇṇ 4-1345       # Latin Letter N with Dot Below
+uplow Ọọ 4-135        # Latin Letter O with Dot Below
+uplow Ṛṛ 4-1235       # Latin Letter R with Dot Below
+uplow Ṣṣ 4-234        # Latin Letter S with Dot Below
+uplow Ṭṭ 4-2345       # Latin Letter T with Dot Below
+uplow Ụụ 4-136        # Latin Letter U with Dot Below
+uplow Ṿṿ 4-1236       # Latin Letter V with Dot Below
+uplow Ẉẉ 4-2456       # Latin Letter W with Dot Below
+uplow Ỵỵ 4-13456      # Latin Letter Y with Dot Below
+uplow Ẓẓ 4-1356       # Latin Letter Z with Dot Below
+uplow Őő 4-135        # Latin Letter O with Double Acute
+uplow Űű 4-136        # Latin Letter U with Double Acute
+uplow Ⱡⱡ 4-123        # Latin Letter L with Double Bar
+uplow Ȁȁ 4-1          # Latin Letter a with Double Grave
+uplow Ȅȅ 4-15         # Latin Letter E with Double Grave
+uplow Ȉȉ 4-24         # Latin Letter I with Double Grave
+uplow Ȍȍ 4-135        # Latin Letter O with Double Grave
+uplow Ȑȑ 4-1235       # Latin Letter R with Double Grave
+uplow Ȕȕ 4-136        # Latin Letter U with Double Grave
+lowercase  ꬸ  4-123   # Latin Small Letter L with Double Middle Tilde
+lowercase  ᵳ  4-1235  # Latin Small Letter R with Fishhook and Middle Tilde
+lowercase  ɾ  4-1235  # Latin Small Letter R with Fishhook
+uplow Ꞗꞗ 4-12         # Latin Letter B with Flourish
+lowercase  ꬴ  4-15    # Latin Small Letter E with Flourish
+uplow Ꝓꝓ 4-1234       # Latin Letter P with Flourish
+# Commented out to get À become 6-12356 correct, defined in no-no-chardefs6.uti
+#uplow Àà 4-1          # Latin Letter a with Grave
+
+# Commented out to get È become 6-2346 correct, defined in no-no-chardefs6.uti
+#uplow Èè 4-15         # Latin Letter E with Grave
+uplow Ìì 45-24         # Latin Letter I with Grave
+uplow Ǹǹ 4-1345       # Latin Letter N with Grave
+
+# Commented out to get Ò become 6-346 correct, defined in no-no-chardefs6.uti
+#uplow Òò 4-135        # Latin Letter O with Grave
+uplow Ùù 45-136        # Latin Letter U with Grave
+uplow Ẁẁ 4-2456       # Latin Letter W with Grave
+uplow Ỳỳ 4-13456      # Latin Letter Y with Grave
+uplow Ꝉꝉ 4-123        # Latin Letter L with High Stroke
+uplow Ʋʋ 4-1236      # Latin Letter V with Hook
+uplow Ƒƒ 4-124       # Latin Letter F with Hook
+uplow Ảả 4-1          # Latin Letter a with Hook Above
+uplow Ẻẻ 4-15         # Latin Letter E with Hook Above
+uplow Ỉỉ 4-24         # Latin Letter I with Hook Above
+uplow Ỏỏ 4-135        # Latin Letter O with Hook Above
+uplow Ủủ 4-136        # Latin Letter U with Hook Above
+uplow Ỷỷ 4-13456      # Latin Letter Y with Hook Above
+lowercase  ᶑ  4-145   # Latin Small Letter D with Hook and Tail
+lowercase  ɋ  4-12345 # Latin Small Letter Q with Hook Tail
+uplow Ɓɓ 4-12         # Latin Letter B with Hook
+uplow Ƈƈ 4-14         # Latin Letter C with Hook
+uplow Ɗɗ 4-145        # Latin Letter D with Hook
+uplow Ɠɠ 4-1245       # Latin Letter G with Hook
+uplow Ɦɦ 4-125        # Latin Letter H with Hook
+uplow Ƙƙ 4-13         # Latin Letter K with Hook
+uplow Ɱɱ 4-134        # Latin Letter M with Hook
+uplow Ƥƥ 4-1234       # Latin Letter P with Hook
+lowercase  ʠ  4-12345 # Latin Small Letter Q with Hook
+lowercase  ʂ  4-234   # Latin Small Letter S with Hook
+uplow Ƭƭ 4-2345       # Latin Letter T with Hook
+uplow Ⱳⱳ 4-2456       # Latin Letter W with Hook
+uplow Ƴƴ 4-13456      # Latin Letter Y with Hook
+uplow Ȥȥ 4-1356       # Latin Letter Z with Hook
+uplow Ớớ 4-135        # Latin Letter O with Horn and Acute
+uplow Ứứ 4-136        # Latin Letter U with Horn and Acute
+uplow Ợợ 4-135        # Latin Letter O with Horn and Dot Below
+uplow Ựự 4-136        # Latin Letter U with Horn and Dot Below
+uplow Ờờ 4-135        # Latin Letter O with Horn and Grave
+uplow Ừừ 4-136        # Latin Letter U with Horn and Grave
+uplow Ởở 4-135        # Latin Letter O with Horn and Hook Above
+uplow Ửử 4-136        # Latin Letter U with Horn and Hook Above
+uplow Ỡỡ 4-135        # Latin Letter O with Horn and Tilde
+uplow Ữữ 4-136        # Latin Letter U with Horn and Tilde
+uplow Ơơ 4-135        # Latin Letter O with Horn
+uplow Ưư 4-136        # Latin Letter U with Horn
+uplow Ȃȃ 4-1          # Latin Letter a with Inverted Breve
+uplow Ȇȇ 4-15         # Latin Letter E with Inverted Breve
+uplow Ȋȋ 4-24         # Latin Letter I with Inverted Breve
+uplow Ȏȏ 4-135        # Latin Letter O with Inverted Breve
+uplow Ȓȓ 4-1235       # Latin Letter R with Inverted Breve
+uplow Ȗȗ 4-136        # Latin Letter U with Inverted Breve
+lowercase  ꬷ  4-123   # Latin Small Letter L with Inverted Lazy S
+uplow Ɲɲ 4-1345       # Latin Letter N with Left Hook
+lowercase  ꭒ  4-136   # Latin Small Letter U with Left Hook
+uplow Ḇḇ 4-12         # Latin Letter B with Line Below
+uplow Ḏḏ 4-145        # Latin Letter D with Line Below
+lowercase  ẖ  4-125   # Latin Small Letter H with Line Below
+uplow Ḵḵ 4-13         # Latin Letter K with Line Below
+uplow Ḻḻ 4-123        # Latin Letter L with Line Below
+uplow Ṉṉ 4-1345       # Latin Letter N with Line Below
+uplow Ṟṟ 4-1235       # Latin Letter R with Line Below
+uplow Ṯṯ 4-2345       # Latin Letter T with Line Below
+uplow Ẕẕ 4-1356       # Latin Letter Z with Line Below
+lowercase  ꭘ  4-1346  # Latin Small Letter X with Long Left Leg and Low Right Ring
+lowercase  ꭙ  4-1346  # Latin Small Letter X with Long Left Leg with Serif
+lowercase  ꭗ  4-1346  # Latin Small Letter X with Long Left Leg
+lowercase  ɼ  4-1235  # Latin Small Letter R with Long Leg
+uplow Ƞƞ 4-1345       # Latin Letter N with Long Right Leg
+uplow Ꝋꝋ 4-135        # Latin Letter O with Long Stroke Overlay
+uplow Ꝍꝍ 4-135        # Latin Letter O with Loop
+uplow Ỿỿ 4-13456      # Latin Letter Y with Loop
+lowercase  ꭖ  4-1346  # Latin Small Letter X with Low Right Ring
+lowercase  ⱺ  4-135   # Latin Small Letter O with Low Ring Inside
+uplow Ḗḗ 4-15         # Latin Letter E with Macron and Acute
+uplow Ṓṓ 4-135        # Latin Letter O with Macron and Acute
+uplow Ṻṻ 4-136        # Latin Letter U with Macron and Diaeresis
+uplow Ḕḕ 4-15         # Latin Letter E with Macron and Grave
+uplow Ṑṑ 4-135        # Latin Letter O with Macron and Grave
+uplow Āā 4-1          # Latin Letter a with Macron
+uplow Ēē 4-15         # Latin Letter E with Macron
+uplow Ḡḡ 4-1245       # Latin Letter G with Macron
+uplow Īī 4-24         # Latin Letter I with Macron
+uplow Ōō 4-135        # Latin Letter O with Macron
+uplow Ūū 4-136        # Latin Letter U with Macron
+uplow Ȳȳ 4-13456      # Latin Letter Y with Macron
+uplow Ŀŀ 4-123        # Latin Letter L with Middle Dot
+lowercase  ꬹ  4-123   # Latin Small Letter L with Middle Ring
+uplow Ɵᵬ 4-135        # Latin Letter O with Middle Tilde : barred o o bar
+lowercase  ᵭ  4-145   # Latin Small Letter D with Middle Tilde
+lowercase  ᵮ  4-124   # Latin Small Letter F with Middle Tilde
+uplow Ɫɫ 4-123        # Latin Letter L with Middle Tilde
+lowercase  ᵯ  4-134   # Latin Small Letter M with Middle Tilde
+lowercase  ᵰ  4-1345  # Latin Small Letter N with Middle Tilde
+lowercase  ᵱ  4-1234  # Latin Small Letter P with Middle Tilde
+lowercase  ᵲ  4-1235  # Latin Small Letter R with Middle Tilde
+lowercase  ᵴ  4-234   # Latin Small Letter S with Middle Tilde
+lowercase  ᵵ  4-2345  # Latin Small Letter T with Middle Tilde
+lowercase  ᵶ  4-1356  # Latin Small Letter Z with Middle Tilde
+lowercase  ⱸ  4-15    # Latin Small Letter E with Notch
+uplow Ꞡꞡ 4-1245       # Latin Letter G with Oblique Stroke
+uplow Ꞣꞣ 4-13         # Latin Letter K with Oblique Stroke
+uplow Ꞥꞥ 4-1345       # Latin Letter N with Oblique Stroke
+uplow Ꞧꞧ 4-1235       # Latin Letter R with Oblique Stroke
+uplow Ꞩꞩ 4-234        # Latin Letter S with Oblique Stroke
+uplow Ǭǭ 4-135        # Latin Letter O with Ogonek and Macron
+uplow Ąą 4-1          # Latin Letter a with Ogonek
+uplow Ęę 4-15         # Latin Letter E with Ogonek
+uplow Įį 4-24         # Latin Letter I with Ogonek
+uplow Ǫǫ 4-135        # Latin Letter O with Ogonek
+uplow Ųų 4-136        # Latin Letter U with Ogonek
+lowercase  ᶀ  4-12    # Latin Small Letter B with Palatal Hook
+lowercase  ꞔ  4-14    # Latin Small Letter C with Palatal Hook
+lowercase  ᶁ  4-145   # Latin Small Letter D with Palatal Hook
+lowercase  ᶂ  4-124   # Latin Small Letter F with Palatal Hook
+lowercase  ᶃ  4-1245  # Latin Small Letter G with Palatal Hook
+lowercase  ꞕ  4-125   # Latin Small Letter H with Palatal Hook
+lowercase  ᶄ  4-13    # Latin Small Letter K with Palatal Hook
+lowercase  ᶅ  4-123   # Latin Small Letter L with Palatal Hook
+lowercase  ᶆ  4-134   # Latin Small Letter M with Palatal Hook
+lowercase  ᶇ  4-1345  # Latin Small Letter N with Palatal Hook
+lowercase  ᶈ  4-1234  # Latin Small Letter P with Palatal Hook
+lowercase  ᶉ  4-1235  # Latin Small Letter R with Palatal Hook
+lowercase  ᶊ  4-234   # Latin Small Letter S with Palatal Hook
+lowercase  ƫ  4-2345  # Latin Small Letter T with Palatal Hook
+lowercase  ᶌ  4-1236  # Latin Small Letter V with Palatal Hook
+lowercase  ᶍ  4-1346  # Latin Small Letter X with Palatal Hook
+lowercase  ᶎ  4-1356  # Latin Small Letter Z with Palatal Hook
+lowercase  ꞎ  4-123   # Latin Small Letter L with Retroflex Hook and Belt
+lowercase  ᶏ  4-1     # Latin Small Letter a with Retroflex Hook
+lowercase  ᶒ  4-15    # Latin Small Letter E with Retroflex Hook
+lowercase  ᶖ  4-24    # Latin Small Letter I with Retroflex Hook
+lowercase  ɭ  4-123   # Latin Small Letter L with Retroflex Hook
+lowercase  ɳ  4-1345  # Latin Small Letter N with Retroflex Hook
+uplow Ʈʈ 4-2345       # Latin Letter T with Retroflex Hook
+lowercase  ᶙ  4-136   # Latin Small Letter U with Retroflex Hook
+lowercase  ʐ  4-1356  # Latin Small Letter Z with Retroflex Hook
+lowercase  ẚ  4-1     # Latin Small Letter a with Right Half Ring
+lowercase  ⱱ  4-1236  # Latin Small Letter V with Right Hook
+uplow Ǻǻ 4-1          # Latin Letter a with Ring Above and Acute
+#uplow Åå 4-1          # Latin Letter a with Ring Above
+sign ̊  4              # Latin Letter Ring Above unicode U+030A
+always e̊ 4-15         # Latin Letter e with Ring Above
+uplow Ůů 4-136        # Latin Letter U with Ring Above
+lowercase  ẘ  4-2456  # Latin Small Letter W with Ring Above
+lowercase  ẙ  4-13456 # Latin Small Letter Y with Ring Above
+uplow Ḁḁ 4-1          # Latin Letter a with Ring Below
+lowercase  ꭎ  4-136   # Latin Small Letter U with Short Right Leg
+lowercase  ꭚ  4-13456 # Latin Small Letter Y with Short Right Leg
+sign  ǈ  4-123        # Latin Capital Letter L with Small Letter J
+sign  ǋ  4-1345       # Latin Capital Letter N with Small Letter J
+sign  ǲ  4-145        # Latin Capital Letter D with Small Letter Z
+uplow Ꝕꝕ 4-1234       # Latin Letter P with Squirrel Tail
+uplow Ƀƀ 4-12        # Latin Letter B with Stroke
+uplow Ɨɨ 4-24         # Latin Letter I with Stroke : barred i i bar
+uplow Ƶƶ 4-1356      # Latin Letter Z with Stroke
+uplow Łł 4-123       # Latin Letter L with Stroke
+#uplow Øø 4-135        # Latin Letter O with Stroke : o slash
+uplow Ǿǿ 4-135        # Latin Letter O with Stroke and Acute
+uplow Ꝅꝅ 4-13         # Latin Letter K with Stroke and Diagonal Stroke
+uplow Ꝑꝑ 4-1234       # Latin Letter P with Stroke Through Descender
+uplow Ꝗꝗ 4-12345      # Latin Letter Q with Stroke Through Descender
+uplow Ⱥⱥ 4-1          # Latin Letter a with Stroke
+uplow Ȼȼ 4-14         # Latin Letter C with Stroke
+uplow Đđ 4-145        # Latin Letter D with Stroke
+uplow Ɇɇ 4-15         # Latin Letter E with Stroke
+uplow Ꞙꞙ 4-124        # Latin Letter F with Stroke
+uplow Ǥǥ 4-1245       # Latin Letter G with Stroke
+uplow Ħħ 4-125        # Latin Letter H with Stroke
+uplow Ɉɉ 4-245        # Latin Letter J with Stroke
+uplow Ꝁꝁ 4-13         # Latin Letter K with Stroke
+uplow Ᵽᵽ 4-1234       # Latin Letter P with Stroke
+uplow Ɍɍ 4-1235       # Latin Letter R with Stroke
+uplow Ŧŧ 4-2345       # Latin Letter T with Stroke
+uplow Ɏɏ 4-13456      # Latin Letter Y with Stroke
+uplow Ȿȿ 4-234        # Latin Letter S with Swash Tail
+uplow Ɀɀ 4-1356       # Latin Letter Z with Swash Tail
+lowercase  ɖ  4-145   # Latin Small Letter D with Tail : d retroflex hook
+uplow Ɽɽ 4-1235       # Latin Letter R with Tail
+uplow Ṍṍ 4-135        # Latin Letter O with Tilde and Acute
+uplow Ṹṹ 4-136        # Latin Letter U with Tilde and Acute
+uplow Ṏṏ 4-135        # Latin Letter O with Tilde and Diaeresis
+uplow Ȭȭ 4-135        # Latin Letter O with Tilde and Macron
+uplow Ḛḛ 4-15         # Latin Letter E with Tilde Below
+uplow Ḭḭ 4-24         # Latin Letter I with Tilde Below
+uplow Ṵṵ 4-136        # Latin Letter U with Tilde Below
+uplow Ãã 4-1          # Latin Letter a with Tilde
+uplow Ẽẽ 4-15         # Latin Letter E with Tilde
+uplow Ĩĩ 4-24         # Latin Letter I with Tilde
+uplow Ññ 4-1345       # Latin Letter N with Tilde
+uplow Õõ 4-135        # Latin Letter O with Tilde
+uplow Ũũ 4-136        # Latin Letter U with Tilde
+uplow Ṽṽ 4-1236       # Latin Letter V with Tilde
+uplow Ỹỹ 4-13456      # Latin Letter Y with Tilde
+uplow Ƃƃ 4-12         # Latin Letter B with Topbar
+uplow Ƌƌ 4-145        # Latin Letter D with Topbar
+lowercase  ᷲ  4-1     # Combining Latin Small Letter a with Diaeresis
+lowercase  ᷬ  4-123   # Combining Latin Small Letter L with Double Middle Tilde
+lowercase  ᷳ  4-135   # Combining Latin Small Letter O with Diaeresis
+lowercase  ᷭ  4-135   # Combining Latin Small Letter O with Light Centralization Stroke
+lowercase  ᷴ  4-136   # Combining Latin Small Letter U with Diaeresis
+lowercase  ᷰ  4-136   # Combining Latin Small Letter U with Light Centralization Stroke
+uplow Ǽǽ 4-345       # Latin Letter Ae with Acute
+uplow Ǣǣ 4-345       # Latin Letter Ae with Macron
+uplow Ꜿꜿ 4-14        # Latin Letter Reversed C with Dot
+sign  Ɋ  4-12345      # Latin Capital Small Letter Q with Hook Tail
+sign  ᵻ  4-24         # Latin Small Capital Letter I with Stroke
+sign  ᵾ  4-136        # Latin Small Capital Letter U with Stroke
+lowercase  ꬾ  4-246   # Latin Small Letter Blackletter O with Stroke
+sign  ʛ  4-1245       # Latin Small Letter Capital G with Hook
+sign  ᴌ  4-123        # Latin Small Letter Capital L with Stroke
+sign  ꭆ  4-1235       # Latin Small Letter Capital R with Right Leg
+lowercase  ʄ  4-245   # Latin Small Letter Dotless J with Stroke and Hook
+lowercase  ɟ  4-245   # Latin Small Letter Dotless J with Stroke
+lowercase  ꭊ  4-1235  # Latin Small Letter Double R with Crossed-Tail
+lowercase  ẜ  4-234   # Latin Small Letter Long S with Diagonal Stroke
+lowercase  ẛ  4-234   # Latin Small Letter Long S with Dot Above
+lowercase  ẝ  4-234   # Latin Small Letter Long S with High Stroke
+lowercase  ᶓ  4-15    # Latin Small Letter Open E with Retroflex Hook
+lowercase  ᶗ  4-135   # Latin Small Letter Open O with Retroflex Hook
+lowercase  ꬿ  4-135   # Latin Small Letter Open O with Stroke
+lowercase  ꭇ  4-1235  # Latin Small Letter R Without Handle
+lowercase  ɝ  4-15    # Latin Small Letter Reversed Open E with Hook
+lowercase  ᶔ  4-15    # Latin Small Letter Reversed Open E with Retroflex Hook
+lowercase  ɿ  4-1235  # Latin Small Letter Reversed R with Fishhook : long leg turned iota (a misnomer)
+lowercase  ꬶ  4-1245  # Latin Small Letter Script G with Crossed-Tail
+lowercase  ꭌ  4-1235  # Latin Small Letter Script R with Ring
+lowercase  ᴓ  4-135   # Latin Small Letter Sideways O with Stroke
+lowercase  ʯ  4-125   # Latin Small Letter Turned H with Fishhook and Tail
+lowercase  ʮ  4-125   # Latin Small Letter Turned H with Fishhook
+lowercase  ɰ  4-134   # Latin Small Letter Turned M with Long Leg
+lowercase  ꭄ  4-135   # Latin Small Letter Turned O Open-O with Stroke
+lowercase  ꭂ  4-246   # Latin Small Letter Turned Oe with Horizontal Stroke
+lowercase  ꭁ  4-246   # Latin Small Letter Turned Oe with Stroke
+lowercase  ɻ  4-1235  # Latin Small Letter Turned R with Hook
+lowercase  ɺ  4-1235  # Latin Small Letter Turned R with Long Leg
+lowercase  ⱹ  4-1235  # Latin Small Letter Turned R with Tail
+lowercase  ꭏ  4-136   # Latin Small Letter U Bar with Short Right Leg
+
+# classes commented out due to "character class table overflow" error
+#class diacritics_acute ÁáÉéÍíÓóÚúÝýĆćĹĺŃńŔŕŚśŹźǴǵǼǽḰḱḾḿṔṕẂẃ
+#class diacritics_acuteanddotabove Ṥṥ
+#class diacritics_bar Ƚꞓ
+#class diacritics_barbarredl ƚ
+#class diacritics_barcambriansymbol Ꞓ
+#class diacritics_belt ɬꞭ
+#class diacritics_breve ĂăĔĕĞğĬĭŎŏŬŭ
+#class diacritics_breveandacute Ắắ
+#class diacritics_breveanddotbelow Ặặ
+#class diacritics_breveandgrave Ằằ
+#class diacritics_breveandhookabove Ẳẳ
+#class diacritics_breveandtilde Ẵẵ
+#class diacritics_brevebelow Ḫḫ
+#class diacritics_caron ČčĎďĚěĽľŇňŘřŠšŤťŽžǍǎǏǐǑǒǓǔǦǧǨǩǰȞȟ
+#class diacritics_caronanddotabove Ṧṧ
+#class diacritics_cedilla ÇçĢģĶķĻļŅņŖŗŞşŢţȨȩḐḑḨḩ
+#class diacritics_cedillaandacute ḈḉḜḝ
+#class diacritics_circumflex ÂâÊêÎîÔôÛûĈĉĜĝĤĥĴĵŜŝŴŵŶŷẐẑ
+#class diacritics_circumflexandacute ẤấẾếỐố
+#class diacritics_circumflexanddotbelow ẬậỆệỘộ
+#class diacritics_circumflexandgrave ẦầỀềỒồ
+#class diacritics_circumflexandhookabove ẨẩỂểỔổ
+#class diacritics_circumflexandtilde ẪẫỄễỖỗ
+#class diacritics_circumflexbelow ḒḓḘḙḼḽṊṋṰṱṶṷ
+#class diacritics_commabelow ȘșȚț
+#class diacritics_crossedtail ʝꬶꬺꬻꭉꭊ
+#class diacritics_curl ȡȴȵȶɕʑⱴ
+#class diacritics_descender ⱧⱨⱩⱪⱫⱬꞐꞑ
+#class diacritics_diaeresis ÄäËëÏïÖöÜüŸÿᷲᷳᷴḦḧẄẅẌẍẗ
+#class diacritics_diaeresisandacute ǗǘḮḯ
+#class diacritics_diaeresisandcaron Ǚǚ
+#class diacritics_diaeresisandgrave Ǜǜ
+#class diacritics_diaeresisandmacron ǕǖǞǟȪȫ
+#class diacritics_diaeresisbelow Ṳṳ
+#class diacritics_diagonalstroke ẜȾⱦꝂꝃꝘꝙꝞꝟ
+#class diacritics_dot Ꜿꜿ
+#class diacritics_dotabove ĊċĖėĠġŻżȦȧȮȯḂḃḊḋḞḟḢḣṀṁṄṅṖṗṘṙṠṡṪṫẆẇẊẋẎẏẛ
+#class diacritics_dotaboveandmacron ǠǡȰȱ
+#class diacritics_dotaboveidot İ
+#class diacritics_dotbelow ḄḅḌḍḤḥḲḳḶḷṂṃṆṇṚṛṢṣṬṭṾṿẈẉẒẓẠạẸẹỊịỌọỤụỴỵ
+#class diacritics_dotbelowanddotabove Ṩṩ
+#class diacritics_dotbelowandmacron ḸḹṜṝ
+#class diacritics_doubleacute ŐőŰű
+#class diacritics_doublebar Ⱡⱡ
+#class diacritics_doublegrave ȀȁȄȅȈȉȌȍȐȑȔȕ
+#class diacritics_doublemiddletilde ᷬꬸ
+#class diacritics_fishhook ɾʮ
+#class diacritics_flourish ꝒꝓꞖꞗꬴ
+#class diacritics_grave ÀàÈèÌìÒòÙùǸǹẀẁỲỳ
+#class diacritics_highstroke ẝꝈꝉ
+#class diacritics_hook ƇƈƑƘƙƤƥƬƭƳƴȤȥƁɓƊɗɝƓɠꞪɦⱮɱɻʂʛʠⱲⱳ
+#class diacritics_hookabove ẢảẺẻỈỉỎỏỦủỶỷ
+#class diacritics_hooktail ɋɊ
+#class diacritics_horn ƠơƯư
+#class diacritics_hornandacute ỚớỨứ
+#class diacritics_hornanddotbelow ỢợỰự
+#class diacritics_hornandgrave ỜờỪừ
+#class diacritics_hornandhookabove ỞởỬử
+#class diacritics_hornandtilde ỠỡỮữ
+#class diacritics_invertedbreve ȂȃȆȇȊȋȎȏȒȓȖȗ
+#class diacritics_lefthook Ɲɲꭒ
+#class diacritics_lightcentralizationstroke ᷭᷰ
+#class diacritics_linebelow ḆḇḎḏḴḵḺḻṈṉṞṟṮṯẔẕẖ
+#class diacritics_longleg ɰɺɼ
+#class diacritics_longrightleg Ƞƞ
+#class diacritics_longstrokeoverlay Ꝋꝋ
+#class diacritics_loop ỾỿꝌꝍ
+#class diacritics_macron ĀāĒēĪīŌōŪūǢǣȲȳḠḡ
+#class diacritics_macronandacute ḖḗṒṓ
+#class diacritics_macronanddiaeresis Ṻṻ
+#class diacritics_macronandgrave ḔḕṐṑ
+#class diacritics_middledot Ŀŀ
+#class diacritics_middletilde Ɫɫᵭᵮᵯᵰᵱᵲᵴᵵᵶ
+#class diacritics_middletildebarredoobar Ɵᵬ
+#class diacritics_obliquestroke ꞠꞡꞢꞣꞤꞥꞦꞧꞨꞩ
+#class diacritics_ogonek ĄąĘęĮįŲųǪǫ
+#class diacritics_ogonekandmacron Ǭǭ
+#class diacritics_palatalhook ƫᶀᶁᶂᶃᶄᶅᶆᶇᶈᶉᶊᶌᶍᶎꞔꞕ
+#class diacritics_retroflexhook ɭɳƮʈʐᶏᶒᶓᶔᶖᶗᶙ
+#class diacritics_ringabove ÅåŮůẘẙ
+#class diacritics_ringaboveandacute Ǻǻ
+#class diacritics_ringbelow Ḁḁ
+#class diacritics_shortrightleg ꭎꭏꭚ
+#class diacritics_squirreltail Ꝕꝕ
+#class diacritics_stroke ĐđĦħłŦŧƀƵǤǥȻȼɆɇɈɉɌɍɎɏɟᴌᴓᵻⱣᵽᵾȺⱥꝀꝁꞘꞙꬾꬿꭁꭄ
+#class diacritics_strokeandacute Ǿǿ
+#class diacritics_strokeanddiagonalstroke Ꝅꝅ
+#class diacritics_strokebarrediibar Ɨɨ
+#class diacritics_strokeoslash Øø
+#class diacritics_strokethroughdescender ꝐꝑꝖꝗ
+#class diacritics_swashtail ⱾȿⱿɀ
+#class diacritics_tail Ɽɽⱹ
+#class diacritics_tilde ÃãÑñÕõĨĩŨũṼṽẼẽỸỹ
+#class diacritics_tildeandacute ṌṍṸṹ
+#class diacritics_tildeanddiaeresis Ṏṏ
+#class diacritics_tildeandmacron Ȭȭ
+#class diacritics_tildebelow ḚḛḬḭṴṵ
+#class diacritics_topbar ƂƃƋƌ

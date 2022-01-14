@@ -1,0 +1,13 @@
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef8Dots.uti
+  word people 1234
+flags: {testmode: backward}
+tests:
+  - - p
+    - people
+  - - p
+    - ""
+    - maxOutputLength: 3
+      realInputLength: 0
+      xfail: "see https://github.com/liblouis/liblouis/issues/770"

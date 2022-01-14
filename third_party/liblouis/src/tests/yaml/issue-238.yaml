@@ -1,0 +1,8 @@
+table: |
+  include tables/da-dk-g08.ctb
+  swapdd AddSeven 1,12,14,145,15,124,1245,125,24,245 17,127,147,1457,157,1247,12457,1257,247,2457
+  noback pass2 %AddSeven %AddSeven
+
+tests:
+  - - abc
+    - ABC

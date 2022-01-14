@@ -1,0 +1,5 @@
+include_rules = [
+  "+chromeos/settings",
+  "+mojo/public/cpp/bindings",
+  "+ui/gfx/win",
+]

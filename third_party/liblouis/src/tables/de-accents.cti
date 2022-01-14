@@ -1,0 +1,117 @@
+# liblouis: Letters with accents (without ä ö ü)
+#
+#  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-------------------------------------------------------------------------------
+
+uplow        \x00C0\x00E0      4-1           Àà  &#192;&#224;   LATIN LETTER A WITH GRAVE
+uplow        \x00C1\x00E1      4-1           Áá  &#193;&#225;   LATIN LETTER A WITH ACUTE
+uplow        \x00C2\x00E2      4-1           Ââ  &#194;&#226;   LATIN LETTER A WITH CIRCUMFLEX
+uplow        \x00C3\x00E3      4-1           Ãã  &#195;&#227;   LATIN LETTER A WITH TILDE
+uplow        \x00C5\x00E5      4-1           Åå  &#197;&#229;   LATIN LETTER A WITH RING ABOVE
+uplow        \x00C6\x00E6      1-15          Ææ  &#198;&#230;   LATIN LETTER AE
+uplow        \x00C7\x00E7      4-14          Çç  &#199;&#231;   LATIN LETTER C WITH CEDILLA
+uplow        \x00C8\x00E8      4-15          Èè  &#200;&#232;   LATIN LETTER E WITH GRAVE
+uplow        \x00C9\x00E9      4-15          Éé  &#201;&#233;   LATIN LETTER E WITH ACUTE
+uplow        \x00CA\x00EA      4-15          Êê  &#202;&#234;   LATIN LETTER E WITH CIRCUMFLEX
+uplow        \x00CB\x00EB      4-15          Ëë  &#203;&#235;   LATIN LETTER E WITH DIAERESIS
+uplow        \x00CC\x00EC      4-24          Ìì  &#204;&#236;   LATIN LETTER I WITH GRAVE
+uplow        \x00CD\x00ED      4-24          Íí  &#205;&#237;   LATIN LETTER I WITH ACUTE
+uplow        \x00CE\x00EE      4-24          Îî  &#206;&#238;   LATIN LETTER I WITH CIRCUMFLEX
+uplow        \x00CF\x00EF      4-24          Ïï  &#207;&#239;   LATIN LETTER I WITH DIAERESIS
+uplow        \x00D0\x00F0      4-145         Ðð  &#208;&#240;   LATIN LETTER ETH
+uplow        \x00D1\x00F1      4-1345        Ññ  &#209;&#241;   LATIN LETTER N WITH TILDE
+uplow        \x00D2\x00F2      4-135         Òò  &#210;&#242;   LATIN LETTER O WITH GRAVE
+uplow        \x00D3\x00F3      4-135         Óó  &#211;&#243;   LATIN LETTER O WITH ACUTE
+uplow        \x00D4\x00F4      4-135         Ôô  &#212;&#244;   LATIN LETTER O WITH CIRCUMFLEX
+uplow        \x00D5\x00F5      4-135         Õõ  &#213;&#245;   LATIN LETTER O WITH TILDE
+uplow        \x00D8\x00F8      4-135         Øø  &#216;&#248;   LATIN LETTER O WITH STROKE
+uplow        \x00D9\x00F9      4-136         Ùù  &#217;&#249;   LATIN LETTER U WITH GRAVE
+uplow        \x00DA\x00FA      4-136         Úú  &#218;&#250;   LATIN LETTER U WITH ACUTE
+uplow        \x00DB\x00FB      4-136         Ûû  &#219;&#251;   LATIN LETTER U WITH CIRCUMFLEX
+uplow        \x00DD\x00FD      4-13456       Ýý  &#221;&#253;   LATIN LETTER Y WITH ACUTE
+uplow        \x00DE\x00FE      4-2345        Þþ  &#222;&#254;   LATIN LETTER THORN
+uplow        \x0178\x00FF      4-13456       Ÿÿ  &#255;&#376;   LATIN LETTER Y WITH DIAERESIS
+uplow        \x0152\x0153      135-15        Œœ  &#338;&#339;   LATIN LIGATURE OE
+
+uplow        \x0100\x0101      4-1           Āā  &#256;&#257;   LATIN LETTER A WITH MACRON
+uplow        \x0102\x0103      4-1           Ăă  &#258;&#259;   LATIN LETTER A WITH BREVE
+uplow        \x0104\x0105      4-1           Ąą  &#260;&#261;   LATIN LETTER A WITH OGONEK
+uplow        \x0106\x0107      4-14          Ćć  &#262;&#263;   LATIN LETTER C WITH ACUTE
+uplow        \x0108\x0109      4-14          Ĉĉ  &#264;&#265;   LATIN LETTER C WITH CIRCUMFLEX
+uplow        \x010A\x010B      4-14          Ċċ  &#266;&#267;   LATIN LETTER C WITH DOT ABOVE
+uplow        \x010C\x010D      4-14          Čč  &#268;&#269;   LATIN LETTER C WITH CARON
+uplow        \x010E\x010F      4-145         Ďď  &#270;&#271;   LATIN LETTER D WITH CARON
+uplow        \x0110\x0111      4-145         Đđ  &#272;&#273;   LATIN LETTER D WITH STROKE
+uplow        \x0112\x0113      4-15          Ēē  &#274;&#275;   LATIN LETTER E WITH MACRON
+uplow        \x0116\x0117      4-15          Ėė  &#278;&#279;   LATIN LETTER E WITH DOT ABOVE
+uplow        \x0118\x0119      4-15          Ęę  &#280;&#281;   LATIN LETTER E WITH OGONEK
+uplow        \x011A\x011B      4-15          Ěě  &#282;&#283;   LATIN LETTER E WITH CARON
+uplow        \x011E\x011F      4-1245        Ğğ  &#286;&#287;   LATIN LETTER G WITH BREVE
+uplow        \x0122\x0123      4-1245        Ģģ  &#290;&#291;   LATIN LETTER G WITH CEDILLA
+uplow        \x0124\x0125      4-125         Ĥĥ  &#292;&#293;   LATIN LETTER H WITH CIRCUMFLEX
+uplow        \x0126\x0127      4-125         Ħħ  &#294;&#295;   LATIN LETTER H WITH STROKE
+uplow        \x0128\x0129      4-24          Ĩĩ  &#296;&#297;   LATIN LETTER I WITH TILDE
+uplow        \x012A\x012B      4-24          Īī  &#298;&#299;   LATIN LETTER I WITH MACRON
+uplow        \x012E\x012F      4-24          Įį  &#302;&#303;   LATIN LETTER I WITH OGONEK
+uplow        \x0130\x0131      4-24          İı  &#304;&#305;   LATIN CAPITAL LETTER I WITH DOT ABOVE - LATIN SMALL LETTER DOTLESS I
+uplow        \x0132\x0133      4-245         Ĳĳ  &#306;&#307;   LATIN LIGATURE IJ
+uplow        \x0134\x0135      4-245         Ĵĵ  &#308;&#309;   LATIN LETTER J WITH CIRCUMFLEX
+uplow        \x0136\x0137      4-13          Ķķ  &#310;&#311;   LATIN LETTER K WITH CEDILLA
+uplow        \x0139\x013A      4-123         Ĺĺ  &#313;&#314;   LATIN LETTER L WITH ACUTE
+uplow        \x013B\x013C      4-123         Ļļ  &#315;&#316;   LATIN LETTER L WITH CEDILLA
+uplow        \x013D\x013E      4-123         Ľľ  &#317;&#318;   LATIN LETTER L WITH CARON
+uplow        \x013F\x0140      4-123         Ŀŀ  &#319;&#320;   LATIN LETTER L WITH MIDDLE DOT
+uplow        \x0141\x0142      4-123         Łł  &#321;&#322;   LATIN LETTER L WITH STROKE
+uplow        \x0143\x0144      4-1345        Ńń  &#323;&#324;   LATIN LETTER N WITH ACUTE
+uplow        \x0145\x0146      4-1345        Ņņ  &#325;&#326;   LATIN LETTER N WITH CEDILLA
+uplow        \x0147\x0148      4-1345        Ňň  &#327;&#328;   LATIN LETTER N WITH CARON
+uplow        \x014A\x014B      4-1345        Ŋŋ  &#330;&#331;   LATIN LETTER ENG
+uplow        \x014C\x014D      4-135         Ōō  &#332;&#333;   LATIN LETTER O WITH MACRON
+uplow        \x014E\x014F      4-135         Ŏŏ  &#334;&#335;   LATIN LETTER O WITH BREVE
+uplow        \x0150\x0151      4-135         Őő  &#336;&#337;   LATIN LETTER O WITH DOUBLE ACUTE
+uplow        \x0154\x0155      4-1235        Ŕŕ  &#340;&#341;   LATIN LETTER R WITH ACUTE
+uplow        \x0156\x0157      4-1235        Ŗŗ  &#342;&#343;   LATIN LETTER R WITH CEDILLA
+uplow        \x0158\x0159      4-1235        Řř  &#344;&#345;   LATIN LETTER R WITH CARON
+uplow        \x015A\x015B      4-234         Śś  &#346;&#347;   LATIN LETTER S WITH ACUTE
+uplow        \x015C\x015D      4-234         Ŝŝ  &#348;&#349;   LATIN LETTER S WITH CIRCUMFLEX
+uplow        \x015E\x015F      4-234         Şş  &#350;&#351;   LATIN LETTER S WITH CEDILLA
+uplow        \x0160\x0161      4-234         Šš  &#352;&#353;   LATIN LETTER S WITH CARON
+uplow        \x0218\x0219      4-234         Șș                 LATIN LETTER S WITH COMMA BELOW
+uplow        \x0162\x0163      4-2345        Ţţ  &#354;&#355;   LATIN LETTER T WITH CEDILLA
+uplow        \x0164\x0165      4-2345        Ťť  &#356;&#357;   LATIN LETTER T WITH CARON
+uplow        \x0166\x0167      4-2345        Ŧŧ  &#358;&#359;   LATIN LETTER T WITH STROKE
+uplow        \x021A\x021B      4-2345        Țț                 LATIN LETTER T WITH COMMA BELOW
+uplow        \x0168\x0169      4-136         Ũũ  &#360;&#361;   LATIN LETTER U WITH TILDE
+uplow        \x016A\x016B      4-136         Ūū  &#362;&#363;   LATIN LETTER U WITH MACRON
+uplow        \x016C\x016D      4-136         Ŭŭ  &#364;&#365;   LATIN LETTER U WITH BREVE
+uplow        \x016E\x016F      4-136         Ůů  &#366;&#367;   LATIN LETTER U WITH RING ABOVE
+uplow        \x0170\x0171      4-136         Űű  &#368;&#369;   LATIN LETTER U WITH DOUBLE ACUTE
+uplow        \x0172\x0173      4-136         Ųų  &#370;&#371;   LATIN LETTER U WITH OGONEK
+uplow        \x0174\x0175      4-2456        Ŵŵ  &#372;&#373;   LATIN LETTER W WITH CIRCUMFLEX
+uplow        \x0176\x0177      4-13456       Ŷŷ  &#374;&#375;   LATIN LETTER Y WITH CIRCUMFLEX
+uplow        \x0179\x017A      4-1356        Źź  &#377;&#378;   LATIN LETTER Z WITH ACUTE
+uplow        \x017B\x017C      4-1356        Żż  &#379;&#380;   LATIN LETTER Z WITH DOT ABOVE
+uplow        \x017D\x017E      4-1356        Žž  &#381;&#382;   LATIN LETTER Z WITH CARON
+uplow        \x01CD\x01CE      4-1           Ǎǎ  &#461;&#462;   LATIN LETTER A WITH CARON
+uplow        \x1E80\x1E81      4-2456        Ẁẁ  &#7808;&#7809; LATIN LETTER W WITH GRAVE
+uplow        \x1E82\x1E83      4-2456        Ẃẃ  &#7810;&#7811; LATIN LETTER W WITH ACUTE
+uplow        \x1E84\x1E85      4-2456        Ẅẅ  &#7812;&#7813; LATIN LETTER W WITH DIAERESIS
+uplow        \x1EF2\x1EF3      4-13456       Ỳỳ  &#7922;&#7923; LATIN LETTER Y WITH GRAVE
+

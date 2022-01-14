@@ -1,0 +1,213 @@
+diff --git a/source/common/loclikely.cpp b/source/common/loclikely.cpp
+index 94a60aba..5a2d5408 100644
+--- a/source/common/loclikely.cpp
++++ b/source/common/loclikely.cpp
+@@ -1181,13 +1181,13 @@ error:
+     }
+ }
+ 
+-static UBool
++static int32_t
+ do_canonicalize(const char*    localeID,
+          char* buffer,
+          int32_t bufferCapacity,
+          UErrorCode* err)
+ {
+-    uloc_canonicalize(
++    int32_t canonicalizedSize = uloc_canonicalize(
+         localeID,
+         buffer,
+         bufferCapacity,
+@@ -1195,16 +1195,14 @@ do_canonicalize(const char*    localeID,
+ 
+     if (*err == U_STRING_NOT_TERMINATED_WARNING ||
+         *err == U_BUFFER_OVERFLOW_ERROR) {
+-        *err = U_ILLEGAL_ARGUMENT_ERROR;
+-
+-        return FALSE;
++        return canonicalizedSize;
+     }
+     else if (U_FAILURE(*err)) {
+ 
+-        return FALSE;
++        return -1;
+     }
+     else {
+-        return TRUE;
++        return canonicalizedSize;
+     }
+ }
+ 
+@@ -1241,12 +1239,17 @@ static UBool
+ _ulocimp_addLikelySubtags(const char* localeID,
+                           icu::ByteSink& sink,
+                           UErrorCode* status) {
+-    char localeBuffer[ULOC_FULLNAME_CAPACITY];
+-
+-    if (do_canonicalize(localeID, localeBuffer, sizeof localeBuffer, status)) {
+-        return _uloc_addLikelySubtags(localeBuffer, sink, status);
++    PreflightingLocaleIDBuffer localeBuffer;
++    do {
++        localeBuffer.requestedCapacity = do_canonicalize(localeID, localeBuffer.getBuffer(),
++            localeBuffer.getCapacity(), status);
++    } while (localeBuffer.needToTryAgain(status));
++    
++    if (U_SUCCESS(*status)) {
++        return _uloc_addLikelySubtags(localeBuffer.getBuffer(), sink, status);
++    } else {
++        return FALSE;
+     }
+-    return FALSE;
+ }
+ 
+ U_CAPI void U_EXPORT2
+@@ -1289,11 +1292,13 @@ U_CAPI void U_EXPORT2
+ ulocimp_minimizeSubtags(const char* localeID,
+                         icu::ByteSink& sink,
+                         UErrorCode* status) {
+-    char localeBuffer[ULOC_FULLNAME_CAPACITY];
+-
+-    if (do_canonicalize(localeID, localeBuffer, sizeof localeBuffer, status)) {
+-        _uloc_minimizeSubtags(localeBuffer, sink, status);
+-    }
++    PreflightingLocaleIDBuffer localeBuffer;
++    do {
++        localeBuffer.requestedCapacity = do_canonicalize(localeID, localeBuffer.getBuffer(),
++            localeBuffer.getCapacity(), status);
++    } while (localeBuffer.needToTryAgain(status));
++    
++    _uloc_minimizeSubtags(localeBuffer.getBuffer(), sink, status);
+ }
+ 
+ // Pairs of (language subtag, + or -) for finding out fast if common languages
+diff --git a/source/common/uloc.cpp b/source/common/uloc.cpp
+index d96e79b8..1b14e641 100644
+--- a/source/common/uloc.cpp
++++ b/source/common/uloc.cpp
+@@ -478,15 +478,19 @@ static const CanonicalizationMap CANONICALIZE_MAP[] = {
+ /* Test if the locale id has BCP47 u extension and does not have '@' */
+ #define _hasBCP47Extension(id) (id && uprv_strstr(id, "@") == NULL && getShortestSubtagLength(localeID) == 1)
+ /* Converts the BCP47 id to Unicode id. Does nothing to id if conversion fails */
+-#define _ConvertBCP47(finalID, id, buffer, length,err) UPRV_BLOCK_MACRO_BEGIN { \
+-    if (uloc_forLanguageTag(id, buffer, length, NULL, err) <= 0 || \
+-            U_FAILURE(*err) || *err == U_STRING_NOT_TERMINATED_WARNING) { \
+-        finalID=id; \
+-        if (*err == U_STRING_NOT_TERMINATED_WARNING) { *err = U_BUFFER_OVERFLOW_ERROR; } \
+-    } else { \
+-        finalID=buffer; \
+-    } \
+-} UPRV_BLOCK_MACRO_END
++static int32_t _ConvertBCP47(
++            const char*& finalID, const char* id, char* buffer, int32_t length, UErrorCode* err) {
++    int32_t localeIDSize = uloc_forLanguageTag(id, buffer, length, NULL, err);
++    if (localeIDSize <= 0 || U_FAILURE(*err) || *err == U_STRING_NOT_TERMINATED_WARNING) {
++        finalID=id;
++        if (*err == U_STRING_NOT_TERMINATED_WARNING) {
++            *err = U_BUFFER_OVERFLOW_ERROR;
++        }
++    } else {
++        finalID=buffer;
++    }
++    return localeIDSize;
++}
+ /* Gets the size of the shortest subtag in the given localeID. */
+ static int32_t getShortestSubtagLength(const char *localeID) {
+     int32_t localeIDLength = static_cast<int32_t>(uprv_strlen(localeID));
+@@ -1474,7 +1478,7 @@ _canonicalize(const char* localeID,
+               uint32_t options,
+               UErrorCode* err) {
+     int32_t j, fieldCount=0, scriptSize=0, variantSize=0;
+-    char tempBuffer[ULOC_FULLNAME_CAPACITY];
++    PreflightingLocaleIDBuffer tempBuffer;
+     const char* origLocaleID;
+     const char* tmpLocaleID;
+     const char* keywordAssign = NULL;
+@@ -1485,7 +1489,10 @@ _canonicalize(const char* localeID,
+     }
+ 
+     if (_hasBCP47Extension(localeID)) {
+-        _ConvertBCP47(tmpLocaleID, localeID, tempBuffer, sizeof(tempBuffer), err);
++        do {
++            tempBuffer.requestedCapacity = _ConvertBCP47(tmpLocaleID, localeID,
++                tempBuffer.getBuffer(), tempBuffer.getCapacity(), err);
++        } while (tempBuffer.needToTryAgain(err));
+     } else {
+         if (localeID==NULL) {
+            localeID=uloc_getDefault();
+diff --git a/source/common/ulocimp.h b/source/common/ulocimp.h
+index 1f796aa2..755e02c6 100644
+--- a/source/common/ulocimp.h
++++ b/source/common/ulocimp.h
+@@ -307,4 +307,72 @@ U_CAPI const char* const* ulocimp_getKnownCanonicalizedLocaleForTest(int32_t* le
+ // Return true if the value is already canonicalized.
+ U_CAPI bool ulocimp_isCanonicalizedLocaleForTest(const char* localeName);
+ 
++/**
++ * A utility class for handling locale IDs that may be longer than ULOC_FULLNAME_CAPACITY.
++ * This encompasses all of the logic to allocate a temporary locale ID buffer on the stack,
++ * and then, if it's not big enough, reallocate it on the heap and try again.
++ *
++ * You use it like this:
++ * UErrorCode err = U_ZERO_ERROR;
++ *
++ * PreflightingLocaleIDBuffer tempBuffer;
++ * do {
++ *     tempBuffer.requestedCapacity = uloc_doSomething(localeID, tempBuffer.getBuffer(), tempBuffer.getCapacity(), &err);
++ * } while (tempBuffer.needToTryAgain(&err));
++ * if (U_SUCCESS(err)) {
++ *     uloc_doSomethingWithTheResult(tempBuffer.getBuffer());
++ * }
++ */
++class PreflightingLocaleIDBuffer {
++private:
++    char stackBuffer[ULOC_FULLNAME_CAPACITY];
++    char* heapBuffer = nullptr;
++    int32_t capacity = ULOC_FULLNAME_CAPACITY;
++    
++public:
++    int32_t requestedCapacity = ULOC_FULLNAME_CAPACITY;
++
++    // No heap allocation. Use only on the stack.
++    static void* U_EXPORT2 operator new(size_t) U_NOEXCEPT = delete;
++    static void* U_EXPORT2 operator new[](size_t) U_NOEXCEPT = delete;
++#if U_HAVE_PLACEMENT_NEW
++    static void* U_EXPORT2 operator new(size_t, void*) U_NOEXCEPT = delete;
++#endif
++
++    PreflightingLocaleIDBuffer() {}
++    
++    ~PreflightingLocaleIDBuffer() { uprv_free(heapBuffer); }
++    
++    char* getBuffer() {
++        if (heapBuffer == nullptr) {
++            return stackBuffer;
++        } else {
++            return heapBuffer;
++        }
++    }
++    
++    int32_t getCapacity() {
++        return capacity;
++    }
++    
++    bool needToTryAgain(UErrorCode* err) {
++        if (heapBuffer != nullptr) {
++            return false;
++        }
++    
++        if (*err == U_BUFFER_OVERFLOW_ERROR || *err == U_STRING_NOT_TERMINATED_WARNING) {
++            int32_t newCapacity = requestedCapacity + 2;    // one for the terminating null, one just for paranoia
++            heapBuffer = static_cast<char*>(uprv_malloc(newCapacity));
++            if (heapBuffer == nullptr) {
++                *err = U_MEMORY_ALLOCATION_ERROR;
++            } else {
++                *err = U_ZERO_ERROR;
++                capacity = newCapacity;
++            }
++            return U_SUCCESS(*err);
++        }
++        return false;
++    }
++};
++
+ #endif

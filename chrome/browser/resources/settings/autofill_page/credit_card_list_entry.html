@@ -1,0 +1,45 @@
+    <style include="settings-shared passwords-shared">
+      .expiration-column {
+        align-items: center;
+        display: flex;
+        flex: 1;
+      }
+
+      #creditCardExpiration {
+        flex: 1;
+      }
+
+      .payments-label {
+        color: var(--cr-secondary-text-color);
+        margin-inline-start: 16px;
+      }
+    </style>
+    <div class="list-item">
+      <div class="type-column">
+        <span id="creditCardLabel">[[creditCard.metadata.summaryLabel]]</span>
+        <span class="payments-label"
+            hidden$="[[creditCard.metadata.isLocal]]">
+          <span hidden$="[[creditCard.metadata.isCached]]">
+            $i18n{googlePayments}
+          </span>
+          <span hidden$="[[!creditCard.metadata.isCached]]">
+            $i18n{googlePaymentsCached}
+          </span>
+        </span>
+      </div>
+      <div class="expiration-column">
+        <div id="creditCardExpiration">
+            [[creditCard.expirationMonth]]/[[creditCard.expirationYear]]
+        </div>
+        <template is="dom-if" if="[[showDots_(creditCard.metadata)]]">
+          <cr-icon-button class="icon-more-vert" id="creditCardMenu"
+              title="$i18n{moreActions}" on-click="onDotsMenuClick_">
+          </cr-icon-button>
+        </template>
+        <template is="dom-if" if="[[!showDots_(creditCard.metadata)]]">
+          <cr-icon-button class="icon-external" id="remoteCreditCardLink"
+              title="$i18n{remoteCreditCardLinkLabel}" role="link"
+              on-click="onRemoteEditClick_"></cr-icon-button>
+        </template>
+      </div>
+    </div>

@@ -1,0 +1,11 @@
+# see https://github.com/liblouis/liblouis/issues/412
+table: [tables/en-us-g1.ctb]
+tests:
+  - - "SARVESH KUMAR Upadhyay"
+    - ",,sarvesh ,,kumar ,upadhyay"
+  - - "SARVESH KUMAR Upadhyay"
+    - ",,sarvesh ,,kumar "
+    - maxOutputLength: 25
+  - - "SARVESH KUMAR UPADHYAY"
+    - ",,sarvesh ,,kumar "
+    - maxOutputLength: 25

@@ -1,0 +1,7 @@
+{
+  "tests": [
+    {
+      "app": "ios_remoting_unittests"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+# 80 ---------------------------------------------------------------------------
+# Long suffix comments, and including trailing spaces.
+config("compiler") {
+  if (is_win) {
+    if (is_component_build) {
+      cflags += [
+        "/EHsc",  # These are some very long suffix comment words aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                  # bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb   
+                  # cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                  # dddddddddddddddd ddddddddddd dddddddd ddddddddddddd ddddddddddddddd
+      ]
+    }
+  }
+}
+

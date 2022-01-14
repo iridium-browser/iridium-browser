@@ -1,0 +1,10 @@
+mfoltz@chromium.org
+jophba@chromium.org
+sergeyu@chromium.org
+wez@chromium.org
+
+# For WebRTC desktop capturer
+per-file desktop*=joedow@chromium.org
+per-file screen_capture*=joedow@chromium.org
+
+per-file web_contents_*=ilnik@chromium.org

@@ -1,0 +1,76 @@
+<style include="cr-shared-style shimless-rma-shared">
+  :host {
+    display: inline-flex;
+  }
+
+  cr-dialog::part(dialog) {
+    width: 460px;
+  }
+
+  iron-icon {
+    width: 20px;
+    height: 20px;
+    /* TODO(joonbug): Update with chrome color */
+    color: blue;
+  }
+
+  .error {
+    /* TODO(joonbug): Update with chrome color */
+    color: red;
+    font-weight: 500;
+  }
+
+  #networkList {
+    flex: 1;
+  }
+
+  .dialogFooter {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-bottom: 16px;
+    padding-inline-start: 16px;
+    padding-top: 24px;
+  }
+</style>
+
+<base-page orientation="column">
+  <div slot="header">
+    <iron-icon icon="shimless-icon:wifi"></iron-icon>
+    <!-- TODO(joonbug): Update for i18n -->
+    <h1>Get connected</h1>
+    <p>Connecting to Wi-Fi is recommended to make the repair process easier. Your network will be saved.</p>
+  </div>
+  <div slot="body" id="container">
+    <network-list id="networkList" show-buttons
+        show-technology-badge="true"
+        networks="[[networks_]]"
+        on-selected="onNetworkSelected_">
+    </network-list>
+  </div>
+</base-page>
+
+<!-- TODO(joonbug): Update for i18n -->
+<cr-dialog id="dialog" close-text="close">
+  <div slot="title">
+    [[getDialogTitle_(networkName_, networkType_, networkShowConnect_)]]
+  </div>
+  <div slot="body">
+    <network-config id="networkConfig" enable-connect="{{enableConnect_}}" error="{{error_}}"
+      on-close="onConfigClose_" on-properties-set="onPropertiesSet_" connect-on-enter="[[networkShowConnect_]]"
+      type="{{networkType_}}" name="{{networkName_}}" guid="[[guid_]]">
+    </network-config>
+    <div class="dialogFooter" slot="button-container">
+      <template is="dom-if" if="[[error_]]" restamp>
+        <div class="flex error">[[getError_(error_)]]</div>
+      </template>
+      <!-- TODO(joonbug): Update for i18n -->
+      <cr-button id="cancelButton" on-click="closeConfig_">Cancel</cr-button>
+      <cr-button id="connectButton" on-click="connectNetwork_"
+        disabled="[[!enableConnect_]]">
+          Connect
+      </cr-button>
+    </div>
+  </div>
+</cr-dialog>

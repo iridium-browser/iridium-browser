@@ -386,6 +386,9 @@ class VIEWS_EXPORT ScrollView : public View, public ScrollBarController {
   ScrollViewCallbackList on_contents_scroll_ended_;
 };
 
+// Required for WebAppUrlHandlerIntentPickerView
+template View* ScrollView::SetContents<View>(std::unique_ptr<View> a_view);
+
 BEGIN_VIEW_BUILDER(VIEWS_EXPORT, ScrollView, View)
 VIEW_BUILDER_VIEW_TYPE_PROPERTY(View, Contents)
 VIEW_BUILDER_PROPERTY(ui::LayerType, ContentsLayerType)

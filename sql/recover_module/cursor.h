@@ -130,7 +130,7 @@ class VirtualCursor {
   std::vector<std::unique_ptr<InnerPageDecoder>> inner_decoders_;
 
   // Decodes the leaf page containing records.
-  std::unique_ptr<LeafPageDecoder> leaf_decoder_;
+  LeafPageDecoder leaf_decoder_;
 
   SEQUENCE_CHECKER(sequence_checker_);
 };

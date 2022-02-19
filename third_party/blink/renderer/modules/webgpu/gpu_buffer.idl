@@ -1,0 +1,20 @@
+// Copyright 2019 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// https://gpuweb.github.io/gpuweb/
+
+[
+    Exposed(Window WebGPU, Worker WebGPU)
+] interface GPUBuffer {
+    [CallWith=ScriptState, RaisesException] Promise<void> mapAsync(
+        GPUMapModeFlags mode,
+        optional GPUSize64 offset = 0,
+        optional GPUSize64 size);
+    [CallWith=ExecutionContext, RaisesException] ArrayBuffer getMappedRange(
+        optional GPUSize64 offset = 0,
+        optional GPUSize64 size);
+    [CallWith=ScriptState] void unmap();
+    [CallWith=ScriptState] void destroy();
+};
+GPUBuffer includes GPUObjectBase;

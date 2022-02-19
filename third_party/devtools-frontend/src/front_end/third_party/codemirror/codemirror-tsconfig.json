@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "composite": true
+  },
+  "files": [
+    "package/addon/runmode/runmode-standalone.js",
+    "package/mode/css/css.js",
+    "package/mode/javascript/javascript.js",
+    "package/mode/xml/xml.js"
+  ]
+}

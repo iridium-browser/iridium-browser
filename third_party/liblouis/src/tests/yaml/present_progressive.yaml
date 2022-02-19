@@ -1,0 +1,94 @@
+# Converted from present_progressive.c with additional tests by buevest
+
+# Note that this test used to fail worse than it does now. The
+# current situation isn't hugely critical, though probably still
+# incorrect.
+
+# There are two key portions of the string: the "ing" (which gets
+# contracted to one character) and the double space at the end. When
+# translated, you get: "greetings " -> "greet+s " Notice that the
+# translation also contracts the double space into a single space.
+
+# With regard to cursor position, compbrlAtCursor is set, which means
+# that the word encompassed by the cursor will be uncontracted
+# (computer braille). This means that if the cursor is anywhere
+# within "greetings", the translated output will also be "greetings",
+# so the cursor positions are identical up to the end of the s
+# (position 8).
+
+# It gets more interesting at position 9 (the first space). Now,
+# greetings gets contracted, so the output cursor position becomes 7.
+# Still correct so far.
+
+# Position 10 (the second space) is the problem. Because
+# compbrlAtCursor is set, the current word should probably be
+# expanded. In this case, it is just a space. However, the two spaces
+# are still compressed into one, even though the second should have
+# been expanded. The translation has still contracted the second
+# space, even though it should have stopped contracting at the
+# cursor.
+
+# See also the description in
+# http://code.google.com/p/liblouis/issues/detail?id=4
+
+# buevest:
+# To me, it looks as follows:
+# if compbrlAtCursor is selected, all compressed spaces in the string
+# are expanded.
+# The only exception is if the cursor is placed on the last of a
+# series of otherwise compressed spaces. Then that exact space is
+# removed, making 2 spaces into 1, 3 into 2 etc.
+
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  math + 346
+  include tables/compress.cti
+  midendword ing 346
+
+tests:
+  - - 'greetings  '
+    - '⠛⠗⠑⠑⠞⠬⠎ '
+  - - 'greetings  '
+    - '⠛⠗⠑⠑⠞⠊⠝⠛⠎ '
+    - mode: [compbrlAtCursor]
+      cursorPos: [1,1]
+      xfail: true
+    # actual output: '⠛⠗⠑⠑⠞⠊⠝⠛⠎  '
+  - - 'greetings  greetings  '
+    - '⠛⠗⠑⠑⠞⠊⠝⠛⠎ ⠛⠗⠑⠑⠞⠬⠎ '
+    - mode: [compbrlAtCursor]
+      cursorPos: [1,1]
+      xfail: true
+    # actual output: '⠛⠗⠑⠑⠞⠊⠝⠛⠎  ⠛⠗⠑⠑⠞⠬⠎  '
+  - - 'greetings  '
+    - '⠛⠗⠑⠑⠞⠬⠎  '
+    - mode: [compbrlAtCursor]
+      cursorPos: [9,7]
+  - - 'greetings  '
+    - '⠛⠗⠑⠑⠞⠬⠎  '
+    - mode: [compbrlAtCursor]
+      cursorPos: [10,8]
+      xfail: true
+    # actual output: '⠛⠗⠑⠑⠞⠬⠎ '
+  - - 'greetings   '
+    - '⠛⠗⠑⠑⠞⠬⠎   '
+    - mode: [compbrlAtCursor]
+      cursorPos: [9,7]
+  - - 'greetings   '
+    - '⠛⠗⠑⠑⠞⠬⠎   '
+    - mode: [compbrlAtCursor]
+      cursorPos: [10,8]
+  - - 'greetings   '
+    - '⠛⠗⠑⠑⠞⠬⠎   '
+    - mode: [compbrlAtCursor]
+      cursorPos: [11,9]
+      xfail: true
+    # actual output: '⠛⠗⠑⠑⠞⠬⠎ '
+  - - 'greetings   g'
+    - '⠛⠗⠑⠑⠞⠬⠎   ⠛'
+    - mode: [compbrlAtCursor]
+      cursorPos: [11,9]
+      xfail: true
+    # actual output: '⠛⠗⠑⠑⠞⠬⠎  ⠛'

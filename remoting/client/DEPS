@@ -1,0 +1,12 @@
+include_rules = [
+  "+ppapi",
+  "+jingle/glue",
+  "+mojo/core/embedder",
+  "+net",
+  "+ui/events/keycodes/dom",
+
+  "+remoting/codec",
+  "+remoting/protocol",
+  "+remoting/signaling",
+  "+services/network",
+]

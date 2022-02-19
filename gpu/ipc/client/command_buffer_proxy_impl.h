@@ -1,0 +1,313 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef GPU_IPC_CLIENT_COMMAND_BUFFER_PROXY_IMPL_H_
+#define GPU_IPC_CLIENT_COMMAND_BUFFER_PROXY_IMPL_H_
+
+#include <stddef.h>
+#include <stdint.h>
+
+#include <map>
+#include <memory>
+#include <queue>
+#include <string>
+#include <unordered_map>
+#include <utility>
+#include <vector>
+
+#include "base/callback.h"
+#include "base/compiler_specific.h"
+#include "base/containers/flat_map.h"
+#include "base/memory/raw_ptr.h"
+#include "base/memory/ref_counted.h"
+#include "base/memory/shared_memory_mapping.h"
+#include "base/memory/unsafe_shared_memory_region.h"
+#include "base/memory/weak_ptr.h"
+#include "base/observer_list.h"
+#include "base/task/single_thread_task_runner.h"
+#include "base/threading/thread_checker.h"
+#include "gpu/command_buffer/client/gpu_control.h"
+#include "gpu/command_buffer/common/command_buffer.h"
+#include "gpu/command_buffer/common/command_buffer_id.h"
+#include "gpu/command_buffer/common/command_buffer_shared.h"
+#include "gpu/command_buffer/common/context_result.h"
+#include "gpu/command_buffer/common/gpu_memory_allocation.h"
+#include "gpu/command_buffer/common/scheduling_priority.h"
+#include "gpu/gpu_export.h"
+#include "gpu/ipc/client/gpu_channel_host.h"
+#include "gpu/ipc/common/gpu_channel.mojom.h"
+#include "gpu/ipc/common/surface_handle.h"
+#include "mojo/public/cpp/bindings/associated_receiver.h"
+#include "mojo/public/cpp/bindings/shared_associated_remote.h"
+#include "ui/gfx/swap_result.h"
+#include "ui/gl/gpu_preference.h"
+
+class GURL;
+
+namespace base {
+class HistogramBase;
+}
+
+namespace gfx {
+struct GpuFenceHandle;
+struct PresentationFeedback;
+}
+
+namespace gpu {
+struct ContextCreationAttribs;
+struct Mailbox;
+struct SwapBuffersCompleteParams;
+struct SyncToken;
+}
+
+namespace gpu {
+class GpuChannelHost;
+class GpuMemoryBufferManager;
+
+// Client side proxy that forwards messages synchronously to a
+// CommandBufferStub.
+class GPU_EXPORT CommandBufferProxyImpl : public gpu::CommandBuffer,
+                                          public gpu::GpuControl,
+                                          public mojom::CommandBufferClient {
+ public:
+  class DeletionObserver {
+   public:
+    // Called during the destruction of the CommandBufferProxyImpl.
+    virtual void OnWillDeleteImpl() = 0;
+
+   protected:
+    virtual ~DeletionObserver() = default;
+  };
+
+  CommandBufferProxyImpl(
+      scoped_refptr<GpuChannelHost> channel,
+      GpuMemoryBufferManager* gpu_memory_buffer_manager,
+      int32_t stream_id,
+      scoped_refptr<base::SingleThreadTaskRunner> task_runner);
+
+  CommandBufferProxyImpl(const CommandBufferProxyImpl&) = delete;
+  CommandBufferProxyImpl& operator=(const CommandBufferProxyImpl&) = delete;
+
+  ~CommandBufferProxyImpl() override;
+
+  // Connect to a command buffer in the GPU process.
+  ContextResult Initialize(gpu::SurfaceHandle surface_handle,
+                           CommandBufferProxyImpl* share_group,
+                           gpu::SchedulingPriority stream_priority,
+                           const gpu::ContextCreationAttribs& attribs,
+                           const GURL& active_url);
+
+  void OnDisconnect();
+
+  // Asks the GPU side to bind an associated interface which will share message
+  // ordering with this command buffer. Used by media clients for interfaces not
+  // defined at the GPU layer.
+  void BindMediaReceiver(mojo::GenericPendingAssociatedReceiver receiver);
+
+  // CommandBuffer implementation:
+  State GetLastState() override;
+  void Flush(int32_t put_offset) override;
+  void OrderingBarrier(int32_t put_offset) override;
+  State WaitForTokenInRange(int32_t start, int32_t end) override;
+  State WaitForGetOffsetInRange(uint32_t set_get_buffer_count,
+                                int32_t start,
+                                int32_t end) override;
+  void SetGetBuffer(int32_t shm_id) override;
+  scoped_refptr<gpu::Buffer> CreateTransferBuffer(
+      uint32_t size,
+      int32_t* id,
+      TransferBufferAllocationOption option =
+          TransferBufferAllocationOption::kLoseContextOnOOM) override;
+  void DestroyTransferBuffer(int32_t id) override;
+
+  // gpu::GpuControl implementation:
+  void SetGpuControlClient(GpuControlClient* client) override;
+  const gpu::Capabilities& GetCapabilities() const override;
+  int32_t CreateImage(ClientBuffer buffer,
+                      size_t width,
+                      size_t height) override;
+  void DestroyImage(int32_t id) override;
+  void SignalQuery(uint32_t query, base::OnceClosure callback) override;
+  void CreateGpuFence(uint32_t gpu_fence_id, ClientGpuFence source) override;
+  void GetGpuFence(uint32_t gpu_fence_id,
+                   base::OnceCallback<void(std::unique_ptr<gfx::GpuFence>)>
+                       callback) override;
+  void SetDisplayTransform(gfx::OverlayTransform transform) override;
+
+  void SetLock(base::Lock* lock) override;
+  void EnsureWorkVisible() override;
+  gpu::CommandBufferNamespace GetNamespaceID() const override;
+  gpu::CommandBufferId GetCommandBufferID() const override;
+  void FlushPendingWork() override;
+  uint64_t GenerateFenceSyncRelease() override;
+  bool IsFenceSyncReleased(uint64_t release) override;
+  void SignalSyncToken(const gpu::SyncToken& sync_token,
+                       base::OnceClosure callback) override;
+  void WaitSyncToken(const gpu::SyncToken& sync_token) override;
+  bool CanWaitUnverifiedSyncToken(const gpu::SyncToken& sync_token) override;
+  void TakeFrontBuffer(const gpu::Mailbox& mailbox);
+  void ReturnFrontBuffer(const gpu::Mailbox& mailbox,
+                         const gpu::SyncToken& sync_token,
+                         bool is_lost);
+
+  void AddDeletionObserver(DeletionObserver* observer);
+  void RemoveDeletionObserver(DeletionObserver* observer);
+
+  bool EnsureBackbuffer();
+
+  using UpdateVSyncParametersCallback =
+      base::RepeatingCallback<void(base::TimeTicks timebase,
+                                   base::TimeDelta interval)>;
+  void SetUpdateVSyncParametersCallback(
+      const UpdateVSyncParametersCallback& callback);
+
+  int32_t route_id() const { return route_id_; }
+
+  const scoped_refptr<GpuChannelHost>& channel() const { return channel_; }
+
+  mojom::GpuChannel& GetGpuChannel() const {
+    return channel()->GetGpuChannel();
+  }
+
+  const base::UnsafeSharedMemoryRegion& GetSharedStateRegion() const {
+    return shared_state_shm_;
+  }
+
+ private:
+  typedef std::map<int32_t, scoped_refptr<gpu::Buffer>> TransferBufferMap;
+  typedef std::unordered_map<uint32_t, base::OnceClosure> SignalTaskMap;
+
+  void CheckLock() {
+    if (lock_) {
+      lock_->AssertAcquired();
+    } else {
+      DCHECK(lockless_thread_checker_.CalledOnValidThread());
+    }
+  }
+
+  void OrderingBarrierHelper(int32_t put_offset);
+
+  std::pair<base::UnsafeSharedMemoryRegion, base::WritableSharedMemoryMapping>
+  AllocateAndMapSharedMemory(size_t size);
+
+  // mojom::CommandBufferClient:
+  void OnConsoleMessage(const std::string& message) override;
+  void OnGpuSwitched(gl::GpuPreference active_gpu_heuristic) override;
+  void OnDestroyed(gpu::error::ContextLostReason reason,
+                   gpu::error::Error error) override;
+  void OnSwapBuffersCompleted(const SwapBuffersCompleteParams& params) override;
+  void OnBufferPresented(uint64_t swap_id,
+                         const gfx::PresentationFeedback& feedback) override;
+  void OnReturnData(const std::vector<uint8_t>& data) override;
+  void OnSignalAck(uint32_t id, const CommandBuffer::State& state) override;
+
+  void OnGetGpuFenceHandleComplete(
+      uint32_t gpu_fence_id,
+      base::OnceCallback<void(std::unique_ptr<gfx::GpuFence>)> callback,
+      gfx::GpuFenceHandle);
+
+  // Try to read an updated copy of the state from shared memory, and calls
+  // OnGpuStateError() if the new state has an error.
+  void TryUpdateState() EXCLUSIVE_LOCKS_REQUIRED(last_state_lock_);
+  // Like above but calls the error handler and disconnects channel by posting
+  // a task.
+  void TryUpdateStateThreadSafe() EXCLUSIVE_LOCKS_REQUIRED(last_state_lock_);
+  // Like the above but does not call the error event handler if the new state
+  // has an error.
+  void TryUpdateStateDontReportError()
+      EXCLUSIVE_LOCKS_REQUIRED(last_state_lock_);
+  // Sets the state, and calls OnGpuStateError() if the new state has an error.
+  void SetStateFromMessageReply(const CommandBuffer::State& state)
+      EXCLUSIVE_LOCKS_REQUIRED(last_state_lock_);
+
+  // Loses the context after we received an invalid reply from the GPU
+  // process.
+  void OnGpuSyncReplyError() EXCLUSIVE_LOCKS_REQUIRED(last_state_lock_);
+
+  // Loses the context when receiving a message from the GPU process.
+  void OnGpuAsyncMessageError(gpu::error::ContextLostReason reason,
+                              gpu::error::Error error)
+      EXCLUSIVE_LOCKS_REQUIRED(last_state_lock_);
+
+  // Loses the context after we receive an error state from the GPU process.
+  void OnGpuStateError() EXCLUSIVE_LOCKS_REQUIRED(last_state_lock_);
+
+  // Sets an error on the last_state_ and loses the context due to client-side
+  // errors.
+  void OnClientError(gpu::error::Error error)
+      EXCLUSIVE_LOCKS_REQUIRED(last_state_lock_);
+
+  // Helper methods, don't call these directly.
+  void DisconnectChannelInFreshCallStack()
+      EXCLUSIVE_LOCKS_REQUIRED(last_state_lock_);
+  void LockAndDisconnectChannel();
+  void DisconnectChannel();
+
+  // The shared memory area used to update state.
+  gpu::CommandBufferSharedState* shared_state() const;
+
+  base::HistogramBase* GetUMAHistogramEnsureWorkVisibleDuration();
+
+  // The shared memory region used to update state.
+  base::UnsafeSharedMemoryRegion shared_state_shm_;
+  base::WritableSharedMemoryMapping shared_state_mapping_;
+
+  // The last cached state received from the service.
+  State last_state_;
+
+  // Lock to access shared state e.g. sync token release count across multiple
+  // threads. This allows tracking command buffer progress from another thread.
+  base::Lock last_state_lock_;
+
+  // There should be a lock_ if this is going to be used across multiple
+  // threads, or we guarantee it is used by a single thread by using a thread
+  // checker if no lock_ is set.
+  raw_ptr<base::Lock> lock_ = nullptr;
+  base::ThreadChecker lockless_thread_checker_;
+
+  // Client that wants to listen for important events on the GpuControl.
+  raw_ptr<gpu::GpuControlClient> gpu_control_client_ = nullptr;
+
+  // Unowned list of DeletionObservers.
+  base::ObserverList<DeletionObserver>::Unchecked deletion_observers_;
+
+  scoped_refptr<GpuChannelHost> channel_;
+  raw_ptr<GpuMemoryBufferManager> gpu_memory_buffer_manager_;
+  bool disconnected_ = false;
+  const int channel_id_;
+  const int32_t route_id_;
+  const int32_t stream_id_;
+  const gpu::CommandBufferId command_buffer_id_;
+  uint32_t last_flush_id_ = 0;
+  int32_t last_put_offset_ = -1;
+  bool has_buffer_ = false;
+
+  mojo::SharedAssociatedRemote<mojom::CommandBuffer> command_buffer_;
+  mojo::AssociatedReceiver<mojom::CommandBufferClient> client_receiver_{this};
+
+  // Next generated fence sync.
+  uint64_t next_fence_sync_release_ = 1;
+
+  // Sync token waits that haven't been flushed yet.
+  std::vector<SyncToken> pending_sync_token_fences_;
+
+  // Tasks to be invoked in SignalSyncPoint responses.
+  uint32_t next_signal_id_ = 0;
+  SignalTaskMap signal_tasks_;
+
+  gpu::Capabilities capabilities_;
+
+  UpdateVSyncParametersCallback update_vsync_parameters_completion_callback_;
+
+  // Cache pointer to EnsureWorkVisibleDuration custom UMA histogram.
+  raw_ptr<base::HistogramBase> uma_histogram_ensure_work_visible_duration_ =
+      nullptr;
+
+  scoped_refptr<base::SingleThreadTaskRunner> callback_thread_;
+  base::WeakPtrFactory<CommandBufferProxyImpl> weak_ptr_factory_{this};
+};
+
+}  // namespace gpu
+
+#endif  // GPU_IPC_CLIENT_COMMAND_BUFFER_PROXY_IMPL_H_

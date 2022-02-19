@@ -1,0 +1,752 @@
+# Deutsche Vollschrift
+#
+# Copyright © 2020 by Bue Vester-Andersen <bue@vester-andersen.dk>
+# Copyright © 2020,2021 by Deutsche Blindenstudienanstalt e.V. (blista)
+# Copyright © 2020,2021 by Bert Frees
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+table:
+  locale: de
+  grade: 1
+  type: literary
+  dots: 6
+  direction: forward
+  __assert-match: de-g1.ctb
+tests:
+  - [" ", " "]
+  - ["!", "⠖"]
+  - ['"', '⠦']
+  - ["#", "⠈⠼"]
+  - ["$", "⠈⠎"]
+  - ["%", "⠼⠚⠴"]
+  - ["&", "⠐⠥"]
+  - ["'", "⠠"]
+  - ["(", "⠶"]
+  - [")", "⠶"]
+  - ["*", "⠠⠔"]
+  - ["+", "⠈⠖"]
+  - [",", "⠂"]
+  - ["-", "⠤"]
+  - [".", "⠄"]
+  - ["/", "⠐⠂"]
+  - ["0", "⠼⠚"]
+  - ["1", "⠼⠁"]
+  - ["2", "⠼⠃"]
+  - ["3", "⠼⠉"]
+  - ["4", "⠼⠙"]
+  - ["5", "⠼⠑"]
+  - ["6", "⠼⠋"]
+  - ["7", "⠼⠛"]
+  - ["8", "⠼⠓"]
+  - ["9", "⠼⠊"]
+  - [":", "⠒"]
+  - [";", "⠆"]
+  - ["<", "⠈⠪⠄"]
+  - ["=", "⠈⠶"]
+  - [">", "⠈⠕⠂"]
+  - ["?", "⠢"]
+  - ["@", "⠠⠨⠈⠜"]
+  - ["A", "⠁"]
+  - ["B", "⠃"]
+  - ["C", "⠉"]
+  - ["D", "⠙"]
+  - ["E", "⠑"]
+  - ["F", "⠋"]
+  - ["G", "⠛"]
+  - ["H", "⠓"]
+  - ["I", "⠊"]
+  - ["J", "⠚"]
+  - ["K", "⠅"]
+  - ["L", "⠇"]
+  - ["M", "⠍"]
+  - ["N", "⠝"]
+  - ["O", "⠕"]
+  - ["P", "⠏"]
+  - ["Q", "⠟"]
+  - ["R", "⠗"]
+  - ["S", "⠎"]
+  - ["T", "⠞"]
+  - ["U", "⠥"]
+  - ["V", "⠧"]
+  - ["W", "⠺"]
+  - ["X", "⠭"]
+  - ["Y", "⠽"]
+  - ["Z", "⠵"]
+  - ["[", "⠠⠶"]
+  - ['\\', '⠈⠌']
+  - ["]", "⠠⠶"]
+  - ["^", "⠈⠮"]
+  - ["_", "⠈⠸"]
+  - ["`", "⠠⠦"]
+  - ["a", "⠁"]
+  - ["b", "⠃"]
+  - ["c", "⠉"]
+  - ["d", "⠙"]
+  - ["e", "⠑"]
+  - ["f", "⠋"]
+  - ["g", "⠛"]
+  - ["h", "⠓"]
+  - ["i", "⠊"]
+  - ["j", "⠚"]
+  - ["k", "⠅"]
+  - ["l", "⠇"]
+  - ["m", "⠍"]
+  - ["n", "⠝"]
+  - ["o", "⠕"]
+  - ["p", "⠏"]
+  - ["q", "⠟"]
+  - ["r", "⠗"]
+  - ["s", "⠎"]
+  - ["t", "⠞"]
+  - ["u", "⠥"]
+  - ["v", "⠧"]
+  - ["w", "⠺"]
+  - ["x", "⠭"]
+  - ["y", "⠽"]
+  - ["z", "⠵"]
+  - ["{", "⠐⠷"]
+  - ["|", "⠐⠤"]
+  - ["}", "⠐⠷"]
+  - ["~", "⠈⠢⠢", {xfail: extra space}]
+
+# LATIN-1 SUPPLEMENT: 0080-00FF
+  - ["¡", "⠠⠖"]
+  - ["¢", "⠈⠉"]
+  - ["£", "⠈⠇"]
+  - ["\u00a4", " "]
+  - ["¥", "⠈⠽"]
+  - ["¦", "⠐⠤"]
+  - ["§", "⠈⠬"]
+  - ["\u00a8", " "]
+  - ["©", "⠶⠘⠉⠶"]
+  - ["ª", "⠁"]
+  - ["«", "⠦"]
+  - ["¬", "⠈⠒⠔"]
+  - ["\u00ad", " "]
+  - ["®", "⠠⠶⠘⠗⠶"]
+  - ["\u00af", " "]
+  - ["°", "⠈⠴"]
+  - ["±", "⠈⠖⠤"]
+  - ["²", "⠌⠆"]
+  - ["³", "⠌⠒"]
+  - ["´", "⠠⠴"]
+  - ["µ", "⠰⠍"]
+  - ["\u00b6", " "]
+  - ["\u00b7", " "]
+  - ["\u00b8", " "]
+  - ["¹", "", {xfail: should probably be defined}]
+  - ["º", "⠕"]
+  - ["»", "⠴"]
+  - ["¼", "⠼⠁⠲"]
+  - ["½", "⠼⠁⠆"]
+  - ["¾", "⠼⠉⠲"]
+  - ["¿", "⠠⠢"]
+  - ["À", "⠈⠁"]
+  - ["Á", "⠈⠁"]
+  - ["Â", "⠈⠁"]
+  - ["Ã", "⠈⠁"]
+  - ["Ä", "⠜"]
+  - ["Å", "⠈⠁"]
+  - ["Æ", "⠁⠑"]
+  - ["Ç", "⠈⠉"]
+  - ["È", "⠈⠑"]
+  - ["É", "⠈⠑"]
+  - ["Ê", "⠈⠑"]
+  - ["Ë", "⠈⠑"]
+  - ["Ì", "⠈⠊"]
+  - ["Í", "⠈⠊"]
+  - ["Î", "⠈⠊"]
+  - ["Ï", "⠈⠊"]
+  - ["Ð", "⠈⠙"]
+  - ["Ñ", "⠈⠝"]
+  - ["Ò", "⠈⠕"]
+  - ["Ó", "⠈⠕"]
+  - ["Ô", "⠈⠕"]
+  - ["Õ", "⠈⠕"]
+  - ["Ö", "⠪"]
+  - ["×", "⠈⠦"]
+  - ["Ø", "⠈⠕"]
+  - ["Ù", "⠈⠥"]
+  - ["Ú", "⠈⠥"]
+  - ["Û", "⠈⠥"]
+  - ["Ü", "⠳"]
+  - ["Ý", "⠈⠽"]
+  - ["Þ", "⠈⠞"]
+  - ["ß", "⠮"]
+  - ["à", "⠈⠁"]
+  - ["á", "⠈⠁"]
+  - ["â", "⠈⠁"]
+  - ["ã", "⠈⠁"]
+  - ["ä", "⠜"]
+  - ["å", "⠈⠁"]
+  - ["æ", "⠁⠑"]
+  - ["ç", "⠈⠉"]
+  - ["è", "⠈⠑"]
+  - ["é", "⠈⠑"]
+  - ["ê", "⠈⠑"]
+  - ["ë", "⠈⠑"]
+  - ["ì", "⠈⠊"]
+  - ["í", "⠈⠊"]
+  - ["î", "⠈⠊"]
+  - ["ï", "⠈⠊"]
+  - ["ð", "⠈⠙"]
+  - ["ñ", "⠈⠝"]
+  - ["ò", "⠈⠕"]
+  - ["ó", "⠈⠕"]
+  - ["ô", "⠈⠕"]
+  - ["õ", "⠈⠕"]
+  - ["ö", "⠪"]
+  - ["÷", "⠈⠒"]
+  - ["ø", "⠈⠕"]
+  - ["ù", "⠈⠥"]
+  - ["ú", "⠈⠥"]
+  - ["û", "⠈⠥"]
+  - ["ü", "⠳"]
+  - ["ý", "⠈⠽"]
+  - ["þ", "⠈⠞"]
+  - ["ÿ", "⠈⠽"]
+
+# Extended Latin A
+  - ["Ā", "⠈⠁"]
+  - ["ā", "⠈⠁"]
+  - ["Ă", "⠈⠁"]
+  - ["ă", "⠈⠁"]
+  - ["Ą", "⠈⠁"]
+  - ["ą", "⠈⠁"]
+  - ["Ć", "⠈⠉"]
+  - ["ć", "⠈⠉"]
+  - ["Ĉ", "⠈⠉"]
+  - ["ĉ", "⠈⠉"]
+  - ["Ċ", "⠈⠉"]
+  - ["ċ", "⠈⠉"]
+  - ["Č", "⠈⠉"]
+  - ["č", "⠈⠉"]
+  - ["Ď", "⠈⠙"]
+  - ["ď", "⠈⠙"]
+  - ["Đ", "⠈⠙"]
+  - ["đ", "⠈⠙"]
+  - ["Ē", "⠈⠑"]
+  - ["ē", "⠈⠑"]
+  - ["Ė", "⠈⠑"]
+  - ["ė", "⠈⠑"]
+  - ["Ę", "⠈⠑"]
+  - ["ę", "⠈⠑"]
+  - ["Ě", "⠈⠑"]
+  - ["ě", "⠈⠑"]
+  - ["Ğ", "⠈⠛"]
+  - ["ğ", "⠈⠛"]
+  - ["Ģ", "⠈⠛"]
+  - ["ģ", "⠈⠛"]
+  - ["Ĥ", "⠈⠓"]
+  - ["ĥ", "⠈⠓"]
+  - ["Ħ", "⠈⠓"]
+  - ["ħ", "⠈⠓"]
+  - ["Ĩ", "⠈⠊"]
+  - ["ĩ", "⠈⠊"]
+  - ["Ī", "⠈⠊"]
+  - ["ī", "⠈⠊"]
+  - ["Į", "⠈⠊"]
+  - ["į", "⠈⠊"]
+  - ["ı", "⠈⠊"]
+  - ["Ĳ", "⠈⠚"]
+  - ["ĳ", "⠈⠚"]
+  - ["Ĵ", "⠈⠚"]
+  - ["ĵ", "⠈⠚"]
+  - ["Ķ", "⠈⠅"]
+  - ["ķ", "⠈⠅"]
+  - ["Ĺ", "⠈⠇"]
+  - ["ĺ", "⠈⠇"]
+  - ["Ļ", "⠈⠇"]
+  - ["ļ", "⠈⠇"]
+  - ["Ľ", "⠈⠇"]
+  - ["ľ", "⠈⠇"]
+  - ["Ŀ", "⠈⠇"]
+  - ["ŀ", "⠈⠇"]
+  - ["Ł", "⠈⠇"]
+  - ["ł", "⠈⠇"]
+  - ["Ń", "⠈⠝"]
+  - ["ń", "⠈⠝"]
+  - ["Ņ", "⠈⠝"]
+  - ["ņ", "⠈⠝"]
+  - ["Ň", "⠈⠝"]
+  - ["ň", "⠈⠝"]
+  - ["Ŋ", "⠈⠝"]
+  - ["ŋ", "⠈⠝"]
+  - ["Ō", "⠈⠕"]
+  - ["ō", "⠈⠕"]
+  - ["Ŏ", "⠈⠕"]
+  - ["ŏ", "⠈⠕"]
+  - ["Ő", "⠈⠕"]
+  - ["ő", "⠈⠕"]
+  - ["Œ", "⠕⠑"]
+  - ["œ", "⠕⠑"]
+  - ["Ŕ", "⠈⠗"]
+  - ["ŕ", "⠈⠗"]
+  - ["Ŗ", "⠈⠗"]
+  - ["ŗ", "⠈⠗"]
+  - ["Ř", "⠈⠗"]
+  - ["ř", "⠈⠗"]
+  - ["Ś", "⠈⠎"]
+  - ["ś", "⠈⠎"]
+  - ["Ŝ", "⠈⠎"]
+  - ["ŝ", "⠈⠎"]
+  - ["Ş", "⠈⠎"]
+  - ["ş", "⠈⠎"]
+  - ["Š", "⠈⠎"]
+  - ["š", "⠈⠎"]
+  - ["Ţ", "⠈⠞"]
+  - ["ţ", "⠈⠞"]
+  - ["Ť", "⠈⠞"]
+  - ["ť", "⠈⠞"]
+  - ["Ŧ", "⠈⠞"]
+  - ["ŧ", "⠈⠞"]
+  - ["Ũ", "⠈⠥"]
+  - ["ũ", "⠈⠥"]
+  - ["Ū", "⠈⠥"]
+  - ["ū", "⠈⠥"]
+  - ["Ŭ", "⠈⠥"]
+  - ["ŭ", "⠈⠥"]
+  - ["Ů", "⠈⠥"]
+  - ["ů", "⠈⠥"]
+  - ["Ű", "⠈⠥"]
+  - ["ű", "⠈⠥"]
+  - ["Ų", "⠈⠥"]
+  - ["ų", "⠈⠥"]
+  - ["Ŵ", "⠈⠺"]
+  - ["ŵ", "⠈⠺"]
+  - ["Ŷ", "⠈⠽"]
+  - ["ŷ", "⠈⠽"]
+  - ["Ÿ", "⠈⠽"]
+  - ["Ź", "⠈⠵"]
+  - ["ź", "⠈⠵"]
+  - ["Ż", "⠈⠵"]
+  - ["ż", "⠈⠵"]
+  - ["Ž", "⠈⠵"]
+  - ["ž", "⠈⠵"]
+
+# Extended Latin B  - ["ƒ", "⠈⠋"]
+  - ["Ǎ", "⠈⠁"]
+  - ["ǎ", "⠈⠁"]
+  - ["Ș", "⠈⠎"]
+  - ["ș", "⠈⠎"]
+  - ["Ț", "⠈⠞"]
+  - ["ț", "⠈⠞"]
+  - ["Ẁ", "⠈⠺"]
+  - ["ẁ", "⠈⠺"]
+  - ["Ẃ", "⠈⠺"]
+  - ["ẃ", "⠈⠺"]
+  - ["Ẅ", "⠈⠺"]
+  - ["ẅ", "⠈⠺"]
+  - ["Ỳ", "⠈⠽"]
+  - ["ỳ", "⠈⠽"]
+
+# GENERAL PUNCTUATION: 2000-206F
+  - ["–", "⠠⠤"]
+  - ["—", "⠠⠤"]
+  - ["‘", "⠠⠦"]
+  - ["’", "⠠⠴"]
+  - ["‚", "⠠⠦"]
+  - ["\u201b", "⠠⠴"]
+  - ["“", "⠦"]
+  - ["”", "⠴"]
+  - ["„", "⠦"]
+  - ["\u201f", "⠴"]
+  - ["†", "⠛⠑⠾⠄"]
+  #???  - ["•", "⠠ ⠭⠣⠬⠣⠣⠠"]
+  - ["…", "⠄⠄⠄"]
+  - ["‰", "⠼⠚⠴⠴"]
+  - ["\u2031", "⠼⠚⠴⠴⠴"]
+  - ["\u2032", "⠈⠔"]
+  - ["\u2033", "⠈⠔⠔"]
+  - ["‹", "⠠⠦"]
+  - ["›", "⠠⠴"]
+
+# CURRENCY SYMBOLS: 20A0-20CF
+  - ["\u20a0", "⠈⠑"]
+  - ["€", "⠈⠑"]
+
+# LETTERLIKE SYMBOLS 2100-214F
+  - ["™", "⠠⠶⠘⠞⠍⠶"]
+
+# NUMBER FORMS: 2150-218F
+  - ["\u2153", "⠼⠁⠒"]
+  - ["\u2154", "⠼⠃⠒"]
+  - ["\u2155", "⠼⠁⠢"]
+  - ["\u2156", "⠼⠃⠢"]
+  - ["\u2157", "⠼⠉⠢"]
+  - ["\u2158", "⠼⠙⠢"]
+  - ["\u2159", "⠼⠁⠖"]
+  - ["\u215a", "⠼⠑⠖"]
+  - ["\u215b", "⠼⠁⠦"]
+  - ["\u215c", "⠼⠉⠦"]
+  - ["\u215d", "⠼⠑⠦"]
+  - ["\u215e", "⠼⠛⠦"]
+
+# ARROWS: 2190-21FF
+  - ["\u2190", "⠪⠒⠒"]
+  - ["\u2192", "⠒⠒⠕"]
+  - ["\u2194", "⠪⠒⠒⠕"]
+
+# MATHEMATICAL OPERATORS: 2200-22FF
+  - ["\u2212", "⠈⠤"]
+  - ["\u2215", "⠈⠒"]
+  - ["\u2217", "⠔"]
+  - ["\u223c", "⠈⠢⠢"]
+  - ["\u2245", "⠈⠢⠢"]
+  - ["\u2259", "⠈⠢"]
+  - ["\u2260", "⠈⠔⠶"]
+  - ["\u2261", "⠈⠶⠶"]
+  - ["\u2264", "⠈⠪⠶"]
+  - ["\u2265", "⠈⠕⠶"]
+  - ["\u2266", "⠈⠪⠶"]
+  - ["\u2267", "⠈⠕⠶"]
+  - ["\u22c5", "⠄"]
+  - ["\u22c6", "⠄"]
+
+# MISCELLANEOUS TECHNICAL: 2300-23FF
+  - ["\u2329", "⠐⠶"]
+  - ["\u232a", "⠐⠶"]
+
+# MISCELLANEOUS SYMBOLS: 2600-26FF
+  - ["\u2639", "⠠⠨⠒⠤⠦"]
+  - ["\u263a", "⠠⠨⠒⠤⠴"]
+
+# Pangram
+  - ["Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich", "⠵⠺⠪⠇⠋ ⠃⠕⠭⠅⠜⠍⠏⠋⠑⠗ ⠚⠁⠛⠑⠝ ⠧⠊⠅⠞⠕⠗ ⠟⠥⠑⠗ ⠳⠃⠑⠗ ⠙⠑⠝ ⠛⠗⠕⠮⠑⠝ ⠎⠽⠇⠞⠑⠗ ⠙⠩⠹"]
+
+# 2.3 Numbers
+  - ["#936", "⠈⠼⠼⠊⠉⠋"]
+  - ["2,5", "⠼⠃⠂⠑"]
+  - ["3.50 Uhr", "⠼⠉⠄⠑⠚ ⠥⠓⠗"]
+  - ["1.234.567.890", "⠼⠁⠄⠃⠉⠙⠄⠑⠋⠛⠄⠓⠊⠚"]
+  
+# Phone number (with spaces, not dots)
+  - ["0041/43/3 33 32 32", "⠼⠚⠚⠙⠁⠐⠂⠼⠙⠉⠐⠂⠼⠉ ⠼⠉⠉ ⠼⠉⠃ ⠼⠉⠃"]
+  - ["'56", "⠼⠠⠑⠋"]
+  - [".303", "⠼⠄⠉⠚⠉"]
+  - ["€ -,25", "⠈⠑⠼⠂⠃⠑", {xfail: "FT/BT"}]
+  - ["3 %", "⠼⠉⠼⠚⠴"]
+  - ["7,5 %", "⠼⠛⠂⠑⠼⠚⠴"]
+  - ["75 ‰", "⠼⠛⠑⠼⠚⠴⠴"]
+  - ["45°", "⠼⠙⠑⠈⠴"]
+  - ["24 °C", "⠼⠃⠙⠈⠴⠘⠉", {xfail: "FT: C should be 45-14"}]
+  - ["§ 4", "⠬⠼⠙"]
+  - ["§ III", "⠬⠘⠊⠊⠊", {xfail: "FT: Prepends 4-"}]
+  - ["§§ 7-11", "⠬⠬⠼⠛⠤⠼⠁⠁"]
+
+# Percent, permille and degrees with space
+  - ["1 % 2 ‰ 3 °", "⠼⠁⠼⠚⠴ ⠼⠃⠼⠚⠴⠴ ⠼⠉⠈⠴"]
+  
+# Math signs as midnum
+  - [2 \x2217 2, "⠼⠃⠄⠼⠃"]
+  - ["11:25 Uhr", "⠼⠁⠁⠠⠒⠃⠑ ⠨⠥⠓⠗", {xfail: "FT: Colon should apparently be 6-25"}]
+
+# Numbers in words
+  - ["8fach", "⠼⠓⠠⠋⠁⠹"]
+  - ["68er", "⠼⠋⠓⠠⠑⠗"]
+  - ["32stel", "⠼⠉⠃⠾⠑⠇"]
+  - ["5te", "⠼⠑⠞⠑"]
+
+# Capitals
+  - ["AUA", "⠡⠁"]
+  - ["ČSSR", "⠈⠉⠎⠎⠗"]
+  - ["U-Bahn", "⠥⠤⠃⠁⠓⠝"]
+  - ["kW kVA hPa", "⠅⠺ ⠅⠧⠁ ⠓⠏⠁"]
+  - ["GmbH ICs KPdSU", "⠨⠛⠍⠃⠘⠓ ⠘⠊⠉⠠⠎ ⠘⠅⠏⠠⠙⠘⠎⠥", {xfail: "BT as '"}]
+
+# "correct" rules
+  - [" -1", " ⠈⠤⠼⠁"]
+  - ["/-4abc- ", "⠐⠂⠤⠼⠙⠠⠁⠃⠉⠤ "]
+
+# Computer braille
+  - [":/1234567890`äöü", "⠠⠨⠒⠲⠡⠣⠩⠹⠱⠫⠻⠳⠪⠬⠜⠠⠜⠠⠪⠠⠳", {xfail: "BT"}]
+
+# Misc forward tests
+  - [" -abc", " ⠠⠤⠁⠃⠉"]
+
+# Emphasis
+
+display: de-eurobrl6.dis
+table:
+  locale: de
+  grade: 1
+  type: literary
+  dots: 6
+  direction: forward
+  __assert-match: de-g1.ctb
+tests:
+
+# The following tests are related to issue #998: "Issues with emphasis in German when quotation mark
+# or full-stop precedes/follows" (https://github.com/liblouis/liblouis/issues/998)
+
+  # Full stop sign included in emphasis or not
+  # ------------------------------------------
+
+  # One word
+
+  # When a single word is emphasized including the full stop at the
+  # end, the word indicator should be used.
+  - -                     "Test."
+    - "_te}."
+    - typeform: { italic: "+++++" }
+  # When the full stop is not emphasized, the result is the same.
+  - -                     "Test."
+    - "_te}."
+    - typeform: { italic: "++++ " }
+      xfail: got "test." (the word has no emphasis mark and it is not contracted)
+
+  # Two words
+
+  # When two words are emphasized including the full stop at the, end
+  # phrase indicators are used.
+  - -                     "Test Test."
+    - "__te} te}.'."
+    - typeform: { italic: "++++++++++" }
+  # When the full stop is not emphasized, the result is:
+  - -                     "Test Test."
+    - "__te} te}'.."
+    - typeform: { italic: "+++++++++ " }
+      xfail: got "_te} test." (the second word is not marked and not contracted)
+
+  # Three words
+
+  # When three words are emphasized including the full stop at the end,
+  # phrase indicators are used.
+  - -                     "Test Test Test."
+    - "__te} te} te}.'."
+    - typeform: { italic: "+++++++++++++++" }
+  # When the full stop is not emphasized, the result is:
+  - -                     "Test Test Test."
+    - "__te} te} te}'.."
+    - typeform: { italic: "++++++++++++++ " }
+      xfail: got "__te} te}'. test." (the last word is not marked and not contracted)
+
+  # Quotation marks included in emphasis or not
+  # -------------------------------------------
+
+  # One word
+
+  # When a single word is emphasized including the quotation marks at
+  # the beginning and end, the word indicator is used.
+  - -                     "«Test»"
+    - "_(te})"
+    - typeform: { italic: "++++++" }
+  # When the quotation marks are not emphasized, the word indicator
+  # comes after the quotation mark (but there is no closing
+  # indicator).
+  - -                     "«Test»"
+    - "(_te})"
+    - typeform: { italic: " ++++ " }
+      xfail: got "(test)" (the word has no emphasis marks and is not contracted)
+  # When only the opening quotation mark is emphasized, the word
+  # indicator is used (and no closing indicator).
+  - -                     "«Test»"
+    - "_(te})"
+    - typeform: { italic: "+++++ " }
+      xfail: got "(test)" (the word has no emphasis marks and is not contracted)
+  # When only the closing quotation mark is emphasized, the word
+  # indicator is used after the quotation mark.
+  - -                     "«Test»"
+    - "(_te})"
+    - typeform: { italic: " +++++" }
+
+  # Two words
+
+  # When two words are emphasized including the quotation marks at the
+  # beginning and end, phrase indicators are used.
+  - -                     "«Test Test»"
+    - "__(te} te})'."
+    - typeform: { italic: "+++++++++++" }
+  # When the quotation marks are not emphasized, the opening indicator
+  # comes after the quotation mark and the closing indicator comes
+  # before the quotation mark.
+  - -                     "«Test Test»"
+    - "(__te} te}'.)"
+    - typeform: { italic: " +++++++++ " }
+      xfail: got "(_te} _te})" (the words are marked individually)
+  # When only the opening quotation mark is emphasized, the opening
+  # indicator comes before the quotation mark and the closing
+  # indicator comes before the quotation mark.
+  - -                     "«Test Test»"
+    - "__(te} te}'.)"
+    - typeform: { italic: "++++++++++ " }
+      xfail: got "_(te} test)" (only the first word is marked and the second word is not contracted)
+  # When only the closing quotation mark is emphasized, the opening
+  # indicator comes after the quotation mark and the closing indicator
+  # comes after the quotation mark.
+  - -                     "«Test Test»"
+    - "(__te} te})'."
+    - typeform: { italic: " ++++++++++" }
+      xfail: got "(_te} _te})" (the words are marked individually)
+
+  # Three words
+
+  # When three words are emphasized including the quotation marks at the
+  # beginning and end, phrase indicators are used.
+  - -                     "«Test Test Test»"
+    - "__(te} te} te})'."
+    - typeform: { italic: "++++++++++++++++" }
+  # When the quotation marks are not emphasized, the opening indicator
+  # comes after the quotation mark and the closing indicator comes
+  # before the quotation mark.
+  - -                     "«Test Test Test»"
+    - "(__te} te} te}'.)"
+    - typeform: { italic: " ++++++++++++++ " }
+      xfail: got "(_te} __te} te})'." (the first word is marked individually)
+
+# Quotation marks
+
+  # replace ambiguous opening single quotation mark by unambiguous one (‚) inside string
+  - - "Test › Test."
+    - "te} '( te}."
+    - xfail: not implemented
+  # replace ambiguous opening single quotation mark by unambiguous one (‚) at start of string
+  - - "›Test Test."
+    - "'(te} te}."
+  # replace ambiguous opening double quotation mark by unambiguous one („) inside string
+  - - "Test » Test."
+    - "te} ( te}."
+    - xfail: not implemented
+  # replace ambiguous opening double quotation mark by unambiguous one („) at start of string
+  - - "»Test Test."
+    - "(te} te}."
+  # replace ambiguous single closing quotation mark by unambiguous one
+  - - "Test Test‹."
+    - "te} te}')."
+  # replace ambiguous double closing quotation mark by unambiguous one
+  - - "Test Test«."
+    - "te} te})."
+  # combinations of both single opening and closing quotation mark
+  - - "Test ›Test‹."
+    - "te} '(te}')."
+  - - "Test ‹Test›"
+    - "te} '(te}')."
+    - xfail: not implemented
+  - - "›Test‹ Test."
+    - "'(te}') te}."
+  - - "‹Test› Test"
+    - "'(te}') te}."
+    - xfail: not implemented
+  # combinations of both double opening and closing quotation mark
+  - - "Test »Test«."
+    - "te} (te})."
+  - - "Test «Test»."
+    - "te} (te})."
+  - - "»Test« Test."
+    - "(te}) te}."
+  - - "«Test» Test."
+    - "(te}) te}."
+  # combinations of both single and double opening and closing mark
+  - - "›Test Test »Test«‹."
+    - "'(te} te} (te})')."
+  - - "»Test Test ›Test‹«."
+    - "(te} te} '(te}'))."
+  - - "‹Test Test «Test»›"
+    - "'(te} te} (te})')."
+    - xfail: not implemented
+  - - "«Test Test ‹Test›»"
+    - "(te} te} '(te}'))."
+    - xfail: not implemented
+  # corrections of closing quotation mark with hyphen
+  - - "›Hey!‹-Ruf"
+    - "'(hey+')-ruf"
+    - xfail: not implemented
+  - - "‹Hey!›-Ruf"
+    - "'(hey+')-ruf"
+    - xfail: not implemented
+  - - "»Hey!«-Ruf"
+    - "(hey+)-ruf"
+    - xfail: not implemented
+  - - "«Hey!»-Ruf"
+    - "(hey+)-ruf"
+    - xfail: not implemented
+  - - "widerlich -‹«"
+    - "widerli4'-'))"
+    - xfail: not implemented
+
+# Case indication
+
+  # Alone standing single capital letter after apostrophe (U+0027) is marked with dots 45.
+  - - "'T."
+    - "'>t."
+    - xfail: not implemented
+  - - "'T Test."
+    - "'>t te}."
+    - xfail: not implemented
+  - - "Test 'T."
+    - "te} '>t."
+    - xfail: not implemented
+  - - "Test,'T."
+    - "te},'>t."
+    - xfail: not implemented
+  - - "Test 'T Test."
+    - "te} '>t te}."
+    - xfail: not implemented
+  - - "Test,'T Test."
+    - "te},'>t te}."
+    - xfail: not implemented
+  # same for right single quotation mark (U+2019)
+  - - "’T."
+    - "'>t."
+    - xfail: not implemented
+  - - "’T Test."
+    - "'>t te}."
+    - xfail: not implemented
+  - - "Test ’T."
+    - "te} '>t."
+    - xfail: not implemented
+  - - "Test,’T."
+    - "te},'>t."
+    - xfail: not implemented
+  - - "Test ’T Test."
+    - "te} '>t te}."
+    - xfail: not implemented
+  - - "Test,’T Test."
+    - "te},'>t te}."
+    - xfail: not implemented
+
+  # At SBS when a name has capitals inside such as McDonalds or McCartney then we switch to grade 0
+  # and announce all capitals with `$`. We do not announce the grade change
+  - - "McDonald"
+    - "$mc$donald"
+    - xfail: not implemented
+  - - "McCartney"
+    - "$mc$cartney"
+    - xfail: not implemented
+
+# Hyphens
+
+  # handle hyphen (U+2010) like hyphen-minus (U+002D)
+  - - Test‐Test
+    - te}-te}
+    - xfail: not implemented
+  # handle non breaking hyphen (U+2011) like hyphen-minus (U+002D)
+  - - Test‑Test
+    - te}-te}
+    - xfail: not implemented
+  # handle figure dash (U+2012) like hyphen-minus (U+002D)
+  - - Test‒Test
+    - te}-te}
+    - xfail: not implemented
+  # handle EN DASH (U+2013) between numbers without space like hyphen-minus (U+002D)
+  - - 1900–2000
+    - #aijj-#bjjj
+    - xfail: not implemented
+
+# Ellipsis
+
+  # replace pseudo-ellipsis with true ellipsis
+  - - Test. . .
+    - te}...
+  - - Test . . .
+    - te} ...
+  - - Test...
+    - te}...
+  - - Test ...
+    - te} ...

@@ -1,0 +1,8 @@
+# -*- Mode: Python; -*-
+include_rules = [
+  # Layering rule.
+  '-discovery/mdns',
+  # Except ourselves.
+  '+discovery/mdns/public',
+]
+

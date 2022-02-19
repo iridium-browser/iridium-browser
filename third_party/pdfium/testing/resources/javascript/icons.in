@@ -1,0 +1,59 @@
+{{header}}
+{{include field.fragment}}
+{{object 16 0}} <<
+  {{streamlen}}
+>>
+stream
+// In order to get icons from a document, you have to first add icons
+// to the document, and the only way to initially get an icon object,
+// it would seem, is from a button in a field. Then it can be added
+// any number of times, which does nothing but accumulate the list of
+// names of the added icons. Whee.
+try {
+  var doc = this;
+  app.alert("doc is " + doc);
+  var icon = doc.getField("MyField.MyPushButton").buttonGetIcon();
+  app.alert("icon is " + icon);
+  doc.addIcon("icon1", icon);
+  doc.addIcon("icon2", icon);
+  app.alert("icon list is now " + doc.icons);
+  var icon1 = doc.icons[0];
+  var icon2 = doc.icons[1];
+  app.alert("they are named " + icon1.name + " and " + icon2.name);
+  var icon1_again = doc.getIcon("icon1");
+  var icon2_again = doc.getIcon("icon2");
+  app.alert("they are also named " + icon1_again.name +
+            " and " + icon2_again.name);
+  app.alert("but they are made anew each time since " +
+             (icon1 == icon1_again) + " is returned from comparison");
+  app.alert("Prototype comparison is " + (icon1.__proto__ == icon1_again.__proto__));
+
+  // Icons are "dynamic" objects, so theoretically we can make them from
+  // the JS side as well, although they will not be bound on the fxjs side.
+  var dubious = new icon1.constructor();
+  app.alert("Made anew from JS side since comparison is " + (dubious == icon1));
+  app.alert("Prototype comparison is " + (dubious.__proto__ == icon1.__proto__));
+
+  // Can't retrieve the name because no fxjs binding present.
+  app.alert("Dubious name is " + dubious.name);
+
+  // No error setting the name because for an unbound object, control doesn't
+  // get far enough to reach the readonly check in the property handler.
+  dubious.name = "pebble";
+
+  // The previous was a silent no-op under the covers.
+  app.alert("name is unchanged from " + dubious.name);
+} catch (e) {
+  app.alert("error: " + e);
+}
+try {
+  icon1.name = "chowder";
+} catch (e) {
+  app.alert("As expected, trying to change the name gave: " + e);
+}
+endstream
+endobj
+{{xref}}
+{{trailer}}
+{{startxref}}
+%%EOF

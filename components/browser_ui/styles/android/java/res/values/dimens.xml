@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 The Chromium Authors. All rights reserved.
+     Use of this source code is governed by a BSD-style license that can be
+     found in the LICENSE file. -->
+
+<resources>
+    <!-- Standard width for overflow menu in Chrome. -->
+    <dimen name="menu_width">258dp</dimen>
+
+    <!-- Button bar dimensions -->
+    <dimen name="button_bar_stacked_margin">8dp</dimen>
+
+    <!-- Alert dialog -->
+    <dimen name="dialog_padding_top">@dimen/abc_dialog_padding_top_material</dimen>
+    <dimen name="dialog_padding_sides">@dimen/abc_dialog_padding_material</dimen>
+
+    <!-- Toolbar dimensions -->
+    <dimen name="toolbar_shadow_height">8dp</dimen>
+    <dimen name="toolbar_hairline_height">1dp</dimen>
+
+    <item name="text_highlight_alpha" format="float" type="dimen">0.2</item>
+    <item name="progress_bar_bg_alpha" format="float" type="dimen">0.2</item>
+</resources>

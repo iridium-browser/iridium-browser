@@ -1,0 +1,78 @@
+	In-vehicle infotainment (information and entertainment)
+	graphical environment support modules for Weston
+
+
+IVI-shell is an alternative shell for Weston, a Wayland display server.
+Window management and application interaction with the display server
+are very different to that of a normal desktop, which is why this is
+a separate shell and not an extension to the desktop-shell suite with
+xdg_shell. As such, applications need to be specifically written to use
+IVI-shell.
+
+IVI-shell contains two main features:
+- Common layout library for surface, which allow ivi-shell developer
+  to develop own shell, linking Common layout library.
+  For the time being, the library refers Genivi ilm interface.
+
+  https://at.projects.genivi.org/wiki/display/WIE/Wayland+IVI+Extension+Home
+
+- Extension protocol; ivi-application to tie wl_surface and a given ID.
+  With this ID, shell can identify which wl_surface is drawn by which
+  application. In in-vehicle infortainment system, a shell has to update
+  a property of a wl_surface. E.g. there may be a use case when vehicle
+  starts to move, the wl_surface drawn by Car navigation is expected to
+  move top of surfaces.
+
+The actual software components delivered with Weston are:
+
+- ivi-application.xml:
+	Wayland protocol extension for IVI-applications; the public
+	shell protocol (the same concept as xdg_shell).
+	Implemented by ivi-shell.so.
+
+- ivi-shell.so:
+	A Weston shell module that implements ivi-application.xml interfaces.
+	Loads ivi-layout.so.
+
+- ivi-layout.so:
+	Implements the IVI window management concepts: Screen, Layer,
+	Surface, groups of Layers, groups of Surfaces, see:
+	https://at.projects.genivi.org/wiki/display/WIE/Summary+of+Layer+manager+APIs
+	Offers a stable API for writing IVI-controller modules like
+	hmi-controller.so against the IVI concepts. In other words,
+	it offers an API to write IVI window manager modules.
+
+- hmi-controller.so:
+	A sample implementation of an IVI-controller module, usually
+	replaced by IVI system vendors.
+	Uses ivi-layout.so to perform essentially window manager tasks.
+	This implementation keeps all window management inside the module,
+	while IVI-systems may use another module that exposes all window
+	management via Wayland or other protocol for an external process
+	to control.
+
+- ivi-hmi-controller.xml:
+	Wayland protocol extension for IVI display control; the private
+	shell protocol for weston-ivi-shell-user-interface client
+	(the same concept as desktop-shell.xml).
+	Implemented by hmi-controller.so, and usually replaced by IVI
+	system vendors.
+
+- weston-ivi-shell-user-interface:
+	A sample implementation of an IVI shell helper client, usually
+	replaced by IVI system vendors.
+	A helper client for basic display content, similar to
+	weston-desktop-shell.
+
+
+How to compile:
+same as weston. To disable, use option: --disable-ivi-shell for configure.
+
+How to configure weston.ini:
+reference ini file will be generated in <build_dir>/ivi-shell.
+
+How to run:
+same as weston. exec weston.
+
+How to use UI:
+http://lists.freedesktop.org/archives/wayland-devel/attachments/20140625/abbfc064/attachment-0001.png

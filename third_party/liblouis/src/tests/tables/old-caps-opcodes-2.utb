@@ -1,0 +1,22 @@
+# Issue with begcaps and endcaps in UEB patches from the APH.
+# See also: old-caps-opcodes-1.utb
+# These opcodes seem to have no effect anymore,
+# compared to liblouis v2.6.3.
+#
+# Translate:
+# hello    correct
+# Hello    correct
+# heLlo    correct
+# HELLO    wrong
+# HEllo    wrong
+# heLLo    wrong
+# HELLo    wrong
+#
+# lou_trace reports all letters as lowercase.
+
+include tables/braille-patterns.cti
+include tables/latinLetterDef6Dots.uti
+
+capsletter 46
+begcaps 45
+endcaps 6

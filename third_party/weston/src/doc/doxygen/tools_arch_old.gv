@@ -1,0 +1,53 @@
+/*
+ * Copyright © 2015 Samsung Electronics Co., Ltd
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice (including the
+ * next paragraph) shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT.  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+digraph toolarch_old {
+    rankdir = "TB";
+
+    node[shape = record]
+
+    subgraph cluster_0 {
+        label = "./tests";
+
+        keyboard_test_c [label = "{keyboard-test.c|tests\l}"]
+        text_test_c [label = "{text-test.c|tests\l}"]
+        vertex_clip_test_c [label = "{vertex-clip-test.c|tests\l}"]
+
+        weston_test_client_helper [label = "{weston-test-client-helper.h/.c|Wayland tracking structs\lWeston test protocol\lWayland callbacks\lTest run lifecycle\l}"]
+
+        weston_test_c [label = "{weston-test.c|Extension protocol\nimplementation}"]
+        weston_test_runner [label = "{weston-test-runner.h/.c|Test definition macros\lTest running functions\lTest reporting functions\lTest run lifecycle\l}"]
+    }
+
+    weston_test_client_helper -> weston_test_runner
+    keyboard_test_c -> weston_test_client_helper
+    keyboard_test_c -> weston_test_runner
+    vertex_clip_test_c -> weston_test_runner
+    text_test_c -> weston_test_client_helper
+    text_test_c -> weston_test_runner
+
+    edge [style = dashed, arrowhead = open]
+    weston_test_client_helper -> weston_test_c
+}

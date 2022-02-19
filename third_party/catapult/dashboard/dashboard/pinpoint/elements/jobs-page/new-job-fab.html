@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<!--
+Copyright 2017 The Chromium Authors. All rights reserved.
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file.
+-->
+
+<link rel="import" href="/components/app-route/app-location.html">
+<link rel="import" href="/components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/components/iron-form/iron-form.html">
+<link rel="import" href="/components/paper-button/paper-button.html">
+<link rel="import" href="/components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="/components/paper-dialog/paper-dialog.html">
+<link rel="import" href="/components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="/components/paper-fab/paper-fab.html">
+<link rel="import" href="/components/paper-input/paper-input.html">
+<link rel="import" href="/components/paper-item/paper-item.html">
+<link rel="import" href="/components/paper-listbox/paper-listbox.html">
+<link rel="import" href="/components/paper-progress/paper-progress.html">
+<link rel="import" href="/components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="/components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="/components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="/elements/autocomplete-box.html">
+
+<link rel="import" href="/elements/base-style.html">
+<link rel="import" href="/elements/jobs-page/commit-details.html">
+
+<dom-module id="new-job-fab">
+  <template>
+    <style include="base-style">
+      .submenu {
+        color: var(--paper-grey-700);
+        --paper-fab-background: white;
+      }
+
+      paper-progress {
+        display: block;
+        width: 100%;
+      }
+
+      paper-dropdown-menu {
+        width: 100%;
+      }
+
+      paper-dialog {
+        width: 50em;
+        overflow: auto;
+      }
+
+      .divider {
+       width: 100%;
+       border-bottom: 1px dashed black;
+       line-height: 0.1em;
+       margin: 2em 0em;
+       text-align: center;
+       font-size: 1.5em;
+       font-weight: lighter;
+      }
+
+      .divider span {
+        background: white;
+        padding: 0 1em;
+      }
+
+      .horizontal {
+        display: inline-flex;
+        width: 100%;
+      }
+
+      .column {
+        width: 50%;
+      }
+
+      .rightPad {
+        margin-right: 0.25em;
+      }
+
+      #chartDropdown {
+        width: 75%;
+        margin-right: 0.5em;
+      }
+
+      #statisticDropdown {
+        width: 25%;
+      }
+
+      .error {
+        color: var(--paper-red-500);
+      }
+    </style>
+
+    <app-location route="{{route}}"></app-location>
+    <template is="dom-if" if="[[submenu]]">
+      <paper-fab class="submenu" mini id="job-fab" icon="refresh" on-tap="openDialog"></paper-fab>
+    </template>
+    <template is="dom-if" if="[[!submenu]]">
+      <paper-fab id="try-fab" icon="add" on-tap="openDialog"></paper-fab>
+    </template>
+    <paper-tooltip for="try-fab" position="left">Try job</paper-tooltip>
+    <paper-dialog id="try_dialog" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
+      <template is="dom-if" if="[[isBisectJob(comparisonMode)]]">
+        <h2>Run a bisect job</h2>
+      </template>
+      <template is="dom-if" if="[[!isBisectJob(comparisonMode)]]">
+        <h2>Run a try job</h2>
+      </template>
+      <div>
+        <template is="dom-if" if="[[isBisectJob(comparisonMode)]]">
+          <p>
+            Narrow down a regression to a cl or set of cl's. A bisect job bisects the commit range, and looks for changes in the specified metric.
+          </p>
+        </template>
+        <template is="dom-if" if="[[!isBisectJob(comparisonMode)]]">
+          <p>
+            Run an A/B experiment between an A build (base commit and an
+            optional patch) and a B build (optional experiment commit and an
+            experiment patch), and compares all the metrics between the two.
+          </p>
+          <p>
+            <b style="color: red;">New!</b> Try the Pinpoint command line
+            interface in <code>depot_tools</code>! Read more about it with
+            <code>pinpoint help</code> from your terminal shell.
+          </p>
+        </template>
+        <template is="dom-if" if="[[error]]">
+          <p class="error">[[error]]
+        </template>
+        <iron-ajax method="post" headers="[[authHeaders]]" auto url="/api/config" loading="{{configLoading}}" last-response="{{config}}"></iron-ajax>
+        <iron-ajax method="post" headers="[[authHeaders]]" auto url="https://chromeperf.appspot.com/api/test_suites" loading="{{suitesLoading}}" last-response="{{testSuites}}"></iron-ajax>
+        <template is="dom-if" if="{{validBenchmark(benchmark)}}">
+          <iron-ajax method="post" headers="[[authHeaders]]" auto url="https://chromeperf.appspot.com/api/describe" params="{{describeParams(benchmark)}}" loading="{{benchmarkConfigLoading}}" last-response="{{benchmarkConfig}}"></iron-ajax>
+        </template>
+        <template is="dom-if" if="[[hasJob(job)]]">
+          <iron-ajax method="post" headers="[[authHeaders]]" auto url="/api/commits" params="{{commitsParams(job)}}" loading="{{commitRangeLoading}}" last-response="{{commitsList}}"></iron-ajax>
+        </template>
+
+        <iron-form id="try_form" headers="[[authHeaders]]" on-iron-form-error="handleError" on-iron-form-response="handleResponse">
+          <form action="/api/new" method="POST">
+
+            <input type="hidden" name="comparison_mode" value="[[comparisonMode]]">
+            <input type="hidden" name="target" value="[[telemetryIsolate(configuration, benchmark)]]">
+            <!--Prevent uploading unused git_hash because raw request will be displayed on job page.
+              It won't change the result, but display unused (and wrong) parameters are confusing-->
+            <input type="hidden" disabled="[[isBisectJob(comparisonMode)]]" name="base_git_hash" value="[[base_git_hash]]">
+            <input type="hidden" disabled="[[!isBisectJob(comparisonMode)]]" name="start_git_hash" value="[[start_git_hash]]">
+            <input type="hidden" disabled="[[!isBisectJob(comparisonMode)]]" name="end_git_hash" value="[[end_git_hash]]">
+
+            <template is="dom-if" if="[[hasJob(job)]]">
+              <input type="hidden" name="grouping_label" disabled$="[[!job.arguments.grouping_label]]" value="[[job.arguments.grouping_label]]">
+              <input type="hidden" name="trace" disabled$="[[!job.arguments.trace]]" value="[[job.arguments.trace]]">
+              <input type="hidden" name="tags" disabled$="[[!job.arguments.tags]]" value="[[job.arguments.tags]]">
+            </template>
+
+            <div class="divider">
+              <span>Benchmark Configuration</span>
+            </div>
+
+            <template is="dom-if" if="[[!hasJob(job)]]">
+              <paper-radio-group id="comparison_mode" selected="{{comparisonMode}}">
+                <paper-radio-button name="try">Try Job</paper-radio-button>
+                <paper-radio-button name="performance">Bisect</paper-radio-button>
+              </paper-radio-group>
+            </template>
+
+            <div class="horizontal">
+              <div class="column rightPad">
+                <autocomplete-box id="botDropdown"
+                                  name="configuration"
+                                  items="{{arrayToAutocompleteList(config.configurations)}}"
+                                  disabled="[[!validConfig(config)]]"
+                                  placeholder="Bot"
+                                  selected-name="{{configuration}}"
+                                  required></autocomplete-box>
+                <template is="dom-if" if="[[configLoading]]">
+                  <paper-progress indeterminate></paper-progress>
+                </template>
+              </div>
+              <div class="column">
+                <autocomplete-box id="benchmarkDropdown"
+                                  name="benchmark"
+                                  items="{{arrayToAutocompleteList(testSuites)}}"
+                                  disabled="[[!validTestSuites(testSuites)]]"
+                                  placeholder="Benchmark"
+                                  selected-name="{{benchmark}}"
+                                  required></autocomplete-box>
+                <template is="dom-if" if="[[suitesLoading]]">
+                  <paper-progress indeterminate></paper-progress>
+                </template>
+              </div>
+            </div>
+
+            <div class="horizontal">
+              <div class="column rightPad">
+                <autocomplete-box id="storyCasesDropdown"
+                                  name="story"
+                                  items="{{storyCases(benchmarkConfig)}}"
+                                  placeholder="Story"
+                                  selected-name="{{story}}"
+                                  required$="[[!isStoryOrTagsSet(story, storyTags)]]"></autocomplete-box>
+                <template is="dom-if" if="[[benchmarkConfigLoading]]">
+                  <paper-progress indeterminate></paper-progress>
+                </template>
+              </div>
+              <div class="column">
+                <autocomplete-box id="storyTagsDropdown"
+                                  name="story_tags"
+                                  items="{{storyTagsFromConfig(benchmarkConfig)}}"
+                                  placeholder="Story Tags (optional, comma-separated)"
+                                  selected-name="{{storyTags}}"
+                                  required$="[[!isStoryOrTagsSet(story, storyTags)]]"></autocomplete-box>
+                <template is="dom-if" if="[[benchmarkConfigLoading]]">
+                  <paper-progress indeterminate></paper-progress>
+                </template>
+              </div>
+            </div>
+
+            <div class="horizontal" hidden="[[!isBisectJob(comparisonMode)]]">
+              <div class="column rightPad">
+                <div class="horizontal">
+                  <autocomplete-box id="chartDropdown"
+                                    name="chart"
+                                    items="{{measurements(benchmarkConfig)}}"
+                                    required$="[[isBisectJob(comparisonMode)]]"
+                                    placeholder="Measurement"
+                                    selected-name="{{chart}}"></autocomplete-box>
+                  <autocomplete-box id="statisticDropdown"
+                                    name="statistic"
+                                    items="{{statistics(benchmarkConfig)}}"
+                                    selected-name="{{statistic}}"
+                                    placeholder="Statistic"></autocomplete-box>
+                </div>
+                <template is="dom-if" if="[[benchmarkConfigLoading]]">
+                  <paper-progress indeterminate></paper-progress>
+                </template>
+              </div>
+              <div class="column">
+                <paper-input name="comparison_magnitude"
+                             value="{{comparison_magnitude}}"
+                             label="Comparison Magnitude"></paper-input>
+              </div>
+            </div>
+
+            <paper-input name="extra_test_args" value="{{extra_test_args}}" label="Extra Test Arguments (optional)"></paper-input>
+
+            <div class="divider">
+              <span>Job Configuration</span>
+            </div>
+
+            <template is="dom-if" if="[[!isBisectJob(comparisonMode)]]">
+              <div class="horizontal">
+                <commit-details class="column rightPad"
+                                project="{{project}}"
+                                value="{{base_git_hash}}"
+                                label="Base Git Hash"
+                                items="[[commitsListItems(commitsList)]]"
+                                headers="[[authHeaders]]"
+                                required disabled="[[isBisectJob(comparisonMode)]]"></commit-details>
+                <paper-input class="column" name="patch" value="{{patch}}" label="Patch to apply (Gerrit URL)" required disabled="[[isBisectJob(comparisonMode)]]"></paper-input>
+              </div>
+            </template>
+
+            <template is="dom-if" if="[[isBisectJob(comparisonMode)]]">
+              <div class="horizontal">
+                  <commit-details class="column rightPad"
+                                  project="{{project}}"
+                                  value="{{start_git_hash}}"
+                                  label="Start Git Hash"
+                                  items="[[commitsListItems(commitsList)]]"
+                                  headers="[[authHeaders]]"
+                                  required disabled="[[!isBisectJob(comparisonMode)]]"></commit-details>
+                  <commit-details class="column"
+                                  project="{{project}}"
+                                  value="{{end_git_hash}}"
+                                  label="End Git Hash"
+                                  items="[[commitsListItems(commitsList)]]"
+                                  headers="[[authHeaders]]"
+                                  required disabled="[[!isBisectJob(comparisonMode)]]"></commit-details>
+              </div>
+            </template>
+
+            <!-- If we're showing a bisection, we should allow setting
+              the "pin" field to allow re-running the job with a provided
+              patch. -->
+            <template is="dom-if" if="[[isBisectJob(comparisonMode)]]">
+              <paper-input name="pin" value="[[job.arguments.pin]]" label="Patch to apply (Gerrit URL)"></paper-input>
+            </template>
+            <paper-input name="project" value="{{project::input}}" label="Monorail Project"></paper-input>
+            <paper-input name="bug_id" value="{{bug_id}}" label="Bug ID"></paper-input>
+
+            <paper-checkbox name="experimental_execution_engine">
+              Use experimental execution engine.
+            </paper-checkbox>
+            <paper-input name="batch_id" value="{{batch_id}}" label="Batch ID"></paper-input>
+          </form>
+        </iron-form>
+      </div>
+      <div class="buttons">
+        <paper-button on-tap="submit">Start</paper-button>
+      </div>
+    </paper-dialog>
+  </template>
+
+  <script>
+    'use strict';
+
+    const _NON_TELEMETRY_TARGETS = ['vr_common_perftests', 'webrtc_perf_tests'];
+
+    const _STATISTICS = ['avg', 'count', 'max', 'min', 'std', 'sum'];
+
+    Polymer({
+      is: 'new-job-fab',
+
+      properties: {
+        benchmark: String,
+        benchmarkConfig: Object,
+        benchmarkConfigLoading: {
+          type: Boolean,
+          value: false
+        },
+        project: {
+          type: String,
+          value: 'chromium'
+        },
+        batch_id: String,
+        bug_id: String,
+        chart: String,
+        commitsList: Object,
+        commitRangeLoading: {
+          type: Boolean,
+          value: false
+        },
+        comparisonMode: {
+          type: String,
+          value: 'try'
+        },
+        config: Object,
+        configuration: String,
+        configLoading: {
+          type: Boolean,
+          value: false
+        },
+        comparison_magnitude: Number,
+        extra_test_args: String,
+        patch: String,
+        statistic: String,
+        base_git_hash: {
+          type: String,
+          value: 'HEAD'
+        },
+        start_git_hash: {
+          type: String,
+          value: 'HEAD'
+        },
+        end_git_hash: {
+          type: String,
+          value: 'HEAD'
+        },
+        submenu: {
+          type: Boolean,
+          value: false
+        },
+        job: {
+          type: Object,
+          value: null
+        },
+        error: Object,
+        testSuites: Object,
+        suitesLoading: {
+          type: Boolean,
+          value: false
+        },
+      },
+
+      observers: [
+        'configChanged(config)',
+        'testSuitesChanged(testSuites)',
+        'benchmarkConfigChanged(benchmarkConfig)',
+        'benchmarkChanged(benchmark)',
+        'jobChanged(job)',
+      ],
+
+      openDialog() {
+        this.$.try_dialog.open();
+      },
+
+      submit() {
+        this.$.try_form.submit();
+      },
+
+      handleError(event) {
+        this.error = event.detail.request.response.error;
+      },
+
+      handleResponse(event) {
+        this.set('route.path', '/job/' + event.detail.response.jobId);
+        this.$.try_dialog.close();
+      },
+
+      isStoryOrTagsSet(story, storyTags) {
+        return story !== '' || storyTags !== '';
+      },
+
+      isBisectJob(comparisonMode) {
+        return comparisonMode == 'performance';
+      },
+
+      hasJob(job) {
+        return job !== null;
+      },
+
+      commitsListItems(commitsList) {
+        if (!commitsList) {
+          return [];
+        }
+
+        const vals = [];
+        for (const cur of commitsList) {
+          vals.push({
+            message: cur.subject,
+            name: cur.git_hash,
+            author: cur.author,
+            date: cur.created,
+            commit_position: cur.commit_position,
+          });
+        }
+        return vals;
+      },
+
+      configChanged(config) {
+        this.$.botDropdown.tryReselectQuery();
+      },
+
+      testSuitesChanged(testSuites) {
+        this.$.benchmarkDropdown.tryReselectQuery();
+      },
+
+      benchmarkConfigChanged(benchmarkConfig) {
+        if (!this.$.storyCasesDropdown.disabled) {
+          this.$.storyCasesDropdown.tryReselectQuery();
+        }
+        if (!this.$.storyTagsDropdown.disabled) {
+          this.$.storyTagsDropdown.tryReselectQuery();
+        }
+        if (!this.$.chartDropdown.disabled) {
+          this.$.chartDropdown.tryReselectQuery();
+        }
+        if (!this.$.statisticDropdown.disabled) {
+          this.$.statisticDropdown.tryReselectQuery();
+        }
+      },
+
+      jobChanged(job) {
+        if (job === null) {
+          return;
+        }
+        this.batch_id = job.batch_id
+        this.bug_id = job.bug_id;
+        this.project = job.arguments.project;
+        this.patch = job.arguments.patch;
+        // Legacy try job doesn't have base_git_hash, use end_git_hash instead
+        this.base_git_hash = job.arguments.base_git_hash ||
+                             job.arguments.end_git_hash;
+        this.start_git_hash = job.arguments.start_git_hash;
+        this.end_git_hash = job.arguments.end_git_hash;
+        this.comparisonMode = job.arguments.comparison_mode;
+        this.comparison_magnitude = job.arguments.comparison_magnitude;
+        this.extra_test_args = job.arguments.extra_test_args;
+        this.$.botDropdown.query = job.arguments.configuration;
+        this.$.benchmarkDropdown.query = job.arguments.benchmark;
+        this.$.storyCasesDropdown.query = job.arguments.story;
+        this.$.storyTagsDropdown.query = job.arguments.story_tags;
+        this.$.chartDropdown.query = job.arguments.chart;
+        this.$.statisticDropdown.query = job.arguments.statistic;
+        if (this.config) {
+          this.$.botDropdown.tryReselectQuery();
+        }
+        if (this.testSuites) {
+          this.$.benchmarkDropdown.tryReselectQuery();
+        }
+        if (this.benchmarkConfig) {
+          this.$.storyCasesDropdown.tryReselectQuery();
+          this.$.storyTagsDropdown.tryReselectQuery();
+          this.$.chartDropdown.tryReselectQuery();
+          this.$.statisticDropdown.tryReselectQuery();
+        }
+      },
+
+      benchmarkChanged(benchmark) {
+        this.benchmarkConfig = null;
+      },
+
+      commitsParams(job) {
+        return {
+          repository: job.arguments.project ? job.arguments.project : 'chromium',
+          start_git_hash: job.arguments.start_git_hash,
+          end_git_hash: job.arguments.end_git_hash
+        };
+      },
+
+      describeParams(benchmark) {
+        return {test_suite: benchmark, master: 'ChromiumPerf'};
+      },
+
+      validTestSuites(testSuites) {
+        return testSuites !== null && testSuites.length > 0;
+      },
+
+      validBenchmark(benchmark) {
+        if (!benchmark) {
+          return false;
+        }
+        return benchmark != '';
+      },
+
+      validConfig(config) {
+        return config !== null && config.configurations.length > 0;
+      },
+
+      arrayToAutocompleteList(arr) {
+        if (!arr) {
+          return [];
+        }
+
+        const vals = [];
+        for (const cur of arr) {
+          vals.push({name: cur});
+        }
+        return vals;
+      },
+
+      measurements(benchmarkConfig) {
+        if (!benchmarkConfig) {
+          return [];
+        }
+
+        const hasStatName = function(m) {
+          for (const s of _STATISTICS) {
+            if (m.endsWith(s)) {
+              return true;
+            }
+          }
+          return false;
+        };
+
+        return this.arrayToAutocompleteList(
+            benchmarkConfig.measurements.filter(m => !hasStatName(m)));
+      },
+
+      statistics(benchmarkConfig) {
+        const s = [''];
+        return this.arrayToAutocompleteList(s.concat(_STATISTICS));
+      },
+
+      storyCases(benchmarkConfig) {
+        if (!benchmarkConfig) {
+          return [];
+        }
+
+        return this.arrayToAutocompleteList(benchmarkConfig.cases);
+      },
+
+      validCases(benchmark, benchmarkConfig) {
+        return (
+          this.validBenchmark(benchmark) &&
+          this.storyCases(benchmarkConfig).length > 0);
+      },
+
+      storyTagsFromConfig(benchmarkConfig) {
+        if (!benchmarkConfig) {
+          return [];
+        }
+
+        return this.arrayToAutocompleteList(
+            Object.keys(benchmarkConfig.caseTags));
+      },
+
+      validTags(benchmark, benchmarkConfig) {
+        return (
+          this.validBenchmark(benchmark) &&
+          this.storyTagsFromConfig(benchmarkConfig).length > 0);
+      },
+
+      telemetryIsolate(configuration, benchmark) {
+        if (_NON_TELEMETRY_TARGETS.indexOf(benchmark) != -1) {
+          return benchmark;
+        }
+        // TODO(dtu): Figure out the proper place for this lookup.
+        if (configuration.toLowerCase().includes('webview')) {
+          return 'performance_webview_test_suite';
+        }
+        if (configuration.toLowerCase().includes('eve')) {
+          return 'performance_test_suite_eve';
+        }
+        if (configuration.toLowerCase().includes('web_engine')) {
+          return 'performance_web_engine_test_suite';
+        }
+        if (benchmark.startsWith('xr')) {
+          return 'vr_perf_tests';
+        }
+        if (configuration === 'android-pixel2-perf-calibration') {
+          return 'performance_test_suite_android_clank_monochrome_64_32_bundle';
+        } else if (configuration === 'android-nexus5x-perf-fyi') {
+          return 'performance_test_suite_android_clank_chrome';
+        } else if (configuration === 'android-pixel2-perf-fyi') {
+          return 'performance_test_suite_android_clank_chrome';
+        } else if (configuration === 'android-pixel2-perf-aab-fyi') {
+          return 'performance_test_suite_android_clank_monochrome_bundle';
+        } else if (configuration === 'android-go-perf') {
+          return 'performance_test_suite_android_clank_chrome';
+        } else if (configuration === 'Android Nexus5 Perf') {
+          return 'performance_test_suite_android_chrome';
+        } else if (configuration === 'android-pixel2-perf') {
+          return 'performance_test_suite_android_clank_monochrome_64_32_bundle';
+        } else if (configuration === 'android-pixel2_weblayer-perf') {
+          return 'performance_weblayer_test_suite';
+        } else if (configuration === 'android-pixel4-perf') {
+          return 'performance_test_suite_android_clank_trichrome_bundle';
+        } else if (configuration === 'android-pixel4_weblayer-perf') {
+          return 'performance_weblayer_test_suite';
+        } else if (configuration === 'android-pixel4a_power-perf') {
+          return 'performance_test_suite_android_clank_chrome';
+        } else if (configuration.toLowerCase().includes('android')) {
+          throw Error(
+              'Given Android configuration ' + configuration + ' does not ' +
+              'have an isolate mapped to it');
+        } else if (configuration === 'fuchsia-perf-fyi') {
+          return 'performance_web_engine_test_suite';
+        }
+
+        return 'performance_test_suite';
+      }
+    });
+  </script>
+</dom-module>

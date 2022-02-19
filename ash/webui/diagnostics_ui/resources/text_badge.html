@@ -1,0 +1,39 @@
+<style include="diagnostics-shared">
+  .error {
+    background-color: var(--google-red-50);
+    color: var(--cros-text-color-alert);
+  }
+
+  .queued, .stopped, .skipped {
+    background-color: var(--cros-button-label-color-primary);
+    color: var(--cros-text-color-secondary);
+  }
+
+  .running {
+    background-color: var(--google-blue-50);
+    color: var(--cros-text-color-prominent);
+  }
+
+  .success {
+    background-color: var(--google-green-50);
+    color: var(--cros-text-color-positive);
+  }
+
+  .warning {
+    background-color: #FEF7E0;
+    color: var(--cros-text-color-warning);
+  }
+
+  #textBadge {
+    @apply --diagnostics-text-badge-font;
+    border-radius: 4px;
+    height: 20px;
+    letter-spacing: .8px;
+    line-height: 16px;
+    padding: 2px 6px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+</style>
+
+<span id="textBadge" class$="[[badgeType]]" hidden$="[[hidden]]">[[value]]</span>

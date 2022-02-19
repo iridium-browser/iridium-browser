@@ -1,0 +1,41 @@
+<!-- Copyright 2015 The Chromium Authors. All rights reserved.
+  -- Use of this source code is governed by a BSD-style license that can be
+  -- found in the LICENSE file.
+  -->
+<style>
+  .container {
+    --cr-toast-background: var(--google-grey-900-white-4-percent);
+    justify-content: space-between;
+    max-width: 336px;
+    min-height: 48px;
+    min-width: 256px;
+    padding: 0;
+  }
+
+  :host-context(:root[dir=ltr]) .container {
+    left: unset;
+    right: 0;
+  }
+
+  :host-context(:root[dir=rtl]) .container {
+    left: 0;
+    right: unset;
+  }
+
+  .text {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    line-height: 20px;
+    margin: 14px 16px;
+    overflow: hidden;
+  }
+
+  .action {
+    margin: 0 8px !important;
+  }
+</style>
+<cr-toast class="container" id="container" duration="5000">
+  <div class="text" id="text"></div>
+  <cr-button class="action" id="action" on-tap="onActionTapped_"></cr-button>
+</cr-toast>

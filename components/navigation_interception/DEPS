@@ -1,0 +1,9 @@
+include_rules = [
+  "+components/navigation_interception/jni_headers",
+  "+net",
+  "+ui/base",
+
+  "+content/public/browser",
+  "+content/public/common",
+  "+content/public/test",
+]

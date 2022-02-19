@@ -1,0 +1,7 @@
+# -*- Mode: Python; -*-
+
+# The CDDL compiler is a standalone tool from the rest of OSP.
+include_rules = [
+    '-util',
+    '-platform',
+]

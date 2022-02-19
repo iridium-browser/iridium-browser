@@ -1,0 +1,4 @@
+include_rules = [
+  "+components/crash/android/jni_headers",
+  "+third_party/crashpad",
+]

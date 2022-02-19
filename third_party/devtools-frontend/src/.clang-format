@@ -1,0 +1,9 @@
+---
+BasedOnStyle: Chromium
+---
+Language: JavaScript
+ColumnLimit: 120
+CommentPragmas: .*\@.*
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+ReflowComments: false

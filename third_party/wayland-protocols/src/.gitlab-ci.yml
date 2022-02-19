@@ -1,0 +1,63 @@
+.templates_sha: &template_sha 290b79e0e78eab67a83766f4e9691be554fc4afd
+
+include:
+  - project: 'freedesktop/ci-templates'
+    ref: *template_sha
+    file: '/templates/debian.yml'
+  - project: 'freedesktop/ci-templates'
+    ref: *template_sha
+    file: '/templates/ci-fairy.yml'
+
+stages:
+  - review
+  - containers-build
+  - test
+
+variables:
+  FDO_UPSTREAM_REPO: wayland/wayland-protocols
+
+.debian:
+  variables:
+    FDO_DISTRIBUTION_VERSION: bullseye
+    FDO_DISTRIBUTION_PACKAGES: 'build-essential automake autoconf libtool pkg-config libwayland-dev meson'
+    FDO_DISTRIBUTION_TAG: '2021-03-24.0'
+
+check-commit:
+  extends:
+    - .fdo.ci-fairy
+  stage: review
+  script:
+    - ci-fairy check-commits --signed-off-by --junit-xml=results.xml
+  variables:
+    GIT_DEPTH: 100
+  artifacts:
+    reports:
+      junit: results.xml
+
+container_build:
+  extends:
+    - .debian
+    - .fdo.container-build@debian
+  stage: containers-build
+  variables:
+    GIT_STRATEGY: none
+
+test-meson:
+  stage: test
+  extends:
+    - .debian
+    - .fdo.distribution-image@debian
+  script:
+    - meson build
+    - ninja -C build
+    - meson test -C build
+    - ninja -C build install
+
+test-autotools:
+  stage: test
+  extends:
+    - .debian
+    - .fdo.distribution-image@debian
+  script:
+    - ./autogen.sh
+    - make check

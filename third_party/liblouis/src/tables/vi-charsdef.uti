@@ -1,0 +1,98 @@
+# Vietnamese characters definition
+#
+#-copyright: Sao Mai
+#-license: LGPLv2.1
+#
+#  Copyright (C) 2018 by Sao Mai Center for the Blind <www.saomaicenter.org/en>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# Created and maintained by: Dang Hoai Phuc, danghoaiphuc@gmail.com
+
+space \s 0 blank
+space \t 9 tab
+space \x000a 0 newline
+space \x000c 0
+space \x000d 0 carriage return
+space \x001b 1b escape character for html back-translation
+space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE 
+
+# latin letters
+uplow Aa 1
+uplow Bb 12
+uplow Cc 14
+uplow Dd 145
+uplow Ee 15
+uplow Ff 124
+uplow Gg 1245
+uplow Hh 125
+uplow Ii 24
+uplow Jj 245
+uplow Kk 13
+uplow Ll 123
+uplow Mm 134
+uplow Nn 1345
+uplow Oo 135
+uplow Pp 1234
+uplow Qq 12345
+uplow Rr 1235
+uplow Ss 234
+uplow Tt 2345
+uplow Uu 136
+uplow Vv 1236
+uplow Ww 2456
+uplow Xx 1346
+uplow Yy 13456
+uplow Zz 1356
+
+# numbers definition
+display 0 356
+display 1 2
+display 2 23
+display 3 25
+display 4 256
+display 5 26
+display 6 235
+display 7 2356
+display 8 236
+display 9 35
+digit 0 245
+digit 1 1
+digit 2 12
+digit 3 14
+digit 4 145
+digit 5 15
+digit 6 124
+digit 7 1245
+digit 8 125
+digit 9 24
+litdigit 0 245
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+
+# signs and punctuations definition
+include vi-puncsdef.uti
+# Vietnamese letters definition
+include vi-lettersdef.uti
+include braille-patterns.cti

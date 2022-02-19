@@ -1,0 +1,35 @@
+<style include="cr-shared-style shimless-rma-shared">
+  #dialogBody {
+    overflow-wrap: anywhere;
+  }
+</style>
+
+<base-page orientation="column">
+  <div slot="header">
+    <h1>[[i18n('rsuCodePageTitleText')]]</h1>
+    <div>
+      <span inner-h-t-m-l="[[rsuInstructionsText_]]"></span>
+    </div>
+    <cr-input
+        on-change="onRsuCodeChanged_"
+        label="[[i18n('rsuCodeLabelText')]]"
+        placeholder="[[i18n('rsuCodePlaceHolderText')]]"
+        id="rsuCode"
+        value="{{rsuCode_}}">
+    </cr-input>
+  </div>
+  <div slot="body">
+    <canvas id="qrCodeCanvas" width="[[canvasSize_]]" height="[[canvasSize_]]">
+    </canvas>
+  </div>
+</base-page>
+
+<cr-dialog id="rsuChallengeDialog" on-cancel="closeDialog_" ignore-popstate>
+  <div slot="title">[[i18n('rsuChallengeDialogTitleText')]]</div>
+  <div slot="body" id="dialogBody">[[rsuChallengeLinkText_]]</div>
+  <div slot="button-container">
+    <cr-button class="action-button" on-click="closeDialog_">
+      [[i18n('rsuChallengeDialogDoneButtonLabel')]]
+    </cr-button>
+  </div>
+</cr-dialog>

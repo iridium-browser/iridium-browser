@@ -103,7 +103,7 @@ class LeafPageDecoder {
   //
   // |db_reader| must have been used to read an inner page of a table B-tree.
   // |db_reader| must outlive this instance.
-  explicit LeafPageDecoder(DatabasePageReader* db_reader) noexcept;
+  explicit LeafPageDecoder() noexcept = default;
   ~LeafPageDecoder() noexcept = default;
 
   LeafPageDecoder(const LeafPageDecoder&) = delete;
@@ -151,6 +151,15 @@ class LeafPageDecoder {
   // read as long as CanAdvance() returns true.
   bool TryAdvance();
 
+  // Initialize with DatabasePageReader
+  void Initialize(DatabasePageReader* db_reader);
+
+  // Reset internal DatabasePageReader
+  void Reset();
+
+  // True if DatabasePageReader is valid
+  bool IsValid() { return (db_reader_ != nullptr); }
+
   // True if the given reader may point to an inner page in a table B-tree.
   //
   // The last ReadPage() call on |db_reader| must have succeeded.
@@ -164,14 +173,14 @@ class LeafPageDecoder {
   static int ComputeCellCount(DatabasePageReader* db_reader);
 
   // The number of the B-tree page this reader is reading.
-  const int64_t page_id_;
+  int64_t page_id_;
   // Used to read the tree page.
   //
   // Raw pointer usage is acceptable because this instance's owner is expected
   // to ensure that the DatabasePageReader outlives this.
-  DatabasePageReader* const db_reader_;
+  DatabasePageReader* db_reader_;
   // Caches the ComputeCellCount() value for this reader's page.
-  const int cell_count_ = ComputeCellCount(db_reader_);
+  int cell_count_;
 
   // The reader's cursor state.
   //

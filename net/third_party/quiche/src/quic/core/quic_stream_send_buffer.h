@@ -65,7 +65,7 @@ class QUIC_EXPORT_PRIVATE QuicStreamSendBuffer {
  public:
   explicit QuicStreamSendBuffer(quiche::QuicheBufferAllocator* allocator);
   QuicStreamSendBuffer(const QuicStreamSendBuffer& other) = delete;
-  QuicStreamSendBuffer(QuicStreamSendBuffer&& other) = delete;
+  QuicStreamSendBuffer(QuicStreamSendBuffer&& other) = default;
   ~QuicStreamSendBuffer();
 
   // Save |data| to send buffer.

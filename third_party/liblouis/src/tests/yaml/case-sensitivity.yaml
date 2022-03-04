@@ -1,0 +1,15 @@
+# when a table does not define any capital marks, rules should be case sensitive
+# see second part of issue #498: https://github.com/liblouis/liblouis/issues/498#issuecomment-498358354
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback context "goal"$s"crazy" @2347-1367-147-147-2
+  noback context "goal"$s"Crazy" @2347-1367-147-147-23
+  noback context "Goal"$s"crazy" @2347-1367-147-147-25
+  noback context "Goal"$s"Crazy" @2347-1367-147-147-256
+tests:
+  - [goal crazy, ⡎⡥⡉⡉⠂]
+  - [goal Crazy, ⡎⡥⡉⡉⠆]
+  - [Goal crazy, ⡎⡥⡉⡉⠒, {xfail: "no context rule matches"}]
+  - [Goal Crazy, ⡎⡥⡉⡉⠲, {xfail: "no context rule matches"}]
+

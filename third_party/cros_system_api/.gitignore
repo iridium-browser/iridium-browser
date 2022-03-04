@@ -1,0 +1,4 @@
+# Generated D-Bus bindings.
+src/bindings
+# Generated protobuf definitions.
+src/protos

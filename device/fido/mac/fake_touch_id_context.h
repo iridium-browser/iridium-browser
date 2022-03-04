@@ -1,0 +1,42 @@
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef DEVICE_FIDO_MAC_FAKE_TOUCH_ID_CONTEXT_H_
+#define DEVICE_FIDO_MAC_FAKE_TOUCH_ID_CONTEXT_H_
+
+#include "base/component_export.h"
+#include "device/fido/mac/touch_id_context.h"
+
+namespace device {
+namespace fido {
+namespace mac {
+
+class API_AVAILABLE(macosx(10.12.2)) FakeTouchIdContext
+    : public TouchIdContext {
+ public:
+  FakeTouchIdContext(const FakeTouchIdContext&) = delete;
+  FakeTouchIdContext& operator=(const FakeTouchIdContext&) = delete;
+
+  ~FakeTouchIdContext() override;
+
+  // TouchIdContext:
+  void PromptTouchId(const std::u16string& reason, Callback callback) override;
+
+  void set_callback_result(bool callback_result) {
+    callback_result_ = callback_result;
+  }
+
+ private:
+  friend class ScopedTouchIdTestEnvironment;
+
+  FakeTouchIdContext();
+
+  bool callback_result_ = true;
+};
+
+}  // namespace mac
+}  // namespace fido
+}  // namespace device
+
+#endif  // DEVICE_FIDO_MAC_FAKE_TOUCH_ID_CONTEXT_H_

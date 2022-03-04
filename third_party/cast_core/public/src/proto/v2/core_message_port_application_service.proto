@@ -1,0 +1,39 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package cast.v2;
+
+import "proto/bindings/api_bindings.proto";
+import "proto/web/message_channel.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// This service runs in Cast Core for a particular app. It uses a MessagePort to
+// communicate with the app.
+service CoreMessagePortApplicationService {
+  // Posts messages between MessagePorts. MessagePorts are connected using other
+  // services (e.g. ApiBindings), then registered with the
+  // MessageConnectorService to communicate over IPC.
+  rpc PostMessage(cast.web.Message) returns (cast.web.MessagePortStatus);
+
+  // Gets the list of bindings to early-inject into javascript at page load.
+  rpc GetAll(cast.bindings.GetAllRequest)
+      returns (cast.bindings.GetAllResponse);
+
+  // Connects to a binding returned by GetAll.
+  rpc Connect(cast.bindings.ConnectRequest)
+      returns (cast.bindings.ConnectResponse);
+}

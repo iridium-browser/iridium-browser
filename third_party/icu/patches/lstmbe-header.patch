@@ -1,0 +1,14 @@
+diff --git a/source/common/lstmbe.cpp b/source/common/lstmbe.cpp
+index 3793abce..70fd038b 100644
+--- a/source/common/lstmbe.cpp
++++ b/source/common/lstmbe.cpp
+@@ -1,8 +1,8 @@
+ // © 2021 and later: Unicode, Inc. and others.
+ // License & terms of use: http://www.unicode.org/copyright.html
+ 
++#include <complex>
+ #include <utility>
+-#include <ctgmath>
+ 
+ #include "unicode/utypes.h"
+ 

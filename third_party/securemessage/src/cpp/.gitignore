@@ -1,0 +1,15 @@
+*.swp
+securemessage.pb.*
+.cproject
+.project
+.settings
+*.o
+*.a
+secure_message_parser_test
+src-gen
+*_test
+*.so
+core
+project.gdbinit
+autom4te.cache
+test_stderr.log

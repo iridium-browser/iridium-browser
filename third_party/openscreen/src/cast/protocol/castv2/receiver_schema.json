@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://something/app_schema.json",
+  "definitions": {
+    "app_id": {"type": "string", "enum": ["0F5096E8", "85CDB22F"]}
+  },
+  "type": "object",
+  "properties": {
+    "availability": {
+      "type": "object",
+      "patternProperties": {
+        "[0-9a-fA-F]": {
+          "type": "string",
+          "enum": ["APP_AVAILABLE", "APP_UNAVAILABLE"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "type": {
+      "type": "string",
+      "enum": ["LAUNCH", "STOP", "GET_APP_AVAILABILITY"]
+    },
+    "responseType": {"type": "string", "enum": ["GET_APP_AVAILABILITY"]},
+    "requestId": {"type": "integer", "minimum": 0},
+    "language": {"type": "string", "minLength": 2},
+    "supportedAppTypes": {
+      "type": "array",
+      "items": {"type": "string", "enum": ["ANDROID_TV", "WEB"]}
+    }
+  },
+  "required": ["requestId"],
+  "allOf": [
+    {
+      "if": {
+        "properties": {"type": {"const": "GET_APP_AVAILABILITY"}},
+        "required": ["type"]
+      },
+      "then": {
+        "properties": {
+          "appId": {"type": "array", "items": {"$ref": "#/definitions/app_id"}}
+        },
+        "required": ["appId"]
+      },
+      "else": {"properties": {"appId": {"$ref": "#/definitions/app_id"}}}
+    },
+    {
+      "if": {
+        "properties": {"responseType": {"const": "GET_APP_AVAILABILITY"}},
+        "required": ["responseType"]
+      },
+      "then": {"required": ["availability"]}
+    },
+    {
+      "if": {"properties": {"type": {"const": "LAUNCH"}}, "required": ["type"]},
+      "then": {"required": ["supportedAppTypes", "language", "appId"]}
+    },
+    {
+      "if": {"properties": {"type": {"const": "STOP"}}, "required": ["type"]},
+      "then": {"required": ["sessionId"]}
+    }
+  ]
+}

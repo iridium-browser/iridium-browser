@@ -1,0 +1,143 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+module ash.diagnostics.mojom;
+
+enum ConnectionType {
+  // Includes devices connected over USB that are on fully internal busses, as
+  // well as the keyboards/touchpads for detachables.
+  kInternal,
+  kUsb,
+  kBluetooth,
+  // An unknown device is most likely to be internal.
+  kUnknown,
+};
+
+enum PhysicalLayout {
+  kUnknown,
+  // A typical Chrome OS keyboard with action keys on the top row, reduced
+  // navigation keys, etc.
+  kChromeOS,
+  // The slightly-modified Chrome OS keyboard found on Dell Enterprise
+  // Chromebooks or Dell WWCB keyboards (like the KM713 Chrome Keyboard).
+  kChromeOSDellEnterprise,
+};
+
+// The international standard that the layout follows.
+enum MechanicalLayout {
+  kUnknown,
+  kAnsi,
+  kIso,
+  kJis,
+};
+
+enum NumberPadPresence {
+  // Unknown indicates there is no reliable evidence whether a numberpad is
+  // present. This is common for external keyboards.
+  kUnknown,
+  kPresent,
+  kNotPresent,
+};
+
+// Note that this enumeration will need to be extended if new keys are added.
+enum TopRowKey {
+  // Either no key at all, or no special action key at this position.
+  kNone,
+  // Marker for keys which cannot be decoded, but have some action.
+  kUnknown,
+  kBack,
+  kForward,
+  kRefresh,
+  kFullscreen,
+  kOverview,
+  kScreenshot,
+  kScreenBrightnessDown,
+  kScreenBrightnessUp,
+  kPrivacyScreenToggle,
+  kVolumeMute,
+  kVolumeDown,
+  kVolumeUp,
+  kKeyboardBacklightDown,
+  kKeyboardBacklightUp,
+  kNextTrack,
+  kPreviousTrack,
+  kPlayPause,
+  kScreenMirror,
+  kDelete,
+};
+
+// Describes a connected keyboard.
+struct KeyboardInfo {
+  // The number of the keyboard's /dev/input/event* node.
+  uint32 id;
+  ConnectionType connection_type;
+  string name;
+  PhysicalLayout physical_layout;
+  MechanicalLayout mechanical_layout;
+  NumberPadPresence number_pad_present;
+  // Excludes left-most Escape key, and right-most key (usually Power/Lock).
+  array<TopRowKey> top_row_keys;
+  // Only applicable to CrOS keyboards.
+  bool has_assistant_key;
+};
+
+// Describes the glyphs that appear on a single key.
+struct KeyGlyphSet {
+  // Glyph if pressed without modifiers. Displayed in the centre or on the lower
+  // half of the key.
+  string main_glyph;
+
+  // Glyph if pressed with Shift. Displayed in the upper half. Null if it's just
+  // the main glyph in upper-case.
+  string? shift_glyph;
+};
+
+enum TouchDeviceType {
+  kDirect,   // e.g. touchscreens, drawing tablets with screens.
+  kPointer,  // e.g. touchpads, drawing tablets without displays.
+};
+
+// Describes a touch surface (pad or screen).
+struct TouchDeviceInfo {
+  // The number of the touch device's /dev/input/event* node.
+  uint32 id;
+  ConnectionType connection_type;
+  TouchDeviceType type;
+  string name;
+};
+
+// Implemented by clients that wish to be updated when input devices are
+// connected or disconnected.
+interface ConnectedDevicesObserver {
+  // OnKeyboardConnected calls are triggered when a new keyboard is connected.
+  OnKeyboardConnected(KeyboardInfo new_keyboard);
+  // OnKeyboardDisconnected calls are triggered when a keyboard is disconnected.
+  OnKeyboardDisconnected(uint32 id);
+  // OnTouchDeviceConnected calls are triggered when a new touch device is
+  // connected.
+  OnTouchDeviceConnected(TouchDeviceInfo new_touch_device);
+  // OnTouchDeviceDisconnected calls are triggered when a touch device is
+  // disconnected.
+  OnTouchDeviceDisconnected(uint32 id);
+};
+
+// Provides information about input devices connected to the system. Implemented
+// in the browser process and called by the Diagnostics SWA (a renderer
+// process).
+interface InputDataProvider {
+  // Returns a snapshot of the devices connected to the system.
+  GetConnectedDevices() =>
+    (array<KeyboardInfo> keyboards,
+     array<TouchDeviceInfo> touch_devices);
+  // Registers an observer of connected input devices.
+  ObserveConnectedDevices(pending_remote<ConnectedDevicesObserver> observer);
+
+  // Returns the visual layout for the keyboard with the given ID. For external
+  // keyboards where we can't be sure of their layout, this will default to the
+  // system layout.
+  //
+  // The layout is represented as a map from the evdev code of a key to a
+  // KeyGlyphSet describing its glyphs.
+  GetKeyboardVisualLayout(uint32 id) => (map<uint32, KeyGlyphSet> layout);
+};

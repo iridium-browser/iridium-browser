@@ -1,0 +1,59 @@
+{
+  "package_name": "pnacl_translator",
+  "package_targets": {
+    "linux_arm": {
+      "archives": [
+        {
+          "extract_dir": "",
+          "hash": "ab447cc34275b1db88a76cb9df15ed49bf8d8719",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/sandboxed_translators_44fc7e4c9021d5d703a4c0b2cfcf3ce5cb24b358.log",
+          "name": "sandboxed_translators.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/sandboxed_translators_44fc7e4c9021d5d703a4c0b2cfcf3ce5cb24b358.tgz"
+        }
+      ],
+      "version": 1
+    },
+    "linux_x86": {
+      "archives": [
+        {
+          "extract_dir": "",
+          "hash": "ab447cc34275b1db88a76cb9df15ed49bf8d8719",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/sandboxed_translators_44fc7e4c9021d5d703a4c0b2cfcf3ce5cb24b358.log",
+          "name": "sandboxed_translators.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/sandboxed_translators_44fc7e4c9021d5d703a4c0b2cfcf3ce5cb24b358.tgz"
+        }
+      ],
+      "version": 1
+    },
+    "mac_x86": {
+      "archives": [
+        {
+          "extract_dir": "",
+          "hash": "ab447cc34275b1db88a76cb9df15ed49bf8d8719",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/sandboxed_translators_44fc7e4c9021d5d703a4c0b2cfcf3ce5cb24b358.log",
+          "name": "sandboxed_translators.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/sandboxed_translators_44fc7e4c9021d5d703a4c0b2cfcf3ce5cb24b358.tgz"
+        }
+      ],
+      "version": 1
+    },
+    "win_x86": {
+      "archives": [
+        {
+          "extract_dir": "",
+          "hash": "ab447cc34275b1db88a76cb9df15ed49bf8d8719",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/sandboxed_translators_44fc7e4c9021d5d703a4c0b2cfcf3ce5cb24b358.log",
+          "name": "sandboxed_translators.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/sandboxed_translators_44fc7e4c9021d5d703a4c0b2cfcf3ce5cb24b358.tgz"
+        }
+      ],
+      "version": 1
+    }
+  },
+  "revision": "a2161789b39b6811ba2a8c64a2341b0a78d25f79",
+  "revision_hash": "9be9b0485ccb0176ebf2d892ffbc0fabca2cbf0f"
+}

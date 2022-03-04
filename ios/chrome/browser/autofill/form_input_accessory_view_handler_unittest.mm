@@ -1,0 +1,26 @@
+// Copyright 2019 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#import "ios/chrome/browser/autofill/form_input_accessory_view_handler.h"
+
+#include "base/mac/foundation_util.h"
+#import "ios/chrome/browser/web/chrome_web_test.h"
+#import "ios/web/public/web_state.h"
+
+#if !defined(__has_feature) || !__has_feature(objc_arc)
+#error "This file requires ARC support."
+#endif
+
+using FormInputAccessoryViewHandlerTest = ChromeWebTest;
+
+// Tests that trying to programmatically dismiss the keyboard when it isn't
+// visible doesn't crash the browser.
+TEST_F(FormInputAccessoryViewHandlerTest, FormInputAccessoryViewHandler) {
+  FormInputAccessoryViewHandler* accessory_view_delegate =
+      [[FormInputAccessoryViewHandler alloc] init];
+  ASSERT_TRUE(accessory_view_delegate);
+  [accessory_view_delegate closeKeyboardWithoutButtonPress];
+  accessory_view_delegate.webState = web_state();
+  [accessory_view_delegate closeKeyboardWithoutButtonPress];
+}

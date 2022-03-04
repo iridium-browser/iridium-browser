@@ -1,0 +1,57 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package remoting.protocol;
+
+// Composite message type for messages sent over the remote-webauthn data
+// channel.
+// Next ID: 6
+message RemoteWebAuthn {
+  // Requests the client to handle a call to
+  // PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable().
+  message IsUvpaaRequest {}
+
+  // Response for IsUvpaaRequest.
+  // Next ID: 2
+  message IsUvpaaResponse { optional bool is_available = 1; }
+
+  // Requests the client to handle a navigator.credentials.create() call.
+  // Next ID: 2
+  message CreateRequest {
+    // A JSON serialized representation of PublicKeyCredentialCreationOptions
+    // passed to navigator.credentials.create().
+    optional string request_details_json = 1;
+  }
+
+  // Response for CreateRequest.
+  // Next ID: 3
+  message CreateResponse {
+    // If neither of the fields is set, it means that the remote create() call
+    // has yielded `null`, which is still a valid response according to the
+    // spec.
+    oneof result {
+      // The `name` property of the `DOMException`, if any.
+      string error_name = 1;
+
+      // A JSON serialized representation of the `PublicKeyCredential`
+      // (https://w3c.github.io/webauthn/#publickeycredential), if any.
+      string response_json = 2;
+    }
+  }
+
+  // Unique ID used to multiplex requests.
+  optional uint64 id = 1;
+
+  oneof message {
+    IsUvpaaRequest is_uvpaa_request = 2;
+    IsUvpaaResponse is_uvpaa_response = 3;
+
+    CreateRequest create_request = 4;
+    CreateResponse create_response = 5;
+  }
+}

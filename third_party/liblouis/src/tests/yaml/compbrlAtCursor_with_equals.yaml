@@ -1,0 +1,27 @@
+# Regression test for an issue that was fixed in https://github.com/liblouis/liblouis/pull/492.
+# Tests the '=' operand with compbrlAtCursor mode active.
+
+table: |
+  include tables/latinLetterDef6Dots.uti
+  begword pilis 1234-24-123-24-234
+tests:
+  - - piliscsabai
+    - piliscsabai
+    - mode: [compbrlAtCursor]
+      inputPos: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      outputPos: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      cursorPos: [0,0]
+
+# when we define the begword rule with '=' then the inlen will be 15
+# after the lou_translate and this will crash lou_checkyaml (when
+# printing the outputPos.
+table: |
+  include tables/latinLetterDef6Dots.uti
+  begword pilis =
+tests:
+  - - piliscsabai
+    - piliscsabai
+    - mode: [compbrlAtCursor]
+      inputPos: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      outputPos: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      cursorPos: [0,0]

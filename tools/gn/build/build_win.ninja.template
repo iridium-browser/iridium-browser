@@ -1,0 +1,12 @@
+rule cxx
+  command = ninja -t msvc -- $cxx /nologo /showIncludes /FC $includes $cflags /c $in /Fo$out
+  description = CXX $out
+  deps = msvc
+
+rule alink_thin
+  command = ninja -t msvc -- $ar /nologo /ignore:4221 $libflags /OUT:$out $in
+  description = LIB $out
+
+rule link
+  command = ninja -t msvc -- $ld /nologo $ldflags /OUT:$out /PDB:$out.pdb $in $solibs $libs
+  description = LINK $out

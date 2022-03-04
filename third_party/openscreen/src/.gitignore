@@ -1,0 +1,9 @@
+/out*/
+buildtools/
+clang-format
+tools/clang/scripts/update.py
+*sysroot
+*.profraw
+*.profdata
+generated_root_cast_receiver*
+yajsv

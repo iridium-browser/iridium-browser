@@ -1,0 +1,8 @@
+bbudge@chromium.org
+raymes@chromium.org
+
+per-file usb_key_code_*=garykac@chromium.org
+per-file usb_key_code_*=wez@chromium.org
+
+# WebSocket
+per-file *websocket*=yhirano@chromium.org

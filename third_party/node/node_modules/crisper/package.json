@@ -1,0 +1,32 @@
+{
+  "name": "crisper",
+  "version": "2.1.1",
+  "description": "Make an HTML file with inline scripts CSP compliant",
+  "main": "index.js",
+  "bin": {
+    "crisper": "bin/crisper"
+  },
+  "scripts": {
+    "test": "jshint --verbose bin/crisper index.js test/test.js && mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PolymerLabs/crisper.git"
+  },
+  "author": "The Polymer Authors",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/PolymerLabs/crisper/issues"
+  },
+  "homepage": "https://github.com/PolymerLabs/crisper",
+  "dependencies": {
+    "command-line-args": "^3.0.1",
+    "command-line-usage": "^3.0.8",
+    "dom5": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "jshint": "^2.6.3",
+    "mocha": "^2.2.3"
+  }
+}

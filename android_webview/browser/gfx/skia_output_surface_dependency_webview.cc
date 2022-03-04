@@ -1,0 +1,160 @@
+// Copyright 2019 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#include "android_webview/browser/gfx/skia_output_surface_dependency_webview.h"
+
+#include "android_webview/browser/gfx/aw_vulkan_context_provider.h"
+#include "android_webview/browser/gfx/gpu_service_webview.h"
+#include "android_webview/browser/gfx/task_forwarding_sequence.h"
+#include "android_webview/browser/gfx/task_queue_webview.h"
+#include "base/callback_helpers.h"
+#include "base/logging.h"
+#include "gpu/ipc/gpu_task_scheduler_helper.h"
+#include "ui/gl/gl_surface.h"
+
+namespace android_webview {
+
+SkiaOutputSurfaceDependencyWebView::SkiaOutputSurfaceDependencyWebView(
+    TaskQueueWebView* task_queue,
+    GpuServiceWebView* gpu_service,
+    gpu::SharedContextState* shared_context_state,
+    gl::GLSurface* gl_surface,
+    AwVulkanContextProvider* vulkan_context_provider)
+    : gl_surface_(gl_surface),
+      vulkan_context_provider_(vulkan_context_provider),
+      task_queue_(task_queue),
+      gpu_service_(gpu_service),
+      workarounds_(
+          gpu_service_->gpu_feature_info().enabled_gpu_driver_bug_workarounds),
+      shared_context_state_(shared_context_state) {
+  DCHECK(!(shared_context_state_ && vulkan_context_provider_) ||
+         shared_context_state_->vk_context_provider() ==
+             vulkan_context_provider);
+}
+
+SkiaOutputSurfaceDependencyWebView::~SkiaOutputSurfaceDependencyWebView() =
+    default;
+
+std::unique_ptr<gpu::SingleTaskSequence>
+SkiaOutputSurfaceDependencyWebView::CreateSequence() {
+  return std::make_unique<TaskForwardingSequence>(
+      this->task_queue_, this->gpu_service_->sync_point_manager());
+}
+
+gpu::SharedImageManager*
+SkiaOutputSurfaceDependencyWebView::GetSharedImageManager() {
+  return gpu_service_->shared_image_manager();
+}
+
+gpu::SyncPointManager*
+SkiaOutputSurfaceDependencyWebView::GetSyncPointManager() {
+  return gpu_service_->sync_point_manager();
+}
+
+const gpu::GpuDriverBugWorkarounds&
+SkiaOutputSurfaceDependencyWebView::GetGpuDriverBugWorkarounds() {
+  return workarounds_;
+}
+
+scoped_refptr<gpu::SharedContextState>
+SkiaOutputSurfaceDependencyWebView::GetSharedContextState() {
+  return shared_context_state_.get();
+}
+
+gpu::raster::GrShaderCache*
+SkiaOutputSurfaceDependencyWebView::GetGrShaderCache() {
+  return nullptr;
+}
+
+viz::VulkanContextProvider*
+SkiaOutputSurfaceDependencyWebView::GetVulkanContextProvider() {
+  return shared_context_state_->vk_context_provider();
+}
+
+viz::DawnContextProvider*
+SkiaOutputSurfaceDependencyWebView::GetDawnContextProvider() {
+  return nullptr;
+}
+
+const gpu::GpuPreferences&
+SkiaOutputSurfaceDependencyWebView::GetGpuPreferences() const {
+  return gpu_service_->gpu_preferences();
+}
+
+const gpu::GpuFeatureInfo&
+SkiaOutputSurfaceDependencyWebView::GetGpuFeatureInfo() {
+  return gpu_service_->gpu_feature_info();
+}
+
+gpu::MailboxManager* SkiaOutputSurfaceDependencyWebView::GetMailboxManager() {
+  return gpu_service_->mailbox_manager();
+}
+
+void SkiaOutputSurfaceDependencyWebView::ScheduleGrContextCleanup() {
+  // There is no way to access the gpu thread here, so leave it no-op for now.
+}
+
+void SkiaOutputSurfaceDependencyWebView::PostTaskToClientThread(
+    base::OnceClosure closure) {
+  task_queue_->ScheduleClientTask(std::move(closure));
+}
+
+gpu::ImageFactory* SkiaOutputSurfaceDependencyWebView::GetGpuImageFactory() {
+  return nullptr;
+}
+
+bool SkiaOutputSurfaceDependencyWebView::IsOffscreen() {
+  return false;
+}
+
+gpu::SurfaceHandle SkiaOutputSurfaceDependencyWebView::GetSurfaceHandle() {
+  return gpu::kNullSurfaceHandle;
+}
+
+scoped_refptr<gl::GLSurface>
+SkiaOutputSurfaceDependencyWebView::CreateGLSurface(
+    base::WeakPtr<gpu::ImageTransportSurfaceDelegate> stub,
+    gl::GLSurfaceFormat format) {
+  return gl_surface_.get();
+}
+
+base::ScopedClosureRunner SkiaOutputSurfaceDependencyWebView::CacheGLSurface(
+    gl::GLSurface* surface) {
+  NOTREACHED();
+  return base::ScopedClosureRunner();
+}
+
+void SkiaOutputSurfaceDependencyWebView::RegisterDisplayContext(
+    gpu::DisplayContext* display_context) {
+  // No GpuChannelManagerDelegate here, so leave it no-op for now.
+}
+
+void SkiaOutputSurfaceDependencyWebView::UnregisterDisplayContext(
+    gpu::DisplayContext* display_context) {
+  // No GpuChannelManagerDelegate here, so leave it no-op for now.
+}
+
+void SkiaOutputSurfaceDependencyWebView::DidLoseContext(
+    gpu::error::ContextLostReason reason,
+    const GURL& active_url) {
+  // No GpuChannelManagerDelegate here, so leave it no-op for now.
+  LOG(ERROR) << "SkiaRenderer detected lost context.";
+}
+
+base::TimeDelta
+SkiaOutputSurfaceDependencyWebView::GetGpuBlockedTimeSinceLastSwap() {
+  // WebView doesn't track how long GPU thread was blocked
+  return base::TimeDelta();
+}
+
+void SkiaOutputSurfaceDependencyWebView::ScheduleDelayedGPUTaskFromGPUThread(
+    base::OnceClosure task) {
+  task_queue_->ScheduleIdleTask(std::move(task));
+}
+
+bool SkiaOutputSurfaceDependencyWebView::NeedsSupportForExternalStencil() {
+  return true;
+}
+
+}  // namespace android_webview

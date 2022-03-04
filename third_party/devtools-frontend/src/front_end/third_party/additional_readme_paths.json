@@ -1,0 +1,15 @@
+[
+  "acorn",
+  "acorn-loose",
+  "codemirror",
+  "codemirror.next",
+  "chromium",
+  "diff",
+  "i18n",
+  "intl-messageformat",
+  "lighthouse",
+  "lit-html",
+  "marked",
+  "puppeteer",
+  "wasmparser"
+]

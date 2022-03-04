@@ -1,0 +1,12 @@
+#-index-name: Cantonese
+#-display-name: Cantonese braille
+
+#+locale:yue-HK
+#+type:literary
+
+# TODO: Please add a reference to official documentation about
+# the implemented braille code. Preferably submit the documents
+# to https://github.com/liblouis/braille-specs.
+
+include zh-hk.ctb
+include braille-patterns.cti

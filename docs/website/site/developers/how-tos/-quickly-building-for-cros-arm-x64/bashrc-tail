@@ -1,0 +1,85 @@
+#!/bin/bash
+# -*- fill-column: 200 -*-
+
+
+function lumpy() {
+  export BOARD=lumpy
+  chrome_build
+}
+
+function daisy() {
+  export BOARD=daisy
+  chrome_build
+}
+
+
+# Useful site: https://sites.google.com/a/chromium.org/dev/chromium-os/building-chromium-os/building-chromium-separately
+function chrome_build() {
+  # https://sites.google.com/a/chromium.org/dev/chromium-os/how-tos-and-troubleshooting/building-chromium-browser
+  export CHROME_ORIGIN=LOCAL_SOURCE
+
+  unset GYP_DEFINES GYP_GENERATORS
+  export BUILD_OUT=out_${BOARD}
+  export builddir_name=out_${BOARD}
+  export GYP_GENERATOR_FLAGS="output_dir=out_${BOARD} config=Debug"
+  export GYP_GENERATORS="ninja"
+  export GYP_DEFINES="$GYP_DEFINES disable_nacl=1 enable_svg=0 chromeos=1 use_official_google_api_keys=1"
+  if [ "$BOARD" = "daisy" ]; then
+    export GYP_DEFINES="$GYP_DEFINES target_arch=arm armv7=1 arm_float_abi=hard v8_use_arm_eabi_hardfloat=true"
+    export GYP_DEFINES="$GYP_DEFINES use_allocator=none "
+    export GYP_DEFINES="$GYP_DEFINES arm_neon=1"
+    # Of interest: http://code.google.com/p/chromium/wiki/LinuxChromiumArm
+    export XBASE="armv7a-cros-linux-gnueabi"
+    function crosip() {
+      echo 10.0.0.1
+    }
+  else
+    export XBASE="x86_64-cros-linux-gnu"
+    function crosip() {
+      echo 10.0.0.2
+    }
+  fi
+  export GYP_DEFINES="$GYP_DEFINES proprietary_codecs=1 ffmpeg_branding=ChromeOS enable_smooth_scrolling=1"
+  export GYP_DEFINES="$GYP_DEFINES python_ver=2.6 swig_defines=-DOS_CHROMEOS linux_sandbox_path=/opt/google/chrome/chrome-sandbox"
+  export GYP_DEFINES="$GYP_DEFINES remove_webcore_debug_symbols=1"
+  export GYP_DEFINES="$GYP_DEFINES component=shared_library"
+  export SYSROOT=/build/${BOARD}/
+
+  export GOLDIFY="-B/usr/x86_64-pc-linux-gnu/${XBASE}/binutils-bin/2.21-gold/"
+  export SYSROOTFLAG="--sysroot=$SYSROOT"
+  export BACKTRACE="-funwind-tables -rdynamic"
+  export GYP_GENERATORS=ninja
+  export GYP_PARALLEL=1
+  export AR="${XBASE}-ar"
+  export CC="${XBASE}-gcc $SYSROOTFLAG $BACKTRACE"
+  export CXX="${XBASE}-g++ $SYSROOTFLAG $GOLDIFY $BACKTRACE"
+  export AR_host="ar"
+  export CC_host="gcc"
+  export CXX_host="g++ -B/usr/x86_64-pc-linux-gnu/x86_64-cros-linux-gnu/binutils-bin/2.21-gold/"
+
+}
+
+export NINJA_STATUS="[%u/%r/%f] "
+
+export TESTING_RSA_KEY=~/trunk/src/scripts/mod_for_test_scripts/ssh_keys/testing_rsa
+
+function crosdevice() {
+  echo -e "\ek$BOARD\e\\"
+  ssh -o StrictHostKeyChecking=no -o CheckHostIP=no -i $TESTING_RSA_KEY root@$(crosip) "$@"
+}
+
+function crosdevicecp() {
+  scp -o StrictHostKeyChecking=no -o CheckHostIP=no -i $TESTING_RSA_KEY \
+    "$@" root@$(crosip):/home/chronos/user/chrome/
+}
+
+function initcrosdevice() {
+  cd ~/chrome_root/src
+  crosdevice 'bash -x -c "echo \"core.%p\" > /proc/sys/kernel/core_pattern && \
+    mkdir -p ~chronos/chrome && chown chronos ~chronos/chrome && \
+    sudo -u chronos /bin/bash -c \"cd ~chronos/chrome && mkdir -p Release Debug\""' && \
+  echo "Now log into crosdevice and run:"
+  echo "ulimit -c unlimited && cd ~chronos/chrome && sudo -u chronos bash"
+  echo "sshfs <desktop-username>@<desktop-hostname>:/home/<desktop-username>/src/chromium/src/out_$BOARD/Debug Debug"
+  crosdevice
+}

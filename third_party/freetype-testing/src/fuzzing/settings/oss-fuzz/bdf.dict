@@ -1,0 +1,33 @@
+# ----------------------------------------------------------------------------
+#   Keywords, taken from the specification:
+#     https://wwwimages2.adobe.com/content/dam/acom/en/devnet/font/pdfs/5005.BDF_Spec.pdf
+# ----------------------------------------------------------------------------
+
+# Global Font Information
+
+"STARTFONT"
+"COMMENT"
+"CONTENTVERSION"
+"FONT"
+"SIZE"
+"FONTBOUNDINGBOX"
+"METRICSSET"
+
+"SWIDTH"
+"DWIDTH"
+"SWIDTH1"
+"DWIDTH1"
+"VVECTOR"
+
+"STARTPROPERTIES"
+"ENDPROPERTIES"
+"ENDFONT"
+
+# Individual Glyph Information
+
+"CHARS"
+"STARTCHAR"
+"ENCODING"
+"BBX"
+"BITMAP"
+"ENDCHAR"

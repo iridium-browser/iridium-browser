@@ -1,0 +1,55 @@
+#-index-name: Bashkir
+#-display-name: Bashkir braille
+
+#+locale: ba
+#+type: literary
+#+direction: forward
+
+#-license: LGPLv2.1
+
+#  Copyright (C) 2020 Rustam Churagulov <tcdl@yandex.ru>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# The Bashkir braille code was created by Makarim Tukhvatshin in the
+# early 60's. There is no official documentation on the braille code
+# that we know of.
+
+# Bashkir braille is largely the same as Russian braille
+include ru-litbrl.ctb
+
+
+# The Bashkir alphabet has 9 letters that are not in the Russian
+# alphabet, namely Ә, Ө, Ҡ, Ғ, Ҫ, Ҙ, Һ, Ү and Ң. Like in ru-chardefs.cti, the
+# following definitions have dot 9 set to make them distinguishable
+# from the Latin letters.
+uplow \x04D8\x04D9 34579,3459  CYRILLIC LETTER æ Әә
+uplow \x04E8\x04E9 12679,1269  CYRILLIC LETTER ø Өө
+uplow \x04A0\x04A1 14679,1469  CYRILLIC LETTER q Ҡҡ
+uplow \x0492\x0493 1245679,124569  CYRILLIC LETTER ɣ Ғғ
+uplow \x04AA\x04AB 3479,349  CYRILLIC LETTER θ Ҫҫ
+uplow \x0498\x0499 34679,3469  CYRILLIC LETTER ð Ҙҙ
+uplow \x04BA\x04BB 123679,12369  CYRILLIC LETTER h Һһ
+uplow \x04AE\x04AF 1345679,134569  CYRILLIC LETTER y Үү
+uplow \x04A2\x04A3 145679,14569  CYRILLIC LETTER ŋ Ңң
+
+# Extend classes defined in ru-litbrl.ctb
+attribute uppercyrillic \x04D8\x04E8\x04A0\x0492\x04AA\x0498\x04BA\x04AE\x04A2
+attribute lowercyrillic \x04D9\x04E9\x04A1\x0493\x04AB\x0499\x04BB\x04AF\x04A3
+
+# Unicode braille patterns
+include braille-patterns.cti

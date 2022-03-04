@@ -1,0 +1,236 @@
+/* Copyright 2017 The TensorFlow Authors. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+==============================================================================*/
+
+package org.tensorflow.lite;
+
+import java.io.File;
+import java.nio.ByteBuffer;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+/**
+ * Package-private class that implements InterpreterApi. This class implements all the
+ * non-experimental API methods. It is used both by the public InterpreterFactory, and as a base
+ * class for the public Interpreter class,
+ */
+class InterpreterImpl implements InterpreterApi {
+  /**
+   * An options class for controlling runtime interpreter behavior. Compared to the base class
+   * InterpreterApi.Options, this adds fields corresponding to experimental features. But it does
+   * not provide accessors to set those fields -- those are only provided in the derived class
+   * Interpreter.Options.
+   */
+  static class Options extends InterpreterApi.Options {
+    public Options() {
+    }
+
+    public Options(InterpreterApi.Options options) {
+      super(options);
+    }
+
+    public Options(Options other) {
+      super(other);
+      allowFp16PrecisionForFp32 = other.allowFp16PrecisionForFp32;
+      allowBufferHandleOutput = other.allowBufferHandleOutput;
+      useXNNPACK = other.useXNNPACK;
+    }
+
+    // See Interpreter.Options#setAllowFp16PrecisionForFp32(boolean).
+    Boolean allowFp16PrecisionForFp32;
+
+    // See Interpreter.Options#setAllowBufferHandleOutput(boolean).
+    Boolean allowBufferHandleOutput;
+
+    // See Interpreter.Options#setUseXNNPACK(boolean).
+    // TODO(b/171856982): update the comment when applying XNNPACK delegate by default is
+    // enabled for C++ TfLite library on Android platform.
+    // Note: the initial "null" value indicates default behavior which may mean XNNPACK
+    // delegate will be applied by default.
+    Boolean useXNNPACK;
+  }
+
+  /**
+   * Initializes an {@code InterpreterImpl}.
+   *
+   * @param modelFile a File of a pre-trained TF Lite model.
+   * @throws IllegalArgumentException if {@code modelFile} does not encode a valid TensorFlow Lite
+   *     model.
+   */
+  public InterpreterImpl(@NonNull File modelFile) {
+    this(modelFile, /*options = */ null);
+  }
+
+  /**
+   * Initializes an {@code InterpreterImpl} and specifies options for customizing interpreter
+   * behavior.
+   *
+   * @param modelFile a file of a pre-trained TF Lite model
+   * @param options a set of options for customizing interpreter behavior. If {@param options} is
+   *     null, a default set of options will be used instead.
+   * @throws IllegalArgumentException if {@code modelFile} does not encode a valid TensorFlow Lite
+   *     model.
+   */
+  public InterpreterImpl(@NonNull File modelFile, @Nullable Options options) {
+    wrapper = new NativeInterpreterWrapper(modelFile.getAbsolutePath(), options);
+  }
+
+  /**
+   * Initializes an {@code InterpreterImpl} with a {@code ByteBuffer} of a model file.
+   *
+   * <p>The ByteBuffer should not be modified after the construction of a {@code InterpreterImpl}.
+   * The {@code ByteBuffer} can be either a {@code MappedByteBuffer} that memory-maps a model file,
+   * or a direct {@code ByteBuffer} of nativeOrder() that contains the bytes content of a model.
+   *
+   * @throws IllegalArgumentException if {@code byteBuffer} is not a {@code MappedByteBuffer} nor a
+   *     direct {@code ByteBuffer} of nativeOrder.
+   */
+  public InterpreterImpl(@NonNull ByteBuffer byteBuffer) {
+    this(byteBuffer, /* options= */ null);
+  }
+
+  /**
+   * Initializes an {@code InterpreterImpl} with a {@code ByteBuffer} of a model file and a set of
+   * custom {@link Interpreter.Options}.
+   *
+   * <p>The {@code ByteBuffer} should not be modified after the construction of an {@code
+   * InterpreterImpl}. The {@code ByteBuffer} can be either a {@code MappedByteBuffer} that
+   * memory-maps a model file, or a direct {@code ByteBuffer} of nativeOrder() that contains the
+   * bytes content of a model.
+   *
+   * @param byteBuffer a {@code ByteBuffer} containing a pre-trained TF Lite model
+   * @param options a set of options for customizing interpreter behavior. If {@param options} is
+   *     null, a default set of options will be used instead.
+   * @throws IllegalArgumentException if {@code byteBuffer} is not a {@code MappedByteBuffer} nor a
+   *     direct {@code ByteBuffer} of nativeOrder.
+   */
+  public InterpreterImpl(@NonNull ByteBuffer byteBuffer, @Nullable Options options) {
+    wrapper = new NativeInterpreterWrapper(byteBuffer, options);
+  }
+
+  InterpreterImpl(NativeInterpreterWrapper wrapper) {
+    this.wrapper = wrapper;
+  }
+
+  @Override
+  public void run(Object input, Object output) {
+    Object[] inputs = {input};
+    Map<Integer, Object> outputs = new HashMap<>();
+    outputs.put(0, output);
+    runForMultipleInputsOutputs(inputs, outputs);
+  }
+
+  @Override
+  public void runForMultipleInputsOutputs(
+      Object @NonNull [] inputs, @NonNull Map<Integer, Object> outputs) {
+    checkNotClosed();
+    Objects.requireNonNull(wrapper).run(inputs, outputs);
+  }
+
+  @Override
+  public void allocateTensors() {
+    checkNotClosed();
+    Objects.requireNonNull(wrapper).allocateTensors();
+  }
+
+  @Override
+  public void resizeInput(int idx, @NonNull int[] dims) {
+    checkNotClosed();
+    Objects.requireNonNull(wrapper).resizeInput(idx, dims, false);
+  }
+
+  @Override
+  public void resizeInput(int idx, @NonNull int[] dims, boolean strict) {
+    checkNotClosed();
+    Objects.requireNonNull(wrapper).resizeInput(idx, dims, strict);
+  }
+
+  @Override
+  public int getInputTensorCount() {
+    checkNotClosed();
+    return Objects.requireNonNull(wrapper).getInputTensorCount();
+  }
+
+  @Override
+  public int getInputIndex(String opName) {
+    checkNotClosed();
+    return Objects.requireNonNull(wrapper).getInputIndex(opName);
+  }
+
+  @Override
+  public Tensor getInputTensor(int inputIndex) {
+    checkNotClosed();
+    return Objects.requireNonNull(wrapper).getInputTensor(inputIndex);
+  }
+
+  /** Gets the number of output Tensors. */
+  @Override
+  public int getOutputTensorCount() {
+    checkNotClosed();
+    return Objects.requireNonNull(wrapper).getOutputTensorCount();
+  }
+
+  @Override
+  public int getOutputIndex(String opName) {
+    checkNotClosed();
+    return Objects.requireNonNull(wrapper).getOutputIndex(opName);
+  }
+
+  @Override
+  public Tensor getOutputTensor(int outputIndex) {
+    checkNotClosed();
+    return Objects.requireNonNull(wrapper).getOutputTensor(outputIndex);
+  }
+
+  @Nullable
+  @Override
+  public Long getLastNativeInferenceDurationNanoseconds() {
+    checkNotClosed();
+    return Objects.requireNonNull(wrapper).getLastNativeInferenceDurationNanoseconds();
+  }
+
+  int getExecutionPlanLength() {
+    checkNotClosed();
+    return Objects.requireNonNull(wrapper).getExecutionPlanLength();
+  }
+
+  @Override
+  public void close() {
+    if (wrapper != null) {
+      wrapper.close();
+      wrapper = null;
+    }
+  }
+
+  @SuppressWarnings("deprecation")
+  @Override
+  protected void finalize() throws Throwable {
+    try {
+      close();
+    } finally {
+      super.finalize();
+    }
+  }
+
+  void checkNotClosed() {
+    if (wrapper == null) {
+      throw new IllegalStateException("Internal error: The Interpreter has already been closed.");
+    }
+  }
+
+  @Nullable NativeInterpreterWrapper wrapper;
+}

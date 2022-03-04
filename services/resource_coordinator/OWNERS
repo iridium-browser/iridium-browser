@@ -1,0 +1,7 @@
+chrisha@chromium.org
+fdoray@chromium.org
+
+# Emeritus:
+oysteine@chromium.org
+
+per-file BUILD.gn=file://services/resource_coordinator/memory_instrumentation/OWNERS

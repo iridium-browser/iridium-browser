@@ -1,0 +1,114 @@
+# The purpose of this test is just to document the current behavior of
+# Liblouis when a table contains conflicting rules. This might be
+# different from the desired behavior.
+# ---------------------------------------------
+
+# last undefined rule wins
+table: |
+  display 1 1
+  display 2 2
+  undefined 1
+  undefined 2
+tests:
+  - [x, 2]
+
+# normally the first character definition rule wins
+table: |
+  display 1 1
+  display 2 2
+  display 3 3
+  sign P 1
+  sign P 2
+  sign P 3
+flags: {testmode: forward}
+tests:
+  - - "P"
+    - "1"
+
+# but in compbrlAtCursor mode the last character definition wins
+# (see https://github.com/liblouis/liblouis/issues/869)
+  - - "P"
+    - "3"
+    - mode: [compbrlAtCursor]
+      cursorPos: [0,0]
+
+# the last character definition wins if a context rule with * in the
+# action part is matched
+table: |
+  display 1 1
+  display 2 2
+  display 3 3
+  sign P 1
+  sign P 2
+  sign P 3
+  noback context ["P"] *
+flags: {testmode: forward}
+tests:
+  - - "P"
+    - "3"
+
+# the first character definition rule wins
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/spaces.uti
+  uplow Aa 1
+  uppercase B 12
+  lowercase b 12
+  uplow Cc 14
+  uplow Dd 145
+  uplow Ee 15
+  uplow Ff 124
+  uplow Gg 1245
+  uplow Hh 125,125
+  uppercase B 1
+  lowercase b 1
+  uplow Dd 14
+  uplow Ff 15,15
+  uplow Hh 1245,1245
+tests:
+  - - Aa Bb Cc Dd Ee Ff Gg Hh
+    - ⠁⠁ ⠃⠃ ⠉⠉ ⠙⠙ ⠑⠑ ⠋⠋ ⠛⠛ ⠓⠓
+
+# but if capsletter is defined the last "uppercase X" wins, and the
+# uppercase part of the last "uplow Xx" wins
+# (see https://github.com/liblouis/liblouis/issues/384)
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/spaces.uti
+  uplow Aa 1
+  uppercase B 12
+  lowercase b 12
+  uplow Cc 14
+  uplow Dd 145
+  uplow Ee 15
+  uplow Ff 124
+  uplow Gg 1245
+  uplow Hh 125,125
+  capsletter 6
+  uppercase B 1
+  lowercase b 1
+  uplow Dd 14
+  uplow Ff 15,15
+  uplow Hh 1245,1245
+tests:
+  - - Aa Bb Cc Dd Ee Ff Gg Hh
+    - ⠠⠁⠁ ⠠⠁⠃ ⠠⠉⠉ ⠠⠉⠙ ⠠⠑⠑ ⠠⠑⠋ ⠠⠛⠛ ⠠⠛⠓
+
+# for printing escape sequences for undefined characters, only
+# character definitions that map to a single dot are used and the
+# first definition wins. display rules are ignored.
+table: |
+  include tables/unicode-without-blank.dis
+  digit 0 356
+  digit 2 23
+  digit 6 235
+  letter x 1346
+  sign \\ 16
+  sign ' 3-3
+  display ' 6
+  sign ' 3
+  sign ' 6
+flags: {testmode: forward}
+tests:
+  - - "\u2026"
+    - ⠄⠡⠭⠆⠴⠆⠖⠄

@@ -1,0 +1,5 @@
+include_rules = [
+  "+chromecast/media/audio/net",
+  "+chromecast/net",
+  "+net",
+]

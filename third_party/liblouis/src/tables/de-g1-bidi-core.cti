@@ -1,0 +1,44 @@
+# liblouis: German grade 1 braille (bidirectional)
+#
+#  Copyright (C) 2018 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
+#  Copyright (C) 2020 Bue Vester-Andersen
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#-------------------------------------------------------------------------------
+
+include de-g1-core-patterns.dic
+
+noback nocross always   au         16                           # 1 #
+noback nocross always   eu         126                          # 2 #
+noback nocross always   ei         146                          # 3 #
+noback nocross always   ch         1456                         # 4 #
+noback nocross always   sch        156                          # 5 #
+noback nocross always   st         23456                        # ] #
+noback nocross always   äu         34                           # \ #
+noback nocross always   ie         346                          # 0 #
+
+nofor partword    au         16                           # 1 #
+nofor partword    eu         126                          # 2 #
+nofor partword    ei         146                          # 3 #
+nofor partword    ch         1456                         # 4 #
+nofor partword    sch        156                          # 5 #
+nofor partword    st         23456                        # ] #
+nofor partword    äu         34                           # \ #
+nofor begnum §\s 346
+nofor partword    ie         346                          # 0 #
+

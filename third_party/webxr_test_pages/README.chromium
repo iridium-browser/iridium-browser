@@ -1,0 +1,81 @@
+Name: Immersive Web - WebXR Samples
+Short Name: webxr-samples
+URL: https://github.com/immersive-web/webxr-samples/
+Version: 0
+Revision: 2727b46707d766e358152194fbb4f6b2647ef2e9
+Date: 2019-01-15
+License: MIT
+License File: NOT_SHIPPED
+Security Critical: no
+
+Description:
+A fork of the WebXR samples to be kept in sync with Chrome and used for testing Chrome.
+
+Local Modifications:
+
+- Forked to provide a stable set of test pages in sync with Chrome.
+
+- Stripped out the media/ directory to minimize the size.
+
+- Adapted samples to work without node compilation
+
+- Added source from https://github.com/toji/gl-matrix (MIT licensed)
+  to js/third-party/gl-matrix, including license file and README.chromium.
+
+- Added missing license file and README.chromium for dat.gui
+
+- Removed the version shim, the samples are intended to work specifically
+  with the ToT Chrome version.
+
+Instructions:
+
+In order to serve the samples locally, few steps are required:
+
+1. Copy contents of src/chrome/test/data/xr/webxr_samples/media into
+   src/third_party/webxr_test_pages/webxr-samples/media
+
+2. Serve files, for example by running
+   `python -m SimpleHTTPServer <port number>` in
+   src/third_party/webxr_test_pages/webxr-samples
+
+3. If you are having trouble with the python server such as it being unreliable
+   serving media like the gltf files, try using "npm serve".
+   To install: `sudo npm install -g serve`
+   To run: `serve .` in src/third_party/webxr_test_pages/webxr-samples
+
+To publish samples for OT:
+
+1. python make_ot_samples_folder.py webxr-samples <dest-folder>
+   That copies just the subset of samples that we want to publish.
+
+2. Serve <dest-folder> locally and make sure everything works.
+
+3. python update_bucket.py --direct-publish-samples-source=<dest-folder> --direct-publish-samples-dest=<bucket-dest-subfolder>
+
+
+
+To create a Google Cloud WebXR-Samples bucket:
+
+1. Navigate to the Google Cloud console at https://console.cloud.google.com/
+
+2. Navigate to storage, and click "Create Bucket"
+
+3. Name the bucket, and set it's configuration to use a Multi-region location type, and uniform
+   access control.
+
+4. (Optional) Grant the bucket public access:
+   a. Select your bucket from the storage browser
+   b. Click "Permissions"
+   c. Click "Add"
+   d. Add the member "allUsers" with the role "Storage Object Viewer"
+   e. Add the member "allAuthenticatedUsers" with the role "Storage Object Viewer"
+   f. Accept the prompt notifying you that you will make the bucket public to the internet.
+
+5. Select a project as bucket owner. (If this is not the default 'chromium-webxr-test' 
+   use `update_bucket.py --bucket gs://PROJECT_ID` in the steps below to override its default.)
+
+6. Create a "media" folder at the top level directory of your bucket, this folder should contain a
+   copy of https://github.com/immersive-web/webxr-samples/tree/master/media
+
+7. Verify the changes are working as intended by navigating to your bucket's index's public access
+   URL.

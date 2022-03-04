@@ -1,0 +1,61 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+//
+// **** DO NOT EDIT - this file was automatically generated. ****
+syntax = "proto3";
+
+package cast.common;
+
+option optimize_for = LITE_RUNTIME;
+
+// Runtime description.
+message RuntimeMetadata {
+  // Runtime name  (platform provided - optional).
+  string name = 1;
+  // Runtime type.
+  RuntimeType.Type type = 2;
+  // Various Runtime capabilities.
+  RuntimeCapabilities runtime_capabilities = 3;
+}
+
+message RuntimeType {
+  // RuntimeType enumeration sets defines the way runtimes are selected for a
+  // given Cast application. The following rules are applied in the order:
+  //  1. Select NATIVE runtime if Cast application ID is in the supported list.
+  //  2. Select CAST_LITE runtime if Cast application is audio-only.
+  //  3. Fall back to Cast Web runtime.
+  enum Type {
+    UNDEFINED = 0;
+    // Cast Web runtime. The list of supported Cast application IDs must be
+    // empty.
+    CAST_WEB = 1;
+    // Cast Lite runtime for audio.
+    CAST_LITE = 2;
+    // Runtimes native to specific platform (Netflix, YouTube applications etc)
+    NATIVE = 3;
+  }
+}
+
+message MediaCapabilities {
+  // TODO: These capabilities must be flashed out.
+  bool audio_supported = 1;
+  bool video_supported = 2;
+}
+
+message ApplicationCapabilities {
+  // List of supported Cast application IDs.
+  repeated string app_ids = 1;
+}
+
+message RuntimeCapabilities {
+  MediaCapabilities media_capabilities = 1;
+
+  oneof specific_capabilities {
+    // capabilities for NATIVE runtime.
+    ApplicationCapabilities native_application_capabilities = 2;
+  }
+
+  // Flags if metrics recording is supported.
+  bool metrics_recorder_supported = 4;
+}

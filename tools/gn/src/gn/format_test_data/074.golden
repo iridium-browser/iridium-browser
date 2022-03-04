@@ -1,0 +1,7 @@
+config("something") {
+  # Makes builds independent of absolute file path.
+  if (symbol_level != 0 && is_clang &&
+      strip_absolute_paths_from_debug_symbols) {
+    print("hi")
+  }
+}

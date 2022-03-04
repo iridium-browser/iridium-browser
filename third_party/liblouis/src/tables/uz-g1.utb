@@ -1,0 +1,93 @@
+# This table contains braille codes and rules for Uzbek and includes Russian literary text translation table#
+#
+#  Copyright (C) 2020-2021, BAUM Engineering <liblouis@baum.ro>
+#
+# This file is part of liblouis.
+#
+# liblouis is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as
+# published by the Free Software Foundation, either version 2.1 of the
+# License, or (at your option) any later version.
+#
+# liblouis is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with liblouis. If not, see
+# <http://www.gnu.org/licenses/>.
+
+#-index-name: Uzbek
+#-display-name: Uzbek braille
+
+#+locale:uz
+#+type:literary
+# Marked as "direction:forward" by Bue Vester-Andersen
+# Literary table without caps.
+#+direction:forward
+
+#-license: LGPLv2.1
+#-author-name: BAUM Engineering
+#-author-email: liblouis@baum.ro
+
+include ru-unicode.dis
+
+space \x00a0 a
+include spaces.uti
+
+# Latin equivalent to the additional braille adaptations.
+uplow \x0048\x0068 1456            #h
+uplow \x0051\x0071 13456           #q
+uplow \x0056\x0076 2456            #v
+uplow \x0058\x0078 125             #x
+uplow \x0059\x0079 12346           #y
+
+# Additional cyrillic braille adaptations.
+uplow \x0492\x0493 12456      #ғ
+uplow \x04B2\x04B3 1456       #ҳ
+uplow \x049A\x049B 13456      #қ
+uplow \x040E\x045E 1236       #ў
+
+# Equivalent to the additional braille adaptations.
+always sh 156
+always ch 12345
+noback correct "Sh" "sh" # because always rule above is case sensitive
+noback correct "Ch" "ch" # because always rule above is case sensitive
+always o’ 1236
+always o‘ 1236
+always o` 1236
+always g‘ 12456
+always g’ 12456
+always g` 12456
+
+# Symbols that are different from ru-litbrl.ctb
+math % 3456-245-356
+math ° 46-356
+punctuation ( 2356
+punctuation ) 2356
+punctuation { 126
+punctuation } 345
+noback punctuation [ 126
+noback punctuation ] 345
+sign @ 4-1
+sign \x2018 3
+sign \x0301 4 # acute accent
+
+noback pass2 @46-46-46 @46
+
+# FIXME: for some weird reason this rule needs to be included before AND after the include ru-litbrl.ctb
+# if the first rule is omitted, "VII" and "XV" are not translated correctly
+# if the second rule is omitted, "IV" is not translated correctly
+attribute roman IVXLCDM
+
+include ru-litbrl.ctb
+
+# Remove indicators before capital letters and between cyrillic and latin letters.
+noback pass3 @6 ?
+noback pass3 @46-356 *      # dot pattern for °
+attribute roman IVXLCDM
+noback pass3 [@46]!%roman ? # keep capital sign only for roman numbers
+noback pass3 [@46]@1236 ?   # remove capital sign from o and g with accent
+noback pass3 @5 ?
+noback pass3 @45 ?

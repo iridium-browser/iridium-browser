@@ -1,0 +1,75 @@
+#
+# Copyright (C) 2015  Tsengel Maidar Innovation Development center of the blind at idcbinnovation@gmail.com
+# Copyright (C) 2018 Tsengel Maidar EBraillesoftLLC
+# Copyright (C) 2015 Sreeja sreeja.param@gmail.com
+# Copyright (C) 2015 Dipendra Manocha d@saksham.org
+# Copyright (C) 2017, 2018, 2019  Angaragerdene angaragerdene.b@gmail.com
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+
+# This table contains braille codes and rules for Mongolian script.
+# Contributors: Dipendra Manocha, Sreeja, Tsengel, Angaragerdene
+# To report any bugs or any suggestion, please write to tsengel.braille.dev@gmail.com and angaragerdene.b@gmail.com
+
+# ----------- define all chars --------------------------------------
+
+replace \x0007
+
+# The Alphabet
+uplow \x0410\x0430 1
+uplow \x0411\x0431 12
+uplow \x0412\x0432 2456
+uplow \x0413\x0433 1245
+uplow \x0414\x0434 145
+uplow \x0415\x0435 15
+uplow \x0416\x0436 245
+uplow \x0417\x0437 1356
+uplow \x0418\x0438 24
+uplow \x0419\x0439 12346
+uplow \x041A\x043A 13
+uplow \x041B\x043B 123
+uplow \x041C\x043C 134
+uplow \x041D\x043D 1345
+uplow \x041E\x043E 135
+uplow \x041F\x043F 1234
+uplow \x0420\x0440 1235
+uplow \x0421\x0441 234
+uplow \x0422\x0442 2345
+uplow \x0423\x0443 136
+uplow \x0424\x0444 124
+uplow \x0425\x0445 125
+uplow \x0426\x0446 14
+uplow \x0427\x0447 12345
+uplow \x0428\x0448 156
+uplow \x0429\x0449 1346
+uplow \x042A\x044A 12356
+uplow \x042B\x044B 2346
+uplow \x042C\x044C 23456
+uplow \x042D\x044D 246
+uplow \x042E\x044E 1256
+uplow \x042F\x044F 1246
+uplow \x0401\x0451 16
+uplow \x04E8\x04E9 1236
+uplow \x04AE\x04AF 1456
+
+sign \x2116 4-1345              # mongolian number sign
+sign \x20AE 4-2345              # mongolian currency symbol
+
+
+# the decimal digits
+include litdigits6Dots.uti

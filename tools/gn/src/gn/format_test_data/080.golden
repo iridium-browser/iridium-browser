@@ -1,0 +1,34 @@
+# https://crbug.com/gn/141. 80 col ---------------------------------------------
+
+a = [ "b" ]  # comment1
+
+a = [
+  "b",
+  "c",
+]  # comment1b
+
+a = b  # comment2
+
+a = {
+  b = 3
+}  # comment3
+
+a = {  # comment4
+  b = 3
+}  # comment5
+
+a = {
+  b = 3  # comment6
+}
+
+if (true) {
+  if (true) {
+    if (true) {
+      something_longer_on_the_lhs =
+          [ "something that will exceed 80 col if dewrapped" ]  # comment7
+
+      something_longer_on_the_lhs =
+          [ "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" ]  # comment8
+    }
+  }
+}

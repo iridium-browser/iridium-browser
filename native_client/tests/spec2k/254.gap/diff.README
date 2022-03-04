@@ -1,0 +1,2 @@
+Eliminate signal, kill, termio, etc.
+which are apparently stubbed out in the x86 but not the ARM toolchain

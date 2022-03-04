@@ -1,0 +1,26 @@
+// Copyright 2020 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// https://github.com/WICG/direct-sockets/blob/main/docs/explainer.md#tcp
+
+dictionary SocketOptions {
+  DOMString localAddress;
+  unsigned short localPort;
+
+  DOMString remoteAddress;
+  unsigned short remotePort;
+
+  unsigned long sendBufferSize;
+  unsigned long receiveBufferSize;
+};
+
+dictionary TCPSocketOptions : SocketOptions {
+  boolean noDelay;
+  boolean keepAlive;
+  [Clamp] unsigned long keepAliveDelay;
+};
+
+dictionary UDPSocketOptions : SocketOptions {
+
+};

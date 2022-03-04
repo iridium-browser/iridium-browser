@@ -1,0 +1,76 @@
+{
+    include: [
+        "vulkan/client.shard.cml",
+        "syslog/client.shard.cml",
+    ],
+    program: {
+        runner: "elf",
+        binary: "chrome",
+        args: [
+            "--use-graphical-presenter",
+            "--enable-features=Vulkan,CanvasOopRasterization"
+        ],
+        // Required to allow JIT in child processes such as renderers.
+        // Known as 'deprecated-ambient-replace-as-executable' in CFv1.
+        job_policy_ambient_mark_vmo_exec: "true",
+    },
+    capabilities: [
+        {
+            protocol: [
+                "fuchsia.ui.app.ViewProvider",
+            ],
+        },
+    ],
+    use: [
+        {
+            directory: "cache",
+            from: "parent",
+            path: "/cache",
+            rights: ["rw*"],
+        },
+        {
+            directory: "data",
+            from: "parent",
+            path: "/data",
+            rights: ["rw*"],
+        },
+        {
+            storage: "tmp",
+            path: "/tmp",
+        },
+        {
+            directory: "root-ssl-certificates",
+            rights: [ "r*" ],
+            path: "/config/ssl",
+        },
+        {
+            protocol: [
+                "fuchsia.device.NameProvider",
+                "fuchsia.element.GraphicalPresenter",
+                "fuchsia.fonts.Provider",
+                "fuchsia.input.virtualkeyboard.ControllerCreator",
+                "fuchsia.intl.PropertyProvider",
+                "fuchsia.media.Audio",
+                "fuchsia.media.AudioDeviceEnumerator",
+                "fuchsia.media.ProfileProvider",
+                "fuchsia.memorypressure.Provider",
+                "fuchsia.net.interfaces.State",
+                "fuchsia.net.name.Lookup",
+                "fuchsia.posix.socket.Provider",
+                "fuchsia.process.Launcher",
+                "fuchsia.ui.composition.Allocator",
+                "fuchsia.ui.composition.Flatland",                
+                "fuchsia.ui.input3.Keyboard",
+                "fuchsia.ui.scenic.Scenic",
+            ],
+        },
+    ],
+    expose: [
+        {
+            protocol: [
+                "fuchsia.ui.app.ViewProvider",
+            ],
+            from: "self",
+        },
+    ],
+}

@@ -1,0 +1,17 @@
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// https://wicg.github.io/picture-in-picture/#htmlvideoelement-extensions
+[
+    ImplementedAs=HTMLVideoElementPictureInPicture
+]
+partial interface HTMLVideoElement {
+    [RuntimeEnabled=PictureInPictureAPI, CallWith=ScriptState, Measure, NewObject, RaisesException] Promise<PictureInPictureWindow> requestPictureInPicture();
+
+    [RuntimeEnabled=PictureInPictureAPI] attribute EventHandler onenterpictureinpicture;
+    [RuntimeEnabled=PictureInPictureAPI] attribute EventHandler onleavepictureinpicture;
+
+    [RuntimeEnabled=AutoPictureInPicture, CEReactions, Measure, Reflect] attribute boolean autoPictureInPicture;
+    [RuntimeEnabled=PictureInPictureAPI, CEReactions, Measure, Reflect] attribute boolean disablePictureInPicture;
+};

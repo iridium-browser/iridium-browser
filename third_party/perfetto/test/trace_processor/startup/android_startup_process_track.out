@@ -1,0 +1,80 @@
+android_startup {
+  startup {
+    startup_id: 1
+    package_name: "com.google.android.calendar"
+    process_name: "com.google.android.calendar"
+    process: {
+      name: "com.google.android.calendar"
+    }
+    zygote_new_process: false
+    to_first_frame {
+      dur_ns: 5
+      main_thread_by_task_state {
+        running_dur_ns: 0
+        runnable_dur_ns: 0
+        uninterruptible_sleep_dur_ns: 0
+        interruptible_sleep_dur_ns: 0
+      }
+      other_processes_spawned_count: 0
+      time_activity_manager {
+        dur_ns: 2
+        dur_ms: 2e-06
+      }
+      mcycles_by_core_type {
+      }
+      time_bind_application {
+        dur_ns: 1
+        dur_ms: 1e-06
+      }
+      dur_ms: 5e-06
+      to_bind_application {
+        dur_ns: 3
+        dur_ms: 3e-06
+      }
+    }
+    event_timestamps {
+      intent_received: 100
+      first_frame: 105
+    }
+    activity_hosting_process_count: 1
+  }
+  startup {
+    startup_id: 2
+    package_name: "com.google.android.calendar"
+    process_name: "com.google.android.calendar"
+    process: {
+      name: "com.google.android.calendar"
+    }
+    zygote_new_process: false
+    to_first_frame {
+      dur_ns: 5
+      main_thread_by_task_state {
+        running_dur_ns: 0
+        runnable_dur_ns: 0
+        uninterruptible_sleep_dur_ns: 0
+        interruptible_sleep_dur_ns: 0
+      }
+      other_processes_spawned_count: 0
+      time_activity_manager {
+        dur_ns: 2
+        dur_ms: 2e-06
+      }
+      mcycles_by_core_type {
+      }
+      time_bind_application {
+        dur_ns: 1
+        dur_ms: 1e-06
+      }
+      dur_ms: 5e-06
+      to_bind_application {
+        dur_ns: 3
+        dur_ms: 3e-06
+      }
+    }
+    event_timestamps {
+      intent_received: 200
+      first_frame: 205
+    }
+    activity_hosting_process_count: 1
+  }
+}

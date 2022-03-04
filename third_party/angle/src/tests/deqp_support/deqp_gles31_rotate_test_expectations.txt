@@ -1,0 +1,13 @@
+// Copyright 2020 The ANGLE Project Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// See README.md for format.
+
+// Only tested on Vulkan currently
+
+3576 VULKAN : dEQP-GLES31.functional.primitive_bounding_box.lines.global_state.vertex_fragment.default_framebuffer_bbox_equal = FAIL
+3576 VULKAN : dEQP-GLES31.functional.primitive_bounding_box.lines.global_state.vertex_fragment.default_framebuffer_bbox_larger = FAIL
+3576 VULKAN : dEQP-GLES31.functional.primitive_bounding_box.lines.global_state.vertex_fragment.default_framebuffer_bbox_smaller = FAIL
+
+6678 UBSAN : dEQP-GLES31.functional.shaders.sample_variables.sample_pos.distribution.* = SKIP

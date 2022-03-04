@@ -1,0 +1,27 @@
+Name: wayland
+URL: http://wayland.freedesktop.org/
+Version: 1.18.0
+CPEPrefix: cpe:/a:wayland:wayland:1.18.0
+License: MIT
+License File: src/COPYING
+Security Critical: yes
+
+Description:
+Wayland is a protocol for a compositor to talk to its clients as well as a C
+library implementation of that protocol.
+
+Modifications:
+- Added wayland_scanner_wrapper.py to generate protocol code automatically.
+- Added "include/" include_dirs for the wayland_server target
+
+To import a new snapshot of wayland:
+- Checkout the latest release tag.
+  $ git checkout 1.13.0
+- Update the DEPS entry to the newly checked out commit.
+  $ roll-dep --roll-to=<commit>
+- Update generated files:
+    (in wayland/src directory)
+    $ ./autogen.sh --disable-dtd-validation && make
+    $ rsync -R $(git ls-files --others '*.h') ../include
+    $ rsync -R $(git ls-files --others 'protocol/*-protocol.c') ..
+- Update this README to reflect the new version number.

@@ -1,0 +1,83 @@
+# attribute name can be a digit between 0 and 7, in which case it can
+# be used in a match expression (but not in a multipass expression)
+table: |
+  display A 17
+  sign a 1
+  sign b 12
+  attribute 5 b
+  match %5 a - 17
+flags: {testmode: forward}
+tests:
+  - - aabaa
+    - aabAa
+
+# attribute name can be a word, in which case it can be used in a
+# multipass expression (but not in a match expression)
+# there are a number of reserved names: numericnocontchars,
+# midendnumericmodechars, numericmodechars, capsmodechars,
+# emphmodechars, seqdelimiter, seqbeforechars, seqafterchars,
+# noletsign, noletsignbefore, noletsignafter
+table: |
+  display A 17
+  sign a 1
+  sign b 12
+  attribute foo b
+  noback context _%foo["a"] @17
+flags: {testmode: forward}
+tests:
+  - - aabaa
+    - aabAa
+
+# attribute name can be a predefined attribute, i.e. space, letter,
+# digit, punctuation, uppercase, lowercase, math, sign or litdigit
+# (and it will set that attribute, not a custom one)
+table: |
+  display A 17
+  sign a 1
+  sign b 12
+  attribute letter b
+  noback context _$l["a"] @17
+table: |
+  display A 17
+  sign a 1
+  sign b 12
+  attribute letter b
+  noback context _%letter["a"] @17
+table: |
+  display A 17
+  sign a 1
+  sign b 12
+  attribute letter b
+  match %a a - 17
+flags: {testmode: forward}
+tests:
+  - - aabaa
+    - aabAa
+
+# if the character is associated with a single-cell dot pattern, the
+# attribute is also set on the dot pattern (only relevant for
+# multipass rules)
+table: |
+  display A 17
+  sign a 1
+  sign b 12
+  attribute foo b
+  noback pass2 _%foo[@1] @17
+flags: {testmode: forward}
+tests:
+  - - aabaa
+    - aabAa
+
+# class is deprecated but can still be used as an alias for attribute,
+# but the name must be a word, and class and attribute may not be both
+# present in the same table
+table: |
+  display A 17
+  sign a 1
+  sign b 12
+  class foo b
+  noback context _%foo["a"] @17
+flags: {testmode: forward}
+tests:
+  - - aabaa
+    - aabAa

@@ -1,0 +1,3 @@
+Eliminate uses of fcntl, exec, etc.
+which are apparently stubbed out in the x86 but not the ARM toolchain.
+Also, added hack where SPEC_CPU2000_NEED_BOOL gets defined for non-nacl systems

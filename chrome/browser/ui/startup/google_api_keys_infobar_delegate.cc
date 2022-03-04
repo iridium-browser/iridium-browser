@@ -17,7 +17,6 @@
 // static
 void GoogleApiKeysInfoBarDelegate::Create(
     infobars::ContentInfoBarManager* infobar_manager) {
-  return;
   infobar_manager->AddInfoBar(
       CreateConfirmInfoBar(std::unique_ptr<ConfirmInfoBarDelegate>(
           new GoogleApiKeysInfoBarDelegate())));

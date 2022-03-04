@@ -66,7 +66,7 @@ const int kSignatureFormatVersion = 2;
 const size_t kSaltBytes = 32;
 
 const char kBackendUrl[] =
-    "trk:222:https://www.googleapis.com/chromewebstore/v1.1/items/verify";
+    "https://www.googleapis.com/chromewebstore/v1.1/items/verify";
 
 const char kPublicKeyPEM[] =                                            \
     "-----BEGIN PUBLIC KEY-----"                                        \

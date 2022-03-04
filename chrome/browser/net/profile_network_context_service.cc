@@ -333,7 +333,7 @@ void ProfileNetworkContextService::UpdateAdditionalCertificates() {
 void ProfileNetworkContextService::RegisterProfilePrefs(
     user_prefs::PrefRegistrySyncable* registry) {
   registry->RegisterBooleanPref(
-      embedder_support::kAlternateErrorPagesEnabled, false,
+      embedder_support::kAlternateErrorPagesEnabled, true,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
   registry->RegisterBooleanPref(prefs::kQuicAllowed, true);
   registry->RegisterBooleanPref(prefs::kGloballyScopeHTTPAuthCacheEnabled,

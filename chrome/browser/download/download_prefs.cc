@@ -269,7 +269,7 @@ void DownloadPrefs::RegisterProfilePrefs(
     user_prefs::PrefRegistrySyncable* registry) {
   registry->RegisterBooleanPref(
       prefs::kPromptForDownload,
-      true,
+      false,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
   registry->RegisterStringPref(prefs::kDownloadExtensionsToOpen, std::string());
   registry->RegisterListPref(prefs::kDownloadExtensionsToOpenByPolicy, {});

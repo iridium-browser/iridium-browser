@@ -43,7 +43,6 @@ base::CallbackListSubscription BatteryStatusService::AddCallback(
   if (!battery_fetcher_)
     battery_fetcher_ = BatteryStatusManager::Create(update_callback_);
 
-#if 0
   if (callback_list_.empty()) {
     bool success = battery_fetcher_->StartListeningBatteryChange();
     // On failure pass the default values back.
@@ -55,7 +54,6 @@ base::CallbackListSubscription BatteryStatusService::AddCallback(
     // Send recent status to the new callback if already available.
     callback.Run(status_);
   }
-#endif
 
   return callback_list_.Add(callback);
 }

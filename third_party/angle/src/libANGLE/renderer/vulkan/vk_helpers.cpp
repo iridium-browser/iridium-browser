@@ -68,7 +68,7 @@ constexpr size_t kDefaultPoolAllocatorPageSize = 16 * 1024;
 
 struct ImageMemoryBarrierData
 {
-    const char *name;
+    char name[44];
 
     // The Vk layout corresponding to the ImageLayout key.
     VkImageLayout layout;
@@ -2014,7 +2014,7 @@ void RenderPassCommandBufferHelper::invalidateRenderPassDepthAttachment(
     const gl::Rectangle &invalidateArea)
 {
     // Keep track of the size of commands in the command buffer.  If the size grows in the
-    // future, that implies that drawing occured since invalidated.
+    // future, that implies that drawing occurred since invalidated.
     mDepthCmdCountInvalidated = getRenderPassWriteCommandCount();
 
     // Also track the size if the attachment is currently disabled.

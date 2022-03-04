@@ -43,13 +43,13 @@ namespace history {
 namespace {
 
 const char kHistoryOAuthScope[] =
-    "trk:138:https://www.googleapis.com/auth/chromesync";
+    "https://www.googleapis.com/auth/chromesync";
 
 const char kHistoryQueryHistoryUrl[] =
-    "trk:139:https://history.google.com/history/api/lookup?client=chrome";
+    "https://history.google.com/history/api/lookup?client=chrome";
 
 const char kHistoryDeleteHistoryUrl[] =
-    "trk:140:https://history.google.com/history/api/delete?client=chrome";
+    "https://history.google.com/history/api/delete?client=chrome";
 
 const char kHistoryAudioHistoryUrl[] =
     "https://history.google.com/history/api/lookup?client=audio";

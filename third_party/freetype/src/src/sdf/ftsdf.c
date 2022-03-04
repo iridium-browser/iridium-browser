@@ -497,7 +497,7 @@
       goto Exit;
     }
 
-    if ( !FT_QALLOC( ptr, sizeof ( *ptr ) ) )
+    if ( !FT_QNEW( ptr ) )
     {
       *ptr = null_edge;
       *edge = ptr;
@@ -536,7 +536,7 @@
       goto Exit;
     }
 
-    if ( !FT_QALLOC( ptr, sizeof ( *ptr ) ) )
+    if ( !FT_QNEW( ptr ) )
     {
       *ptr     = null_contour;
       *contour = ptr;
@@ -591,7 +591,7 @@
       goto Exit;
     }
 
-    if ( !FT_QALLOC( ptr, sizeof ( *ptr ) ) )
+    if ( !FT_QNEW( ptr ) )
     {
       *ptr        = null_shape;
       ptr->memory = memory;
@@ -3242,7 +3242,7 @@
     buffer   = (FT_SDFFormat*)bitmap->buffer;
 
     if ( USE_SQUARED_DISTANCES )
-      sp_sq = fixed_spread * fixed_spread;
+      sp_sq = FT_INT_16D16( spread * spread );
     else
       sp_sq = fixed_spread;
 

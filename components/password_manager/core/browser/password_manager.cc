@@ -204,10 +204,10 @@ bool HasMutedCredentials(base::span<const InsecureCredential> credentials,
 void PasswordManager::RegisterProfilePrefs(
     user_prefs::PrefRegistrySyncable* registry) {
   registry->RegisterBooleanPref(
-      prefs::kCredentialsEnableService, false,
+      prefs::kCredentialsEnableService, true,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PRIORITY_PREF);
   registry->RegisterBooleanPref(
-      prefs::kCredentialsEnableAutosignin, false,
+      prefs::kCredentialsEnableAutosignin, true,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PRIORITY_PREF);
   registry->RegisterStringPref(prefs::kSyncPasswordHash, std::string(),
                                PrefRegistry::NO_REGISTRATION_FLAGS);

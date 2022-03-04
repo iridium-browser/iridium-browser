@@ -54,7 +54,7 @@ GURL GetGoogleBaseUrl() {
 }
 
 GURL GetApiUrl() {
-  return {};
+  return GetGoogleBaseUrl().Resolve(kNewTabPromosApiPath);
 }
 
 // Parses an update proto from |value|. Will return false if |value| is not of

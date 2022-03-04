@@ -11,10 +11,7 @@ pkg_config("system_libdrm") {
 
 shim_headers("libdrm_shim") {
   root_path = "src/include"
-  headers = [
-    "drm.h",
-    "drm_fourcc.h",
-  ]
+  headers = [ "drm.h" ]
 }
 
 source_set("libdrm") {

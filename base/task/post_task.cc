@@ -73,10 +73,8 @@ bool PostDelayedTask(const Location& from_here,
                      const TaskTraits& traits,
                      OnceClosure task,
                      TimeDelta delay) {
-	auto e = GetTaskExecutorForTraits(traits);
-	if (e == nullptr)
-		return false;
-	return e->PostDelayedTask(from_here, traits, std::move(task), delay);
+  return GetTaskExecutorForTraits(traits)->PostDelayedTask(
+      from_here, traits, std::move(task), delay);
 }
 
 bool PostTaskAndReply(const Location& from_here,
@@ -88,37 +86,27 @@ bool PostTaskAndReply(const Location& from_here,
 }
 
 scoped_refptr<TaskRunner> CreateTaskRunner(const TaskTraits& traits) {
-	auto e = GetTaskExecutorForTraits(traits);
-	if (e == nullptr)
-		return nullptr;
-	return e->CreateTaskRunner(traits);
+  return GetTaskExecutorForTraits(traits)->CreateTaskRunner(traits);
 }
 
 scoped_refptr<SequencedTaskRunner> CreateSequencedTaskRunner(
     const TaskTraits& traits) {
-	auto e = GetTaskExecutorForTraits(traits);
-	if (e == nullptr)
-		return nullptr;
-	return e->CreateSequencedTaskRunner(traits);
+  return GetTaskExecutorForTraits(traits)->CreateSequencedTaskRunner(traits);
 }
 
 scoped_refptr<SingleThreadTaskRunner> CreateSingleThreadTaskRunner(
     const TaskTraits& traits,
     SingleThreadTaskRunnerThreadMode thread_mode) {
-	auto e = GetTaskExecutorForTraits(traits);
-	if (e == nullptr)
-		return nullptr;
-	return e->CreateSingleThreadTaskRunner(traits, thread_mode);
+  return GetTaskExecutorForTraits(traits)->CreateSingleThreadTaskRunner(
+      traits, thread_mode);
 }
 
 #if BUILDFLAG(IS_WIN)
 scoped_refptr<SingleThreadTaskRunner> CreateCOMSTATaskRunner(
     const TaskTraits& traits,
     SingleThreadTaskRunnerThreadMode thread_mode) {
-	auto e = GetTaskExecutorForTraits(traits);
-	if (e == nullptr)
-		return nullptr;
-	return e->CreateCOMSTATaskRunner(traits, thread_mode);
+  return GetTaskExecutorForTraits(traits)->CreateCOMSTATaskRunner(traits,
+                                                                  thread_mode);
 }
 #endif  // BUILDFLAG(IS_WIN)
 

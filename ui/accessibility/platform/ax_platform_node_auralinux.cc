@@ -2275,7 +2275,7 @@ void ClassInit(gpointer class_pointer, gpointer /* class_data */) {
 GType GetType() {
   AXPlatformNodeAuraLinux::EnsureGTypeInit();
 
-  static gsize type_volatile = 0;
+  static volatile gsize type_volatile = 0;
   if (g_once_init_enter(&type_volatile)) {
     static const GTypeInfo type_info = {
         sizeof(AXPlatformNodeAuraLinuxClass),  // class_size

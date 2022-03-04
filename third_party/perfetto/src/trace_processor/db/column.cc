@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include <limits>
 #include "src/trace_processor/db/column.h"
 
 #include "src/trace_processor/db/compare.h"

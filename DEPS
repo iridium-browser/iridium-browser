@@ -41,7 +41,6 @@ gclient_gn_args = [
   'checkout_google_benchmark',
   'checkout_ios_webkit',
   'checkout_nacl',
-  'checkout_never',
   'checkout_openxr',
   'checkout_rts_model',
   'cros_boards',
@@ -67,7 +66,6 @@ vars = {
   # variables.
   # TODO(ehmaldonado): Remove this once the bug in gclient is fixed.
   'checkout_android': False,
-  'checkout_never': False,
 
   # By default, don't check out Fuchsia. Will be overridden by gclient
   # variables.
@@ -114,7 +112,7 @@ vars = {
 
   # Check out and download nacl by default, unless on an arm mac.
   # This can be disabled e.g. with custom_vars.
-  'checkout_nacl': False,
+  'checkout_nacl': 'not (host_os == "mac" and host_cpu == "arm64")',
 
   # By default, do not check out src-internal. This can be overridden e.g. with
   # custom_vars.
@@ -151,8 +149,8 @@ vars = {
   # support for other platforms may be added in the future.
   'checkout_openxr' : 'checkout_win',
 
-  'checkout_traffic_annotation_tools': False,
-  'checkout_instrumented_libraries': False,
+  'checkout_traffic_annotation_tools': 'checkout_configuration != "small"',
+  'checkout_instrumented_libraries': 'checkout_linux and checkout_configuration != "small"',
 
   # By default bot checkouts the WPR archive files only when this
   # flag is set True.
@@ -251,11 +249,11 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling V8
   # and whatever else without interference from each other.
-  'v8_revision': '071d2ba4197530af42298e9a5634ad7edfeee2fd',
+  'v8_revision': '7d7c04aac7d650964d96d1f1c080949ae5519c78',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling ANGLE
   # and whatever else without interference from each other.
-  'angle_revision': 'abdccddb7534a11e62c062ff1320f4bbcc6ce45b',
+  'angle_revision': '29b222a3c07c541cafa459ae6886134da3493a4b',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling SwiftShader
   # and whatever else without interference from each other.
@@ -294,7 +292,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling freetype
   # and whatever else without interference from each other.
-  'freetype_revision': '0b635b1eb2a5a648627284de946cd9364929e4d4',
+  'freetype_revision': '034e5dbf92ea3a7ea7c9322e47a3a50ff23f7b55',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling freetype
   # and whatever else without interference from each other.
@@ -1676,7 +1674,7 @@ deps = {
     Var('chromium_git') + '/external/github.com/gpuweb/cts.git' + '@' + 'fc207904abbb29864991c71c7156336455a3d892',
 
   'src/third_party/webrtc':
-    Var('webrtc_git') + '/src.git' + '@' + '81f4af57823c28c903b61b273e6fc2b87787b11b',
+    Var('webrtc_git') + '/src.git' + '@' + '4d7f57adca5e9c9657e0adfdc3c95b6534b85cc2',
 
   'src/third_party/libgifcodec':
      Var('skia_git') + '/libgifcodec' + '@'+  Var('libgifcodec_revision'),
@@ -1746,7 +1744,7 @@ deps = {
     Var('chromium_git') + '/v8/v8.git' + '@' +  Var('v8_revision'),
 
   'src-internal': {
-    'url': 'https://chrome-internal.googlesource.com/chrome/src-internal.git@8882289bafe4ec7ad8706a5f4f518bfc028a1260',
+    'url': 'https://chrome-internal.googlesource.com/chrome/src-internal.git@0c15e5e44fea9a3b1954bc3cd97a10ed9fb08a71',
     'condition': 'checkout_src_internal',
   },
 
@@ -3882,35 +3880,35 @@ hooks = [
   {
     'name': 'sysroot_arm',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'checkout_linux and checkout_arm',
     'action': ['python3', 'src/build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=arm'],
   },
   {
     'name': 'sysroot_arm64',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'checkout_linux and checkout_arm64',
     'action': ['python3', 'src/build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=arm64'],
   },
   {
     'name': 'sysroot_x86',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'checkout_linux and (checkout_x86 or checkout_x64)',
     'action': ['python3', 'src/build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=x86'],
   },
   {
     'name': 'sysroot_mips',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'checkout_linux and checkout_mips',
     'action': ['python3', 'src/build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=mips'],
   },
   {
     'name': 'sysroot_mips64',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'checkout_linux and checkout_mips64',
     'action': ['python3', 'src/build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=mips64el'],
   },
@@ -3918,7 +3916,7 @@ hooks = [
   {
     'name': 'sysroot_x64',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'checkout_linux and checkout_x64',
     'action': ['python3', 'src/build/linux/sysroot_scripts/install-sysroot.py',
                '--arch=x64'],
   },
@@ -3965,7 +3963,7 @@ hooks = [
     # Note: On Win, this should run after win_toolchain, as it may use it.
     'name': 'clang',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'not llvm_force_head_revision',
     'action': ['python3', 'src/tools/clang/scripts/update.py'],
   },
   {
@@ -3973,7 +3971,7 @@ hooks = [
     # Note: On Win, this should run after win_toolchain, as it may use it.
     'name': 'clang_tot',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'llvm_force_head_revision',
     'action': ['python3', 'src/tools/clang/scripts/build.py',
                '--llvm-force-head-revision',
                '--with-android={checkout_android}',
@@ -3983,7 +3981,7 @@ hooks = [
     # This is supposed to support the same set of platforms as 'clang' above.
     'name': 'clang_coverage',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'checkout_clang_coverage_tools',
     'action': ['python3', 'src/tools/clang/scripts/update.py',
                '--package=coverage_tools'],
   },
@@ -4105,7 +4103,7 @@ hooks = [
   {
     'name': 'rc_linux',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'checkout_win and host_os == "linux"',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4117,7 +4115,6 @@ hooks = [
  {
     'name': 'test_fonts',
     'pattern': '.',
-    'condition': 'checkout_never',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4131,7 +4128,6 @@ hooks = [
   {
     'name': 'opus_test_files',
     'pattern': '.',
-    'condition': 'checkout_never',
     'action': ['python3',
                'src/third_party/depot_tools/download_from_google_storage.py',
                '--no_auth',
@@ -4157,7 +4153,7 @@ hooks = [
   {
     'name': 'msan_chained_origins',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'checkout_instrumented_libraries',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4169,7 +4165,7 @@ hooks = [
   {
     'name': 'msan_no_origins',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'checkout_instrumented_libraries',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4181,7 +4177,6 @@ hooks = [
   {
     'name': 'wasm_fuzzer',
     'pattern': '.',
-    'condition': 'checkout_never',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4196,7 +4191,7 @@ hooks = [
   {
     'name': 'node_linux64',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'host_os == "linux"',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4367,7 +4362,6 @@ hooks = [
   {
     'name': 'zucchini_testdata',
     'pattern': '.',
-    'condition': 'checkout_never',
     'action': [ 'python3',
                 'src/third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -4391,7 +4385,7 @@ hooks = [
   {
     'name': 'Fetch Android AFDO profile',
     'pattern': '.',
-    'condition': 'checkout_never',
+    'condition': 'checkout_android or checkout_linux',
     'action': [ 'python3',
                 'src/tools/download_optimization_profile.py',
                 '--newest_state=src/chrome/android/profiles/newest.txt',

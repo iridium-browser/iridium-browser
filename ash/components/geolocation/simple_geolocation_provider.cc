@@ -20,7 +20,7 @@ namespace ash {
 namespace {
 
 const char kDefaultGeolocationProviderUrl[] =
-    "trk:215:https://www.googleapis.com/geolocation/v1/geolocate?";
+    "https://www.googleapis.com/geolocation/v1/geolocate?";
 
 }  // namespace
 

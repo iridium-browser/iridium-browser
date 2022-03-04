@@ -70,17 +70,17 @@ namespace {
 // The URL for the the Learn More page shown on incognito new tab.
 const char kLearnMoreIncognitoUrl[] =
 #if BUILDFLAG(IS_CHROMEOS_ASH)
-    "trk:246:https://support.google.com/chromebook/?p=incognito";
+    "https://support.google.com/chromebook/?p=incognito";
 #else
-    "trk:247:https://support.google.com/chrome/?p=incognito";
+    "https://support.google.com/chrome/?p=incognito";
 #endif
 
 // The URL for the Learn More page shown on guest session new tab.
 const char kLearnMoreGuestSessionUrl[] =
 #if BUILDFLAG(IS_CHROMEOS_ASH)
-    "trk:248:https://support.google.com/chromebook/?p=chromebook_guest";
+    "https://support.google.com/chromebook/?p=chromebook_guest";
 #else
-    "trk:261:https://support.google.com/chrome/?p=ui_guest";
+    "https://support.google.com/chrome/?p=ui_guest";
 #endif
 
 std::string ReplaceTemplateExpressions(

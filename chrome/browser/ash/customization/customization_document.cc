@@ -198,7 +198,7 @@ std::string ReadFileInBackground(const base::FilePath& file) {
 
 // Template URL where to fetch OEM services customization manifest from.
 const char ServicesCustomizationDocument::kManifestUrl[] =
-    "trk:151:https://ssl.gstatic.com/chrome/chromeos-customization/%s.json";
+    "https://ssl.gstatic.com/chrome/chromeos-customization/%s.json";
 
 // A custom extensions::ExternalLoader that the ServicesCustomizationDocument
 // creates and uses to publish OEM default apps to the extensions system.

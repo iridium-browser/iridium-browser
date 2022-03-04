@@ -28,7 +28,7 @@ namespace safe_search_api {
 namespace {
 
 const char kSafeSearchApiUrl[] =
-    "trk:238:https://safesearch.googleapis.com/v1:classify";
+    "https://safesearch.googleapis.com/v1:classify";
 const char kDataContentType[] = "application/x-www-form-urlencoded";
 const char kDataFormat[] = "key=%s&urls=%s";
 

@@ -77,10 +77,8 @@ GURL GetChromeSyncURLForDice(const std::string& email,
   GURL url = GaiaUrls::GetInstance()->signin_chrome_sync_dice();
   if (!email.empty())
     url = net::AppendQueryParameter(url, "email_hint", email);
-  auto s2 = continue_url;
-  gurl_strip_trk(s2);
-  if (!s2.empty())
-    url = net::AppendQueryParameter(url, "continue", s2);
+  if (!continue_url.empty())
+    url = net::AppendQueryParameter(url, "continue", continue_url);
   return url;
 }
 
@@ -89,10 +87,8 @@ GURL GetAddAccountURLForDice(const std::string& email,
   GURL url = GaiaUrls::GetInstance()->add_account_url();
   if (!email.empty())
     url = net::AppendQueryParameter(url, "Email", email);
-  auto s2 = continue_url;
-  gurl_strip_trk(s2);
-  if (!s2.empty())
-    url = net::AppendQueryParameter(url, "continue", s2);
+  if (!continue_url.empty())
+    url = net::AppendQueryParameter(url, "continue", continue_url);
   return url;
 }
 

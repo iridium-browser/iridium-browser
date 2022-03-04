@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-#include <limits>
 #include "src/trace_processor/containers/string_pool.h"
 
+#include <limits>
 
 #include "perfetto/base/logging.h"
 #include "perfetto/ext/base/utils.h"

@@ -63,12 +63,10 @@ class VirtualCursor {
   // |sqlite_cursor| must have been returned by VirtualTable::SqliteCursor().
   static inline VirtualCursor* FromSqliteCursor(
       sqlite3_vtab_cursor* sqlite_cursor) {
-#ifndef NDEBUG
     static_assert(std::is_standard_layout<VirtualCursor>::value,
                   "needed for the reinterpret_cast below");
     static_assert(offsetof(VirtualCursor, sqlite_cursor_) == 0,
                   "sqlite_cursor_ must be the first member of the class");
-#endif
     VirtualCursor* result = reinterpret_cast<VirtualCursor*>(sqlite_cursor);
     DCHECK_EQ(sqlite_cursor, &result->sqlite_cursor_);
     return result;
@@ -132,7 +130,7 @@ class VirtualCursor {
   std::vector<std::unique_ptr<InnerPageDecoder>> inner_decoders_;
 
   // Decodes the leaf page containing records.
-  LeafPageDecoder leaf_decoder_;
+  std::unique_ptr<LeafPageDecoder> leaf_decoder_;
 
   SEQUENCE_CHECKER(sequence_checker_);
 };

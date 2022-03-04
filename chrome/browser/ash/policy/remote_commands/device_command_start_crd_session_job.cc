@@ -32,11 +32,11 @@ namespace {
 
 // OAuth2 Token scopes
 constexpr char kCloudDevicesOAuth2Scope[] =
-    "trk:233:https://www.googleapis.com/auth/clouddevices";
+    "https://www.googleapis.com/auth/clouddevices";
 constexpr char kChromotingRemoteSupportOAuth2Scope[] =
-    "trk:234:https://www.googleapis.com/auth/chromoting.remote.support";
+    "https://www.googleapis.com/auth/chromoting.remote.support";
 constexpr char kTachyonOAuth2Scope[] =
-    "trk:235:https://www.googleapis.com/auth/tachyon";
+    "https://www.googleapis.com/auth/tachyon";
 
 // Job parameters fields:
 

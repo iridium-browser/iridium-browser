@@ -13,7 +13,6 @@ namespace {
 // GTK only has a global setting for whether animations should be enabled.  So
 // use it for all of the specific settings that Chrome needs.
 bool AnimationsEnabled() {
-	return false;
   auto* provider = AnimationSettingsProviderLinux::GetInstance();
   return !provider || provider->AnimationsEnabled();
 }

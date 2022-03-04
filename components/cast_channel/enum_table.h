@@ -8,7 +8,6 @@
 #include <cstdint>
 #include <cstring>
 #include <ostream>
-#include <vector>
 
 #include "base/check_op.h"
 #include "base/notreached.h"
@@ -188,6 +187,7 @@ class
   inline constexpr GenericEnumTableEntry(int32_t value);
   inline constexpr GenericEnumTableEntry(int32_t value, base::StringPiece str);
 
+  GenericEnumTableEntry(const GenericEnumTableEntry&) = delete;
   GenericEnumTableEntry& operator=(const GenericEnumTableEntry&) = delete;
 
  private:
@@ -253,6 +253,7 @@ class EnumTable {
     constexpr Entry(E value, base::StringPiece str)
         : GenericEnumTableEntry(static_cast<int32_t>(value), str) {}
 
+    Entry(const Entry&) = delete;
     Entry& operator=(const Entry&) = delete;
   };
 
@@ -311,14 +312,15 @@ class EnumTable {
     if (is_sorted_) {
       const std::size_t index = static_cast<std::size_t>(value);
       if (ANALYZER_ASSUME_TRUE(index < data_.size())) {
-        const auto& entry = data_[index];
+        const auto& entry = data_.begin()[index];
         if (ANALYZER_ASSUME_TRUE(entry.has_str()))
           return entry.str();
       }
       return absl::nullopt;
     }
     return GenericEnumTableEntry::FindByValue(
-        &data_[0], data_.size(), static_cast<int32_t>(value));
+        reinterpret_cast<const GenericEnumTableEntry*>(data_.begin()),
+        data_.size(), static_cast<int32_t>(value));
   }
 
   // This overload of GetString is designed for cases where the argument is a
@@ -346,7 +348,8 @@ class EnumTable {
   // enum value directly.
   absl::optional<E> GetEnum(base::StringPiece str) const {
     auto* entry = GenericEnumTableEntry::FindByString(
-        &data_[0], data_.size(), str);
+        reinterpret_cast<const GenericEnumTableEntry*>(data_.begin()),
+        data_.size(), str);
     return entry ? static_cast<E>(entry->value) : absl::optional<E>();
   }
 
@@ -361,7 +364,7 @@ class EnumTable {
   // Align the data on a cache line boundary.
   alignas(64)
 #endif
-      const std::vector<Entry> data_;
+      std::initializer_list<Entry> data_;
   bool is_sorted_;
 
   constexpr EnumTable(std::initializer_list<Entry> data, bool is_sorted)
@@ -373,8 +376,8 @@ class EnumTable {
 
     for (std::size_t i = 0; i < data.size(); i++) {
       for (std::size_t j = i + 1; j < data.size(); j++) {
-        const Entry& ei = data[i];
-        const Entry& ej = data[j];
+        const Entry& ei = data.begin()[i];
+        const Entry& ej = data.begin()[j];
         DCHECK(ei.value != ej.value)
             << "Found duplicate enum values at indices " << i << " and " << j;
         DCHECK(!(ei.has_str() && ej.has_str() && ei.str() == ej.str()))

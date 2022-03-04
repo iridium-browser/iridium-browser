@@ -13,9 +13,9 @@
 
 #if BUILDFLAG(IS_MAC)
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
-#define PRODUCT_STRING "Iridium"
+#define PRODUCT_STRING "Google Chrome"
 #elif BUILDFLAG(CHROMIUM_BRANDING)
-#define PRODUCT_STRING "Iridium"
+#define PRODUCT_STRING "Chromium"
 #else
 #error Unknown branding
 #endif

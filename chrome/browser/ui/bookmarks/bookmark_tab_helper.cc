@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#include <cstddef>
 #include "chrome/browser/ui/bookmarks/bookmark_tab_helper.h"
 
 #include "base/observer_list.h"

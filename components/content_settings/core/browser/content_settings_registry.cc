@@ -131,7 +131,7 @@ void ContentSettingsRegistry::Init() {
   // PrefProvider::DiscardOrMigrateObsoletePreferences() and
   // DefaultProvider::DiscardOrMigrateObsoletePreferences() accordingly.
 
-  Register(ContentSettingsType::COOKIES, "cookies", CONTENT_SETTING_SESSION_ONLY,
+  Register(ContentSettingsType::COOKIES, "cookies", CONTENT_SETTING_ALLOW,
            WebsiteSettingsInfo::SYNCABLE,
            AllowlistedSchemes(kChromeUIScheme, kChromeDevToolsScheme),
            ValidSettings(CONTENT_SETTING_ALLOW, CONTENT_SETTING_BLOCK,

@@ -112,7 +112,7 @@ AccountConsistencyModeManager::~AccountConsistencyModeManager() {}
 // static
 void AccountConsistencyModeManager::RegisterProfilePrefs(
     user_prefs::PrefRegistrySyncable* registry) {
-  registry->RegisterBooleanPref(prefs::kSigninAllowedOnNextStartup, false);
+  registry->RegisterBooleanPref(prefs::kSigninAllowedOnNextStartup, true);
 }
 
 // static

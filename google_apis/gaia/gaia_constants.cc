@@ -25,21 +25,21 @@ const char kSyncService[] = "chromiumsync";
 const char kRemotingService[] = "chromoting";
 
 // OAuth scopes.
-const char kOAuth1LoginScope[] = "trk:181:https://www.google.com/accounts/OAuthLogin";
+const char kOAuth1LoginScope[] = "https://www.google.com/accounts/OAuthLogin";
 
 // Service/scope names for device management (cloud-based policy) server.
 const char kDeviceManagementServiceOAuth[] =
-    "trk:102:https://www.googleapis.com/auth/chromeosdevicemanagement";
+    "https://www.googleapis.com/auth/chromeosdevicemanagement";
 
 // OAuth2 scope for access to all Google APIs.
-const char kAnyApiOAuth2Scope[] = "trk:103:https://www.googleapis.com/auth/any-api";
+const char kAnyApiOAuth2Scope[] = "https://www.googleapis.com/auth/any-api";
 
 // OAuth2 scope for access to Chrome sync APIs
 const char kChromeSyncOAuth2Scope[] =
-    "trk:104:https://www.googleapis.com/auth/chromesync";
+    "https://www.googleapis.com/auth/chromesync";
 // OAuth2 scope for access to the Chrome Sync APIs for managed profiles.
 const char kChromeSyncSupervisedOAuth2Scope[] =
-    "trk:105:https://www.googleapis.com/auth/chromesync_playpen";
+    "https://www.googleapis.com/auth/chromesync_playpen";
 
 // OAuth2 scope for access to Kid Management API.
 const char kKidManagementOAuth2Scope[] =
@@ -51,17 +51,17 @@ const char kKidManagementPrivilegedOAuth2Scope[] =
 
 // OAuth2 scope for access to Google Family Link Supervision Setup.
 const char kKidsSupervisionSetupChildOAuth2Scope[] =
-    "trk:262:https://www.googleapis.com/auth/kids.supervision.setup.child";
+    "https://www.googleapis.com/auth/kids.supervision.setup.child";
 
 // OAuth2 scope for access to Google Talk APIs (XMPP).
 const char kGoogleTalkOAuth2Scope[] =
-    "trk:106:https://www.googleapis.com/auth/googletalk";
+    "https://www.googleapis.com/auth/googletalk";
 
 // OAuth2 scope for access to Google account information.
 const char kGoogleUserInfoEmail[] =
-    "trk:107:https://www.googleapis.com/auth/userinfo.email";
+    "https://www.googleapis.com/auth/userinfo.email";
 const char kGoogleUserInfoProfile[] =
-    "trk:260:https://www.googleapis.com/auth/userinfo.profile";
+    "https://www.googleapis.com/auth/userinfo.profile";
 
 // OAuth2 scope for access to the parent approval widget.
 const char kParentApprovalOAuth2Scope[] =
@@ -69,7 +69,7 @@ const char kParentApprovalOAuth2Scope[] =
 
 // OAuth2 scope for access to the people API (read-only).
 const char kPeopleApiReadOnlyOAuth2Scope[] =
-    "trk:208:https://www.googleapis.com/auth/peopleapi.readonly";
+    "https://www.googleapis.com/auth/peopleapi.readonly";
 
 // OAuth2 scope for access to the programmatic challenge API (read-only).
 const char kProgrammaticChallengeOAuth2Scope[] =
@@ -145,21 +145,21 @@ const char kNearbyShareOAuth2Scope[] =
     "https://www.googleapis.com/auth/nearbysharing-pa";
 
 // OAuth2 scopes for access to GCM account tracker.
-const char kGCMGroupServerOAuth2Scope[] = "trk:114:https://www.googleapis.com/auth/gcm";
+const char kGCMGroupServerOAuth2Scope[] = "https://www.googleapis.com/auth/gcm";
 const char kGCMCheckinServerOAuth2Scope[] =
-    "trk:115:https://www.googleapis.com/auth/android_checkin";
+    "https://www.googleapis.com/auth/android_checkin";
 
 // OAuth2 scope for access to readonly Chrome web store.
 const char kChromeWebstoreOAuth2Scope[] =
-    "trk:116:https://www.googleapis.com/auth/chromewebstore.readonly";
+    "https://www.googleapis.com/auth/chromewebstore.readonly";
 
 // OAuth2 scope for access to Account Capabilities API.
 const char kAccountCapabilitiesOAuth2Scope[] =
-    "trk:117:https://www.googleapis.com/auth/account.capabilities";
+    "https://www.googleapis.com/auth/account.capabilities";
 
 // OAuth2 scope for support content API.
 const char kSupportContentOAuth2Scope[] =
-    "trk:118:https://www.googleapis.com/auth/supportcontent";
+    "https://www.googleapis.com/auth/supportcontent";
 
 // OAuth 2 scope for NTP Photos module API.
 const char kPhotosModuleOAuth2Scope[] =

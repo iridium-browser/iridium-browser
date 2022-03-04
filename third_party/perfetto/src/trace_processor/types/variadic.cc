@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include <limits>
 #include "src/trace_processor/types/variadic.h"
 
 namespace perfetto {

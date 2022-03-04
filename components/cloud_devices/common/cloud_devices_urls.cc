@@ -13,14 +13,14 @@
 namespace cloud_devices {
 
 const char kCloudPrintAuthScope[] =
-    "trk:197:https://www.googleapis.com/auth/cloudprint";
+    "https://www.googleapis.com/auth/cloudprint";
 
 namespace {
 
 // Url must not be matched by "urls" section of
 // cloud_print_app/manifest.json. If it's matched, print driver dialog will
 // open sign-in page in separate window.
-const char kCloudPrintURL[] = "trk:201:https://www.google.com/cloudprint";
+const char kCloudPrintURL[] = "https://www.google.com/cloudprint";
 
 }
 

@@ -62,7 +62,7 @@ const int ClientSideDetectionService::kNegativeCacheIntervalDays = 1;
 const int ClientSideDetectionService::kPositiveCacheIntervalMinutes = 30;
 
 const char ClientSideDetectionService::kClientReportPhishingUrl[] =
-    "trk:148:https://sb-ssl.google.com/safebrowsing/clientreport/phishing";
+    "https://sb-ssl.google.com/safebrowsing/clientreport/phishing";
 
 struct ClientSideDetectionService::ClientPhishingReportInfo {
   std::unique_ptr<network::SimpleURLLoader> loader;
@@ -211,7 +211,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
     const std::string& access_token) {
   DCHECK_CURRENTLY_ON(BrowserThread::UI);
 
-  if (1) {
+  if (!enabled_) {
     if (!callback.is_null())
       std::move(callback).Run(GURL(request->url()), false);
     return;
@@ -269,7 +269,6 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
   resource_request->url = GetClientReportUrl(kClientReportPhishingUrl);
   resource_request->method = "POST";
   resource_request->load_flags = net::LOAD_DISABLE_CACHE;
-  resource_request->credentials_mode = network::mojom::CredentialsMode::kOmit;
   auto loader = network::SimpleURLLoader::Create(std::move(resource_request),
                                                  traffic_annotation);
   loader->AttachStringForUpload(request_data, "application/octet-stream");

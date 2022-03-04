@@ -281,7 +281,7 @@ SafeBrowsingUIManager* SafeBrowsingService::CreateUIManager() {
 }
 
 void SafeBrowsingService::RegisterAllDelayedAnalysis() {
-#if 0
+#if BUILDFLAG(FULL_SAFE_BROWSING)
   RegisterBinaryIntegrityAnalysis();
 #endif
 }

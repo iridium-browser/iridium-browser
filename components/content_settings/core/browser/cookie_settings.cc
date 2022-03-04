@@ -63,7 +63,7 @@ void CookieSettings::RegisterProfilePrefs(
     user_prefs::PrefRegistrySyncable* registry) {
   registry->RegisterIntegerPref(
       prefs::kCookieControlsMode,
-      static_cast<int>(CookieControlsMode::kBlockThirdParty),
+      static_cast<int>(CookieControlsMode::kIncognitoOnly),
       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
 }
 

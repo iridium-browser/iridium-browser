@@ -136,23 +136,14 @@ static_assert(std::is_trivially_destructible<LeafPageDecoder>::value,
               "Move the destructor to the .cc file if it's non-trival");
 #endif  // !DCHECK_IS_ON()
 
-void LeafPageDecoder::Initialize(DatabasePageReader* db_reader) {
-  DCHECK(db_reader);
+LeafPageDecoder::LeafPageDecoder(DatabasePageReader* db_reader) noexcept
+    : page_id_(db_reader->page_id()),
+      db_reader_(db_reader),
+      cell_count_(ComputeCellCount(db_reader)),
+      next_read_index_(0),
+      last_record_size_(0) {
   DCHECK(IsOnValidPage(db_reader));
-  page_id_ = db_reader->page_id();
-  db_reader_ = db_reader;
-  cell_count_ = ComputeCellCount(db_reader);
-  next_read_index_ = 0;
-  last_record_size_ = 0;
   DCHECK(DatabasePageReader::IsValidPageId(page_id_));
-}
-
-void LeafPageDecoder::Reset() {
-  db_reader_ = nullptr;
-  page_id_ = 0;
-  cell_count_ = 0;
-  next_read_index_ = 0;
-  last_record_size_ = 0;
 }
 
 bool LeafPageDecoder::TryAdvance() {

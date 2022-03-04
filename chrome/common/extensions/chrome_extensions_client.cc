@@ -45,9 +45,9 @@ namespace {
 
 // TODO(battre): Delete the HTTP URL once the blocklist is downloaded via HTTPS.
 const char kExtensionBlocklistUrlPrefix[] =
-    "trk:269:http://www.gstatic.com/chrome/extensions/blocklist";
+    "http://www.gstatic.com/chrome/extensions/blocklist";
 const char kExtensionBlocklistHttpsUrlPrefix[] =
-    "trk:270:https://www.gstatic.com/chrome/extensions/blocklist";
+    "https://www.gstatic.com/chrome/extensions/blocklist";
 
 }  // namespace
 

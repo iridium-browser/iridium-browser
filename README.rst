@@ -62,13 +62,13 @@ preparatory steps may be needed:
    which is exactly equal to the hash, ``gclient sync`` barfs about it. Then,
    you have to fetch the data manually:
 
-   ```
-   pushd third_party/webrtc/
-   git ls-remote origin | grep 0b2302e5e0418b6716fbc0b3927874fd3a842caf abcdef... refs/branch-heads/m78
-   git fetch origin refs/branch-heads/m78
-   git reset --hard FETCH_HEAD
-   popd
-   ```
+   .. code-block:: sh
+
+      pushd third_party/webrtc/
+      git ls-remote origin | grep 0b2302e5e0418b6716fbc0b3927874fd3a842caf abcdef... refs/branch-heads/m78
+      git fetch origin refs/branch-heads/m78
+      git reset --hard FETCH_HEAD
+      popd
 
 #) Undo the PATH change from 1, since depot_tools ships an untrusted copy of ninja.
 
@@ -81,26 +81,34 @@ Steps for tarball state
 
 5) The gn files in Iridium are edited to respect the ``$CC`` etc. environment variables.
    These env vars _must_ always be set, so issue
-   ``export CC=gcc CXX=g++ AR=ar NM=nm``
+
+   .. code-block:: sh
+
+      export CC=gcc CXX=g++ AR=ar NM=nm``
+
    or
-   ``export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm``
+
+   .. code-block:: sh
+
+      export CC=clang CXX=clang++ AR=llvm-ar NM=llvm-nm``
+
    (can pick any preferred toolchain, though).
 
 #) Link up nodejs:
 
-   ```
-   mkdir -p third_party/node/linux/node-linux-x64/bin
-   ln -s /usr/bin/node third_party/node/linux/node-linux-x64/bin/
-   ```
+   .. code-block:: sh
+
+      mkdir -p third_party/node/linux/node-linux-x64/bin
+      ln -s /usr/bin/node third_party/node/linux/node-linux-x64/bin/
 
 #) Because chromium is too stupid to use pkg-config for wayland and xkbcommon,
    it needs to be manually specified. Issue
 
-   ```
-   export CFLAGS="-O2 -Wall $(pkg-config wayland-client xkbcommon --cflags)"
-   export CXXFLAGS="$CFLAGS"
-   gn gen '--args= custom_toolchain="//build/toolchain/linux/unbundle:default" host_toolchain="//build/toolchain/linux/unbundle:default" use_custom_libcxx=false host_cpu="x64" host_os="linux" is_debug=false dcheck_always_on=false enable_nacl=false use_swiftshader_with_subzero=true is_component_ffmpeg=true use_cups=true use_aura=true symbol_level=1 blink_symbol_level=0 use_kerberos=true enable_vr=false optimize_webui=false enable_reading_list=false use_pulseaudio=true link_pulseaudio=true is_component_build=false use_sysroot=false fatal_linker_warnings=false use_allocator="partition" use_allocator_shim=true use_partition_alloc=true disable_fieldtrial_testing_config=true use_gnome_keyring=false use_unofficial_version_number=false use_vaapi=true use_sysroot=false treat_warnings_as_errors=false enable_widevine=false use_dbus=true media_use_openh264=false rtc_use_h264=false use_v8_context_snapshot=true v8_use_external_startup_data=true use_system_harfbuzz=true use_system_freetype=true enable_hangout_services_extension=true enable_vulkan=true rtc_use_pipewire=true rtc_link_pipewire=true is_clang=false use_gold=true icu_use_data_file=false proprietary_codecs=true ffmpeg_branding="Chrome"' out/Release
-   ```
+   .. code-block:: sh
+
+      export CFLAGS="-O2 -Wall $(pkg-config wayland-client xkbcommon --cflags)"
+      export CXXFLAGS="$CFLAGS"
+      gn gen '--args= custom_toolchain="//build/toolchain/linux/unbundle:default" host_toolchain="//build/toolchain/linux/unbundle:default" use_custom_libcxx=false host_cpu="x64" host_os="linux" is_debug=false dcheck_always_on=false enable_nacl=false use_swiftshader_with_subzero=true is_component_ffmpeg=true use_cups=true use_aura=true symbol_level=1 blink_symbol_level=0 use_kerberos=true enable_vr=false optimize_webui=false enable_reading_list=false use_pulseaudio=true link_pulseaudio=true is_component_build=false use_sysroot=false fatal_linker_warnings=false use_allocator="partition" use_allocator_shim=true use_partition_alloc=true disable_fieldtrial_testing_config=true use_gnome_keyring=false use_unofficial_version_number=false use_vaapi=true use_sysroot=false treat_warnings_as_errors=false enable_widevine=false use_dbus=true media_use_openh264=false rtc_use_h264=false use_v8_context_snapshot=true v8_use_external_startup_data=true use_system_harfbuzz=true use_system_freetype=true enable_hangout_services_extension=true enable_vulkan=true rtc_use_pipewire=true rtc_link_pipewire=true is_clang=false use_gold=true icu_use_data_file=false proprietary_codecs=true ffmpeg_branding="Chrome"' out/Release
 
    Note that gn embodies the environment variables' values (CC, CFLAGS, etc.)
    into Makefiles, so upon change of any of those variables, gn needs to be
@@ -112,4 +120,8 @@ Steps for tarball state
    distribution's package manager. On openSUSE, it is possible to use ``zypper
    si -d chromium`` to do that in a single shot.
 
-#) Issue ``LD_LIBRARY_PATH=$PWD/out/Release ninja -C out/Release chrome chromedriver``.
+#) Issue
+
+   .. code-block:: sh
+
+      LD_LIBRARY_PATH=$PWD/out/Release ninja -C out/Release chrome chromedriver

@@ -1,0 +1,21 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package fusebox;
+
+message DirEntryProto {
+  // True if the entry is a directory.
+  optional bool is_directory = 1;
+  // Entry name.
+  optional string name = 2;
+}
+
+message DirEntryListProto {
+  // List of DirEntry.
+  repeated DirEntryProto entries = 1;
+}

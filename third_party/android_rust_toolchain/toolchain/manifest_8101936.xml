@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<manifest>
+  <remote name="aosp" fetch="https://android.googlesource.com/" review="https://android.googlesource.com/" />
+
+  <default revision="master" remote="aosp" sync-j="4" />
+
+  <project path="toolchain/rustc" name="toolchain/rustc" revision="f55de583e63a90882362c8b3426341f02e09a50e" />
+
+  <project path="toolchain/android_rust" name="toolchain/android_rust" revision="c4dd83e11a4d2b47eec250c4f7ca6f327b1caf4e" />
+
+  <project path="prebuilts/clang/host/linux-x86" name="platform/prebuilts/clang/host/linux-x86" clone-depth="1" revision="5fbf5a87192cd127a5184a975ea2db08bf1a1571" />
+
+  <project path="prebuilts/clang/host/darwin-x86" name="platform/prebuilts/clang/host/darwin-x86" clone-depth="1" revision="ff4d350e7893c13ec92456645ea0ade177e84fd6" />
+
+  <project path="prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8" name="platform/prebuilts/gcc/linux-x86/host/x86_64-linux-glibc2.17-4.8" clone-depth="1" revision="d38e3ac65e3c32bfdd55d5caad5e13d084e9f30e" />
+
+  <project path="prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" name="platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9" clone-depth="1" revision="6e0928fdce95f1666f9d07191a71cc5bb79414ef" />
+
+  <project path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" name="platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" clone-depth="1" revision="1142ea802152d757f2163679b9ec1f485015770c" />
+
+  <project path="prebuilts/gcc/darwin-x86/aarch64/aarch64-linux-android-4.9" name="platform/prebuilts/gcc/darwin-x86/aarch64/aarch64-linux-android-4.9" clone-depth="1" revision="db9127492a6454f18382f960ccb34929583e85b0" />
+
+  <project path="prebuilts/gcc/darwin-x86/arm/arm-linux-androideabi-4.9" name="platform/prebuilts/gcc/darwin-x86/arm/arm-linux-androideabi-4.9" clone-depth="1" revision="a369caa4ff53363a93445c245cbbf76888c28bc5" />
+
+  <project path="prebuilts/cmake/linux-x86" name="platform/prebuilts/cmake/linux-x86" clone-depth="1" revision="001ed46e3703c78cbc3838adfe4c14ba279f9ff7" />
+
+  <project path="prebuilts/ninja/linux-x86" name="platform/prebuilts/ninja/linux-x86" clone-depth="1" revision="8a10824f74fe0e22af9bf314a837f5b70e2bb67f" />
+
+  <project path="prebuilts/cmake/darwin-x86" name="platform/prebuilts/cmake/darwin-x86" clone-depth="1" revision="7aea7e9880110799088cd1de509886871078306f" />
+
+  <project path="prebuilts/ninja/darwin-x86" name="platform/prebuilts/ninja/darwin-x86" clone-depth="1" revision="f321e197944c19d273cec788b9a3e8ca94331248" />
+
+  <project path="prebuilts/build-tools" name="platform/prebuilts/build-tools" clone-depth="1" revision="1977a48004500e4ac1969eac749b27bbdbec2f37" />
+
+  <project path="prebuilts/python/linux-x86" name="platform/prebuilts/python/linux-x86" clone-depth="1" revision="a6d32cf2a62a6b01e9d10650439405f1120b9594" />
+
+  <project path="prebuilts/python/darwin-x86" name="platform/prebuilts/python/darwin-x86" clone-depth="1" revision="1334bd904422c078df49a7508caddef4fe336a94" />
+
+  <project path="prebuilts/android-emulator-build/curl" name="platform/prebuilts/android-emulator-build/curl" clone-depth="1" revision="2bc4dde5cc487c931be3ea97d9a362c86eb2f1da" />
+
+  <project path="prebuilts/rust" name="platform/prebuilts/rust" clone-depth="1" revision="420962b62c20817a28fdebbe025001b838d0329d" />
+
+  <project path="toolchain/prebuilts/ndk/r23" name="toolchain/prebuilts/ndk/r23" clone-depth="1" revision="c99c7c9153e9b2f02e6b05dd852b150ab0dded0e" />
+
+  <project path="build/soong" name="platform/build/soong" revision="341f73550d698d32328c06f223c0d2a51dd53d8c">
+    <linkfile dest="Android.bp" src="root.bp" />
+
+    <linkfile dest="bootstrap.bash" src="bootstrap.bash" />
+</project>
+</manifest>

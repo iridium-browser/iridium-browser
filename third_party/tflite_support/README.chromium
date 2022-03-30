@@ -1,0 +1,44 @@
+Name: TensorFlow Lite Support
+Short Name: tflite-support
+URL: https://github.com/tensorflow/tflite-support
+Version: 27decd8a9f30004d01b1cd5f40f27e7b1be20fa5
+Date: 2022/02/07
+License: Apache 2.0
+License File: LICENSE
+Security Critical: Yes
+CPEPrefix: unknown
+
+Description:
+TFLite Support is a toolkit that helps users to develop ML and deploy TFLite
+models onto mobile devices.  It works cross-Platform and is supported on
+Java, C++ (WIP), and Swift (WIP).
+
+Third party dependencies:
+- tflite
+- libzip
+- utf
+- tensorflow-text
+
+Modifications:
+01) Use re2::StringPiece instead of absl::string_view in regex_tokenizer.cc
+02) Remove support for sentencepiece tokenization because the required overhead
+isn't worth adding this functionality, esp since no feature team needs it.
+03) [To Be Upstreamed] Remove unused functions.
+04) Remove the ABSL_DEPRECATED annotation from a deprecated struct since this
+is a no-op in chromium builds and upsets clang.
+05) [To Be Upstreamed] Use size_t in for loop in nl_classifier.h
+06) [To Be Upstreamed] Remove unused variable in task_utils.h
+07) Do not use absl::any since it is not supported in chromium
+08) [To Be Upstreamed] Remove unused stl include in tokenizer_jni_lib.h
+09) Remove memory mapped file support in external_file_handler.cc since it is
+only available on POSIX systems.
+10) Run clang-format.
+11) Remove unbuilt files that triggered checkdeps warnings, and fix file perms.
+12) Remove an unneeded static initializer.
+
+Update Process (internal: http://shortn/_nwz8liqimy):
+1) Clone the tflite-support github repo at the desired commit into src/
+2) Apply each patch listed above residing in patches/ using `git apply patches/$PATCHFILE`
+3) Get the build working.
+4) Record the patches made with `git format-patches HEAD -<number of changes>`
+

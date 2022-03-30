@@ -1,0 +1,57 @@
+// Copyright 2017 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef CHROME_BROWSER_EXTENSIONS_API_NOTIFICATIONS_EXTENSION_NOTIFICATION_HANDLER_H_
+#define CHROME_BROWSER_EXTENSIONS_API_NOTIFICATIONS_EXTENSION_NOTIFICATION_HANDLER_H_
+
+#include "chrome/browser/notifications/notification_handler.h"
+#include "extensions/browser/event_router.h"
+
+class Profile;
+
+namespace extensions {
+
+// Handler for notifications shown by extensions. Will be created and owned by
+// the NativeNotificationDisplayService.
+class ExtensionNotificationHandler : public NotificationHandler {
+ public:
+  ExtensionNotificationHandler();
+
+  ExtensionNotificationHandler(const ExtensionNotificationHandler&) = delete;
+  ExtensionNotificationHandler& operator=(const ExtensionNotificationHandler&) =
+      delete;
+
+  ~ExtensionNotificationHandler() override;
+
+  // Extracts an extension ID from the URL for an app window, or an empty string
+  // if the URL is not a valid app window URL.
+  static std::string GetExtensionId(const GURL& url);
+
+  // NotificationHandler implementation.
+  void OnClose(Profile* profile,
+               const GURL& origin,
+               const std::string& notification_id,
+               bool by_user,
+               base::OnceClosure completed_closure) override;
+  void OnClick(Profile* profile,
+               const GURL& origin,
+               const std::string& notification_id,
+               const absl::optional<int>& action_index,
+               const absl::optional<std::u16string>& reply,
+               base::OnceClosure completed_closure) override;
+  void DisableNotifications(Profile* profile, const GURL& origin) override;
+
+ protected:
+  // Overriden in unit tests.
+  virtual void SendEvent(Profile* profile,
+                         const std::string& extension_id,
+                         events::HistogramValue histogram_value,
+                         const std::string& name,
+                         EventRouter::UserGestureState user_gesture,
+                         std::unique_ptr<base::ListValue> args);
+};
+
+}  // namespace extensions
+
+#endif  // CHROME_BROWSER_EXTENSIONS_API_NOTIFICATIONS_EXTENSION_NOTIFICATION_HANDLER_H_

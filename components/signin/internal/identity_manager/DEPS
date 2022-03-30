@@ -1,0 +1,9 @@
+include_rules = [
+  "+ash/constants",
+  "+components/signin/internal/base",
+  "+components/signin/public/base",
+  "+components/signin/public/identity_manager",
+  "+components/signin/public/webdata",
+  "+components/signin/public/android/jni_headers",
+  "+mojo/public",
+]

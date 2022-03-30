@@ -1,0 +1,18 @@
+earlyprintk=ttyS2,115200n8
+console=tty1
+console=ttyS2,115200n8
+loglevel=7
+init=/sbin/init
+cros_secure
+oops=panic
+panic=-1
+root=/dev/mmcblk0p3
+rootwait
+ro
+dm_verity.error_behavior=3
+dm_verity.max_bios=-1
+dm_verity.dev_wait=0
+dm="1 vroot none ro 1,0 3334144 verity payload=ROOT_DEV hashtree=HASH_DEV hashstart=3334144 alg=sha1 root_hexdigest=cac50a01eb2b17d6863fb7ca0c932e8f2224dc26 salt=2e5e07e55e251dc2619ba54b2bea16f7e38fa67ea6d8bdc59f7bd47fc19bc177"
+noinitrd cros_debug
+vt.global_cursor_default=0
+kern_guid=%U

@@ -1,0 +1,18 @@
+// Copyright 2022 The Chromium OS Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+// This file defines signals for the state of ARC VMs
+package arc_vm_status;
+
+// Signals that the VM has completed boot
+message ArcVmBootCompleteSignal {
+  // The name of the VM.
+  string name = 1;
+
+  // The owner of the vm.
+  string owner_id = 2;
+}

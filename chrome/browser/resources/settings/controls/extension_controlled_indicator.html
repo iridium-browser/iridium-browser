@@ -1,0 +1,26 @@
+<style include="settings-shared">
+  :host {
+    align-items: center;
+    display: flex;
+    margin-inline-start: 36px;
+    min-height: var(--settings-row-min-height);
+  }
+
+  img {
+    /* Dimensions of the image are set in the URL. */
+    margin-inline-end: 16px;
+  }
+
+  /* Using ">" operator to ensure that this CSS rule will not accidentally
+   * be applied to a search highlight span (which is inserted dynamically if
+   * when search "hit" occurs within this element. */
+  :host > span {
+    flex: 1;
+    margin-inline-end: 8px;
+  }
+</style>
+<img role="presentation" src="chrome://extension-icon/[[extensionId]]/20/1">
+<span inner-h-t-m-l="[[getLabel_(extensionId, extensionName)]]"></span>
+<template is="dom-if" if="[[extensionCanBeDisabled]]" restamp>
+  <cr-button on-click="onDisableTap_">$i18n{disable}</cr-button>
+</template>

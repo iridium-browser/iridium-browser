@@ -1,0 +1,81 @@
+# There is a group of contractions that are represented by one letter
+# only. If they come as single words, they should be abbriviated
+# normally. But if they come as a part of bigger word, dots 36 must be
+# placed before the character that represents the abbreviated word.
+
+# This is the most problematic rule for me so far. I should define
+# every contraction twice, one with the "word" opcode, and another
+# with the "partword" upcode.
+
+# When I used the "word" upcode, a big problem happens with
+# back-translation: if the contraction is part of a word, NVDA
+# automatically assumes that the character before the dots 36 is a
+# contraction as well and automatically expand it. An example if the
+# "word" upcode is used:
+
+table: |
+  include tables/unicode.dis
+  include tables/ar-ar-g1.utb
+  word ربما 1235
+  partword ربما 36-1235
+  word ليس 123
+  partword ليس 36-123
+  word ولما 2456
+  partword ولما 36-2456
+
+tests:
+
+# As separate words it works just fine:
+- - ربما ليس هو
+  - ⠗ ⠇ ⠓⠺
+# As part of a word, it fails:
+- - وليس
+  - ⠺⠤⠇
+  - xfail: true
+# What happens is that it assumes both characters as contractions,
+# but it should only consider the one after dots 36:
+- - وليس
+  - ⠤⠺⠤⠇
+# The first character in the word is not an abbreviation, yet NVDA
+# assumes that it is a seperate word as soon as I put dots 36 after
+# it, because it thinks it is a dash symbol, not a contraction
+# indicator. In grade1, the word "وليس" will be "ولماليس"
+
+# Another example:
+- - لربما
+  - ⠇⠤⠗
+  - xfail: true
+# Incorrect back-translation:
+- - لربما
+  - ⠤⠇⠤⠗
+
+# To temporarily work around this issue, I used the "lowword"
+# upcode. This resulted in good back-translation, but disabled the use
+# of all these abbreviations if they come connected with punctuation
+# marks, which is not desirable.
+
+table: |
+  include tables/unicode.dis
+  include tables/ar-ar-g1.utb
+  lowword ربما 1235
+  partword ربما 36-1235
+  lowword ليس 123
+  partword ليس 36-123
+  lowword ولما 2456
+  partword ولما 36-2456
+
+tests:
+
+# As a seperate word it works fine:
+- - ليس
+  - ⠇
+# Due to the use of "lowword", they will not be translated next to punctuations:
+- - ليس ربما.
+  - ⠇ ⠗⠲
+  - xfail: true
+# What happens:
+- - ليس ربما.
+  - ⠇ ⠗⠃⠍⠁⠲
+# It solves the issue of the character that comes before dots 36.
+- - لربما
+  - ⠇⠤⠗

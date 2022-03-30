@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocol name="contrast">
+  <copyright><![CDATA[
+    SPDX-FileCopyrightText: 2015 Martin Gräßlin
+    SPDX-FileCopyrightText: 2015 Marco Martin
+
+    SPDX-License-Identifier: LGPL-2.1-or-later
+  ]]></copyright>
+  <interface name="org_kde_kwin_contrast_manager" version="1">
+      <request name="create">
+          <arg name="id" type="new_id" interface="org_kde_kwin_contrast"/>
+          <arg name="surface" type="object" interface="wl_surface"/>
+      </request>
+      <request name="unset">
+          <arg name="surface" type="object" interface="wl_surface"/>
+      </request>
+  </interface>
+  <interface name="org_kde_kwin_contrast" version="1">
+      <request name="commit">
+      </request>
+      <request name="set_region">
+        <arg name="region" type="object" interface="wl_region" allow-null="true"/>
+      </request>
+      <request name="set_contrast">
+        <arg name="contrast" type="fixed"/>
+      </request>
+      <request name="set_intensity">
+        <arg name="intensity" type="fixed"/>
+      </request>
+      <request name="set_saturation">
+        <arg name="saturation" type="fixed"/>
+      </request>
+      <request name="release" type="destructor">
+        <description summary="release the contrast object"/>
+      </request>
+  </interface>
+</protocol>

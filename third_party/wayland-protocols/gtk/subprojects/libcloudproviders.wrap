@@ -1,0 +1,5 @@
+[wrap-git]
+directory=libcloudproviders
+url=https://gitlab.gnome.org/World/libcloudproviders.git
+revision=master
+depth=1

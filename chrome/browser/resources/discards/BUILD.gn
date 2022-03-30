@@ -1,0 +1,107 @@
+# Copyright 2018 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//third_party/closure_compiler/compile_js.gni")
+import("//tools/polymer/html_to_js.gni")
+
+js_type_check("closure_compile") {
+  is_polymer3 = true
+  closure_flags = default_closure_args + mojom_js_args +
+                  [ "js_module_root=" + rebase_path(".", root_build_dir) ]
+  deps = [
+    ":database_tab",
+    ":discards",
+    ":discards_main",
+    ":discards_tab",
+    ":graph_doc",
+    ":graph_tab_template",
+  ]
+}
+
+js_library("discards") {
+  deps = [ "//chrome/browser/ui/webui/discards:mojo_bindings_webui_js" ]
+}
+
+js_library("discards_main") {
+  deps = [
+    "//third_party/polymer/v3_0/components-chromium/polymer:polymer_bundled",
+  ]
+}
+
+js_library("database_tab") {
+  deps = [
+    ":discards",
+    ":sorted_table_behavior",
+    "//chrome/browser/ui/webui/discards:mojo_bindings_webui_js",
+    "//third_party/polymer/v3_0/components-chromium/polymer:polymer_bundled",
+    "//ui/webui/resources/js:assert.m",
+  ]
+}
+
+js_library("discards_tab") {
+  deps = [
+    ":discards",
+    ":sorted_table_behavior",
+    "//chrome/browser/ui/webui/discards:mojo_bindings_webui_js",
+    "//third_party/polymer/v3_0/components-chromium/polymer:polymer_bundled",
+    "//ui/webui/resources/js:assert.m",
+    "//ui/webui/resources/js:icon",
+  ]
+}
+
+js_library("graph_tab_template") {
+  deps = [
+    "//chrome/browser/ui/webui/discards:mojo_bindings_webui_js",
+    "//third_party/polymer/v3_0/components-chromium/polymer:polymer_bundled",
+  ]
+}
+
+js_library("graph_doc") {
+  deps = [ "//chrome/browser/ui/webui/discards:mojo_bindings_webui_js" ]
+
+  externs_list = [ "../../../../third_party/d3/src/externs.js" ]
+}
+
+js_library("sorted_table_behavior") {
+}
+
+# This action merges the graph tab script into the graph_doc HTML template.
+# It then base64 encodes the combination, and merges into the graph_tab HTML
+# template to complete the data: URL for the webview therein.
+action("generate_graph_tab") {
+  script = "generate_graph_tab.py"
+  sources = [
+    "graph_doc.js",
+    "graph_doc_template.html",
+    "graph_tab_template.html",
+  ]
+  outputs = [ "$target_gen_dir/graph_tab.js" ]
+
+  args =
+      rebase_path(outputs, root_build_dir) +
+      rebase_path([
+                    "graph_doc_template.html",
+                    "graph_doc.js",
+                  ],
+                  root_build_dir) +
+      rebase_path([ "$target_gen_dir/graph_tab_template.js" ], root_build_dir)
+  deps = [ ":web_components" ]
+}
+
+# Action with a transparent name.
+group("discards_resources_gen") {
+  public_deps = [
+    ":generate_graph_tab",
+    ":web_components",
+  ]
+}
+
+html_to_js("web_components") {
+  js_files = [
+    "database_tab.js",
+    "discards_main.js",
+    "discards_tab.js",
+    "graph_tab_template.js",
+  ]
+}

@@ -1,0 +1,55 @@
+# Converted from letterDefTest.c
+table: |
+  display m 134
+  display s 234
+  letter ⠍ 134
+  letter ⠎ 234
+  always \x280d\x280e 234-134
+table: |
+  display m 134
+  display s 234
+  lowercase ⠍ 134
+  lowercase ⠎ 234
+  always ⠍⠎ 234-134
+table: |
+  display m 134
+  display s 234
+  uppercase ⠍ 134
+  uppercase ⠎ 234
+  always ⠍⠎ 234-134
+tests:
+  - [⠍⠎, sm]
+
+# This table has been isolated from the previous ones
+# Because the test currently fails.
+table: |
+  display m 134
+  display s 234
+  uplow ⠄⠍ 134
+  uplow ⠎⠎ 234
+  always ⠍⠎ 234-134
+tests:
+  - [⠍⠎, sm, {xfail: true}]
+
+# Converted from uplow_with_unicode.c
+table: |
+  display ^ 2346
+  uplow       Gg  1245
+  uplow       Rr  1235
+  uplow       Oo  135
+  uplow       Ss  234
+  uplow       \x1e9e\x00df 2346
+  word gross 1245-2346
+  word groß 1245-2346
+table: |
+  display ^ 2346
+  uplow       Gg  1245
+  uplow       Rr  1235
+  uplow       Oo  135
+  uplow       Ss  234
+  lowercase   \x00df 2346
+  word gross 1245-2346
+  word groß 1245-2346
+tests:
+  - [gross, g^]
+  - [groß, g^]

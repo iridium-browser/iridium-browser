@@ -1,0 +1,9 @@
+#!/bin/sh
+# Copyright (c) 2012 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# pylint -- a shell wrapper for pylint.
+
+base_dir=$(dirname "$0")
+PYTHONDONTWRITEBYTECODE=1 exec "$base_dir/pylint-1.5" "$@"

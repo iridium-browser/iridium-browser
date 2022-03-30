@@ -1,0 +1,55 @@
+<style include="settings-shared"></style>
+<settings-animated-pages id="pages" current-route="{{currentRoute}}"
+    section="osAccessibility" focus-config="[[focusConfig_]]">
+  <div route-path="default">
+    <template is="dom-if" if="[[showAccessibilityLabelsSetting_]]">
+      <settings-toggle-button
+          id="a11yImageLabels"
+          pref="{{prefs.settings.a11y.enable_accessibility_image_labels}}"
+          on-change="onToggleAccessibilityImageLabels_"
+          label="$i18n{accessibleImageLabelsTitle}"
+          sub-label="$i18n{accessibleImageLabelsSubtitle}"
+          deep-link-focus-id$="[[Setting.kGetImageDescriptionsFromGoogle]]">
+      </settings-toggle-button>
+      <div class="hr"></div>
+    </template>
+    <settings-toggle-button id="optionsInMenuToggle"
+        hidden="[[isKioskModeActive_]]"
+        label="$i18n{optionsInMenuLabel}"
+        pref="{{prefs.settings.a11y.enable_menu}}"
+        deep-link-focus-id$="[[Setting.kA11yQuickSettings]]">
+    </settings-toggle-button>
+    <div class="hr" hidden="[[isKioskModeActive_]]"></div>
+    <cr-link-row id="subpage-trigger"
+        label="$i18n{manageAccessibilityFeatures}"
+        on-click="onManageAccessibilityFeaturesTap_"
+        sub-label="$i18n{moreFeaturesLinkDescription}"
+        role-description="$i18n{subpageArrowRoleDescription}">
+    </cr-link-row>
+  </div>
+
+  <template is="dom-if" route-path="/manageAccessibility">
+    <settings-subpage page-title="$i18n{manageAccessibilityFeatures}"
+        hide-close-button="[[isKioskModeActive_]]">
+      <settings-manage-a11y-page prefs="{{prefs}}">
+      </settings-manage-a11y-page>
+    </settings-subpage>
+  </template>
+  <template is="dom-if" route-path="/manageAccessibility/tts">
+    <settings-subpage page-title="$i18n{manageTtsSettings}">
+      <settings-tts-subpage prefs="{{prefs}}">
+      </settings-tts-subpage>
+    </settings-subpage>
+  </template>
+  <template is="dom-if" route-path="/manageAccessibility/captions">
+    <settings-subpage page-title="$i18n{captionsTitle}">
+      <settings-captions prefs="{{prefs}}"></settings-captions>
+    </settings-subpage>
+  </template>
+  <template is="dom-if" route-path="/manageAccessibility/switchAccess">
+    <settings-subpage page-title="$i18n{manageSwitchAccessSettings}">
+      <settings-switch-access-subpage prefs="{{prefs}}">
+      </settings-switch-access-subpage>
+    </settings-subpage>
+  </template>
+</settings-animated-pages>

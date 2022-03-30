@@ -1,0 +1,19 @@
+# Copyright 2020 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+#
+# This directory is formatted to match the format of the interfaces implemented.
+
+BasedOnStyle: Google
+Standard: Cpp11
+AccessModifierOffset: -2
+AllowShortFunctionsOnASingleLine: Inline
+ColumnLimit: 100
+CommentPragmas: NOLINT:.*
+DerivePointerAlignment: false
+IncludeBlocks: Preserve
+IndentWidth: 4
+ContinuationIndentWidth: 8
+PointerAlignment: Left
+TabWidth: 4
+UseTab: Never

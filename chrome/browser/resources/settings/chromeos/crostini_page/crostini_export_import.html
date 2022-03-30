@@ -1,0 +1,26 @@
+<style include="settings-shared"></style>
+<div id="export" class="settings-box first">
+  <div id="exportCrostiniLabel" class="start">
+    $i18n{crostiniExportLabel}
+  </div>
+  <cr-button on-click="onExportClick_" disabled="[[!enableButtons_]]"
+    aria-labelledby="exportCrostiniLabel"
+    deep-link-focus-id$="[[Setting.kBackupLinuxAppsAndFiles]]">
+    $i18n{crostiniExport}
+  </cr-button>
+</div>
+<div id="import" class="settings-box hr">
+  <div id="importCrostiniLabel" class="start">
+    $i18n{crostiniImportLabel}
+  </div>
+  <cr-button on-click="onImportClick_" disabled="[[!enableButtons_]]"
+    aria-labelledby="importCrostiniLabel"
+    deep-link-focus-id$="[[Setting.kRestoreLinuxAppsAndFiles]]">
+    $i18n{crostiniImport}
+  </cr-button>
+</div>
+<template is="dom-if" if="[[showImportConfirmationDialog_]]" restamp>
+  <settings-crostini-import-confirmation-dialog
+      on-close="onImportConfirmationDialogClose_">
+  </settings-crostini-import-confirmation-dialog>
+</template>

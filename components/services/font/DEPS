@@ -1,0 +1,8 @@
+include_rules = [
+  "+mojo/public",
+  "+ppapi/buildflags",
+  "+ppapi/c",
+  "+skia",
+  "+third_party/skia/include",
+  "+ui/gfx"
+]

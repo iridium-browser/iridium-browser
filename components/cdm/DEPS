@@ -1,0 +1,8 @@
+include_rules = [
+  "+ipc",
+  "+media/base",
+  "+media/cdm",
+  "+media/media_buildflags.h",
+  "+ppapi/buildflags",
+  "+third_party/widevine/cdm/widevine_cdm_common.h",
+]

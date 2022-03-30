@@ -1,0 +1,10 @@
+jam@chromium.org
+npm@chromium.org
+thestig@chromium.org
+tsepez@chromium.org
+
+# For Skia related changes
+reed@google.com
+
+# Autorollers need to own DEPS
+per-file DEPS=*

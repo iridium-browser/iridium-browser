@@ -1,0 +1,59 @@
+<style include="cr-shared-style shimless-rma-shared shimless-fonts">
+  :host {
+    padding: 1px;
+  }
+
+  /* TODO(gavinwill): update colors to CrOS */
+  :host([checked]) #componentButton {
+    background-color: lightskyblue;
+  }
+
+  #componentButton {
+    --vertical-padding: 24px;
+    border-radius: 8px;
+    box-shadow: var(--cr-card-shadow);
+    color: var(--shimless-component-text-color);
+    font-family: var(--shimless-component-font-family);
+    font-size: var(--shimless-component-font-size);
+    font-weight: var(--shimless-medium-font-weight);
+    height: calc((2 * var(--vertical-padding)) + 
+        (2 * var(--shimless-component-line-height)));
+    line-height: var(--shimless-component-line-height);
+    padding: 0;
+    width: 100%;
+  }
+
+  #labelDiv {
+    color: grey;
+    flex-basis: 155px;
+    inset-inline-start: 0;
+    padding-inline-start: 24px;
+    position: absolute;
+  }
+
+  :host([checked]) #labelDiv {
+    color: blue;
+  }
+
+  iron-icon {
+    margin-top: 6px;
+  }
+
+  #checkIcon {
+    height: 20px;
+    inset-inline-end: 16px;
+    position: absolute;
+    width: 20px;
+  }
+</style>
+
+<cr-button id="componentButton" disabled="[[disabled]]"
+    on-click="onComponentButtonClicked_">
+  <div id="labelDiv">
+    <span id="componentName">[[componentName]]</span>
+    <div id="componentIdentifier">[[componentIdentifier]]</div>
+  </div>
+  <iron-icon id="checkIcon" icon="shimless-icon24:check-circle"
+      hidden="[[!checked]]">
+  </iron-icon>
+</cr-button>

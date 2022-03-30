@@ -1,0 +1,666 @@
+#-index-name: Burmese, uncontracted
+#-display-name: Burmese uncontracted braille
+#
+#+locale: my
+#+type: literary
+#+contraction: no
+#+grade: 1
+#+dots: 6
+#+direction: both
+#+system: myanmar
+#
+#-copyright: Sao Mai Center for the Blind <www.saomaicenter.org/en>
+#-license: LGPLv2.1
+#
+#  Copyright (C) 2018 by Sao Mai Center for the Blind <www.saomaicenter.org/en>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+# Created and maintained by: Dang Hoai Phuc <danghoaiphuc@gmail.com>
+# with help from Benedict and Pyae Phyopaing from Myanmar
+#
+#-maintainer-name: Dang Hoai Phuc
+#-maintainer-email: danghoaiphuc@gmail.com
+#-author: Dang Hoai Phúc <danghoaiphuc@gmail.com>
+#
+#-updated: 2020-11-17
+#
+# Based on <https://github.com/liblouis/liblouis/files/5552378/MyanmarBrailleGrade1Uncontracted.xlsx>
+
+space \s 0 blank
+space \t 9 tab
+space \x000a 0 newline
+space \x000c 0
+space \x000d 0 carriage return
+space \x001b 1b escape character for html back-translation
+space \x00A0 a NO-BREAK SPACE <noBreak> 0020 NON-BREAKING SPACE 
+
+# latin letters
+uplow Aa 1
+uplow Bb 12
+uplow Cc 14
+uplow Dd 145
+uplow Ee 15
+uplow Ff 124
+uplow Gg 1245
+uplow Hh 125
+uplow Ii 24
+uplow Jj 245
+uplow Kk 13
+uplow Ll 123
+uplow Mm 134
+uplow Nn 1345
+uplow Oo 135
+uplow Pp 1234
+uplow Qq 12345
+uplow Rr 1235
+uplow Ss 234
+uplow Tt 2345
+uplow Uu 136
+uplow Vv 1236
+uplow Ww 2456
+uplow Xx 1346
+uplow Yy 13456
+uplow Zz 1356
+
+# numbers definition
+display 0 356
+display 1 2
+display 2 23
+display 3 25
+display 4 256
+display 5 26
+display 6 235
+display 7 2356
+display 8 236
+display 9 35
+digit 0 245
+digit 1 1
+digit 2 12
+digit 3 14
+digit 4 145
+digit 5 15
+digit 6 124
+digit 7 1245
+digit 8 125
+digit 9 24
+litdigit 0 245
+litdigit 1 1
+litdigit 2 12
+litdigit 3 14
+litdigit 4 145
+litdigit 5 15
+litdigit 6 124
+litdigit 7 1245
+litdigit 8 125
+litdigit 9 24
+# Burmese numbers
+digit \x1040 245
+digit \x1041 1
+digit \x1042 12
+digit \x1043 14
+digit \x1044 145
+digit \x1045 15
+digit \x1046 124
+digit \x1047 1245
+digit \x1048 125
+digit \x1049 24
+litdigit \x1040 245
+litdigit \x1041 1
+litdigit \x1042 12
+litdigit \x1043 14
+litdigit \x1044 145
+litdigit \x1045 15
+litdigit \x1046 124
+litdigit \x1047 1245
+litdigit \x1048 125
+litdigit \x1049 24
+
+# signs and punctuations definition
+display ! 2346
+punctuation ! 235
+display " 5
+punctuation " 236
+#prepunc " 236
+#postpunc " 356
+display ? 1456
+punctuation ? 236
+match %[^_~]%<* " %[_.$]*%[a#] 236
+match %[a#]%[_.$]* " %>*%[^_~] 356
+
+display # 3456
+sign # 456-3456
+display $ 1246
+sign $ 4-234
+display % 146
+sign % 3456-245-356
+math % 3456-245-356
+display & 12346
+sign & 4-12346
+punctuation ' 3
+display ( 12356
+punctuation ( 2356
+display ) 23456
+punctuation ) 2356
+display * 16
+sign * 16
+display + 346
+math + 26
+display , 6
+punctuation , 6
+punctuation - 36
+math - 35
+hyphen - 36
+display . 46
+punctuation . 46
+decpoint . 46
+display / 34
+sign / 34
+math / 5-34
+punctuation / 34
+display ~ 45
+display : 156
+punctuation : 45
+display ; 56
+punctuation ; 23
+display < 126
+math < 5-246
+display = 123456
+math = 5-2356
+display > 345
+punctuation > 5-135
+display @ 47
+sign @ 4
+
+display [ 2467
+punctuation [ 46-126
+display \\ 12567
+sign \\ 4-16
+display ] 124567
+punctuation ] 46-345
+display ^ 457
+sign ^ 4-26
+display _ 456
+sign _ 4-456
+display ` 4
+sign ` 4-4 grave accent
+
+display } 12456
+punctuation } 456-345
+display | 1256
+sign | 456-1256
+display { 246
+punctuation { 456-126
+#display ~ 45
+math ~ 4-35
+punctuation \x201C 236 open quotation mark
+punctuation \x201D 356 closing quoation mark
+# Burmese punctuations
+punctuation \x104A 25
+punctuation \x104B 256
+
+include braille-patterns.cti
+
+
+
+sign \x1039 36
+sign \x103F 56-1456
+sign \x103A 3
+sign \x25CC 36
+
+# consonants
+letter \x1000  13
+letter \x1001 46
+letter \x1002 1245
+letter \x1003 12345
+letter \x1004  34
+letter \x1005 234
+letter \x1006 235
+letter \x1007 1356
+letter \x1008 2346
+letter \x1009 1236
+letter \x100A 12356
+letter \x100B 1256
+letter \x100C 12456
+letter \x100D  23456
+letter \x100E  123456
+letter \x100F  1246
+letter \x1010  2345
+letter \x1011  245
+letter \x1012  145
+letter \x1013  124
+letter \x1014  1345
+letter \x1015  1234
+letter \x1016  45
+letter \x1017  146
+letter \x1018  12
+letter \x1019  134
+letter \x101A  13456
+letter \x101B  1235
+letter \x101C  123
+letter \x101D  2456
+letter \x101E  1456
+letter \x101F  125
+letter \x1020  456
+letter \x1021  126
+
+# dependent various signs
+letter \x1036 14
+letter \x1037 2
+letter \x1038 23
+# medial and accented signs
+letter \x103B  35  
+letter \x103C 26  
+letter \x103D 345  
+letter \x103E 1346  
+
+# dependent vowels    
+letter \x102B 56-1
+letter \x102C 1
+letter \x102D 24
+letter \x102E 246  
+letter \x102F 15
+letter \x1030 136  
+#match - \x200B\x1031 - 156
+letter \x1031 156
+letter \x1032 16  
+# independent vowels symbol
+letter \x1023 56-15
+letter \x1025 56-136
+letter \x1026 56-136-23
+letter \x1029 1456-26
+match - \x104E\x1004\x103A\x1038 - 346
+# independent vowels and various S
+letter \x1024 56-246
+letter \x1027 56-156
+letter \x102A 1456-26
+letter \x104C 236
+letter \x104D 12346
+letter \x104F 135
+
+numsign 3456
+capsletter 6
+begcapsword 6-6
+endcapsword 6-3
+lencapsphrase 3
+begcapsphrase 6-6-6
+begcaps 6-6-6
+endcaps 6-3
+
+
+#   Unicode Accented Letters
+
+uplow \x00c0\x00e0 45-16-1 Àà
+uplow \x00c1\x00e1 45-34-1 Áá
+uplow \x00c2\x00e2 45-146-1 Ââ
+uplow \x00c3\x00e3 45-12456-1 Ãã
+uplow \x00c4\x00e4 45-25-1 Ää
+uplow \x00c5\x00e5 45-1246-1 Åå
+uplow \x00c7\x00e7 45-12346-14 Çç
+uplow \x00c8\x00e8 45-16-15 Èè
+uplow \x00c9\x00e9 45-34-15 Éé
+uplow \x00ca\x00ea 45-146-15 Êê
+uplow \x00cb\x00eb 45-25-15 Ëë
+uplow \x00cc\x00ec 45-16-24 Ìì
+uplow \x00cd\x00ed 45-34-24 Íí
+uplow \x00ce\x00ee 45-146-24  Îî
+uplow \x00cf\x00ef 45-25-24 Ïï
+uplow \x00d0\x00f0 3456-1246 Ðð
+uplow \x00d1\x00f1 45-12456-1345 Ññ
+uplow \x00d2\x00f2 45-16-135 Òò
+uplow \x00d3\x00f3 45-34-135 Óó
+uplow \x00d4\x00f4 45-146-135 Ôô
+uplow \x00d5\x00f5 45-12456-135 Õõ
+uplow \x00d6\x00f6 45-25-135 Öö
+uplow \x00d8\x00f8 4-16-135 Øø
+uplow \x00d9\x00f9 45-16-136 Ùù
+uplow \x00da\x00fa 45-34-136 Úú
+uplow \x00db\x00fb 45-146-136 Ûû
+uplow \x00dc\x00fc 45-25-136 Üü
+uplow \x00de\x00fe 3456-2346 Þþ
+uplow \x00dd\x00fd 45-34-13456 Ýý
+
+uplow \x0100\x0101 4-36-1 Āā
+uplow \x0102\x0103 4-346-1 Ăă
+uplow \x0106\x0107 45-34-14 Ćć
+uplow \x0108\x0109 45-146-14 Ĉĉ
+uplow \x010c\x010d 45-346-14 Čč
+uplow \x0112\x0113 4-36-15 Ēē
+uplow \x0114\x0115 4-346-15 Ĕĕ
+uplow \x011a\x011b 45-346-15 Ěě
+uplow \x011c\x011d 45-146-1245 Ĝĝ
+uplow \x011e\x011f 4-346-1245 Ğğ
+uplow \x0124\x0125 45-146-125 Ĥĥ
+uplow \x012a\x012b 4-36-24 Īī
+uplow \x012c\x012d 4-346-24 Ĭĭ
+uplow \x014c\x014d 4-36-135 Ōō
+uplow \x014e\x014f 4-346-135 Ŏŏ
+uplow \x0166\x0167 4-25-2345 Ŧŧ
+uplow \x016a\x016b 4-36-136 Ūū
+uplow \x016c\x016d 4-346-136 Ŭŭ
+
+uplow \x0178\x00ff 45-25-13456 Ÿÿ
+
+# Early Forms of English
+uplow \x021c\x021d 3456-13456 Ȝȝ yogh
+uplow \x00de\x00fe 3456-2346 Þþ thorn
+uplow \x00d0\x00f0 3456-1246 Ðð eth
+uplow \x01f7\x01bf 3456-2456 Ƿƿ wynn (wen)
+
+sign \x0300 45-16 ̀̀  grave accent
+noback correct [$l]"̀" "̀"*
+
+sign \x0301 45-34 ́  acute accent
+noback correct [$l]"́" "́"*
+
+sign \x0302 45-146 ̂  circumflex
+noback correct [$l]"̂" "̂"*
+
+sign \x0303 45-12456 ̃  tilde
+noback correct [$l]"̃" "̃"*
+noback pass2 @45-12456-6 @6-45-12456  move after capital sign
+
+sign \x0304 45-4-36 ̄  macron
+noback correct [$l]"̄" "̄"*
+
+sign \x0306 4-346 ̆  breve
+noback correct [$l]"̆" "̆"*
+
+sign \x0308 45-25 ̈  diaeresis/umlat
+noback correct [$l]"̈" "̈"*
+
+sign \x030a 45-1246 ̊  ring/circle
+noback correct [$l]"̊" "̊"*
+
+sign \x030c 45-346 ̌  caron
+noback correct [$l]"̌" "̌"*
+
+sign \x0327 45-12346 ̧  cedilla
+noback correct [$l]"̧" "̧"*
+
+
+#   Unicode Greek
+
+uplow \x0391\x03b1 46-1 Αα Alpha
+uplow \x0392\x03b2 46-12 Ββ Beta
+uplow \x0393\x03b3 46-1245 Γγ Gamma
+uplow \x0394\x03b4 46-145 Δδ Delta
+uplow \x0395\x03b5 46-15 Εε Epsilon
+uplow \x0396\x03b6 46-1356 Ζζ Zeta
+uplow \x0397\x03b7 46-156 Ηη Eta
+uplow \x0398\x03b8 46-1456 Θθ Theta
+uplow \x0399\x03b9 46-24 Ιι Iota
+uplow \x039a\x03ba 46-13 Κκ Kappa
+uplow \x039b\x03bb 46-123 Λλ Lamda
+uplow \x039c\x03bc 46-134 Μμ Mu
+uplow \x039d\x03bd 46-1345 Νν Nu
+uplow \x039e\x03be 46-1346 Ξξ Xi
+uplow \x039f\x03bf 46-135 Οο Omicron
+uplow \x03a0\x03c0 46-1234 Ππ Pi
+uplow \x03a1\x03c1 46-1235 Ρρ Rho
+uplow \x03a3\x03c3 46-234 Σσ Sigma
+noback lowercase \x03c2 46-234 ς Small Letter Sigma
+uplow \x03a4\x03c4 46-2345 Ττ Tau
+uplow \x03a5\x03c5 46-136 Υυ Upsilon
+uplow \x03a6\x03c6 46-124 Φφ Phi
+uplow \x03a7\x03c7 46-12346 Χχ Chi
+uplow \x03a8\x03c8 46-13456 Ψψ Psi
+uplow \x03a9\x03c9 46-2456 Ωω Omega
+
+
+#   Unicode Punctuation and Signs
+
+punctuation \x0092 3
+punctuation \x0097 36-36
+punctuation \x0093 236
+punctuation \x0094 356
+punctuation \x0096 36
+punctuation \x0097 36-36
+sign \x00a1 45-56-235 ¡
+punctuation \x00a1 235 ¡
+sign \x00a2 4-14 ¢ cent
+sign \x00a3 4-123 £ pound
+#sign \x00a3 3456 £
+sign \x00a4 1246 ¤ curency
+sign \x00a5 4-13456 ¥ yen
+sign \x00a6 46-1256 ¦ broken bar
+punctuation \x00a6 456-1256 ¦ broken bar
+sign \x00a7 45-234 § section
+sign \x00a8 45-25 ¨
+sign \x00a9 45-14 © copyright
+#sign \x00aa ª
+punctuation \x00ab 456-236 «
+sign \x00ac 4-1456 ¬
+punctuation \x00ad 36 - soft hyphen
+sign \x00ae 45-1235 ® registered
+sign \x00af 4-36 ¯
+#sign \x00ba 0 º
+sign \x00b4 45-56-12 ´ acute accent
+sign \x00b6 45-1234 ¶ pilcrow 
+sign \x00b8 45-12346 ¸ cedilla 
+punctuation \x00bb 456-356 »
+punctuation \x00bf 45-56-236 ¿
+uppercase \x00c6 1-6-45-235-15 Æ capital ligature ae (ash)
+lowercase \x00e6 1-45-235-15 æ lowercase ligature ae (ash)
+uppercase \x0152 135-6-45-235-15 Œ capital ligature oe
+lowercase \x0153 135-45-235-15 œ ligature oe
+
+uplow \x014a\x014b 45-1345 Ŋŋ
+uplow \x018f\x0259 456-26 Əə
+
+sign \x02d8 4-346 ˘ uncombining breve
+sign \x02e6 45-46-14 ˦ high tone
+sign \x02e7 45-46-25 ˧ mid tone
+sign \x02e8 45-46-36 ˨ low tone
+
+space \x2000 0
+space \x2001 0
+space \x2002 0
+space \x2003 0
+space \x2004 0
+space \x2005 0
+space \x2006 0
+space \x2007 0
+space \x2008 0
+space \x2009 0
+space \x200a 0
+space \x200b 0
+punctuation \x2010 36 ‐
+punctuation \x2011 36 ‑
+punctuation \x2013 6-36 –
+punctuation \x2014 5-6-36 —
+punctuation \x2015 5-6-36 ―
+noback punctuation \x2018 6-236 ‘
+noback punctuation \x2019 6-356 ’
+punctuation \x201c 236 “
+punctuation \x201d 356 ”
+sign \x2020 4-6-1456 † dagger
+sign \x2021 4-6-12456 ‡ double dagger
+sign \x2022 456-256 • bullet
+sign \x25e6 456-135 horowground bullet
+punctuation \x2026 256-256-256 … ellipse
+sign \x20a3 4-124 ₣ franc
+sign \x20a6 4-1345 ₦ naira
+sign \x20ac 4-15 € euro
+
+sign \x2122 45-2345 ™
+sign \x2190 56-1256-246 ←
+sign \x2191 56-1256-346 ↑
+sign \x2192 56-1256-135 →
+sign \x2193 56-1256-146 ↓
+sign \x21b5 56-1256-256-146 ↵
+sign \x21cc 45-456-2356 ⇌ equilibrium arrow (harpoons)
+
+sign \x25aa 456-256 ▪ 
+
+sign \x2640 45-1346 ♀
+sign \x2642 45-13456 ♂
+sign \x266D 3456-126 ♭
+sign \x266E 3456-16 ♮
+sign \x266F 3456-146 ♯
+
+sign \x3003 5-2 〃 ditto mark
+
+
+#   Unicode Math
+
+sign \x00b0 45-245 °
+math \x00b1 456-235 ±
+#  grade 1 indicator add before superscipts
+math \x00b2 56-35-3456-12 ²
+math \x00b3 56-35-3456-14 ³
+sign \x00b4 45-34 ´
+sign \x00b5 46-134 µ
+math \x00b7 4-16 ·
+math \x00bc 3456-1-34-145 ¼
+math \x00bd 3456-1-34-12 ½
+math \x00be 3456-14-34-145 ¾
+math \x00d7 5-236 ×
+math \x00f7 5-34 ÷
+
+#math \x2070 35-3456-245 ⁰
+
+math \x2150 3456-1-34-1245 ⅐
+math \x2151 3456-1-34-24 ⅑
+math \x2152 3456-1-34-1-245 ⅒
+math \x2153 3456-1-34-14 ⅓
+math \x2154 3456-12-34-14 ⅔
+math \x2155 3456-1-34-15 ⅕
+math \x2156 3456-12-34-15 ⅖
+math \x2157 3456-14-34-15 ⅗
+math \x2158 3456-145-34-15 ⅘
+math \x2159 3456-1-34-124 ⅙
+math \x215a 3456-15-34-124 ⅚
+math \x215b 3456-1-34-125 ⅛
+math \x215c 3456-14-34-125 ⅜
+math \x215d 3456-15-34-125 ⅝
+math \x215e 3456-1245-34-125 ⅞
+
+sign \x2032 2356 ′ prime (derivative)
+sign \x2033 2356-2356 ″ double prime (second derivative)
+
+sign \x2200 45-1 ∀ for all
+sign \x2202 4-145 ∂ partial derivative
+sign \x2203 45-26 ∃ there exists
+sign \x2205 4-245 ∅ empty set
+sign \x2207 45-145 ∇ nabla
+sign \x2208 45-15 ∈ element of
+sign \x220b 4-45-15 ∋ contains (such that)
+sign \x2212 5-36 − minus sign (not hyphen)
+sign \x2213 456-36 ∓ minus or plus
+sign \x2218 5-356 ∘ hollow dot (ring operator)
+sign \x221a 5-146 √ square root
+sign \x221d 456-5-2356 ∝ proportional to
+sign \x221e 3456-123456 ∞ infinity
+sign \x2220 456-246 ∠ angle
+sign \x2221 46-456-246 ∡ measured angle
+sign \x2225 3456-123 ∥ parallel to
+sign \x2227 4-236 ∧ logical and
+sign \x2228 4-235 ∨ logical or
+sign \x2229 46-236 ∩ set intersection
+sign \x222a 46-235 ∪ set union
+sign \x222b 2346 ∫ integral
+sign \x222e 4-2346 contour integral
+noback sign \x2234 6-16 ∴ therefore # using noback to avoid conflict with Child
+sign \x2235 4-34 ∵ because
+noback sign \x2236 25 ∶ ratio # using noback to avoid conflict with :
+sign \x2237 25-25 ∷ proportion
+sign \x2243 456-35 ≃ asymptotically equal to
+sign \x2245 5-456-35 ≅ approximately equal to
+sign \x2248 45-35 ≈ almost equal to
+sign \x224f 45-5-2356 ≏ difference between
+sign \x2251 46-5-2356 ≑ geometrically equal
+sign \x2260 5-2356-4-156 ≠ not equal
+sign \x2261 456-123456 ≡ identical (equivalent) to
+sign \x2264 456-4-126 ≤ less than or equal to
+sign \x2265 456-4-345 ≥ greater than or equal to
+sign \x226a 46-4-126 ≪ much less than
+sign \x226b 46-4-345 ≫ much greater than
+sign \x2282 45-126 ⊂ subset of
+sign \x2283 45-345 ⊃ superset of
+sign \x2286 456-45-126 ⊆ subset or equal to
+sign \x2287 456-45-345 ⊇ superset or equal to
+sign \x228a 46-45-126 ⊊ proper subset
+sign \x228b 46-45-345 ⊋ proper superset
+sign \x22a3 4-456-25 ⊣ left tack
+sign \x22a5 3456-36 ⊥ up tack
+sign \x22a6 456-25 ⊦ assertion
+sign \x22a8 45-456-25 ⊨ valid
+sign \x22b2 4-456-126 ⊲ normal subgroup
+sign \x22b3 4-456-345 ⊳ contains as normal subgroup 
+sign \x22b4 456-456-126 ⊴ normal subgroup or equal
+sign \x22b5 456-456-345 ⊵ contains as normal subgroup or equal
+sign \x22be 3456-456-246 ⊾ right angle with arc
+sign \x22c5 5-256 ⋅ dot operator
+sign \x2ae4 46-456-25 ⫤ reverse 'is valid' sign
+
+math \x2329 4-126 〈
+math \x232A 4-345 〉
+
+math \x3008 4-126 〈
+math \x3009 4-345 〉
+
+
+#   Unicode misc
+
+punctuation \x0093 236
+punctuation \x0094 356
+punctuation \x0096 36
+
+# Diagonal and Vertical lines
+noback sign \X2502 456 │ tally mark - vertical single solid line segment
+noback sign \X250a 45 ┊ first variant vertical line segment
+noback sign \X2551 6-456 ║ second variant vertical line segment
+noback sign \X2571 345 ╱ right-leaning single solid diagonal line segment # using noback to avoid conflict with "ar" contraction
+noback sign \X2572 126 ╲ left-leaning single solid diagonal line segment # using noback to avoid conflict with "gh" contraction
+
+# Shape Symbols
+sign \x25a0 456-1246-3456-145 ■ filled (solid) square
+sign \x25a1 1246-3456-145 □ square
+sign \x25a7 46-1246-3456-145 ▧ shaded square (upper left to lower right)
+sign \x25b2 456-1246-3456-14 ▲ filled (solid) (equilateral) triangle
+sign \x25b3 1246-3456-14 △ regular (equilateral) triangle
+sign \x25cb 1246-123456 ○ circle
+sign \x25cd 46-1246-123456 ◍ shaded circle
+sign \x29b5 46-245 ⦵ 'normal' (superscript circle crossed by horizontal line)
+noback sign \x25cf 5-35 ● black circle # not representing filled circle shape as it is mostly used in password fields to represent hidden characters
+
+#   Unicode prefers \x2019 for apostrophe instead of \x27
+endword \x2019d 3-145
+endword \x2019m 3-134
+endword \x2019re 3-1235-15
+endword \x2019ve 3-1236-15
+endword \x2019ll 3-123-123
+endword \x2019s 3-234
+endword s\x2019 234-3
+endword \x2019t 3-2345
+
+# processing vowels to be placed before consonants
+class accentletters \x103B\x103C\x103D\x103E
+class consonants \x1000\x1001\x1002\x1003\x1004\x1005\x1006\x1007\x1008\x1009\x100A\x100B\x100C\x100D\x100E\x100F\x1010\x1011\x1012\x1013\x1014\x1015\x1016\x1017\x1018\x1019\x101A\x101B\x101C\x101D\x101E\x101F\x1020\x1021
+
+noback correct [%consonants]"\x1031" "\x1031"*
+noback correct [%consonants%accentletters]"\x1031" "\x1031"*
+noback correct [%consonants%accentletters%accentletters]"\x1031" "\x1031"*
+# place \x102f after \x1036
+noback correct "\x102F\x1036" "\x1036\x102F"
+
+# normally sign \x103a with dot 3 but in some cases with dots 356
+match - \x102b\x103a - 56-1-356
+match - \x102c\x103a - 1-356
+# follow Khinnsee rule
+match - \x1004\x103a\x1039 - 5

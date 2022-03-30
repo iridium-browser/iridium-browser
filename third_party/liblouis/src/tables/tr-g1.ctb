@@ -1,0 +1,53 @@
+#tr#1#Turkish Uncontracted#tr#Turkish
+#
+# liblouis: Turkish Braille Code (Grade 1)
+#
+#  Copyright (C) 2014, Greg Kearney, gkearney@gmail.com
+#  Copyright (C) 2014-2016 Arend Arends <arendarends@ziggo.nl>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+
+# Taken from several examples by Greg Kearney (2014) for South African
+# languages with only slight modifications (additions) This is
+# unchanged after the LibLouis upgrade to version 3.0.0 (with only the
+# include file en-ueb-g1.ctb changed)
+
+# Based on English UEB Grade 1
+
+# Used to display symbols, Unicode chars and other symbols used
+# throughout UEB code.
+
+include en-ueb-g1.ctb
+
+# Turkish characters (added by Arend Arends)
+
+uplow \x00c2\x00e2 345		LATIN LETTER A WITH CIRCUMFLEX
+uplow \x00c7\x00e7 16		LATIN LETTER C WITH CEDILLA
+uplow \x00ce\x00ee 34		LATIN LETTER I WITH CIRCUMFLEX
+uplow \x00d6\x00f6 246		LATIN LETTER O WITH DIAERESIS
+uplow \x00db\x00fb 156		LATIN LETTER U WITH CIRCUMFLEX
+uplow \x00dc\x00fc 1256		LATIN LETTER U WITH DIAERESIS
+uplow \x011e\x011f 126		LATIN LETTER G WITH BREVE
+uplow \x015e\x015f 146		LATIN LETTER S WITH CEDILLA
+
+# special case, in basic latin capital i is dotless, in Turkish there
+# is a character i lower/upper case both with a dot and a character i
+# lower/upper case both without dot
+
+# this definition overwrites the previous definition
+uplow I\x0131 35		LATIN CAPITAL LETTER I/SMALL LETTER DOTLESS I
+uplow \x0130i 24		LATIN CAPITAL LETTER I WITH DOT/SMALL LETTER i

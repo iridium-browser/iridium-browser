@@ -1,0 +1,110 @@
+# Copyright © 2015 Torch Trust <www.torchtrust.org>
+# Copyright © 2015 Bert Frees
+# Copyright © 2018-2019 Mike Gray
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table:
+  language: en
+  grade: 1
+  system: ueb
+  __assert-match: en-ueb-g1.ctb
+tests:
+  - [°, ⠘⠚]
+  - [–, ⠠⠤]
+  - [—, ⠠⠤]
+  - [―, ⠐⠠⠤]
+  - [±, ⠸⠖]
+  - [¼, ⠼⠁⠌⠙]
+  - [½, ⠼⠁⠌⠃]
+  - [¾, ⠼⠉⠌⠙]
+  - [×, ⠐⠦]
+  - [÷, ⠐⠌]
+  - [´, ⠘⠌]
+  - [¨, ⠘⠒]
+  - [¯, ⠈⠤]
+  - [Àà, ⠠⠘⠡⠁⠘⠡⠁]
+  - [Áá, ⠠⠘⠌⠁⠘⠌⠁]
+  - [Ââ, ⠠⠘⠩⠁⠘⠩⠁]
+  - [Ãã, ⠠⠘⠻⠁⠘⠻⠁]
+  - [Ää, ⠠⠘⠒⠁⠘⠒⠁]
+  - [Åå, ⠠⠘⠫⠁⠘⠫⠁]
+  - [Ææ, ⠠⠁⠠⠘⠖⠑⠁⠘⠖⠑]
+  - [Çç, ⠠⠘⠯⠉⠘⠯⠉]
+  - [Ďď, ⠠⠘⠬⠙⠘⠬⠙]
+  - [Èè, ⠠⠘⠡⠑⠘⠡⠑]
+  - [Éé, ⠠⠘⠌⠑⠘⠌⠑]
+  - [Êê, ⠠⠘⠩⠑⠘⠩⠑]
+  - [Ëë, ⠠⠘⠒⠑⠘⠒⠑]
+  - [Ìì, ⠠⠘⠡⠊⠘⠡⠊]
+  - [Íí, ⠠⠘⠌⠊⠘⠌⠊]
+  - [Îî, ⠠⠘⠩⠊⠘⠩⠊]
+  - [Ĩĩ, ⠠⠘⠻⠊⠘⠻⠊]
+  - [Ïï, ⠠⠘⠒⠊⠘⠒⠊]
+  - [Ðð, ⠠⠼⠫⠼⠫]
+  - [Ľľ, ⠠⠘⠬⠇⠘⠬⠇]
+  - [Ňň, ⠠⠘⠬⠝⠘⠬⠝]
+  - [Ññ, ⠠⠘⠻⠝⠘⠻⠝]
+  - [Òò, ⠠⠘⠡⠕⠘⠡⠕]
+  - [Óó, ⠠⠘⠌⠕⠘⠌⠕]
+  - [Ôô, ⠠⠘⠩⠕⠘⠩⠕]
+  - [Õõ, ⠠⠘⠻⠕⠘⠻⠕]
+  - [Öö, ⠠⠘⠒⠕⠘⠒⠕]
+  - [Øø, ⠠⠈⠡⠕⠈⠡⠕]
+  - [Řř, ⠠⠘⠬⠗⠘⠬⠗]
+  - [Šš, ⠠⠘⠬⠎⠘⠬⠎]
+  - [Ťť, ⠠⠘⠬⠞⠘⠬⠞]
+  - [Ùù, ⠠⠘⠡⠥⠘⠡⠥]
+  - [Úú, ⠠⠘⠌⠥⠘⠌⠥]
+  - [Ûû, ⠠⠘⠩⠥⠘⠩⠥]
+  - [Üü, ⠠⠘⠒⠥⠘⠒⠥]
+  - [Ýý, ⠠⠘⠌⠽⠘⠌⠽]
+  - [Þþ, ⠠⠼⠮⠼⠮]
+  - [ÿ, ⠘⠒⠽]
+  - [1st, ⠼⠁⠎⠞]
+  - [2nd, ⠼⠃⠝⠙]
+  - [3rd, ⠼⠉⠗⠙]
+  - [4th, ⠼⠙⠞⠓]
+  - - one italic word
+    - ⠕⠝⠑ ⠨⠂⠊⠞⠁⠇⠊⠉ ⠺⠕⠗⠙
+    - typeform:
+        italic: '    ++++++     '
+  - - two italic words
+    - ⠨⠂⠞⠺⠕ ⠨⠂⠊⠞⠁⠇⠊⠉ ⠺⠕⠗⠙⠎
+    - typeform:
+        italic: '++++++++++      '
+  - - three italic words
+    - ⠨⠶⠞⠓⠗⠑⠑ ⠊⠞⠁⠇⠊⠉ ⠺⠕⠗⠙⠎⠨⠄
+    - {typeform: {italic: '++++++++++++++++++'}}
+  - - one bold word
+    - ⠕⠝⠑ ⠘⠂⠃⠕⠇⠙ ⠺⠕⠗⠙
+    - typeform:
+        bold: '    ++++     '
+  - - two bold words
+    - ⠘⠂⠞⠺⠕ ⠘⠂⠃⠕⠇⠙ ⠺⠕⠗⠙⠎
+    - typeform:
+        bold: '++++++++      '
+  - - three bold words
+    - ⠘⠶⠞⠓⠗⠑⠑ ⠃⠕⠇⠙ ⠺⠕⠗⠙⠎⠘⠄
+    - {typeform: {bold: '++++++++++++++++'}}
+  - - one underlined word
+    - ⠕⠝⠑ ⠸⠂⠥⠝⠙⠑⠗⠇⠊⠝⠑⠙ ⠺⠕⠗⠙
+    - typeform:
+        underline: '    ++++++++++     '
+  - - two underlined words
+    - ⠸⠂⠞⠺⠕ ⠸⠂⠥⠝⠙⠑⠗⠇⠊⠝⠑⠙ ⠺⠕⠗⠙⠎
+    - typeform:
+        underline: '++++++++++++++      '
+  - - three underlined words
+    - ⠸⠶⠞⠓⠗⠑⠑ ⠥⠝⠙⠑⠗⠇⠊⠝⠑⠙ ⠺⠕⠗⠙⠎⠸⠄
+    - {typeform: {underline: '++++++++++++++++++++++'}}
+  - - ..... ---- __init__
+    - ⠲⠲⠲⠲⠲ ⠤⠤⠤⠤ ⠨⠤⠨⠤⠊⠝⠊⠞⠨⠤⠨⠤
+
+  # more ligature examples (see section 4.3.3 in the rule book)
+  - [Ætna, ⠠⠁⠠⠘⠖⠑⠞⠝⠁]
+  - [ŒDIPUS, ⠠⠠⠕⠘⠖⠑⠙⠊⠏⠥⠎]

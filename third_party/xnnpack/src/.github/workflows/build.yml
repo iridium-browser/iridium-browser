@@ -1,0 +1,48 @@
+name: Build using CMake
+on: [push]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  build-xnnpack-cmake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install ninja
+        run: sudo apt-get install ninja-build
+      - name: Configure CMake and build
+        run: scripts/build-local.sh
+        working-directory: ${{ github.workspace }}
+  build-xnnpack-cmake-windows:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install ninja
+        run: choco install ninja
+      - name: Configure CMake and build
+        run: scripts/build-windows.sh
+        shell: bash  # Specify bash so we can reuse the build script on Windows (runs on Git bash)
+        working-directory: ${{ github.workspace }}
+  build-xnnpack-cmake-android:
+    strategy:
+      matrix:
+        script: [build-android-arm64.sh, build-android-armv7.sh, build-android-x86.sh]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install ninja
+        run: sudo apt-get install ninja-build
+      - name: Setup Android NDK
+        id: setup-ndk
+        uses: nttld/setup-ndk@v1.0.6
+        with:
+          ndk-version: r23b
+          add-to-path: false
+      - name: Configure CMake and build
+        run: scripts/${{ matrix.script }}
+        working-directory: ${{ github.workspace }}
+        env:
+          ANDROID_NDK: ${{ steps.setup-ndk.outputs.ndk-path }}

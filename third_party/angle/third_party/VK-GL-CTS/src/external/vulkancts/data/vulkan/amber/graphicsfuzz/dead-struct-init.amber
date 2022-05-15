@@ -1,0 +1,114 @@
+#!amber
+
+# Copyright 2018 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# A test for a bug found by GraphicsFuzz.
+
+# A fragment shader that uses struct initializers.
+# Derived from the following GLSL fragment shader.
+# We check that all pixels are red. The test passes because main does
+# some computation and then writes red to _GLF_color.
+
+# #version 310 es
+#
+# precision highp float;
+# precision highp int;
+#
+# layout(location = 0) out vec4 _GLF_color;
+#
+# struct S {
+#  bool b;
+# };
+#
+# S foo()
+# {
+#  if(true)
+#   {
+#      return S(true);
+#   }
+#   return S(true);
+# }
+# void main(void)
+# {
+#   foo();
+#   _GLF_color = vec4(1.0, 0.0, 0.0, 1.0);
+# }
+
+SHADER vertex variant_vertex_shader PASSTHROUGH
+
+SHADER fragment variant_fragment_shader SPIRV-ASM TARGET_ENV spv1.0
+; SPIR-V
+; Version: 1.0
+; Generator: Khronos SPIR-V Tools Assembler; 0
+; Bound: 23
+; Schema: 0
+               OpCapability Shader
+          %1 = OpExtInstImport "GLSL.std.450"
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %2 "main" %3
+               OpExecutionMode %2 OriginUpperLeft
+               OpSource ESSL 310
+               OpName %2 "main"
+               OpName %4 "S"
+               OpMemberName %4 0 "b"
+               OpName %5 "foo("
+               OpName %3 "_GLF_color"
+               OpDecorate %3 Location 0
+          %6 = OpTypeVoid
+          %7 = OpTypeFunction %6
+          %8 = OpTypeBool
+          %4 = OpTypeStruct %8
+          %9 = OpTypeFunction %4
+         %10 = OpConstantTrue %8
+         %11 = OpConstantComposite %4 %10
+         %12 = OpTypeFloat 32
+         %13 = OpTypeVector %12 4
+         %14 = OpTypePointer Output %13
+          %3 = OpVariable %14 Output
+         %15 = OpConstant %12 1
+         %16 = OpConstant %12 0
+         %17 = OpConstantComposite %13 %15 %16 %16 %15
+          %2 = OpFunction %6 None %7
+         %18 = OpLabel
+         %19 = OpFunctionCall %4 %5
+               OpStore %3 %17
+               OpReturn
+               OpFunctionEnd
+          %5 = OpFunction %4 None %9
+         %20 = OpLabel
+               OpSelectionMerge %21 None
+               OpBranchConditional %10 %22 %21
+         %22 = OpLabel
+               OpReturnValue %11
+         %21 = OpLabel
+               OpReturnValue %11
+               OpFunctionEnd
+END
+
+
+BUFFER variant_framebuffer FORMAT B8G8R8A8_UNORM
+
+PIPELINE graphics variant_pipeline
+  ATTACH variant_vertex_shader
+  ATTACH variant_fragment_shader
+  FRAMEBUFFER_SIZE 256 256
+  BIND BUFFER variant_framebuffer AS color LOCATION 0
+END
+CLEAR_COLOR variant_pipeline 0 0 0 255
+
+CLEAR variant_pipeline
+RUN variant_pipeline DRAW_RECT POS 0 0 SIZE 256 256
+
+EXPECT variant_framebuffer IDX 0 0 SIZE 256 256 EQ_RGBA 255 0 0 255

@@ -1,0 +1,17 @@
+include_rules = [
+  "-cc",
+  "-components/viz",
+  "+components/viz/common",
+  "+mojo/public/cpp",
+  "-ui",
+  "+ui/gfx",
+]
+
+specific_include_rules = {
+  "demo_main\.cc": [
+    "+components/viz/demo/host",
+    "+components/viz/demo/service",
+    "+mojo/core/embedder",
+    "+ui",
+  ],
+}

@@ -1,0 +1,38 @@
+# Copyright © 2019 by Dave Mielke <dave@mielke.cc>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table: spaces.uti,grc-international-common.uti
+table: spaces.uti,grc-international-decomposed.uti
+table: spaces.uti,grc-international-composed.uti
+table:
+  language: grc
+  region: en
+  __assert-match: grc-international-en.utb
+flags: {testmode: forward}
+tests:
+
+- # lowercase letters
+  - αβγδεζηθικλμνξοπρστυφχψως
+  - ⠁⠃⠛⠙⠑⠵⠱⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠥⠋⠯⠽⠺⠎
+
+- # uppercase letters
+  - ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ
+  - ⠨⠁⠨⠃⠨⠛⠨⠙⠨⠑⠨⠵⠨⠱⠨⠹⠨⠊⠨⠅⠨⠇⠨⠍⠨⠝⠨⠭⠨⠕⠨⠏⠨⠗⠨⠎⠨⠞⠨⠥⠨⠋⠨⠯⠨⠽⠨⠺
+
+- # accents
+  - ᾿ ῾ ΄ ` ´ ῀ ͺ ι ¯
+  - ⠴ ⠓ ⠈ ⠠ ⠈ ⠐ ⠔ ⠔ ⠸
+
+- # symbols
+  - ϕ
+  - ⠋
+
+- # punctuation
+  - ; · ᾽
+  - ⠢ ⠆ ⠄
+

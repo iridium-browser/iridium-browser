@@ -1,0 +1,69 @@
+# TODO(crbug.com/1111979) Enable all tests on lacros.
+-AccessContextAuditBrowserTest.CheckSessionOnly
+-AccessContextAuditBrowserTest.RemoveRecords
+-AdsPageLoadMetricsObserverBrowserTest.PageAdDensityIgnoreDisplayNoneFrame
+-AdsPageLoadMetricsObserverBrowserTest.PageAdDensityMultipleFrames
+-AdsPageLoadMetricsObserverBrowserTest.PageAdDensityRecordsPageMax
+-All/HostedOrWebAppTest.CtrlClickLink/HostedApp
+-All/HostedOrWebAppTest.CtrlClickLink/WebApp
+-All/PopupBrowserTest.MoveClampedToCurrentDisplay*
+-All/WebRtcScreenCaptureBrowserTestWithPicker.ScreenCaptureVideo*
+-All/WebRtcScreenCaptureBrowserTestWithPicker.ScreenCaptureVideoAndAudio*
+-AudioFocusWebContentsObserverBrowserTest.PlatformAppHasDifferentAudioFocus
+-BluetoothApiTest.*
+-BluetoothLowEnergyApiTest.*
+-BluetoothPrivateApiTest.*
+-BrowserTest.GetSizeForNewRenderView
+-BrowserTest.RestorePinnedTabs
+-BrowserViewTest.DevToolsUpdatesBrowserWindow
+-BrowserViewTest.F6CyclesThroughCaptionBubbleToo
+-BrowserViewTest.GetAccessibleTabModalDialogTitle
+-BrowsingDataRemoverBrowserTest.StorageRemovedFromDisk
+-ContentSettingsTest.AllowCookiesForASessionUsingExceptions
+-ContextMenuBrowserTest.*
+-CustomTabBarViewBrowserTest.BackToAppButtonIsNotVisibleInOutOfScopePopups
+-CustomTabBarViewBrowserTest.IsNotCreatedInPopup
+-CustomTabBarViewBrowserTest.RightClickMenuShowsCopyUrl
+-DeclarativeContentApiTest.RulesPersistence
+-ExternalProtocolDialogBrowserTest.TestFocus
+-FindInPageControllerTest.FindMovesOnTabClose_Issue1343052
+-FindInPageControllerTest.FindMovesWhenObscuring
+-FolderUploadConfirmationViewTest.InitiallyFocusesCancel
+-GlobalErrorBubbleTest.InvokeUi_ExternalInstallBubbleAlert
+-KeepAliveDevToolsTest.KeepsAliveUntilBrowserClose
+-MediaRouterUIBrowserTest.EphemeralToolbarIconForDialog
+-MediaRouterUIBrowserTest.OpenDialogFromAppMenu
+-OmniboxPopupContentsViewTest.ClickOmnibox
+-OmniboxPopupContentsViewTest.PopupMatchesLocationBarBackground
+-OutOfProcessPPAPITest.NetAddress
+-OutOfProcessPPAPITest.Printing
+-OutOfProcessPPAPITest.URLRequest_CreateAndIsURLRequestInfo
+-PageLoadMetricsBrowserTest.MainFrameIntersectionsMainFrame
+-PreservedWindowPlacement.Test
+-ProfileListDesktopBrowserTest.SwitchToProfile
+-SessionRestoreTest.RestoredTabsHaveCorrectInitialSize
+-SSLUITest.DisplayedContentWithCertErrorsClearedOnNavigation
+-SSLUITest.InAppTestHTTPSExpiredCertAndPreviouslyProceeded
+-SSLUITest.TestCloseTabWithUnsafePopup
+-TabActivityWatcherTest.AllWindowMetricsArePopulated
+-TabHoverCardBubbleViewBrowserTest.WidgetNotVisibleOnMousePressAfterTabFocus
+-TabHoverCardBubbleViewBrowserTest.WidgetVisibleOnKeyPressAfterTabFocus
+-TabRestoreTest.RestoreWindowBounds
+# crbug.com/1121486
+# Following tests were flaky. We disable them first until we have time to investigate.
+-DevToolsExtensionTest.HttpIframeInDevToolsExtensionDevtools
+-DevToolsTest.*
+-FindInPageControllerTest.SingleOccurrence
+-MediaRouterUIBrowserTest.PinAndUnpinToolbarIcon
+-MultiActionAPITest.PopupCreation/*
+-PDFExtensionClipboardTest.CombinedShiftArrowPresses
+-PopupTrackerBrowserTest.ControlClick_HasTracker
+# https://crbug.com/1197201
+# Following tests fail when Mirror is enabled on Lacros. They try to update
+# credentials in Ash Account Manager, which is currently not possible in
+# browser_tests because of lack of crosapi.
+-DiceBrowserTest.*
+-DiceBrowsingDataRemoverBrowserTest.*
+-ExtensionBrowsingDataTest.*
+-UserPolicySigninServiceTest.*
+-UserPolicySigninServiceSyncNotRequiredTest.AcceptManagementDeclineSync

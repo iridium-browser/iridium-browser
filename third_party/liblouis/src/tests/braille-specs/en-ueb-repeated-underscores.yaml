@@ -1,0 +1,20 @@
+# Copyright © 2018 by Michael Robin <robin@chapman.edu>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+# See https://www.freelists.org/post/liblouis-liblouisxml/FW-UEB-grade-2-with-repeated-underscores-as-one-or-two-cells-instead-of-full-cells
+# See https://github.com/liblouis/liblouis/pull/792 which contains a related change but did not fix the test
+table:
+  language: en
+  grade: 2
+  system: ueb
+  __assert-match: en-ueb-g2.ctb
+tests:
+  - - '_ __ ___'
+    - '_ _.- _.-_'
+    - {xfail: multiple "_" becomes single "_"}

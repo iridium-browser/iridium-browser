@@ -1,0 +1,15 @@
+<style include="cr-shared-style shimless-rma-shared">
+</style>
+
+<base-page>
+  <div slot="left-pane">
+    <h1>[[i18n('provisioningPageTitleText')]]</h1>
+  </div>
+  <div slot="right-pane">
+    <div class="illustration-wrapper">
+      <paper-spinner-lite hidden$="[[!shouldShowSpinner_]]" active
+          class="large-spinner">
+      </paper-spinner-lite>
+    </div>
+  </div>
+</base-page>

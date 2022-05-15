@@ -1,0 +1,47 @@
+/*
+ * The default style sheet used to render elements with a `popup`
+ * content attribute (with HTMLPopupAttribute feature enabled).
+ *
+ * Copyright 2021 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+@namespace "http://www.w3.org/1999/xhtml";
+
+[popup=popup i]:not(:popup-open),
+[popup=hint i]:not(:popup-open),
+[popup=async i]:not(:popup-open) {
+  display: none;
+}
+
+[popup=popup i],
+[popup=hint i],
+[popup=async i] {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* The rest here is copied from dialog, perhaps these shouldn't
+     apply to popup. At least the background color is nice, because
+     it obscures the backdrop. And the foreground color/border
+     help to set off the popup from the rest of the page. */
+  width: fit-content;
+  height: fit-content;
+  border: 1px solid;
+  padding: 1em;
+  background: -internal-light-dark(white, black);
+  color: -internal-light-dark(black, white);
+}
+
+[popup=popup i]::backdrop,
+[popup=hint i]::backdrop,
+[popup=async i]::backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: transparent;
+    pointer-events: none !important;
+}

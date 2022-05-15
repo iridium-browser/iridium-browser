@@ -1,0 +1,28 @@
+display: unicode-without-blank.dis
+table:
+  language: en
+  grade: 1
+  system: ueb
+  __assert-match: en-ueb-g1.ctb
+flags: {testmode: backward}
+tests:
+  # Numbers.
+  - [⠼⠁, 1]
+  - [⠼⠁⠁, 11]
+  # Indicators which prefix other cells and don't mean anything by themselves.
+  - [⠈, \\4/]
+  - [⠈⠁, "@"]
+  - [⠘, \\45/]
+  - [⠸, \\456/]
+  - [⠨, \\46/]
+  - [⠐, \\5/]
+  - [⠰, \\56/]
+  - [⠠, ""]
+  - [⠠⠁, A]
+  - [⠠⠠, ""]
+  - [⠠⠠⠁⠁, AA]
+  # Backtranslations followed by punctuation
+  - [⠁⠂, "a,"]
+  - [⠃⠂, "b,"]
+  - [⠉⠂, "c,"]
+  - [⠙⠂, "d,"]

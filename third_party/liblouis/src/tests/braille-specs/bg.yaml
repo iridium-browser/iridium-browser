@@ -1,0 +1,44 @@
+# Tests for Bulgarian braille
+#
+# Copyright © 2021 by Rumyana Kamenska (rkamenska@gmail.com)
+
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ----------------------------------------------------------------------------------------------
+
+# literary braille
+display: |
+  display \s 0
+  include bg.dis
+table:
+  language: bg
+  type: literary
+  contraction: no
+  dots: 6
+
+tests:
+
+  # Example for dashes in dialogs. Capital Cyrillic letters should be
+  # marked with dots 46
+  -
+    - Добро утро, как си? - Попита той.
+    - Àdobro utro, kak si?õ- Àpopita toy.
+  -
+    - Благодаря, добре съм.
+    - Àblagodar$, dobre s[m.
+
+  # Several consecutive capital Cyrillic letters should be marked with
+  # dots 56
+  -
+    - БНТ, ДКМС
+    - ôbnt, ôdkms
+
+  # In this table there is not difference between cyrillic and latin
+  # letters. They all are capitalized with dots 46 Mixed letters and
+  # digits.
+  - 
+    - 1А2б3C4d
+    - ÁaÀaÁbøbÁcÀcÁdõd
+

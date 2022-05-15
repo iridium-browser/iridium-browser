@@ -1,0 +1,91 @@
+# Copyright © 2018 by André-Abush Clause <dev@andreabc.net>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table:
+  language: fr
+  type: computer
+  dots: 8
+  system: bfu
+  __assert-match: fr-bfu-comp8.utb
+tests:
+  - - abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    - ⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵ ⡁⡃⡉⡙⡑⡋⡛⡓⡊⡚⡅⡇⡍⡝⡕⡏⡟⡗⡎⡞⡥⡧⡺⡭⡽⡵
+  - - 1 2 3 4 5 6 7 8 9 0 42 1234
+    - ⠡ ⠣ ⠩ ⠹ ⠱ ⠫ ⠻ ⠳ ⠪ ⠼ ⠹⠣ ⠡⠣⠩⠹
+  - - 3*3 1+1=2 1/4=0,25 (1+14,48)/4=3,87
+    - ⠩⠔⠩ ⠡⣖⠡⣶⠣ ⠡⠌⠹⣶⠼⠂⠣⠱ ⠦⠡⣖⠡⠹⠂⠹⠳⠴⠌⠹⣶⠩⠂⠳⠻
+  - - 4^2=16 4^(1+2-6)
+    - ⠹⠈⠣⣶⠡⠫ ⠹⠈⠦⠡⣖⠣⠤⠫⠴
+  - ["ÀàÂâÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜü", "⡷⠷⡡⢡⡯⠯⡿⠿⡮⠮⡣⢣⡫⢫⡩⢩⡻⢻⡹⢹⡪⢪⡾⠾⡱⢱⡳⢳"]
+  - ['!"(),-./\\;:;?@[]{}*…', '⠖⠶⠦⠴⠂⠤⠲⠌⢌⠆⠒⠆⠢⠜⣦⣴⣆⣰⠔⢤']
+  - - +±=<>×÷¹²³%¼½¾‰
+    - ⣖⣤⣶⢆⡰⣔⣒⡈⡘⡸⢬⢥⢨⢭⣬
+    - mode: [compbrlAtCursor]
+      cursorPos: [7,7]
+  - ["_|$¢€£¥§ ¨¸´¤„`#&®™©", "⣐⢸⡔⣉⣑⡆⣲⢏ ⠨⠸⠐⠘⠰⠠⢼⢿⢗⢞⢉"]
+  - ["•‣∙⁍⁌⁃◦ —–°", "⣛⣛⣛⣛⣛⣛⣛ ⣘⣈⡢"]
+  - - « blabla bla bla » “” ‚‚‹›„‘’' Eh ! Ah ? Oh ;
+    - ⢶⡀⠃⠇⠁⠃⠇⠁⡀⠃⠇⠁⡀⠃⠇⠁⡀⡶ ⣄⣠ ⡠⡠⡐⢐⠰⢠⡄⠄ ⡑⠓⡀⠖ ⡁⠓⡀⠢ ⡕⠓⡀⠆
+    - mode: [compbrlAtCursor]
+      cursorPos: [7,7]
+  - - â ê î ô û ë ï ü œ Â Ê Î Ô Û Ë Ï Ü Œ
+    - ⢡ ⢣ ⢩ ⢹ ⢱ ⢫ ⢻ ⢳ ⢪ ⡡ ⡣ ⡩ ⡹ ⡱ ⡫ ⡻ ⡳ ⡪
+    - mode: [compbrlAtCursor]
+      cursorPos: [7,7]
+  - - ¡¿ÁáÍíÑñÓóÚúÄäÖöß ^`ˆ˜¨¯´¸
+    - ⢖⢢⣷⢷⡌⣌⣝⣻⡬⠬⣾⢾⡼⣜⣪⢔⢎ ⠈⠠⢈⡨⠨⢍⠐⠸
+    - mode: [compbrlAtCursor]
+      cursorPos: [7,7]
+  - - '|†‡¤¦ªº¬¬±¶·'
+    - ⢸⢴⡴⠘⢘⣡⣢⡲⡲⣤⣸⢀
+    - mode: [compbrlAtCursor]
+      cursorPos: [7,7]
+  - ["ƒŠšŽžŸÿµÃãÅÅÆæÌìÐðÒòÕõØøÝýÞþ", "⢋⣮⢮⣵⢵⣹⢲⡒⣁⢁⡂⡂⡜⢜⣊⢊⣃⢃⣕⢕⣅⣨⣼⢰⣽⢽⣚⢚"]
+
+table:
+  language: fr
+  type: computer
+  dots: 8
+  system: bfu
+  __assert-match: fr-bfu-comp8.utb
+flags: {testmode: backward}
+tests:
+  - - ⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵ ⡁⡃⡉⡙⡑⡋⡛⡓⡊⡚⡅⡇⡍⡝⡕⡏⡟⡗⡎⡞⡥⡧⡺⡭⡽⡵
+    - abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ
+  - - ⠡ ⠣ ⠩ ⠹ ⠱ ⠫ ⠻ ⠳ ⠪ ⠼ ⠹⠣ ⠡⠣⠩⠹
+    - 1 2 3 4 5 6 7 8 9 0 42 1234
+  - - ⠩⠔⠩ ⠡⣖⠡⣶⠣ ⠡⠌⠹⣶⠼⠂⠣⠱ ⠦⠡⣖⠡⠹⠂⠹⠳⠴⠌⠹⣶⠩⠂⠳⠻
+    - 3*3 1+1=2 1/4=0,25 (1+14,48)/4=3,87
+  - - ⠹⠈⠣⣶⠡⠫ ⠹⠈⠦⠡⣖⠣⠤⠫⠴
+    - 4^2=16 4^(1+2-6)
+  - ["⡷⠷⡡⢡⡯⠯⡿⠿⡮⠮⡣⢣⡫⢫⡩⢩⡻⢻⡹⢹⡪⢪⡾⠾⡱⢱⡳⢳", "ÀàÂâÇçÉéÈèÊêËëÎîÏïÔôŒœÙùÛûÜü"]
+  - ['⠖⠶⠦⠴⠂⠤⠲⠌⢌⠆⠒⠆⠢⠜⣦⣴⣆⣰⠔⢤', '!"(),-./\\;:;?@[]{}*…']
+  - - ⣖⣤⣶⢆⡰⣔⣒⡈⡘⡸⢬⢥⢨⢭⣬
+    - +±=<>×÷¹²³%¼½¾‰
+    - mode: [compbrlAtCursor]
+      cursorPos: [7,7]
+  - ["⣐⢸⡔⣉⣑⡆⣲⢏ ⠨⠸⠐⠘⠰⠠⢼⢿⢗⢞⢉", "_|$¢€£¥§ ¨¸´¤„`#&®™©"]
+  - ["⣛ ⣘⣈⡢", "• —–°"]
+  - - ⢶⡀⠃⠇⠁⠃⠇⠁⠤⠃⠇⠁⠤⠃⠇⠁⡀⡶ ⣄⣠ ⡠⡠⡐⢐⠰⢠⡄⠄ ⡑⠓⡀⠖ ⡁⠓⡀⠢ ⡕⠓⡀⠆
+    - « blabla-bla-bla » “” ‚‚‹›„‘’' Eh ! Ah ? Oh ;
+    - mode: [compbrlAtCursor]
+      cursorPos: [7,7]
+  - - ⢡ ⢣ ⢩ ⢹ ⢱ ⢫ ⢻ ⢳ ⢪ ⡡ ⡣ ⡩ ⡹ ⡱ ⡫ ⡻ ⡳ ⡪
+    - â ê î ô û ë ï ü œ Â Ê Î Ô Û Ë Ï Ü Œ
+    - mode: [compbrlAtCursor]
+      cursorPos: [7,7]
+  - - ⢖⢢⣷⢷⡌⣌⣝⣻⡬⠬⣾⢾⡼⣜⣪⢔⢎ ⠈⠠⢈⡨⠨⢍⠐⠸
+    - ¡¿ÁáÍíÑñÓóÚúÄäÖöß ^`ˆ˜¨¯´¸
+    - mode: [compbrlAtCursor]
+      cursorPos: [7,7]
+  - - ⢸⢴⡴⠘⢘⣡⣢⡲⡲⣤⣸⢀
+    - '|†‡¤¦ªº¬¬±¶·'
+    - mode: [compbrlAtCursor]
+      cursorPos: [7,7]
+  - ["⢋⣮⢮⣵⢵⣹⢲⡒⣁⢁⡂⡂⡜⢜⣊⢊⣃⢃⣕⢕⣅⣨⣼⢰⣽⢽⣚⢚", "ƒŠšŽžŸÿµÃãÅÅÆæÌìÐðÒòÕõØøÝýÞþ"]
+  

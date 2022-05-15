@@ -1,0 +1,290 @@
+table:
+  language: en
+  grade: 2
+  system: ueb
+  __assert-match: en-ueb-g2.ctb
+tests:
+  # 9.2.1 page 93
+- - pneumonia
+  - .2pneumonia
+  - typeform:
+      italic: '+        '
+
+- - 8 chickens!
+  - .2#h *ick5s6
+  - typeform:
+      italic: '+          '
+
+- - story stories
+  - /or_2y /or_2ies
+  - typeform:
+      underline: '    +     +  '
+
+- - 24 should be 34
+  - '#bd %d 2 _2#cd'
+  - typeform:
+      underline: '             + '
+
+- - bright blue ball
+  - ~2b"r ~2blue ~2ball
+  - typeform:
+      bold: "+      +    +   "
+
+- - '27.9'
+  - '#bg_24#i'
+  - typeform:
+      underline: '  + '
+    xfail: true
+
+- - Stop! May I help?
+  - ',/op~26 ,may ,i help~28'
+  - typeform:
+      bold: '    +           +'
+
+- - 83%
+  - '#hc_2.0'
+  - typeform:
+      underline: '  +'
+
+- - It will cost $45 not €45.
+  - ',x w co/ ~2`s#de n ~2`e#de4'
+  - typeform:
+      bold: '             +       +   '
+
+- - For help, click the ? icon.
+  - ',= help1 click ! ~2;8 icon4'
+  - typeform:
+      bold: '                    +      '
+
+- - change y to i
+  - '*ange .2;y to .2i'
+  - typeform:
+      italic: '       +    +'
+
+- - 55 not 56
+  - '#e~2#e n #e~2#f'
+  - typeform:
+      bold: ' +      +'
+    xfail: true
+
+  # 9.2.2 page 94
+
+- - I have enough knowledge.
+  - _2,i _2h _25 _2k4
+  - typeform:
+      underline: '+ +    +      +         '
+
+- - ("Beyond belief!")
+  - '"<8.2,2y .22lief60">'
+  - typeform:
+      italic: '  +      +        '
+
+- - Which bowl is broken?
+  - ~2,:i~2* b~2{l is brok~258
+  - typeform:
+      bold: '+  +   +          +  '
+
+- - M is for Mother
+  - ;,m is = .2,"m
+  - typeform:
+      italic: '         +     '
+
+  # 9.2.3 page 94
+- - mother  mother  mother  mother
+  - mo!~2r  mo~2!r  mo?~2}  mot~2h}
+  - typeform:
+      bold: '     +    +         +      +  '
+
+  # 9.3.2 page 94
+- - Who is for the people?
+  - ',:o is _1= ! p8'
+  - typeform:
+      underline: '       +++            '
+
+- - She was right.
+  - ',%e ~10 "r4'
+  - typeform:
+      bold: '    +++       '
+
+- - R.S.V.P.
+  - .1,r4,s4,v4,p4
+  - typeform:
+      italic: ++++++++
+
+- - 'l''oeil-de-boeuf (Fr.: bull''s eye)'
+  - .1l'oeil-de-boeuf "<;,fr43 bull's eye">
+  - typeform:
+      italic: '+++++++++++++++                  '
+
+- - one two–three
+  - .1"o .1two,-?ree
+  - typeform:
+      italic: +++++++++++++
+
+- - '##1,500,000 1 500 000'
+  - _1#a1ejj1jjj _1#a"ejj"jjj
+  - typeform:
+      underline: '+++++++++ +++++++++  '
+    xfail: true
+
+- - 1939-1945
+  - .1#aici-#aide
+  - typeform:
+      italic: +++++++++
+
+- - briefly
+  - brief.1ly
+  - typeform:
+      italic: '     ++'
+
+- - daytime
+  - '"d_1"t'
+  - typeform:
+      underline: '   ++++'
+
+- - 13.86666...
+  - '#ac4h~1#ffff444'
+  - typeform:
+      bold: '    +++++++'
+    xfail: true
+
+- - Go to http://www.wikipedia.org for general information.
+  - ',g to .1http3_/_/www4wikip$ia4org = g5}al 9=ma;n4'
+  - typeform:
+      italic: '      ++++++++++++++++++++++++                         '
+
+- - the ionogenic (ion-forming) form
+  - '! .1ionog5ic "<ion-=m+"> .1=m'
+  - typeform:
+      italic: '    +++++++++               ++++'
+
+- - '... referred to as sea waves or (from the Japanese) tsunami.'
+  - 444 ref}r$ to z ~1sea ~1waves or "<f ! ,japanese"> ~1.1tsunami4
+  - typeform:
+      bold: '                   +++++++++                        ++++++++'
+      italic: '                                                    ++++++++'
+
+- - HarperCollinsPublishers
+  - ',h>p},coll9s.1,publi%}s'
+  - typeform:
+      italic: '             ++++++++++'
+
+- - N(S) is called the empty set or null set.
+  - ~1,n"<.2,s"> is call$ ! ~1empty ~1set or ~1null ~1set4
+  - typeform:
+      bold: ++++               +++++++++    +++++++++
+      italic: '  +                                      '
+
+  # 9.4.4 page 96
+- - Charles Dickens wrote Oliver Twist, Great Expectations and A Tale of Two Cities.
+  - ',*>les ,dick5s wrote .7,oliv} ,twi/1 ,grt ,expecta;ns.'' & .7,a ,tale ( ,two
+    ,cities4.'''
+  - typeform:
+      italic: '                      ++++++++++++++++++++++++++++++++     +++++++++++++++++++++'
+
+- - 'Maybe as an adverb is one word: Maybe it will rain tomorrow. May be as a verb phrase is two words: He may be home soon.'
+  - ~1,maybe z an adv}b is "o ~w3 .7,maybe x w ra9 tm4.' ~1,may ~12 z a v}b phrase is two ~ws3 .7,he may 2 home soon4.'
+  - typeform:
+      bold:   '+++++                                                        ++++++                                                    '
+      italic: '                                ++++++++++++++++++++++++++++                                       ++++++++++++++++++++'
+
+- - Click the Up One Level button.
+  - ',click ! ~7,up ,"o ,level~'' button4'
+  - typeform:
+      bold: '          ++++++++++++        '
+
+- - When using the typewriter, words were underlined but, when using a word processor, the italic font is preferred.
+  - ',:5 us+ ! typewrit}1 _7~ws 7 "ul9$_'' b1 :5 us+ a ~w processor1 .7! italic font
+    is pref}r$4.'''
+  - typeform:
+      underline: '                           +++++++++++++++++++++                                                                '
+      italic:    '                                                                                   +++++++++++++++++++++++++++++'
+
+- - In C:\\My Documents\\letter to dad 041023.doc, the underlined part is the filename.
+  - ',9 ,c3_*,my ,docu;ts_*_7lett}"" to dad #jdajbc_''4doc1 ! "ul9$ "p is ! file"n4'
+  - typeform:
+      underline: '                   ++++++++++++++++++++                                          '
+    xfail: true
+
+- - textbook
+  - ~1text~'book
+  - typeform:
+      bold: '++++    '
+
+- - and/or
+  - _1&_'_/or
+  - typeform:
+      underline: '+++   '
+
+- - syllable emphasis
+  - _1syl_'lable _1em_'phasis
+  - typeform:
+      underline: '+++      ++      '
+
+- - Radar is from radio detecting and ranging.
+  - .1,rad> is f .1ra.'dio .2detect+ .2& .2rang+4
+  - typeform:
+      italic: '+++++         ++    +         +   +       '
+
+- - HarperFlamingoCanada
+  - ',h>p}.1,flam+o.'',canada'
+  - typeform:
+      italic: '      ++++++++      '
+
+- - the Globe's business section
+  - '! .1,globe.''''s busi;s sec;n'
+  - typeform:
+      italic: '    +++++                   '
+
+  # 9.7.1 page 99
+    
+  # 9.7.2 page 99
+  
+- - Hänsel und Gretel, a fairy tale
+  - .7,h~3ansel und ,gretel1.' a fairy tale
+  - typeform:
+      italic: '++++++++++++++++++             '
+
+- - out-of-the-way
+  - '|-.1(-!.''-way'
+  - typeform:
+      italic: '    ++++++    '
+
+- - Brevity is the soul of wit.—Shakespeare
+  - .7,brev;y is ! s|l ( wit4.',-,%akespe>e
+  - typeform:
+      italic: '+++++++++++++++++++++++++++            '
+    xfail: true
+
+- - Remember Do unto others ...
+  - ',rememb} .7,d unto o!rs.'' 444'
+  - typeform:
+      italic: '         ++++++++++++++    '
+
+  #   9.7.3 page 100
+
+- - Did you read Hamlet?
+  - ',did y r1d _1,hamlet8'
+  - typeform:
+      underline: '             ++++++ '
+    xfail: true
+
+- - '"Help! I''m falling."'
+  - 8.1,help6 ,i'm .1fall+40
+  - typeform:
+      italic: ' +++++     +++++++  '
+    xfail: true
+
+  #   9.8.1 page 101
+
+- - 'The object of the following sentence is underlined: Lucy Maud Montgomery wrote Anne of Green Gables.'
+  - ',! object ( ! foll{+ s5t;e is "ul9$3 ,lucy ,maud ,montgom}y wrote _7.7,anne ( ,gre5 ,gables4.''_'''
+  - typeform:
+      italic:    '                                                                               +++++++++++++++++++++'
+      underline: '                                                                               +++++++++++++++++++++'
+
+- - 'the bank''s dictum: Pecunia Felicitatibus Honoratur. Money welcomed gladly.'
+  - '! bank''s dictum3 .7~7,pecunia ,felicitatibus ,honoratur4~'' ,m"oy welcom$ gladly4.'''
+  - typeform:
+      italic: '                   ++++++++++++++++++++++++++++++++ ++++++++++++++++++++++'
+      bold:   '                   ++++++++++++++++++++++++++++++++                       '

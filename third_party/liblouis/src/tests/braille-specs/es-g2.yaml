@@ -1,0 +1,594 @@
+# Copyright © 2018 Juan Pablo Bello
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table:
+  language: es
+  grade: 2
+  __assert-match: es-g2.ctb
+
+flags: {testmode: forward}
+tests:
+
+  # general contractions, different places
+  - - abeja
+    - ⠂⠑⠚⠁
+  - - nabo
+    - ⠝⠂⠕
+  - - admiro
+    - ⠹⠍⠊⠗⠕
+  - - radio
+    - ⠗⠹⠊⠕
+  - - ciudad
+    - ⠉⠊⠥⠙⠹
+  - - alba
+    - ⠅⠃⠁
+  - - falda
+    - ⠋⠅⠙⠁
+  - - actual
+    - ⠁⠉⠞⠥⠅
+  - - ancho
+    - ⠩⠉⠓⠕
+  - - zanco
+    - ⠵⠩⠉⠕
+  - - tocan
+    - ⠞⠕⠉⠩
+  - - arpa
+    - ⠡⠏⠁
+  - - marco
+    - ⠍⠡⠉⠕
+  - - jugar
+    - ⠚⠥⠛⠡
+  - - asno
+    - ⠯⠝⠕
+  - - gasto
+    - ⠛⠯⠞⠕
+  - - telas
+    - ⠞⠑⠇⠯
+  - - bravo
+    - ⠆⠁⠧⠕
+  - - cobre
+    - ⠉⠕⠆⠑
+  - - crisol
+    - ⠒⠊⠎⠕⠇
+  - - sacro
+    - ⠎⠁⠒⠕
+  - - drama
+    - ⠲⠁⠍⠁
+  - - ladrillo
+    - ⠇⠁⠲⠊⠇⠇⠕
+  - - embudo
+    - ⠣⠃⠥⠙⠕
+  - - gema
+    - ⠛⠣⠁
+  - - tótem
+    - ⠞⠬⠞⠣
+  - - enchufe
+    - ⠢⠉⠓⠥⠋⠑
+  - - gente
+    - ⠛⠢⠞⠑
+  - - pisen
+    - ⠏⠊⠎⠢
+  - - era
+    - ⠦⠁
+  - - serio
+    - ⠎⠦⠊⠕
+  - - oler
+    - ⠕⠇⠦
+  - - esbelto
+    - ⠫⠃⠑⠇⠞⠕
+  - - vestido
+    - ⠧⠫⠞⠊⠙⠕
+  - - nieves
+    - ⠝⠊⠑⠧⠫
+  - - gris
+    - ⠶⠊⠎
+  - - agrio
+    - ⠁⠶⠊⠕
+  - - impedir
+    - ⠜⠏⠑⠙⠊⠗
+  - - dime
+    - ⠙⠜⠑
+  - - muslim
+    - ⠍⠥⠎⠇⠜
+  - - indio
+    - ⠔⠙⠊⠕
+  - - tinta
+    - ⠞⠔⠞⠁
+  - - fin
+    - ⠋⠔
+  - - ioniza
+    - ⠼⠊⠵⠁
+  - - accionista
+    - ⠁⠉⠉⠼⠊⠎⠞⠁
+  - - omega
+    - ⠺⠑⠛⠁
+  - - doma
+    - ⠙⠺⠁
+  - - tom
+    - ⠞⠺
+  - - once
+    - ⠕⠝⠉⠑
+  - - leones
+    - ⠇⠑⠕⠝⠫
+  - - donativo
+    - ⠙⠭⠁⠞⠊⠧⠕
+  - - don
+    - ⠙⠭
+  - - orgullo
+    - ⠱⠛⠥⠇⠇⠕
+  - - tortuga
+    - ⠞⠱⠞⠥⠛⠁
+  - - dolor
+    - ⠙⠕⠇⠱
+  - - oscuro
+    - ⠪⠉⠥⠗⠕
+  - - loseta
+    - ⠇⠪⠑⠞⠁
+  - - cocos
+    - ⠉⠕⠉⠪
+  - - probeta
+    - ⠖⠕⠃⠑⠞⠁
+  - - aprisa
+    - ⠁⠖⠊⠎⠁
+  - - quieto
+    - ⠟⠊⠑⠞⠕
+  - - paquete
+    - ⠏⠁⠟⠑⠞⠑
+  - - truco
+    - ⠴⠥⠉⠕
+  - - cuatro
+    - ⠉⠥⠁⠴⠕
+  - - huelga
+    - ⠓⠳⠇⠛⠁
+  - - tenue
+    - ⠞⠢⠳
+  - - mayab
+    - ⠍⠁⠽⠁⠃
+
+  # intersyllabic tests where a contraction might be a syllable itself or part syllable
+  - - abdica
+    - ⠂⠙⠊⠉⠁
+  - - abatir
+    - ⠂⠁⠞⠊⠗
+  - - adjetivo
+    - ⠹⠚⠑⠞⠊⠧⠕
+  - - amada
+    - ⠁⠍⠹⠁
+  - - alcoba
+    - ⠅⠉⠕⠃⠁
+  - - dalia
+    - ⠙⠅⠊⠁
+  - - lanza
+    - ⠇⠩⠵⠁
+  - - anuda
+    - ⠩⠥⠙⠁
+  - - partir
+    - ⠏⠡⠞⠊⠗
+  - - arreglo
+    - ⠡⠗⠑⠛⠇⠕
+  - - solas
+    - ⠎⠇⠯
+  - - asistir
+    - ⠯⠊⠎⠞⠊⠗
+  - - bruja
+    - ⠆⠥⠚⠁
+  - - subraya
+    - ⠎⠥⠆⠁⠽⠁
+  - - pulcro
+    - ⠏⠥⠇⠒⠕
+  - - Pedro
+    - ⠨⠏⠑⠲⠕
+  - - empieza
+    - ⠣⠏⠊⠑⠵⠁
+  - - tema
+    - ⠞⠣⠁
+  - - miren
+    - ⠍⠊⠗⠢
+  - - ameno
+    - ⠁⠍⠢⠕
+  - - verde
+    - ⠧⠦⠙⠑
+  - - pera
+    - ⠏⠦⠁
+  - - estufa
+    - ⠫⠞⠥⠋⠁
+  - - mesa
+    - ⠍⠫⠁
+  - - negro
+    - ⠝⠑⠶⠕
+  - - limpio
+    - ⠇⠜⠏⠊⠕
+  - - lima
+    - ⠇⠜⠁
+  - - cinta
+    - ⠉⠔⠞⠁
+  - - minuto
+    - ⠍⠔⠥⠞⠕
+  - - camiones
+    - ⠉⠁⠍⠼⠫
+  - - rompe
+    - ⠗⠺⠏⠑
+  - - loma
+    - ⠇⠺⠁
+  - - ronca
+    - ⠗⠭⠉⠁
+  - - cono
+    - ⠉⠭⠕
+  - - corte
+    - ⠉⠱⠞⠑
+  - - mora
+    - ⠍⠱⠁
+  - - mostaza
+    - ⠍⠪⠞⠁⠵⠁
+  - - rosa
+    - ⠗⠪⠁
+  - - prisa
+    - ⠖⠊⠎⠁
+  - - quiso
+    - ⠟⠊⠎⠕
+  - - trigo
+    - ⠴⠊⠛⠕
+  - - pueblo
+    - ⠏⠳⠃⠇⠕
+
+  # multiple contractions: a word may repeat contractions or be entirely represented by them
+  - - abad
+    - ⠂⠹
+  - - abanico
+    - ⠂⠩⠊⠉⠕
+  - - abarcar
+    - ⠂⠡⠉⠡
+  - - adelantar
+    - ⠹⠑⠇⠩⠞⠡
+  - - alababan
+    - ⠅⠂⠂⠩
+  - - aladinos
+    - ⠅⠹⠔⠪
+  - - anaranjadas
+    - ⠩⠡⠩⠚⠹⠯
+  - - asas
+    - ⠯⠯
+  - - asomar
+    - ⠯⠺⠡
+  - - arar
+    - ⠡⠡
+  - - bromas
+    - ⠆⠺⠯
+  - - cadenas
+    - ⠉⠹⠢⠯
+  - - someter
+    - ⠎⠺⠑⠞⠦
+  - - costosos
+    - ⠉⠪⠞⠪⠪
+  - - criminales
+    - ⠒⠜⠔⠅⠫
+  - - drenar
+    - ⠲⠢⠡
+  - - emperadores
+    - ⠣⠏⠦⠹⠱⠫
+  - - empiezan
+    - ⠣⠏⠊⠑⠵⠩
+  - - enero
+    - ⠢⠦⠕
+  - - eras
+    - ⠦⠯
+  - - escritor
+    - ⠫⠒⠊⠞⠱
+  - - esperar
+    - ⠫⠏⠦⠡
+  - - groseros
+    - ⠶⠪⠦⠪
+  - - imponer
+    - ⠜⠏⠭⠦
+  - - inclinar
+    - ⠔⠉⠇⠔⠡
+  - - ominosos
+    - ⠺⠔⠪⠪
+  - - onerosos
+    - ⠕⠝⠦⠪⠪
+  - - opiniones
+    - ⠕⠏⠔⠼⠫
+  - - oros
+    - ⠱⠪
+  - - osos
+    - ⠪⠪
+  - - principales
+    - ⠖⠔⠉⠊⠏⠅⠫
+  - - quinqué
+    - ⠟⠔⠟⠮
+  - - rueden
+    - ⠗⠳⠙⠢
+  - - ronronear
+    - ⠗⠭⠗⠭⠑⠡
+  - - sorprender
+    - ⠎⠱⠖⠢⠙⠦
+  - - trompos
+    - ⠴⠺⠏⠪
+
+  # lower sign exceptions: when a word consists of lowered signs only, first contraction is
+  # destroyed to avoid confussion with punctuation signs
+  - - tren
+    - ⠞⠗⠢
+  - - trinen
+    - ⠞⠗⠔⠢
+  - - entrenen
+    - ⠑⠝⠴⠢⠢
+  - - crin
+    - ⠉⠗⠔
+  - - graben
+    - ⠛⠗⠂⠢
+  - - drenen
+    - ⠙⠗⠢⠢
+
+  # lang realization: contractions may not abbreviate accented (acute) vowels
+  - - ábside
+    - ⠷⠃⠎⠊⠙⠑
+  - - dádivas
+    - ⠙⠷⠙⠊⠧⠯
+  - - álamos
+    - ⠷⠇⠁⠍⠪
+  - - ánfora
+    - ⠷⠝⠋⠱⠁
+  - - árboles
+    - ⠷⠗⠃⠕⠇⠫
+  - - mástiles
+    - ⠍⠷⠎⠞⠊⠇⠫
+  - - émbolo
+    - ⠮⠍⠃⠕⠇⠕
+  - - sartén
+    - ⠎⠡⠞⠮⠝
+  - - céntrico
+    - ⠉⠮⠝⠴⠊⠉⠕
+  - - Inés
+    - ⠨⠔⠮⠎
+  - - ciérralos
+    - ⠉⠊⠮⠗⠗⠅⠪
+  - - ímpetu
+    - ⠌⠍⠏⠑⠞⠥
+  - - índice
+    - ⠌⠝⠙⠊⠉⠑
+  - - cómico
+    - ⠉⠬⠍⠊⠉⠕
+  - - cóncavo
+    - ⠉⠬⠝⠉⠁⠧⠕
+  - - órgano
+    - ⠬⠗⠛⠩⠕
+  - - cóselos
+    - ⠉⠬⠎⠑⠇⠪
+  - - Cuéllar
+    - ⠨⠉⠥⠮⠇⠇⠡
+
+  # word endings tests
+  - - filas
+    - ⠋⠊⠇⠯
+  - - sedes
+    - ⠎⠑⠙⠫
+  - - pasión
+    - ⠏⠯⠼
+  - - reacción
+    - ⠗⠑⠁⠼
+  - - lección
+    - ⠇⠑⠼
+  - - aflicción
+    - ⠁⠋⠇⠊⠼
+  - - obstrucción
+    - ⠕⠃⠎⠴⠥⠼
+  - - cantando
+    - ⠉⠩⠞⠩⠙
+  - - oyendo
+    - ⠕⠽⠢⠙
+  - - moliendo
+    - ⠍⠕⠇⠲⠙
+  - - parque
+    - ⠏⠡⠟
+  - - fácilmente
+    - ⠋⠷⠍
+
+  # an ending may never be replaced by other partword contractions
+  - - hablando
+    - ⠓⠂⠇⠩⠙⠕
+    - xfail: the correct form does not have an extra o at end
+  - - sufriendo
+    - ⠎⠥⠋⠗⠊⠢⠙⠕
+    - xfail: the correct form employs the word ending, see above
+
+  # lang realization: accented vowels are never part of word endings
+  - - mandó
+    - ⠍⠩⠙⠬
+  - - vendó
+    - ⠧⠢⠙⠬
+  - - panqué
+    - ⠏⠩⠟⠮
+  - - implementé
+    - ⠜⠏⠇⠣⠢⠞⠮
+
+  # the acción, ección etc. contractions will form their derived plurals by the addition of the
+  # partword contraction for es (1246)
+  - - pasiones
+    - ⠏⠯⠼⠫
+  - - inyecciones
+    - ⠔⠽⠑⠼⠫
+  - - reducciones
+    - ⠗⠙⠥⠼⠫
+  - - adicciones
+    - ⠹⠊⠼⠫
+
+  # endword contractions for ando, endo, que, mente will form their plurals by the addition of the letter s
+  - - bandos
+    - ⠃⠩⠙⠎
+  - - tremendos
+    - ⠴⠣⠢⠙⠎
+  - - sendos
+    - ⠎⠢⠙⠎
+  - - tanques
+    - ⠞⠩⠟⠎
+  - - alimentes
+    - ⠅⠊⠍⠎
+  - - deprimentes
+    - ⠙⠑⠖⠊⠍⠎
+  - - amígdala
+    - ⠁⠍⠌⠛⠙⠅⠁
+  - - occidente
+    - ⠕⠉⠉⠊⠙⠢⠞⠑
+  - - cercamente
+    - ⠉⠉⠍
+  - - ignoro
+    - ⠊⠛⠝⠱⠕
+  
+  # wheneever a word can be contracted with two contractions which overlap like ad or dr, the later one is preferred.
+  - - cuento
+    - ⠉⠥⠢⠞⠕
+  - - ladra
+    - ⠇⠁⠲⠁
+  - - esquema
+    - ⠫⠟⠣⠁
+  - - fueron
+    - ⠋⠥⠦⠭
+  - - hueso
+    - ⠓⠥⠫⠕
+  - - sígueme
+    - ⠎⠌⠛⠥⠣⠑
+  
+  # word beginnings may not be followed by vowels (to avoid confussion with punctuation signs), including accented ones.
+  # also, word beginnings might not be followed by a contraction which abbreviates a consonant.
+  - - comunicar
+    - ⠉⠺⠥⠝⠊⠉⠡
+  - - comando
+    - ⠉⠺⠩⠙
+
+  # need prioritization
+  - - conato
+    - ⠉⠭⠁⠞⠕
+  - - contrato
+    - ⠒⠞⠗⠁⠞⠕
+  - - consumo
+    - ⠒⠎⠥⠍⠕
+  - - congruente
+    - ⠒⠛⠗⠥⠢⠞⠑
+  - - ingrato
+    - ⠔⠶⠁⠞⠕
+  - - distrae
+    - ⠲⠞⠗⠁⠑
+  - - concreto
+    - ⠒⠉⠗⠑⠞⠕
+  - - comprar
+    - ⠤⠏⠗⠡
+
+  - - expresar
+    - ⠭⠏⠗⠫⠡
+  - - interpretar
+    - ⠽⠏⠗⠑⠞⠡
+  - - pregrabar
+    - ⠖⠛⠗⠂⠡
+  - - pregrado
+    - ⠖⠛⠗⠹⠕
+  - - pregrados
+    - ⠖⠛⠗⠹⠪
+  - - condrioma
+    - ⠒⠙⠗⠊⠺⠁
+  - - reprende
+    - ⠗⠏⠗⠢⠙⠑
+  - - ingresaron
+    - ⠔⠶⠫⠡⠭
+  - - retraso
+    - ⠗⠞⠗⠯⠕
+  - - extraño
+    - ⠭⠞⠗⠁⠻⠕
+  - - entrecruzar
+    - ⠴⠉⠗⠥⠵⠡
+  - - intergrupal
+    - ⠽⠛⠗⠥⠏⠅
+  - - sobreproducido
+    - ⠆⠏⠗⠕⠙⠥⠉⠊⠙⠕
+
+  # stenographic interruption: whenever x, w or k is anywhere in a word, the entire word is
+  # uncontracted and dot 5 prefixes the word.
+  # most are african based or arabic derived words in the language.
+  - - kiosco
+    - ⠐⠅⠊⠕⠎⠉⠕
+  - - wagner
+    - ⠐⠺⠁⠛⠝⠑⠗
+  - - xalapa
+    - ⠐⠭⠁⠇⠁⠏⠁
+  - - hardware
+    - ⠐⠓⠁⠗⠙⠺⠁⠗⠑
+  - - hawaiano
+    - ⠐⠓⠁⠺⠁⠊⠁⠝⠕
+  - - kiwi
+    - ⠐⠅⠊⠺⠊
+  - - maxwell
+    - ⠐⠍⠁⠭⠺⠑⠇⠇
+  - - darwinismo
+    - ⠐⠙⠁⠗⠺⠊⠝⠊⠎⠍⠕
+  - - newton
+    - ⠐⠝⠑⠺⠞⠕⠝
+  - - sándwich
+    - ⠐⠎⠷⠝⠙⠺⠊⠉⠓
+  - - sandwichería
+    - ⠐⠎⠁⠝⠙⠺⠊⠉⠓⠑⠗⠌⠁
+  - - kilos
+    - ⠐⠅⠊⠇⠕⠎
+  - - abakuá
+    - ⠐⠁⠃⠁⠅⠥⠷
+  - - bakalao
+    - ⠐⠃⠁⠅⠁⠇⠁⠕
+  - - bikini
+    - ⠐⠃⠊⠅⠊⠝⠊
+  - - búnker
+    - ⠐⠃⠾⠝⠅⠑⠗
+  - - eureka
+    - ⠐⠑⠥⠗⠑⠅⠁
+  - - folklore
+    - ⠐⠋⠕⠇⠅⠇⠕⠗⠑
+  - - folklórica
+    - ⠐⠋⠕⠇⠅⠇⠬⠗⠊⠉⠁
+  - - anexar
+    - ⠐⠁⠝⠑⠭⠁⠗
+  - - anorexia
+    - ⠐⠁⠝⠕⠗⠑⠭⠊⠁
+  - - aproximación
+    - ⠐⠁⠏⠗⠕⠭⠊⠍⠁⠉⠊⠬⠝
+  - - aproximadamente
+    - ⠐⠁⠏⠗⠕⠭⠊⠍⠁⠙⠁⠍⠑⠝⠞⠑
+  - - auxiliador
+    - ⠐⠁⠥⠭⠊⠇⠊⠁⠙⠕⠗
+  - - xilófono
+    - ⠐⠭⠊⠇⠬⠋⠕⠝⠕
+  - - exponer
+    - ⠐⠑⠭⠏⠕⠝⠑⠗
+    - xfail: the exception to the interruption rule is applied correctly here
+    
+  # testing to check if dot 5 is also added before closing quotation or question mark symbols
+  - - no quieres que hablen?
+    - ⠝ ⠟⠊⠦⠫ ⠟ ⠓⠂⠇⠢⠐⠢
+  - - la tienda se llama "el retén"
+    - ⠄ ⠞⠊⠢⠙⠁ ⠎ ⠇⠇⠁⠍⠁ ⠦⠑ ⠗⠞⠮⠝⠐⠦
+
+  # test lower sign exceptions and stenographic interruption with capitalization
+  - - toma un Tren
+    - ⠞⠺⠁ ⠥ ⠨⠞⠗⠢
+  - - fueron con Walter
+    - ⠋⠥⠦⠭ ⠉ ⠐⠨⠺⠁⠇⠞⠑⠗
+  - - es el señor Kraller
+    - ⠫ ⠑ ⠎⠑⠻⠱ ⠐⠨⠅⠗⠁⠇⠇⠑⠗
+  - - es para MAXWELL
+    - ⠫ ⠡ ⠐⠨⠨⠍⠁⠭⠺⠑⠇⠇
+
+  # testing these with punctuation
+  - - no "drenen" el lago
+    - ⠝ ⠦⠙⠗⠢⠢⠐⠦ ⠑ ⠇⠁⠛⠕
+    - xfail: unresolved multipass situation
+  - - toma un "tren"
+    - ⠞⠺⠁ ⠥ ⠦⠞⠗⠢⠐⠦
+    - xfail: unresolved multipass situation
+  - - toma un ¿tren?
+    - ⠞⠺⠁ ⠥ ⠢⠞⠗⠢⠐⠢
+    - xfail: unresolved multipass situation
+  - - es su ¿bikini?
+    - ⠫ ⠜ ⠢⠐⠃⠊⠅⠊⠝⠊⠐⠢
+    - xfail: unresolved multipass situation

@@ -1,0 +1,86 @@
+display: unicode-without-blank.dis
+
+# Tests for tables that use literary 6 dots notation for numbers, e.g. [⠼⠁, 1]
+table:
+  language: en
+  grade: 1
+  system: ueb
+  __assert-match: en-ueb-g1.ctb
+table:
+  language: en
+  region: en-US
+  grade: 1
+  __assert-match: en-us-g1.ctb
+table:
+  language: fi
+  type: literary
+  __assert-match: fi.utb
+table:
+  language: nl
+  grade: 0
+  __assert-match: nl.tbl # nl-NL-g0.utb
+table:
+  language: pl
+  type: literary
+  __assert-match: pl.tbl # Pl-Pl-g1.utb
+table:
+  language: sr
+  grade: 1
+  __assert-match: sr.tbl # sr-g1.ctb
+table:
+  language: sv
+  grade: 1
+  __assert-match: sv.tbl # Se-Se-g1.utb
+flags: {testmode: backward}
+tests:
+  - - Lowercase letters
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+  - - Single digits
+    - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
+    - 1 2 3 4 5 6 7 8 9 0
+
+# LV uses different letter definitions,
+# so run separately.
+table:
+  language: lv
+  grade: 1
+  __assert-match: lv.tbl # Lv-Lv-g1.utb
+flags: {testmode: backward}
+tests:
+  - - Lowercase letters
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+    - a b c d e f g h i j k l m n o p q r s t ķ ļ v x ņ ō
+  - - Single digits
+    - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
+    - 1 2 3 4 5 6 7 8 9 0
+
+# pt-pt-g1.utb passes digits test, but fails
+# the small letters test.
+table:
+  language: pt
+  grade: 1
+  __assert-match: pt-pt-g1.utb
+flags: {testmode: backward}
+tests:
+  - - Lowercase letters
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+  - - Single digits
+    - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
+    - 1 2 3 4 5 6 7 8 9 0
+
+# Tests for tables that ought to use literary 6 dots notation for numbers, e.g. [⠼⠁, 1]
+# but yet they fail and should be fixed at some point.
+# see https://github.com/liblouis/liblouis/issues/490
+# Currently no tables
+#flags: {testmode: backward}
+#tests:
+#  - - Lowercase letters
+#    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+#    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+#    - xfail: true
+#  - - Single digits
+#    - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
+#    - 1 2 3 4 5 6 7 8 9 0
+#    - xfail: true

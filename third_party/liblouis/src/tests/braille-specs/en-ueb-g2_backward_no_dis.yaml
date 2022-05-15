@@ -1,0 +1,11 @@
+# Tests for en-ueb-g2.ctb back-translation with no additional display table.
+table:
+  language: en
+  grade: 2
+  system: ueb
+  __assert-match: en-ueb-g2.ctb
+flags: {testmode: backward}
+tests:
+  # #309: Ensure the display rule is used for "?",
+  # rather than a subsequent rule.
+  - ["?", this]

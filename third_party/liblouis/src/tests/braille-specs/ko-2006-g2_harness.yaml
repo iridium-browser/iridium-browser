@@ -1,0 +1,36 @@
+display: unicode-without-blank.dis
+table:
+  language: ko
+  grade: 2
+  version: 2006
+  __assert-match: ko-2006-g2.ctb
+tests:
+  - # Numbers followed by Korean words.
+    - 2000년
+    - ⠼⠃⠚⠚⠚ ⠉⠡
+  - # Korean mixed with English contractions
+    - unity
+    - ⠥⠝⠰⠽
+  - # New dot combination for punctuation
+    - 불이야!
+    - ⠘⠯⠕⠜⠖
+  - # Korean word 1: blue
+    - 파란색
+    - ⠙⠐⠣⠒⠠⠗⠁
+  - # Korean word 2: cave
+    - 동굴
+    - ⠊⠿⠈⠯
+  - # Korean word 3: paid
+    - 샀다.
+    - ⠇⠌⠊⠲
+  - # Korean word 4: vacuum cleaner
+    - 진공 청소기
+    - ⠨⠟⠈⠿ ⠰⠻⠠⠥⠈⠕
+  - # Words within parentheses.
+    - 신라의 수도는 서라벌(오늘날 경주)였다.
+    - ⠠⠟⠐⠣⠺ ⠠⠍⠊⠥⠉⠵ ⠠⠎⠐⠣⠘⠞⠤⠥⠉⠮⠉⠂ ⠈⠻⠨⠍⠤⠱⠌⠊⠚
+    - {xfail: true}
+  - # English followed by Korean: name of a broadcasting company
+    - YTN 연합뉴스
+    - ⠴⠠⠠⠽⠞⠝ ⠡⠚⠃⠉⠩⠠⠪
+    - {xfail: true}

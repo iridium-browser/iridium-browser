@@ -1,0 +1,59 @@
+# Copyright © 2020-2021 by BAUM Engineering <liblouis@baum.ro>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+# In Uzbekistan there are two braille systems in use:
+# 1) Kiril braille, based on Cyrillic.
+# 2) Uzbek braille, based on the Latin script.
+
+# In Uzbek braille no capital letters are used. Punctuation marks are
+# similar to Russian and English braille.
+
+display: ru-unicode.dis
+table:
+  language: uz
+  type: literary
+tests:
+  - # Sample for testing "ғ" and "ў"
+    - тўғиладилар
+    - ⠞⠧⠻⠊⠇⠁⠙⠊⠇⠁⠗
+  - # Sample for testing "ҳ", "қ" and "ў"
+    - ҳуқуқларда
+    - ⠹⠥⠽⠥⠽⠇⠁⠗⠙⠁
+  - # Sample for testing "sh" inside a word/between other letters.
+    - qilishlari
+    - ⠽⠊⠇⠊⠱⠇⠁⠗⠊
+  - # Sample for testing "ch" inside a word/between other letters.
+    - anchadan
+    - ⠁⠝⠟⠁⠙⠁⠝
+  - # Phrase one
+    - Hayirli kech
+    - ⠹⠁⠯⠊⠗⠇⠊⠀⠅⠑⠟
+  - # Phrase two
+    - Рождество байрамингиз қутлуғ бўлсин
+    - ⠗⠕⠚⠙⠑⠎⠞⠺⠕⠀⠃⠁⠯⠗⠁⠍⠊⠝⠛⠊⠵⠀⠽⠥⠞⠇⠥⠻⠀⠃⠧⠇⠎⠊⠝
+  - # Test for o’ character (with different accent marks)
+    - o’o`o‘
+    - ⠧⠧⠧
+  - # Test for g‘ character (with different accent marks)
+    - g‘g`g’
+    - ⠻⠻⠻
+  - # Various symbols
+    - () {} []
+    - ⠶⠶⠀⠣⠜⠀⠣⠜
+  - - 5 %
+    - ⠼⠑⠼⠚⠴
+  - - 90 °
+    - ⠼⠊⠚⠨⠴
+  - # When writing Roman numbers, the capital sign (46) is placed only at the beginning of the number (1).
+    - VII
+    - ⠨⠺⠊⠊
+  - - IV
+    - ⠨⠊⠺
+  - - XV
+    - ⠨⠓⠺

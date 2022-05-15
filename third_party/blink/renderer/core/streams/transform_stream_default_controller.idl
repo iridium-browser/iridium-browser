@@ -1,0 +1,14 @@
+// Copyright 2019 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// This is only used when the new C++ implementation is enabled.
+
+// https://streams.spec.whatwg.org/#rs-default-controller-class-definition
+interface TransformStreamDefaultController {
+    readonly attribute double? desiredSize;
+    [CallWith=ScriptState, RaisesException] void enqueue(
+        optional any chunk);
+    [CallWith=ScriptState] void error(optional any reason);
+    [CallWith=ScriptState] void terminate();
+};

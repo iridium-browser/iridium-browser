@@ -1,0 +1,18 @@
+# encoding: utf-8 
+display: unicode-without-blank.dis
+table:
+  language: cmn
+  region: cmn-CN
+  system: cmn-two-cell
+  __assert-match: zhcn-g2.ctb
+tests:
+  - [准,⠩⠥]
+  - [备,⠊⠌]
+  - [开始,⠅⠟⠋⠧]
+  - [第3次,⠜⠃ ⠼⠉ ⠝⠃]
+  - [五A级,⠢⠧⠠⠁ ⠑⠣]
+  - [带u盘,⠌⠛⠰⠥ ⠦⠫]
+  - [参差,⠝⠅⠝⠇]
+  - [阿胶,⠾⠎⠑⠗]
+  - [你好,⠟⠧⠃⠷]
+  - [1只,⠼⠁ ⠉⠇]

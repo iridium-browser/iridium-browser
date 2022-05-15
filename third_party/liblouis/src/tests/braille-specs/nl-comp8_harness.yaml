@@ -1,0 +1,82 @@
+# Dutch computer braille as used in Belgium and the Netherlands
+# Based on the 2020 standard, see «Achtpunts braillestandaard voor het
+# Nederlandse taalgebied, versie 2020» by Braille Autoriteit
+# <http://liblouis.org/braille-specs/dutch/>
+#
+# Copyright (C) 2019, 2020 by the Dutch Braille Authority <http://braille-autoriteit.org>
+# Copyright (C) 2019, 2020 by Dedicon <http://www.dedicon.nl>
+# Copyright (C) 2019 by Babbage B.V. <http://www.babbage.com>
+# Copyright (C) 2020 by Leonard de Ruijter <alderuijter@gmail.com>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+table:
+  language: nl
+  type: computer
+  dots: 8
+  __assert-match: nl-comp8.utb
+flags: {testmode: bothDirections}
+tests:
+  - - Lowercase letters
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵  
+  - - Uppercase letters
+    - A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+    - ⡁ ⡃ ⡉ ⡙ ⡑ ⡋ ⡛ ⡓ ⡊ ⡚ ⡅ ⡇ ⡍ ⡝ ⡕ ⡏ ⡟ ⡗ ⡎ ⡞ ⡥ ⡧ ⡺ ⡭ ⡽ ⡵
+  - - Single digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⠡ ⠣ ⠩ ⠹ ⠱ ⠫ ⠻ ⠳ ⠪ ⠬
+  - - Accented letters (lowercase)
+    - á â à ã ä æ ç é ê è ë í î ì ï ñ ó ô ò õ ö ø œ ß ú ûù ü
+    - ⢁ ⢡ ⢷ ⢈ ⢜ ⢅ ⢯ ⢿ ⢣ ⢮ ⢫ ⢌ ⢩ ⢊ ⢻ ⢝ ⢬ ⢹ ⢕ ⢚ ⢪ ⢵ ⢺ ⢼ ⢥ ⢱⢾ ⢳
+  - - Accented letters (uppercase)
+    - Á Â À Ã Ä Æ Ç É Ê È Ë Í Î Ì Ï Ñ Ó Ô Ò Õ Ö Ø Œ Ú Û Ù Ü
+    - ⣁ ⣡ ⣷ ⣈ ⣜ ⣅ ⣯ ⣿ ⣣ ⣮ ⣫ ⣌ ⣩ ⣊ ⣻ ⣝ ⣬ ⣹ ⣕ ⣚ ⣪ ⣵ ⣺ ⣥ ⣱ ⣾ ⣳
+  - - Monetary symbols
+    - $ € £ ¤ ¥
+    - ⢙ ⢑ ⢏ ⢭ ⢽
+  - - Arrows
+    - ← → ↑ ↓
+    - ⢎ ⡱ ⣭ ⣛
+
+  - - Ons voorstel is bij uitstek geschikt voor complexe (technische en wiskundige) teksten, al dan niet op een brailleleesregel.
+    - ⡕⠝⠎ ⠧⠕⠕⠗⠎⠞⠑⠇ ⠊⠎ ⠃⠊⠚ ⠥⠊⠞⠎⠞⠑⠅ ⠛⠑⠎⠉⠓⠊⠅⠞ ⠧⠕⠕⠗ ⠉⠕⠍⠏⠇⠑⠭⠑ ⠦⠞⠑⠉⠓⠝⠊⠎⠉⠓⠑ ⠑⠝ ⠺⠊⠎⠅⠥⠝⠙⠊⠛⠑⠴ ⠞⠑⠅⠎⠞⠑⠝⠂ ⠁⠇ ⠙⠁⠝ ⠝⠊⠑⠞ ⠕⠏ ⠑⠑⠝ ⠃⠗⠁⠊⠇⠇⠑⠇⠑⠑⠎⠗⠑⠛⠑⠇⠲
+  - - Voorlooptekens zijn niet nodig, alle karakters passen in 1 braillecel.
+    - ⡧⠕⠕⠗⠇⠕⠕⠏⠞⠑⠅⠑⠝⠎ ⠵⠊⠚⠝ ⠝⠊⠑⠞ ⠝⠕⠙⠊⠛⠂ ⠁⠇⠇⠑ ⠅⠁⠗⠁⠅⠞⠑⠗⠎ ⠏⠁⠎⠎⠑⠝ ⠊⠝ ⠡ ⠃⠗⠁⠊⠇⠇⠑⠉⠑⠇⠲
+  - - Een cijfer bestaat uit het "reguliere" cijfer met toevoeging van braillepunt 6.
+    - ⡑⠑⠝ ⠉⠊⠚⠋⠑⠗ ⠃⠑⠎⠞⠁⠁⠞ ⠥⠊⠞ ⠓⠑⠞ ⠶⠗⠑⠛⠥⠇⠊⠑⠗⠑⠶ ⠉⠊⠚⠋⠑⠗ ⠍⠑⠞ ⠞⠕⠑⠧⠕⠑⠛⠊⠝⠛ ⠧⠁⠝ ⠃⠗⠁⠊⠇⠇⠑⠏⠥⠝⠞ ⠫⠲
+  - - Alle voortekens verdwijnen, d.w.z. geen (permanent) hoofdletterteken, cijferteken, herstelteken etc.
+    - ⡁⠇⠇⠑ ⠧⠕⠕⠗⠞⠑⠅⠑⠝⠎ ⠧⠑⠗⠙⠺⠊⠚⠝⠑⠝⠂ ⠙⠲⠺⠲⠵⠲ ⠛⠑⠑⠝ ⠦⠏⠑⠗⠍⠁⠝⠑⠝⠞⠴ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠞⠑⠅⠑⠝⠂ ⠉⠊⠚⠋⠑⠗⠞⠑⠅⠑⠝⠂ ⠓⠑⠗⠎⠞⠑⠇⠞⠑⠅⠑⠝ ⠑⠞⠉⠲
+  - - 503,2 + 498,5 = 1001,7.
+    - ⠱⠬⠩⠂⠣ ⢖ ⠹⠪⠳⠂⠱ ⢶ ⠡⠬⠬⠡⠂⠻⠲
+  - - (8 -3) *5 =25. 2%=2/100.
+    - ⠦⠳ ⠤⠩⠴ ⠔⠱ ⢶⠣⠱⠲ ⠣⠿⢶⠣⠌⠡⠬⠬⠲
+  - - =SUM(B4:OFFSET(B4,0,E2-1))
+    - ⢶⡎⡥⡍⠦⡃⠹⠒⡕⡋⡋⡎⡑⡞⠦⡃⠹⠂⠬⠂⡑⠣⠤⠡⠴⠴
+  - - =IF(AND(C2>=C4,C2<=C5),C6)
+    - ⢶⡊⡋⠦⡁⡝⡙⠦⡉⠣⡢⢶⡉⠹⠂⡉⠣⢔⢶⡉⠱⠴⠂⡉⠫⠴
+  - - déjà vu, 2 fietsen à €500,
+    - ⠙⢿⠚⢷ ⠧⠥⠂ ⠣ ⠋⠊⠑⠞⠎⠑⠝ ⢷ ⢑⠱⠬⠬⠂
+  - - crèche, gêne, paté, reëel,
+    - ⠉⠗⢮⠉⠓⠑⠂ ⠛⢣⠝⠑⠂ ⠏⠁⠞⢿⠂ ⠗⠑⢫⠑⠇⠂
+  - - ruïne, vóórkomen, reçu,
+    - ⠗⠥⢻⠝⠑⠂ ⠧⢬⢬⠗⠅⠕⠍⠑⠝⠂ ⠗⠑⢯⠥⠂
+  - - "Röntgen. Jan zei: “De bal was ín!”."
+    - ⡗⢪⠝⠞⠛⠑⠝⠲ ⡚⠁⠝ ⠵⠑⠊⠒ ⣆⡙⠑ ⠃⠁⠇ ⠺⠁⠎ ⢌⠝⠖⣰⠲
+  - - Jan_Adams07@g-mail.com
+    - ⡚⠁⠝⠸⡁⠙⠁⠍⠎⠬⠻⠜⠛⠤⠍⠁⠊⠇⠲⠉⠕⠍
+  - - https://braille-autoriteit.org/
+    - ⠓⠞⠞⠏⠎⠒⠌⠌⠃⠗⠁⠊⠇⠇⠑⠤⠁⠥⠞⠕⠗⠊⠞⠑⠊⠞⠲⠕⠗⠛⠌
+
+# forward translation only
+flags: {testmode: forward}
+tests:
+  - - Greek
+    - ΑΒΓ αβγ Σσ
+    - ⣁⣃⣛ ⢁⢃⢛ ⣎⢎

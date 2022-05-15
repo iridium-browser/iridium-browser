@@ -1,0 +1,461 @@
+﻿# Urdu 6 Dot Braille Grade 2
+# Copyright (C) 2018, 2020, 2021 by Compass Braille <http://www.compassbraille.org>
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode.dis
+table:
+  language: ur
+  type: literary
+  contraction: full
+  __assert-match: ur-pk-g2.ctb
+
+flags: {testmode: forward}
+tests:
+  - ["0", "⠼⠚"]
+  - ["1", "⠼⠁"]
+  - ["2", "⠼⠃"]
+  - ["3", "⠼⠉"]
+  - ["4", "⠼⠙"]
+  - ["5", "⠼⠑"]
+  - ["6", "⠼⠋"]
+  - ["7", "⠼⠛"]
+  - ["8", "⠼⠓"]
+  - ["9", "⠼⠊"]
+
+# Arabic Digits - not usually used in Urdu
+  - ["٠", "⠼⠚"]
+  - ["١", "⠼⠁"]
+  - ["٢", "⠼⠃"]
+  - ["٣", "⠼⠉"]
+  - ["٤", "⠼⠙"]
+  - ["٥", "⠼⠑"]
+  - ["٦", "⠼⠋"]
+  - ["٧", "⠼⠛"]
+  - ["٨", "⠼⠓"]
+  - ["٩", "⠼⠊"]
+
+flags: {testmode: bothDirections}
+tests:
+
+# Extended Arabic Digits - usually used in Urdu
+  - ["۰", "⠼⠚"]
+  - ["۱", "⠼⠁"]
+  - ["۲", "⠼⠃"]
+  - ["۳", "⠼⠉"]
+  - ["۴", "⠼⠙"]
+  - ["۵", "⠼⠑"]
+  - ["۶", "⠼⠋"]
+  - ["۷", "⠼⠛"]
+  - ["۸", "⠼⠓"]
+  - ["۹", "⠼⠊"]
+
+# Dot 4 used for SUPERSCRIPT ALEF (\x0670), for example at end of word for "Moses"
+  - [مُوسیٰ,⠍⠥⠺⠎⠊⠈]
+
+# ARABIC LIGATURE ALLAH ISOLATED FORM (\xFDF2)
+  - [ﷲ, ⠁⠠⠇⠈⠓]
+  - [رُوحُ ﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
+# - [رُوحُﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]  # only forward translation, forward test included below
+# - [رُوحُ اﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]  # only forward translation, forward test included below
+
+# FEH (\x0641) with SHADDA (\x0651)
+  - [صفّور, ⠯⠠⠋⠺⠗]
+
+# REH (\x0631), KASRA (\x0650) or DAMMA (\x064F), SHADDA (\x0651)
+  - [زرِّین, ⠵⠠⠗⠑⠊⠝]
+  - [کرُّوبی, ⠅⠠⠗⠥⠺⠃⠊]
+
+# Contraction dots 16 when vowel between TCHEH and HEH DOACHASHMEE
+  - [چِھپایا, ⠡⠑⠏⠁⠽]
+
+# Contraction dots 15 used for اس and اِس at start of word except when followed by SHADDA
+  - [اسرائیلیوں, ⠑⠗⠈⠊⠇⠐⠌]
+# - [اِسرائیلِیوں,⠑⠗⠈⠊⠇⠑⠐⠌]  # only forward translation, forward test included below
+  - [اسّی, ⠁⠠⠎⠊]
+
+# Contraction dots 135 no longer used for ٹھ
+  - [بَیٹھکوں, ⠃⠂⠊⠪⠦⠅⠺⠰]
+
+# Contraction 35 used for ان and اِن whether as a whole word or within a word
+  - [گھرانے, ⠛⠦⠗⠔⠌]
+  - [ان, ⠔]
+# - [اِن, ⠔]  # only forward translation, forward test included below
+  - [انسان, ⠔⠎⠔]
+# - [اِنسان, ⠔⠎⠔]  # only forward translation, forward test included below
+
+# Contraction 36 used for بے not for بی at the beginning of words.
+# Letters بے are usually spaced from the start of word in print but joined in Braille.
+  - [بے شُمار, ⠤⠩⠥⠍⠁⠗]
+  - [آفتابے, ⠜⠋⠞⠁⠃⠌]
+  - [بیٹوں, ⠃⠊⠪⠺⠰]
+
+# Words for "unleavened"
+  - [بے خمِیری, ⠤⠭⠍⠊⠗⠊]
+
+# Words for "innocent"
+  - [بے گُناہ, ⠤⠛⠥⠢⠓]
+  - [بے گُناہوں, ⠤⠛⠥⠢⠓⠺⠰]
+
+# Contraction 136 used for اَور and اور
+  - [اور, ⠥]
+# - [اَور, ⠥]  # only forward translation, forward test included below
+
+# Dots 3-3 used for repeated words (not 6-6 as in old table)
+  - [ٹِھیک ٹِھیک, ⠕⠄⠄]
+
+# Contraction dots 25 is no longer used for با at start of word
+  - [بادشاہ, ⠃⠁⠙⠩⠁⠓]
+  - [باعث, ⠃⠹]
+# - [باعِث, ⠃⠹]  # only forward translation, forward test included below
+  - [بات, ⠃⠁⠞]
+  - [بازُو, ⠃⠁⠵⠺]
+  - [باپ, ⠃⠁⠏]
+  - [بادل, ⠃⠁⠙⠇]
+  - [باہر, ⠃⠁⠓⠗]
+  - [باغ باغ, ⠃⠁⠣⠄⠄]
+  - [باتیں, ⠃⠁⠞⠊⠰]
+  - [باتوں, ⠃⠁⠞⠺⠰]
+  - [بابت, ⠃⠁⠃⠞]
+  - [باندھا, ⠃⠔⠙⠦⠁]
+
+# Contraction dots 34 is no longer used for ہو
+  - [ہو,⠓⠺]
+  - [ہو۔,⠓⠺⠲]
+  - [ہوں, ⠓⠺⠰]
+  - [ہُوئی,⠓⠰⠊]
+# - [ہُوئی,⠓⠰⠊]  # only forward translation, forward test included below
+  - [ہُوئی۔,⠓⠰⠊⠲]
+# - [ہُوئی۔,⠓⠰⠊⠲]  # only forward translation, forward test included below
+  - [ہُؤا,⠓⠺⠁]
+# - [ہُؤا,⠓⠺⠁]  # only forward translation, forward test included below
+  - [ہُؤا۔,⠓⠺⠁⠲]
+# - [ہُؤا۔,⠓⠺⠁⠲]  # only forward translation, forward test included below
+  - [ہُوئے,⠓⠰⠌]
+# - [ہُوئے,⠓⠰⠌]  # only forward translation, forward test included below
+  - [ہُوئے۔,⠓⠰⠌⠲]
+# - [ہُوئے۔,⠓⠰⠌⠲]  # only forward translation, forward test included below
+  - [ہُوئیں,⠓⠰⠊⠰]
+# - [ہُوئیں,⠓⠰⠊⠰]  # only forward translation, forward test included below
+# - [ہُوئِیں,⠓⠰⠊⠰]  # only forward translation, forward test included below
+# - [ہُوئِیں۔,⠓⠰⠊⠰⠲]  # only forward translation, forward test included below
+  - [ہو گا, ⠓⠺⠀⠛⠁]
+  - [ہو گی, ⠓⠺⠀⠛⠊]
+  - [ہوتا, ⠓⠺⠞⠁]
+  - [ہوتے, ⠓⠺⠞⠌]
+  - [ہوتی, ⠓⠺⠞⠊]
+  - [ہو تو, ⠓⠺⠀⠞]
+  - [ہونے, ⠓⠺⠼]
+
+# Contraction 256 is no longer used for تا
+  - [تارِیکی,⠞⠁⠗⠊⠅⠊]
+  - [نفتالی,⠝⠋⠞⠁⠇⠊]
+  - [تالابوں, ⠞⠁⠧⠃⠺⠰]
+  - [بتانا, ⠃⠞⠁⠢]
+  - [پچھتانے, ⠏⠡⠞⠔⠌]
+  - [مُمتاز, ⠍⠥⠍⠞⠁⠵]
+  - [بتاتا, ⠃⠞⠁⠞⠁]
+  - [بتایا, ⠃⠞⠁⠽]
+  - [تاکیداً, ⠞⠁⠅⠊⠙⠠]
+  - [سُتاری, ⠎⠥⠞⠁⠗⠊]
+  - [تاکِستان, ⠞⠁⠅⠑⠎⠞⠔]
+  - [تازہ, ⠞⠁⠵⠓]
+
+# Contraction 46 is no longer used for کھ
+  - [دیکھ, ⠙⠊⠅⠦]
+  - [دیکھا, ⠙⠊⠅⠦⠁]
+  - [کھیت, ⠅⠦⠊⠞]
+  - [دِکھاؤُں, ⠙⠑⠅⠦⠈⠥⠺⠰]
+  - [رکھنا, ⠗⠅⠦⠢]
+  - [کھائی, ⠅⠦⠈⠊]
+  - [کھانا, ⠅⠦⠔⠁]
+  - [دِکھائی, ⠙⠑⠅⠦⠈⠊]
+  - [آنکھوں, ⠜⠝⠅⠦⠺⠰]
+  - [کھولتے, ⠅⠦⠺⠇⠞⠌]
+  - [کھِلا, ⠅⠦⠑⠧]
+  - [دِکھانے, ⠙⠅⠦⠔⠌]
+  - [آنکھ, ⠜⠝⠅⠦]
+  - [رکھّا, ⠗⠠⠅⠦⠁]
+  - [کھڑے, ⠅⠦⠻⠌]
+  - [سِکھایا, ⠎⠑⠅⠦⠁⠽]
+  - [دیکھتے دیکھتے, ⠙⠊⠅⠦⠞⠌⠄⠄]
+  - [دیکھنے, ⠙⠊⠅⠦⠼]
+  - [رکھّو, ⠗⠠⠅⠦⠺]
+  - [رکھتے, ⠗⠅⠦⠞⠌]
+  - [رکھتا, ⠗⠅⠦⠞⠁]
+
+# Contraction dots 456-12
+  - [بالکل, ⠸⠃]
+# - [بالکُل, ⠸⠃]  # only forward translation, forward test included below
+
+# ALEF (\x0627) followed by YEH WITH HAMZA ABOVE(\x0626) ائ
+# should be contracted to dot 4, overiding other possible contractions like 1236 for لا and 26 for نا.
+# but may be contained within a contraction like 456-124
+  - [اسرائیل, ⠑⠗⠈⠊⠇]
+  - [بھائی, ⠆⠈⠊]
+  - [جائیں, ⠚⠈⠊⠰]
+  - [جائے, ⠚⠈⠌]
+  - [ستائیں, ⠎⠞⠈⠊⠰]
+  - [دائیوں, ⠙⠈⠐⠌]
+
+# لائ
+  - [پِلائیں, ⠏⠑⠇⠈⠊⠰]
+  - [بلائیں, ⠃⠇⠈⠊⠰]
+  - [پَھیلائے, ⠖⠂⠊⠇⠈⠌]
+  - [لاؤُں, ⠇⠈⠥⠺⠰]
+
+# نائ
+  - [بنائے, ⠃⠝⠈⠌]
+  - [بنائیں, ⠃⠝⠈⠊⠰]
+  - [سُنائے, ⠎⠥⠝⠈⠌]
+
+# within longer contractions
+  - [لائے, ⠇⠈⠌]
+  - [فائدہ, ⠸⠋]
+  - [بے فائدہ, ⠤⠸⠋]
+
+# Alef with Madda Above (\x0622) sometimes appears separately
+# as Alef then Madda Above(\x0627\x0653). Backtranslation will fail
+# in these cases.
+  - [زمِین و آسمان,⠵⠍⠑⠊⠝⠤⠜⠎⠍⠔]
+# - [زمِین و آسمان,⠵⠍⠑⠊⠝⠤⠜⠎⠍⠔]  # only forward translation, forward test included below
+  - [آسمان,⠜⠎⠍⠔]
+# - [آسمان,⠜⠎⠍⠔]  # only forward translation, forward test included below
+
+# Yeh with Hamza Above (\x0626) sometimes appears separately
+# as Yeh then Hamza above (\x064A\x0654). Backtranslation will fail
+# in these cases.
+  - [جائے۔, ⠚⠈⠌⠲]
+# - [جائے۔, ⠚⠈⠌⠲]  # only forward translation, forward test included below
+# - [اِسرائیلیوں, ⠑⠗⠈⠊⠇⠐⠌]  # only forward translation, forward test included below
+  - [گئی۔, ⠛⠄⠊⠲]
+# - [گئی۔, ⠛⠄⠊⠲]  # only forward translation, forward test included below
+# - [گئے, ⠛⠄⠌]  # only forward translation, forward test included below
+# - [آئے, ⠜⠄⠌]  # only forward translation, forward test included below
+
+# Waw with Hamza Above (\x0624) sometimes appears separately
+# as Waw then Hamza above (\x0648\x0654). Backtranslation will fail
+# in these cases.
+  - [گہراؤ,⠛⠓⠗⠈⠺]
+# - [گہراؤ,⠛⠓⠗⠈⠺]  # only forward translation, forward test included below
+  - [جناؤ, ⠚⠝⠈⠺]
+# - [جناؤ, ⠚⠝⠈⠺]  # only forward translation, forward test included below
+  - [پہناؤ, ⠏⠓⠝⠈⠺]
+# - [پہناؤ, ⠏⠓⠝⠈⠺]  # only forward translation, forward test included below
+  - [بناؤ, ⠃⠝⠈⠺]
+# - [بناؤ, ⠃⠝⠈⠺]  # only forward translation, forward test included below
+  - [بناؤُں, ⠃⠝⠈⠥⠺⠰]
+# - [بناؤُں, ⠃⠝⠈⠥⠺⠰]  # only forward translation, forward test included below
+
+# wordsign 1245
+  - [اگر, ⠛]
+
+# wordsign 34
+  - [یہی, ⠌]
+# - [یِہی, ⠌]  # only forward translation, forward test included below
+
+# wordsign 134
+  - [میں, ⠍]
+  - [مَیں نے, ⠍⠀⠼]
+  - [مَیں, ⠍⠂⠊⠰]
+
+# wordsign 14 - various spellings
+  - [چاہیے, ⠉]
+# - [چاہئے, ⠉]  # only forward translation, forward test included below
+# - [چاہئے, ⠉]  # only forward translation, forward test included below
+# - [چاہِئے, ⠉]  # only forward translation, forward test included below
+
+# words ending in ئے
+  - [کِئے, ⠅⠊⠌]
+  - [دِئے, ⠙⠊⠌]
+# - [دئے, ⠙⠊⠌]  # only forward translation, forward test included below
+# - [دئِے, ⠙⠊⠌]  # only forward translation, forward test included below
+
+# 46-125 contraction at end of word
+  - [نِگاہ, ⠝⠨⠓]
+# - [نگاہ, ⠝⠨⠓]  # only forward translation, forward test included below
+  - [قُربان گاہ, ⠟⠥⠗⠃⠔⠨⠓]
+  - [آرام گاہ, ⠜⠗⠁⠍⠨⠓]
+  - [خَیمہ گاہ, ⠭⠂⠊⠍⠓⠨⠓]
+  - [لشکر گاہ, ⠇⠩⠅⠗⠨⠓]
+
+# 5-34 contraction at end of word
+  - [کیوں, ⠅⠐⠌]
+
+# wordsign 236 but not if attached to lower dot sign, eg. fullstop
+  - [ہر, ⠦]
+  - [ہر۔, ⠓⠗⠲]
+
+# wordsign 23 but not if attached to lower dot sign, eg. fullstop.
+  - [بھی, ⠆]
+  - [بھی۔, ⠆⠊⠲]
+
+# word 5-345 spelling variations
+  - [آئندہ, ⠐⠜]
+# - [آئندہ, ⠐⠜]  # only forward translation, forward test included below
+# - [آئندہ, ⠐⠜]  # only forward translation, forward test included below
+# - [آئندہ, ⠐⠜]  # only forward translation, forward test included below
+# - [آیندہ, ⠐⠜]  # only forward translation, forward test included below
+# - [آٔندہ, ⠐⠜]  # only forward translation, forward test included below
+# - [آٔندہ, ⠐⠜]  # only forward translation, forward test included below
+
+# Shortform dots 134-12 spelling variations
+  - [مُناسِب, ⠍⠃]
+# - [مناسب, ⠍⠃]  # only forward translation, forward test included below
+# - [مناسِب, ⠍⠃]  # only forward translation, forward test included below
+
+# ignore ُ (\x064F DAMMA) in these words
+  - [زُبان, ⠵⠃⠔]
+  - [ہارُون, ⠓⠁⠗⠺⠝]
+  - [بےشُمار, ⠤⠩⠍⠁⠗]
+  - [بُلند, ⠃⠇⠝⠙]
+  - [پُوری, ⠏⠺⠗⠊]
+
+# ignore  َ (\x064E FATHA) in these words
+  - [عَمرام, ⠷⠍⠗⠁⠍]
+  - [تَو, ⠞⠺]
+  - [جَیسا, ⠚⠊⠎⠁]
+
+# ignore ِ (\x0650 KASRA) in these words
+  - [عِبادت, ⠷⠃⠁⠙⠞]
+  - [ہڈِّیوں, ⠓⠠⠬⠐⠌]
+  - [چِکنا, ⠉⠅⠢]
+
+# Word for "shepherds"
+  - [گڈریے,⠛⠬⠗⠊⠌]
+# - [گڈرئے,⠛⠬⠗⠊⠌]  # only forward translation, forward test included below
+
+# Word for "forever"
+  - [ابدُالآباد, ⠁⠃⠙⠥⠇⠜⠃⠁⠙]
+# - [ابدُالآباد, ⠁⠃⠙⠥⠇⠜⠃⠁⠙]  # only forward translation, forward test included below
+
+# Word for "face to face"
+  - [رُوبرُو, ⠗⠥⠺⠀⠃⠀⠗⠥⠺]
+# - [رُوبرو, ⠗⠥⠺⠀⠃⠀⠗⠥⠺]   # only forward translation, forward test included below
+
+# Word for "sale"
+  - [بیچ, ⠃⠊⠉]
+
+# Word for "favouritism"
+  - [طرفداری, ⠐⠾⠐⠙⠊]
+
+# Word for "Exodus"
+  - [خُرُوج, ⠭⠥⠗⠥⠺⠚]
+# - [خرُوج, ⠭⠥⠗⠥⠺⠚]  # only forward translation, forward test included below
+
+# Word for "Emroidered"
+  - [بُوٹے دار, ⠃⠥⠺⠪⠌⠐⠙]
+
+# Word including new character \x06C2 to go to dots 125-3
+  - [خَیمۂ, ⠭⠂⠊⠍⠓⠄]
+
+# All the commented tests above marked 'only forward'
+flags: {testmode: forward}
+tests:
+  - [باعِث, ⠃⠹]
+  - [ہُوئی,⠓⠰⠊]
+  - [ہُوئی۔,⠓⠰⠊⠲]
+  - [ہُؤا,⠓⠺⠁]
+  - [ہُؤا۔,⠓⠺⠁⠲]
+  - [ہُوئے,⠓⠰⠌]
+  - [ہُوئے۔,⠓⠰⠌⠲]
+  - [ہُوئیں,⠓⠰⠊⠰]
+  - [ہُوئِیں,⠓⠰⠊⠰]
+  - [ہُوئِیں۔,⠓⠰⠊⠰⠲]
+  - [زمِین و آسمان,⠵⠍⠑⠊⠝⠤⠜⠎⠍⠔]
+  - [آسمان,⠜⠎⠍⠔]
+  - [جائے۔,⠚⠈⠌⠲]
+  - [اِسرائیلیوں, ⠑⠗⠈⠊⠇⠐⠌]
+  - [گئی۔,⠛⠄⠊⠲]
+  - [گئے,⠛⠄⠌]
+  - [آئے,⠜⠄⠌]
+  - [گہراؤ,⠛⠓⠗⠈⠺]
+  - [یِہی, ⠌]
+  - [نِگاہ, ⠝⠨⠓]
+  - [آئندہ, ⠐⠜]
+  - [آئندہ, ⠐⠜]
+  - [آئندہ, ⠐⠜]
+  - [آیندہ, ⠐⠜]
+  - [آٔندہ, ⠐⠜]
+  - [آٔندہ, ⠐⠜]
+  - [گڈرئے,⠛⠬⠗⠊⠌]
+  - [ابدُالآباد, ⠁⠃⠙⠥⠇⠜⠃⠁⠙]
+  - [جناؤ, ⠚⠝⠈⠺]
+  - [پہناؤ, ⠏⠓⠝⠈⠺]
+  - [بناؤ, ⠃⠝⠈⠺]
+  - [بناؤُں, ⠃⠝⠈⠥⠺⠰]
+  - [چاہئے, ⠉]
+  - [چاہئے, ⠉]
+  - [چاہِئے, ⠉]
+  - [اِسرائیلِیوں,⠑⠗⠈⠊⠇⠑⠐⠌]
+  - [بالکُل, ⠸⠃]
+  - [دئِے, ⠙⠊⠌]
+  - [مناسب, ⠍⠃]
+  - [مناسِب, ⠍⠃]
+  - [نگاہ, ⠝⠨⠓]
+  - [رُوبرو, ⠗⠥⠺⠀⠃⠀⠗⠥⠺]
+  - [رُوحُﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
+  - [رُوحُ اﷲ, ⠗⠥⠺⠱⠁⠠⠇⠈⠓]
+  - [خرُوج, ⠭⠥⠗⠥⠺⠚]
+
+# List of words which work in both directions
+flags: {testmode: bothDirections}
+tests:
+  - [بیابان, ⠃⠽⠃⠔]
+  - [لگیں, ⠇⠛⠊⠰]
+  - [خُدا,⠭⠥⠙⠁]
+  - [نے,⠼]
+  - [اِبتدا,⠁⠑⠃⠞⠙⠁]
+  - [میں,⠍]
+  - [کو,⠻]
+  - [پَیدا,⠏⠂⠊⠙⠁]
+  - [کِیا۔,⠅⠑⠽⠲]
+  - [اور,⠥]
+  - [زمِین,⠵⠍⠑⠊⠝]
+  - [وِیران,⠺⠑⠊⠗⠔]
+  - [سُنسان,⠎⠥⠝⠎⠔]
+  - [تھی,⠳⠊]
+  - [کے,⠅⠌]
+  - [اُوپر,⠘⠥]
+  - [اندھیرا,⠔⠙⠦⠊⠗⠁]
+  - [تھا,⠳⠁]
+  - [رُوح,⠗⠥⠺⠱]
+  - [پانی,⠏⠔⠊]
+  - [سطح,⠎⠾⠱]
+  - [پر,⠏]
+  - [جُنبِش,⠚⠥⠝⠃⠑⠩]
+  - [کرتی,⠅⠗⠞⠊]
+  - [تھی۔,⠳⠊⠲]
+  - [کہا،,⠅⠓⠁⠂]
+  - [کہ,⠅]
+  - [رَوشنی,⠗⠂⠺⠩⠝⠊]
+  - [جا,⠚⠁]
+  - [جا,⠚⠁]
+  - [اچھّی,⠁⠠⠡⠊]
+  - [ہے,⠓]
+  - [سے,⠎]
+  - [جُدا,⠚⠥⠙⠁]
+  - [تو,⠞]
+  - [دِن,⠙⠑⠝]
+  - [رات,⠗⠁⠞]
+  - [شام,⠩⠁⠍]
+  - [صُبح,⠯⠥⠃⠱]
+  - [سو,⠎⠺]
+  - [پہلا,⠸⠏⠁]
+  - [پانیوں,⠏⠔⠐⠌]
+  - [درمیان,⠙⠗⠍⠽⠝]
+  - [فضا,⠋⠫⠁]
+  - [تاکہ,⠠⠞]
+  - [پس,⠏⠎]
+  - [بنایا,⠃⠢⠽]
+  - [نِیچے,⠝⠑⠊⠉⠌]
+  - [دُوسرا,⠙⠥⠺⠎⠗⠁]
+  - [پَیدایش,⠏⠂⠊⠙⠁⠊⠩]
+  - [جگہ,⠚⠛⠓]
+  - [جمع,⠚⠍⠷]
+  - [خُشکی,⠭⠥⠩⠅⠊]
+  - [نظر,⠐⠝]

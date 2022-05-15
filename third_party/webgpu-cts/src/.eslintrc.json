@@ -1,0 +1,93 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": { "project": "./tsconfig.json" },
+  "extends": [
+    "./node_modules/gts",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "plugins": ["node", "ban", "import", "deprecation"],
+  "rules": {
+    // Core rules
+    "linebreak-style": ["warn", "unix"],
+    "no-console": "warn",
+    "no-undef": "off",
+    "no-useless-rename": "warn",
+    "object-shorthand": "warn",
+    "quotes": ["warn", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+
+    // All test TODOs must be tracked inside file/test descriptions or READMEs.
+    // Comments relating to TODOs in descriptions can be marked with references like "[1]".
+    // TODOs not relating to test coverage can be marked MAINTENANCE_TODO or similar.
+    "no-warning-comments": ["warn", { "terms": ["todo", "fixme", "xxx"], "location": "anywhere" }],
+
+    // Plugin: @typescript-eslint
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { "vars": "all", "args": "none" }],
+    "@typescript-eslint/consistent-type-assertions": "warn",
+
+    // Plugin: ban
+    "ban/ban": [
+      "warn",
+      {
+        "name": "setTimeout",
+        "message": "WPT disallows setTimeout; use `framework/util/timeout.js`."
+      }
+    ],
+
+    // Plugin: deprecation
+    //"deprecation/deprecation": "warn",
+
+    // Plugin: import
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": false }
+      }
+    ],
+    "import/newline-after-import": ["warn", { "count": 1 }],
+    "import/no-duplicates": "warn",
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "zones": [
+          {
+            "target": "./src/webgpu",
+            "from": "./src/common",
+            "except": ["./framework", "./util"],
+            "message": "Non-framework common/ code imported from webgpu/ suite"
+          },
+          {
+            "target": "./src/unittests",
+            "from": "./src/common",
+            "except": ["./framework", "./util", "./internal"],
+            "message": "Non-framework common/ code imported from unittests/ suite"
+          },
+          {
+            "target": "./src/webgpu",
+            "from": "./src/unittests",
+            "message": "unittests/ suite imported from webgpu/ suite"
+          },
+          {
+            "target": "./src/common",
+            "from": "./src",
+            "except": ["./common"],
+            "message": "Non common/ code imported from common/"
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "./.eslint-resolver": {}
+    }
+  }
+}

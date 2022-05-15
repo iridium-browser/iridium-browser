@@ -1,0 +1,907 @@
+# Tests for quirks in the Deutsche Kurzschrift
+#
+# Copyright © 2022 Swiss Library for the Blind, Visually Impaired and Print Disabled
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ----------------------------------------------------------------------------------------------
+
+# These tests were ported from
+# https://github.com/sbsdev/dtbook2sbsform/tree/master/test_xsl. The
+# original tests check the xml to sbsform conversion. Only a subset of
+# them is concerned with braille translation. This subset has been
+# ported to liblouis YAML tests.
+
+# The tests mostly deal with quirks from German Kurzschrift, i.e.
+# grade 2. There are a few tests in grade 0.
+
+display: de-eurobrl6.dis
+table:
+  locale: de
+  grade: 2
+  type: literary
+  dots: 6
+  __assert-match: de-g2.ctb
+tests:
+  # Falsche Kursiv-Ankündigung beim Gebrauch von nbsp statt gewöhnlichem Leerzeichen
+  - -                     "bla blo"
+    - "__bla blo'."
+    - typeform: { italic: "+++++++" }
+
+  # Falsche Übersetzungen bei mixed emphasis
+  - -                     "experimentalprotektorverhalten"
+    - "_xp7imct:'.pro(kt?v7h:tc"
+    - typeform: { italic: "++++++++++++                  " }
+  - -                     "experimentalprotektorverhalten"
+    - "xp7imct:'_pro(kt?'.v7h:tc"
+    - typeform: { italic: "            +++++++++         " }
+      xfail: true
+  - -                     "experimentalprotektorverhalten"
+    - "xp7imct:pro(kt?'_v7h:tc"
+    - typeform: { italic: "                     +++++++++" }
+      xfail: true
+
+  # Falsches Resultat bei Wortersatzstrich -xxx, wenn direkt nach Tag
+  - - "-losenheim"
+    - "'-losch3m"
+    - xfail: tbh, not sure if this test makes any sense without any context
+
+  # Acronym tests
+  - -                      "Foo"
+    - "$foo"
+    - typeform: { acronym: "+++" }
+      xfail: here we should enable capitalization for the acronym
+  - -                      "NATO"
+    - ">nato"
+    - typeform: { acronym: "++++" }
+      xfail: here we should enable capitalization for the acronym
+  - -                      "USA"
+    - ">usa"
+    - typeform: { acronym: "+++" }
+      xfail: here we should enable capitalization for the acronym
+  - -                      "Haha USA"
+    - "haha >usa"
+    - typeform: { acronym: "     +++" }
+      xfail: here we should enable capitalization for the acronym
+
+  # Block boondary tests
+  - -                     "Mist, dachte er, wie komme ich hier raus?"
+    - "_mi}, d<( 7, __2 kxe # hr r1s?'."
+    - typeform: { italic: "++++             ++++++++++++++++++++++++" }
+      xfail: Capitalized emphasis is neither indicated nor contracted
+  - -                     "ABCs"
+    - ">abc's"
+    - typeform: { abbrev: "+++ " }
+      xfail: here we should enable capitalization for the abbrev
+
+  # Braillequirks
+  - -                     "Italy stands the other side!"
+    - "_it:'y ,}s the oth7 side+"
+    - typeform: { italic: "+++++                       " }
+  - - "Forever intervene!"
+    - "f?ev7 *t7vce+"
+    # test for stick!!!«
+  - - "»Sun-­block on a stick!!!«"
+    - "(s/- blo$ on 'a }i$+++)"
+    # test for abbr AM
+  - -                     "AM- und der FM-Skala,"
+    - "am- u r >fm-sk:a,"
+    - typeform: { abbrev: "++          ++       " }
+      xfail: here we should enable capitalization for the abbrev
+  # test for em with subelements
+  - -                     "US-Justizministerium"
+    - "__>us-justizministerium'."
+    - typeform: { abbrev: "++                  " }
+      xfail: here we should enable capitalization for the abbrev
+  # test for whitespace swallowed with adjacing inlines
+  - -                     "Mein Mann. Ihr"
+    - "__m6 m+n.'. $i"
+    - typeform: { abbrev: "++++++++++    ",
+                  vform:  "           +++"}
+      xfail: here we should enable capitalization for the abbrev
+
+  # Swallow white space whith embed new lines
+  - - "Gedanken – Strich      —"
+    - "&dkc'- }r#'-"
+    - xfail: tbh, not sure if swallowing white space should be liblouis responsibilty
+  - - "Gedanken\n— Strich"
+    - "&dkc'- }r#"
+    - xfail: tbh, not sure if swallowing white space should be liblouis responsibilty
+  - - "Gedanken\n  — Strich"
+    - "&dkc'- }r#"
+    - xfail: tbh, not sure if swallowing white space should be liblouis responsibilty
+  - - "Gedanken\n                         —         Strich"
+    - "&dkc'- }r#"
+    - xfail: tbh, not sure if swallowing white space should be liblouis responsibilty
+  # test 2 for Apostroph (pt. 6) vor Einzelbuchstaben mit Punkt innerhalb abbr
+  - -                     "A. B. D. E. F. G. H. I. J."
+    - "a.b.d.e.f.g.h.i.j."
+    - typeform: { abbrev: "++++++++++++++++++++++++++"}
+      xfail: whitespace should be trimmed inside abbrevs. Not implemented
+  # em innerhalb Anführungszeichen liefern falsches Resultat
+  - -                     "»Test«"
+    - "(_te})"
+    - typeform: { italic: " ++++ "}
+      xfail: Capitalized emphasis is neither indicated nor contracted
+  # Single word mixed emphasis em before
+  - -                     "Menschenversuch"
+    - "_mc5c'.v7su4"
+    - typeform: { italic: "++++++++       "}
+
+  # Single word mixed emphasis em after
+  - -                     "Liebegang"
+    - "l0;'_g+g"
+    - typeform: { italic: "     ++++"}
+      xfail: "' missing in front of emphasis indicator"
+
+  # Single word mixed emphasis em inside
+  - -                     "LiebeMenschenversuch"
+    - "l0;'_mc5c'.v7su4"
+    - typeform: { italic: "     ++++++++       "}
+      xfail: Capitalized emphasis is neither indicated nor contracted
+  # Falsches Resultat bei gemischtem Bruch, wenn Zeilenumbruch vorkommt
+  - - "4\n1/2"
+    - "#d#a;"
+    - xfail: fractions are not implemented
+  # Quotes w/o context
+  - -                     " (»Bsp.!«"
+    - " =(bsp.+)"
+    - typeform: { abbrev: "   ++++  "}
+  # Quotes with phone number
+  - - "079 160 22 22«"
+    - "#jgi.afj.bb.bb')"
+    - xfail: the phone number needs special treatment which isn't implemented
+  # Leading zeros in time indication
+  - -                   "11:05"
+    - "#aa':#je"
+    - typeform: { time: "+++++"}
+      xfail: typeform time is not implemented and maybe shouldn't be
+  # Many quoted paras
+  - -                     "»Okay. Aber ich würde es auch gar nicht wissen; bin erst ein paar Jahre in den USA.«"
+    - "(oka'y. a # 8e % | gar n w~c; b* 7} 6 paar jre * e >;usa.)"
+    - typeform: { abbrev: "                                                                               +++  "}
+      xfail: we should enable capitalization inside abbrev
+  - - "Sie hatte von Anfang an den Akzent bemerkt, der den Ausländer verriet, und fragte: »Na, und woher kommst du?«"
+    - "s he v +f+g + e akzct ;m7kt, r e 1sl`nd7 -r0t, u frag(: (na, u woh7 kx} du?)"
+  # Wort "ich" am Ende von Inlines mit nachfolgendem Satzzeichen
+  - -                     "Ich, ich; ich: ich? ich! (ich) »ich«."
+    - "_i4, _i4; _i4: _i4? _i4+ =_i4= (_i4)."
+    - typeform: { italic: "+++       +++  +++        +++   +++  ",
+                  bold:   "     +++            +++              "}
+      xfail: apparently ich should be contracted to i4, don't know why
+  # Emphasis: Wortgrenzenerkennung bei "-" und "/"
+  - -                     "Wort, Wort, Wort. Zwei Wörter, eins/zwei, eins-­zwei."
+    - "_w?t, _w?t, _w?t. __zw3 w9rt7'., __6s!,zw3'., __6s-mzw3'.."
+    - typeform: { italic: "++++        ++++  +++++++++++             ++++++++++ ",
+                  bold:   "      ++++                     +++++++++             "}
+      xfail: apparently before puntuation no '. is needed at least for single word emphasis
+  # line break before ndash
+  - - "word\n– word"
+    - "w?d'- w?d"
+    - xfail: tbh, not sure if swallowing white space should be liblouis responsibilty
+
+  # Abbrev tests
+  - -                     "A4"
+    - ">a#d"
+    - typeform: { abbrev: "++"}
+      xfail: we should enable capitalization inside abbrev
+  - -                     "RTÉ"
+    - ">rt\"%"
+    - typeform: { abbrev: "+++"}
+      xfail: we should enable capitalization inside abbrev
+  - -                     "C2D"
+    - ">c#b>d"
+    - typeform: { abbrev: "+++"}
+      xfail: we should enable capitalization inside abbrev
+  - -                     "C"
+    - ">c"
+    - typeform: { abbrev: "+"}
+      xfail: we should enable capitalization inside abbrev
+  - -                     "c2d"
+    - "'c#b'd"
+    - typeform: { abbrev: "+++"}
+      xfail: we should enable capitalization inside abbrev
+  - -                     "GmbH"
+    - "$gmb>h"
+    - typeform: { abbrev: "++++"}
+      xfail: we should enable capitalization inside abbrev
+  - -                     "kHz"
+    - "'k$hz"
+    - typeform: { abbrev: "+++"}
+      xfail: we should enable capitalization inside abbrev
+  - -                     "USA"
+    - ">usa"
+    - typeform: { abbrev: "+++"}
+      xfail: we should enable capitalization inside abbrev
+  - -                     "cd"
+    - "'cd"
+    - typeform: { abbrev: "++"}
+  - -                     "3a"
+    - "#c'a"
+    - typeform: { abbrev: " +"}
+  - -                     "Nr. 2"
+    - "nr.#b"
+    - typeform: { abbrev: "++++ "}
+      xfail: space trimming inside abbrev not implemented
+  - -                     "z. B."
+    - "z.b."
+    - typeform: { abbrev: "+++++"}
+      xfail: space trimming inside abbrev not implemented
+  - -                     "w. z. b. w."
+    - "w.z.b.w."
+    - typeform: { abbrev: "+++++++++++"}
+      xfail: space trimming inside abbrev not implemented
+  - -                     "etc."
+    - "et'c."
+    - typeform: { abbrev: "++++"}
+  - -                     "a."
+    - "a."
+    - typeform: { abbrev: "++"}
+  - - "wrt."
+    - "wrt."
+  - - "h."
+    - "h."
+  - - "p."
+    - "p."
+  # whitespace inside abbr needs to be trimmed (why?)
+  - -                     "DM 50"
+    - ">dm#ej"
+    - typeform: { abbrev: "+++  "}
+      xfail: not implemented
+  # abbrev inside em
+  - -                     "es lebe das Format A4"
+    - "__% lbe d f?mat >a#d'."
+    - typeform: { italic: "+++++++++++++++++++++",
+                  abbrev: "                   + "}
+      xfail: we should enable capitalization inside abbrev
+  - -                     "es lebe das Format A4"
+    - "% lbe d f?mat >a#d"
+    - typeform: { abbrev: "                   + "}
+      xfail: we should enable capitalization inside abbrev
+  # Eszett
+  - - "ß"
+    - "'~"
+  - - "»ß«"
+    - "('~)"
+  - - "(ß)"
+    - "='~="
+  - - "weßir"
+    - "we'~ir"
+
+  # Ich tests
+  - ["ich", "#"]
+  - ["ich.", "#."]
+  - ["ich,", "i4,"]
+  - ["ich;", "i4;"]
+  - ["ich:", "i4:"]
+  - ["ich!", "i4+"]
+  - ["ich?", "i4?"]
+
+  # "ich" inside em
+  - -                     "ich, "
+    - "_i4, "
+    - typeform: { italic: "+++  "}
+      xfail: inside em and followed by space the ich specific rules e.g. 'word ich, 24-1456-2' from de-g2-core.cti don't seem to work
+  # "ich" inside em
+  - -                     "ich) "
+    - "_i4= "
+    - typeform: { italic: "+++  "}
+      xfail: inside em and followed by space the ich specific rules e.g. 'word ich, 24-1456-2' from de-g2-core.cti don't seem to work
+  # "ich" inside em
+  - -                     "(ich) "
+    - "_=i4= "
+    - typeform: { italic: "++++  "}
+      xfail: inside em and followed by space the ich specific rules e.g. 'word ich, 24-1456-2' from de-g2-core.cti don't seem to work
+  - -                     "mich) "
+    - "_m#= "
+    - typeform: { italic: "++++  "}
+      xfail: there is an extra '. after # which shouldn't be there
+
+  # "ich" inside em
+  - -                     "ich"
+    - "_#"
+    - typeform: { italic: "+++"}
+  # "ich" inside em
+  - -                     "ich."
+    - "_#."
+    - typeform: { italic: "++++"}
+  # "ich" inside em
+  - -                     "ich,"
+    - "_i4,"
+    - typeform: { italic: "++++"}
+  # "ich" inside em
+  - -                     "ich;"
+    - "_i4;"
+    - typeform: { italic: "++++"}
+  # "ich" inside em
+  - -                     "ich:"
+    - "_i4:"
+    - typeform: { italic: "++++"}
+  # "ich" inside em
+  - -                     "ich!"
+    - "_i4+"
+    - typeform: { italic: "++++"}
+  # "ich" inside em
+  - -                     "ich?"
+    - "_i4?"
+    - typeform: { italic: "++++"}
+  # Allcaps "ich"
+  - ["ICH", "#"]
+  - ["ICH.", "#."]
+  - ["ICH,", "i4,"]
+  - ["ICH;", "i4;"]
+  - ["ICH!", "i4+"]
+  - ["ICH?", "i4?"]
+  # All-Caps ich inside em
+  - ["ICH", "_#", {typeform: { italic: "+++"}}]
+  - - "ICH."
+    - "_#."
+    - typeform: { italic: "+++ "}
+      xfail: there is an extra '. after # which shouldn't be there
+  - -                     "ICH,"
+    - "_i4,"
+    - typeform: { italic: "+++ "}
+      xfail: inside em and allcaps the ich specific rules from de-g2-core.cti don't seem to work
+  - -                     "ICH;"
+    - "_i4;"
+    - typeform: { italic: "+++ "}
+      xfail: inside em and allcaps the ich specific rules from de-g2-core.cti don't seem to work
+  - -                     "ICH!"
+    - "_i4+"
+    - typeform: { italic: "+++ "}
+      xfail: inside em and allcaps the ich specific rules from de-g2-core.cti don't seem to work
+  - - "ICH?"
+    - "_i4?"
+    - typeform: { italic: "+++ "}
+      xfail: inside em and allcaps the ich specific rules from de-g2-core.cti don't seem to work
+  # Capitalized "ich"
+  - ["Ich", "#"]
+  - ["Ich.", "#."]
+  - ["Ich,", "i4,"]
+  - ["Ich;", "i4;"]
+  - ["Ich!", "i4+"]
+  - ["Ich?", "i4?"]
+  # Capitalized ich inside em
+  - ["Ich", "_#", {typeform: { italic: "+++"}}]
+  - ["Ich.", "_#.", {typeform: { italic: "++++"}}]
+  - ["Ich,", "_i4,", {typeform: { italic: "++++"}}]
+  - ["Ich;", "_i4;", {typeform: { italic: "++++"}}]
+  - ["Ich!", "_i4+", {typeform: { italic: "++++"}}]
+  - ["Ich?", "_i4?", {typeform: { italic: "++++"}}]
+  # Minus tests
+  - ["−10 Grad", "\"-#aj grad"]
+  - [" -10 Grad", " \"-#aj grad"]
+  - ["(-10 Grad)", "=\"-#aj grad="]
+  - -                   " −10 Grad"
+    - " __\"-#aj grad'."
+    - typeform: { bold: " ++++++++"}
+  - ["−10 Grad", "\"-#aj grad"]
+  - ["5-10 Grad", "#e-#aj grad"]
+
+  # Mixed emphasis tests
+  - -                     "kursivblo"
+    - "_kursiv'.blo"
+    - typeform: { italic: "++++++   "}
+  - -                     "blakursiv"
+    - "bla'_kursiv"
+    - typeform: { italic: "   ++++++"}
+      xfail: "' missing in front of emphasis indicator"
+  - -                     "blakursivblo"
+    - "bla'_kursiv'.blo"
+    - typeform: { italic: "   ++++++   "}
+      xfail: "' missing in front of emphasis indicator"
+  - -                     "kursiv...blo"
+    - "_kursiv'....blo"
+    - typeform: { italic: "++++++      "}
+  - -                     "bla...kursiv"
+    - "bla...'_kursiv"
+    - typeform: { italic: "      ++++++"}
+      xfail: "' missing in front of emphasis indicator"
+  - -                     "bla...kursiv...blo"
+    - "bla...'_kursiv'....blo"
+    - typeform: { italic: "      ++++++      "}
+      xfail: "' missing in front of emphasis indicator"
+
+  # Punctuation tests
+  # Punctuation after numbers
+  - -                     " 2? 2! 2; (2) »2« "
+    - " _#b'? _#b'+ _#b'; =_#b'= (_#b') "
+    - typeform: { italic: " +  +  +   +   +  "}
+      xfail: there are extra '. after the numbers which shouldn't be there
+
+  - ["»Am 10?«", "(am #aj'?)"]
+
+  # Wortersatzstrich Tests
+  - - "-tragen"
+    - "'-tgc"
+    - xfail: tbh not sure if this test is valid w/o any context
+  # Roman numbers
+  - - "Henry IV."
+    - "hcr'y >iv."
+    - xfail: roman numbers not implemented
+  - - "Auf Seite iii beginnt das Vorwort."
+    - "1 s3( 'iii ;g*nt d ,?w?t."
+    - xfail: roman numbers not implemented
+
+  # originally from https://github.com/sbsdev/sbs-braille-tables/blob/master/tests/g2.yaml
+  # Wortersatzstrich initial
+  - - " -bla "
+    - " '-bla "
+  - - " (-bla) "
+    - " ='-bla= "
+  - - " [-bla] "
+    - " '='-bla'= "
+  - - " ›-bla‹ "
+    - " '('-bla') "
+  - - " »-bla« "
+    - " ('-bla) "
+
+  # Minuszeichen nach ( [ › »
+  - - " -4 "
+    - " \"-#d "
+  - - " (-4) "
+    - " =\"-#d'= "
+  - - " [-4] "
+    - " '=\"-#d''= "
+  - - " ›-4‹ "
+    - " '(\"-#d') "
+  - - " »-4« "
+    - " (\"-#d') "
+
+  # Übersetzung von 'n' als Wort (zwischen Blanks)
+  - - "rock'n'roll"
+    - "ro$'n'roq"
+  - - "rock 'n' roll"
+    - "ro$ ''n' roq"
+
+  # Fractions as characters (Fragezeichen)
+  - - ¼?
+    - "#a/'?"
+  - - ½?
+    - "#a;'?"
+  - - ¾?
+    - "#c/'?"
+  - - ⅓?
+    - "#a:'?"
+  - - ⅔?
+    - "#b:'?"
+  - - ⅕?
+    - "#a?'?"
+  - - ⅖?
+    - "#b?'?"
+  - - ⅗?
+    - "#c?'?"
+  - - ⅘?
+    - "#d?'?"
+  - - ⅙?
+    - "#a+'?"
+  - - ⅚?
+    - "#e+'?"
+  - - ⅛?
+    - "#a('?"
+  - - ⅜?
+    - "#c('?"
+  - - ⅝?
+    - "#e('?"
+  - - ⅞?
+    - "#g('?"
+
+  # Fractions as characters (Komma)
+  - - ¼,
+    - "#a/',"
+  - - ½,
+    - "#a;',"
+  - - ¾,
+    - "#c/',"
+  - - ⅓,
+    - "#a:',"
+  - - ⅔,
+    - "#b:',"
+  - - ⅕,
+    - "#a?',"
+  - - ⅖,
+    - "#b?',"
+  - - ⅗,
+    - "#c?',"
+  - - ⅘,
+    - "#d?',"
+  - - ⅙,
+    - "#a+',"
+  - - ⅚,
+    - "#e+',"
+  - - ⅛,
+    - "#a(',"
+  - - ⅜,
+    - "#c(',"
+  - - ⅝,
+    - "#e(',"
+  - - ⅞,
+    - "#g(',"
+
+  # Wortersatzstrich
+  - - " -tragen"
+    - " '-tgc"
+  - # http://redmine.sbszh.ch/issues/1505
+    - Arbeits und blah, -losenheim
+    - ")bs u blah, '-losch3m"
+  - - " -losenheim"
+    - " '-losch3m"
+
+  # Pfeilsymbole erscheinen fälschlicherweise IMMER mit Leerzeichen davor und dahinter
+  # http://redmine.sbszh.ch/issues/2456
+  - - Abgase → Umweltverschmutzung
+    - abgase ::o umwytv75mutzu
+  - - Siehe Kapitel 3 (→ Kaufvertrag)
+    - "s0he kapity #c =::o k1fv7tg="
+
+  # Automatische Korrektur des Abstands zwischen Operator und Zahl
+  # http://redmine.sbszh.ch/issues/2326
+  - - Kaufpreis × 4
+    - 'k1fpr3s "(#d'
+
+  # Plus
+  - - 222 + 222 222+222 222 +222 wort + wort wort + 222
+    - '#bbb "+#bbb #bbb "+#bbb #bbb "+#bbb w?t "+ w?t w?t "+#bbb'
+
+  # Minus
+  - - 222 − 222 222−222 222 −222 wort − wort wort − 222
+    - '#bbb "-#bbb #bbb "-#bbb #bbb "-#bbb w?t "- w?t w?t "-#bbb'
+
+  # Malkreuz
+  - - 222 × 222 222×222 222 ×222 wort × wort wort × 222
+    - '#bbb "(#bbb #bbb "(#bbb #bbb "(#bbb w?t "( w?t w?t "(#bbb'
+
+  # Geteilt durch
+  - - 222 ÷ 222 222÷222 222 ÷222 wort ÷ wort wort ÷ 222
+    - '#bbb ":#bbb #bbb ":#bbb #bbb ":#bbb w?t ": w?t w?t ":#bbb'
+
+  # Gleich
+  - - 222 = 222 222=222 222 =222 wort = wort wort = 222
+    - '#bbb "=#bbb #bbb "=#bbb #bbb "=#bbb w?t "= w?t w?t "=#bbb'
+
+  # Punkt 6 Apo bei Frage-/Ausrufezeichen in Klammern
+  # http://redmine.sbszh.ch/issues/2324
+  - - "(?) (!)"
+    - "='?= ='+="
+
+  # Korrektur des Trademark-Symbols
+  # http://redmine.sbszh.ch/issues/2270
+  - - foo™
+    - "foo'=>tm="
+
+  # Übersetzung bei Wörtern mit Stern `*`
+  # http://redmine.sbszh.ch/issues/2187
+  - - Martell
+    - m)(q
+  - - Martell*
+    - m)(q'*
+
+  # Fragezeichen nach Klammer fälschlicherweise ohne Pt. 6 Apo
+  # http://redmine.sbszh.ch/issues/2186
+  - - bla (45-55) blo
+    - "bla =#de-#ee'= blo"
+  - - bla ?-55 blo
+    - "bla '?-#ee blo"
+  - - bla (?-55) blo
+    - "bla ='?-#ee'= blo"
+
+  # Punctuation after numbers
+  - - »Am 10?«
+    - "(am #aj'?)"
+
+  # Minus tests
+  - - "−10 Grad"
+    - "\"-#aj grad"
+  - - " -10 Grad"
+    - " \"-#aj grad"
+  - - "(-10 Grad)"
+    - "=\"-#aj grad="
+  - # using a unicode minus
+    - "−10 Grad"
+    - "\"-#aj grad"
+  - - "5-10 Grad"
+    - "#e-#aj grad"
+
+  # Braillequirks
+  - # test for !«
+    - "»Ich bin Bergfahrer!«"
+    - "(# b* b7g,r7+)"
+  - # test for !
+    - "And we look farther on!"
+    - "+d we look f)th7 on+"
+  - # test for stick!!!«
+    - "»Sun-­block on a stick!!!«"
+    - "(s/- blo$ on 'a }i$+++)"
+  - # test for und/oder
+    - "Substanz und/oder deren"
+    - "sub}+z u!,o d7c"
+  - # Swallow white space whith embed new lines
+    - "Gedanken – Strich      —"
+    - "&dkc'- }r#'-"
+    - xfail: tbh, not sure if swallowing white space should be liblouis responsibilty
+  - # Swallow white space whith embed new lines
+    - "Gedanken
+— Strich"
+    - "&dkc'- }r#"
+  - # Swallow white space whith embed new lines
+    - "Gedanken
+  — Strich"
+    - "&dkc'- }r#"
+  - # Swallow white space whith embed new lines
+    - "Gedanken
+                         —         Strich"
+    - "&dkc'- }r#"
+    - xfail: tbh, not sure if swallowing white space should be liblouis responsibilty
+  - # test für Einzelbuchstaben mit Punkt
+    - "A. B. C. D. E. F. G. H. I. J."
+    - "a. b. 'c. d. e. f. g. h. i. j."
+  - # Apostroph (pt. 6) erscheint zweimal bei Apostroph + Einzelbuchstabe
+    # http://redmine.sbszh.ch/issues/show/929
+    - "wie geht's"
+    - "2 g=t's"
+  - # Problem bei Schrägstrich: Kürzungen
+    # http://redmine.sbszh.ch/issues/show/1005
+    - "Produktion/Test"
+    - "qduktion!,te}"
+  - # Einzelbuchstaben mit Akzenten erhalten fälschlicherweise einen Pt.6
+    # http://redmine.sbszh.ch/issues/show/1010
+    - "à la carte"
+    - "\"[ la 'c)("
+    - xfail: not sure if this test case is correct, now that we only use detailed accents in the swiss table
+  - # Leerschläge vor und nach Schrägstrich werden getilgt
+    # http://redmine.sbszh.ch/issues/show/1011
+    - "wort / wort"
+    - "w?t !, w?t"
+  # Check if unicode chars are eaten by liblouis
+  - - "╞"
+    - "'_"
+    - xfail: tbh don't know how this was working downstream
+  - - "╡"
+    - "'."
+    - xfail: tbh don't know how this was working downstream
+
+  - # Gross, schliess, etc
+    - Groß schließ Großmutter
+    - g~ 5~ g~mutt7
+
+    # ach
+  - - ach achtung flaches dach
+    - a4 a4tu fl<% d<
+
+    # al
+  - - alter al, kalter kanal
+    - :t7 al, k:t7 k+al
+
+    # ar
+  - - eine ar arvenwald gart fast gar
+    - "6e ar )vcw:d g)t fa} gar"
+
+    # be
+  - - be bereitet unbequeme hiebe
+    - "be ;r3(t /;'qu{e h0be"
+
+    # ck
+  - - das ck in kuckuck
+    - "d 'ck * ku$u$"
+
+    # dies
+  - - dies ist dieses paradies
+    - d0s } 0% p)ad0s
+
+    # eh
+  - - ehrlich eh reh dreht
+    - ehr_ eh reh dr=t
+
+    # ent
+  - - entgehen rentner dokument
+    - ~g=c rctn7 dokumct
+
+    # falls
+  - - ebenfalls fallstrick falls einzelfallstudie
+    - ebcf fq}ri$ fqs 6zyfq}udie
+
+    # heit
+  - - einheit schönheitskönigin heiter hoheit
+    - 6h 59nhsk9n>* h3t7 hoh3t
+
+    # ie
+  - - liegt knie ieri
+    - l0gt kn0 i7i
+
+    # ig
+  - - igel figur leipzig
+    - igy f>ur l3pz>
+
+    # ihr
+  - - ihr ihretwegen ihrige mihrab
+    - i ietwgc i>e mihrab
+
+    # keit
+  - - dankbarkeit heiterkeitserfolg keitel
+    - dkb)k h3t7ks7fg k3ty
+
+    # lich
+  - - licht sonnenlicht fröhlich
+    - l#t sonnc_t fr9h_
+
+    # ll
+  - - llewellyn halle hell
+    - lleweq'yn haqe heq
+
+    # mal
+  - - mal zumal damaliges maximal
+    - "mal ,zm dam>% ma'ximal"
+
+    # mm
+  - - mm kamm klemmt
+    - mm kax klext
+
+    # möcht
+  - - möcht möchten hinmöchtest möchtegern
+    - "m94t 4c h*4e} 4eg7n"
+
+    # nis
+  - - nisse ärgernis hemmnis ergebnislos
+    - "ni~e `rg7x hexx 7&bxlos"
+
+    # or
+  - - or orden pforte chor
+    - or ?dc pf?( 4or
+
+    # sam
+  - - samt einsamkeit sparsam sam
+    - samt 6~k sp)~ sam
+
+    # schaft
+  - - schaft bürgschaft kundschafter herrschaft
+    - 5aft b8rg5 k/d57 rr5aft
+
+    # sein
+  - - sein seine seinerseits dasein
+    - 9 9e 97s3ts das6
+
+    # ss
+  - - kasse nuss
+    - ka~e nu~
+
+    # te
+  - - te teppich protest betete
+    - "te tepp# q(} ;(("
+
+    # ung
+  - - ungarn heilung zeitungen
+    - /g)n h3lu ztuc
+
+    # ver
+  - - verein sport-verein unverantwortlich pulver -versuch
+    - "-6 sp?t-v76 /v7+tw?t_ pulv7 '-v7su4"
+
+    # war
+  - - war waren warst spielwaren
+    - ) )c )} ,0w)c
+
+  # Misc quirks
+  - - "bli 8:"
+    - "bli #h':"
+  - - "bli 8!"
+    - "bli #h'+"
+  - - "bli 8?"
+    - "bli #h'?"
+  - - "bli 8;"
+    - "bli #h';"
+  - - "bli 8,"
+    - "bli #h,"
+  - - "bli 8."
+    - "bli #h."
+
+  # im tests
+  - - "Bla im Blo"
+    - "bla - blo"
+  - - "Heim-Kino"
+    - "h3m-k*o"
+  - - "Das Im-Buch-Lesen"
+    - "d im-bu4-l%c"
+  - - "Das Konzentriert-Im-Buch-Lesen"
+    - "d konzctr0rt-im-bu4-l%c"
+
+  # line break before ndash
+  # Bug #1212
+  - - "word
+– word"
+    - "w?d'- w?d"
+
+  # originally from https://github.com/sbsdev/sbs-braille-tables/blob/master/tests/accents.yaml
+  # Reduced accents
+  - - "Àà Ââ Çç Èè Éé Êê Ëë Ìì Îî Ïï Òò Ôô Ùù Ûû Œœ"
+    - '"a"a "a"a "c"c "e"e "e"e "e"e "e"e "i"i "i"i "i"i "o"o "o"o "u"u "u"u oeoe'
+  # Reduced accents
+  - - "Áá Ãã Åå Ææ Āā Ăă Ąą Ćć Ĉĉ Ċċ Čč Ďď Đđ Ðð Ēē Ėė Ęę Ěě Ğğ Ģģ"
+    - '"a"a "a"a "a"a "a"a "a"a "a"a "a"a "c"c "c"c "c"c "c"c "d"d "d"d "d"d "e"e "e"e "e"e "e"e "g"g "g"g'
+    - xfail: Ææ is translated as ae
+  - - "Ĥĥ Ħħ Íí Ĩĩ Īī Įį Ĳĳ Ĵĵ Ķķ Ĺĺ Ļļ Ľľ Ŀŀ Łł Ńń Ññ Ņņ Ňň Ŋŋ"
+    - '"h"h "h"h "i"i "i"i "i"i "i"i "j"j "j"j "k"k "l"l "l"l "l"l "l"l "l"l "n"n "n"n "n"n "n"n "n"n'
+  - - "İı"
+    - '"i"i'
+    - xfail: lowercasing turns İ into i, removing the accent, see the FIXME in latinLowercase.uti
+  - - "Ōō Óó Õõ Øø Ŏŏ Őő Ŕŕ Ŗŗ Řř Śś Ŝŝ Şş Šš Șș Ţţ Ťť Ŧŧ Țț"
+    - '"o"o "o"o "o"o "o"o "o"o "o"o "r"r "r"r "r"r "s"s "s"s "s"s "s"s "s"s "t"t "t"t "t"t "t"t'
+  - - "Ũũ Ūū Úú Ŭŭ Ůů Űű Ųų Ŵŵ Ŷŷ Źź Żż Žž Ǎǎ Ẁẁ Ẃẃ Ẅẅ Ỳỳ Ýý Þþ Ÿÿ"
+    - '"u"u "u"u "u"u "u"u "u"u "u"u "u"u "w"w "y"y "z"z "z"z "z"z "a"a "w"w "w"w "w"w "y"y "y"y "t"t "y"y'
+
+  # originally from https://github.com/sbsdev/sbs-braille-tables/blob/master/tests/v-form.yaml
+  # v-forms
+  - - Sie
+    - $s
+    - xfail: v-forms not implemented
+  - - Euerem
+    - $27{
+    - xfail: v-forms not implemented
+
+table:
+  locale: de
+  grade: 1
+  type: literary
+  dots: 6
+  __assert-match: de-g1.ctb
+tests:
+  # v-forms
+  - - Sie
+    - $s0
+    - xfail: v-forms not implemented
+  - - Euerem
+    - $2erem
+    - xfail: v-forms not implemented
+
+table:
+  locale: de
+  grade: 0
+  type: literary
+  dots: 6
+  __assert-match: de-g0.utb
+tests:
+  # originally from https://github.com/sbsdev/sbs-braille-tables/blob/master/tests/g0.yaml
+  # test for text starting with space followed by dash
+  - - "  -steigen"
+    - " '-steigen"
+    - xfail: fix not yet upstream
+  # test for <em> starting or ending with dash
+  - -                     "auffallen und -steigen "
+    - "auf'_fallen und '-_steigen "
+    - typeform: { italic: "   ++++++     ++++++++ "}
+      xfail: "' missing in front of emphasis indicator"
+  - -                     "hin- und hergehen "
+    - "_hin- und _her'.gehen "
+    - typeform: { italic: "++++     +++      "}
+
+  # v-forms
+  - - Sie
+    - $sie
+    - xfail: v-forms not implemented
+  - - Euerem
+    - $euerem
+    - xfail: v-forms not implemented
+
+  # Roman numbers Contraction 0
+  - - "Seite VI"
+    - "seite >vi"
+    - xfail: roman numbers not implemented
+  - - "Seite VI)"
+    - "seite >vi="
+    - xfail: roman numbers not implemented
+  - - "Seite VI,"
+    - "seite >vi,"
+    - xfail: roman numbers not implemented
+  - - "Seite VI."
+    - "seite >vi."
+    - xfail: roman numbers not implemented
+  - - "Seite VIff."
+    - "seite >vi'ff."
+    - xfail: roman numbers not implemented
+  - - "Seite VIUIUIUI "
+    - "seite >vi'uiuiui"
+    - xfail: roman numbers not implemented
+
+
+

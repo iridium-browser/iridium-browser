@@ -1,0 +1,44 @@
+# Copyright 2021 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+source_set("utils") {
+  public = [ "signals_utils.h" ]
+
+  sources = [ "signals_utils.cc" ]
+
+  public_deps = [
+    "//components/safe_browsing/core/common",
+    "//third_party/abseil-cpp:absl",
+  ]
+
+  deps = [
+    "//chrome/common:constants",
+    "//components/component_updater",
+    "//components/policy/content",
+    "//components/policy/core/browser",
+    "//components/policy/core/common",
+    "//components/prefs",
+    "//components/safe_browsing/core/common:safe_browsing_prefs",
+  ]
+}
+
+source_set("features") {
+  public = [ "signals_features.h" ]
+
+  sources = [ "signals_features.cc" ]
+
+  public_deps = [ "//base" ]
+}
+
+source_set("unit_tests") {
+  testonly = true
+  sources = [ "signals_features_unittest.cc" ]
+
+  deps = [
+    ":features",
+    "//base",
+    "//base/test:test_support",
+    "//testing/gtest",
+  ]
+}

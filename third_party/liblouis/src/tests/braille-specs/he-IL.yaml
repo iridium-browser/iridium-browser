@@ -1,0 +1,80 @@
+# Copyright © 2020 by BAUM Engineering <liblouis@baum.ro>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+# The 4 most used languages in Israel are Hebrew, Arabic, Russian and
+# English. This table supports 3 of them: Hebrew, Arabic and
+# English. The native braille codes of these languages differ in how
+# they treat certain punctuation marks etc. The library for the blind
+# and the ministry of education sat together in 2016 and decided how
+# to combine the 3 languages in a single braille code. This table is
+# the result of their decision.
+
+# Refer to World Braille Usage (3rd edition), page 74
+# <http://liblouis.org/braille-specs/world-braille-usage-third-edition.pdf>
+# and <http://liblouis.org/braille-specs/hebrew>.
+
+display: unicode-without-blank.dis
+
+# Test for uncontracted braille
+table:
+  region: mul-IL
+  grade: 1
+  dots: 6
+  __assert-match: he-IL.utb
+tests:
+  - # Phrase 1
+    - בוקר טוב.
+    - ⠧⠺⠟⠗ ⠞⠺⠧⠲
+  - # Phrase 2
+    - אני רעב.
+    - ⠁⠝⠚ ⠗⠫⠧⠲
+  - # Phrase 3
+    - בוא הנה.
+    - ⠧⠺⠁ ⠓⠝⠓⠲
+  - # Phrase 4
+    - עוד משהו?
+    - ⠫⠺⠙ ⠍⠩⠓⠺⠢
+  - # Testing percentage.
+    - ההתקדמות הוצגה כ%.
+    - ⠓⠓⠹⠟⠙⠍⠺⠹ ⠓⠺⠮⠛⠓ ⠡⠒⠏⠲
+  - # Phrase with escaped quote.
+    - "\"אתה אף פעם לא נכשל עד שאתה מפסיק לנסות.\""
+    - ⠦⠁⠹⠓ ⠁⠋ ⠋⠫⠍ ⠇⠁ ⠝⠡⠩⠇ ⠫⠙ ⠩⠁⠹⠓ ⠍⠋⠎⠚⠟ ⠇⠝⠎⠺⠹⠲⠴
+  - # Sample for checking arabic translation.
+    - هذه الأفكار المغلوطة ح
+    - ⠓⠮⠓ ⠁⠇⠌⠋⠅⠁⠗ ⠁⠇⠍⠣⠇⠺⠾⠡ ⠱
+  - # Sample for checking english translation.
+    - Lorem Ipsum is simply dummy text.
+    - ⠠⠇⠕⠗⠑⠍ ⠠⠊⠏⠎⠥⠍ ⠊⠎ ⠎⠊⠍⠏⠇⠽ ⠙⠥⠍⠍⠽ ⠞⠑⠭⠞⠲
+  - # Arabic numbers [1,2,3,...,9,0]
+    - "١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩ ٠"
+    - "⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚"
+  - # Hebrew letters with dagesh as a separate dot
+    - "כּ פּ בּ שׂ"
+    - "⠅ ⠏ ⠃ ⠱"
+
+# Test for computer braille
+table:
+  language: he
+  type: computer
+  __assert-match: he-IL-comp8.utb
+tests:
+  - # Sample for testing ₪
+    - שלט המטבע שלנו הוא ₪
+    - ⠩⠇⠞ ⠓⠍⠞⠧⠫ ⠩⠇⠝⠺ ⠓⠺⠁ ⡈
+    - xfail: fails with the new table
+  - # Hebrew point holam haser ("וֹ" - ⠕)
+    - חוֹלָם
+    - ⠭⠺⠕⠇⠣⢍
+  - # Hebrew point qubuts ("כֻּ", three dots on bottom)
+    - כֻּלָּם
+    - ⠡⠬⠕⠇⠣⠕⢍
+  - # Hebrew point shin dot and hebrew point kamatz katan ("שָּׂ", dot on right top and sign below the letter)
+    - יִשָּׂשכָר
+    - ⠚⠊⠩⠣⠕⢱⠩⠡⠣⠗

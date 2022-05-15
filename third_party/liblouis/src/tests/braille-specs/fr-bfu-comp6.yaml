@@ -1,0 +1,218 @@
+# Copyright © 2018, 2021 by André-Abush Clause <dev@andreabc.net>
+# Copyright © 2019 by Ludovic Oger <oger.ludovic@gmail.com>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+# The display tables have been separated from the translation tables. But in
+# the case of this test some display relevant stuff is still defined in the
+# translation table. That is why we have to include it here.
+display: unicode-without-blank.dis,fr-bfu-comp6.utb
+table:
+  language: fr
+  type: literary
+  dots: 6
+  system: bfu
+  __assert-match: fr-bfu-comp6.utb
+tests:
+  - - a b c d e f g h i j k l m n o p q r s t u v w x y z
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+  - - A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+    - ⠨⠁ ⠨⠃ ⠨⠉ ⠨⠙ ⠨⠑ ⠨⠋ ⠨⠛ ⠨⠓ ⠨⠊ ⠨⠚ ⠨⠅ ⠨⠇ ⠨⠍ ⠨⠝ ⠨⠕ ⠨⠏ ⠨⠟ ⠨⠗ ⠨⠎ ⠨⠞ ⠨⠥ ⠨⠧ ⠨⠺ ⠨⠭ ⠨⠽ ⠨⠵
+  - - A, B, C, D, E, F
+    - ⠨⠁⠂ ⠨⠃⠂ ⠨⠉⠂ ⠨⠙⠂ ⠨⠑⠂ ⠨⠋
+  - - 1 2 3 4 5 6 7 8 9 0 42 1234
+    - ⠠⠡ ⠠⠣ ⠠⠩ ⠠⠹ ⠠⠱ ⠠⠫ ⠠⠻ ⠠⠳ ⠠⠪ ⠠⠼ ⠠⠹⠣ ⠠⠡⠣⠩⠹
+  - - 3*3 1+1=2 1/4=0,25
+    - ⠠⠩⠔⠩ ⠠⠡⠖⠡⠶⠣ ⠠⠡⠌⠹⠶⠼⠂⠣⠱
+  - - 4^2=16 4^(1+2-6)
+    - ⠠⠹⠈⠣⠶⠡⠫ ⠠⠹⠈⠦⠡⠖⠣⠤⠫⠴
+  - - 4-2=2 -2 1-(-4-2)=7
+    - ⠠⠹⠤⠣⠶⠣ ⠠⠤⠣ ⠠⠡⠤⠦⠤⠹⠤⠣⠴⠶⠻
+  - - +1 & Ah! Eh! Oh!
+    - ⠠⠖⠡ ⠐⠿ ⠨⠁⠓⠖ ⠨⠑⠓⠖ ⠨⠕⠓⠖
+  - ['+', '⠠⠖']
+  - ['=', '⠠⠶']
+  - ['=42', '⠠⠶⠹⠣']
+  - ['=4.2', '⠠⠶⠹⠲⠣']
+  - ['=4,2', '⠠⠶⠹⠂⠣']
+  - ['!1 "12', '⠖⠠⠡ ⠶⠠⠡⠣']
+  - - "\"Tout grand progrès scientifique est né d'une nouvelle audace de l'imagination.\""
+    - ⠶⠨⠞⠕⠥⠞ ⠛⠗⠁⠝⠙ ⠏⠗⠕⠛⠗⠮⠎ ⠎⠉⠊⠑⠝⠞⠊⠋⠊⠟⠥⠑ ⠑⠎⠞ ⠝⠿ ⠙⠄⠥⠝⠑ ⠝⠕⠥⠧⠑⠇⠇⠑ ⠁⠥⠙⠁⠉⠑ ⠙⠑ ⠇⠄⠊⠍⠁⠛⠊⠝⠁⠞⠊⠕⠝⠲⠶
+  - - â ê î ô û ë ï ü œ Â Ê Î Ô Û Ë Ï Ü Œ
+    - ⠡ ⠣ ⠩ ⠹ ⠱ ⠫ ⠻ ⠳ ⠪ ⠨⠡ ⠨⠣ ⠨⠩ ⠨⠹ ⠨⠱ ⠨⠫ ⠨⠻ ⠨⠳ ⠨⠪
+  - - àéóù À É Ó Ù ÀÉÓÙ
+    - ⠷⠿⠬⠾ ⠨⠷ ⠨⠿ ⠨⠬ ⠨⠾ ⠨⠨⠷⠿⠬⠾
+  - - BONJOUR à Tous!
+    - ⠨⠨⠃⠕⠝⠚⠕⠥⠗ ⠷ ⠨⠞⠕⠥⠎⠖
+  - - "CA, DG, G7: G20, IA, B2m, B2G, h2 3D"
+    - "⠨⠨⠉⠁⠂ ⠨⠨⠙⠛⠂ ⠨⠛⠠⠻⠒ ⠨⠛⠠⠣⠼⠂ ⠨⠨⠊⠁⠂ ⠨⠃⠠⠣⠍⠂ ⠨⠃⠠⠣⠨⠛⠂ ⠓⠠⠣ ⠠⠩⠨⠙"
+  - ['À+', '⠨⠷⠠⠖']
+  - ['Ça, ÇA et ça', '⠨⠯⠁⠂ ⠨⠨⠯⠁ ⠑⠞ ⠯⠁']
+  - - bœuf, chœur, manœuvre, mœurs, œil, œuf, œuvre, sœur
+    - ⠃⠪⠥⠋⠂ ⠉⠓⠪⠥⠗⠂ ⠍⠁⠝⠪⠥⠧⠗⠑⠂ ⠍⠪⠥⠗⠎⠂ ⠪⠊⠇⠂ ⠪⠥⠋⠂ ⠪⠥⠧⠗⠑⠂ ⠎⠪⠥⠗
+  - - 10£ 20€ 30¥ 42$ 50% 100‰ 0°
+    - ⠠⠡⠼⠘⠇ ⠠⠣⠼⠘⠑ ⠠⠩⠼⠘⠽ ⠠⠹⠣⠘⠎ ⠠⠱⠼⠐⠬ ⠠⠡⠼⠼⠐⠬⠬ ⠠⠼⠐⠕
+  - - âge; âme; bâtir; pâle; être; forêt; même; rêve; naître; paraître; côte; piqûre
+    - ⠡⠛⠑⠆ ⠡⠍⠑⠆ ⠃⠡⠞⠊⠗⠆ ⠏⠡⠇⠑⠆ ⠣⠞⠗⠑⠆ ⠋⠕⠗⠣⠞⠆ ⠍⠣⠍⠑⠆ ⠗⠣⠧⠑⠆ ⠝⠁⠩⠞⠗⠑⠆ ⠏⠁⠗⠁⠩⠞⠗⠑⠆ ⠉⠹⠞⠑⠆ ⠏⠊⠟⠱⠗⠑
+  - - aiguë, ambiguë, contiguë, exiguë, canoë; aïe, aïeul, coïncider, archaïque, haïr, ouïe, ouïr, astéroïde, maïs, paranoïa; capharnaüm
+    - ⠁⠊⠛⠥⠫⠂ ⠁⠍⠃⠊⠛⠥⠫⠂ ⠉⠕⠝⠞⠊⠛⠥⠫⠂ ⠑⠭⠊⠛⠥⠫⠂ ⠉⠁⠝⠕⠫⠆ ⠁⠻⠑⠂ ⠁⠻⠑⠥⠇⠂ ⠉⠕⠻⠝⠉⠊⠙⠑⠗⠂ ⠁⠗⠉⠓⠁⠻⠟⠥⠑⠂ ⠓⠁⠻⠗⠂ ⠕⠥⠻⠑⠂ ⠕⠥⠻⠗⠂ ⠁⠎⠞⠿⠗⠕⠻⠙⠑⠂ ⠍⠁⠻⠎⠂ ⠏⠁⠗⠁⠝⠕⠻⠁⠆ ⠉⠁⠏⠓⠁⠗⠝⠁⠳⠍
+  - - foo@bar.com, et cætera, länder
+    - ⠋⠕⠕⠜⠃⠁⠗⠲⠉⠕⠍⠂ ⠑⠞ ⠉⠜⠞⠑⠗⠁⠂ ⠇⠜⠝⠙⠑⠗
+
+  # Capitalization
+  - ["HCl", "⠨⠓⠨⠉⠇", xfail: true]
+  - ["HCl", "⠨⠨⠓⠉⠠⠄⠇"]
+  - ["McDonald", "⠨⠍⠉⠨⠙⠕⠝⠁⠇⠙"]
+  - ["L’Europe", "⠨⠇⠄⠨⠑⠥⠗⠕⠏⠑"]
+  - ["l'UNESCO", "⠇⠄⠨⠨⠥⠝⠑⠎⠉⠕"]
+  - ["L'UNESCO", "⠨⠨⠇⠄⠥⠝⠑⠎⠉⠕"]
+  - ["majUSCULE", "⠍⠁⠚⠨⠨⠥⠎⠉⠥⠇⠑"]
+  - ["majUSCULE", "⠍⠁⠚⠨⠥⠨⠎⠨⠉⠨⠥⠨⠇⠨⠑", xfail: true]
+  - ["MAJuscule", "⠨⠨⠍⠁⠚⠠⠄⠥⠎⠉⠥⠇⠑"]
+  - ["MAJuscule", "⠨⠍⠨⠁⠨⠚⠥⠎⠉⠥⠇⠑", xfail: true]
+  - ["BC/DE", "⠨⠨⠃⠉⠌⠙⠑"]
+  - ["PROCHAIN ARRÊT REZ-DE-CHAUSSÉE", "⠨⠨⠏⠗⠕⠉⠓⠁⠊⠝ ⠨⠨⠁⠗⠗⠣⠞ ⠨⠨⠗⠑⠵⠤⠙⠑⠤⠉⠓⠁⠥⠎⠎⠿⠑"]
+  - ["PHRASE EN LETTRES CAPITALES", "⠒⠨⠏⠓⠗⠁⠎⠑ ⠑⠝ ⠇⠑⠞⠞⠗⠑⠎ ⠨⠉⠁⠏⠊⠞⠁⠇⠑⠎", xfail: true]
+
+  # Emphasis
+  - - Mots en italique.
+    - ⠸⠨⠍⠕⠞⠎ ⠸⠑⠝ ⠸⠊⠞⠁⠇⠊⠟⠥⠑⠲
+    - typeform:
+        italic: '+++++++++++++++++'
+  - - Mots en gras.
+    - ⠸⠨⠍⠕⠞⠎ ⠸⠑⠝ ⠸⠛⠗⠁⠎⠲
+    - typeform:
+        bold: '+++++++++++++'
+  - - Mots en souligné.
+    - ⠸⠨⠍⠕⠞⠎ ⠸⠑⠝ ⠸⠎⠕⠥⠇⠊⠛⠝⠿⠲
+    - typeform:
+        underline: '+++++++++++++++++'
+  - - Quatre mots en italique.
+    - ⠒⠸⠨⠟⠥⠁⠞⠗⠑ ⠍⠕⠞⠎ ⠑⠝ ⠸⠊⠞⠁⠇⠊⠟⠥⠑⠲
+    - typeform:
+        italic: '++++++++++++++++++++++++'
+  - - Quatre mots en gras.
+    - ⠒⠸⠨⠟⠥⠁⠞⠗⠑ ⠍⠕⠞⠎ ⠑⠝ ⠸⠛⠗⠁⠎⠲
+    - typeform:
+        bold: '++++++++++++++++++++'
+  - - Quatre mots en souligné.
+    - ⠒⠸⠨⠟⠥⠁⠞⠗⠑ ⠍⠕⠞⠎ ⠑⠝ ⠸⠎⠕⠥⠇⠊⠛⠝⠿⠲
+    - typeform:
+        underline: '++++++++++++++++++++++++'
+  -
+    - Mot composé en italique.
+    - Grand-père
+    - ⠸⠨⠛⠗⠁⠝⠙⠤⠏⠮⠗⠑
+    - typeform:
+        italic: '++++++++++'
+  -
+    - Italique sur les trois premières lettres.
+    - Italique
+    - ⠸⠨⠊⠞⠁⠠⠄⠇⠊⠟⠥⠑
+    - typeform:
+        italic: '+++     '
+  - 
+    - Italique sur les cinq dernières lettres.
+    - Italique
+    - ⠨⠊⠞⠁⠸⠇⠊⠟⠥⠑
+    - typeform:
+        italic: '   +++++'
+  - 
+    - Italique au milieu d'un mot.
+    - Italique
+    - ⠨⠊⠞⠁⠸⠇⠊⠟⠥⠠⠄⠑
+    - typeform:
+        italic: '   ++++ '
+  - 
+    - Italique sur la dernière lettre.
+    - Italique
+    - ⠨⠊⠞⠁⠇⠊⠟⠥⠸⠑
+    - typeform:
+        italic: '       +'
+  # Gras sur la première lettre.
+  - - Gras
+    - ⠸⠨⠛⠠⠄⠗⠁⠎
+    - typeform:
+        bold: '+   '
+  #  Gras sur la deuxième lettre.
+  - - Gras
+    - ⠨⠛⠸⠗⠠⠄⠁⠎
+    - typeform:
+        bold: ' +  '
+  - 
+    - Deux lettres isolées en gras, séparées par une espace
+    - a A
+    - ⠸⠁ ⠸⠨⠁
+    - typeform:
+        bold: '+ +'
+  - 
+    - Deux lettres isolées en gras, séparées par une virgule
+    - "a, A"
+    - ⠸⠁⠂ ⠸⠨⠁
+    - typeform:
+        bold: '+  +'
+  - - a
+    - ⠸⠁
+    - typeform:
+        bold: '+'
+  - - A
+    - ⠸⠨⠁
+    - typeform:
+        bold: '+'
+
+
+table:
+  language: fr
+  type: literary
+  dots: 6
+  system: bfu
+  __assert-match: fr-bfu-comp6.utb
+flags: {testmode: backward}
+tests:
+  - - ⠠⠡ ⠠⠣ ⠠⠩ ⠠⠹ ⠠⠱ ⠠⠫ ⠠⠻ ⠠⠳ ⠠⠪ ⠠⠼ ⠠⠹⠣ ⠠⠡⠣⠩⠹
+    - 1 2 3 4 5 6 7 8 9 0 42 1234
+  - - ⠠⠩⠔⠩ ⠠⠡⠖⠡⠶⠣ ⠠⠡⠌⠹⠶⠼⠂⠣⠱
+    - 3*3 1+1=2 1/4=0,25
+  - - ⠠⠹⠈⠣⠶⠡⠫ ⠠⠹⠈⠦⠡⠖⠣⠤⠫⠴
+    - 4^2=16 4^(1+2-6)
+  - - ⠠⠹⠤⠣⠶⠣ ⠠⠤⠣ ⠠⠡⠤⠦⠤⠹⠤⠣⠴⠶⠻
+    - 4-2=2 -2 1-(-4-2)=7
+    - xfail: true
+  - - ⠠⠖ ⠠⠶ ⠠⠖⠡ ⠐⠿ ⠨⠁⠓⠖ ⠨⠑⠓⠖ ⠨⠕⠓⠖
+    - + = +1 & Ah! Eh! Oh!
+  - ["⠠⠶⠹⠣", "=42"]
+  - ["`⠶⠹⠲⠣", "=4.2"]
+  - - ⠠⠶⠹⠂⠣
+    - =4,2
+  - ['⠖⠠⠡⠹', '!14']
+  - - ⠶⠨⠞⠕⠥⠞ ⠛⠗⠁⠝⠙ ⠏⠗⠕⠛⠗⠮⠎ ⠎⠉⠊⠑⠝⠞⠊⠋⠊⠟⠥⠑ ⠑⠎⠞ ⠝⠿ ⠙⠄⠥⠝⠑ ⠝⠕⠥⠧⠑⠇⠇⠑ ⠁⠥⠙⠁⠉⠑ ⠙⠑ ⠇⠄⠊⠍⠁⠛⠊⠝⠁⠞⠊⠕⠝⠲⠶
+    - "«Tout grand progrès scientifique est né d'une nouvelle audace de l'imagination.»"
+  - - ⠡ ⠣ ⠩ ⠹ ⠱ ⠫ ⠻ ⠳ ⠪ ⠨⠡ ⠨⠣ ⠨⠩ ⠨⠹ ⠨⠱ ⠨⠫ ⠨⠻ ⠨⠳ ⠨⠪
+    - â ê î ô û ë ï ü œ Â Ê Î Ô Û Ë Ï Ü Œ
+  - - ⠷⠿⠬⠾ ⠨⠷ ⠨⠿ ⠨⠬ ⠨⠾ ⠨⠨⠷⠿⠬⠾
+    - àéóù À É Ó Ù ÀÉÓÙ
+  - - ⠨⠨⠃⠕⠝⠚⠕⠥⠗ ⠷ ⠨⠞⠕⠥⠎⠖
+    - BONJOUR à Tous!
+  - - "⠨⠨⠉⠁⠂ ⠨⠨⠙⠛⠂ ⠨⠛⠠⠻⠒ ⠨⠛⠠⠣⠼⠂ ⠨⠨⠊⠁⠂ ⠨⠃⠠⠣⠍⠂ ⠨⠃⠠⠣⠨⠛⠂ ⠨⠓⠠⠖ ⠓⠠⠣ ⠠⠩⠨⠙"
+    - "CA, DG, G7: G20, IA, B2m, B2G, H+ h2 3D"
+  - - ⠨⠯⠁⠂ ⠨⠨⠯⠁ ⠑⠞ ⠯⠁
+    - Ça, ÇA et ça
+  - - ⠃⠪⠥⠋⠂ ⠉⠓⠪⠥⠗⠂ ⠍⠁⠝⠪⠥⠧⠗⠑⠂ ⠍⠪⠥⠗⠎⠂ ⠪⠊⠇⠂ ⠪⠥⠋⠂ ⠪⠥⠧⠗⠑⠂ ⠎⠪⠥⠗
+    - bœuf, chœur, manœuvre, mœurs, œil, œuf, œuvre, sœur
+  - - ⠠⠡⠼⠘⠇ ⠠⠣⠼⠘⠑ ⠠⠩⠼⠘⠽ ⠠⠹⠣⠘⠎ ⠠⠱⠼⠐⠬ ⠠⠡⠼⠼⠐⠬⠬ ⠠⠼⠐⠕
+    - 10£ 20€ 30¥ 42$ 50% 100‰ 0°
+  - - ⠡⠛⠑⠆ ⠡⠍⠑⠆ ⠃⠡⠞⠊⠗⠆ ⠏⠡⠇⠑⠆ ⠣⠞⠗⠑⠆ ⠋⠕⠗⠣⠞⠆ ⠍⠣⠍⠑⠆ ⠗⠣⠧⠑⠆ ⠝⠁⠩⠞⠗⠑⠆ ⠏⠁⠗⠁⠩⠞⠗⠑⠆ ⠉⠹⠞⠑⠆ ⠏⠊⠟⠱⠗⠑
+    - âge; âme; bâtir; pâle; être; forêt; même; rêve; naître; paraître; côte; piqûre
+  - - ⠁⠊⠛⠥⠫⠂ ⠁⠍⠃⠊⠛⠥⠫⠂ ⠉⠕⠝⠞⠊⠛⠥⠫⠂ ⠑⠭⠊⠛⠥⠫⠂ ⠉⠁⠝⠕⠫⠆ ⠁⠻⠑⠂ ⠁⠻⠑⠥⠇⠂ ⠉⠕⠻⠝⠉⠊⠙⠑⠗⠂ ⠁⠗⠉⠓⠁⠻⠟⠥⠑⠂ ⠓⠁⠻⠗⠂ ⠕⠥⠻⠑⠂ ⠕⠥⠻⠗⠂ ⠁⠎⠞⠿⠗⠕⠻⠙⠑⠂ ⠍⠁⠻⠎⠂ ⠏⠁⠗⠁⠝⠕⠻⠁⠆ ⠉⠁⠏⠓⠁⠗⠝⠁⠳⠍
+    - aiguë, ambiguë, contiguë, exiguë, canoë; aïe, aïeul, coïncider, archaïque, haïr, ouïe, ouïr, astéroïde, maïs, paranoïa; capharnaüm
+  - ["⠪⠕ ⠁⠝ ⠊⠞⠑⠍⠲", "• an item."]
+  - ["⠨⠓⠨⠉⠇", "HCl"]
+  - ["⠨⠨⠓⠉⠠⠄⠇", "HCl"]
+  - ["⠨⠍⠉⠨⠙⠕⠝⠁⠇⠙", "McDonald"]
+  - ["⠨⠇⠄⠨⠑⠥⠗⠕⠏⠑", "L'Europe"]
+  - ["⠋⠕⠕⠜⠃⠁⠗⠲⠉⠕⠍", "foo@bar.com"]
+  - - ⠜⠉⠓⠍⠑⠁⠂ ⠑⠭⠀⠜⠟⠥⠕⠂⠀⠨⠇⠜⠞⠊⠞⠊⠁⠂⠀⠨⠇⠜⠝⠙⠑⠗⠂⠀⠝⠜⠧⠥⠎⠂⠀⠑⠞⠀⠉⠜⠞⠑⠗⠁
+    - æchmea, ex æquo, Lætitia, Länder, nævus, et cætera

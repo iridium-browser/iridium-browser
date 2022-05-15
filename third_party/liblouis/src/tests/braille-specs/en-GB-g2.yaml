@@ -1,0 +1,471 @@
+# Tests for U.K. English contracted braille
+#
+# Copyright © 2011 Christian Egli
+# Copyright © 2012 Michael Whapples
+# Copyright © 2012-2014 Mesar Hameed
+# Copyright © 2019 Anthony Tibbs <anthony@tibbs.ca>
+# Copyright © 2020 by James Bowden <james.bowden@rnib.org.uk>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+table:
+  language: en
+  region: en-GB
+  grade: 2
+  __assert-match: en_GB.tbl # en-GB-g2.ctb
+
+# Tests for forward translation
+flags: {testmode: forward}
+tests:
+  - # an example of a simple message being forward translated, and
+    # contractions expected.
+    - the cat sat on the mat
+    - ⠮ ⠉⠁⠞ ⠎⠁⠞ ⠕⠝ ⠮ ⠍⠁⠞
+  - # same as above example.
+    - to the moon
+    - ⠖⠮ ⠍⠕⠕⠝
+  - # an example of where text should generally be contracted, except
+    # at the point of the cursor. also specify where the computer
+    # cursor is at, and where we expect the braille cursor to be.
+    - you went to
+    - ⠽ ⠺⠑⠝⠞ ⠞⠕
+    - mode: [compbrlAtCursor]
+      cursorPos: [4,2]
+  - # An example to reproduce:
+    # https://bugzilla.gnome.org/show_bug.cgi?id=651217 note that the
+    # braille cursor is very squeued. computer cursor is at pos 13,
+    # expected braille cursor at 15, but actually at 17.
+    - Pappa Pappa help me.
+    - ⠠⠏⠁⠏⠏⠁ ⠠⠏⠁⠏⠏⠁ ⠓⠑⠇⠏ ⠍⠑⠲
+    - mode: [compbrlAtCursor]
+      cursorPos: [13,15]
+      xfail: Braille cursor is very squeued
+  - # this testcase tests cursor position when mode is 0. The word
+    # 'about' is contracted to 'ab'. The user presses cursor routing 1
+    # on their display, which should land on letter 'b', but instead
+    # it lands on letter 'a' (index 0).
+    - about
+    - ⠁⠃
+    - mode: [compbrlAtCursor]
+      cursorPos: [1,1]
+      xfail: true
+
+  # Converted from en_gb_g1_italics.c
+  - - This is a Test
+    - ⠠⠹ ⠊⠎ ⠁ ⠠⠞⠑⠌
+    - typeform:
+        italic: '              '
+  - - This is a Test in Italic.
+    - ⠨⠨⠠⠹ ⠊⠎ ⠁ ⠠⠞⠑⠌ ⠔ ⠠⠊⠞⠁⠇⠊⠉⠲⠨⠄
+    - typeform:
+        italic: '+++++++++++++++++++++++++'
+      xfail: true
+  - - This is a Test
+    - ⠠⠹ ⠨⠊⠎ ⠨⠁ ⠠⠞⠑⠌
+    - typeform:
+        italic: '     ++++     '
+      xfail: true
+  - # Test case requested here:
+    # http://www.freelists.org/post/liblouis-liblouisxml/Mesar-here-are-some-test-possibilities
+    - time and spirit
+    - ⠨⠐⠞ ⠨⠯ ⠨⠸⠎
+    - typeform:
+        italic: '+++++++++++++++'
+      xfail: true
+
+# Tests for backward translation
+flags: {testmode: backward}
+tests:
+  - # an example of testing simple backtranslation.
+    - ⠮ ⠉⠁⠞ ⠎⠁⠞ ⠕⠝ ⠮ ⠍⠁⠞
+    - the cat sat on the mat
+  - # same as above example.
+    - ⠖⠮ ⠍⠕⠕⠝
+    - to the moon
+  - # an example where the text to be backtranslated is grade 2, but the word at the cursor is grade 1.
+    - ⠽ ⠺⠑⠝⠞ ⠞⠕
+    - you went to
+    - mode: [compbrlAtCursor]
+      cursorPos: [2,4]
+
+# Test for issue 572: "ll" erroneously treated as "little" contraction in all words
+# Tests based on UKAAF Standards Rule 8.10.6 and Appendix III
+# (https://github.com/liblouis/liblouis/issues/572)
+flags: {testmode: bothDirections}
+tests:
+  - [ball, ⠃⠁⠇⠇]
+  - [little, ⠇⠇]
+  - [littler, ⠇⠇⠗]
+  - [belittle, ⠆⠇⠊⠞⠞⠇⠑]
+  - [belittled, ⠆⠇⠇⠙]
+  - [littlewood, ⠇⠇⠺⠕⠕⠙]
+  - [Dolittle, ⠠⠙⠕⠇⠊⠞⠞⠇⠑]
+  - [Doolittle, ⠠⠙⠕⠕⠇⠊⠞⠞⠇⠑]
+  - [Littlejohn, ⠠⠇⠇⠚⠕⠓⠝]
+  - [Littleover, ⠠⠇⠇⠕⠧⠻]
+
+# Dictionary test (words starting with "part")
+flags: {testmode: forward}
+tests:
+  - [Parthenoi, ⠠⠐⠏⠓⠢⠕⠊]
+  - [Parthenon, ⠠⠐⠏⠓⠢⠕⠝]
+  - [Parthenon's, ⠠⠐⠏⠓⠢⠕⠝⠄⠎]
+  - [Parthenopaeus, ⠠⠐⠏⠓⠢⠕⠏⠁⠑⠥⠎]
+  - [Parthenope, ⠠⠐⠏⠓⠢⠕⠏⠑]
+  - [Parthenos, ⠠⠐⠏⠓⠢⠕⠎]
+  - [Parthia, ⠠⠐⠏⠓⠊⠁]
+  - [Parthia's, ⠠⠐⠏⠓⠊⠁⠄⠎]
+  - [Parthian, ⠠⠐⠏⠓⠊⠁⠝]
+  - [Parthian's, ⠠⠐⠏⠓⠊⠁⠝⠄⠎]
+  - [Parthians, ⠠⠐⠏⠓⠊⠁⠝⠎]
+  - [Partitur, ⠠⠐⠏⠊⠞⠥⠗]
+  - [Partitur's, ⠠⠐⠏⠊⠞⠥⠗⠄⠎]
+  - [Partlow, ⠠⠐⠏⠇⠪]
+  - [Partlow's, ⠠⠐⠏⠇⠪⠄⠎]
+  - [part, ⠐⠏]
+  - [part's, ⠐⠏⠄⠎]
+  - [partake, ⠐⠏⠁⠅⠑]
+  - [partaken, ⠐⠏⠁⠅⠢]
+  - [partaker, ⠐⠏⠁⠅⠻]
+  - [partaker's, ⠐⠏⠁⠅⠻⠄⠎]
+  - [partakers, ⠐⠏⠁⠅⠻⠎]
+  - [partakes, ⠐⠏⠁⠅⠑⠎]
+  - [partaking, ⠐⠏⠁⠅⠬]
+  - [partakings, ⠐⠏⠁⠅⠬⠎]
+  - [partan, ⠐⠏⠁⠝]
+  - [partans, ⠐⠏⠁⠝⠎]
+  - [parted, ⠐⠏⠫]
+  - [parter, ⠐⠏⠻]
+  - [parterre, ⠐⠏⠻⠗⠑]
+  - [parterre's, ⠐⠏⠻⠗⠑⠄⠎]
+  - [parterres, ⠐⠏⠻⠗⠑⠎]
+  - [parters, ⠐⠏⠻⠎]
+  - [parthenocarpic, ⠐⠏⠓⠢⠕⠉⠜⠏⠊⠉]
+  - [parthenocarpically, ⠐⠏⠓⠢⠕⠉⠜⠏⠊⠉⠠⠽]
+  - [parthenocarpies, ⠐⠏⠓⠢⠕⠉⠜⠏⠊⠑⠎]
+  - [parthenocarpy, ⠐⠏⠓⠢⠕⠉⠜⠏⠽]
+  - [parthenogeneses, ⠐⠏⠓⠢⠕⠛⠢⠑⠎⠑⠎]
+  - [parthenogenesis, ⠐⠏⠓⠢⠕⠛⠢⠑⠎⠊⠎]
+  - [parthenogenesis's, ⠐⠏⠓⠢⠕⠛⠢⠑⠎⠊⠎⠄⠎]
+  - [parthenogenetic, ⠐⠏⠓⠢⠕⠛⠢⠑⠞⠊⠉]
+  - [parthenogenetically, ⠐⠏⠓⠢⠕⠛⠢⠑⠞⠊⠉⠠⠽]
+  - [parti, ⠐⠏⠊]
+  - [partial, ⠐⠏⠊⠁⠇]
+  - [partial's, ⠐⠏⠊⠁⠇⠄⠎]
+  - [partialise, ⠐⠏⠊⠁⠇⠊⠎⠑]
+  - [partialised, ⠐⠏⠊⠁⠇⠊⠎⠫]
+  - [partialises, ⠐⠏⠊⠁⠇⠊⠎⠑⠎]
+  - [partialising, ⠐⠏⠊⠁⠇⠊⠎⠬]
+  - [partialism, ⠐⠏⠊⠁⠇⠊⠎⠍]
+  - [partialist, ⠐⠏⠊⠁⠇⠊⠌]
+  - [partialists, ⠐⠏⠊⠁⠇⠊⠌⠎]
+  - [partialities, ⠐⠏⠊⠁⠇⠊⠞⠊⠑⠎]
+  - [partiality, ⠐⠏⠊⠁⠇⠰⠽]
+  - [partiality's, ⠐⠏⠊⠁⠇⠰⠽⠄⠎]
+  - [partially, ⠐⠏⠊⠠⠽]
+  - [partialness, ⠐⠏⠊⠁⠇⠰⠎]
+  - [partialness's, ⠐⠏⠊⠁⠇⠰⠎⠄⠎]
+  - [partialnesses, ⠐⠏⠊⠁⠇⠰⠎⠑⠎]
+  - [partials, ⠐⠏⠊⠁⠇⠎]
+  - [partibilities, ⠐⠏⠊⠃⠊⠇⠊⠞⠊⠑⠎]
+  - [partibility, ⠐⠏⠊⠃⠊⠇⠰⠽]
+  - [partible, ⠐⠏⠊⠼]
+  - [participable, ⠐⠏⠊⠉⠊⠏⠁⠼]
+  - [participance, ⠐⠏⠊⠉⠊⠏⠨⠑]
+  - [participances, ⠐⠏⠊⠉⠊⠏⠨⠑⠎]
+  - [participant, ⠐⠏⠊⠉⠊⠏⠁⠝⠞]
+  - [participant's, ⠐⠏⠊⠉⠊⠏⠁⠝⠞⠄⠎]
+  - [participantly, ⠐⠏⠊⠉⠊⠏⠁⠝⠞⠇⠽]
+  - [participants, ⠐⠏⠊⠉⠊⠏⠁⠝⠞⠎]
+  - [participate, ⠐⠏⠊⠉⠊⠏⠁⠞⠑]
+  - [participated, ⠐⠏⠊⠉⠊⠏⠁⠞⠫]
+  - [participates, ⠐⠏⠊⠉⠊⠏⠁⠞⠑⠎]
+  - [participating, ⠐⠏⠊⠉⠊⠏⠁⠞⠬]
+  - [participation, ⠐⠏⠊⠉⠊⠏⠠⠝]
+  - [participation's, ⠐⠏⠊⠉⠊⠏⠠⠝⠄⠎]
+  - [participational, ⠐⠏⠊⠉⠊⠏⠠⠝⠁⠇]
+  - [participations, ⠐⠏⠊⠉⠊⠏⠠⠝⠎]
+  - [participative, ⠐⠏⠊⠉⠊⠏⠁⠞⠊⠧⠑]
+  - [participator, ⠐⠏⠊⠉⠊⠏⠁⠞⠕⠗]
+  - [participator's, ⠐⠏⠊⠉⠊⠏⠁⠞⠕⠗⠄⠎]
+  - [participators, ⠐⠏⠊⠉⠊⠏⠁⠞⠕⠗⠎]
+  - [participatory, ⠐⠏⠊⠉⠊⠏⠁⠞⠕⠗⠽]
+  - [participial, ⠐⠏⠊⠉⠊⠏⠊⠁⠇]
+  - [participial's, ⠐⠏⠊⠉⠊⠏⠊⠁⠇⠄⠎]
+  - [participially, ⠐⠏⠊⠉⠊⠏⠊⠠⠽]
+  - [participle, ⠐⠏⠊⠉⠊⠏⠇⠑]
+  - [participle's, ⠐⠏⠊⠉⠊⠏⠇⠑⠄⠎]
+  - [participles, ⠐⠏⠊⠉⠊⠏⠇⠑⠎]
+  - [particle, ⠐⠏⠊⠉⠇⠑]
+  - [particle's, ⠐⠏⠊⠉⠇⠑⠄⠎]
+  - [particleboard, ⠐⠏⠊⠉⠇⠑⠃⠕⠜⠙]
+  - [particleboard's, ⠐⠏⠊⠉⠇⠑⠃⠕⠜⠙⠄⠎]
+  - [particleboards, ⠐⠏⠊⠉⠇⠑⠃⠕⠜⠙⠎]
+  - [particles, ⠐⠏⠊⠉⠇⠑⠎]
+  - [particoloured, ⠐⠏⠊⠉⠕⠇⠳⠗⠫]
+  - [particular, ⠐⠏⠊⠉⠥⠇⠜]
+  - [particular's, ⠐⠏⠊⠉⠥⠇⠜⠄⠎]
+  - [particularisation, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠠⠝]
+  - [particularisation's, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠠⠝⠄⠎]
+  - [particularisations, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠠⠝⠎]
+  - [particularise, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠑]
+  - [particularised, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠫]
+  - [particulariser, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠻]
+  - [particularises, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠑⠎]
+  - [particularising, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠬]
+  - [particularism, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠍]
+  - [particularism's, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠍⠄⠎]
+  - [particularisms, ⠐⠏⠊⠉⠥⠇⠜⠊⠎⠍⠎]
+  - [particularist, ⠐⠏⠊⠉⠥⠇⠜⠊⠌]
+  - [particularistic, ⠐⠏⠊⠉⠥⠇⠜⠊⠌⠊⠉]
+  - [particularists, ⠐⠏⠊⠉⠥⠇⠜⠊⠌⠎]
+  - [particularities, ⠐⠏⠊⠉⠥⠇⠜⠊⠞⠊⠑⠎]
+  - [particularity, ⠐⠏⠊⠉⠥⠇⠜⠰⠽]
+  - [particularity's, ⠐⠏⠊⠉⠥⠇⠜⠰⠽⠄⠎]
+  - [particularizers, ⠐⠏⠊⠉⠥⠇⠜⠊⠵⠻⠎]
+  - [particularly, ⠐⠏⠊⠉⠥⠇⠜⠇⠽]
+  - [particularness, ⠐⠏⠊⠉⠥⠇⠜⠰⠎]
+  - [particulars, ⠐⠏⠊⠉⠥⠇⠜⠎]
+  - [particulate, ⠐⠏⠊⠉⠥⠇⠁⠞⠑]
+  - [particulate's, ⠐⠏⠊⠉⠥⠇⠁⠞⠑⠄⠎]
+  - [particulates, ⠐⠏⠊⠉⠥⠇⠁⠞⠑⠎]
+  - [partied, ⠐⠏⠊⠫]
+  - [partier, ⠐⠏⠊⠻]
+  - [partiers, ⠐⠏⠊⠻⠎]
+  - [parties, ⠐⠏⠊⠑⠎]
+  - [partim, ⠐⠏⠊⠍]
+  - [parting, ⠐⠏⠬]
+  - [parting's, ⠐⠏⠬⠄⠎]
+  - [partings, ⠐⠏⠬⠎]
+  - [partisan, ⠐⠏⠊⠎⠁⠝]
+  - [partisan's, ⠐⠏⠊⠎⠁⠝⠄⠎]
+  - [partisanly, ⠐⠏⠊⠎⠁⠝⠇⠽]
+  - [partisans, ⠐⠏⠊⠎⠁⠝⠎]
+  - [partisanship, ⠐⠏⠊⠎⠁⠝⠩⠊⠏]
+  - [partisanship's, ⠐⠏⠊⠎⠁⠝⠩⠊⠏⠄⠎]
+  - [partisanships, ⠐⠏⠊⠎⠁⠝⠩⠊⠏⠎]
+  - [partita, ⠐⠏⠊⠞⠁]
+  - [partitas, ⠐⠏⠊⠞⠁⠎]
+  - [partite, ⠐⠏⠊⠞⠑]
+  - [partition, ⠐⠏⠊⠰⠝]
+  - [partition's, ⠐⠏⠊⠰⠝⠄⠎]
+  - [partitioned, ⠐⠏⠊⠰⠝⠫]
+  - [partitioner, ⠐⠏⠊⠰⠝⠻]
+  - [partitioners, ⠐⠏⠊⠰⠝⠻⠎]
+  - [partitioning, ⠐⠏⠊⠰⠝⠬]
+  - [partitionist, ⠐⠏⠊⠰⠝⠊⠌]
+  - [partitionist's, ⠐⠏⠊⠰⠝⠊⠌⠄⠎]
+  - [partitionists, ⠐⠏⠊⠰⠝⠊⠌⠎]
+  - [partitionment, ⠐⠏⠊⠰⠝⠰⠞]
+  - [partitionments, ⠐⠏⠊⠰⠝⠰⠞⠎]
+  - [partitions, ⠐⠏⠊⠰⠝⠎]
+  - [partitive, ⠐⠏⠊⠞⠊⠧⠑]
+  - [partitive's, ⠐⠏⠊⠞⠊⠧⠑⠄⠎]
+  - [partitively, ⠐⠏⠊⠞⠊⠧⠑⠇⠽]
+  - [partitives, ⠐⠏⠊⠞⠊⠧⠑⠎]
+  - [partitura, ⠐⠏⠊⠞⠥⠗⠁]
+  - [partizan, ⠐⠏⠊⠵⠁⠝]
+  - [partizan's, ⠐⠏⠊⠵⠁⠝⠄⠎]
+  - [partizans, ⠐⠏⠊⠵⠁⠝⠎]
+  - [partlet, ⠐⠏⠇⠑⠞]
+  - [partlets, ⠐⠏⠇⠑⠞⠎]
+  - [partly, ⠐⠏⠇⠽]
+  - [partner, ⠐⠏⠝⠻]
+  - [partner's, ⠐⠏⠝⠻⠄⠎]
+  - [partnered, ⠐⠏⠝⠻⠫]
+  - [partnering, ⠐⠏⠝⠻⠬]
+  - [partnerless, ⠐⠏⠝⠻⠨⠎]
+  - [partners, ⠐⠏⠝⠻⠎]
+  - [partnership, ⠐⠏⠝⠻⠩⠊⠏]
+  - [partnership's, ⠐⠏⠝⠻⠩⠊⠏⠄⠎]
+  - [partnerships, ⠐⠏⠝⠻⠩⠊⠏⠎]
+  - [parton, ⠐⠏⠕⠝]
+  - [partons, ⠐⠏⠕⠝⠎]
+  - [partook, ⠐⠏⠕⠕⠅]
+  - [partridge, ⠐⠏⠗⠊⠙⠛⠑]
+  - [partridge's, ⠐⠏⠗⠊⠙⠛⠑⠄⠎]
+  - [partridgeberries, ⠐⠏⠗⠊⠙⠛⠑⠃⠻⠗⠊⠑⠎]
+  - [partridgeberry, ⠐⠏⠗⠊⠙⠛⠑⠃⠻⠗⠽]
+  - [partridgeberry's, ⠐⠏⠗⠊⠙⠛⠑⠃⠻⠗⠽⠄⠎]
+  - [partridges, ⠐⠏⠗⠊⠙⠛⠑⠎]
+  - [partridgewood, ⠐⠏⠗⠊⠙⠛⠑⠺⠕⠕⠙]
+  - [parts, ⠐⠏⠎]
+  - [partsong, ⠐⠏⠎⠰⠛]
+  - [partsong's, ⠐⠏⠎⠰⠛⠄⠎]
+  - [parture, ⠐⠏⠥⠗⠑]
+  - [parturiencies, ⠐⠏⠥⠗⠊⠢⠉⠊⠑⠎]
+  - [parturiency, ⠐⠏⠥⠗⠊⠢⠉⠽]
+  - [parturiency's, ⠐⠏⠥⠗⠊⠢⠉⠽⠄⠎]
+  - [parturient, ⠐⠏⠥⠗⠊⠢⠞]
+  - [parturients, ⠐⠏⠥⠗⠊⠢⠞⠎]
+  - [parturifacient, ⠐⠏⠥⠗⠊⠋⠁⠉⠊⠢⠞]
+  - [parturifacients, ⠐⠏⠥⠗⠊⠋⠁⠉⠊⠢⠞⠎]
+  - [parturition, ⠐⠏⠥⠗⠊⠰⠝]
+  - [parturition's, ⠐⠏⠥⠗⠊⠰⠝⠄⠎]
+  - [parturitions, ⠐⠏⠥⠗⠊⠰⠝⠎]
+  - [partway, ⠐⠏⠺⠁⠽]
+  - [partwork, ⠐⠏⠐⠺]
+  - [partworks, ⠐⠏⠐⠺⠎]
+  - [party, ⠐⠏⠽]
+  - [party's, ⠐⠏⠽⠄⠎]
+  - [partyer, ⠐⠏⠽⠻]
+  - [partyers, ⠐⠏⠽⠻⠎]
+  - [partygoer, ⠐⠏⠽⠛⠕⠻]
+  - [partygoer's, ⠐⠏⠽⠛⠕⠻⠄⠎]
+  - [partygoers, ⠐⠏⠽⠛⠕⠻⠎]
+  - [partying, ⠐⠏⠽⠬]
+  - [partyism, ⠐⠏⠽⠊⠎⠍]
+
+# Known issues
+flags: {testmode: bothDirections}
+tests:
+  - [a, ⠁]
+  - [Hello, ⠠⠓⠑⠇⠇⠕]
+  - [Llandudno, ⠠⠇⠇⠁⠝⠙⠥⠙⠝⠕, xfail: both forward and backward translation fails]
+  - [little, ⠇⠇]
+  - [ball, ⠃⠁⠇⠇]
+  - [first, ⠋⠌]
+  - [it, ⠭]
+  - [its, ⠭⠎]
+  - ["it's", ⠭⠄⠎, xfail: only backward translation fails]
+  - [Llandaff, ⠠⠇⠇⠁⠝⠙⠁⠋⠋, xfail: both forward and backward translation fails]
+  - [Llanelli, ⠠⠇⠇⠁⠝⠑⠇⠇⠔, xfail: both forward and backward translation fails]
+  - [•, ⠸⠲, xfail: both forward and backward translation fails]
+  - ["a,", ⠁⠂, xfail: only backward translation fails]
+  - ["a;", ⠁⠆, xfail: only backward translation fails]
+  - ["a:", ⠁⠒, xfail: only backward translation fails]
+  - ["a.", ⠁⠲]
+  - ["a!", ⠁⠖, xfail: only backward translation fails]
+  - ["a)", ⠁⠶]
+  - ["a?", ⠁⠦, xfail: only backward translation fails]
+  - ["a-", ⠁⠤, xfail: only backward translation fails]
+  - ['a"', ⠁⠴, xfail: only backward translation fails]
+  - ["a]", ⠁⠶⠄]
+  - ['"a', ⠦⠁, xfail: only backward translation fails]
+  - ["(a", ⠶⠁]
+  - ["[a", ⠠⠶⠁]
+  - [Labrador, ⠠⠇⠁⠃⠗⠁⠙⠕⠗, xfail: only backward translation fails]
+  - [last, ⠇⠁⠌, xfail: only backward translation fails]
+  - [lathe, ⠇⠁⠮, xfail: only backward translation fails]
+  - [LCD, ⠠⠠⠇⠉⠙, xfail: only backward translation fails]
+  - [lead, ⠇⠂⠙, xfail: only backward translation fails]
+  - [ledge, ⠇⠫⠛⠑, xfail: only backward translation fails]
+  - [lend, ⠇⠢⠙, xfail: only backward translation fails]
+  - [level, ⠇⠑⠧⠑⠇, xfail: only backward translation fails]
+  - [line, ⠇⠔⠑, xfail: only backward translation fails]
+  - [live, ⠇⠊⠧⠑, xfail: only backward translation fails]
+  - [love, ⠇⠕⠧⠑, xfail: only backward translation fails]
+  - [lure, ⠇⠥⠗⠑, xfail: only backward translation fails]
+  - [£1, ⠇⠼⠁]
+  - [£5, ⠇⠼⠑]
+  - [£20, ⠇⠼⠃⠚]
+  - [glass, ⠛⠇⠁⠎⠎, xfail: only backward translation fails]
+  - [classic, ⠉⠇⠁⠎⠎⠊⠉, xfail: only backward translation fails]
+  - [areligious, ⠁⠗⠑⠇⠊⠛⠊⠳⠎, xfail: only forward translation fails]
+  - [dynaribbon, ⠙⠽⠝⠁⠗⠊⠆⠕⠝, xfail: only forward translation fails]
+  - [indiarubber, ⠔⠙⠊⠁⠗⠥⠆⠻, xfail: only forward translation fails]
+  - [rareripe, ⠗⠜⠑⠗⠊⠏⠑, xfail: both forward and backward translation fails]
+  - [foredoomed, ⠿⠑⠙⠕⠕⠍⠫]
+  - [Castlereagh, ⠠⠉⠁⠌⠇⠑⠗⠂⠣, xfail: only forward translation fails]
+  - [forerunner, ⠿⠑⠗⠥⠝⠝⠻]
+  - [Kingussie, ⠠⠅⠔⠛⠥⠎⠎⠊⠑, xfail: both forward and backward translation fails]
+  - [ou, ⠕⠥]
+  - [lossless, ⠇⠕⠎⠎⠨⠎, xfail: only backward translation fails]
+  - [blasthole, ⠃⠇⠁⠌⠓⠕⠇⠑, xfail: both forward and backward translation fails]
+  - [dustheap, ⠙⠥⠌⠓⠂⠏, xfail: only forward translation fails]
+  - [firsthand, ⠋⠌⠓⠯]
+  - [guesthouse, ⠛⠥⠑⠌⠓⠳⠎⠑, xfail: only forward translation fails]
+  - [imposthume, ⠊⠍⠏⠕⠌⠓⠥⠍⠑, xfail: only forward translation fails]
+  - [posthaste, ⠏⠕⠌⠓⠁⠌⠑]
+  - [postholder, ⠏⠕⠌⠓⠕⠇⠙⠻]
+  - [posthumous, ⠏⠕⠌⠓⠥⠍⠳⠎]
+  - [Westham, ⠠⠺⠑⠌⠓⠁⠍, xfail: only forward translation fails]
+  - [Beethoven, ⠠⠃⠑⠑⠞⠓⠕⠧⠢, xfail: only forward translation fails]
+  - [enough, ⠢, xfail: both forward and backward translation fails]
+  - [Bedouin, ⠠⠃⠫⠳⠔]
+  - [bedraggled, ⠆⠙⠗⠁⠶⠇⠫, xfail: only forward translation fails]
+  - [Belorussia, ⠠⠃⠑⠇⠕⠗⠥⠎⠎⠊⠁, xfail: both forward and backward translation fails]
+  - [Bewdley, ⠠⠃⠑⠺⠙⠇⠑⠽, xfail: both forward and backward translation fails]
+  - [Bewick, ⠠⠃⠑⠺⠊⠉⠅, xfail: only forward translation fails]
+  - [Bexhill, ⠠⠃⠑⠭⠓⠊⠇⠇]
+  - [Bexley, ⠠⠃⠑⠭⠇⠑⠽, xfail: only forward translation fails]
+  - [disaccharide, ⠙⠊⠎⠁⠉⠡⠜⠊⠙⠑, xfail: both forward and backward translation fails]
+  - [disc, ⠙⠊⠎⠉, xfail: only forward translation fails]
+  - [diseuse, ⠙⠊⠎⠑⠥⠎⠑, xfail: only forward translation fails]
+  - [dish., ⠙⠊⠩⠲]
+  - ["dish,", ⠙⠊⠩⠂, xfail: only backward translation fails]
+  - ["dish!)", ⠙⠊⠩⠖⠶, xfail: only backward translation fails]
+  - [dishful, ⠙⠊⠩⠰⠇]
+  - [disk, ⠙⠊⠎⠅]
+  - [diss, ⠙⠊⠎⠎, xfail: both forward and backward translation fails]
+  - [disubstituted, ⠙⠊⠎⠥⠃⠌⠊⠞⠥⠞⠫, xfail: only forward translation fails]
+  - [disulfate, ⠙⠊⠎⠥⠇⠋⠁⠞⠑]
+  - [disulphide, ⠙⠊⠎⠥⠇⠏⠓⠊⠙⠑]
+  - [disyllabic, ⠙⠊⠎⠽⠇⠇⠁⠃⠊⠉, xfail: both forward and backward translation fails]
+  - [dissyllabic, ⠲⠎⠽⠇⠇⠁⠃⠊⠉, xfail: only backward translation fails]
+  - ['"Good"', ⠦⠠⠛⠙⠲⠴, xfail: both forward and backward translation fails]
+  - [3, ⠼⠉]
+  - ["3+", ⠼⠉⠰⠖, xfail: both forward and backward translation fails]
+  - [3+3, ⠼⠉⠀⠰⠖⠼⠉, xfail: both forward and backward translation fails]
+  - [3.14, ⠼⠉⠂⠁⠙⠁, xfail: both forward and backward translation fails]
+  - ["3,000", ⠼⠉⠄⠚⠚⠚, xfail: only backward translation fails]
+  - ["56+56", ⠼⠑⠋⠀⠰⠖⠼⠑⠋, xfail: both forward and backward translation fails]
+  - [x+y, ⠰⠭⠀⠰⠖⠰⠽, xfail: both forward and backward translation fails]
+  - ["1:30", ⠼⠁⠼⠉⠚, xfail: only backward translation fails]
+  - ["7/10", ⠼⠛⠸⠌⠼⠁⠚, xfail: only backward translation fails]
+  - [24th, ⠼⠃⠙⠹]
+  - [1st, ⠼⠁⠌]
+  - [3d, ⠼⠉⠰⠙]
+  - [5e, ⠼⠑⠰⠑]
+  - [–, ⠤⠤, xfail: both forward and backward translation fails]
+  - [—, ⠤⠤, xfail: only backward translation fails]
+  - [―, ⠤⠤⠤⠤, xfail: both forward and backward translation fails]
+  - [immobile, ⠊⠍⠍⠕⠃⠊⠇⠑, xfail: only backward translation fails]
+  - [anecdote, ⠁⠝⠑⠉⠙⠕⠞⠑, xfail: only backward translation fails]
+  - [update, ⠥⠏⠙⠁⠞⠑, xfail: only backward translation fails]
+  - [frost, ⠋⠗⠕⠌, xfail: only backward translation fails]
+  - [became, ⠆⠉⠁⠍⠑, xfail: only backward translation fails]
+  - [betroth, ⠆⠞⠗⠕⠹, xfail: only backward translation fails]
+  - [fab, ⠋⠁⠃, xfail: only backward translation fails]
+  - [acknowledge, ⠁⠉⠐⠅⠇⠫⠛⠑, xfail: only backward translation fails]
+  - [acre, ⠁⠉⠗⠑, xfail: only backward translation fails]
+  - [afraid, ⠁⠋⠗⠁⠊⠙, xfail: only backward translation fails]
+  - [MacDonald, ⠠⠍⠁⠉⠠⠙⠕⠝⠁⠇⠙, xfail: only backward translation fails]
+  - [tbl, ⠞⠃⠇, xfail: only backward translation fails]
+  - [Bagdad, ⠠⠃⠁⠛⠙⠁⠙, xfail: only backward translation fails]
+  - [dawdle, ⠙⠁⠺⠙⠇⠑, xfail: only backward translation fails]
+  - [Radcliff, ⠠⠗⠁⠙⠉⠇⠊⠋⠋, xfail: only backward translation fails]
+  - [beefsteak, ⠃⠑⠑⠋⠌⠂⠅, xfail: only backward translation fails]
+  - [offstage, ⠷⠋⠌⠁⠛⠑, xfail: only backward translation fails]
+  - [arm, ⠜⠍, xfail: only backward translation fails]
+  - [armchair, ⠜⠍⠡⠁⠊⠗, xfail: only backward translation fails]
+  - [are, ⠜⠑, xfail: only backward translation fails]
+  - ["...", ⠄⠄⠄, xfail: only backward translation fails]
+  - [bottlenose, ⠃⠕⠞⠞⠇⠑⠝⠕⠎⠑, xfail: only forward translation fails]
+  - [Brasenose, ⠠⠃⠗⠁⠎⠑⠝⠕⠎⠑, xfail: only forward translation fails]
+  - [gooseneck, ⠛⠕⠕⠎⠑⠝⠑⠉⠅, xfail: only backward translation fails]
+  - [inglenook, ⠔⠛⠇⠑⠝⠕⠕⠅, xfail: only forward translation fails]
+  - [captainess, ⠉⠁⠏⠞⠁⠔⠑⠎⠎, xfail: both forward and backward translation fails]
+  - [villainess, ⠧⠊⠇⠇⠁⠔⠑⠎⠎, xfail: both forward and backward translation fails]
+  - ["Severo?", ⠠⠎⠑⠧⠻⠕⠦, xfail: only backward translation fails]
+  - ["Seversky?", ⠠⠎⠑⠧⠻⠎⠅⠽⠦, xfail: only backward translation fails]
+  - ["there'd", ⠐⠮⠄⠙]
+  - ["there'll", ⠐⠮⠄⠇⠇]
+  - ["there's", ⠐⠮⠄⠎]
+  - [these, ⠘⠮]
+  - [theses, ⠮⠎⠑⠎]
+  - [those, ⠘⠹]
+  - [Thoseby, ⠠⠹⠕⠎⠑⠃⠽]
+  - [wherever, ⠱⠻⠐⠑]
+  - ["where'er", ⠱⠻⠑⠄⠻, xfail: only forward translation fails]
+  - [whereupon, ⠐⠱⠘⠥]
+  - [Cirencester, ⠠⠉⠊⠗⠢⠉⠑⠌⠻, xfail: only forward translation fails]
+  - [littlest, ⠇⠇⠌]
+  - [llst, ⠰⠇⠇⠎⠞, xfail: both forward and backward translation fails]
+  - [infrared, ⠔⠋⠗⠁⠗⠫]

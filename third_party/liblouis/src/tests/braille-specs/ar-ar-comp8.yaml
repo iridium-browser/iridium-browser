@@ -1,0 +1,56 @@
+# Copyright © 2018, 2021 by Ikrami Ahmad <ikrami.ahmad@gmail.com>
+# Copyright © 2020 by Mada, Qatar Assistive Technology Center <Braille@mada.org.qa>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode.dis
+table:
+  language: ar
+  type: computer
+  dots: 8
+  __assert-match: ar-ar-comp8.utb
+
+flags: {testmode: bothDirections}
+tests:
+- - ابتثجحخدذرز
+  - ⠁⠃⠞⠹⠚⠱⠭⠙⠮⠗⠵
+- - سشصضطظعغفقكلمنه
+  - ⠎⠩⠯⠫⠾⠿⠷⠣⠋⠟⠅⠇⠍⠝⠓
+- - ويىةءأإؤئآ
+  - ⠺⠊⠕⠡⠄⠌⠨⠳⠽⠜
+- - ًٌٍَُِّْ
+  - ⠂⠆⠥⠢⠑⠔⠒⠠
+- - ABCDEFGHIJKLMNOPQRSTUVWXYZ
+  - ⡁⡃⡉⡙⡑⡋⡛⡓⡊⡚⡅⡇⡍⡝⡕⡏⡟⡗⡎⡞⡥⡧⡺⡭⡽⡵
+- - (){}[]
+  - ⡦⢴⡶⢶⡷⢾
+- - +-÷×=<>*/\\
+  - ⢖⠤⢲⢦⣶⢪⢕⢔⢌⡌
+- - '؟ـ،:"'
+  - ⠦⠐⠒⡐⡒⠶
+- - '!@#$%^&_'
+  - ⠖⡈⠼⢫⢩⢮⡯⡸
+- - 1234567890
+  - ⢁⢃⢉⢙⢑⢋⢛⢓⢊⢚
+
+flags: {testmode: forward}
+tests:
+# Arabic full stop
+- - ۔
+  - ⠲
+
+flags: {testmode: backward}
+tests:
+# adding dots 78 to input small latin characters
+- - ⣁⣃⣉⣙⣑⣋⣛⣓⣊⣚⣅⣇⣍⣝⣕⣏⣟⣗⣎⣞⣥⣧⣺⣭⣽⣵
+  - abcdefghijklmnopqrstuvwxyz
+- - ⣊⣞⡄⣎
+  - "it's"
+# Latin full stop has priority over Arabic one
+- - ⠍⠗⠱⠃⠁⠲
+  - مرحبا.

@@ -1,0 +1,854 @@
+# The display tables have been separated from the translation tables. But in
+# the case of this test some display relevant stuff is still defined in the
+# translation table. That is why we have to include it here.
+display: unicode-without-blank.dis,no-no-g0.utb
+table:
+  language: no
+  grade: 0
+  dots: 6
+  __assert-match: no-no-g0.utb
+
+tests:
+  # Norwegian alphabet
+  - [a b c d e f g h i j k l m n o p q r s t u v w x y z æ ø å, ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵ ⠜ ⠪ ⠡]
+  - [Æ, ⠠⠜]
+  - [Ø, ⠠⠪]
+  - [Å, ⠠⠡]
+  # Letters used in Norwegian
+  - [à, ⠷]
+  - [À, ⠠⠷]
+  - [ä, ⠜]
+  - [Ä, ⠠⠜]
+  - [ç, ⠯]
+  - [Ç, ⠠⠯]
+  - [é, ⠿]
+  - [É, ⠠⠿]
+  - [è, ⠮]
+  - [È, ⠠⠮]
+  - [ê, ⠣]
+  - [Ê, ⠠⠣]
+  - [ò, ⠬]
+  - [Ò, ⠠⠬]
+  - [ö, ⠪]
+  - [Ö, ⠠⠪]
+  - [ü, ⠳]
+  - [Ü, ⠠⠳]
+  - [à, ⠷]
+  - [À, ⠠⠷]
+  # Alphabets used in Norwegian
+  - [vis à vis, ⠧⠊⠎ ⠷ ⠧⠊⠎] # Example 1
+  - [à jour, ⠷ ⠚⠕⠥⠗] # Example 2
+  - [Gävle, ⠠⠛⠜⠧⠇⠑] # Example 3
+  - [Jyväskylä, ⠠⠚⠽⠧⠜⠎⠅⠽⠇⠜] # Example 4
+  - [Kärnten, ⠠⠅⠜⠗⠝⠞⠑⠝] # Example 5
+  - [François, ⠠⠋⠗⠁⠝⠯⠕⠊⠎] # Example 6
+  - [Jeg har en idé!, ⠠⠚⠑⠛ ⠓⠁⠗ ⠑⠝ ⠊⠙⠿⠖] # Example 7
+  - ['"Det er én ting jeg lurer på," sa André.', ⠲⠠⠙⠑⠞ ⠑⠗ ⠿⠝ ⠞⠊⠝⠛ ⠚⠑⠛ ⠇⠥⠗⠑⠗ ⠏⠡⠂⠲ ⠎⠁ ⠠⠁⠝⠙⠗⠿⠄] # Example 8
+  - [I går lét vi borna få vera oppe lenge., ⠠⠊ ⠛⠡⠗ ⠇⠿⠞ ⠧⠊ ⠃⠕⠗⠝⠁ ⠋⠡ ⠧⠑⠗⠁ ⠕⠏⠏⠑ ⠇⠑⠝⠛⠑⠄] # Example 9
+  - [Genève, ⠠⠛⠑⠝⠮⠧⠑] # Example 10
+  - [I dag lèt eg ingen koma innfor døra mi., ⠠⠊ ⠙⠁⠛ ⠇⠮⠞ ⠑⠛ ⠊⠝⠛⠑⠝ ⠅⠕⠍⠁ ⠊⠝⠝⠋⠕⠗ ⠙⠪⠗⠁ ⠍⠊⠄] # Example 11
+  - [Det vart fint vêr i dag., ⠠⠙⠑⠞ ⠧⠁⠗⠞ ⠋⠊⠝⠞ ⠧⠣⠗ ⠊ ⠙⠁⠛⠄] # Example 12
+  - [De hadde en tête-à-tête., ⠠⠙⠑ ⠓⠁⠙⠙⠑ ⠑⠝ ⠞⠣⠞⠑⠤⠷⠤⠞⠣⠞⠑⠄] # Example 13
+  - [Det trur eg òg., ⠠⠙⠑⠞ ⠞⠗⠥⠗ ⠑⠛ ⠬⠛⠄] # Example 14
+  - [Göteborg, ⠠⠛⠪⠞⠑⠃⠕⠗⠛] # Example 15
+  - [Yrjö, ⠠⠽⠗⠚⠪] # Example 16
+  - [Köln, ⠠⠅⠪⠇⠝] # Example 17
+  - [München, ⠠⠍⠳⠝⠉⠓⠑⠝] # Example 18
+
+  - # Alphabet used in Sami (except á)
+    - a b c č d đ e f g h i j k l m n ŋ o p r s š t ŧ u v z ž
+    - ⠁ ⠃ ⠉ ⠩ ⠙ ⠹ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠫ ⠕ ⠏ ⠗ ⠎ ⠱ ⠞ ⠳ ⠥ ⠧ ⠵ ⠮
+  # Check for capitals as well
+  - [Č, ⠠⠩]
+  - [Đ, ⠠⠹]
+  - [Ŋ, ⠠⠫]
+  - [Š, ⠠⠱]
+  - [Ŧ, ⠠⠳]
+  - [Ž, ⠠⠮]
+
+  - # Alphabet used in Sami (á)
+    - á Á
+    - ⠷ ⠠⠷
+
+  - # ï, I WITH DIAERESIS, used in south sami alphabet
+    - ï Ï
+    - ⠌ ⠠⠌
+
+
+  - # Alphabet used in Norse (except é þ oe)
+    - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö ǫ
+    - ⠁ ⠷ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪ ⠾
+
+  - # Alphabet used in Norse (oe as "latin ligature oe")
+    - Œ œ
+    - ⠠⠬ ⠬
+  - # Alphabet used in Norse (é þ oe)
+    - é þ oe
+    - ⠿ ⠫ ⠕⠑
+
+  - # Alphabet used in Icelandic (except é þ)
+    - a á b c d ð e f g h i í j k l m n o ó p q r s t u ú v w x y ý z æ ö
+    - ⠁ ⠷ ⠃ ⠉ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠺ ⠭ ⠽ ⠯ ⠵ ⠜ ⠪
+
+  - # Alphabet used in Icelandic (é þ)
+    - é þ
+    - ⠿ ⠫
+
+  - # Alphabet used in Norwegian and Danish
+    - a á b d ð e f g h i í j k l m n o ó p r s t u ú v y ý æ ö
+    - ⠁ ⠷ ⠃ ⠙ ⠱ ⠑ ⠋ ⠛ ⠓ ⠊ ⠣ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠹ ⠏ ⠗ ⠎ ⠞ ⠥ ⠻ ⠧ ⠽ ⠯ ⠜ ⠪
+
+  # Alphabet used in sentence
+  - [., ⠄]
+  - [',', ⠂]
+  - [;, ⠆]
+  - [':', ⠒]
+  - ['?', ⠢]
+  - ['!', ⠖]
+  # Full stops
+  - [., ⠄] # Example 1
+  - [Eva spiser frokost., ⠠⠑⠧⠁ ⠎⠏⠊⠎⠑⠗ ⠋⠗⠕⠅⠕⠎⠞⠄] # Example 2
+  - [H.C. Andersen., ⠠⠓⠄⠠⠉⠄ ⠠⠁⠝⠙⠑⠗⠎⠑⠝⠄] # Example 3
+  - [Det er helt tåp..., ⠠⠙⠑⠞ ⠑⠗ ⠓⠑⠇⠞ ⠞⠡⠏⠄⠄⠄] # Example 4
+  - [Jeg kan da for ... ikke vite det., ⠠⠚⠑⠛ ⠅⠁⠝ ⠙⠁ ⠋⠕⠗ ⠄⠄⠄ ⠊⠅⠅⠑ ⠧⠊⠞⠑ ⠙⠑⠞⠄] # Example 5
+  # Commas
+  - [',', ⠂] # Example 1
+  - ['Jeg kan ikke uttale meg om dette, da jeg ikke kjenner saken.', ⠠⠚⠑⠛ ⠅⠁⠝ ⠊⠅⠅⠑ ⠥⠞⠞⠁⠇⠑ ⠍⠑⠛ ⠕⠍ ⠙⠑⠞⠞⠑⠂ ⠙⠁ ⠚⠑⠛ ⠊⠅⠅⠑ ⠅⠚⠑⠝⠝⠑⠗ ⠎⠁⠅⠑⠝⠄] # Example 2
+  - ['Jan kjøpte grønnsaker, egg og ost.', ⠠⠚⠁⠝ ⠅⠚⠪⠏⠞⠑ ⠛⠗⠪⠝⠝⠎⠁⠅⠑⠗⠂ ⠑⠛⠛ ⠕⠛ ⠕⠎⠞⠄] # Example 3
+  - ['Hanne kjøpte 2,5 kg blåbær.', ⠠⠓⠁⠝⠝⠑ ⠅⠚⠪⠏⠞⠑ ⠼⠃⠂⠑ ⠅⠛ ⠃⠇⠡⠃⠜⠗⠄] # Example 4
+  - ['Genseren kostet kr 99,50.', ⠠⠛⠑⠝⠎⠑⠗⠑⠝ ⠅⠕⠎⠞⠑⠞ ⠅⠗ ⠼⠊⠊⠂⠑⠚⠄] # Example 5
+  # Semicolons
+  - [;, ⠆] # Example 1
+  - [Tore forsvant; det ble stor oppstandelse., ⠠⠞⠕⠗⠑ ⠋⠕⠗⠎⠧⠁⠝⠞⠆ ⠙⠑⠞ ⠃⠇⠑ ⠎⠞⠕⠗ ⠕⠏⠏⠎⠞⠁⠝⠙⠑⠇⠎⠑⠄] # Example 2
+  - ['15,9; 22,6; 3; 2,5', ⠼⠁⠑⠂⠊⠆ ⠼⠃⠃⠂⠋⠆ ⠼⠉⠆ ⠼⠃⠂⠑] # Example 3
+  - [Tekst; Regnskap 2006; Regnskap 2005; Budsjett 2006; Budsjett 2007, ⠠⠞⠑⠅⠎⠞⠆ ⠠⠗⠑⠛⠝⠎⠅⠁⠏ ⠼⠃⠚⠚⠋⠆ ⠠⠗⠑⠛⠝⠎⠅⠁⠏ ⠼⠃⠚⠚⠑⠆ ⠠⠃⠥⠙⠎⠚⠑⠞⠞ ⠼⠃⠚⠚⠋⠆ ⠠⠃⠥⠙⠎⠚⠑⠞⠞ ⠼⠃⠚⠚⠛] # Examp4
+  - [Inntekter, ⠠⠊⠝⠝⠞⠑⠅⠞⠑⠗] # Example 5
+  - [Inndekning av felleskostnader; 2.088.000; 1.986.000; 1.986.000; 2.088.000, ⠠⠊⠝⠝⠙⠑⠅⠝⠊⠝⠛ ⠁⠧ ⠋⠑⠇⠇⠑⠎⠅⠕⠎⠞⠝⠁⠙⠑⠗⠆ ⠼⠃⠄⠚⠓⠓⠄⠚⠚⠚⠆ ⠼⠁⠄⠊⠓⠋⠄⠚⠚⠚⠆ ⠼⠁⠄⠊⠓⠋⠄⠚⠚⠚⠆ ⠼⠃⠄⠚⠓⠓⠄⠚⠚⠚] # Example 6
+  - [Andre leieinntekter; 40.800; 39.600; 38.000; 40.000, ⠠⠁⠝⠙⠗⠑ ⠇⠑⠊⠑⠊⠝⠝⠞⠑⠅⠞⠑⠗⠆ ⠼⠙⠚⠄⠓⠚⠚⠆ ⠼⠉⠊⠄⠋⠚⠚⠆ ⠼⠉⠓⠄⠚⠚⠚⠆ ⠼⠙⠚⠄⠚⠚⠚] # Example 7
+  # Colons
+  - [':', ⠒] # Example 1
+  - ['Per sa: "Jeg vil ikke være med på sjøen i dag."', ⠠⠏⠑⠗ ⠎⠁⠒ ⠲⠠⠚⠑⠛ ⠧⠊⠇ ⠊⠅⠅⠑ ⠧⠜⠗⠑ ⠍⠑⠙ ⠏⠡ ⠎⠚⠪⠑⠝ ⠊ ⠙⠁⠛⠄⠲] # Example 2
+  - ['Det finnes 3 ulike skjemaer: røde, gule og blå.', ⠠⠙⠑⠞ ⠋⠊⠝⠝⠑⠎ ⠼⠉ ⠥⠇⠊⠅⠑ ⠎⠅⠚⠑⠍⠁⠑⠗⠒ ⠗⠪⠙⠑⠂ ⠛⠥⠇⠑ ⠕⠛ ⠃⠇⠡⠄] # Example 3
+  - ['Målestokk 1 :50.000.', ⠠⠍⠡⠇⠑⠎⠞⠕⠅⠅ ⠼⠁ ⠒⠼⠑⠚⠄⠚⠚⠚⠄] # Example 4
+  # Question marks
+  - ['?', ⠢] # Example 1
+  - ['Melk? Juice? Eller vann?', ⠠⠍⠑⠇⠅⠢ ⠠⠚⠥⠊⠉⠑⠢ ⠠⠑⠇⠇⠑⠗ ⠧⠁⠝⠝⠢] # Example 2
+  - ['"Skal vi gå ut og spise i dag?" spurte Karin.', ⠲⠠⠎⠅⠁⠇ ⠧⠊ ⠛⠡ ⠥⠞ ⠕⠛ ⠎⠏⠊⠎⠑ ⠊ ⠙⠁⠛⠢⠲ ⠎⠏⠥⠗⠞⠑ ⠠⠅⠁⠗⠊⠝⠄] # Example 3
+  # Exclamation marks
+  - ['!', ⠖] # Example 1
+  - [Pass på!, ⠠⠏⠁⠎⠎ ⠏⠡⠖] # Example 2
+  - [Lykke til!, ⠠⠇⠽⠅⠅⠑ ⠞⠊⠇⠖] # Example 3
+  # Parentes
+  - [( ), ⠦ ⠴] # Example 1
+  - [Det var ingen sak (trodde han)., ⠠⠙⠑⠞ ⠧⠁⠗ ⠊⠝⠛⠑⠝ ⠎⠁⠅ ⠦⠞⠗⠕⠙⠙⠑ ⠓⠁⠝⠴⠄] # Example 2
+  - [Året etter (1930) kom han hit., ⠠⠡⠗⠑⠞ ⠑⠞⠞⠑⠗ ⠦⠼⠁⠊⠉⠚⠴ ⠅⠕⠍ ⠓⠁⠝ ⠓⠊⠞⠄] # Example 3
+  # Brackets
+  - ['[ ]', ⠷ ⠾] # Example 1
+  - ['valg [val]', ⠧⠁⠇⠛ ⠷⠧⠁⠇⠾] # Example 2
+  - ['Utelatt tekst [...] er ikke tatt med.', ⠠⠥⠞⠑⠇⠁⠞⠞ ⠞⠑⠅⠎⠞ ⠷⠄⠄⠄⠾ ⠑⠗ ⠊⠅⠅⠑ ⠞⠁⠞⠞ ⠍⠑⠙⠄] # Example 3
+  # Curly brackets
+  - ['{ }', ⠠⠷ ⠠⠾] # Example 1
+  - ['Ich bin, du bist, {er, sie, es} ist', ⠠⠊⠉⠓ ⠃⠊⠝⠂ ⠙⠥ ⠃⠊⠎⠞⠂ ⠠⠷⠑⠗⠂ ⠎⠊⠑⠂ ⠑⠎⠠⠾ ⠊⠎⠞] # Example 2
+  # Mengdeparentes
+  - # Example 1
+    - '{ }'
+    - ⠣ ⠜
+    - {xfail: true}
+  - # Example 2
+    - L = {1, 3, 4}
+    - ⠠⠇ ⠶⠣⠼⠁⠂ ⠼⠉⠂ ⠼⠙⠜
+    - {xfail: true}
+  # Quotes
+  - ['" "', ⠲ ⠲]
+  - ['"Jeg går nå," sa han.', ⠲⠠⠚⠑⠛ ⠛⠡⠗ ⠝⠡⠂⠲ ⠎⠁ ⠓⠁⠝⠄]
+  - [Båten het "Vesta"., ⠠⠃⠡⠞⠑⠝ ⠓⠑⠞ ⠲⠠⠧⠑⠎⠞⠁⠲⠄]
+  - ['"Reiste han med "Vesta"?"', ⠲⠠⠗⠑⠊⠎⠞⠑ ⠓⠁⠝ ⠍⠑⠙ ⠲⠠⠧⠑⠎⠞⠁⠲⠢⠲]
+  - ['""Vera" het båten," rettet hun.', ⠲⠲⠠⠧⠑⠗⠁⠲ ⠓⠑⠞ ⠃⠡⠞⠑⠝⠂⠲ ⠗⠑⠞⠞⠑⠞ ⠓⠥⠝⠄]
+  - [5 kasser à 20 kg 3 " à 30 ", ⠼⠑ ⠅⠁⠎⠎⠑⠗ ⠷ ⠼⠃⠚ ⠅⠛ ⠼⠉ ⠲ ⠷ ⠼⠉⠚ ⠲]
+  #  Apostrophe
+  - ['''', ⠐]
+  - ['Har du sett''n her?', ⠠⠓⠁⠗ ⠙⠥ ⠎⠑⠞⠞⠐⠝ ⠓⠑⠗⠢]
+  - [Dette må være Vigdis' bok., ⠠⠙⠑⠞⠞⠑ ⠍⠡ ⠧⠜⠗⠑ ⠠⠧⠊⠛⠙⠊⠎⠐ ⠃⠕⠅⠄]
+  - [Møtet var i NATO's faste råd., ⠠⠍⠪⠞⠑⠞ ⠧⠁⠗ ⠊ ⠠⠠⠝⠁⠞⠕⠐⠎ ⠋⠁⠎⠞⠑ ⠗⠡⠙⠄]
+  # Asterisk
+  - ['*', ⠔]
+  - [Det var den første skolen for blinde.*, ⠠⠙⠑⠞ ⠧⠁⠗ ⠙⠑⠝ ⠋⠪⠗⠎⠞⠑ ⠎⠅⠕⠇⠑⠝ ⠋⠕⠗ ⠃⠇⠊⠝⠙⠑⠄⠔]
+  # Ampersand
+  - ['&', ⠬]
+  - [Donald Duck & co., ⠠⠙⠕⠝⠁⠇⠙ ⠠⠙⠥⠉⠅ ⠬ ⠉⠕⠄]
+  # Section sign
+  - [§, ⠬]
+  -
+    - § 18 § 223 2. ledd
+    - ⠬⠼⠁⠓ ⠬⠼⠃⠃⠉ ⠼⠃⠄ ⠇⠑⠙⠙
+  -
+    - §§ 28—32 §§ 20 og 24
+    - ⠬⠬⠼⠃⠓⠤⠤⠼⠉⠃ ⠬⠬⠼⠃⠚ ⠕⠛ ⠼⠃⠙
+  # Number sign
+  - ['#', ⠼]
+  - ['På telefonen finner du tasten #.', ⠠⠏⠡ ⠞⠑⠇⠑⠋⠕⠝⠑⠝ ⠋⠊⠝⠝⠑⠗ ⠙⠥ ⠞⠁⠎⠞⠑⠝ ⠼⠄]
+  -
+    - 'Viderekobling oppløses ved å trykke #21#.'
+    - ⠠⠧⠊⠙⠑⠗⠑⠅⠕⠃⠇⠊⠝⠛ ⠕⠏⠏⠇⠪⠎⠑⠎ ⠧⠑⠙ ⠡ ⠞⠗⠽⠅⠅⠑ ⠼⠠⠼⠃⠁⠼⠄
+  # Dash
+  - [a-a, ⠁⠤⠁]
+  - [a−a, ⠁⠤⠁] # U+2212
+  - [Anne-Lise fikk en aha-opplevelse., ⠠⠁⠝⠝⠑⠤⠠⠇⠊⠎⠑ ⠋⠊⠅⠅ ⠑⠝ ⠁⠓⠁⠤⠕⠏⠏⠇⠑⠧⠑⠇⠎⠑⠄]
+  - [14-åringer kalles i dag fjortiser., ⠼⠁⠙⠤⠡⠗⠊⠝⠛⠑⠗ ⠅⠁⠇⠇⠑⠎ ⠊ ⠙⠁⠛ ⠋⠚⠕⠗⠞⠊⠎⠑⠗⠄]
+  - [Kultur- og kirkedepartementet skrev til alle stortingsmenn og -kvinner., ⠠⠅⠥⠇⠞⠥⠗⠤ ⠕⠛ ⠅⠊⠗⠅⠑⠙⠑⠏⠁⠗⠞⠑⠍⠑⠝⠞⠑⠞ ⠎⠅⠗⠑⠧ ⠞⠊⠇ ⠁⠇⠇⠑ ⠎⠞⠕⠗⠞⠊⠝⠛⠎⠍⠑⠝⠝ ⠕⠛ ⠤⠅⠧⠊⠝⠝⠑⠗⠄]
+  # Figure dash
+  - [‒, ⠤]
+  # Lang dash
+  - [–, ⠤⠤]
+  - [Toget går i pendeltrafikk Oslo–Lillehammer., ⠠⠞⠕⠛⠑⠞ ⠛⠡⠗ ⠊ ⠏⠑⠝⠙⠑⠇⠞⠗⠁⠋⠊⠅⠅ ⠠⠕⠎⠇⠕⠤⠤⠠⠇⠊⠇⠇⠑⠓⠁⠍⠍⠑⠗⠄]
+  - [Åpningstiden er 9–16., ⠠⠡⠏⠝⠊⠝⠛⠎⠞⠊⠙⠑⠝ ⠑⠗ ⠼⠊⠤⠤⠼⠁⠋⠄]
+  - [Bosnia-Hercegovina–Norge 0–2., ⠠⠃⠕⠎⠝⠊⠁⠤⠠⠓⠑⠗⠉⠑⠛⠕⠧⠊⠝⠁⠤⠤⠠⠝⠕⠗⠛⠑ ⠼⠚⠤⠤⠼⠃⠄]
+  # Tankestrek
+  - [–, ⠤⠤]
+  - [Matta – det var det de kalte Svein Mathiesen – var sidekommentator., ⠠⠍⠁⠞⠞⠁ ⠤⠤ ⠙⠑⠞ ⠧⠁⠗ ⠙⠑⠞ ⠙⠑ ⠅⠁⠇⠞⠑ ⠠⠎⠧⠑⠊⠝ ⠠⠍⠁⠞⠓⠊⠑⠎⠑⠝ ⠤⠤ ⠧⠁⠗ ⠎⠊⠙⠑⠅⠕⠍⠍⠑⠝⠞⠁⠞⠕⠗⠄]
+  - ['– Pass på, kamerat Brezhnjev, nå kommer vi! sa Lillelien.', ⠤⠤ ⠠⠏⠁⠎⠎ ⠏⠡⠂ ⠅⠁⠍⠑⠗⠁⠞ ⠠⠃⠗⠑⠵⠓⠝⠚⠑⠧⠂ ⠝⠡ ⠅⠕⠍⠍⠑⠗ ⠧⠊⠖ ⠎⠁ ⠠⠇⠊⠇⠇⠑⠇⠊⠑⠝⠄]
+  # Slash
+  - [/, ⠌]
+  - [Han kjørte i 100 km/t i 50-sonen., ⠠⠓⠁⠝ ⠅⠚⠪⠗⠞⠑ ⠊ ⠼⠁⠚⠚ ⠅⠍⠌⠞ ⠊ ⠼⠑⠚⠤⠎⠕⠝⠑⠝⠄]
+  - [Enhver kan forsyne seg med det han/hun måtte ønske., ⠠⠑⠝⠓⠧⠑⠗ ⠅⠁⠝ ⠋⠕⠗⠎⠽⠝⠑ ⠎⠑⠛ ⠍⠑⠙ ⠙⠑⠞ ⠓⠁⠝⠌⠓⠥⠝ ⠍⠡⠞⠞⠑ ⠪⠝⠎⠅⠑⠄]
+  - [De framførte "Våren" av Grieg/Vinje., ⠠⠙⠑ ⠋⠗⠁⠍⠋⠪⠗⠞⠑ ⠲⠠⠧⠡⠗⠑⠝⠲ ⠁⠧ ⠠⠛⠗⠊⠑⠛⠌⠠⠧⠊⠝⠚⠑⠄]
+  - [Det må lederen og/eller kassereren bestemme., ⠠⠙⠑⠞ ⠍⠡ ⠇⠑⠙⠑⠗⠑⠝ ⠕⠛⠌⠑⠇⠇⠑⠗ ⠅⠁⠎⠎⠑⠗⠑⠗⠑⠝ ⠃⠑⠎⠞⠑⠍⠍⠑⠄]
+  - ['En durkdreven drømmer fra Drammen / dro djervt uten draft over dammen. / Den dåd han har drømt, / til døden er dømt. / Han druknet i dønningen. Amen!', ⠠⠑⠝ ⠙⠥⠗⠅⠙⠗⠑⠧⠑⠝ ⠙⠗⠪⠍⠍⠑⠗ ⠋⠗⠁ ⠠⠙⠗⠁⠍⠍⠑⠝ ⠌ ⠙⠗⠕ ⠙⠚⠑⠗⠧⠞ ⠥⠞⠑⠝ ⠙⠗⠁⠋⠞ ⠕⠧⠑⠗ ⠙⠁⠍⠍⠑⠝⠄ ⠌ ⠠⠙⠑⠝ ⠙⠡⠙ ⠓⠁⠝ ⠓⠁⠗ ⠙⠗⠪⠍⠞⠂ ⠌ ⠞⠊⠇ ⠙⠪⠙⠑⠝ ⠑⠗ ⠙⠪⠍⠞⠄ ⠌ ⠠⠓⠁⠝ ⠙⠗⠥⠅⠝⠑⠞ ⠊ ⠙⠪⠝⠝⠊⠝⠛⠑⠝⠄ ⠠⠁⠍⠑⠝⠖]
+  # Small Latin letters
+  -
+    - Anne løser oppgavene 19 c, 24 d og 33 c.
+    - ⠠⠁⠝⠝⠑ ⠇⠪⠎⠑⠗ ⠕⠏⠏⠛⠁⠧⠑⠝⠑ ⠼⠁⠊⠰⠉⠂ ⠼⠃⠙⠰⠙ ⠕⠛ ⠼⠉⠉⠰⠉⠄
+    - {xfail: true}
+  - [Jeg vet at hun spiller i klasse a., ⠠⠚⠑⠛ ⠧⠑⠞ ⠁⠞ ⠓⠥⠝ ⠎⠏⠊⠇⠇⠑⠗ ⠊ ⠅⠇⠁⠎⠎⠑ ⠁⠄]
+  # Capital Latin letter
+  - [Det var en gang ..., ⠠⠙⠑⠞ ⠧⠁⠗ ⠑⠝ ⠛⠁⠝⠛ ⠄⠄⠄]
+  - [Mitt navn er Kristin Halvorsen., ⠠⠍⠊⠞⠞ ⠝⠁⠧⠝ ⠑⠗ ⠠⠅⠗⠊⠎⠞⠊⠝ ⠠⠓⠁⠇⠧⠕⠗⠎⠑⠝⠄]
+  - [FN, ⠠⠠⠋⠝]
+  - [NSB, ⠠⠠⠝⠎⠃]
+  - [LO, ⠠⠠⠇⠕]
+  -
+    - SVs landsmøte i 2007 ble avholdt i tiden 22.–25. mars.
+    - ⠠⠠⠎⠧⠰⠎ ⠇⠁⠝⠙⠎⠍⠪⠞⠑ ⠊ ⠼⠃⠚⠚⠛ ⠃⠇⠑ ⠁⠧⠓⠕⠇⠙⠞ ⠊ ⠞⠊⠙⠑⠝ ⠼⠃⠃⠄⠤⠤⠼⠃⠑⠄ ⠍⠁⠗⠎⠄
+  - [NSBs rutetabeller finner du på Internett., ⠠⠠⠝⠎⠃⠰⠎ ⠗⠥⠞⠑⠞⠁⠃⠑⠇⠇⠑⠗ ⠋⠊⠝⠝⠑⠗ ⠙⠥ ⠏⠡ ⠠⠊⠝⠞⠑⠗⠝⠑⠞⠞⠄]
+  - ['Alle CD-ene som var oppbevart i boden, ble stjålet.', ⠠⠁⠇⠇⠑ ⠠⠠⠉⠙⠤⠑⠝⠑ ⠎⠕⠍ ⠧⠁⠗ ⠕⠏⠏⠃⠑⠧⠁⠗⠞ ⠊ ⠃⠕⠙⠑⠝⠂ ⠃⠇⠑ ⠎⠞⠚⠡⠇⠑⠞⠄]
+  -
+    - MediaLT RadiOrakel
+    - ⠠⠍⠑⠙⠊⠁⠠⠇⠠⠞ ⠠⠗⠁⠙⠊⠠⠕⠗⠁⠅⠑⠇
+    - {xfail: true}
+  - [KrFs leder er Knut Arild Hareide., ⠠⠅⠗⠠⠋⠎ ⠇⠑⠙⠑⠗ ⠑⠗ ⠠⠅⠝⠥⠞ ⠠⠁⠗⠊⠇⠙ ⠠⠓⠁⠗⠑⠊⠙⠑⠄]
+  -
+    - TVNorge har flere nyhetssendinger pr. dag.
+    - ⠠⠞⠠⠧⠠⠝⠕⠗⠛⠑ ⠓⠁⠗ ⠋⠇⠑⠗⠑ ⠝⠽⠓⠑⠞⠎⠎⠑⠝⠙⠊⠝⠛⠑⠗ ⠏⠗⠄ ⠙⠁⠛⠄
+    - {xfail: true}
+  -
+    - DTBook NBfU
+    - ⠠⠙⠠⠞⠠⠃⠕⠕⠅ ⠠⠝⠠⠃⠋⠠⠥
+    - {xfail: true}
+  -
+    - MHz kHz
+    - ⠠⠍⠠⠓⠵ ⠅⠠⠓⠵
+    - {xfail: true}
+  - [DnB NOR, ⠠⠙⠝⠠⠃ ⠠⠠⠝⠕⠗]
+  -
+    - CO2 NaCl
+    - ⠠⠉⠠⠕⠡⠼⠃ ⠠⠝⠁⠠⠉⠇
+    - {xfail: true}
+  -
+    - H2SO4
+    - ⠠⠓⠡⠼⠃⠠⠎⠠⠕⠡⠼⠙
+    - {xfail: true}
+  -
+    - HCl CHCl3
+    - ⠠⠓⠠⠉⠇ ⠠⠉⠠⠓⠠⠉⠇⠡⠼⠉
+    - {xfail: true}
+
+  # More capitals
+
+  -
+    - Jeg bare MÅ snakke med deg!
+    - ⠠⠚⠑⠛ ⠃⠁⠗⠑ ⠠⠠⠍⠡ ⠎⠝⠁⠅⠅⠑ ⠍⠑⠙ ⠙⠑⠛⠖
+  -
+    - SPIS FULLKORN OG FRØ
+    - "⠠⠠⠠⠎⠏⠊⠎ ⠋⠥⠇⠇⠅⠕⠗⠝ ⠕⠛ ⠋⠗⠪⠠"
+
+
+  # Greek Letters
+  -
+    - π = 3,14
+    - ⠘⠏ ⠶⠼⠉⠂⠁⠙
+    - {xfail: true}
+  -
+    - Øretelefonen tåler en motstand på 8 Ω (Ohm).
+    - ⠠⠪⠗⠑⠞⠑⠇⠑⠋⠕⠝⠑⠝ ⠞⠡⠇⠑⠗ ⠑⠝ ⠍⠕⠞⠎⠞⠁⠝⠙ ⠏⠡ ⠼⠓ ⠸⠺ ⠦⠠⠕⠓⠍⠴⠄
+    - {xfail: true}
+  # Roman numbers
+  - [Per Egil Hegge ga i 2006 ut en biografi om Harald V., ⠠⠏⠑⠗ ⠠⠑⠛⠊⠇ ⠠⠓⠑⠛⠛⠑ ⠛⠁ ⠊ ⠼⠃⠚⠚⠋ ⠥⠞ ⠑⠝ ⠃⠊⠕⠛⠗⠁⠋⠊ ⠕⠍ ⠠⠓⠁⠗⠁⠇⠙ ⠠⠧⠄]
+  -
+    - Haakon VII var konge i Norge 1905—1957.
+    - ⠠⠓⠁⠁⠅⠕⠝ ⠠⠧⠊⠊ ⠧⠁⠗ ⠅⠕⠝⠛⠑ ⠊ ⠠⠝⠕⠗⠛⠑ ⠼⠁⠊⠚⠑⠤⠤⠼⠁⠊⠑⠛⠄
+    - {xfail: true}
+  -
+    - Utdraget er hentet fra kap. IV iii.
+    - ⠠⠥⠞⠙⠗⠁⠛⠑⠞ ⠑⠗ ⠓⠑⠝⠞⠑⠞ ⠋⠗⠁ ⠅⠁⠏⠄ ⠠⠊⠧ ⠰⠊⠊⠊⠄
+    - {xfail: true}
+  # Highlighting
+  -
+    - hund hunden hunder hundene
+    - ⠓⠥⠝⠙ ⠓⠥⠝⠙⠆⠑⠝⠰ ⠓⠥⠝⠙⠆⠑⠗⠰ ⠓⠥⠝⠙⠆⠑⠝⠑⠰
+    - typeform:
+        italic: '         ++     ++     +++'
+  -
+    - Det var bare det at hun også misunte ham det.
+    - ⠠⠙⠑⠞ ⠧⠁⠗ ⠃⠁⠗⠑ ⠙⠑⠞ ⠁⠞ ⠓⠥⠝ ⠕⠛⠎⠡ ⠆⠍⠊⠎⠰⠥⠝⠞⠑ ⠓⠁⠍ ⠙⠑⠞⠄
+    - typeform:
+        italic: '                             +++             '
+  -
+    - Jeg verken vil eller kan gjøre dette for deg!
+    - ⠠⠚⠑⠛ ⠧⠑⠗⠅⠑⠝ ⠆⠧⠊⠇⠰ ⠑⠇⠇⠑⠗ ⠆⠅⠁⠝⠰ ⠛⠚⠪⠗⠑ ⠙⠑⠞⠞⠑ ⠋⠕⠗ ⠙⠑⠛⠖
+    - typeform:
+        italic: '           +++       +++                     '
+  -
+    - Karin Fossum slo gjennom som krimforfatter med romanen Evas øye, som kom ut i 1995.
+    - ⠠⠅⠁⠗⠊⠝ ⠠⠋⠕⠎⠎⠥⠍ ⠎⠇⠕ ⠛⠚⠑⠝⠝⠕⠍ ⠎⠕⠍ ⠅⠗⠊⠍⠋⠕⠗⠋⠁⠞⠞⠑⠗ ⠍⠑⠙ ⠗⠕⠍⠁⠝⠑⠝ ⠆⠠⠑⠧⠁⠎ ⠪⠽⠑⠰⠂ ⠎⠕⠍ ⠅⠕⠍ ⠥⠞ ⠊ ⠼⠁⠊⠊⠑⠄
+    - typeform:
+        italic: '                                                       ++++++++                    '
+  -
+    - '"Hør her: du må gjøre det!"'
+    - ⠲⠠⠓⠪⠗ ⠓⠑⠗⠒ ⠆⠙⠥ ⠸⠍⠡⠸ ⠛⠚⠪⠗⠑ ⠙⠑⠞⠰⠖⠲
+    - typeform:
+        italic:    '          +++++++++++++++  '
+        underline: '              ++           '
+      xfail: true
+  - # Highlighting: bold and nested italic
+    - hør    her    du    må    gjøre    det
+    - ⠓⠪⠗    ⠓⠑⠗    ⠠⠄⠙⠥    ⠆⠍⠡⠰    ⠛⠚⠪⠗⠑⠠⠄    ⠙⠑⠞
+    - typeform:
+        bold:   '              +++++++++++++++++       '
+        italic: '                    ++                '
+  -
+    - 'Romanen Tusen strålende soler av den afghansk-amerikanske forfatteren Khaled
+      Hosseini tyder på å bli en like stor suksess som den forrige romanen, Drageløperen.
+      I bokanmeldelsen fra Dagbladet 06.06.07 forklares dette med: Ikke fordi Hosseini
+      er en spesielt god forfatter. Men fordi tematikken til den USA-bosatte Hosseini,
+      har en spesiell dragning på et vestlig publikum.'
+    - ⠠⠗⠕⠍⠁⠝⠑⠝ ⠆⠠⠞⠥⠎⠑⠝ ⠎⠞⠗⠡⠇⠑⠝⠙⠑ ⠎⠕⠇⠑⠗⠰ ⠁⠧ ⠙⠑⠝ ⠁⠋⠛⠓⠁⠝⠎⠅⠤⠁⠍⠑⠗⠊⠅⠁⠝⠎⠅⠑ ⠋⠕⠗⠋⠁⠞⠞⠑⠗⠑⠝ ⠠⠅⠓⠁⠇⠑⠙ ⠠⠓⠕⠎⠎⠑⠊⠝⠊ ⠞⠽⠙⠑⠗ ⠏⠡ ⠡ ⠃⠇⠊ ⠑⠝ ⠇⠊⠅⠑ ⠎⠞⠕⠗ ⠎⠥⠅⠎⠑⠎⠎ ⠎⠕⠍ ⠙⠑⠝ ⠋⠕⠗⠗⠊⠛⠑ ⠗⠕⠍⠁⠝⠑⠝⠂ ⠆⠠⠙⠗⠁⠛⠑⠇⠪⠏⠑⠗⠑⠝⠰⠄ ⠠⠊ ⠃⠕⠅⠁⠝⠍⠑⠇⠙⠑⠇⠎⠑⠝ ⠋⠗⠁ ⠆⠠⠙⠁⠛⠃⠇⠁⠙⠑⠞⠰ ⠼⠚⠋⠄⠚⠋⠄⠚⠛ ⠋⠕⠗⠅⠇⠁⠗⠑⠎ ⠙⠑⠞⠞⠑ ⠍⠑⠙⠒ ⠠⠄⠠⠊⠅⠅⠑ ⠋⠕⠗⠙⠊ ⠠⠓⠕⠎⠎⠑⠊⠝⠊ ⠑⠗ ⠑⠝ ⠎⠏⠑⠎⠊⠑⠇⠞ ⠛⠕⠙ ⠋⠕⠗⠋⠁⠞⠞⠑⠗⠄ ⠠⠍⠑⠝ ⠋⠕⠗⠙⠊ ⠞⠑⠍⠁⠞⠊⠅⠅⠑⠝ ⠞⠊⠇ ⠙⠑⠝ ⠠⠠⠥⠎⠁⠤⠃⠕⠎⠁⠞⠞⠑ ⠠⠓⠕⠎⠎⠑⠊⠝⠊⠂ ⠓⠁⠗ ⠑⠝ ⠎⠏⠑⠎⠊⠑⠇⠇ ⠙⠗⠁⠛⠝⠊⠝⠛ ⠏⠡ ⠑⠞ ⠧⠑⠎⠞⠇⠊⠛ ⠏⠥⠃⠇⠊⠅⠥⠍⠄⠠⠄
+    - typeform:
+        italic: '        +++++++++++++++++++++                                                                                                                      ++++++++++++                       +++++++++                                                                                                                                                                                    '
+        bold:   '                                                                                                                                                                                                                              +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+  - # Highlighting: bold
+    - aa bb cc
+    - ⠁⠁ ⠠⠄⠃⠃⠠⠄ ⠉⠉
+    - {typeform: {bold: '   ++   '}}
+  - # Highlighting: underline
+    - aa bb cc
+    - ⠁⠁ ⠸⠃⠃⠸ ⠉⠉
+    - {typeform: {underline: '   ++   '}}
+  -
+    - Vinje, Finn-Erik. 2004. Skriveregler. 8. utg. Oslo
+    - ⠠⠧⠊⠝⠚⠑⠂ ⠠⠋⠊⠝⠝⠤⠠⠑⠗⠊⠅⠄ ⠼⠃⠚⠚⠙⠄ ⠆⠠⠎⠅⠗⠊⠧⠑⠗⠑⠛⠇⠑⠗⠰⠄ ⠼⠓⠄ ⠥⠞⠛⠄ ⠠⠕⠎⠇⠕
+    - typeform:
+        italic: '                        ++++++++++++              '
+  -
+    - Hellevik, Alf. 1970. God nynorsk.  Oslo
+    - ⠠⠓⠑⠇⠇⠑⠧⠊⠅⠂ ⠠⠁⠇⠋⠄ ⠼⠁⠊⠛⠚⠄ ⠆⠠⠛⠕⠙ ⠝⠽⠝⠕⠗⠎⠅⠰⠄  ⠠⠕⠎⠇⠕
+    - typeform:
+        italic: '                     +++++++++++       '
+  -
+    - Ny afghansk bestselger. Bokanmeldelse Dagbladet 06.06.07
+    - ⠠⠝⠽ ⠁⠋⠛⠓⠁⠝⠎⠅ ⠃⠑⠎⠞⠎⠑⠇⠛⠑⠗⠄ ⠠⠃⠕⠅⠁⠝⠍⠑⠇⠙⠑⠇⠎⠑ ⠆⠠⠙⠁⠛⠃⠇⠁⠙⠑⠞⠰ ⠼⠚⠋⠄⠚⠋⠄⠚⠛
+    - typeform:
+        italic: '                                      +++++++++         '
+  # Sperret tekst
+  -
+    - Det viktigste er å få fram m e n i n g e n.
+    - ⠠⠙⠑⠞ ⠧⠊⠅⠞⠊⠛⠎⠞⠑ ⠑⠗ ⠡ ⠋⠡ ⠋⠗⠁⠍ ⠐⠂⠍⠑⠝⠊⠝⠛⠑⠝⠐⠂⠄
+    - {xfail: true}
+  -
+    - L a s t a t e n ( k o m m u n e n ) g å f o r a n.
+    - ⠐⠂⠠⠇⠁ ⠎⠞⠁⠞⠑⠝ ⠦⠅⠕⠍⠍⠥⠝⠑⠝⠴ ⠛⠡ ⠋⠕⠗⠁⠝⠄⠐⠂
+    - {xfail: true}
+  # Capitalization
+  - [Jeg bare MÅ snakke med deg!, ⠠⠚⠑⠛ ⠃⠁⠗⠑ ⠠⠠⠍⠡ ⠎⠝⠁⠅⠅⠑ ⠍⠑⠙ ⠙⠑⠛⠖]
+  - [DEN BESTE BURSDAGEN jeg har hatt var da jeg fylte åtte., ⠠⠠⠠⠙⠑⠝ ⠃⠑⠎⠞⠑ ⠃⠥⠗⠎⠙⠁⠛⠑⠝⠠ ⠚⠑⠛ ⠓⠁⠗ ⠓⠁⠞⠞ ⠧⠁⠗ ⠙⠁ ⠚⠑⠛ ⠋⠽⠇⠞⠑ ⠡⠞⠞⠑⠄,]
+  # Headlines
+  - [EN ROSE MED TORNER, ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑ ⠍⠑⠙ ⠞⠕⠗⠝⠑⠗⠠]
+  - [EN ROSE! MED 15 TORNER., ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑⠖ ⠍⠑⠙ ⠼⠁⠑ ⠞⠕⠗⠝⠑⠗⠠⠄, xfail: "period and endcaps switched"]
+  - ["EN ROSE! MED 15 TORNER?", ⠠⠠⠠⠑⠝ ⠗⠕⠎⠑⠖ ⠍⠑⠙ ⠼⠁⠑ ⠞⠕⠗⠝⠑⠗⠠⠢, xfail: "question mark and encdaps switched"]
+  - [SAK 27/07 SØKNAD OM ØKONOMISK STØTTE FOR 2007, ⠠⠠⠠⠎⠁⠅ ⠼⠃⠛⠌⠼⠚⠛ ⠎⠪⠅⠝⠁⠙ ⠕⠍ ⠪⠅⠕⠝⠕⠍⠊⠎⠅ ⠎⠞⠪⠞⠞⠑ ⠋⠕⠗ ⠼⠃⠚⠚⠛⠠, {xfail: not implemented yet}]
+  # Numeric characters
+  - ['1', ⠼⠁]
+  - ['11', ⠼⠁⠁]
+  - ['100', ⠼⠁⠚⠚]
+  -
+    - '2300'
+    - ⠼⠃⠄⠉⠚⠚
+    - {xfail: true}
+  - ['3 415 3.868,6', ⠼⠉ ⠼⠙⠁⠑ ⠼⠉⠄⠓⠋⠓⠂⠋]
+  -
+    - 6 712
+    - ⠼⠋⠄⠛⠁⠃
+    - {xfail: true}
+  -
+    - 27 764
+    - ⠼⠃⠛⠄⠛⠋⠙
+    - {xfail: true}
+  -
+    - 1 000 000
+    - ⠼⠁⠄⠚⠚⠚⠄⠚⠚⠚
+    - {xfail: true}
+  -
+    - Han tjente 2 000 kr i år 2000.
+    - ⠠⠓⠁⠝ ⠞⠚⠑⠝⠞⠑ ⠼⠃⠄⠚⠚⠚ ⠅⠗ ⠊ ⠡⠗ ⠼⠃⠚⠚⠚⠄
+    - {xfail: true}
+  - ['Adressen hennes var Kallbakken, 8013 Bodø.', ⠠⠁⠙⠗⠑⠎⠎⠑⠝ ⠓⠑⠝⠝⠑⠎ ⠧⠁⠗ ⠠⠅⠁⠇⠇⠃⠁⠅⠅⠑⠝⠂ ⠼⠓⠚⠁⠉ ⠠⠃⠕⠙⠪⠄]
+  -
+    - π = 3,141.59
+    - ⠘⠏ ⠶⠼⠉⠂⠁⠙⠁⠄⠑⠊
+    - {xfail: true}
+  -
+    - (tlf)39 25 07 82
+    - ⠼⠉⠊⠄⠃⠑⠄⠚⠛⠄⠓⠃
+    - {xfail: true}
+  -
+    - (mob)998 72 008
+    - ⠼⠊⠊⠓⠄⠛⠃⠄⠚⠚⠓
+    - {xfail: true}
+  -
+    - (pn)280280 53862
+    - ⠼⠃⠓⠚⠃⠓⠚⠄⠑⠉⠓⠋⠃
+    - {xfail: true}
+  -
+    - Mitt bankkontonummer er 6411 18 96267.
+    - ⠠⠍⠊⠞⠞ ⠃⠁⠝⠅⠅⠕⠝⠞⠕⠝⠥⠍⠍⠑⠗ ⠑⠗ ⠼⠋⠙⠁⠁⠼⠁⠓⠼⠊⠋⠃⠋⠛⠄
+    - {xfail: true}
+  -
+    - Mitt kontonummer er 0531 57 96263.
+    - ⠠⠍⠊⠞⠞ ⠅⠕⠝⠞⠕⠝⠥⠍⠍⠑⠗ ⠑⠗ ⠼⠚⠑⠉⠁⠼⠑⠛⠼⠊⠋⠃⠋⠉⠄
+    - {xfail: true}
+  # 8.3 Fractions and mixed numbers
+  - [1/2, ⠼⠁⠌⠼⠃]
+  - [½, ⠼⠁⠌⠼⠃]
+  - [1/10, ⠼⠁⠌⠼⠁⠚]
+  - [⅒, ⠼⠁⠌⠼⠁⠚]
+  - [Han spiste 3/8 av pizzaen., ⠠⠓⠁⠝ ⠎⠏⠊⠎⠞⠑ ⠼⠉⠌⠼⠓ ⠁⠧ ⠏⠊⠵⠵⠁⠑⠝⠄]
+  - [Barna får en 1/4-liters kartong med melk på skolen., ⠠⠃⠁⠗⠝⠁ ⠋⠡⠗ ⠑⠝ ⠼⠁⠌⠼⠙⠤⠇⠊⠞⠑⠗⠎ ⠅⠁⠗⠞⠕⠝⠛ ⠍⠑⠙ ⠍⠑⠇⠅ ⠏⠡ ⠎⠅⠕⠇⠑⠝⠄]
+  - [Han kjøpte 1 1/2-litersflasker brus., ⠠⠓⠁⠝ ⠅⠚⠪⠏⠞⠑ ⠼⠁⠼⠁⠌⠼⠃⠤⠇⠊⠞⠑⠗⠎⠋⠇⠁⠎⠅⠑⠗ ⠃⠗⠥⠎⠄]
+  # Time Indications
+  - [Han kommer kl 20.15., ⠠⠓⠁⠝ ⠅⠕⠍⠍⠑⠗ ⠅⠇ ⠼⠃⠚⠄⠁⠑⠄]
+  - [Jeg må bli ferdig innen 10.03.2007., ⠠⠚⠑⠛ ⠍⠡ ⠃⠇⠊ ⠋⠑⠗⠙⠊⠛ ⠊⠝⠝⠑⠝ ⠼⠁⠚⠄⠚⠉⠄⠃⠚⠚⠛⠄]
+  -
+    - Kurset ble holdt helga 18.—20. mars.
+    - ⠠⠅⠥⠗⠎⠑⠞ ⠃⠇⠑ ⠓⠕⠇⠙⠞ ⠓⠑⠇⠛⠁ ⠼⠁⠓⠄⠤⠼⠃⠚⠄ ⠍⠁⠗⠎⠄
+    - {xfail: true}
+  # Bible References
+  - ['1 Mos 3,15', ⠼⠁ ⠠⠍⠕⠎ ⠼⠉⠂⠁⠑]
+  -
+    - Matt 4,1-11
+    - ⠍⠁⠞⠞ ⠼⠙⠂⠁⠤⠁⠁
+    - {xfail: true}
+  -
+    - Gal 5,26-6,5
+    - ⠛⠁⠇ ⠼⠑⠂⠃⠋⠤⠼⠋⠂⠑
+    - {xfail: true}
+  -
+    - 5 Mos 8,7.11-18
+    - ⠼⠑ ⠠⠍⠕⠎ ⠼⠓⠂⠛⠄⠁⠁⠤⠁⠓
+    - {xfail: true}
+  -
+    - 2 Mos 20,1-8.12-17
+    - ⠼⠃ ⠠⠍⠕⠎ ⠼⠃⠚⠂⠁⠤⠓⠄⠁⠃⠤⠁⠛
+    - {xfail: true}
+  -
+    - Luk 4,16-22a
+    - ⠠⠇⠥⠅ ⠼⠙⠂⠁⠋⠤⠃⠃⠰⠁
+    - {xfail: true}
+  -
+    - Pet 3,13-15a.17-18
+    - ⠠⠏⠑⠞ ⠼⠉⠂⠁⠉⠤⠁⠑⠰⠁⠄⠼⠁⠛⠤⠁⠓
+    - {xfail: true}
+  # Koranen References
+  - ['Sure 3,27', ⠠⠎⠥⠗⠑ ⠼⠉⠂⠃⠛]
+  -
+    - Sure 13,12-20
+    - ⠠⠎⠥⠗⠑ ⠼⠁⠉⠂⠁⠃⠤⠃⠚
+    - {xfail: true}
+  # Other writings
+  -
+    - III.77
+    - ⠠⠊⠊⠊⠄⠼⠛⠛
+    - {xfail: true}
+  # Mathematical signs Operators
+  -
+    - 2 + 2 = 4
+    - ⠼⠃ ⠖⠼⠃ ⠶⠼⠙
+    - {xfail: true}
+  -
+    - 13 - 4 = 9
+    - ⠼⠁⠉ ⠤⠼⠙ ⠶⠼⠊
+    - {xfail: true}
+  -
+    - 4 . 7 = 28
+    - ⠼⠙ ⠄⠼⠛ ⠶⠼⠃⠓
+    - {xfail: true}
+  -
+    - '32 : 4 = 8'
+    - ⠼⠉⠃ ⠒⠼⠙ ⠶⠼⠓
+    - {xfail: true}
+  - [Per + Kari = sant!, ⠠⠏⠑⠗ ⠖ ⠠⠅⠁⠗⠊ ⠶ ⠎⠁⠝⠞⠖]
+  - [Lengde x bredde x dybde., ⠠⠇⠑⠝⠛⠙⠑ ⠭ ⠃⠗⠑⠙⠙⠑ ⠭ ⠙⠽⠃⠙⠑⠄]
+  # Inequality Signs
+  -
+    - 8 > 7,98
+    - ⠼⠓ ⠕⠂⠼⠛⠂⠊⠓
+    - {xfail: true}
+  - [Bodø < Bergen, ⠠⠃⠕⠙⠪ ⠪⠄ ⠠⠃⠑⠗⠛⠑⠝]
+  # Fractions sign
+  - [1/4, ⠼⠁⠌⠼⠙]
+  -
+    - Han hadde bare en 1/2-kartong med melk.
+    - ⠓⠁⠝ ⠓⠁⠙⠙⠑ ⠃⠁⠗⠑ ⠑⠝ ⠼⠁⠌⠼⠃⠤⠅⠁⠗⠞⠕⠝⠛ ⠍⠑⠙ ⠍⠑⠇⠅⠄
+    - {xfail: true}
+  -
+    - 56+35/9+4  = 7
+    - ⠆⠼⠑⠋ ⠖⠼⠉⠑ ⠌ ⠼⠊ ⠖⠼⠙⠰ ⠶⠼⠛
+    - {xfail: true}
+  -
+    - Effekt = energioverføring / tid.
+    - ⠠⠑⠋⠋⠑⠅⠞ ⠶ ⠆⠑⠝⠑⠗⠛⠊⠕⠧⠑⠗⠋⠪⠗⠊⠝⠛ ⠲⠠ ⠞⠊⠙⠰⠄
+    - {xfail: true}
+  # Indices
+  -
+    - Gulvet er 10 m2 stort.
+    - ⠠⠛⠥⠇⠧⠑⠞ ⠑⠗ ⠼⠁⠚ ⠍⠨⠼⠃ ⠎⠞⠕⠗⠞⠄
+    - {xfail: true}
+  -
+    - xn - 1 er et nokså ukjent tall.
+    - ⠭⠨⠦⠝ ⠤⠼⠁⠴ ⠑⠗ ⠑⠞ ⠝⠕⠅⠎⠡ ⠥⠅⠚⠑⠝⠞ ⠞⠁⠇⠇⠄
+    - {xfail: true}
+  -
+    - x1 = 8
+    - ⠭⠡⠼⠁ ⠶⠼⠓
+    - {xfail: true}
+  -
+    - Minimumstemperaturen, xmin, var 2 grader.
+    - ⠠⠍⠊⠝⠊⠍⠥⠍⠎⠞⠑⠍⠏⠑⠗⠁⠞⠥⠗⠑⠝⠂ ⠭⠡⠦⠍⠊⠝⠴⠂ ⠧⠁⠗ ⠼⠃ ⠛⠗⠁⠙⠑⠗⠄
+    - {xfail: true}
+  -
+    - Norge kjøper CO2-kvoter.
+    - ⠠⠝⠕⠗⠛⠑ ⠅⠚⠪⠏⠑⠗ ⠠⠉⠠⠕⠡⠼⠃⠤⠅⠧⠕⠞⠑⠗⠄
+    - {xfail: true}
+  - [√25 =5, ⠩⠼⠃⠑ ⠶⠼⠑]
+  -
+    - √49-24 =5
+    - ⠩⠦⠼⠙⠊ ⠤⠼⠃⠙⠴ ⠶⠼⠑
+    - {xfail: true}
+  # 9.6 Percent and promille
+  -
+    - Det er 10 % rabatt på alle varer onsdag.
+    - ⠠⠙⠑⠞ ⠑⠗ ⠼⠁⠚⠨⠴ ⠗⠁⠃⠁⠞⠞ ⠏⠡ ⠁⠇⠇⠑ ⠧⠁⠗⠑⠗ ⠕⠝⠎⠙⠁⠛⠄
+  -
+    - Det bør være en promillegrense på 0,2 ‰ på sjøen.
+    - ⠠⠙⠑⠞ ⠃⠪⠗ ⠧⠜⠗⠑ ⠑⠝ ⠏⠗⠕⠍⠊⠇⠇⠑⠛⠗⠑⠝⠎⠑ ⠏⠡ ⠼⠚⠂⠃⠨⠴⠴ ⠏⠡ ⠎⠚⠪⠑⠝⠄
+  -
+    - Det er ikke snakk om å endre promillegrensa (0,2 ‰) ved bilkjøring.
+    - ⠠⠙⠑⠞ ⠑⠗ ⠊⠅⠅⠑ ⠎⠝⠁⠅⠅ ⠕⠍ ⠡ ⠑⠝⠙⠗⠑ ⠏⠗⠕⠍⠊⠇⠇⠑⠛⠗⠑⠝⠎⠁ ⠦⠼⠚⠂⠃⠨⠴⠴⠠⠴ ⠧⠑⠙ ⠃⠊⠇⠅⠚⠪⠗⠊⠝⠛⠄
+  # Hyphen
+  -
+    - Totalvekten = bilens vekt + vekten på lasten.
+    - ⠠⠞⠕⠞⠁⠇⠧⠑⠅⠞⠑⠝ ⠶ ⠃⠊⠇⠑⠝⠎ ⠧⠑⠅⠞ ⠖⠠ ⠧⠑⠅⠞⠑⠝ ⠏⠡ ⠇⠁⠎⠞⠑⠝⠄
+    - {xfail: true}
+  - [°, ⠐⠴] # Gradtegn
+  - ['''', ⠐] # Minute, foot
+  - ['''''', ⠐⠐] # Second, empty
+  - # Kaliber
+    - .
+    - ⠼⠄
+    - {xfail: true}
+  # Annotations
+  -
+    - Spydkastet var 85,71 m.
+    - ⠎⠏⠽⠙⠅⠁⠎⠞⠑⠞ ⠧⠁⠗ ⠼⠓⠑⠂⠛⠁ ⠍⠄
+    - {xfail: true}
+  - [En boks melk rommer normalt 1 l., ⠠⠑⠝ ⠃⠕⠅⠎ ⠍⠑⠇⠅ ⠗⠕⠍⠍⠑⠗ ⠝⠕⠗⠍⠁⠇⠞ ⠼⠁ ⠇⠄]
+  - [Det er bare 30 g smør i kaka!, ⠠⠙⠑⠞ ⠑⠗ ⠃⠁⠗⠑ ⠼⠉⠚ ⠛ ⠎⠍⠪⠗ ⠊ ⠅⠁⠅⠁⠖]
+  - [Lua kostet bare 64 kr på salg., ⠠⠇⠥⠁ ⠅⠕⠎⠞⠑⠞ ⠃⠁⠗⠑ ⠼⠋⠙ ⠅⠗ ⠏⠡ ⠎⠁⠇⠛⠄]
+  -
+    - Radiostasjonen sender på 98,4 MHz.
+    - ⠠⠗⠁⠙⠊⠕⠎⠞⠁⠎⠚⠕⠝⠑⠝ ⠎⠑⠝⠙⠑⠗ ⠏⠡ ⠼⠊⠓⠂⠙ ⠠⠍⠠⠓⠵⠄
+    - {xfail: true}
+  - [Dokumentet var ikke større enn 20 kB., ⠠⠙⠕⠅⠥⠍⠑⠝⠞⠑⠞ ⠧⠁⠗ ⠊⠅⠅⠑ ⠎⠞⠪⠗⠗⠑ ⠑⠝⠝ ⠼⠃⠚ ⠅⠠⠃⠄]
+  # Degrees
+  - [Vinkelen var 45°., ⠠⠧⠊⠝⠅⠑⠇⠑⠝ ⠧⠁⠗ ⠼⠙⠑⠐⠴⠄]
+  - [Alta ligger på 69° 57' nordlig bredde., ⠠⠁⠇⠞⠁ ⠇⠊⠛⠛⠑⠗ ⠏⠡ ⠼⠋⠊⠐⠴ ⠼⠑⠛⠐ ⠝⠕⠗⠙⠇⠊⠛ ⠃⠗⠑⠙⠙⠑⠄]
+  - 
+    - Ute er det 20° C.
+    - ⠠⠥⠞⠑ ⠑⠗ ⠙⠑⠞ ⠼⠃⠚⠐⠴⠠⠉⠄
+  - 
+    - Vannet har nådd kokepunktet (100°).
+    - ⠧⠁⠝⠝⠑⠞ ⠓⠁⠗ ⠝⠡⠙⠙ ⠅⠕⠅⠑⠏⠥⠝⠅⠞⠑⠞ ⠦⠼⠁⠚⠚⠐⠴⠠⠴⠄
+    - {xfail: true}
+  # Foot
+  - [Båten er 13' lang., ⠠⠃⠡⠞⠑⠝ ⠑⠗ ⠼⠁⠉⠐ ⠇⠁⠝⠛⠄]
+  - ['5,25'''' disketter er ikke lenger å få tak i.', ⠼⠑⠂⠃⠑⠐⠐ ⠙⠊⠎⠅⠑⠞⠞⠑⠗ ⠑⠗ ⠊⠅⠅⠑ ⠇⠑⠝⠛⠑⠗ ⠡ ⠋⠡ ⠞⠁⠅ ⠊⠄]
+  # Kaliber
+  -
+    - Hun prøvde å skyte meg med en 38 Colt!
+    - ⠠⠓⠥⠝ ⠏⠗⠪⠧⠙⠑ ⠡ ⠎⠅⠽⠞⠑ ⠍⠑⠛ ⠍⠑⠙ ⠑⠝ ⠼⠄⠉⠓ ⠠⠉⠕⠇⠞⠖
+    - {xfail: true}
+    # Currencies
+  - ['1 kr 10,50 kr kr 1.500,- NOK 750', ⠼⠁ ⠅⠗ ⠼⠁⠚⠂⠑⠚ ⠅⠗ ⠅⠗ ⠼⠁⠄⠑⠚⠚⠂⠤ ⠠⠠⠝⠕⠅ ⠼⠛⠑⠚]
+  - ['k1 k10,50 k1.500', ⠅⠼⠁ ⠅⠼⠁⠚⠂⠑⠚ ⠅⠼⠁⠄⠑⠚⠚]
+  - ['€1 €10,50 €1.500', ⠢⠼⠁ ⠢⠼⠁⠚⠂⠑⠚ ⠢⠼⠁⠄⠑⠚⠚]
+  - ['I Belgia kostet CD-en €8,50.', ⠠⠊ ⠠⠃⠑⠇⠛⠊⠁ ⠅⠕⠎⠞⠑⠞ ⠠⠠⠉⠙⠤⠑⠝ ⠢⠼⠓⠂⠑⠚⠄]
+  - [Billetten på londonbussen kostet £2., ⠠⠃⠊⠇⠇⠑⠞⠞⠑⠝ ⠏⠡ ⠇⠕⠝⠙⠕⠝⠃⠥⠎⠎⠑⠝ ⠅⠕⠎⠞⠑⠞ ⠇⠼⠃⠄]
+  - [Billetten på londonbussen kostet £ 2., ⠠⠃⠊⠇⠇⠑⠞⠞⠑⠝ ⠏⠡ ⠇⠕⠝⠙⠕⠝⠃⠥⠎⠎⠑⠝ ⠅⠕⠎⠞⠑⠞ ⠇⠼⠃⠄]
+  - ['$1 $10,50 $1.500', ⠲⠼⠁ ⠲⠼⠁⠚⠂⠑⠚ ⠲⠼⠁⠄⠑⠚⠚]
+  - [I New York er billettprisene bare $2., ⠠⠊ ⠠⠝⠑⠺ ⠠⠽⠕⠗⠅ ⠑⠗ ⠃⠊⠇⠇⠑⠞⠞⠏⠗⠊⠎⠑⠝⠑ ⠃⠁⠗⠑ ⠲⠼⠃⠄]
+  -
+    - '"$29 kostet boka," sa han.'
+    - ⠲⠠⠲⠼⠃⠊ ⠅⠕⠎⠞⠑⠞ ⠃⠕⠅⠁⠂⠲ ⠎⠁ ⠓⠁⠝⠄
+    - {xfail: true}
+  - [I Indonesia kostet sjalet ¤114 i lokal valuta., ⠠⠊ ⠠⠊⠝⠙⠕⠝⠑⠎⠊⠁ ⠅⠕⠎⠞⠑⠞ ⠎⠚⠁⠇⠑⠞ ⠦⠍⠴⠼⠁⠁⠙ ⠊ ⠇⠕⠅⠁⠇ ⠧⠁⠇⠥⠞⠁⠄]
+  - [Bildet kostet 125 SEK i Stockholm., ⠠⠃⠊⠇⠙⠑⠞ ⠅⠕⠎⠞⠑⠞ ⠼⠁⠃⠑ ⠠⠠⠎⠑⠅ ⠊ ⠠⠎⠞⠕⠉⠅⠓⠕⠇⠍⠄]
+  - [Hytteleia i Århus var DKK 700 pr. døgn., ⠠⠓⠽⠞⠞⠑⠇⠑⠊⠁ ⠊ ⠠⠡⠗⠓⠥⠎ ⠧⠁⠗ ⠠⠠⠙⠅⠅ ⠼⠛⠚⠚ ⠏⠗⠄ ⠙⠪⠛⠝⠄]
+  # Edb-sign
+  - ['http://nlb.no', ⠣⠓⠞⠞⠏⠒⠌⠌⠝⠇⠃⠄⠝⠕⠜]
+  -
+    - Hun har e-postadressen line@online.no.
+    - ⠠⠓⠥⠝ ⠓⠁⠗ ⠑⠤⠏⠕⠎⠞⠁⠙⠗⠑⠎⠎⠑⠝ ⠣⠇⠊⠝⠑⠈⠕⠝⠇⠊⠝⠑⠄⠝⠕⠜⠄
+    - {xfail: true}
+  - [Hun oppga tone21@hotmail.com som sin adresse., ⠠⠓⠥⠝ ⠕⠏⠏⠛⠁ ⠣⠞⠕⠝⠑⠼⠃⠁⠈⠓⠕⠞⠍⠁⠊⠇⠄⠉⠕⠍⠜ ⠎⠕⠍ ⠎⠊⠝ ⠁⠙⠗⠑⠎⠎⠑⠄, {xfail: true}]
+  - [Han har e-postadressen msvendsen@c2i.net., ⠠⠓⠁⠝ ⠓⠁⠗ ⠑⠤⠏⠕⠎⠞⠁⠙⠗⠑⠎⠎⠑⠝ ⠣⠍⠎⠧⠑⠝⠙⠎⠑⠝⠈⠉⠼⠃⠰⠊⠄⠝⠑⠞⠜⠄, {xfail: true}]
+  - ['Dokumentet ligger i mappen c:\\tekst\\ på harddisken.', ⠠⠙⠕⠅⠥⠍⠑⠝⠞⠑⠞ ⠇⠊⠛⠛⠑⠗ ⠊ ⠍⠁⠏⠏⠑⠝ ⠉⠒⠱⠞⠑⠅⠎⠞⠱ ⠏⠡ ⠓⠁⠗⠙⠙⠊⠎⠅⠑⠝⠄]
+  -
+    - per_erik.iversen@online.no
+    - ⠏⠑⠗⠸⠑⠗⠊⠅⠄⠊⠧⠑⠗⠎⠑⠝⠈⠕⠝⠇⠊⠝⠑⠄⠝⠕
+    - {xfail: true}
+  -
+    - Dokumentet heter en_spøkelseshistorie_fra_lofoten.doc.
+    - ⠠⠙⠕⠅⠥⠍⠑⠝⠞⠑⠞ ⠓⠑⠞⠑⠗ ⠑⠝⠸⠎⠏⠪⠅⠑⠇⠎⠑⠎⠓⠊⠎⠞⠕⠗⠊⠑⠸⠋⠗⠁⠸⠠ ⠇⠕⠋⠕⠞⠑⠝⠄⠙⠕⠉⠄
+    - {xfail: true}
+  -
+    - Den midlertidige filen $~pgave.doc slettes når Word avsluttes.
+    - ⠠⠙⠑⠝ ⠍⠊⠙⠇⠑⠗⠞⠊⠙⠊⠛⠑ ⠋⠊⠇⠑⠝ ⠲⠹⠏⠛⠁⠧⠑⠄⠙⠕⠉ ⠎⠇⠑⠞⠞⠑⠎ ⠝⠡⠗ ⠠⠺⠕⠗⠙ ⠁⠧⠎⠇⠥⠞⠞⠑⠎⠄
+    - {xfail: true}
+  -
+    - Han har hjemmeside www.nettpark.no/~tjb.
+    - ⠠⠓⠁⠝ ⠓⠁⠗ ⠓⠚⠑⠍⠍⠑⠎⠊⠙⠑ ⠣⠺⠺⠺⠄⠝⠑⠞⠞⠏⠁⠗⠅⠄⠝⠕⠌⠹⠞⠚⠃⠜⠄
+    - {xfail: true}
+  - [Du finner tasten | like til venstre for 1-tallet på tastaturet., ⠠⠙⠥ ⠋⠊⠝⠝⠑⠗ ⠞⠁⠎⠞⠑⠝ ⠿ ⠇⠊⠅⠑ ⠞⠊⠇ ⠧⠑⠝⠎⠞⠗⠑ ⠋⠕⠗ ⠼⠁⠤⠞⠁⠇⠇⠑⠞ ⠏⠡ ⠞⠁⠎⠞⠁⠞⠥⠗⠑⠞⠄]
+  - [Dir *.* | more, ⠠⠙⠊⠗ ⠔⠄⠔ ⠿ ⠍⠕⠗⠑]
+  - [Send $^g til skriveren og du får tilbake et pip!, ⠠⠎⠑⠝⠙ ⠲⠨⠛ ⠞⠊⠇ ⠎⠅⠗⠊⠧⠑⠗⠑⠝ ⠕⠛ ⠙⠥ ⠋⠡⠗ ⠞⠊⠇⠃⠁⠅⠑ ⠑⠞ ⠏⠊⠏⠖]
+  - [Avslutt med ^w for å lukke Word., ⠠⠁⠧⠎⠇⠥⠞⠞ ⠍⠑⠙ ⠨⠺ ⠋⠕⠗ ⠡ ⠇⠥⠅⠅⠑ ⠠⠺⠕⠗⠙⠄]
+  -
+    - Du finner alltid ferske nyheter på www.nrk.no.
+    - ⠠⠙⠥ ⠋⠊⠝⠝⠑⠗ ⠁⠇⠇⠞⠊⠙ ⠋⠑⠗⠎⠅⠑ ⠝⠽⠓⠑⠞⠑⠗ ⠏⠡ ⠣⠺⠺⠺⠄⠝⠗⠅⠄⠝⠕⠜⠄
+    - {xfail: true}
+  -
+    - 'set path=c:\\prog;%PATH%'
+    - ⠎⠑⠞ ⠏⠁⠞⠓⠶⠉⠒⠱⠏⠗⠕⠛⠆⠫⠠⠠⠏⠁⠞⠓⠫
+    - {xfail: true}
+  -
+    - <a href="http://www.aftenposten.no">Aftenposten<a>
+    - ⠣⠁ ⠓⠗⠑⠋⠶⠮⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠄⠁⠋⠞⠑⠝⠏⠕⠎⠞⠑⠝⠠⠄⠝⠕⠮⠜⠠⠁⠋⠞⠑⠝⠏⠕⠎⠞⠑⠝⠣⠁⠜
+    - {xfail: true}
+  - ['tall := a + b', ⠞⠁⠇⠇ ⠒⠶ ⠁ ⠖ ⠃]
+  -
+    - Send inn et ønske til onskekonserten@nrk.no du også!
+    - ⠠⠎⠑⠝⠙ ⠊⠝⠝ ⠑⠞ ⠪⠝⠎⠅⠑ ⠞⠊⠇⠣⠕⠝⠎⠅⠑⠅⠕⠝⠎⠑⠗⠞⠑⠝⠈⠠ ⠝⠗⠅⠄⠝⠕⠜ ⠙⠥ ⠕⠛⠎⠡⠖
+    - {xfail: true}
+  # Character Combinations
+  - [© OUP 2007, ⠦⠉⠴ ⠠⠠⠕⠥⠏ ⠼⠃⠚⠚⠛]
+  - [Regnskapet er redigert i Microsoft Excel®., ⠠⠗⠑⠛⠝⠎⠅⠁⠏⠑⠞ ⠑⠗ ⠗⠑⠙⠊⠛⠑⠗⠞ ⠊ ⠠⠍⠊⠉⠗⠕⠎⠕⠋⠞ ⠠⠑⠭⠉⠑⠇⠦⠗⠴⠄]
+  -
+    - Paracetamolpreparater selges under flere navn. Paracet™ og Pinex™ er to av dem.
+    - ⠠⠏⠁⠗⠁⠉⠑⠞⠁⠍⠕⠇⠏⠗⠑⠏⠁⠗⠁⠞⠑⠗ ⠎⠑⠇⠛⠑⠎ ⠥⠝⠙⠑⠗ ⠋⠇⠑⠗⠑ ⠝⠁⠧⠝⠄ ⠠⠏⠁⠗⠁⠉⠑⠞⠦⠞⠴ ⠕⠛ ⠠⠏⠊⠝⠑⠭⠦⠞⠴ ⠑⠗ ⠞⠕ ⠁⠧ ⠙⠑⠍⠄
+  - [./. Du finner alt i brevet fra advokaten., ⠄⠌⠄ ⠠⠙⠥ ⠋⠊⠝⠝⠑⠗ ⠁⠇⠞ ⠊ ⠃⠗⠑⠧⠑⠞ ⠋⠗⠁ ⠁⠙⠧⠕⠅⠁⠞⠑⠝⠄]
+  - ['så /: vi vant :/ vår rett.', ⠎⠡ ⠌⠒ ⠧⠊ ⠧⠁⠝⠞ ⠒⠌ ⠧⠡⠗ ⠗⠑⠞⠞⠄]
+  - ['Noe så dumt er det bare du som kan skrive. :-)', ⠠⠝⠕⠑ ⠎⠡ ⠙⠥⠍⠞ ⠑⠗ ⠙⠑⠞ ⠃⠁⠗⠑ ⠙⠥ ⠎⠕⠍ ⠅⠁⠝ ⠎⠅⠗⠊⠧⠑⠄ ⠒⠤⠴]
+  -
+    - 'Jeg har prøvd å sende deg denne meldingen to ganger før, men enten henger pc-en seg opp, eller så brytes nettforbindelsen. :-('
+    - ⠠⠚⠑⠛ ⠓⠁⠗ ⠏⠗⠪⠧⠙ ⠡ ⠎⠑⠝⠙⠑ ⠙⠑⠛ ⠙⠑⠝⠝⠑ ⠍⠑⠇⠙⠊⠝⠛⠑⠝ ⠞⠕ ⠛⠁⠝⠛⠑⠗ ⠋⠪⠗⠂ ⠍⠑⠝ ⠑⠝⠞⠑⠝ ⠓⠑⠝⠛⠑⠗ ⠏⠉⠤⠑⠝ ⠎⠑⠛ ⠕⠏⠏⠂ ⠑⠇⠇⠑⠗ ⠎⠡ ⠃⠗⠽⠞⠑⠎ ⠝⠑⠞⠞⠋⠕⠗⠃⠊⠝⠙⠑⠇⠎⠑⠝⠄ ⠒⠤⠦
+  # Universal Accent
+  - [Forlì, ⠠⠋⠕⠗⠇⠘⠊]
+  - [Citroën, ⠠⠉⠊⠞⠗⠕⠈⠑⠝]
+  - [hôpital, ⠓⠨⠕⠏⠊⠞⠁⠇]
+  - [Dvořák, ⠠⠙⠧⠕⠈⠗⠷⠅]
+  - [Brăila, ⠠⠃⠗⠈⠁⠊⠇⠁]
+  - [français, ⠋⠗⠁⠝⠯⠁⠊⠎]
+  - [Częstochowa, ⠠⠉⠵⠈⠑⠎⠞⠕⠉⠓⠕⠺⠁]
+  - [Łódź, ⠠⠈⠇⠹⠙⠈⠵]
+  - [ođđasat, ⠕⠹⠹⠁⠎⠁⠞]
+  - [Han fór opp., ⠠⠓⠁⠝ ⠋⠹⠗ ⠕⠏⠏⠄]
+  - [Málaga, ⠠⠍⠷⠇⠁⠛⠁]
+  - [Bartók, ⠠⠃⠁⠗⠞⠹⠅]
+  - [Gdańsk, ⠠⠛⠙⠁⠈⠝⠎⠅]
+  - [où, ⠕⠘⠥]
+  - [Forlì, ⠠⠋⠕⠗⠇⠘⠊]
+  - [lātus, ⠇⠈⠁⠞⠥⠎]
+  - [São Paulo, ⠠⠎⠈⠁⠕ ⠠⠏⠁⠥⠇⠕]
+  - [España, ⠠⠑⠎⠏⠁⠈⠝⠁]
+  - [Citroën, ⠠⠉⠊⠞⠗⠕⠈⠑⠝]
+  - [że, ⠈⠵⠑]
+  - [sâl, ⠎⠨⠁⠇]
+  - [hôpital, ⠓⠨⠕⠏⠊⠞⠁⠇]
+  - [ĵus, ⠈⠚⠥⠎]
+  - [sápmelaš, ⠎⠷⠏⠍⠑⠇⠁⠱]
+  - [lătus, ⠇⠈⠁⠞⠥⠎]
+  - [aŭ, ⠁⠈⠥]
+  - [Brăila, ⠠⠃⠗⠈⠁⠊⠇⠁]
+  - [dům, ⠙⠈⠥⠍]
+  # Sign under the character
+  - [français, ⠋⠗⠁⠝⠯⠁⠊⠎]
+  - [Moçambique, ⠠⠍⠕⠯⠁⠍⠃⠊⠟⠥⠑]
+  - [Constanţa, ⠠⠉⠕⠝⠎⠞⠁⠝⠈⠞⠁]
+  - [Częstochowa, ⠠⠉⠵⠈⠑⠎⠞⠕⠉⠓⠕⠺⠁]
+  # Strikethrough
+  - [Łódź, ⠠⠈⠇⠹⠙⠈⠵]
+  - [ođđasat, ⠕⠹⠹⠁⠎⠁⠞]
+  - [Bláalóniđ, ⠠⠃⠇⠷⠁⠇⠹⠝⠊⠹]
+  - [Ruoŧŧa, ⠠⠗⠥⠕⠳⠳⠁]
+  - [þingvellir, ⠫⠊⠝⠛⠧⠑⠇⠇⠊⠗]
+  # Sharp s, mentioned in the handbook chapter 14.4, but we assume
+  # the way it's defined in Appendix 5
+  - [groß, ⠛⠗⠕⠮]
+  # Special characters
+  -
+    - Would you like to come and play football with us? John asked, staring at me with a threatening look. "Oh yes, let's play football," I said, showing great enthusiasm (but in fact I was deadly frightened).
+    - ⠲⠠⠺⠕⠥⠇⠙ ⠆⠽⠕⠥⠰ ⠇⠊⠅⠑ ⠞⠕ ⠉⠕⠍⠑ ⠁⠝⠙ ⠏⠇⠁⠽ ⠋⠕⠕⠞⠃⠁⠇⠇ ⠺⠊⠞⠓ ⠥⠎⠢⠲ ⠠⠚⠕⠓⠝ ⠁⠎⠅⠑⠙⠂ ⠎⠞⠁⠗⠊⠝⠛ ⠁⠞ ⠍⠑ ⠺⠊⠞⠓ ⠁ ⠞⠓⠗⠑⠁⠞⠑⠝⠊⠝⠛ ⠇⠕⠕⠅⠄ ⠲⠆⠕⠓ ⠽⠑⠎⠂ ⠇⠑⠞⠐⠎ ⠏⠇⠁⠽ ⠋⠕⠕⠞⠃⠁⠇⠇⠰⠂⠲ ⠠⠊ ⠎⠁⠊⠙⠂ ⠎⠓⠕⠺⠊⠝⠛ ⠛⠗⠑⠁⠞ ⠑⠝⠞⠓⠥⠎⠊⠁⠎⠍ ⠦⠃⠥⠞ ⠊⠝ ⠋⠁⠉⠞ ⠠⠊ ⠺⠁⠎ ⠙⠑⠁⠙⠇⠽ ⠋⠗⠊⠛⠓⠞⠑⠝⠑⠙⠴⠄
+    - {xfail: true}
+  -
+    - Would you like to come and play football with us? John asked, staring at me with a threatening look. "Oh yes, let's play football," I said, showing great enthusiasm (but in fact I was deadly frightened).
+    - ⠐⠂⠦⠠⠺⠕⠥⠇⠙ ⠨⠽⠕⠥ ⠇⠊⠅⠑ ⠞⠕ ⠉⠕⠍⠑ ⠁⠝⠙ ⠏⠇⠁⠽ ⠋⠕⠕⠞⠃⠁⠇⠇ ⠺⠊⠞⠓ ⠥⠎⠦⠴ ⠠⠚⠕⠓⠝ ⠁⠎⠅⠑⠙⠂ ⠎⠞⠁⠗⠊⠝⠛ ⠁⠞ ⠍⠑ ⠺⠊⠞⠓ ⠁ ⠞⠓⠗⠑⠁⠞⠑⠝⠊⠝⠛ ⠇⠕⠕⠅⠲ ⠦⠨⠨⠠⠕⠓ ⠽⠑⠎⠂ ⠇⠑⠞⠄⠎ ⠏⠇⠁⠽ ⠋⠕⠕⠞⠃⠁⠇⠇⠂⠴⠨⠄ ⠠⠊ ⠎⠁⠊⠙⠂ ⠎⠓⠕⠺⠊⠝⠛ ⠛⠗⠑⠁⠞ ⠑⠝⠞⠓⠥⠎⠊⠁⠎⠍ ⠶⠃⠥⠞ ⠊⠝ ⠋⠁⠉⠞ ⠠⠊ ⠺⠁⠎ ⠙⠑⠁⠙⠇⠽ ⠋⠗⠊⠛⠓⠞⠑⠝⠑⠙⠶⠲⠐⠂
+    - {xfail: true}
+  -
+    - '[`k''a:kə]'
+    - ⠰⠶⠦⠂⠘⠅⠤⠁⠒⠅⠢⠰⠶
+    - {xfail: true}
+  -
+    - /`ka:ke/
+    - ⠸⠶⠦⠂⠘⠅⠁⠒⠅⠑⠸⠶
+    - {xfail: true}
+  # Bullet Points
+  -
+    - 'I 2007 feires det 100-årsjubileum ifm. Edvard Griegs død i 1907. I en avis sto blant annet følgende fakta om Edvard Grieg:'
+    - ⠠⠊ ⠼⠃⠚⠚⠛ ⠋⠑⠊⠗⠑⠎ ⠙⠑⠞ ⠼⠁⠚⠚⠡⠗⠎⠚⠥⠃⠊⠇⠑⠥⠍ ⠊⠋⠍⠄ ⠠⠑⠙⠧⠁⠗⠙ ⠠⠛⠗⠊⠑⠛⠎ ⠙⠪⠙ ⠊ ⠼⠁⠊⠚⠛⠄ ⠠⠊ ⠑⠝ ⠁⠧⠊⠎ ⠎⠞⠕ ⠃⠇⠄⠁⠄ ⠋⠪⠇⠛⠑⠝⠙⠑ ⠋⠁⠅⠞⠁ ⠕⠍ ⠠⠑⠙⠧⠁⠗⠙ ⠠⠛⠗⠊⠑⠛⠒
+    - {xfail: true}
+  -
+    - '– Edvard Grieg ble født i Bergen 15. juni 1843, og døde samme sted 4. september 1907. Han var gift med kusinen Nina Hagerup.'
+    - ⠤⠤ ⠠⠑⠙⠧⠁⠗⠙ ⠠⠛⠗⠊⠑⠛ ⠃⠇⠑ ⠋⠪⠙⠞ ⠊ ⠠⠃⠑⠗⠛⠑⠝ ⠼⠁⠑⠄ ⠚⠥⠝⠊ ⠼⠁⠓⠙⠉⠂ ⠕⠛ ⠙⠪⠙⠑ ⠎⠁⠍⠍⠑ ⠎⠞⠑⠙ ⠼⠙⠄ ⠎⠑⠏⠞⠑⠍⠃⠑⠗ ⠼⠁⠊⠚⠛⠄ ⠠⠓⠁⠝ ⠧⠁⠗ ⠛⠊⠋⠞ ⠍⠑⠙ ⠅⠥⠎⠊⠝⠑⠝ ⠠⠝⠊⠝⠁ ⠠⠓⠁⠛⠑⠗⠥⠏⠄
+  -
+    - – Grieg er Norges mest kjente komponist. Han jobbet og studerte bl.a. i Danmark og Tyskland.
+    - ⠤⠤ ⠠⠛⠗⠊⠑⠛ ⠑⠗ ⠠⠝⠕⠗⠛⠑⠎ ⠍⠑⠎⠞ ⠅⠚⠑⠝⠞⠑ ⠅⠕⠍⠏⠕⠝⠊⠎⠞⠄ ⠠⠓⠁⠝ ⠚⠕⠃⠃⠑⠞ ⠕⠛ ⠎⠞⠥⠙⠑⠗⠞⠑ ⠃⠇⠄⠁⠄ ⠊ ⠠⠙⠁⠝⠍⠁⠗⠅ ⠕⠛ ⠠⠞⠽⠎⠅⠇⠁⠝⠙⠄
+  -
+    - '– Han var også en dyktig pianist. Han opptrådte alene eller sammen med kona Nina, som var sanger.'
+    - ⠤⠤ ⠠⠓⠁⠝ ⠧⠁⠗ ⠕⠛⠎⠡ ⠑⠝ ⠙⠽⠅⠞⠊⠛ ⠏⠊⠁⠝⠊⠎⠞⠄ ⠠⠓⠁⠝ ⠕⠏⠏⠞⠗⠡⠙⠞⠑ ⠁⠇⠑⠝⠑ ⠑⠇⠇⠑⠗ ⠎⠁⠍⠍⠑⠝ ⠍⠑⠙ ⠅⠕⠝⠁ ⠠⠝⠊⠝⠁⠂ ⠎⠕⠍ ⠧⠁⠗ ⠎⠁⠝⠛⠑⠗⠄
+  - ['Du må ta med deg følgende dokumenter:', ⠠⠙⠥ ⠍⠡ ⠞⠁ ⠍⠑⠙ ⠙⠑⠛ ⠋⠪⠇⠛⠑⠝⠙⠑ ⠙⠕⠅⠥⠍⠑⠝⠞⠑⠗⠒]
+  - [– undertegnet salgsmelding, ⠤⠤ ⠥⠝⠙⠑⠗⠞⠑⠛⠝⠑⠞ ⠎⠁⠇⠛⠎⠍⠑⠇⠙⠊⠝⠛]
+  - [– kvittering for betalt veiavgift, ⠤⠤ ⠅⠧⠊⠞⠞⠑⠗⠊⠝⠛ ⠋⠕⠗ ⠃⠑⠞⠁⠇⠞ ⠧⠑⠊⠁⠧⠛⠊⠋⠞]
+  - [– kvittering for betalt registreringsavgift, ⠤⠤ ⠅⠧⠊⠞⠞⠑⠗⠊⠝⠛ ⠋⠕⠗ ⠃⠑⠞⠁⠇⠞ ⠗⠑⠛⠊⠎⠞⠗⠑⠗⠊⠝⠛⠎⠁⠧⠛⠊⠋⠞]
+  - [Vi er takknemlig hvis du ringer før du kommer!, ⠠⠧⠊ ⠑⠗ ⠞⠁⠅⠅⠝⠑⠍⠇⠊⠛ ⠓⠧⠊⠎ ⠙⠥ ⠗⠊⠝⠛⠑⠗ ⠋⠪⠗ ⠙⠥ ⠅⠕⠍⠍⠑⠗⠖]
+  - ['10 år med skolefaget KRL:', ⠼⠁⠚ ⠡⠗ ⠍⠑⠙ ⠎⠅⠕⠇⠑⠋⠁⠛⠑⠞ ⠠⠠⠅⠗⠇⠒]
+  -
+    - • Før kunne foreldre og elever søke om fritak fra faget kristendom. Da fikk elevene faget alternativ livssynsundervisning i stedet.
+    - ⠶ ⠠⠋⠪⠗ ⠅⠥⠝⠝⠑ ⠋⠕⠗⠑⠇⠙⠗⠑ ⠕⠛ ⠑⠇⠑⠧⠑⠗ ⠎⠪⠅⠑ ⠕⠍ ⠋⠗⠊⠞⠁⠅ ⠋⠗⠁ ⠋⠁⠛⠑⠞ ⠅⠗⠊⠎⠞⠑⠝⠙⠕⠍⠄ ⠠⠙⠁ ⠋⠊⠅⠅ ⠑⠇⠑⠧⠑⠝⠑ ⠋⠁⠛⠑⠞ ⠁⠇⠞⠑⠗⠝⠁⠞⠊⠧ ⠇⠊⠧⠎⠎⠽⠝⠎⠥⠝⠙⠑⠗⠧⠊⠎⠝⠊⠝⠛ ⠊ ⠎⠞⠑⠙⠑⠞⠄
+    - {xfail: "the nbsp comes out untranslated instead of being translated to a simple space"}
+  -
+    - '• I 1997 ble de to fagene slått sammen til ett fag: kristendoms-, religions- og livssynskunnskap (KRL).'
+    - ⠶ ⠠⠊ ⠼⠁⠊⠊⠛ ⠃⠇⠑ ⠙⠑ ⠞⠕ ⠋⠁⠛⠑⠝⠑ ⠎⠇⠡⠞⠞ ⠎⠁⠍⠍⠑⠝ ⠞⠊⠇ ⠑⠞⠞ ⠋⠁⠛⠒ ⠅⠗⠊⠎⠞⠑⠝⠙⠕⠍⠎⠤⠂ ⠗⠑⠇⠊⠛⠊⠕⠝⠎⠤ ⠕⠛ ⠇⠊⠧⠎⠎⠽⠝⠎⠅⠥⠝⠝⠎⠅⠁⠏ ⠦⠠⠠⠅⠗⠇⠴⠄
+    - {xfail: "the nbsp comes out untranslated instead of being translated to a simple space"}
+  -
+    - • Det ble gjort mindre endringer i KRL-faget i 2001 og 2005, og det ble enklere å søke om fritak fra aktiviteter i faget.
+    - ⠶ ⠠⠙⠑⠞ ⠃⠇⠑ ⠛⠚⠕⠗⠞ ⠍⠊⠝⠙⠗⠑ ⠑⠝⠙⠗⠊⠝⠛⠑⠗ ⠊ ⠠⠠⠅⠗⠇⠤⠋⠁⠛⠑⠞ ⠊ ⠼⠃⠚⠚⠁ ⠕⠛ ⠼⠃⠚⠚⠑⠂ ⠕⠛ ⠙⠑⠞ ⠃⠇⠑ ⠑⠝⠅⠇⠑⠗⠑ ⠡ ⠎⠪⠅⠑ ⠕⠍ ⠋⠗⠊⠞⠁⠅ ⠋⠗⠁ ⠁⠅⠞⠊⠧⠊⠞⠑⠞⠑⠗ ⠊ ⠋⠁⠛⠑⠞⠄
+    - {xfail: "the nbsp comes out untranslated instead of being translated to a simple space"}
+  # Footnotes and endnotes
+  - ['Skolen ble åpnet i den franske hovedstaden i 1784,*', ⠠⠎⠅⠕⠇⠑⠝ ⠃⠇⠑ ⠡⠏⠝⠑⠞ ⠊ ⠙⠑⠝ ⠋⠗⠁⠝⠎⠅⠑ ⠓⠕⠧⠑⠙⠎⠞⠁⠙⠑⠝ ⠊ ⠼⠁⠛⠓⠙⠂⠔]
+  -
+    - '*Dette var verdens første skole for blinde.'
+    - ⠔⠙⠑⠞⠞⠑ ⠧⠁⠗ ⠧⠑⠗⠙⠑⠝⠎ ⠋⠪⠗⠎⠞⠑ ⠎⠅⠕⠇⠑ ⠋⠕⠗ ⠃⠇⠊⠝⠙⠑⠄
+    - {xfail: true}
+  -
+    - men allerede 5 år etter åpningen oppstod alvorlige vanskeligheter ...
+    - ⠍⠑⠝ ⠁⠇⠇⠑⠗⠑⠙⠑ ⠼⠑ ⠡⠗ ⠑⠞⠞⠑⠗ ⠡⠏⠝⠊⠝⠛⠑⠝ ⠕⠏⠏⠎⠞⠕⠙ ⠁⠇⠧⠕⠗⠇⠊⠛⠑ ⠧⠁⠝⠎⠅⠑⠇⠊⠛⠓⠑⠞⠑⠗ ⠄⠄⠄
+  -
+    - Året etter1 ble den første spesialskole for blinde barn etablert i Paris.2 Etter hvert som tiden gikk, vokste det fram …
+    - ⠠⠡⠗⠑⠞ ⠑⠞⠞⠑⠗⠠⠼⠁ ⠃⠇⠑ ⠙⠑⠝ ⠋⠪⠗⠎⠞⠑ ⠎⠏⠑⠎⠊⠁⠇⠎⠅⠕⠇⠑ ⠋⠕⠗ ⠃⠇⠊⠝⠙⠑ ⠃⠁⠗⠝ ⠑⠞⠁⠃⠇⠑⠗⠞ ⠊ ⠠⠏⠁⠗⠊⠎⠄⠠⠼⠃ ⠠⠑⠞⠞⠑⠗ ⠓⠧⠑⠗⠞ ⠎⠕⠍ ⠞⠊⠙⠑⠝ ⠛⠊⠅⠅⠂ ⠧⠕⠅⠎⠞⠑ ⠙⠑⠞ ⠋⠗⠁⠍ ⠄⠄⠄
+    - {xfail: true}
+  -
+    - 1 1784.
+    - ⠠⠼⠁ ⠼⠁⠛⠓⠙⠄
+    - {xfail: true}
+  -
+    - 2 Grunnleggerens navn var Valentin Haüy.
+    - ⠠⠼⠃ ⠠⠛⠗⠥⠝⠝⠇⠑⠛⠛⠑⠗⠑⠝⠎ ⠝⠁⠧⠝ ⠧⠁⠗ ⠠⠧⠁⠇⠑⠝⠞⠊⠝ ⠠⠓⠁⠳⠽⠄
+    - {xfail: true}
+  -
+    - 'Man viser til en fotnote med et siffer¹ som settes opphøyd uten mellomrom inntil det ord eller det uttrykk som noten gjelder: Hun brukte uttrykket "takle problemet"²'
+    - ⠠⠍⠁⠝ ⠧⠊⠎⠑⠗ ⠞⠊⠇ ⠑⠝ ⠋⠕⠞⠝⠕⠞⠑ ⠍⠑⠙ ⠑⠞ ⠎⠊⠋⠋⠑⠗⠠⠼⠁ ⠎⠕⠍ ⠎⠑⠞⠞⠑⠎ ⠕⠏⠏⠓⠪⠽⠙ ⠥⠞⠑⠝ ⠍⠑⠇⠇⠕⠍⠗⠕⠍ ⠊⠝⠝⠞⠊⠇ ⠙⠑⠞ ⠕⠗⠙ ⠑⠇⠇⠑⠗ ⠙⠑⠞ ⠥⠞⠞⠗⠽⠅⠅ ⠎⠕⠍ ⠝⠕⠞⠑⠝ ⠛⠚⠑⠇⠙⠑⠗⠒ ⠆⠠⠓⠥⠝ ⠃⠗⠥⠅⠞⠑ ⠥⠞⠞⠗⠽⠅⠅⠑⠞ ⠲⠞⠁⠅⠇⠑ ⠏⠗⠕⠃⠇⠑⠍⠑⠞⠲⠰⠠⠼⠃
+    - {xfail: true}
+  - [Sluttnoter, ⠠⠎⠇⠥⠞⠞⠝⠕⠞⠑⠗]
+  -
+    - '1 Hvis det er bare én fotnote på siden, forekommer også asterisk (*) som notetegn. I eldre tekster ble også kors brukt. Siffer er å foretrekke.'
+    - ⠼⠁ ⠠⠓⠧⠊⠎ ⠙⠑⠞ ⠑⠗ ⠃⠁⠗⠑ ⠿⠝ ⠋⠕⠞⠝⠕⠞⠑ ⠏⠡ ⠎⠊⠙⠑⠝⠂ ⠋⠕⠗⠑⠅⠕⠍⠍⠑⠗ ⠕⠛⠎⠡ ⠁⠎⠞⠑⠗⠊⠎⠅ ⠦⠔⠴ ⠎⠕⠍ ⠝⠕⠞⠑⠞⠑⠛⠝⠄ ⠠⠊ ⠑⠇⠙⠗⠑ ⠞⠑⠅⠎⠞⠑⠗ ⠃⠇⠑ ⠕⠛⠎⠡ ⠅⠕⠗⠎ ⠃⠗⠥⠅⠞⠄ ⠠⠎⠊⠋⠋⠑⠗ ⠑⠗ ⠡ ⠋⠕⠗⠑⠞⠗⠑⠅⠅⠑⠄
+  -
+    - 2 Fra engelsk tackle a problem.
+    - ⠼⠃ ⠠⠋⠗⠁ ⠑⠝⠛⠑⠇⠎⠅ ⠆⠞⠁⠉⠅⠇⠑ ⠁ ⠏⠗⠕⠃⠇⠑⠍⠰⠄
+    - {typeform: {italic: '              ++++++++++++++++ '}}
+  - [ , ' '] # U+2000 (En Quad)
+  - [ , ' '] # U+2001 (Em Quad)
+  - [ , ' '] # U+2002 (En Space)
+  - [ , ' '] # U+2003 (Em Space)
+  - [ , ' '] # U+2004 (Three-Per-Em Space)
+  - [ , ' '] # U+2005 (Four-Per-Em Space)
+  - [ , ' '] # U+2006 (Six-Per-Em Space)
+  - [ , ' '] # U+2007 (Figure Space)
+  - [ , ' '] # U+2008 (Punctuation Space)
+  - [ , ' '] # U+2009 (Thin Space)
+  - [e̊, ⠈⠑] # (e̊ sign)
+  - [●, ⠶] # U+25CF(Black Circle)
+  - [ݲ, ' '] # (undefined sign)
+  # subscript and superscript
+  - - CO2
+    - ⠠⠠⠉⠕⠡⠼⠃
+    - typeform: {sub: '  +'}
+  - - CO22
+    - ⠠⠠⠉⠕⠡⠦⠼⠃⠃⠴
+    - typeform: {sub: '  ++'}
+  - - abcdef
+    - ⠁⠃⠉⠡⠦⠙⠑⠋⠴
+    - typeform: {sub: '   +++'}
+  - - cm2
+    - ⠉⠍⠨⠼⠃
+    - typeform: {super: '  +'}
+  - - CO₂
+    - ⠠⠠⠉⠕⠡⠼⠃
+  - - CO₂₂
+    - ⠠⠠⠉⠕⠡⠦⠼⠃⠃⠴
+  # Diacritics
+  # Letter with diacritical mark, as precomposed character
+  - - 'á' # U+00e1
+    - '⠷'
+  - - 'å' # U+00e5
+    - '⠡'
+  - - 'ă' # U+0101
+    - '⠈⠁'
+  - - 'č' # U+010d
+    - '⠩'
+  # Letter with diacritical mark, as base character and combining character
+  - - 'á' # U+0061 U+0301
+    - '⠷'
+    - xfail: true # should be normalized to UFC (U+00e1)
+  - - 'å' # U+0061 U+030a
+    - '⠡'
+    - xfail: true # should be normalized to UFC (U+00e5)
+  - - 'ă' # U+0061 U+0306
+    - '⠈⠁'
+    - xfail: true # should be normalized to UFC (U+0101)
+  - - 'č' # U+0063 U+030c
+    - '⠩'
+    - xfail: true # should be normalized to UFC (U+010d)
+  - - 'e̊' # U+0065 U+030a
+    - '⠈⠑'
+  # Arrows
+  - - '→ --> ← <--'
+    - '⠒⠐ ⠤⠤⠕⠂ ⠐⠒ ⠪⠄⠤⠤'

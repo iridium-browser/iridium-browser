@@ -1,0 +1,180 @@
+table:
+  language: en
+  grade: 2
+  system: ueb
+  __assert-match: en-ueb-g2.ctb
+tests:
+
+# 2.6.1 page 15
+
+- - x
+  - ;x
+- - it
+  - x
+- - was
+  - '0'
+- - al
+  - ;al
+- - also
+  - al
+- - e-x-u-d-e
+  - ;;e-x-u-d-e
+  - xfail: true
+- - do-it-yourself
+  - d-x-yrf
+- - out-and-out
+  - '|-&-|'
+- - 5-yrf-678
+  - '#e-;yrf-#fgh'
+- - I like x–it works.
+  - ',i l ;x,-x "ws4'
+- - his child–this one
+  - 8 *,-? "o
+- - my friend–Fr John
+  - my fr,-;,fr ,john
+- - th--r
+  - th--;r
+- - Mme. M―
+  - ',mme4 ;,m",-'
+- - –s
+  - ',-;s'
+- - ―st
+  - '",-st'
+
+# 2.6.2 page 16
+
+- - (c
+  - '"<;c'
+- - '[can'
+  - .<c
+- - '{af'
+  - _<;af
+- - –(after
+  - ',-"<af'
+- - “do
+  - 8d
+- - ‘your
+  - ',8yr'
+- - '"yr-123'
+  - ',7;yr-#abc'
+  - xfail: true
+- - '''e ''as'
+  - ''';e ''z'
+- - p
+  - .2;p
+  - {typeform: {italic: '+'}}
+- - people
+  - ~1p
+  - {typeform: {bold: '++++++'}}
+- - enough
+  - _15
+  - {typeform: {underline: '++++++'}}
+- - child-safe
+  - .1*-safe
+  - {typeform: {italic: '++++++++++'}}
+- - N
+  - ;,n
+- - Not Like That
+  - ',n ,l ,t'
+- - LITTLE CHILD
+  - ',,ll ,,*'
+- - –GREAT
+  - ',-,,grt'
+- - OUT OF TOWN
+  - ',,,| ( t{n,'''
+- - –“[Be true.]”
+  - ',-8.<,2 true4.>0'
+- - <x, y>
+  - '`<x1 y`>'
+- - this/that
+  - ?is_/?at
+- - '*from'
+  - '"9from'
+- - '&c'
+  - '`&c'
+- - 'Apt. #B'
+  - ',apt4 _?,b'
+- - ¶d
+  - ~pd
+- - é
+  - ~/e
+- - ū
+  - '`-u'
+- - ~s
+  - '`9s'
+- - ~st
+  - '`9/'
+
+# 2.6.3 page 16
+
+- - very, very still; rather good.
+  - v1 v /2 r gd4
+- - 'd:'
+  - ;d3
+- - this...
+  - ?444
+- - rejoice!
+  - rjc6
+- - (q, r)
+  - '"<;q1 ;r">'
+- - '[quite, rather]'
+  - .<q1 r.>
+- - '{k-p}'
+  - _<;k-;p_>
+- - '"Which go-between?"'
+  - '8,: g-2t80'
+- - children.”
+  - '*n40'
+- - t' have–
+  - ;t' h,-
+- - friends' numbers
+  - frs' numb}s
+- - Himself or herself?–Neither!
+  - .7,hmf or h}f8,-,nei6.'
+  - {typeform: {italic: '++++++++++++++++++++++++++++'}}
+- - ALWAYS BE YOURSELF
+  - ',,,alw 2 yrf,'''
+- - t'night
+  - t'ni<t
+- - word(s)
+  - ~w"<s">
+- - ab/cd
+  - ab_/cd
+- - could/should
+  - c|ld_/%|ld
+- - section B²
+  - sec;n ,b;9#b
+- - knowledge.³
+  - '"kl$ge4;9#c'
+- - this.)*
+  - ?is4">"9
+- - <J.Child@children.net>
+  - '`<,j4,*ild`a*ildr54net`>'
+- - just_for_good.org
+  - ju/.-=.-good4org
+- - l_ _f
+  - l.- .-f
+- - ch...f
+  - '*444f'
+- - 'a:b :: x:y'
+  - a;3b 33 x;3y
+- - X%
+  - ',x.0'
+- - Braillex®
+  - ',braillex~r'
+- - Braille4All
+  - ',braille#d,all'
+- - ‘It'll
+  - ',8,x''ll'
+- - '[X''ll'
+  - .<;,x'll
+- - YOU'RE
+  - .1,,y',,re
+  - {typeform: {italic: '++++++'}}
+- - child's?)
+  - '*''s8">'
+- - “p's and q's”
+  - 8;p's & ;q's0
+- - “That's Mr. Little's!”
+  - 8,t's ,mr4 .1,ll's60
+  - {typeform: {italic: '            ++++++++++'}}

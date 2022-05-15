@@ -1,0 +1,16 @@
+# Tests that typeform handling works in combination with correct rules.
+# Converted from pass0_typebuf.c
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  sign . 46
+  emphclass italic
+  begemphword italic 46
+  noback correct "foo" "foobar"
+
+tests:
+  - - foo baz
+    - foobar .baz
+    - typeform:
+        italic: '    +++'

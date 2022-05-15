@@ -1,0 +1,81 @@
+# U.S. English Computer Braille Code
+# <http://liblouis.org/braille-specs/english/#computer-braille-code-cbc>
+#
+# Copyright © 2019 by Timothy Wynn
+# Copyright © 2021 by BAUM Engineering
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ----------------------------------------------------------------------------------------------
+
+display: unicode.dis
+table:
+  language: en
+  region: en-US
+  type: computer
+  dots: 6
+  __assert-match: en-us-comp6.ctb
+
+flags: {testmode: bothDirections}
+tests:
+  # Character Definitions:
+  # Alphanumeric characters:
+  - - AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz
+    - ⠸⠁⠁⠸⠃⠃⠸⠉⠉⠸⠙⠙⠸⠑⠑⠸⠋⠋⠸⠛⠛⠸⠓⠓⠸⠊⠊⠸⠚⠚⠸⠅⠅⠸⠇⠇⠸⠍⠍⠸⠝⠝⠸⠕⠕⠸⠏⠏⠸⠟⠟⠸⠗⠗⠸⠎⠎⠸⠞⠞⠸⠥⠥⠸⠧⠧⠸⠺⠺⠸⠭⠭⠸⠽⠽⠸⠵⠵
+  - [0123456789, ⠴⠂⠆⠒⠲⠢⠖⠶⠦⠔]
+  # Single-Cell Symbols:
+  - ["!\"#$%&'()*+,-./:;<=>?@[\\\\]^", ⠮⠐⠼⠫⠩⠯⠄⠷⠾⠡⠬⠠⠤⠨⠌⠱⠰⠣⠿⠜⠹⠈⠪⠳⠻⠘]
+  # Braille symbols with the 456 prefix:
+  - ["_`{|}~", ⠸⠸⠸⠈⠸⠪⠸⠳⠸⠻⠸⠘]
+
+  # Braille Indicators:
+  # capsLetter already tested (see above alphabet.
+  # Upper and Lower Case Designation: "Two or more upper case letters
+  # occurring in predominantly lower case text—whether these letters
+  # appear consecutively or are separated by numbers, punctuation,
+  # etc.—must be preceded by the caps lock indicator[, and] remains in
+  # effect until cancelled by the caps release indicator or the next
+  # significant space, whichever comes first" (pp. 19-20).
+  # Example 4.4.1: Caps Lock and Caps Release Indicators (p. 20):
+  - [VFUN PSTmsgToVec(ipcMsg, ⠸⠜⠧⠋⠥⠝⠀⠸⠜⠏⠎⠞⠸⠣⠍⠎⠛⠸⠞⠕⠸⠧⠑⠉⠷⠊⠏⠉⠸⠍⠎⠛]
+  # Modify above example to test a capsModeChar (2):
+  - [VFUN PSTmsG2Vec(ipcMsg, ⠸⠜⠧⠋⠥⠝⠀⠸⠜⠏⠎⠞⠸⠣⠍⠎⠸⠜⠛⠆⠧⠸⠣⠑⠉⠷⠊⠏⠉⠸⠍⠎⠛]
+
+  # Isolated Lower-Cell Signs: "When a lower-cell sign is isolated
+  # (i.e., preceded and followed by a space or line end), dots 456 must
+  # immediately precede this sign. The lower-cell sign may be a
+  # single-digit number, quotation mark, apostrophe, comma, hyphen/minus
+  # sign, or semicolon" (p. 27).
+  # Example 8.1.1: Isolated Lower-Cell Signs (p. 27):
+  # Note: The below example has been modified to use lowercase letters.
+  - - "107 : clear ylen 0 do xlen 0 do 0 i j universe c! loop loop ;"
+    - ⠂⠴⠶⠀⠱⠀⠉⠇⠑⠁⠗⠀⠽⠇⠑⠝⠀⠸⠴⠀⠙⠕⠀⠭⠇⠑⠝⠀⠸⠴⠀⠙⠕⠀⠸⠴⠀⠊⠀⠚⠀⠥⠝⠊⠧⠑⠗⠎⠑⠀⠉⠮⠀⠇⠕⠕⠏⠀⠇⠕⠕⠏⠀⠸⠰
+
+flags: {testmode: forward}
+# Typeforms only supported with testmode 'forward'.
+tests:
+  # Emphasis Indicators:
+  # Example 10.1.1 Emphasis Indicators (p. 33):
+  # Note: Only the computer braille portion of the example is utilized.
+  - - "&Hdddd where dddd"
+    - ⠯⠸⠓⠸⠡⠙⠙⠙⠙⠸⠌⠀⠺⠓⠑⠗⠑⠀⠸⠡⠙⠙⠙⠙⠸⠌
+    - typeform:
+        italic: "  ++++       ++++"
+
+# Spaces
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '⠀']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '⠀']
+  - ['\x000a', '⠀']
+  - ['\x000d', '⠀']
+  - ['\x00a0', '⠀']
+
+# Apostrophes
+flags: {testmode: forward}
+tests:
+  - ['\x2019\x00b4\x0027', '⠄⠄⠄']

@@ -1,0 +1,197 @@
+# Collection of various regression tests
+
+# Test that are related to a certain issue that was fixed and don't
+# have a place in a YAML file dedicated to a specific feature or
+# opcode can be placed in this file.
+
+# ----------------------
+# Regression test for issue #35: "AAs" translates to ",,aas" (https://github.com/liblouis/liblouis/issues/35)
+table: |
+  include tables/spaces.uti
+  include tables/text_nabcc.dis
+  lowercase a 1
+  base uppercase A a
+  punctuation ' 3
+  punctuation , 6
+  punctuation ; 56
+  multind 56-6 letsign capsletter
+  letsign 56
+  capsletter 6
+  begcapsword 6-6
+  endcapsword 6-3
+tests:
+  - - "A Aa AAa AAAa"
+    - ";,a ,aa ,,aa,'a ,,aaa,'a"
+  - - "AAa AAa"
+    - ",,aa,'a ,,aa,'a"
+
+# ----------------------
+# Regression test for issue #77: Translating "---.com" with UEBC-g2.ctb causes infinite loop
+# (https://github.com/liblouis/liblouis/issues/77)
+# The issue was fixed by https://github.com/liblouis/liblouis/pull/799.
+
+# The table below makes liblouis hang
+table: |
+  include tables/latinLetterDef6Dots.uti
+  punctuation . 256
+  punctuation - 36
+  nocont .com
+  repeated --- 6-36-6-36-6-36
+tests:
+  - [--.com, --.com]
+  - [---.com, ---.com]
+
+# if I remove the nocont rule it doesn't hang
+table: |
+  include tables/latinLetterDef6Dots.uti
+  punctuation . 256
+  punctuation - 36
+  display \s 6
+  repeated --- 6-36-6-36-6-36
+tests:
+  - [---.com, " - - -.com"]
+
+# also if I remove the repeated rule it doesn't hang
+table: |
+  include tables/latinLetterDef6Dots.uti
+  punctuation . 256
+  punctuation - 36
+  nocont	.com
+tests:
+  - [---.com, ---.com]
+
+# ----------------------
+# This test was added in https://github.com/liblouis/liblouis/pull/109.
+# The second line ("three bold words") would fail unless the first
+# line ("three italic words") was commented out. The first translation
+# was somehow influencing the second one.
+table: [tables/unicode-without-blank.dis, tables/en-ueb-g1.ctb]
+tests:
+  - [three italic words, ⠨⠶⠞⠓⠗⠑⠑ ⠊⠞⠁⠇⠊⠉ ⠺⠕⠗⠙⠎⠨⠄, {typeform: {italic: '++++++++++++++++++'}}]
+  - [three bold words, ⠘⠶⠞⠓⠗⠑⠑ ⠃⠕⠇⠙ ⠺⠕⠗⠙⠎⠘⠄, {typeform: {bold: '++++++++++++++++'}}]
+
+# ----------------------
+# Regression test for issue #238: Pass2 with swapdd opcode selects wrong dot pattern
+# (https://github.com/liblouis/liblouis/issues/238)
+# The issue was fixed by https://github.com/liblouis/liblouis/pull/536 (commit 0d3aaac).
+table: |
+  include tables/da-dk-g08.ctb
+  swapdd AddSeven 1,12,14,145,15,124,1245,125,24,245 17,127,147,1457,157,1247,12457,1257,247,2457
+  noback pass2 %AddSeven %AddSeven
+tests:
+  - - abc
+    - ABC
+
+# ----------------------
+# Regression test for issue #412: Word wrapping not working with en-us-g1.ctb (https://github.com/liblouis/liblouis/issues/412)
+# Back-tracking was not working with all caps words.
+# The issue was fixed by https://github.com/liblouis/liblouis/pull/567.
+table: [tables/en-us-g1.ctb]
+tests:
+  - - "SARVESH KUMAR Upadhyay"
+    - ",,sarvesh ,,kumar ,upadhyay"
+  - - "SARVESH KUMAR Upadhyay"
+    - ",,sarvesh ,,kumar "
+    - maxOutputLength: 25
+  - - "SARVESH KUMAR UPADHYAY"
+    - ",,sarvesh ,,kumar "
+    - maxOutputLength: 25
+
+# ----------------------
+# Regression test for issue #498: Preserve case when "context" statements work in a braille table
+# (https://github.com/liblouis/liblouis/issues/498)
+# The issue was fixed by https://github.com/liblouis/liblouis/pull/756.
+
+table: |
+  space \s 0
+  include tables/latinLetterDef8Dots.uti
+tests:
+  - - AB cd Ef gH
+    - AB cd Ef gH
+
+table: |
+  display - 36
+  space \s 0
+  include tables/latinLetterDef8Dots.uti
+  noback context $l[]$l @36
+tests:
+  - [AB, A-B]
+  - [cd, c-d]
+  - [Ef, E-f]
+  - [gH, g-H]
+
+# ----------------------
+# Regression test related to issue #537: [Feature Request] Better granularity of cursor moving
+# (https://github.com/liblouis/liblouis/issues/537)
+# There was a bug in the input output mapping of context rules.
+# The issue was fixed by https://github.com/liblouis/liblouis/pull/547.
+table: |
+  include tables/braille-patterns.cti
+  letter \x4EA4 13-246-3
+  letter \x6A02 14-2346-5
+  letter \x97FF 15-46-4
+  noback context "\x4EA4\x97FF"["\x6A02"] @236-5
+tests:
+  - - 交
+    - ⠅⠪⠄
+    - outputPos: [0]
+      inputPos: [0,0,0]
+  - - 響
+    - ⠑⠨⠈
+    - outputPos: [0]
+      inputPos: [0,0,0]
+  - - 樂
+    - ⠉⠮⠐
+    - outputPos: [0]
+      inputPos: [0,0,0]
+  - - 交響樂
+    - ⠅⠪⠄⠑⠨⠈⠦⠐
+    - outputPos: [0,3,6]
+      inputPos: [0,0,0,1,1,1,2,2]
+
+# ----------------------
+# Regression test for issue #583: en-ueb-g1.ctb back translation returns wrong inlen
+# (https://github.com/liblouis/liblouis/issues/583)
+# The issue was fixed by https://github.com/liblouis/liblouis/pull/624.
+table: |
+  include tables/en-ueb-g1.ctb
+flags: {testmode: backward}
+tests:
+  - - "`>`>"
+    - ">>"
+
+# ----------------------
+# Regression test for issue #584: en-ueb-g1.ctb back translation of undefined braille does not fill in inpos
+# (https://github.com/liblouis/liblouis/issues/584)
+# The issue was fixed by https://github.com/liblouis/liblouis/pull/624.
+table: |
+  include tables/en-ueb-g1.ctb
+flags: {testmode: backward}
+tests:
+  - - ">>"
+    - "\\\\345/\\\\345/"
+    - inputPos: [0,0,0,0,0,1,1,1,1,1]
+
+# ----------------------
+# Regression test for issue #886: Example found where inputPos array is not monotonically increasing
+# (https://github.com/liblouis/liblouis/issues/886)
+# The issue was fixed by https://github.com/liblouis/liblouis/pull/889.
+display: tables/unicode.dis
+table: |
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits8Dots.uti
+  include tables/litdigits6Dots.uti
+  numsign 3456
+  emphclass italic
+  emphclass underline
+  emphclass bold
+  emphclass super
+  emphletter super 46
+  begemph super 46-236
+  endemph super 346
+tests:
+  - - "rs4954"
+    - "⠨⠦⠗⠎⠬⠼⠙⠊⠑⠙"
+    - typeform:
+        super: '++    '
+      inputPos: [0, 0, 0, 1, 1, 2, 2, 3, 4, 5]

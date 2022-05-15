@@ -1,0 +1,12 @@
+display: unicode-without-blank.dis
+table:
+  language: en
+  region: en-US
+  type: computer
+  dots: 8
+  __assert-match: en_US-comp8-ext.tbl # en-us-comp8-ext.utb
+flags: {testmode: backward}
+tests:
+  - - Ambiguous dot patterns
+    - ⠌ ⠡ ⢎ ⢗ ⢃ ⢑
+    - / * × ® ² €

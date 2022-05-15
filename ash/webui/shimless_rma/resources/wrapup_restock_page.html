@@ -1,0 +1,51 @@
+<style include="cr-shared-style shimless-rma-shared">
+  #navigationButtonWrapper {
+    bottom: var(--header-footer-height);
+    position: absolute;
+  }
+
+  #continue {
+    margin-inline-end: 8px;
+  }
+</style>
+
+<base-page>
+  <div slot="left-pane">
+    <h1>[[i18n('restockTitleText')]]</h1>
+    <div class="instructions">[[i18n('restockInstructionsText')]]</div>
+    <div id="navigationButtonWrapper">
+      <cr-button id="continue" class="action-button"
+          on-click="onRestockContinueButtonClicked_"
+          disabled="[[allButtonsDisabled]]">
+        [[i18n('restockContinueButtonText')]]
+      </cr-button>
+      <cr-button id="shutdown" on-click="onShutdownButtonClicked_"
+          disabled="[[allButtonsDisabled]]">
+        [[i18n('restockShutdownButtonText')]]
+      </cr-button>
+    </div>
+  </div>
+  <div slot="right-pane">
+    <div class="illustration-wrapper">
+      <img class="illustration" src="illustrations/repair_start.svg">
+    </div>
+  </div>
+</base-page>
+
+<cr-dialog id="powerwashDialog" close-text="close">
+  <div slot="title">
+    [[i18n('powerwashDialogTitle')]]
+  </div>
+  <div slot="body">
+    [[i18n('powerwashDialogShutdownDescription')]]
+  </div>
+  <div class="dialog-footer" slot="button-container">
+    <cr-button id="closePowerwashDialogButton" on-click="onCancelClick_">
+      [[i18n('cancelButtonLabel')]]
+    </cr-button>
+    <cr-button id="powerwashButton" class="text-button action-button"
+        on-click="onPowerwashButtonClick_">
+      [[i18n('powerwashDialogPowerwashButton')]]
+    </cr-button>
+  </div>
+</cr-dialog>

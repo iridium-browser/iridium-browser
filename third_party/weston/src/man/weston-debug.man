@@ -1,0 +1,51 @@
+.TH WESTON-DEBUG 1 "2018-09-11" "Weston @version@"
+.SH NAME
+weston-debug \- a tool for getting debug messages from compositor.
+.SH SYNOPSIS
+.B weston-debug [options] [names]
+.
+.\" ***************************************************************
+.SH DESCRIPTION
+
+.B weston-debug
+is a debugging tool which uses weston_debug_v1 interface to get the
+debug messages from the compositor. The debug messages are categorized into different
+debug streams by the compositor (example: logs, proto, list, etc.,) and the compositor
+requires a file descriptor to stream the messages.
+
+This tool accepts a file name or a file descriptor (not both) and any desired debug stream
+names from the user as command line arguments and subscribes the desired streams from the
+compositor by using the weston_debug_v1 interface. After the subscription, the
+compositor will start to write the debug messages to the shared file descriptor.
+
+If no file name or file descriptor argument is given, the tool will use the stdout file
+descriptor.
+
+.
+.\" ***************************************************************
+.SH OPTIONS
+.
+.B weston-debug
+accepts the following command line options.
+.TP
+. B \-h, \-\-help
+Print the help text and exit with success.
+.TP
+. B \-l, \-\-list
+List the available debug streams supported by the compositor. May be used
+together with --all or a list of debug stream names.
+.TP
+. B \-a, \-\-all
+Bind all debug streams offered by the compositor. Mututally exclusive with
+explicitly specifying stream names.
+.TP
+. B \-o FILE, \-\-output FILE
+Direct output to file named FILE. Use - for stdout.
+Stdout is the default. Mutually exclusive with -f.
+.TP
+. B \-f FD, \-\-outfd FD
+Direct output to the file descriptor FD.
+Stdout (1) is the default. Mutually exclusive with -o.
+.TP
+.B [names]
+A list of debug streams to bind to. Mutually exclusive with --all.

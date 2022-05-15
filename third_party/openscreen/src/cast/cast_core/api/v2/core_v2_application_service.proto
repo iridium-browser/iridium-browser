@@ -1,0 +1,19 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+//
+// **** DO NOT EDIT - this file was automatically generated. ****
+syntax = "proto3";
+
+package cast.v2;
+
+import "cast/cast_core/api/v2/cast_message.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// This service runs in Cast Core for a particular app. It uses the V2 protocol
+// to communicate with the app.
+service CoreV2ApplicationService {
+  // Send a Cast V2 message to core application.
+  rpc SendCastMessage(CastMessageRequest) returns (CastMessageResponse);
+}

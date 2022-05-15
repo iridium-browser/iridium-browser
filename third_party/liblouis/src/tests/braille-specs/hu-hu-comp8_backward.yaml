@@ -1,0 +1,33 @@
+display: unicode-without-blank.dis
+table:
+  language: hu
+  type: computer
+  dots: 8
+  __assert-match: hu-hu-comp8.ctb
+flags: {testmode: backward}
+tests:
+  - [⠁⠙⢈⠎⠎⠵⠑⠗⢾, adásszerű]
+  - [⠁⠙⢈⠎⠎⠵⢷⠝⠑⠞, adásszünet]
+  - [⠁⠙⢪⠎⠎⠵⢈⠍⠇⠁, adósszámla]
+  - [⡁⠛⠽⠁⠛⠕⠎⠎⠵⠑⠗⠛⢡⠝⠽, Agyagosszergény]
+  - [⠁⠛⠽⠁⠛⠛⠽⢾⠗⢾⠊⠅⠑⠝, agyaggyűrűiken]
+  - [⠁⠛⠽⠕⠝⠝⠽⠕⠍, agyonnyom]
+  - # this testcase testing all accented letters back translation
+    - ⢈⠗⠧⢌⠵⠞⢾⠗⢻⠞⢷⠅⢟⠗⠋⢬⠗⢪⠛⢡⠏
+    - árvíztűrőtükörfúrógép
+  - # this testcase containing a sentence with have normal characters and numbers, but testing back translation.
+    - ⡁ ⠞⠑⠇⠑⠋⠕⠝⠎⠵⢈⠍⠕⠍⠒ ⠬⠫⠤⠡⠤⠣⠱⠫⠤⠣⠱⠫⠄
+    - 'A telefonszámom: 06-1-256-256.'
+  - [⡁ ⠋⢟⠇⠙⠗⠑⠝⠛⢡⠎ ⠻⠂⠱ ⠑⠗⢻⠎⠎⢡⠛⢾ ⠧⠕⠇⠞⠄, 'A földrengés 7,5 erősségű volt.']
+  - [⡞⠁⠍⢈⠎ ⠍⢡⠛ ⠝⠑⠍ ⠞⠥⠙⠞⠁⠂ ⠓⠕⠛⠽ ⠍⠊ ⠧⢈⠗ ⠗⢈⠄, 'Tamás még nem tudta, hogy mi vár rá.']
+  - [⠈⡞⠁⠍⢈⠎ ⠍⢡⠛ ⠝⠑⠍ ⠞⠥⠙⠞⠁⠂ ⠓⠕⠛⠽ ⠍⠊ ⠧⢈⠗ ⠗⢈⠄⠈, '"Tamás még nem tudta, hogy mi vár rá."']
+  - [⡊ ⠙⠕⠝⠠⠞ ⠝⠕ ⠺⠓⠽ ⠓⠁⠏⠏⠑⠝⠑⠙ ⠞⠓⠊⠎ ⠏⠗⠕⠃⠇⠑⠍⠄, I don't no why happened this problem.]
+  - [⡁⠵ ⠡⡔ ⠏⠁⠗⠁⠛⠗⠁⠋⠥⠎ ⠁⠇⠁⠏⠚⢈⠝ ⠁ ⠅⠑⠙⠧⠑⠵⠍⢡⠝⠽ ⠊⠛⢡⠝⠽⠃⠑ ⠧⠑⠓⠑⠞⢻⠄, Az 1§ paragrafus alapján a kedvezmény igénybe vehető.]
+  - [⠤ ⡁ ⠎⠊⠧⠁⠞⠁⠛⠊ ⠅⠁⠗⠁⠧⢈⠝⢬⠞⠕⠝⠂ ⠝⠑⠛⠽⠧⠑⠝ ⠧⠁⠛⠽ ⢟⠞⠧⠑⠝ ⠍⢡⠗⠋⢟⠇⠙⠝⠽⠊⠗⠑ ⠊⠝⠝⠑⠝⠄ ⡑⠛⠽ ⡋⠕⠗⠙⠄ ⡙⠑ ⠍⠊ ⠝⠑⠍ ⠍⠑⠛⠽⢷⠝⠅ ⠍⠁⠛⢈⠧⠁⠇⠄ ⠤ ⡑⠇⢻⠧⠑⠞⠞⠑ ⠁⠵ ⠊⠗⠁⠞⠞⢈⠗⠉⢈⠚⢈⠞⠂ ⢡⠎ ⢈⠞⠁⠙⠕⠞⠞ ⡝⠁⠎⠵⠊⠋⠝⠁⠅ ⠑⠛⠽ ⠁⠝⠛⠕⠇ ⠋⠕⠝⠞⠕⠞⠄ ⠤ ⡓⠁ ⠧⠊⠎⠎⠵⠁⠚⢟⠝⠂ ⠅⠑⠗⠑⠎⠎⠑⠝ ⠍⠑⠛ ⠁ ⠧⠁⠎⢬⠞⢈⠇⠇⠕⠍⢈⠎ ⠍⠑⠇⠇⠑⠞⠞ ⠁ ⡛⠗⠁⠝⠙ ⡓⠕⠞⠑⠇⠃⠁⠝⠄, '- A sivatagi karavánúton, negyven vagy ötven mérföldnyire innen. Egy Ford. De mi nem megyünk magával. - Elővette az irattárcáját, és átadott Naszifnak egy angol fontot. - Ha visszajön, keressen meg a vasútállomás mellett a Grand Hotelban.']
+  - [⡁ ⠧⢡⠞⠑⠇⢈⠗ ⠡ ⡘⠄, A vételár 1 €.]
+  - [⡙⠑ ⠝⠑⠅⠑⠍ ⠝⠁⠛⠽⠕⠝ ⠝⠑⠓⠑⠵⠑⠍⠗⠑ ⠑⠎⠊⠅ ⠁ ⠇⠑⠧⢡⠇⢌⠗⢈⠎ ⠦⠝⢡⠵⠙ ⠑⠇ ⠁ ⠓⠑⠇⠽⠑⠎⢌⠗⢈⠎⠊ ⠓⠊⠃⢈⠅⠁⠞ ⢡⠎ ⠁ ⠉⠎⢬⠝⠽⠁ ⢌⠗⢈⠎⠕⠍⠁⠞⠴⠄, De nekem nagyon nehezemre esik a levélírás (nézd el a helyesírási hibákat és a csúnya írásomat).]
+  - [⡁ ⠅⠊⢈⠇⠇⢌⠞⢈⠎ ⠍⠑⠛⠝⠽⠊⠞⢪⠚⢈⠝ ⠚⠑⠇⠑⠝ ⠧⠕⠇⠞ ⠁⠵ ⡍⡧⡛⡽⡕⡎⡵ ⠑⠇⠝⢟⠅⠑⠄, A kiállítás megnyitóján jelen volt az MVGYOSZ elnöke.]
+  - [⡁ ⠏⠕⠝⠞⠕⠎ ⠊⠙⢻ ⠡⠡⠒⠹⠱ ⠏⠑⠗⠉⠄, 'A pontos idő 11:45 perc.']
+  - [⠠⠔⡁ ⠅⠊⠁⠙⢈⠎ ⢬⠚⠙⠕⠝⠎⢈⠛⠁⠊⠄, •A kiadás újdonságai.]
+  - [⡁ ⠓⠥⡸⠇⠊⠎⠞ ⠋⢈⠚⠇ ⠝⠑⠍ ⠇⢡⠞⠑⠵⠊⠅⠄, A hu_list fájl nem létezik.]
+  - [⡁⠵ ⠑⠤⠍⠁⠊⠇ ⠉⢌⠍⠑⠍⠒ ⠁⠅⠁⠗⠍⠊⡜⠁⠅⠁⠗⠍⠊⠄⠓⠥⠄, 'Az e-mail címem: akarmi@akarmi.hu.']

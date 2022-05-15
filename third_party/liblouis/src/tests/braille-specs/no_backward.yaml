@@ -1,0 +1,15 @@
+display: unicode.dis
+table:
+  language: no
+  grade: 1
+  __assert-match: no-no-g1.ctb
+flags: {testmode: backward}
+tests:
+  - [⠠⠙ ⠉ ⠚, Du og jeg]
+  - [⠧⠗⠜⠇, vræl]
+  - [⠰⠠⠉ ⠅⠕⠍⠍⠱ ⠪ ⠰⠙, C kommer før d]
+  - ['⠠⠞⠗⠑ ⠝⠕⠗⠎⠅⠑ ⠎⠜⠗⠞⠑⠛⠝ ⠍⠡ ⠜ ⠰⠜⠂ ⠰⠪ ⠉ ⠡⠄', 'Tre norske særtegn må være æ, ø og å.']
+
+flags: {testmode: bothDirections}
+tests:
+  - [nlb.no, ⠣⠝⠇⠃⠄⠝⠕⠜, {xfail: true}]

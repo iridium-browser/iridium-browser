@@ -1,0 +1,22 @@
+display: unicode-without-blank.dis
+table:
+  language: cs
+  type: computer
+  __assert-match: cs-comp8.utb
+flags: {testmode: bothDirections}
+tests:
+  - # Capital Czech letters
+    - NECHŤ JIŽ HŘÍŠNÉ SAXOFONY ĎÁBLŮ ROZEZVUČÍ SÍŇ ÚDĚSNÝMI TÓNY WALTZU, TANGA A QUICKSTEPU!
+    - ⡝⡑⡉⡓⡳ ⡚⡊⡮ ⡓⡺⡌⡱⡝⡜ ⡎⡁⡭⡕⡋⡕⡝⡽ ⡹⡡⡃⡇⡾ ⡗⡕⡵⡑⡵⡧⡥⡩⡌ ⡎⡌⡫ ⡬⡙⡣⡎⡝⡯⡍⡊ ⡞⡪⡝⡽ ⡷⡁⡇⡞⡵⡥⠂ ⡞⡁⡝⡛⡁ ⡁ ⡟⡥⡊⡉⡅⡎⡞⡑⡏⡥⠖
+
+  - # Small Czech letters
+    - nechť již hříšné saxofony ďáblů rozezvučí síň úděsnými tóny waltzu, tanga a quickstepu.
+    - ⠝⠑⠉⠓⠳ ⠚⠊⠮ ⠓⠺⠌⠱⠝⠜ ⠎⠁⠭⠕⠋⠕⠝⠽ ⠹⠡⠃⠇⠾ ⠗⠕⠵⠑⠵⠧⠥⠩⠌ ⠎⠌⠫ ⠬⠙⠣⠎⠝⠯⠍⠊ ⠞⠪⠝⠽ ⠷⠁⠇⠞⠵⠥⠂ ⠞⠁⠝⠛⠁ ⠁ ⠟⠥⠊⠉⠅⠎⠞⠑⠏⠥⠄
+
+  - # Numbers
+    - 1234567890
+    - ⢁⢃⢉⢙⢑⢋⢛⢓⢊⢚
+
+  - # Simple math
+    - α + β + γ = 180°
+    - ⠘⠁ ⠲ ⠘⠃ ⠲ ⠘⠛ ⣶ ⢁⢓⢚⢎

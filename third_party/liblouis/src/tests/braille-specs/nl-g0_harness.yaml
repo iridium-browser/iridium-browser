@@ -1,0 +1,373 @@
+# Dutch braille based on the 2017 standard, see «Braillestandaard voor
+# algemeen gebruik in het Nederlandse taalgebied, Van toepassing vanaf
+# 19 april 2018» by Braille Autoriteit
+# <http://liblouis.org/braille-specs/dutch>
+#
+# Copyright © 2010-2011 by DocArch <http://www.docarch.be>
+# Copyright © 2014-2015, 2019, 2021 by Bert Frees
+# Copyright © 2015-2016, 2018-2019 by Dedicon <http://www.dedicon.nl>
+# Copyright © 2019 by Transkript <http://www.transkript.be>
+# Copyright © 2019 by Braille Autoriteit <https://braille-autoriteit.org>
+# Copyright © 2019 by Licht en Liefde <https://www.blindenzorglichtenliefde.be>
+# Copyright © 2019 by Luisterpuntbibliotheek <https://www.luisterpuntbibliotheek.be>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+table:
+  language: nl
+  grade: 0
+  __assert-match: nl.tbl # nl-NL-g0.utb
+tests:
+  - - Lowercase letters
+    - a b c d e f g h i j k l m n o p q r s t u v w x y z
+    - ⠁ ⠃ ⠉ ⠙ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠥ ⠧ ⠺ ⠭ ⠽ ⠵
+  - - Single digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
+  - - Digits followed by lowercase letters
+    - 1a 1.a 1,a 1:a
+    - ⠼⠁⠠⠁ ⠼⠁⠲⠠⠁ ⠼⠁⠂⠠⠁ ⠼⠁⠒⠠⠁
+  - - Punctuation
+    - '. , ? ! ; : - … [ ]'
+    - ⠲ ⠂ ⠢ ⠖ ⠆ ⠒ ⠤ ⠲⠲⠲ ⠷ ⠾
+  - - Symbols
+    - '@ # % ‰ ^ & * = + _ / \\ < > ~ | ±'
+    - ⠜ ⠐⠼ ⠿ ⠿⠿ ⠬ ⠯ ⠔ ⠶ ⠖ ⠸ ⠌ ⠐⠡ ⠐⠪ ⠐⠕ ⠐⠢ ⠹ ⠖⠤
+  - - a accent
+    - ä â à
+    - ⠜ ⠡ ⠷
+  - - c accent
+    - ç
+    - ⠯
+  - - e accent
+    - é ë ê è
+    - ⠿ ⠫ ⠣ ⠮
+  - - i accent
+    - ï î
+    - ⠻ ⠩
+  - - n accent
+    - ñ
+    - ⠰⠻
+  - - o accent
+    - ó ö ô
+    - ⠬ ⠪ ⠹
+  - - u accent
+    - ü û ù
+    - ⠳ ⠱ ⠾
+  # §2.19 Punt
+  - [beletselteken ..., ⠃⠑⠇⠑⠞⠎⠑⠇⠞⠑⠅⠑⠝ ⠲⠲⠲]
+  - ['Vul in ei of ij: p..n, r..s.', ⠨⠧⠥⠇ ⠊⠝ ⠑⠊ ⠕⠋ ⠊⠚⠒ ⠏⠲⠲⠝⠂ ⠗⠲⠲⠎⠲]
+  # §2.1 Aanhalingstekens
+  # §2.5 Apostrof/weglatingsteken
+  - ['''enkele aanhalingstekens''', ⠄⠑⠝⠅⠑⠇⠑ ⠁⠁⠝⠓⠁⠇⠊⠝⠛⠎⠞⠑⠅⠑⠝⠎⠄]
+  - ['"dubbele aanhalingstekens"', ⠶⠙⠥⠃⠃⠑⠇⠑ ⠁⠁⠝⠓⠁⠇⠊⠝⠛⠎⠞⠑⠅⠑⠝⠎⠶]
+  - [“dubbele aanhalingstekens”, ⠶⠙⠥⠃⠃⠑⠇⠑ ⠁⠁⠝⠓⠁⠇⠊⠝⠛⠎⠞⠑⠅⠑⠝⠎⠶]
+  - ["SMS'je", ⠘⠎⠍⠎⠄⠠⠚⠑]
+  - [SMS’je, ⠘⠎⠍⠎⠄⠠⠚⠑]
+  # §2.10 Haakjes
+  - [(ronde haakjes), ⠦⠗⠕⠝⠙⠑ ⠓⠁⠁⠅⠚⠑⠎⠴]
+  - ['[vierkante haakjes]', ⠷⠧⠊⠑⠗⠅⠁⠝⠞⠑ ⠓⠁⠁⠅⠚⠑⠎⠾]
+  # §2.23 Zeldzaam voorkomende tekens
+  - [copyright ©, ⠉⠕⠏⠽⠗⠊⠛⠓⠞ ⠐⠉]
+  - [paragraaf §, ⠏⠁⠗⠁⠛⠗⠁⠁⠋ ⠬]
+  - [registered ®, ⠗⠑⠛⠊⠎⠞⠑⠗⠑⠙ ⠐⠗]
+  - [trademark ™, ⠞⠗⠁⠙⠑⠍⠁⠗⠅ ⠐⠞⠍]
+  # §2.17 Muntsymbolen/valutatekens
+  - [dollar $, ⠙⠕⠇⠇⠁⠗ ⠙⠕⠇⠇⠁⠗]
+  - [euro €, ⠑⠥⠗⠕ ⠑⠥⠗⠕]
+  - [pond £, ⠏⠕⠝⠙ ⠏⠕⠝⠙]
+  - [yen ¥, ⠽⠑⠝ ⠽⠑⠝]
+  - ['€ 12,35', ⠑⠼⠁⠃⠂⠉⠑]
+  - ['€12,35', ⠑⠼⠁⠃⠂⠉⠑]
+  - ['$ 10,00', ⠙⠼⠁⠚⠂⠚⠚]
+  - ['$10,00', ⠙⠼⠁⠚⠂⠚⠚]
+  - ['£ 65,47', ⠏⠼⠋⠑⠂⠙⠛]
+  - ['£65,47', ⠏⠼⠋⠑⠂⠙⠛]
+  - [¥ 100.000, ⠽⠼⠁⠚⠚⠲⠚⠚⠚]
+  - [¥100.000, ⠽⠼⠁⠚⠚⠲⠚⠚⠚]
+  # §3.1 Het cijferteken
+  - ['1.234.567,89', ⠼⠁⠲⠃⠉⠙⠲⠑⠋⠛⠂⠓⠊]
+  - [050-12 34 56, ⠼⠚⠑⠚⠤⠼⠁⠃ ⠼⠉⠙ ⠼⠑⠋]
+  - [050/78 90 12, ⠼⠚⠑⠚⠌⠼⠛⠓ ⠼⠊⠚ ⠼⠁⠃]
+  - [050-34.56.78, ⠼⠚⠑⠚⠤⠼⠉⠙⠲⠑⠋⠲⠛⠓]
+  - [BE03 4747 0637 8184, ⠘⠃⠑⠼⠚⠉ ⠼⠙⠛⠙⠛ ⠼⠚⠋⠉⠛ ⠼⠓⠁⠓⠙]
+  - [+ 32 11 32 43 54, ⠖ ⠼⠉⠃ ⠼⠁⠁ ⠼⠉⠃ ⠼⠙⠉ ⠼⠑⠙]
+  - - Number grouping (not implemented)
+    - 1 297 381 euro
+    - ⠼⠁⠲⠃⠊⠛⠲⠉⠓⠁ ⠑⠥⠗⠕
+    - xfail: true
+  - ['1e, 1ste', ⠼⠁⠠⠑⠂ ⠼⠁⠎⠞⠑]
+  - ['2e, 2de', ⠼⠃⠠⠑⠂ ⠼⠃⠠⠙⠑]
+  - ['3e, 3de', ⠼⠉⠠⠑⠂ ⠼⠉⠠⠙⠑]
+  - ['15e, 27ste', ⠼⠁⠑⠠⠑⠂ ⠼⠃⠛⠎⠞⠑]
+  - ['10a, 10A', ⠼⠁⠚⠠⠁⠂ ⠼⠁⠚⠨⠁]
+  - [12.b, ⠼⠁⠃⠲⠠⠃]
+  - [31-07-2010, ⠼⠉⠁⠤⠼⠚⠛⠤⠼⠃⠚⠁⠚]
+  - [31/07/2010, ⠼⠉⠁⠌⠼⠚⠛⠌⠼⠃⠚⠁⠚]
+  - [16.30 tot 21.30 uur, ⠼⠁⠋⠲⠉⠚ ⠞⠕⠞ ⠼⠃⠁⠲⠉⠚ ⠥⠥⠗]
+  - ['16:30 tot 21:30 uur', ⠼⠁⠋⠒⠼⠉⠚ ⠞⠕⠞ ⠼⠃⠁⠒⠼⠉⠚ ⠥⠥⠗]
+  - [x_1 = 0, ⠭⠸⠼⠁ ⠶ ⠼⠚]
+  - ['x,1', ⠭⠂⠼⠁]
+  # §3.2 De basisrekentekens
+  - [1 + 2 = 3, ⠼⠁ ⠖ ⠼⠃ ⠶ ⠼⠉]
+  - [9 - 5 = 4, ⠼⠊ ⠤ ⠼⠑ ⠶ ⠼⠙]
+  - [3 x 3 = 9, ⠼⠉ ⠭ ⠼⠉ ⠶ ⠼⠊]
+  - [3 * 3 = 9, ⠼⠉ ⠔ ⠼⠉ ⠶ ⠼⠊]
+  - [3 · 3 = 9, ⠼⠉ ⠦ ⠼⠉ ⠶ ⠼⠊]
+  - [3 ∙ 3 = 9, ⠼⠉ ⠦ ⠼⠉ ⠶ ⠼⠊]
+  - [3 ⋅ 3 = 9, ⠼⠉ ⠦ ⠼⠉ ⠶ ⠼⠊]
+  - [3 × 3 = 9, ⠼⠉ ⠦ ⠼⠉ ⠶ ⠼⠊]
+  - ['8 : 4 = 2', ⠼⠓ ⠒ ⠼⠙ ⠶ ⠼⠃]
+  - [8 / 4 = 2, ⠼⠓ ⠌ ⠼⠙ ⠶ ⠼⠃]
+  - [8 ÷ 4 = 2, ⠼⠓ ⠲ ⠼⠙ ⠶ ⠼⠃]
+  - [65+-kaart, ⠼⠋⠑⠐⠖⠤⠅⠁⠁⠗⠞]
+  - ["65+'er", ⠼⠋⠑⠐⠖⠄⠑⠗]
+  - [40-jarige, ⠼⠙⠚⠤⠚⠁⠗⠊⠛⠑]
+  # §2.18 Procent- en promilleteken
+  # §3.4 Procent- en promilleteken
+  - ['79,5 %', ⠼⠛⠊⠂⠑ ⠿]
+  - [15%, ⠼⠁⠑ ⠿]
+  - ['79,5 ‰', ⠼⠛⠊⠂⠑ ⠿⠿]
+  - [15‰, ⠼⠁⠑ ⠿⠿]
+  # §3.6 Graad-, minuut- en secondeteken
+  - ['37,8° C', ⠼⠉⠛⠂⠓⠈⠴ ⠨⠉]
+  - ["Een hoek van 27° 30'.", ⠨⠑⠑⠝ ⠓⠕⠑⠅ ⠧⠁⠝ ⠼⠃⠛⠈⠴ ⠼⠉⠚⠈⠔⠲]
+  - ["Het record is 3' 5''.", ⠨⠓⠑⠞ ⠗⠑⠉⠕⠗⠙ ⠊⠎ ⠼⠉⠈⠔ ⠼⠑⠈⠔⠔⠲]
+  - ["57° 38' noorderbreedte", ⠼⠑⠛⠈⠴ ⠼⠉⠓⠈⠔ ⠝⠕⠕⠗⠙⠑⠗⠃⠗⠑⠑⠙⠞⠑]
+  # §3.5 Oppervlakte- en inhoudsmaten
+  - [65 m², ⠼⠋⠑ ⠍⠬⠼⠃]
+  - [65 m^2, ⠼⠋⠑ ⠍⠬⠼⠃]
+  - [1.000 cm³, ⠼⠁⠲⠚⠚⠚ ⠉⠍⠬⠼⠉]
+  - [1.000 cm^3, ⠼⠁⠲⠚⠚⠚ ⠉⠍⠬⠼⠉]
+  # §3.3 Breuken
+  - [½ kg - 1/2 kg, ⠼⠁⠌⠼⠃ ⠅⠛ ⠤ ⠼⠁⠌⠼⠃ ⠅⠛]
+  - [¼ l - 1/4 l, ⠼⠁⠌⠼⠙ ⠇ ⠤ ⠼⠁⠌⠼⠙ ⠇]
+  # §2.12 Hoofdletters
+  - [Winston Churchill, ⠨⠺⠊⠝⠎⠞⠕⠝ ⠨⠉⠓⠥⠗⠉⠓⠊⠇⠇]
+  - [MacLean, ⠨⠍⠁⠉⠨⠇⠑⠁⠝]
+  - [AMSTERDAM en BRUSSEL, ⠘⠁⠍⠎⠞⠑⠗⠙⠁⠍ ⠑⠝ ⠘⠃⠗⠥⠎⠎⠑⠇]
+  - ['WMO, VDAB', ⠘⠺⠍⠕⠂ ⠘⠧⠙⠁⠃]
+  - [abCDef, ⠁⠃⠘⠉⠙⠠⠑⠋]
+  - [ONZE DIRECTEUR-GENERAAL WOONT IN BRUSSEL, ⠘⠘⠕⠝⠵⠑ ⠙⠊⠗⠑⠉⠞⠑⠥⠗⠤⠛⠑⠝⠑⠗⠁⠁⠇ ⠺⠕⠕⠝⠞ ⠊⠝ ⠘⠃⠗⠥⠎⠎⠑⠇]
+  - [IN BRUSSEL WOONT ONZE DIRECTEUR-GENERAAL, ⠘⠘⠊⠝ ⠃⠗⠥⠎⠎⠑⠇ ⠺⠕⠕⠝⠞ ⠕⠝⠵⠑ ⠙⠊⠗⠑⠉⠞⠑⠥⠗⠤⠘⠛⠑⠝⠑⠗⠁⠁⠇]
+  - - HUIS-TUIN-EN-KEUKEN-MIDDELTJES
+    - ⠘⠘⠓⠥⠊⠎⠤⠞⠥⠊⠝⠤⠑⠝⠤⠅⠑⠥⠅⠑⠝⠤⠘⠍⠊⠙⠙⠑⠇⠞⠚⠑⠎
+  - [Eghezée of Éghezée, ⠨⠑⠛⠓⠑⠵⠿⠑ ⠕⠋ ⠨⠿⠛⠓⠑⠵⠿⠑]
+  - [EGHEZEE of ÉGHEZÉE, ⠘⠑⠛⠓⠑⠵⠑⠑ ⠕⠋ ⠘⠿⠛⠓⠑⠵⠿⠑]
+  - [Saint-Etienne of Saint-Étienne, ⠨⠎⠁⠊⠝⠞⠤⠨⠑⠞⠊⠑⠝⠝⠑ ⠕⠋ ⠨⠎⠁⠊⠝⠞⠤⠨⠿⠞⠊⠑⠝⠝⠑]
+  - [SAINT-ETIENNE of SAINT-ÉTIENNE, ⠘⠎⠁⠊⠝⠞⠤⠘⠑⠞⠊⠑⠝⠝⠑ ⠕⠋ ⠘⠎⠁⠊⠝⠞⠤⠘⠿⠞⠊⠑⠝⠝⠑]
+  - [BELGIE of BELGIË, ⠘⠃⠑⠇⠛⠊⠑ ⠕⠋ ⠘⠃⠑⠇⠛⠊⠫]
+  - [Benedictus XVI, ⠨⠃⠑⠝⠑⠙⠊⠉⠞⠥⠎ ⠘⠭⠧⠊]
+  - [Jozef II-straat, ⠨⠚⠕⠵⠑⠋ ⠘⠊⠊⠤⠎⠞⠗⠁⠁⠞]
+  - [WO II, ⠘⠺⠕ ⠘⠊⠊]
+  - [E.T.A., ⠘⠑⠲⠞⠲⠁⠲]
+  - [EEN woord in hoofdletters, ⠘⠑⠑⠝ ⠺⠕⠕⠗⠙ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
+  - [TWEE WOORDEN in hoofdletters, ⠘⠞⠺⠑⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
+  - [DRIE WOORDEN IN hoofdletters, ⠘⠙⠗⠊⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠘⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
+  - [MEER DAN DRIE WOORDEN in hoofdletters, ⠘⠘⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠘⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
+  - [WAT IS FOUT - De fout..., ⠘⠺⠁⠞ ⠘⠊⠎ ⠘⠋⠕⠥⠞ ⠤ ⠨⠙⠑ ⠋⠕⠥⠞⠲⠲⠲]
+  - [WAT IS FOUT - de fout..., ⠘⠺⠁⠞ ⠘⠊⠎ ⠘⠋⠕⠥⠞ ⠤ ⠙⠑ ⠋⠕⠥⠞⠲⠲⠲]
+  - [WAT IS FOUT De fout..., ⠘⠺⠁⠞ ⠘⠊⠎ ⠘⠋⠕⠥⠞ ⠨⠙⠑ ⠋⠕⠥⠞⠲⠲⠲]
+  - # permanent hoofdletterteken begint reeds bij "IK" en komt na het leesteken
+    - "'IK DACHT DAT IK HIER DE ENIGE KONINGIN ZOU ZIJN'"
+    - ⠄⠘⠘⠊⠅ ⠙⠁⠉⠓⠞ ⠙⠁⠞ ⠊⠅ ⠓⠊⠑⠗ ⠙⠑ ⠑⠝⠊⠛⠑ ⠅⠕⠝⠊⠝⠛⠊⠝ ⠵⠕⠥ ⠘⠵⠊⠚⠝⠄
+  - [BTW-TARIEF volledig in hoofdletters, ⠘⠃⠞⠺⠤⠘⠞⠁⠗⠊⠑⠋ ⠧⠕⠇⠇⠑⠙⠊⠛ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
+  - [BTW-tarief alleen btw in hoofdletters, ⠘⠃⠞⠺⠤⠞⠁⠗⠊⠑⠋ ⠁⠇⠇⠑⠑⠝ ⠃⠞⠺ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎]
+  - [VN-verdrag, ⠘⠧⠝⠤⠧⠑⠗⠙⠗⠁⠛]
+  - [VN-Zeeverdrag, ⠘⠧⠝⠤⠨⠵⠑⠑⠧⠑⠗⠙⠗⠁⠛]
+  - [P+R park and ride, ⠘⠏⠐⠖⠗ ⠏⠁⠗⠅ ⠁⠝⠙ ⠗⠊⠙⠑]
+  - [N-VA Nieuw-Vlaamse Alliantie, ⠨⠝⠤⠘⠧⠁ ⠨⠝⠊⠑⠥⠺⠤⠨⠧⠇⠁⠁⠍⠎⠑ ⠨⠁⠇⠇⠊⠁⠝⠞⠊⠑]
+  - [Firma Bossuyt & Zonen, ⠨⠋⠊⠗⠍⠁ ⠨⠃⠕⠎⠎⠥⠽⠞ ⠯ ⠨⠵⠕⠝⠑⠝]
+  - ['C&A', ⠘⠉⠐⠯⠁]
+  - ['CD&V Christen-Democratisch en Vlaams', ⠘⠉⠙⠐⠯⠧ ⠨⠉⠓⠗⠊⠎⠞⠑⠝⠤⠨⠙⠑⠍⠕⠉⠗⠁⠞⠊⠎⠉⠓ ⠑⠝ ⠨⠧⠇⠁⠁⠍⠎]
+  - [W.F. Hermans, ⠘⠺⠲⠋⠲ ⠨⠓⠑⠗⠍⠁⠝⠎]
+  - [FAQ's, ⠘⠋⠁⠟⠄⠠⠎]
+  - [VTM'er, ⠘⠧⠞⠍⠄⠠⠑⠗]
+  - ['SLAAT DE VLAM IN DE PAN, DEK DE VUURHAARD DAN AF MET EEN BRANDWERENDE DEKEN OF
+      EEN VOCHTIGE DOEK.', ⠘⠘⠎⠇⠁⠁⠞ ⠙⠑ ⠧⠇⠁⠍ ⠊⠝ ⠙⠑ ⠏⠁⠝⠂ ⠙⠑⠅ ⠙⠑ ⠧⠥⠥⠗⠓⠁⠁⠗⠙ ⠙⠁⠝ ⠁⠋ ⠍⠑⠞ ⠑⠑⠝ ⠃⠗⠁⠝⠙⠺⠑⠗⠑⠝⠙⠑ ⠙⠑⠅⠑⠝ ⠕⠋ ⠑⠑⠝ ⠧⠕⠉⠓⠞⠊⠛⠑ ⠘⠙⠕⠑⠅⠲]
+  - [Eén, ⠨⠑⠿⠝]
+    # This test was previously:
+    # [Eén, ⠨⠿⠿⠝]
+    # However, there is nothing in the braille standard
+    # to suggest that this replacement (E to É) should occur.
+  - [É-U, ⠨⠿⠤⠨⠥]
+  # combinaties hoofdletters en cijfers
+  - [1e, ⠼⠁⠠⠑]
+  - [1E, ⠼⠁⠨⠑]
+  - [2DE, ⠼⠃⠘⠙⠑]
+  - - BIJ MEER DAN DRIE WOORDEN IN HOOFDLETTERS WORDT 2DE NIET CORRECT OMGEZET
+    - ⠘⠘⠃⠊⠚ ⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠓⠕⠕⠋⠙⠇⠑⠞⠞⠑⠗⠎ ⠺⠕⠗⠙⠞ ⠼⠃⠠⠙⠑ ⠝⠊⠑⠞ ⠉⠕⠗⠗⠑⠉⠞ ⠘⠕⠍⠛⠑⠵⠑⠞
+  - - Zie refertes D-NE004W, D-NB007B en D-NB007BDK.
+    - ⠨⠵⠊⠑ ⠗⠑⠋⠑⠗⠞⠑⠎ ⠨⠙⠤⠘⠝⠑⠼⠚⠚⠙⠨⠺⠂ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠨⠃ ⠑⠝ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠘⠃⠙⠅⠲
+    - xfail: "'D-NE004W, D-NB007B' is now seen as 6 words ('D', 'NE', 'W', 'D', 'NB' and 'B') so that phrase indication is used"
+  - - Zie refertes D-NE004W, D-NB007B, D-NB007BDK.
+    - ⠨⠵⠊⠑ ⠗⠑⠋⠑⠗⠞⠑⠎ ⠨⠙⠤⠘⠝⠑⠼⠚⠚⠙⠨⠺⠂ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠨⠃⠂ ⠨⠙⠤⠘⠝⠃⠼⠚⠚⠛⠘⠃⠙⠅⠲
+    - xfail: "'D-NE004W, D-NB007B, D-NB007BDK' is now seen as 9 words"
+  # §2.13 Internettekens
+  - [lisa_dirk@yahoo.com, ⠇⠊⠎⠁⠸⠙⠊⠗⠅⠜⠽⠁⠓⠕⠕⠲⠉⠕⠍]
+  - ['http://www.avh.asso.fr/', ⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠲⠁⠧⠓⠲⠁⠎⠎⠕⠲⠋⠗⠌]
+  - ['C:\\Documents and Settings', ⠨⠉⠒⠐⠡⠨⠙⠕⠉⠥⠍⠑⠝⠞⠎ ⠁⠝⠙ ⠨⠎⠑⠞⠞⠊⠝⠛⠎]
+  - ['Naam | Adresstraat 1 | 2018 Plaats', ⠨⠝⠁⠁⠍ ⠹ ⠨⠁⠙⠗⠑⠎⠎⠞⠗⠁⠁⠞ ⠼⠁ ⠹ ⠼⠃⠚⠁⠓ ⠨⠏⠇⠁⠁⠞⠎]
+  - ['ja | nee', ⠚⠁ ⠹ ⠝⠑⠑]
+  - ['ja |nee', ⠚⠁ ⠹ ⠝⠑⠑]
+  - ['ja| nee', ⠚⠁ ⠹ ⠝⠑⠑]
+  - ['ja|nee', ⠚⠁ ⠹ ⠝⠑⠑]
+  - [no_reply@skynet.be, ⠝⠕⠸⠗⠑⠏⠇⠽⠜⠎⠅⠽⠝⠑⠞⠲⠃⠑]
+  # §2.2 Alfabetwisselingsteken
+  - - cañon
+    - ⠉⠁⠰⠻⠕⠝
+  - - "De eerste drie letters van het Griekse alfabet zijn: alfa (α), bèta (β) en gamma (γ)."
+    - ⠨⠙⠑ ⠑⠑⠗⠎⠞⠑ ⠙⠗⠊⠑ ⠇⠑⠞⠞⠑⠗⠎ ⠧⠁⠝ ⠓⠑⠞ ⠨⠛⠗⠊⠑⠅⠎⠑ ⠁⠇⠋⠁⠃⠑⠞ ⠵⠊⠚⠝⠒ ⠁⠇⠋⠁ ⠦⠰⠁⠴⠂ ⠃⠮⠞⠁ ⠦⠰⠃⠴ ⠑⠝ ⠛⠁⠍⠍⠁ ⠦⠰⠛⠴⠲
+  - - De Poolse stad Łódź
+    - ⠨⠙⠑ ⠨⠏⠕⠕⠇⠎⠑ ⠎⠞⠁⠙ ⠰⠨⠣⠬⠙⠮
+  - - Σας καλωσορίζουμε στην Ελλάδα!
+    - ⠰⠰⠨⠎⠁⠎ ⠅⠁⠇⠺⠎⠕⠗⠊⠵⠕⠥⠍⠑ ⠎⠞⠱⠝ ⠰⠨⠑⠇⠇⠁⠙⠁⠖
+  # §2.1 Aanhalingstekens
+  - - '''s morgens, baby''s, Alex'' boeken, de jaren ''90'
+    - ⠄⠎ ⠍⠕⠗⠛⠑⠝⠎⠂ ⠃⠁⠃⠽⠄⠎⠂ ⠨⠁⠇⠑⠭⠄ ⠃⠕⠑⠅⠑⠝⠂ ⠙⠑ ⠚⠁⠗⠑⠝ ⠄⠼⠊⠚
+  # §2.10 Haakjes
+  - - Een typist(e) moet heel precies werken.
+    - ⠨⠑⠑⠝ ⠞⠽⠏⠊⠎⠞⠦⠑⠴ ⠍⠕⠑⠞ ⠓⠑⠑⠇ ⠏⠗⠑⠉⠊⠑⠎ ⠺⠑⠗⠅⠑⠝⠲
+  # §3.2 De basisrekentekens
+  - - 'Deze wandkaart heeft een schaal van 1 : 7.500.'
+    - ⠨⠙⠑⠵⠑ ⠺⠁⠝⠙⠅⠁⠁⠗⠞ ⠓⠑⠑⠋⠞ ⠑⠑⠝ ⠎⠉⠓⠁⠁⠇ ⠧⠁⠝ ⠼⠁ ⠒ ⠼⠛⠲⠑⠚⠚⠲
+  - - Op zijn laatste rapport stond voor wiskunde een 6+.
+    - ⠨⠕⠏ ⠵⠊⠚⠝ ⠇⠁⠁⠞⠎⠞⠑ ⠗⠁⠏⠏⠕⠗⠞ ⠎⠞⠕⠝⠙ ⠧⠕⠕⠗ ⠺⠊⠎⠅⠥⠝⠙⠑ ⠑⠑⠝ ⠼⠋⠐⠖⠲
+  # §2.16 Liggend streepje
+  - - Hij vertelde – zonder het te beseffen – een goede mop.
+    - ⠨⠓⠊⠚ ⠧⠑⠗⠞⠑⠇⠙⠑ ⠤ ⠵⠕⠝⠙⠑⠗ ⠓⠑⠞ ⠞⠑ ⠃⠑⠎⠑⠋⠋⠑⠝ ⠤ ⠑⠑⠝ ⠛⠕⠑⠙⠑ ⠍⠕⠏⠲
+  - - groente- en fruithandel
+    - ⠛⠗⠕⠑⠝⠞⠑⠤ ⠑⠝ ⠋⠗⠥⠊⠞⠓⠁⠝⠙⠑⠇
+  # §2.8 Drukwijzigingsteken
+  - - Landt je vader op Schiphol?
+    - ⠨⠇⠁⠝⠙⠸⠞ ⠚⠑ ⠧⠁⠙⠑⠗ ⠕⠏ ⠨⠎⠉⠓⠊⠏⠓⠕⠇⠢
+    - typeform:
+        bold: '    +                      '
+  - - Amsterdam en Brussel
+    - ⠸⠨⠁⠍⠎⠞⠑⠗⠙⠁⠍ ⠑⠝ ⠸⠨⠃⠗⠥⠎⠎⠑⠇
+    - typeform:
+        bold: '+++++++++    +++++++'
+  - - Heb je Vlucht langs de Anapoer al gelezen?
+    - ⠨⠓⠑⠃ ⠚⠑ ⠸⠸⠨⠧⠇⠥⠉⠓⠞ ⠇⠁⠝⠛⠎ ⠙⠑ ⠸⠨⠁⠝⠁⠏⠕⠑⠗ ⠁⠇ ⠛⠑⠇⠑⠵⠑⠝⠢
+    - typeform:
+        bold: '       +++++++++++++++++++++++            '
+  - - '''t Is tijd om naar huis te gaan.'
+    - ⠸⠸⠄⠞ ⠨⠊⠎ ⠞⠊⠚⠙ ⠕⠍ ⠝⠁⠁⠗ ⠓⠥⠊⠎ ⠞⠑ ⠸⠛⠁⠁⠝⠲
+    - typeform:
+        bold: '++++++++++++++++++++++++++++++++'
+  - - waterplant
+    - ⠸⠺⠁⠞⠑⠗⠠⠏⠇⠁⠝⠞
+    - typeform:
+        underline: '+++++     '
+  - - Koppelteken heft werking op van zowel drukwijzigingsteken als permanent hoofdletterteken
+    - ZUID-AFRIKA was zijn droom.
+    - ⠸⠘⠵⠥⠊⠙⠤⠸⠘⠁⠋⠗⠊⠅⠁ ⠺⠁⠎ ⠵⠊⠚⠝ ⠙⠗⠕⠕⠍⠲
+    - typeform:
+        {bold: '+++++++++++                '}
+  - - Koppelteken heft werking op van zowel drukwijzigingsteken dus geen herstelteken nodig
+    - BTW-tarieven
+    - ⠸⠘⠃⠞⠺⠤⠞⠁⠗⠊⠑⠧⠑⠝
+    - typeform:
+        {italic: '+++         '}
+  - - Koppelteken heft werking op van drukwijzigingsteken
+    - Zuid-Afrika
+    - ⠸⠨⠵⠥⠊⠙⠤⠸⠨⠁⠋⠗⠊⠅⠁
+    - typeform:
+        {bold: '+++++++++++'}
+  - - 3de
+    - ⠼⠉⠸⠙⠑
+    - typeform:
+        bold: ' ++'
+  - - cursief
+    - ⠸⠉⠥⠗⠎⠊⠑⠋
+    - typeform:
+        italic: '+++++++'
+  - - onderstreept
+    - ⠸⠕⠝⠙⠑⠗⠎⠞⠗⠑⠑⠏⠞
+    - typeform:
+        underline: '++++++++++++'
+  - - vetgedrukt
+    - ⠸⠧⠑⠞⠛⠑⠙⠗⠥⠅⠞
+    - typeform:
+        bold: '++++++++++'
+  # permanent drukwijzigingsteken
+  - - vier woorden in cursief
+    - ⠸⠸⠧⠊⠑⠗ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠸⠉⠥⠗⠎⠊⠑⠋
+    - typeform:
+        italic: '+++++++++++++++++++++++'
+  - - Priester-dichter Guido Gezelle schreef in het West-Vlaams.
+    - ⠸⠸⠨⠏⠗⠊⠑⠎⠞⠑⠗⠤⠙⠊⠉⠓⠞⠑⠗ ⠨⠛⠥⠊⠙⠕ ⠨⠛⠑⠵⠑⠇⠇⠑ ⠎⠉⠓⠗⠑⠑⠋ ⠊⠝ ⠓⠑⠞ ⠨⠺⠑⠎⠞⠤⠸⠨⠧⠇⠁⠁⠍⠎⠲
+    - typeform:
+        italic: '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+  # drukwijzigingsteken komt na het leesteken
+  - - "'cursief'"
+    - ⠄⠸⠉⠥⠗⠎⠊⠑⠋⠄
+    - typeform:
+        italic: '+++++++++'
+  - - "'cursief'"
+    - ⠄⠸⠉⠥⠗⠎⠊⠑⠋⠄
+    - typeform:
+        italic: ' +++++++ '
+  - - (cursief)
+    - ⠦⠸⠉⠥⠗⠎⠊⠑⠋⠴
+    - typeform:
+        italic: '+++++++++'
+  - - (cursief)
+    - ⠦⠸⠉⠥⠗⠎⠊⠑⠋⠴
+    - typeform:
+        italic: ' +++++++ '
+  - # indien het eerste woord met een leesteken begint, begint het permanent drukwijzigingsteken toch
+    # bij het eerste woord, na het leesteken en wordt het pas bij het laatste woord opgeheven
+    - "'meer dan drie woorden in cursief'"
+    - ⠄⠸⠸⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠸⠉⠥⠗⠎⠊⠑⠋⠄
+    - typeform:
+        italic: '++++++++++++++++++++++++++++++++++'
+  - # ... ook indien de leestekens niet cursief zijn
+    - "'meer dan drie woorden in cursief'"
+    - ⠄⠸⠸⠍⠑⠑⠗ ⠙⠁⠝ ⠙⠗⠊⠑ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠸⠉⠥⠗⠎⠊⠑⠋⠄
+    - typeform:
+        italic: ' ++++++++++++++++++++++++++++++++ '
+  # volgorde van hoofdletterteken en drukwijzigingsteken (drukwijzigingsteken eerst)
+  - - CURSIEF
+    - ⠸⠘⠉⠥⠗⠎⠊⠑⠋
+    - typeform:
+        italic: '+++++++'
+  - - VIER WOORDEN IN CURSIEF
+    - ⠸⠸⠘⠘⠧⠊⠑⠗ ⠺⠕⠕⠗⠙⠑⠝ ⠊⠝ ⠸⠘⠉⠥⠗⠎⠊⠑⠋
+    - typeform:
+        italic: '+++++++++++++++++++++++'
+  - - "'IK DACHT DAT IK HIER DE ENIGE KONINGIN ZOU ZIJN.'"
+    - ⠄⠸⠸⠘⠘⠊⠅ ⠙⠁⠉⠓⠞ ⠙⠁⠞ ⠊⠅ ⠓⠊⠑⠗ ⠙⠑ ⠑⠝⠊⠛⠑ ⠅⠕⠝⠊⠝⠛⠊⠝ ⠵⠕⠥ ⠸⠘⠵⠊⠚⠝⠲⠄
+    - typeform:
+        italic: ' ++++++++++++++++++++++++++++++++++++++++++++++++ '
+
+  # Misc
+  - - Not part of the braille standard
+    - 'CO₂-uitstoot: 158 g CO₂/km'
+    - ⠘⠉⠕⠡⠆⠤⠥⠊⠞⠎⠞⠕⠕⠞⠒ ⠼⠁⠑⠓ ⠛ ⠘⠉⠕⠡⠆⠌⠅⠍
+
+  # Regels uit toekomstige 2019 standaard (niet officiëel goedgekeurd, maar vrijwel zeker dat dit zal gebeuren)
+  - - Klemtoon en nadruk / accenten (RFC-000367 - https://braille-autoriteit.org/changerequest/klemtoon_en_nadruk)
+    - á é í ó ú
+    - ⠷ ⠿ ⠌ ⠬ ⠾
+  - ["Dáár!", "⠨⠙⠷⠷⠗⠖"]
+  - ["Geef het hém.", "⠨⠛⠑⠑⠋ ⠓⠑⠞ ⠓⠿⠍⠲"]
+  - ["Dat is léúk.", "⠨⠙⠁⠞ ⠊⠎ ⠇⠿⠾⠅⠲"]
+  - ["Je móét komen.", "⠨⠚⠑ ⠍⠬⠿⠞ ⠅⠕⠍⠑⠝⠲"]
+  - ["Ga búíten spelen.", "⠨⠛⠁ ⠃⠾⠌⠞⠑⠝ ⠎⠏⠑⠇⠑⠝⠲"]
+  - ["Móéilijk gaat óók.", "⠨⠍⠬⠿⠊⠇⠊⠚⠅ ⠛⠁⠁⠞ ⠬⠬⠅⠲"]
+  - - Accolades (RFC-000390 - https://braille-autoriteit.org/changerequest/accolades)
+    - "{ }"
+    - ⠐⠷ ⠐⠾
+
+flags: {testmode: backward}
+tests:
+  - - Digits followed by lowercase letters
+    - ⠼⠁⠠⠁ ⠼⠁⠲⠠⠁ ⠼⠁⠂⠠⠁ ⠼⠁⠒⠠⠁
+    - 1a 1.a 1,a 1:a

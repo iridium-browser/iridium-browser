@@ -1,0 +1,56 @@
+# Copyright © 2021 by Imam Kahraman <imam.kahraman@gmail.com>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+# See https://github.com/liblouis/liblouis/pull/720 for more details
+# as to how these tests were created.
+
+display: unicode.dis
+table:
+  language: kmr
+  grade: 0
+  __assert-match: kmr.tbl
+flags: {testmode: forward}
+tests:
+  - [azadi, ⠁⠵⠁⠙⠊]
+  - [bakur, ⠃⠁⠅⠥⠗]
+  - [ciwan, ⠉⠊⠺⠁⠝]
+  - [çîrok, ⠡⠔⠗⠕⠅]
+  - [destan, ⠙⠑⠎⠞⠁⠝]
+  - [êzîdî, ⠣⠵⠔⠙⠔]
+  - [erê, ⠑⠗⠣]
+  - [firat, ⠋⠊⠗⠁⠞]
+  - [gulîstan, ⠛⠥⠇⠔⠎⠞⠁⠝]
+  - [havîn, ⠓⠁⠧⠔⠝]
+  - [iro, ⠊⠗⠕]
+  - [îsot, ⠔⠎⠕⠞]
+  - [jin, ⠚⠊⠝]
+  - [kurdistan, ⠅⠥⠗⠙⠊⠎⠞⠁⠝]
+  - [lêkolîn, ⠇⠣⠅⠕⠇⠔⠝]
+  - [malbat, ⠍⠁⠇⠃⠁⠞]
+  - [nêçîr, ⠝⠣⠡⠔⠗]
+  - [oremar, ⠕⠗⠑⠍⠁⠗]
+  - [paytext, ⠏⠁⠽⠞⠑⠭⠞]
+  - [qamişlo, ⠟⠁⠍⠊⠩⠇⠕]
+  - [rojava, ⠗⠕⠚⠁⠧⠁]
+  - [serxwebûn, ⠎⠑⠗⠭⠺⠑⠃⠱⠝]
+  - [şirnex, ⠩⠊⠗⠝⠑⠭]
+  - [tembûr, ⠞⠑⠍⠃⠱⠗]
+  - [û, ⠱]
+  - [urmê, ⠥⠗⠍⠣]
+  - [viyan, ⠧⠊⠽⠁⠝]
+  - [welat, ⠺⠑⠇⠁⠞]
+  - [xezal, ⠭⠑⠵⠁⠇]
+  - [yekitî, ⠽⠑⠅⠊⠞⠔]
+  - [zap, ⠵⠁⠏]
+  - [çand, ⠡⠁⠝⠙]
+  - [dîl, ⠙⠔⠇]
+  - [bîranîn, ⠃⠔⠗⠁⠝⠔⠝]
+  - [nêzîk, ⠝⠣⠵⠔⠅]
+  - [şer, ⠩⠑⠗]
+  - [şêr, ⠩⠣⠗]
+  - [şirîn, ⠩⠊⠗⠔⠝]
+  - ["ez û tu", "⠑⠵⠀⠱⠀⠞⠥"]

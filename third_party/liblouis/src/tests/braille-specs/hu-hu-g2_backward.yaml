@@ -1,0 +1,21 @@
+display: unicode.dis
+table:
+  language: hu
+  grade: 2
+  __assert-match: hu-hu-g2.ctb
+flags: {testmode: backward}
+tests:
+- [⠍⠈⠚⠥⠎ ⠼⠁⠤⠑⠊, "május 1-ei"]
+- [⠚⠬⠝⠊⠥⠎ ⠼⠃⠤⠁⠊, "június 2-ai"]
+- [⠁⠥⠛⠥⠱⠞⠥⠎ ⠼⠃⠚⠤⠊, "augusztus 20-i"]
+- [⠼⠑⠋⠼⠚⠴, '56%']
+- [⠼⠑⠋⠼⠚⠴⠤⠁, 56%-a]
+- [⠼⠑⠋⠼⠚⠴⠤⠃, 56%-ban]
+- [⠿, "#"]
+- [⠐⠙, "$"]
+- [⠐⠯, "&"]
+- [⠐⠡, \\]
+- [⠐⠉, "`"]
+- [⠐⠋, "^"]
+- [⠐⠛, "|"]
+- [⠐⠞, "~"]

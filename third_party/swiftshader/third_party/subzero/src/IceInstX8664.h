@@ -576,8 +576,43 @@ void emitIASXmmShift(const Cfg *Func, Type Ty, const Variable *Var,
 /// Emit a two-operand (GPR) instruction, where the dest operand is a Variable
 /// that's guaranteed to be a register.
 template <bool VarCanBeByte = true, bool SrcCanBeByte = true>
-void emitIASRegOpTyGPR(const Cfg *Func, Type Ty, const Variable *Dst,
-                       const Operand *Src, const GPREmitterRegOp &Emitter);
+void emitIASRegOpTyGPR(const Cfg *Func, Type Ty, const Variable *Var,
+                       const Operand *Src, const GPREmitterRegOp &Emitter) {
+  auto *Target = InstX86Base::getTarget(Func);
+  Assembler *Asm = Func->getAssembler<Assembler>();
+  assert(Var->hasReg());
+  // We cheat a little and use GPRRegister even for byte operations.
+  GPRRegister VarReg = VarCanBeByte ? RegX8664::getEncodedGPR(Var->getRegNum())
+                                    : RegX8664::getEncodedGPR(Var->getRegNum());
+  if (const auto *SrcVar = llvm::dyn_cast<Variable>(Src)) {
+    if (SrcVar->hasReg()) {
+      GPRRegister SrcReg = SrcCanBeByte
+                               ? RegX8664::getEncodedGPR(SrcVar->getRegNum())
+                               : RegX8664::getEncodedGPR(SrcVar->getRegNum());
+      (Asm->*(Emitter.GPRGPR))(Ty, VarReg, SrcReg);
+    } else {
+      AsmAddress SrcStackAddr = AsmAddress(SrcVar, Target);
+      (Asm->*(Emitter.GPRAddr))(Ty, VarReg, SrcStackAddr);
+    }
+  } else if (const auto *Mem = llvm::dyn_cast<X86OperandMem>(Src)) {
+    Mem->emitSegmentOverride(Asm);
+    (Asm->*(Emitter.GPRAddr))(Ty, VarReg, AsmAddress(Mem, Asm, Target));
+  } else if (const auto *Imm = llvm::dyn_cast<ConstantInteger32>(Src)) {
+    (Asm->*(Emitter.GPRImm))(Ty, VarReg, AssemblerImmediate(Imm->getValue()));
+  } else if (const auto *Imm = llvm::dyn_cast<ConstantInteger64>(Src)) {
+    assert(Utils::IsInt(32, Imm->getValue()));
+    (Asm->*(Emitter.GPRImm))(Ty, VarReg, AssemblerImmediate(Imm->getValue()));
+  } else if (const auto *Reloc = llvm::dyn_cast<ConstantRelocatable>(Src)) {
+    const auto FixupKind = (Reloc->getName().hasStdString() &&
+                            Reloc->getName().toString() == GlobalOffsetTable)
+                               ? FK_GotPC
+                               : FK_Abs;
+    AssemblerFixup *Fixup = Asm->createFixup(FixupKind, Reloc);
+    (Asm->*(Emitter.GPRImm))(Ty, VarReg, AssemblerImmediate(Fixup));
+  } else {
+    llvm_unreachable("Unexpected operand type");
+  }
+}
 
 /// Instructions of the form x := op(x).
 template <typename InstX86Base::InstKindX86 K>

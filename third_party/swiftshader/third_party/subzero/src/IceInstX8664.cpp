@@ -659,6 +659,7 @@ void emitIASOpTyGPR(const Cfg *Func, Type Ty, const Operand *Op,
   }
 }
 
+#if 0
 template <bool VarCanBeByte, bool SrcCanBeByte>
 void emitIASRegOpTyGPR(const Cfg *Func, Type Ty, const Variable *Var,
                        const Operand *Src, const GPREmitterRegOp &Emitter) {
@@ -697,6 +698,7 @@ void emitIASRegOpTyGPR(const Cfg *Func, Type Ty, const Variable *Var,
     llvm_unreachable("Unexpected operand type");
   }
 }
+#endif
 
 void emitIASAddrOpTyGPR(const Cfg *Func, Type Ty, const AsmAddress &Addr,
                         const Operand *Src, const GPREmitterAddrOp &Emitter) {

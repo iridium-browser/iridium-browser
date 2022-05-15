@@ -1,0 +1,465 @@
+# Based on the Latvian braille specifications <http://liblouis.org/braille-specs/latvian>
+#
+# Copyright © 2017-2018 Rimas Kudelis
+# Copyright © 2018 Gatis Grintals
+# Copyright © 2018 Artis Raugulis
+# Copyright © 2018-2019 Bert Frees
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table:
+  language: lv
+  grade: 1
+  __assert-match: lv.tbl # Lv-Lv-g1.utb
+
+tests:
+  - - All letters of alphabet
+    - a ā b c č d e ē f g ģ h i ī j k ķ l ļ m n ņ o p r s š t u ū v z ž
+    - ⠁ ⠡ ⠃ ⠉ ⠩ ⠙ ⠑ ⠱ ⠋ ⠛ ⠻ ⠓ ⠊ ⠪ ⠚ ⠅ ⠥ ⠇ ⠧ ⠍ ⠝ ⠽ ⠕ ⠏ ⠗ ⠎ ⠮ ⠞ ⠌ ⠬ ⠺ ⠜ ⠼
+  - - Uppercase of letters that are different from other languages
+    - U V Z
+    - ⠨⠌ ⠨⠺ ⠨⠜
+  - - Other letters
+    - q w x y ä į æ
+    - ⠟ ⠺ ⠭ ⠽ ⠵ ⠫ ⠸
+  - - Pangram
+    - Glāžšķūņa rūķīši dzērumā čiepj Baha koncertflīģeļu vākus.
+    - ⠨⠛⠇⠡⠼⠮⠥⠬⠽⠁ ⠗⠬⠥⠪⠮⠊ ⠙⠜⠱⠗⠌⠍⠡ ⠩⠊⠑⠏⠚ ⠨⠃⠁⠓⠁ ⠅⠕⠝⠉⠑⠗⠞⠋⠇⠪⠻⠑⠧⠌ ⠺⠡⠅⠌⠎⠲
+  - - All letters of alphabet, in both lowercase and uppercase
+    - aA āĀ bB cC čČ dD eE ēĒ fF gG ģĢ hH iI īĪ jJ kK ķĶ lL ļĻ mM nN ņŅ oO pP rR sS šŠ tT uU ūŪ vV zZ žŽ
+    - ⠁⠨⠁ ⠡⠨⠡ ⠃⠨⠃ ⠉⠨⠉ ⠩⠨⠩ ⠙⠨⠙ ⠑⠨⠑ ⠱⠨⠱ ⠋⠨⠋ ⠛⠨⠛ ⠻⠨⠻ ⠓⠨⠓ ⠊⠨⠊ ⠪⠨⠪ ⠚⠨⠚ ⠅⠨⠅ ⠥⠨⠥ ⠇⠨⠇ ⠧⠨⠧ ⠍⠨⠍ ⠝⠨⠝ ⠽⠨⠽ ⠕⠨⠕ ⠏⠨⠏ ⠗⠨⠗ ⠎⠨⠎ ⠮⠨⠮ ⠞⠨⠞ ⠌⠨⠌ ⠬⠨⠬ ⠺⠨⠺ ⠜⠨⠜ ⠼⠨⠼
+  - - Letters of old alphabet
+    - ōŌ ŗŖ
+    - ⠵⠨⠵ ⠷⠨⠷
+  - - Other letters
+    - éÉ
+    - ⠿⠨⠿
+  - - Single digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
+  - - Punctuation and other symbols
+    - ', . ? ! ; : '' « » ( ) a-b'
+    - ⠂ ⠲ ⠢ ⠖ ⠆ ⠒ ⠄ ⠦ ⠴ ⠶ ⠶ ⠁⠤⠃
+  # More symbols
+  - - '“ ” „ ‘ ’'
+    - ⠦ ⠴ ⠦ ⠆ ⠰
+  - - 'ʹ' # modifier letter prime
+    - ⠐⠔
+  - - 'ʺ' # modifier letter double prime
+    - ⠐⠔⠔
+  - - '`' # grave accent
+    - ⠄
+  - - '′' # prime
+    - ⠔
+  - - '！' # fullwidth exclamation mark
+    - ⠯
+  - - '（ ）' # fullwidth left/right parenthesis
+    - ⠣ ⠜
+  - - '- – −' # hyphen-minus, en dash, minus sign
+    - ⠤ ⠤ ⠤
+  - - '—' # em dash
+    - ⠒
+  - - '_' # underscore
+    - ⠠
+  - - '¯' # macron
+    - ⠨⠒
+  - - '[ ]'
+    - ⠷ ⠾
+  - - '{ }'
+    - ⠯ ⠽
+  - - '#'
+    - ⠼
+  - - '&'
+    - ⠈⠯
+  - - '~'
+    - ⠒⠒
+  - - '/' # solidus
+    - ⠌
+  - - '∕' # division slash
+    - ⠸⠇
+  - - '⁄' # fraction slash
+    - ⠳
+  - - '\\'
+    - ⠰⠤
+  - - '='
+    - ⠶
+  - - '+'
+    - ⠖
+  - - '*' # asterisk
+    - ⠔
+  - - '∗' # asterisk operator
+    - ⠿
+  - - '×'
+    - ⠦
+  - - '÷'
+    - ⠲
+  - - '∶' # ratio
+    - ⠐⠒
+  - - '⋅' # dot operator
+    - ⠄
+  - - '•' # bullet
+    - ⠐
+  - - '∘' # ring operator
+    - ⠼⠴
+  - - '±'
+    - ⠖⠤
+  - - '< >'
+    - ⠪ ⠕
+  - - '≠'
+    - ⠈⠶
+  - - '≈'
+    - ⠨⠶
+  - - '≅'
+    - ⠢⠶
+  - - '≤ ≥'
+    - ⠪⠶ ⠕⠶
+  - - '≪ ≫'
+    - ⠪⠪ ⠕⠕
+  - - '°' # degree sign
+    - ⠴
+  - - '¹' # superscript
+    - ⠱
+  - - '₁' # subscript
+    - ⠱
+  - - 'aⁿ'
+    - ⠬
+    - xfail: fixme
+  - - 'Sˣ'
+    - ⠌
+    - xfail: fixme
+  - - 'Sₓ'
+    - ⠡
+    - xfail: fixme
+  - - '%'
+    - ⠼⠚⠴
+  - - '‰'
+    - ⠼⠚⠴⠴
+  - - '^'
+    - ⠨
+  - - '@'
+    - ⠈
+  - - '£ € $ ¢'
+    - ⠈⠇ ⠈⠑ ⠈⠲ ⠈⠉
+  - - '†'
+    - ⠣
+  - - '§'
+    - ⠬
+  - - '¶'
+    - ⠹
+  - - '¬'
+    - ⠳
+  - - '…'
+    - ⠲⠲⠲
+  - - '|' # vertical line
+    - ⠸
+  - - '∣' # divides
+    - ⠇
+  - - '│' # box drawings light vertical
+    - ⠈⠡
+  - - '√'
+    - ⠩⠱
+  - - '∛'
+    - ⠩
+  - - '∑'
+    - ⠸⠎
+  - - '∫'
+    - ⠮
+  - - '∆'
+    - ⠸⠙
+  - - '⇒'
+    - ⠶⠜
+  - - '⇔'
+    - ⠣⠶⠜
+  - - '→' # rightwards arrow
+    - ⠒⠕
+  - - '⃗' # combining right arrow above
+    - ⠒⠂
+  - - '⃑' # combining right harpoon above
+    - ⠘⠒⠂
+  - - '∞'
+    - ⠻
+  - - '∾'
+    - ⠸⠹
+  - - '∥'
+    - ⠇⠇
+  - - '∦'
+    - ⠈⠇⠇
+  - - '⇈'
+    - ⠌⠌
+  - - '⇅'
+    - ⠌⠡
+  - - '∩'
+    - ⠰⠲
+  - - '∪'
+    - ⠰⠴
+  - - '⊃'
+    - ⠽
+  - - '⊂'
+    - ⠯
+  - - '⊄'
+    - ⠈⠯
+  - - '∈'
+    - ⠐⠪
+  - - '∉'
+    - ⠘⠪
+  - - '⊙'
+    - ⠨⠗
+  - - '⊥'
+    - ⠼⠄
+  - - '∢'
+    - ⠸⠪
+  - - 'ᴗ' # latin small letter bottom half o
+    - ⠸⠜
+  - - '◡' # lower half circle
+    - ⠘⠲
+  - - '∅' # empty set
+    - ⠈⠴
+  - - '⌀' # diameter sign
+    - ⠸⠹
+  - - 'ℜ'
+    - ⠠⠗
+  # Combinations of numbers and punctuation
+  - - '+371'
+    - ⠖⠼⠉⠛⠁
+  - - '2-3'
+    - ⠼⠃⠤⠼⠉
+  # No space after comma
+  - - 't, t'
+    - ⠞⠂⠞
+  # All caps
+  - - 'TEXT'
+    - ⠨⠨⠞⠑⠭⠞
+  # Russian letters
+  - - 'А'
+    - ⠁
+  - - 'а'
+    - ⠁
+  - - 'Б'
+    - ⠃
+  - - 'б'
+    - ⠃
+  - - 'В'
+    - ⠺
+  - - 'в'
+    - ⠺
+  - - 'Г'
+    - ⠛
+  - - 'г'
+    - ⠛
+  - - 'Д'
+    - ⠙
+  - - 'д'
+    - ⠙
+  - - 'Е'
+    - ⠑
+  - - 'е'
+    - ⠑
+  - - 'Ё'
+    - ⠡
+  - - 'ё'
+    - ⠡
+  - - 'Ж'
+    - ⠚
+  - - 'ж'
+    - ⠚
+  - - 'З'
+    - ⠵
+  - - 'з'
+    - ⠵
+  - - 'И'
+    - ⠊
+  - - 'и'
+    - ⠊
+  - - 'Й'
+    - ⠯
+  - - 'й'
+    - ⠯
+  - - 'К'
+    - ⠅
+  - - 'к'
+    - ⠅
+  - - 'Л'
+    - ⠇
+  - - 'л'
+    - ⠇
+  - - 'М'
+    - ⠍
+  - - 'м'
+    - ⠍
+  - - 'Н'
+    - ⠝
+  - - 'н'
+    - ⠝
+  - - 'О'
+    - ⠕
+  - - 'о'
+    - ⠕
+  - - 'П'
+    - ⠏
+  - - 'п'
+    - ⠏
+  - - 'Р'
+    - ⠗
+  - - 'р'
+    - ⠗
+  - - 'С'
+    - ⠎
+  - - 'с'
+    - ⠎
+  - - 'Т'
+    - ⠞
+  - - 'т'
+    - ⠞
+  - - 'У'
+    - ⠥
+  - - 'у'
+    - ⠥
+  - - 'Ф'
+    - ⠋
+  - - 'ф'
+    - ⠋
+  - - 'Х'
+    - ⠓
+  - - 'х'
+    - ⠓
+  - - 'Ц'
+    - ⠉
+  - - 'ц'
+    - ⠉
+  - - 'Ч'
+    - ⠟
+  - - 'ч'
+    - ⠟
+  - - 'Ш'
+    - ⠱
+  - - 'ш'
+    - ⠱
+  - - 'Щ'
+    - ⠭
+  - - 'щ'
+    - ⠭
+  - - 'Ъ'
+    - ⠷
+  - - 'ъ'
+    - ⠷
+  - - 'Ы'
+    - ⠮
+  - - 'ы'
+    - ⠮
+  - - 'Ь'
+    - ⠾
+  - - 'ь'
+    - ⠾
+  - - 'Э'
+    - ⠪
+  - - 'э'
+    - ⠪
+  - - 'Ю'
+    - ⠳
+  - - 'ю'
+    - ⠳
+  - - 'Я'
+    - ⠫
+  - - 'я'
+    - ⠫
+  # Greek letters
+  - - 'Α'
+    - ⠁
+  - - 'α'
+    - ⠁
+  - - 'Β'
+    - ⠃
+  - - 'β'
+    - ⠃
+  - - 'Γ'
+    - ⠛
+  - - 'γ'
+    - ⠛
+  - - 'Δ'
+    - ⠙
+  - - 'δ'
+    - ⠙
+  - - 'Ε'
+    - ⠑
+  - - 'ε'
+    - ⠑
+  - - 'Ζ'
+    - ⠵
+  - - 'ζ'
+    - ⠵
+  - - 'Η'
+    - ⠱
+  - - 'η'
+    - ⠱
+  - - 'Θ'
+    - ⠹
+  - - 'θ'
+    - ⠹
+  - - 'Ι'
+    - ⠊
+  - - 'ι'
+    - ⠊
+  - - 'Κ'
+    - ⠅
+  - - 'κ'
+    - ⠅
+  - - 'Λ'
+    - ⠇
+  - - 'λ'
+    - ⠇
+  - - 'Μ'
+    - ⠍
+  - - 'μ'
+    - ⠍
+  - - 'Ν'
+    - ⠝
+  - - 'ν'
+    - ⠝
+  - - 'Ξ'
+    - ⠭
+  - - 'ξ'
+    - ⠭
+  - - 'Ο'
+    - ⠕
+  - - 'ο'
+    - ⠕
+  - - 'Π'
+    - ⠏
+  - - 'π'
+    - ⠏
+  - - 'Ρ'
+    - ⠗
+  - - 'ρ'
+    - ⠗
+  - - 'Σ'
+    - ⠎
+  - - 'ς σ'
+    - ⠎ ⠎
+  - - 'Τ'
+    - ⠞
+  - - 'τ'
+    - ⠞
+  - - 'Υ'
+    - ⠥
+  - - 'υ'
+    - ⠥
+  - - 'Φ'
+    - ⠋
+  - - 'φ'
+    - ⠋
+  - - 'Χ'
+    - ⠯
+  - - 'χ'
+    - ⠯
+  - - 'Ψ'
+    - ⠽
+  - - 'ψ'
+    - ⠽
+  - - 'Ω'
+    - ⠺
+  - - 'ω'
+    - ⠺

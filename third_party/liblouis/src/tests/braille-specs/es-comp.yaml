@@ -1,0 +1,18 @@
+# Regression test for issue #406: Braille with NVDA unable to type lowercase ó in Spanish
+# (https://github.com/liblouis/liblouis/issues/406)
+# Back-translation for "ó" (lowercase o acute) didn't work.
+# The issue was fixed by https://github.com/liblouis/liblouis/pull/477.
+display: unicode-without-blank.dis
+table:
+  language: es
+  type: computer
+  __assert-match: Es-Es-G0.utb
+flags: {testmode: forward}
+tests:
+  # forward translation works
+  - [ó, ⠬]
+flags: {testmode: backward}
+tests:
+  # backward translation seems to fail
+  - [⠬, ó]
+  - [⣬, 0]

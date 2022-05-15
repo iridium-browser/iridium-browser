@@ -1,0 +1,67 @@
+# Copyright 2022 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+if (is_linux) {
+  executable("chrome_management_service") {
+    sources = [ "chrome_management_service_main.cc" ]
+
+    deps = [
+      ":management_service",
+      "//base",
+      "//chrome/browser/enterprise/connectors/device_trust/key_management/core:constants",
+      "//mojo/core/embedder",
+    ]
+  }
+
+  source_set("management_service") {
+    public = [
+      "chrome_management_service.h",
+      "rotate_util.h",
+    ]
+
+    sources = [
+      "chrome_management_service.cc",
+      "rotate_util.cc",
+    ]
+
+    public_deps = [
+      "//base",
+      "//chrome/browser/enterprise/connectors/device_trust/key_management/installer:elevated_rotation",
+      "//components/version_info",
+    ]
+
+    deps = [
+      "//chrome/browser/enterprise/connectors/device_trust/key_management/core:constants",
+      "//chrome/browser/enterprise/connectors/device_trust/key_management/core/network",
+      "//chrome/common:channel_info",
+      "//mojo/public/cpp/bindings",
+      "//services/network/public/mojom",
+      "//third_party/abseil-cpp:absl",
+      "//url",
+    ]
+  }
+
+  source_set("unit_tests") {
+    testonly = true
+
+    sources = [
+      "chrome_management_service_unittest.cc",
+      "rotate_util_unittest.cc",
+    ]
+
+    deps = [
+      ":management_service",
+      "//base",
+      "//base/test:test_support",
+      "//chrome/browser/enterprise/connectors/device_trust/key_management/core:constants",
+      "//chrome/browser/enterprise/connectors/device_trust/key_management/core/network:test_support",
+      "//chrome/browser/enterprise/connectors/device_trust/key_management/core/persistence:test_support",
+      "//chrome/browser/enterprise/connectors/device_trust/key_management/installer:elevated_rotation",
+      "//components/policy/proto",
+      "//components/version_info",
+      "//services/network:test_support",
+      "//testing/gtest",
+    ]
+  }
+}

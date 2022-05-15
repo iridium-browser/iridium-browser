@@ -1,0 +1,77 @@
+    <style include="cr-shared-style">
+      :host {
+        --avatar-size: 96px;
+        --avatar-spacing: 24px;
+        display: inline-flex;
+      }
+
+      #avatar-grid .avatar {
+        --avatar-focus-color: var(--google-grey-700);
+        --avatar-gap-color: white;
+        --avatar-gap-width: 2px;
+        --avatar-selected-color: var(--google-blue-500);
+
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 1px solid var(--paper-grey-300);
+        border-radius: 100%;
+        box-shadow: 0 0 0 var(--avatar-gap-width) var(--avatar-gap-color),
+            0 0 0 calc(var(--avatar-gap-width) + var(--avatar-outline-width))
+                var(--avatar-outline-color);
+        display: flex;
+        height: var(--avatar-size);
+        margin: calc(var(--avatar-spacing) / 2);
+        min-width: 0;
+        padding: 0;
+        transition: none !important;  /* Polymer's :host([animated]) rule. */
+        width: var(--avatar-size);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        #avatar-grid .avatar {
+          --avatar-focus-color: var(--google-grey-500);
+          --avatar-gap-color: var(--google-grey-800);
+          --avatar-selected-color: var(--google-blue-300);
+        }
+      }
+
+      #avatar-grid .avatar.iron-selected {
+        --avatar-outline-color: var(--avatar-selected-color);
+        --avatar-outline-width: 2px !important;  /* Overrides rule below. */
+        border-color: var(--avatar-selected-color);
+      }
+
+      :host-context(.focus-outline-visible) #avatar-grid
+          .avatar:not(.iron-selected):focus {
+        --avatar-outline-color: var(--avatar-focus-color);
+        --avatar-outline-width: 1px;
+      }
+
+      cr-button {
+        background-size: var(--avatar-size);
+      }
+
+      paper-tooltip {
+        --paper-tooltip-delay-in: 100ms;
+        --paper-tooltip-duration-in: 100ms;
+        --paper-tooltip-duration-out: 100ms;
+        --paper-tooltip-min-width: none;
+      }
+    </style>
+    <cr-profile-avatar-selector-grid id="avatar-grid" role="radiogroup"
+        ignore-modified-key-events="[[ignoreModifiedKeyEvents]]">
+      <template is="dom-repeat" items="[[avatars]]">
+        <cr-button id="[[getAvatarId_(index)]]" aria-label="[[item.label]]"
+            tabindex$="[[getTabIndex_(index, item, tabFocusableAvatar_)]]"
+            class$="avatar [[getSelectedClass_(item, selectedAvatar)]]"
+            style$="background-image: [[getIconImageSet_(item.url)]]"
+            on-click="onAvatarTap_"
+            role="radio"
+            aria-checked$="[[getCheckedAttribute_(item, selectedAvatar)]]">
+        </cr-button>
+        <paper-tooltip for="[[getAvatarId_(index)]]"
+            offset="0" fit-to-visible-bounds>
+          [[item.label]]
+        </paper-tooltip>
+      </template>
+    </cr-profile-avatar-selector-grid>

@@ -1,0 +1,27 @@
+display: unicode-without-blank.dis
+table:
+  language: en
+  region: en-US
+  type: computer
+  dots: 8
+  __assert-match: en_US-comp8-ext.tbl # en-us-comp8-ext.utb
+flags: {testmode: forward}
+tests:
+  - - Uppercase and lowercase
+    - Aa Ää
+    - ⡁⠁ ⡰⢜
+  - - Greek
+    - ΑΒΓ αβγ Σσς
+    - ⣁⣃⣛ ⢁⢃⢛ ⣎⢎⢎
+  - - Double punctuation marks
+    - ‼ ⁇ ⁈ ⁉
+    - ⠮⠮ ⠹⠹ ⠹⠮ ⠮⠹
+  - - Bullets
+    - • ■ ◦ ◾
+    - ⣶ ⣶ ⣶ ⣶
+  - - Ligatures
+    - diﬃcult
+    - ⠙⠊⠋⠋⠊⠉⠥⠇⠞
+  - - Formatting characters
+    - ‎left‏right
+    - ⠇⠑⠋⠞⠗⠊⠛⠓⠞

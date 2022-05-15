@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>View mitigation flags</title>
+  </head>
+  <body>
+    Paste mitigation values from chrome://sandbox output.
+    <form>
+      Chrome (desiredMitigations): <input type="text" id="chrome"><br>
+      Platform (platformMitigations): <input type="text" id="platform"><br>
+      <input type="button" value="Expand" OnClick="work()">
+    </form>
+    <pre id="output"></pre>
+    <script type="text/javascript">
+      /*
+       See //sandbox/win/src/security_level.h. This is a bitfield so is
+       easy to process.
+      */
+      const ChromeMitigationFlags = [
+        'MITIGATION_DEP', // 0x00000001;
+        'MITIGATION_DEP_NO_ATL_THUNK', // 0x00000002;
+        'MITIGATION_SEHOP', // 0x00000004;
+        'MITIGATION_RELOCATE_IMAGE', // 0x00000008;
+        'MITIGATION_RELOCATE_IMAGE_REQUIRED', // 0x00000010;
+        'MITIGATION_HEAP_TERMINATE', // 0x00000020;
+        'MITIGATION_BOTTOM_UP_ASLR', // 0x00000040;
+        'MITIGATION_HIGH_ENTROPY_ASLR', // 0x00000080;
+        'MITIGATION_STRICT_HANDLE_CHECKS', // 0x00000100;
+        'MITIGATION_DLL_SEARCH_ORDER', // 0x00000200;
+        'MITIGATION_HARDEN_TOKEN_IL_POLICY', // 0x00000400;
+        'MITIGATION_WIN32K_DISABLE', // 0x00000800;
+        'MITIGATION_EXTENSION_POINT_DISABLE', // 0x00001000;
+        'MITIGATION_DYNAMIC_CODE_DISABLE', // 0x00002000;
+        'MITIGATION_DYNAMIC_CODE_DISABLE_WITH_OPT_OUT', // 0x00004000;
+        'MITIGATION_DYNAMIC_CODE_OPT_OUT_THIS_THREAD', // 0x00008000;
+        'MITIGATION_NONSYSTEM_FONT_DISABLE', // 0x00010000;
+        'MITIGATION_FORCE_MS_SIGNED_BINS', // 0x00020000;
+        'MITIGATION_IMAGE_LOAD_NO_REMOTE', // 0x00040000;
+        'MITIGATION_IMAGE_LOAD_NO_LOW_LABEL', // 0x00080000;
+        'MITIGATION_IMAGE_LOAD_PREFER_SYS32', // 0x00100000;
+        'MITIGATION_RESTRICT_INDIRECT_BRANCH_PREDICTION', // 0x00200000;
+      ];
+
+      /* Defined in Windows.h -> Winbase.h These are not just bitflields but
+       masked bitfields.  |offset| indicates the shift within the 64bit
+       field indicated by the |type| entry.  |mask| and |value| are then
+       used to compare the 64bit field to determine if an option is set.
+       |mask| and |value| must be <256 because of how bits are tested
+       later.
+      */
+      const WindowsMitigations = [
+        // basic (pc0) mitigations in {win7},{lsb of pc1}.
+        {'type': 'pc0', 'mitigation': 'DEP_ENABLE',                                     'value': 0x1, 'mask': 0x01, 'offset':0},
+        {'type': 'pc0', 'mitigation': 'DEP_ATL_THUNK_ENABLE',                           'value': 0x2, 'mask': 0x02, 'offset':0},
+        {'type': 'pc0', 'mitigation': 'SEHOP_ENABLE',                                   'value': 0x4, 'mask': 0x04, 'offset':0},
+
+        // pc1 mitigations in {lsb of pc1}. PROCESS_CREATION_MITIGATION_POLICY.
+        {'type': 'pc1', 'mitigation': 'FORCE_RELOCATE_IMAGES_ALWAYS_ON',                'value': 0x1, 'mask': 0x03, 'offset':8},
+        {'type': 'pc1', 'mitigation': 'FORCE_RELOCATE_IMAGES_ALWAYS_OFF',               'value': 0x2, 'mask': 0x03, 'offset':8},
+        {'type': 'pc1', 'mitigation': 'FORCE_RELOCATE_IMAGES_ALWAYS_ON_REQ_RELOCS',     'value': 0x3, 'mask': 0x03, 'offset':8},
+
+        {'type': 'pc1', 'mitigation': 'HEAP_TERMINATE_ALWAYS_ON',                       'value': 0x1, 'mask': 0x03, 'offset': 12},
+        {'type': 'pc1', 'mitigation': 'HEAP_TERMINATE_ALWAYS_OFF',                      'value': 0x2, 'mask': 0x03, 'offset': 12},
+        {'type': 'pc1', 'mitigation': 'HEAP_TERMINATE_RESERVED',                        'value': 0x3, 'mask': 0x03, 'offset': 12},
+
+        {'type': 'pc1', 'mitigation': 'BOTTOM_UP_ASLR_ALWAYS_ON',                       'value': 0x1, 'mask': 0x03, 'offset': 16},
+        {'type': 'pc1', 'mitigation': 'BOTTOM_UP_ASLR_ALWAYS_OFF',                      'value': 0x2, 'mask': 0x03, 'offset': 16},
+        {'type': 'pc1', 'mitigation': 'BOTTOM_UP_ASLR_RESERVED',                        'value': 0x3, 'mask': 0x03, 'offset': 16},
+
+        {'type': 'pc1', 'mitigation': 'HIGH_ENTROPY_ASLR_ALWAYS_ON',                    'value': 0x1, 'mask': 0x03, 'offset': 20},
+        {'type': 'pc1', 'mitigation': 'HIGH_ENTROPY_ASLR_ALWAYS_OFF',                   'value': 0x2, 'mask': 0x03, 'offset': 20},
+        {'type': 'pc1', 'mitigation': 'HIGH_ENTROPY_ASLR_RESERVED',                     'value': 0x3, 'mask': 0x03, 'offset': 20},
+
+        {'type': 'pc1', 'mitigation': 'STRICT_HANDLE_CHECKS_ALWAYS_ON',                 'value': 0x1, 'mask': 0x03, 'offset': 24},
+        {'type': 'pc1', 'mitigation': 'STRICT_HANDLE_CHECKS_ALWAYS_OFF',                'value': 0x2, 'mask': 0x03, 'offset': 24},
+        {'type': 'pc1', 'mitigation': 'STRICT_HANDLE_CHECKS_RESERVED',                  'value': 0x3, 'mask': 0x03, 'offset': 24},
+
+        {'type': 'pc1', 'mitigation': 'WIN32K_SYSTEM_CALL_DISABLE_ALWAYS_ON',           'value': 0x1, 'mask': 0x03, 'offset': 28},
+        {'type': 'pc1', 'mitigation': 'WIN32K_SYSTEM_CALL_DISABLE_ALWAYS_OFF',          'value': 0x2, 'mask': 0x03, 'offset': 28},
+        {'type': 'pc1', 'mitigation': 'WIN32K_SYSTEM_CALL_DISABLE_RESERVED',            'value': 0x3, 'mask': 0x03, 'offset': 28},
+
+        {'type': 'pc1', 'mitigation': 'EXTENSION_POINT_DISABLE_ALWAYS_ON',              'value': 0x1, 'mask': 0x03, 'offset': 32},
+        {'type': 'pc1', 'mitigation': 'EXTENSION_POINT_DISABLE_ALWAYS_OFF',             'value': 0x2, 'mask': 0x03, 'offset': 32},
+        {'type': 'pc1', 'mitigation': 'EXTENSION_POINT_DISABLE_RESERVED',               'value': 0x3, 'mask': 0x03, 'offset': 32},
+
+        {'type': 'pc1', 'mitigation': 'PROHIBIT_DYNAMIC_CODE_ALWAYS_ON',                'value': 0x1, 'mask': 0x03, 'offset': 36},
+        {'type': 'pc1', 'mitigation': 'PROHIBIT_DYNAMIC_CODE_ALWAYS_OFF',               'value': 0x2, 'mask': 0x03, 'offset': 36},
+        {'type': 'pc1', 'mitigation': 'PROHIBIT_DYNAMIC_CODE_ALWAYS_ON_ALLOW_OPT_OUT',  'value': 0x3, 'mask': 0x03, 'offset': 36},
+
+        {'type': 'pc1', 'mitigation': 'CONTROL_FLOW_GUARD_ALWAYS_ON',                   'value': 0x1, 'mask': 0x03, 'offset': 40},
+        {'type': 'pc1', 'mitigation': 'CONTROL_FLOW_GUARD_ALWAYS_OFF',                  'value': 0x2, 'mask': 0x03, 'offset': 40},
+        {'type': 'pc1', 'mitigation': 'CONTROL_FLOW_GUARD_EXPORT_SUPPRESSION',          'value': 0x3, 'mask': 0x03, 'offset': 40},
+
+        {'type': 'pc1', 'mitigation': 'BLOCK_NON_MICROSOFT_BINARIES_ALWAYS_ON',         'value': 0x1, 'mask': 0x03, 'offset': 44},
+        {'type': 'pc1', 'mitigation': 'BLOCK_NON_MICROSOFT_BINARIES_ALWAYS_OFF',        'value': 0x2, 'mask': 0x03, 'offset': 44},
+        {'type': 'pc1', 'mitigation': 'BLOCK_NON_MICROSOFT_BINARIES_ALLOW_STORE',       'value': 0x3, 'mask': 0x03, 'offset': 44},
+
+        {'type': 'pc1', 'mitigation': 'FONT_DISABLE_ALWAYS_ON',                         'value': 0x1, 'mask': 0x03, 'offset': 48},
+        {'type': 'pc1', 'mitigation': 'FONT_DISABLE_ALWAYS_OFF',                        'value': 0x2, 'mask': 0x03, 'offset': 48},
+        {'type': 'pc1', 'mitigation': 'AUDIT_NONSYSTEM_FONTS',                          'value': 0x3, 'mask': 0x03, 'offset': 48},
+
+        {'type': 'pc1', 'mitigation': 'IMAGE_LOAD_NO_REMOTE_ALWAYS_ON',                 'value': 0x1, 'mask': 0x03, 'offset': 52},
+        {'type': 'pc1', 'mitigation': 'IMAGE_LOAD_NO_REMOTE_ALWAYS_OFF',                'value': 0x2, 'mask': 0x03, 'offset': 52},
+        {'type': 'pc1', 'mitigation': 'IMAGE_LOAD_NO_REMOTE_RESERVED',                  'value': 0x3, 'mask': 0x03, 'offset': 52},
+
+        {'type': 'pc1', 'mitigation': 'IMAGE_LOAD_NO_LOW_LABEL_ALWAYS_ON',              'value': 0x1, 'mask': 0x03, 'offset': 56},
+        {'type': 'pc1', 'mitigation': 'IMAGE_LOAD_NO_LOW_LABEL_ALWAYS_OFF',             'value': 0x2, 'mask': 0x03, 'offset': 56},
+        {'type': 'pc1', 'mitigation': 'IMAGE_LOAD_NO_LOW_LABEL_RESERVED',               'value': 0x3, 'mask': 0x03, 'offset': 56},
+
+        {'type': 'pc1', 'mitigation': 'IMAGE_LOAD_PREFER_SYSTEM32_ALWAYS_ON',           'value': 0x1, 'mask': 0x03, 'offset': 60},
+        {'type': 'pc1', 'mitigation': 'IMAGE_LOAD_PREFER_SYSTEM32_ALWAYS_OFF',          'value': 0x2, 'mask': 0x03, 'offset': 60},
+        {'type': 'pc1', 'mitigation': 'IMAGE_LOAD_PREFER_SYSTEM32_RESERVED',            'value': 0x3, 'mask': 0x03, 'offset': 60},
+
+        // pc2: in second 64bit block only. (PROCESS_CREATION_MITIGATION_POLICY2).
+        {'type': 'pc2', 'mitigation': 'LOADER_INTEGRITY_CONTINUITY_ALWAYS_ON',          'value': 0x1, 'mask': 0x03, 'offset':  4},
+        {'type': 'pc2', 'mitigation': 'LOADER_INTEGRITY_CONTINUITY_ALWAYS_OFF',         'value': 0x2, 'mask': 0x03, 'offset':  4},
+        {'type': 'pc2', 'mitigation': 'LOADER_INTEGRITY_CONTINUITY_AUDIT',              'value': 0x3, 'mask': 0x03, 'offset':  4},
+
+        {'type': 'pc2', 'mitigation': 'STRICT_CONTROL_FLOW_GUARD_ALWAYS_ON',            'value': 0x1, 'mask': 0x03, 'offset':  8},
+        {'type': 'pc2', 'mitigation': 'STRICT_CONTROL_FLOW_GUARD_ALWAYS_OFF',           'value': 0x2, 'mask': 0x03, 'offset':  8},
+        {'type': 'pc2', 'mitigation': 'STRICT_CONTROL_FLOW_GUARD_RESERVED',             'value': 0x3, 'mask': 0x03, 'offset':  8},
+
+        {'type': 'pc2', 'mitigation': 'MODULE_TAMPERING_PROTECTION_ALWAYS_ON',          'value': 0x1, 'mask': 0x03, 'offset': 12},
+        {'type': 'pc2', 'mitigation': 'MODULE_TAMPERING_PROTECTION_ALWAYS_OFF',         'value': 0x2, 'mask': 0x03, 'offset': 12},
+        {'type': 'pc2', 'mitigation': 'MODULE_TAMPERING_PROTECTION_NOINHERIT',          'value': 0x3, 'mask': 0x03, 'offset': 12},
+
+        {'type': 'pc2', 'mitigation': 'RESTRICT_INDIRECT_BRANCH_PREDICTION_ALWAYS_ON',  'value': 0x1, 'mask': 0x03, 'offset': 16},
+        {'type': 'pc2', 'mitigation': 'RESTRICT_INDIRECT_BRANCH_PREDICTION_ALWAYS_OFF', 'value': 0x2, 'mask': 0x03, 'offset': 16},
+        {'type': 'pc2', 'mitigation': 'RESTRICT_INDIRECT_BRANCH_PREDICTION_RESERVED',   'value': 0x3, 'mask': 0x03, 'offset': 16},
+
+        {'type': 'pc2', 'mitigation': 'ALLOW_DOWNGRADE_DYNAMIC_CODE_POLICY_ALWAYS_ON',  'value': 0x1, 'mask': 0x03, 'offset': 20},
+        {'type': 'pc2', 'mitigation': 'ALLOW_DOWNGRADE_DYNAMIC_CODE_POLICY_ALWAYS_OFF', 'value': 0x2, 'mask': 0x03, 'offset': 20},
+        {'type': 'pc2', 'mitigation': 'ALLOW_DOWNGRADE_DYNAMIC_CODE_POLICY_RESERVED',   'value': 0x3, 'mask': 0x03, 'offset': 20},
+
+        {'type': 'pc2', 'mitigation': 'SPECULATIVE_STORE_BYPASS_DISABLE_ALWAYS_ON',     'value': 0x1, 'mask': 0x03, 'offset': 24},
+        {'type': 'pc2', 'mitigation': 'SPECULATIVE_STORE_BYPASS_DISABLE_ALWAYS_OFF',    'value': 0x2, 'mask': 0x03, 'offset': 24},
+        {'type': 'pc2', 'mitigation': 'SPECULATIVE_STORE_BYPASS_DISABLE_RESERVED',      'value': 0x3, 'mask': 0x03, 'offset': 24},
+
+        {'type': 'pc2', 'mitigation': 'CET_USER_SHADOW_STACKS_ALWAYS_ON',               'value': 0x1, 'mask': 0x03, 'offset': 28},
+        {'type': 'pc2', 'mitigation': 'CET_USER_SHADOW_STACKS_ALWAYS_OFF',              'value': 0x2, 'mask': 0x03, 'offset': 28},
+        {'type': 'pc2', 'mitigation': 'CET_USER_SHADOW_STACKS_RESERVED',                'value': 0x3, 'mask': 0x03, 'offset': 28},
+      ];
+
+      // Returns a byte vector (in ints).
+      function parseHexString(str) {
+        let buffer = new ArrayBuffer(str.length / 2);
+        let bytes = new Uint8Array(buffer);
+        let idx = 0;
+        while (str.length >= 2) {
+          bytes[idx] = parseInt(str.substring(0, 2), 16);
+          str = str.substring(2, str.length);
+          idx++;
+        }
+        return bytes;
+      }
+
+      // Bits are msb..lsb.
+      function isBitSet(bytes, bit) {
+        if (bit > bytes.length * 8) {
+          return false;
+        }
+        const idx = bytes.length - 1 - Math.floor(bit / 8);
+        const ibit = bit % 8;
+        return (bytes[idx] & (1 << ibit)) == (1<<ibit);
+      }
+
+      // |mask| & |value| must be 0<=x<=255. Bits are msb..lsb.
+      function areMaskedBitsEqual(bytes, offset, mask, value) {
+        if (offset > bytes.length * 8) {
+          return false;
+        }
+        const idx = bytes.length - 1 - Math.floor(offset / 8);
+        const ibit = offset % 8;
+        return (bytes[idx] & (mask << ibit)) == (value<<ibit);
+      }
+
+      function selectSetItems(items, bytes) {
+        let output = [];
+        for (let i = 0; i<items.length; i++) {
+          if (isBitSet(bytes, i)) {
+            output.push(items[i]);
+          }
+        }
+        return output;
+      }
+
+      function selectWindowsMitgations(items, bytes) {
+        let output = [];
+        // Default to DWORD version, if longer assume 1 or 2 64bit fields.
+        let offsets = {'pc0': 0};
+        if (bytes.length == 8) {
+          offsets['pc1'] = 0;
+        }
+        else if (bytes.length == 16) {
+          offsets['pc0'] = 64;
+          offsets['pc1'] = 64;
+          offsets['pc2'] = 0;
+        }
+        for (const item of items) {
+          if (item.type == 'pc1' && bytes.length < 8)
+            continue;
+          if (item.type == 'pc2' && bytes.length < 16)
+            continue;
+          // Must be valid to use offset of type now.
+          if (areMaskedBitsEqual(bytes, item['offset'] + offsets[item['type']],
+                                 item['mask'], item['value'])) {
+            output.push(item['mitigation']);
+          }
+        }
+        return output;
+      }
+
+      function work(){
+        let chrome = parseHexString(document.getElementById('chrome').value);
+        let platform = parseHexString(document.getElementById('platform').value);
+        document.getElementById('output').innerText =
+          selectSetItems(ChromeMitigationFlags, chrome).join('\n') + '\n\n'
+          + selectWindowsMitgations(WindowsMitigations, platform).join('\n');
+      }
+
+      // Listen for pasted input.
+      const $cr = document.querySelector('#chrome');
+      const $pl = document.querySelector('#platform');
+      function changedHandler() {
+        work();
+      }
+      $cr.addEventListener('input', changedHandler);
+      $pl.addEventListener('input', changedHandler);
+     </script>
+  </body>
+</html>

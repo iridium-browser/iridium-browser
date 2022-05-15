@@ -1,0 +1,37 @@
+# Copyright © 2009 SBS Schweizerische Bibliothek für Blinde und Sehbehinderte
+# Copyright © 2020 by Bert Frees
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+table: de-eurobrl6.dis
+table: {language: de, grade: 0}
+table: {language: de, grade: 1}
+table: {language: de, grade: 2}
+flags: {testmode: display}
+tests:
+  - - " abcdefghijklmnopqrstuvxyz"
+    - ⠀⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠭⠽⠵
+  - - "&%{~}123456789w,;:/?"
+    - ⠯⠿⠷⠮⠾⠡⠣⠩⠹⠱⠫⠻⠳⠪⠺⠂⠆⠒⠲⠢
+  - - "+=(*).-|0`#\"!>$<'"
+    - ⠖⠶⠦⠔⠴⠄⠤⠌⠬⠜⠼⠈⠐⠘⠨⠰⠠
+
+table: de-eurobrl6.dis
+flags: {testmode: display}
+tests:
+  # according to the standard it should be \x007F but _ seems more convenient and used more widely
+  - - "_"
+    - ⠸
+
+table: {language: de, grade: 0, type: literary}
+table: {language: de, grade: 1}
+table: {language: de, grade: 2}
+flags: {testmode: display}
+tests:
+  - - "\\x007F"
+    - ⠸

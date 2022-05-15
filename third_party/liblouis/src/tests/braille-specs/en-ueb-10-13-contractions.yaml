@@ -1,0 +1,423 @@
+table:
+  language: en
+  grade: 2
+  system: ueb
+  __assert-match: en-ueb-g2.ctb
+tests:
+
+# 10.8.1 page 133
+
+- - amount
+  - am.t
+- - baroness
+  - b>o;s
+- - bastion
+  - bas;n
+- - blessing
+  - b.s+
+- - business
+  - busi;s
+- - cancel
+  - c.el
+- - carefully
+  - c>e;lly
+- - cement
+  - ce;t
+- - cheerful
+  - '*e};l'
+- - chockfull
+  - '*ock;ll'
+- - circuity
+  - circu;y
+- - commencement
+  - comm;e;t
+- - comment
+  - com;t
+- - confusion
+  - 3fu.n
+- - country
+  - c.try
+- - county
+  - c.ty
+- - creation
+  - cr1;n
+- - dancer
+  - d.er
+- - deity
+  - de;y
+- - Du Plessis
+  - ',du ,p.sis'
+- - experienced
+  - exp}i;ed
+- - expressionless
+  - expres.n.s
+- - extramental
+  - extra;tal
+- - fences
+  - f;es
+- - finesse
+  - fi;se
+- - found
+  - f.d
+- - fractional
+  - frac;nal
+- - Frances
+  - ',fr.es'
+- - governess
+  - gov};s
+- - Guinness
+  - ',gu9;s'
+- - incongruous
+  - 9c;gru|s
+- - influenceable
+  - 9flu;eable
+- - lioness
+  - lio;s
+- - longevity
+  - l;gev;y
+- - memento
+  - me;to
+- - mongoose
+  - m;goose
+- - mountain
+  - m.ta9
+- - noblesse
+  - nob.se
+- - persuasion
+  - p}sua.n
+- - pity
+  - p;y
+- - pongee
+  - p;gee
+- - prong
+  - pr;g
+- - rationally
+  - ra;nally
+- - rotation
+  - rota;n
+- - Rountree
+  - ',r.tree'
+- - séance
+  - s~/e.e
+- - silenced
+  - sil;ed
+- - sinfulness
+  - s9;l;s
+- - Spencer
+  - ',sp;er'
+- - sponge
+  - sp;ge
+- - sound
+  - s.d
+- - sublessee
+  - sub.see
+- - Tennessee
+  - ',t5;see'
+- - thence
+  - ?;e
+- - tongue
+  - t;gue
+- - unfulfilled
+  - un;lfill$
+- - unless
+  - un.s
+- - unlessoned
+  - un.son$
+- - Wenceslaus
+  - ',w;eslaus'
+- - wounded
+  - w.d$
+- - '"alone"ness'
+  - 8al"o0ness
+  - xfail: true
+- - ancestor
+  - ance/or
+- - channel-less
+  - '*annel-less'
+- - congruous
+  - 3gru|s
+- - electroencephalogram
+  - electro5cephalogram
+- - encephalitis
+  - 5cephalitis
+- - fiancé
+  - fianc~/e
+- - inessential
+  - 9ess5tial
+- - lessee
+  - lessee
+- - moongod
+  - moongod
+- - nongaseous
+  - nongase|s
+- - one-ness
+  - '"o-ness'
+- - '''ound'
+  - '''|nd'
+- - pityard
+  - pity>d
+- - regardless
+  - re_1g>d_'less
+  - typeform:
+      underline: '  ++++    '
+    xfail: true
+    
+#   10.8.2 page 135
+
+- - AttenTION!
+  - ',att5,,tion6'
+  - xfail: true
+- - AWful
+  - ',,aw,''ful'
+  - xfail: true
+- - ELesson
+  - ',e,lesson'
+  - xfail: true
+- - ExperiMental
+  - ',exp}i,m5tal'
+  - xfail: true
+- - MyAncestor
+  - ',my,ance/or'
+  - xfail: true
+
+#  10.8.4 page 135
+
+- - chieftainess
+  - '*iefta9ess'
+- - citizeness
+  - citiz5ess
+- - heatheness
+  - h1!ness
+
+#   10.9.1 page 136
+
+- - You should receive your letter tomorrow afternoon.
+  - ',y %d rcv yr lr tm afn4'
+- - an about-face from the quick-witted go-between
+  - an ab-face f ! qk-witt$ g-2t
+- - '"Good-bye, Miss Little-Smythe!"'
+  - 8,gd-bye1 ,miss ,ll-,smy!60
+- - (braille–first writing system for blind people)
+  - '"<brl,-f/ writ+ sy/em = bl p">'
+- - According to him, neither Little Rock, Much Hadham nor Port Said would be much fun.
+  - ',ac to hm1 .7nei ,ll ,rock1 ,m* ,_hham nor ,port ,sd.'' wd 2 m* fun4'
+  - typeform:
+      italic: '                  ++++++++++++++++++++++++++++++++++++++++++++++                   '
+- - to-night
+  - to-ni<t
+- - above/below
+  - above_/bel{
+- - PRINT/BRAILLE
+  - ',,pr9t_/,,braille'
+- - friend@rogers.com
+  - fri5d`arog}s4com
+- - www.living.beyond.myself.org
+  - www4liv+4beyond4myself4org
+
+#   10.9.2 page 137
+
+- - aboveground
+  - abvgr.d
+- - belowdecks
+  - 2ldecks
+- - Friendly Islands
+  - ',frly ,isl&s'
+- - godchildren
+  - god*n
+- - goodafternoon
+  - gdafn
+- - hereabouts
+  - '"habs'
+- - lettermen
+  - lrm5
+- - Quicker Delivery
+  - ',qk} ,deliv}y'
+- - repaid
+  - repd
+- - suchlike
+  - s*like
+- - Our boyfriends mustn't miss tomorrow's afterdinner speaker!
+  - ',|r boyfrs m/n''t miss tm''s afd9n} sp1k}6'
+- - Mr Letterman could've quickly rebrailled the Aftercare Newsletter.
+  - ',mr ,lrman cd''ve qkly rebrld ! ,afc>e ,newslr4'
+- - I am brailling the newsletters' headlines.
+  - ',i am braill+ ! newslrs'' h1dl9es4'
+- - friend(s)
+  - fri5d"<s">
+- - littler
+  - littl~1}
+  - typeform:
+      bold: '     ++'
+- - print/braille
+  - pr9t_/braille
+- - unnecessary
+  - .1un.'necess>y
+  - typeform:
+      italic: '++         '
+- - www.afterschool.gov
+  - www4aft}s*ool4gov
+- - aftereffect
+  - aft}e6ect
+- - afterimage
+  - aft}image
+- - blinded
+  - bl9d$
+- - blinding
+  - bl9d+
+- - befriended
+  - 2fri5d$
+- - friendy
+  - fri5dy
+- - abouts
+  - ab|ts
+- - acrosses
+  - acrosses
+- - againe
+  - aga9e
+- - almosts
+  - almo/s
+- - hims
+  - hims
+- - hereinbefore
+  - '"h9be=e'
+- - hereinbelow
+  - '"h9bel{'
+- - inbetween
+  - 9betwe5
+- - misconceived
+  - misconceiv$
+- - '"couldx"'
+  - 8c|ldx0
+- - Himalayas
+  - ',himalayas'
+- - Suchet
+  - ',su*et'
+- - Yourcenar
+  - ',y|rc5>'
+
+#  10.9.3 page 139
+
+- - Braillette board
+  - ',brltte bo>d'
+- - Marcillat-en-Combraille, France
+  - ',m>cillat-en-,combrl1 ,fr.e'
+- - Greatford Hall
+  - ',grt=d ,hall'
+- - greatgreatgreatgrandchildren
+  - grtgrtgrtgr&*n
+- - Greatorex
+  - ',grtorex'
+- - Blindcraft
+  - ',blcraft'
+- - Blindheim
+  - ',blheim'
+- - Firstbank
+  - ',f/bank'
+- - Firstchoice
+  - ',f/*oice'
+- - '"goodz"'
+  - 8gdz0
+- - Mr Feelgreat from Goodge Street
+  - ',mr ,feelgrt f ,gdge ,/reet'
+- - Ms Letterkenny's Littleport home.
+  - ',ms ,lrk5ny''s ,llport home4'
+- - Quicksburg, Virginia
+  - ',qksburg1 ,virg9ia'
+- - Blindoc
+  - ',bl9doc'
+- - www.braillex.com
+  - www4braillex4com
+- - Firstamerica
+  - ',fir/am}ica'
+- - Goodacre
+  - ',goodacre'
+- - Littlearm
+  - ',little>m'
+- - Letterewe Estate
+  - ',lett}ewe ,e/ate'
+- - Mr Linkletter of Portlittle
+  - ',mr ,l9klett} ( ,portlittle'
+- - Bisquick Pancake Mix
+  - ',bisquick ,pancake ,mix'
+- - Ted Makegood of Goodena
+  - ',t$ ,makegood ( ,good5a'
+
+#  10.9.4 page 140
+
+- - Herf gun
+  - ',herf gun'
+- - '"mst" files'
+  - 8mst0 files
+- - SOMESCH RIVER
+  - .1,,somesch ,,riv}
+  - typeform:
+      italic: '+++++++      '
+- - www.sch.edu.au
+  - www4s*4$u4au
+
+#   10.9.5 page 141
+
+- - ab initio
+  - ;ab 9itio
+- - et al–
+  - et ;al,-
+- - Al-Azar
+  - ;,al-,az>
+- - 'Alt.: 3000 ft.'
+  - ';,alt43 #cjjj ft4'
+- - '"Hm, would Al like this CD?"'
+  - 8;,hm1 wd ;,al l ? ;,,cd80
+- - Grtsamada
+  - ;,grtsamada
+- - BLCUP
+  - ;,,blcup
+- - spelled "ei" or "ie"?
+  - spell$ 8;ei0 or 8ie08
+- - gd lnch. TM sd yu shd meet me b4 yr mtg 2 read lr. wl b qk. l8r.
+  - ';gd ln*4 ;,,tm ;sd yu shd meet me b#d ;yr mtg #b r1d ;lr4 wl ;b ;qk4 l#hr4'
+
+#   10.9.6 page 141
+
+- - Dobrljin
+  - ;;,dobrljin
+  - xfail: true
+- - ozbrl
+  - ;;ozbrl
+  - xfail: true
+
+#   Appendix 1.2
+
+- [ahimsa, ahimsa]
+- [braillist, brailli/]
+- [declaration, decl>a;n]
+- [drafter, 'draft}']
+- [lacrosse, lacrosse]
+- [marabout, m>ab|t]
+- [mustache, mu/a*e]
+- [mustang, mu/ang]
+- [muster, 'mu/}']
+- [necessarily, necess>ily]
+- [rafter, 'raft}']
+- [shoulder, '%|ld}']
+
+#   Appendix 1.3
+
+- [abouts, ab|ts]
+- [acrosses, acrosses]
+- [againe, aga9e]
+- [almosts, almo/s]
+- [hims, hims]
+
+#   Appendix 1.4
+
+- [aftereffect, 'aft}e6ect']
+- [afterimage, 'aft}image']
+- [blinded, bl9d$]
+- [blinding, bl9d+]
+- [befriended, 2fri5d$]
+
+#   Appendix 1.5
+
+- [hereinbefore, '"h9be=e']
+- [inbetween, 9betwe5]
+- [misconceived, misconceiv$]

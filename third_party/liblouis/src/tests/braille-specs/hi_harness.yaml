@@ -1,0 +1,12 @@
+display: unicode.dis
+table:
+  language: hi
+  type: literary
+  grade: 1
+  __assert-match: hi.tbl # hi-in-g1.utb
+flags: {testmode: bothDirections}
+tests:
+  - # https://github.com/liblouis/liblouis/issues/571
+    - नोन
+    - ⠝⠕⠝
+    - xfail: true

@@ -1,0 +1,53 @@
+# Copyright © 2020 by Beneficent Technology, Inc. www.benetech.org
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+table: en-us-g1.ctb
+table: en-in-g1.ctb
+tests:
+  # see http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.1 for italics and bold guidance
+  - ["This word is italicized.", ",this .word is italicized4", {typeform: {italic: '     ++++               '}}]
+  - ["These three consecutive words are italicized.", ",these .three .consecutive .words are italicized4", {typeform: {italic: '      +++++++++++++++++++++++                '}}]
+  - ["This phrase of more than three words is italicized.", ",this ..phrase of more than three .words is italicized4", {typeform: {italic: '     +++++++++++++++++++++++++++++++               '}}]
+  - ["Parts of these words are italicized.", ".,par,'ts of t.hes,'e wo.rds are itali.cized,'4", {typeform: {italic: '+++       +++    +++          +++++ '}}]
+  - ["This word is boldfaced.", ",this _.word is boldfaced4", {typeform: {bold: '     ++++              '}}]
+  - ["These three consecutive words are boldfaced.", ",these _.three _.consecutive _.words are boldfaced4", {typeform: {bold: '      +++++++++++++++++++++++               '}}]
+  - ["This phrase of more than three words is boldfaced.", ",this _..phrase of more than three _.words is boldfaced4", {typeform: {bold: '     +++++++++++++++++++++++++++++++              '}}]
+  - ["Parts of these words are boldfaced.", "_.,par,'ts of t_.hes,'e wo_.rds are bold_.faced,'4", {typeform: {bold: '+++       +++    +++         +++++ '}}]
+  # see http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.5 for underline guidance
+  - ["This word is underlined.", ",this  _- word ,'  is underlined4", {typeform: {underline: '     ++++               '}}]
+  - ["These three consecutive words are underlined.", ",these  _- three consecutive words ,'  are underlined4", {typeform: {underline: '      +++++++++++++++++++++++                '}}]
+  - ["This phrase of more than three words is underlined.", ",this  _- phrase of more than three words ,'  is underlined4", {typeform: {underline: '     +++++++++++++++++++++++++++++++               '}}]
+  - ["Parts of these words are underlined.", " _- ,par ,' ts of t _- hes ,' e wo _- rds ,'  are under _- lined ,' 4", {typeform: {underline: '+++       +++    +++          +++++ '}}]
+  # single character tests
+  - ["abcde", "ab.c,'de", {typeform: {italic: '  +  '}}]
+  - ["abcde", "ab_.c,'de", {typeform: {bold: '  +  '}}]
+  - ["abcde", "ab _- c ,' de", {typeform: {underline: '  +  '}}]
+  # Emphasized initial characters, based on http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.8 example 5-17
+  - ["She sells seashells by the seashore.", ".,s,'he .s,'ells .s,'eashells by the .s,'eashore4", {typeform: {italic: '+   +     +                +        '}}]
+  - ["She sells seashells by the seashore.", "_.,s,'he _.s,'ells _.s,'eashells by the _.s,'eashore4", {typeform: {bold: '+   +     +                +        '}}]
+  - ["She sells seashells by the seashore.", " _- ,s ,' he  _- s ,' ells  _- s ,' eashells by the  _- s ,' eashore4", {typeform: {underline: '+   +     +                +        '}}]
+  # mixed emphasis tests
+  - # http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.4, example 5-14
+    - "Did Judy consent to the plan?"
+    - ".,did .,judy _.consent .to .the .plan8"
+    - typeform:
+        italic: '+++++++++       +++++++++++++'
+        bold:   '         +++++++             '
+  - # http://www.brailleauthority.org/formats/2011manual-web/formats05.html#5.4, example 5-15
+    - "The principal approved the plan for the field trip."
+    - "..,the principal _.approved the plan for the field .trip4"
+    - typeform:
+        italic: '+++++++++++++++++++++++++++++++++++++++++++++++++++'
+        bold:   '              ++++++++                             '
+  # Emphasis termination tests
+  - [abcdefg, "ab.cd,'efg", {typeform: {italic: '  ++   '}}]
+  - [abcdef, "ab.cd,'ef", {typeform: {italic: '  ++  '}}]
+  - [abcde, "ab.cd,'e", {typeform: {italic: '  ++ '}}]
+  - [abcd, "ab.cd", {typeform: {italic: '  ++'}}]
+  - [abc, "ab.c", {typeform: {italic: '  +'}}]

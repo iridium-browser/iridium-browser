@@ -1,0 +1,232 @@
+# Copyright © 2019 by Dave Mielke <dave@mielke.cc>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table: spaces.uti,grc-international-decomposed.uti
+table:
+  language: grc
+  region: en
+  __assert-match: grc-international-en.utb
+flags: {testmode: forward}
+tests:
+
+- # lowercase letters with dasia
+  - ἁ ἑ ἡ ἱ ὁ ὑ ὡ ῥ
+  - ⠓⠁ ⠓⠑ ⠓⠱ ⠓⠊ ⠓⠕ ⠓⠥ ⠓⠺ ⠗⠓
+
+- # lowercase letters with dasia and oxia
+  - ἅ ἕ ἥ ἵ ὅ ὕ ὥ
+  - ⠓⠈⠁ ⠓⠈⠑ ⠓⠈⠱ ⠓⠈⠊ ⠓⠈⠕ ⠓⠈⠥ ⠓⠈⠺
+
+- # lowercase letters with dasia and oxia and ypogegrammeni
+  - ᾅ ᾕ ᾥ
+  - ⠓⠈⠁⠔ ⠓⠈⠱⠔ ⠓⠈⠺⠔
+
+- # lowercase letters with dasia and perispomeni
+  - ἇ ἧ ἷ ὗ ὧ
+  - ⠓⠐⠁ ⠓⠐⠱ ⠓⠐⠊ ⠓⠐⠥ ⠓⠐⠺
+
+- # lowercase letters with dasia and perispomeni and ypogegrammeni
+  - ᾇ ᾗ ᾧ
+  - ⠓⠐⠁⠔ ⠓⠐⠱⠔ ⠓⠐⠺⠔
+
+- # lowercase letters with dasia and varia
+  - ἃ ἓ ἣ ἳ ὃ ὓ ὣ
+  - ⠓⠠⠁ ⠓⠠⠑ ⠓⠠⠱ ⠓⠠⠊ ⠓⠠⠕ ⠓⠠⠥ ⠓⠠⠺
+
+- # lowercase letters with dasia and varia and ypogegrammeni
+  - ᾃ ᾓ ᾣ
+  - ⠓⠠⠁⠔ ⠓⠠⠱⠔ ⠓⠠⠺⠔
+
+- # lowercase letters with dasia and ypogegrammeni
+  - ᾁ ᾑ ᾡ
+  - ⠓⠁⠔ ⠓⠱⠔ ⠓⠺⠔
+
+- # lowercase letters with dialytika
+  - ϊ ϋ
+  - ⠊ ⠥
+
+- # lowercase letters with dialytika and oxia
+  - ΐ ΰ
+  - ⠈⠊ ⠈⠥
+
+- # lowercase letters with dialytika and perispomeni
+  - ῗ ῧ
+  - ⠐⠊ ⠐⠥
+
+- # lowercase letters with dialytika and tonos
+  - ΐ ΰ
+  - ⠈⠊ ⠈⠥
+
+- # lowercase letters with dialytika and varia
+  - ῒ ῢ
+  - ⠠⠊ ⠠⠥
+
+- # lowercase letters with macron
+  - ᾱ ῑ ῡ
+  - ⠸⠁ ⠸⠊ ⠸⠥
+
+- # lowercase letters with oxia
+  - ά έ ή ί ό ύ ώ
+  - ⠈⠁ ⠈⠑ ⠈⠱ ⠈⠊ ⠈⠕ ⠈⠥ ⠈⠺
+
+- # lowercase letters with oxia and ypogegrammeni
+  - ᾴ ῄ ῴ
+  - ⠈⠁⠔ ⠈⠱⠔ ⠈⠺⠔
+
+- # lowercase letters with perispomeni
+  - ᾶ ῆ ῖ ῦ ῶ
+  - ⠐⠁ ⠐⠱ ⠐⠊ ⠐⠥ ⠐⠺
+
+- # lowercase letters with perispomeni and ypogegrammeni
+  - ᾷ ῇ ῷ
+  - ⠐⠁⠔ ⠐⠱⠔ ⠐⠺⠔
+
+- # lowercase letters with psili
+  - ἀ ἐ ἠ ἰ ὀ ὐ ὠ ῤ
+  - ⠴⠁ ⠴⠑ ⠴⠱ ⠴⠊ ⠴⠕ ⠴⠥ ⠴⠺ ⠴⠗
+
+- # lowercase letters with psili and oxia
+  - ἄ ἔ ἤ ἴ ὄ ὔ ὤ
+  - ⠴⠈⠁ ⠴⠈⠑ ⠴⠈⠱ ⠴⠈⠊ ⠴⠈⠕ ⠴⠈⠥ ⠴⠈⠺
+
+- # lowercase letters with psili and oxia and ypogegrammeni
+  - ᾄ ᾔ ᾤ
+  - ⠴⠈⠁⠔ ⠴⠈⠱⠔ ⠴⠈⠺⠔
+
+- # lowercase letters with psili and perispomeni
+  - ἆ ἦ ἶ ὖ ὦ
+  - ⠴⠐⠁ ⠴⠐⠱ ⠴⠐⠊ ⠴⠐⠥ ⠴⠐⠺
+
+- # lowercase letters with psili and perispomeni and ypogegrammeni
+  - ᾆ ᾖ ᾦ
+  - ⠴⠐⠁⠔ ⠴⠐⠱⠔ ⠴⠐⠺⠔
+
+- # lowercase letters with psili and varia
+  - ἂ ἒ ἢ ἲ ὂ ὒ ὢ
+  - ⠴⠠⠁ ⠴⠠⠑ ⠴⠠⠱ ⠴⠠⠊ ⠴⠠⠕ ⠴⠠⠥ ⠴⠠⠺
+
+- # lowercase letters with psili and varia and ypogegrammeni
+  - ᾂ ᾒ ᾢ
+  - ⠴⠠⠁⠔ ⠴⠠⠱⠔ ⠴⠠⠺⠔
+
+- # lowercase letters with psili and ypogegrammeni
+  - ᾀ ᾐ ᾠ
+  - ⠴⠁⠔ ⠴⠱⠔ ⠴⠺⠔
+
+- # lowercase letters with tonos
+  - ά έ ή ί ό ύ ώ
+  - ⠈⠁ ⠈⠑ ⠈⠱ ⠈⠊ ⠈⠕ ⠈⠥ ⠈⠺
+
+- # lowercase letters with varia
+  - ὰ ὲ ὴ ὶ ὸ ὺ ὼ
+  - ⠠⠁ ⠠⠑ ⠠⠱ ⠠⠊ ⠠⠕ ⠠⠥ ⠠⠺
+
+- # lowercase letters with varia and ypogegrammeni
+  - ᾲ ῂ ῲ
+  - ⠠⠁⠔ ⠠⠱⠔ ⠠⠺⠔
+
+- # lowercase letters with vrachy
+  - ᾰ ῐ ῠ
+  - ⠁ ⠊ ⠥
+
+- # lowercase letters with ypogegrammeni
+  - ᾳ ῃ ῳ
+  - ⠁⠔ ⠱⠔ ⠺⠔
+
+- # uppercase letters with dasia
+  - Ἁ Ἑ Ἡ Ἱ Ὁ Ὑ Ὡ Ῥ
+  - ⠨⠓⠁ ⠨⠓⠑ ⠨⠓⠱ ⠨⠓⠊ ⠨⠓⠕ ⠨⠓⠥ ⠨⠓⠺ ⠨⠗⠓
+
+- # uppercase letters with dasia and oxia
+  - Ἅ Ἕ Ἥ Ἵ Ὅ Ὕ Ὥ
+  - ⠨⠓⠈⠁ ⠨⠓⠈⠑ ⠨⠓⠈⠱ ⠨⠓⠈⠊ ⠨⠓⠈⠕ ⠨⠓⠈⠥ ⠨⠓⠈⠺
+
+- # uppercase letters with dasia and oxia and prosgegrammeni
+  - ᾍ ᾝ ᾭ
+  - ⠨⠓⠈⠁⠔ ⠨⠓⠈⠱⠔ ⠨⠓⠈⠺⠔
+
+- # uppercase letters with dasia and perispomeni
+  - Ἇ Ἧ Ἷ Ὗ Ὧ
+  - ⠨⠓⠐⠁ ⠨⠓⠐⠱ ⠨⠓⠐⠊ ⠨⠓⠐⠥ ⠨⠓⠐⠺
+
+- # uppercase letters with dasia and perispomeni and prosgegrammeni
+  - ᾏ ᾟ ᾯ
+  - ⠨⠓⠐⠁⠔ ⠨⠓⠐⠱⠔ ⠨⠓⠐⠺⠔
+
+- # uppercase letters with dasia and prosgegrammeni
+  - ᾉ ᾙ ᾩ
+  - ⠨⠓⠁⠔ ⠨⠓⠱⠔ ⠨⠓⠺⠔
+
+- # uppercase letters with dasia and varia
+  - Ἃ Ἓ Ἣ Ἳ Ὃ Ὓ Ὣ
+  - ⠨⠓⠠⠁ ⠨⠓⠠⠑ ⠨⠓⠠⠱ ⠨⠓⠠⠊ ⠨⠓⠠⠕ ⠨⠓⠠⠥ ⠨⠓⠠⠺
+
+- # uppercase letters with dasia and varia and prosgegrammeni
+  - ᾋ ᾛ ᾫ
+  - ⠨⠓⠠⠁⠔ ⠨⠓⠠⠱⠔ ⠨⠓⠠⠺⠔
+
+- # uppercase letters with dialytika
+  - Ϊ Ϋ
+  - ⠨⠊ ⠨⠥
+
+- # uppercase letters with macron
+  - Ᾱ Ῑ Ῡ
+  - ⠨⠸⠁ ⠨⠸⠊ ⠨⠸⠥
+
+- # uppercase letters with oxia
+  - Ά Έ Ή Ί Ό Ύ Ώ
+  - ⠨⠈⠁ ⠨⠈⠑ ⠨⠈⠱ ⠨⠈⠊ ⠨⠈⠕ ⠨⠈⠥ ⠨⠈⠺
+
+- # uppercase letters with prosgegrammeni
+  - ᾼ ῌ ῼ
+  - ⠨⠁⠔ ⠨⠱⠔ ⠨⠺⠔
+
+- # uppercase letters with psili
+  - Ἀ Ἐ Ἠ Ἰ Ὀ Ὠ
+  - ⠨⠴⠁ ⠨⠴⠑ ⠨⠴⠱ ⠨⠴⠊ ⠨⠴⠕ ⠨⠴⠺
+
+- # uppercase letters with psili and oxia
+  - Ἄ Ἔ Ἤ Ἴ Ὄ Ὤ
+  - ⠨⠴⠈⠁ ⠨⠴⠈⠑ ⠨⠴⠈⠱ ⠨⠴⠈⠊ ⠨⠴⠈⠕ ⠨⠴⠈⠺
+
+- # uppercase letters with psili and oxia and prosgegrammeni
+  - ᾌ ᾜ ᾬ
+  - ⠨⠴⠈⠁⠔ ⠨⠴⠈⠱⠔ ⠨⠴⠈⠺⠔
+
+- # uppercase letters with psili and perispomeni
+  - Ἆ Ἦ Ἶ Ὦ
+  - ⠨⠴⠐⠁ ⠨⠴⠐⠱ ⠨⠴⠐⠊ ⠨⠴⠐⠺
+
+- # uppercase letters with psili and perispomeni and prosgegrammeni
+  - ᾎ ᾞ ᾮ
+  - ⠨⠴⠐⠁⠔ ⠨⠴⠐⠱⠔ ⠨⠴⠐⠺⠔
+
+- # uppercase letters with psili and prosgegrammeni
+  - ᾈ ᾘ ᾨ
+  - ⠨⠴⠁⠔ ⠨⠴⠱⠔ ⠨⠴⠺⠔
+
+- # uppercase letters with psili and varia
+  - Ἂ Ἒ Ἢ Ἲ Ὂ Ὢ
+  - ⠨⠴⠠⠁ ⠨⠴⠠⠑ ⠨⠴⠠⠱ ⠨⠴⠠⠊ ⠨⠴⠠⠕ ⠨⠴⠠⠺
+
+- # uppercase letters with psili and varia and prosgegrammeni
+  - ᾊ ᾚ ᾪ
+  - ⠨⠴⠠⠁⠔ ⠨⠴⠠⠱⠔ ⠨⠴⠠⠺⠔
+
+- # uppercase letters with tonos
+  - Ά Έ Ή Ί Ό Ύ Ώ
+  - ⠨⠈⠁ ⠨⠈⠑ ⠨⠈⠱ ⠨⠈⠊ ⠨⠈⠕ ⠨⠈⠥ ⠨⠈⠺
+
+- # uppercase letters with varia
+  - Ὰ Ὲ Ὴ Ὶ Ὸ Ὺ Ὼ
+  - ⠨⠠⠁ ⠨⠠⠑ ⠨⠠⠱ ⠨⠠⠊ ⠨⠠⠕ ⠨⠠⠥ ⠨⠠⠺
+
+- # uppercase letters with vrachy
+  - Ᾰ Ῐ Ῠ
+  - ⠨⠁ ⠨⠊ ⠨⠥
+

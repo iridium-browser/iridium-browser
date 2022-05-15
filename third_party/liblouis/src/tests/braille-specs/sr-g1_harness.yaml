@@ -1,0 +1,24 @@
+display: unicode-without-blank.dis
+table:
+  language: sr
+  grade: 1
+  __assert-match: sr.tbl # sr-g1.ctb
+tests:
+  - [WILDCARD, ⠘⠺⠊⠇⠙⠉⠁⠗⠙] # tested buggy behavior
+  - [-, ⠤] # same thing again
+  # common punctuation test
+  - - '!"#$%&/()=?*\\|÷×[]¤@{}§<>€+'''
+    - ⠖⠶⠼⠲⠼⠚⠴⠈⠯⠌⠶⠶⠶⠢⠤⠡⠈⠇⠳⠘⠒⠶⠄⠠⠶⠶⠧⠶⠜⠶⠆⠰⠶⠬⠐⠪⠕⠂⠢⠖⠄
+    - {xfail: true}
+  # alphabet test (including diacritics) latin script only
+  - [qwertzuiopšđasdfghjklčćžyxcvbnm, ⠟⠺⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠽⠭⠉⠧⠃⠝⠍]
+  # special syllables /digraphs
+  - [dž lj nj, ⠻ ⠣ ⠫]
+  # letters and numbers
+  - [abc123, ⠁⠃⠉⠼⠁⠃⠉]
+  # numbers and letters
+  - [123abc, ⠼⠁⠃⠉⠁⠃⠉]
+  # cyrillic letters, assuming that cyrillic script works tested on a braille display
+  - [љњертзуиопшђасдфгхјклчћжџцвбнм, ⠣⠫⠑⠗⠞⠵⠥⠊⠕⠏⠱⠹⠁⠎⠙⠋⠛⠓⠚⠅⠇⠡⠩⠮⠻⠉⠧⠃⠝⠍]
+  # fixed buggy behavior of the letter u
+  - [u, ⠥]

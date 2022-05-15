@@ -1,0 +1,9 @@
+load("//bazel:macros.bzl", "generated_cc_atom")
+
+licenses(["notice"])
+
+generated_cc_atom(
+    name = "SkUserConfig_hdr",
+    hdrs = ["SkUserConfig.h"],
+    visibility = ["//:__subpackages__"],
+)

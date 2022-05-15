@@ -1,0 +1,32 @@
+From 5eef7704468d7ba13e03d72b7dc81a7516139f33 Mon Sep 17 00:00:00 2001
+From: Tomasz Figa <tfiga@chromium.org>
+Date: Tue, 20 Nov 2018 12:44:03 +0900
+Subject: [PATCH 6/8] CHROMIUM: drm/rockchip: Enable rendernode
+
+The Mesa EGL surfaceless platform needs a render node to se kms_swrast,
+so make the Rockchip DRM driver provide one. (Strictly speaking, vgem
+should work fine, but somehow the allocations fail from it and the
+problem needs further investigation.)
+
+Change-Id: I11f6f7c92b311422384d16f4272a2430a2e8344d
+Signed-off-by: Tomasz Figa <tfiga@chromium.org>
+---
+ drivers/gpu/drm/rockchip/rockchip_drm_drv.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_drv.c b/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
+index 37f9a3b651ab08..3eb70c0f8b6eb4 100644
+--- a/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
++++ b/drivers/gpu/drm/rockchip/rockchip_drm_drv.c
+@@ -221,7 +221,7 @@ static const struct file_operations rockchip_drm_driver_fops = {
+ 
+ static struct drm_driver rockchip_drm_driver = {
+ 	.driver_features	= DRIVER_MODESET | DRIVER_GEM |
+-				  DRIVER_PRIME | DRIVER_ATOMIC,
++				  DRIVER_PRIME | DRIVER_ATOMIC | DRIVER_RENDER,
+ 	.lastclose		= drm_fb_helper_lastclose,
+ 	.gem_vm_ops		= &drm_gem_cma_vm_ops,
+ 	.gem_free_object_unlocked = rockchip_gem_free_object,
+-- 
+2.20.0.rc2.403.gdbc3b29805-goog
+

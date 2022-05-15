@@ -1,0 +1,49 @@
+# Converted from capitalization.c
+ 
+table: |
+  include tables/spaces.uti
+  lowercase a 1
+  lowercase b 2
+  lowercase c 3
+  lowercase x 4
+  lowercase y 5
+  lowercase z 6
+  base uppercase A a
+  base uppercase B b
+  base uppercase C c
+  base uppercase X x
+  base uppercase Y y
+  base uppercase Z z
+  sign - 23
+  seqdelimiter - # Has no effect with capitals
+  sign + 12
+  sign [ 13
+  sign ] 14
+  sign < 15
+  sign > 16
+  capsletter 12
+  begcapsword 13
+  endcapsword 14
+  lencapsphrase 3
+  begcaps 15
+  endcaps 16
+
+flags: {testmode: bothDirections}
+tests:
+  - [Abc, '+abc']
+  - [ABC, '[abc']
+  - [AbcXyz, '+abc+xyz']
+  - [ABcXYz, '[ab]c[xy]z']
+  - [ABC-XYZ, '[abc-[xyz']
+  - [ABC XYZ ABC, '<abc xyz abc>']
+  - [ABC-XYZ-ABC, '[abc-[xyz-[abc']
+  - [ABC XYZ-ABC, '[abc [xyz-[abc']
+  - ['ABC XYZ ABC   ', '<abc xyz abc>   ']
+  - [ABC XYZ ABC XYZ, '<abc xyz abc xyz>']
+  - [ABC-XYZ-ABC-XYZ, '[abc-[xyz-[abc-[xyz']
+  - [ABC XYZ-ABC-XYZ, '[abc [xyz-[abc-[xyz']
+  - [ABC XYZ ABC-XYZ, '<abc xyz abc-xyz>']
+  - [A B C, '<a b c>']
+  - ['A B C ', '<a b c> ']
+  - [A-B-C, '+a-+b-+c']
+  - [AB-X-BC, '[ab-+x-[bc']

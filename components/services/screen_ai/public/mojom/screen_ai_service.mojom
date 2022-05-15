@@ -1,0 +1,56 @@
+// Copyright 2022 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+module screen_ai.mojom;
+
+import "sandbox/policy/mojom/sandbox.mojom";
+import "skia/public/mojom/bitmap.mojom";
+import "ui/gfx/geometry/mojom/geometry.mojom";
+import "ui/accessibility/ax_enums.mojom";
+
+// An object detected by the Screen AI library.
+struct Node {
+  // Rectangle covering the detected object, with respect to the top-left of
+  // the image.
+  gfx.mojom.Rect rect;
+
+  // Detected type of the object.
+  ax.mojom.Role role;
+
+  // Confidence level of detection, [0..1].
+  float confidence;
+};
+
+// Indicates the result of image processing service.
+enum ErrorType {
+  // No error.
+  kOK = 0,
+
+  // Could not find the library.
+  kFailedLibraryNotFound = 1,
+
+  // Library could not process image.
+  kFailedProcessingImage = 2,
+};
+
+// Main interface a client uses for Screen AI services. Each browser mainframe
+// has its own ScreenAIAnnotator and all ScreenAIAnnotators of one profile use
+// one ScreenAIService.
+// Requests are sent from browsers in RenderFrameHostImpl class.
+interface ScreenAIAnnotator {
+  // Receives a snapshot, schedules image processing, and returns the error
+  // type (if any) and an array of detected nodes.
+  Annotate(skia.mojom.BitmapN32 image) =>
+    (ErrorType error, array<Node> nodes);
+};
+
+
+// The service runs in a sandboxed process to run Screen AI service library. The
+// library provides an image processing module to analyze snapshots of the
+// browser and add more details to the accessibility tree.
+[ServiceSandbox=sandbox.mojom.Sandbox.kScreenAI]
+interface ScreenAIService {
+  // Binds a new annotator to the service.
+  BindAnnotator(pending_receiver<ScreenAIAnnotator> annotator);
+};

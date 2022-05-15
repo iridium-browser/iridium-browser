@@ -1,0 +1,42 @@
+# Tests for Yakut literary braille
+#
+# Based on 'Braille codes of the national languages of Russia'
+# <http://liblouis.org/braille-specs/russian>
+#
+# Copyright © 2018 by Sergiy Moskalets <www.trosti.com.ua>
+# Copyright © 2021 by Andrey Yakuboy <andrewia2002@yandex.ru>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis,ru-unicode.dis
+table:
+  language: sah
+  type: literary
+  __assert-match: sah.utb
+  contraction: no
+  dots: 6
+tests:
+  - - Дьон барыта бэйэ суолтатыгар уонна быраабыгар тэҥ буолан төрүүллэр. Кинилэр бары өркөн өйдөөх, суобастаах буолан төрүүллэр, уонна бэйэ бэйэлэригэр тылга кииринигэс быһыылара доҕордоһуу тыыннаах буолуохтаах.
+    - ⠙⠾⠕⠝ ⠃⠁⠗⠮⠞⠁ ⠃⠪⠯⠪ ⠎⠥⠕⠇⠞⠁⠞⠮⠛⠁⠗ ⠥⠕⠝⠝⠁ ⠃⠮⠗⠁⠁⠃⠮⠛⠁⠗ ⠞⠪⠽ ⠃⠥⠕⠇⠁⠝ ⠞⠣⠗⠧⠧⠇⠇⠪⠗⠲ ⠅⠊⠝⠊⠇⠪⠗ ⠃⠁⠗⠮ ⠣⠗⠅⠣⠝ ⠣⠯⠙⠣⠣⠓⠂⠎⠥⠕⠃⠁⠎⠞⠁⠁⠓ ⠃⠥⠕⠇⠁⠝ ⠞⠣⠗⠧⠧⠇⠇⠪⠗⠂⠥⠕⠝⠝⠁ ⠃⠪⠯⠪ ⠃⠪⠯⠪⠇⠪⠗⠊⠛⠪⠗ ⠞⠮⠇⠛⠁ ⠅⠊⠊⠗⠊⠝⠊⠛⠪⠎ ⠃⠮⠩⠮⠮⠇⠁⠗⠁ ⠙⠕⠹⠕⠗⠙⠕⠩⠥⠥ ⠞⠮⠮⠝⠝⠁⠁⠓ ⠃⠥⠕⠇⠥⠕⠓⠞⠁⠁⠓⠲
+  - - 123,5+46=169,5
+    - ⠼⠁⠃⠉⠂⠑ ⠖⠼⠙⠋ ⠶⠼⠁⠋⠊⠂⠑
+  - - 1, 3, 5, 7, 11, 13, 17, 19, 23
+    - ⠼⠁⠠⠂⠼⠉⠠⠂⠼⠑⠠⠂⠼⠛⠠⠂⠼⠁⠁⠠⠂⠼⠁⠉⠠⠂⠼⠁⠛⠠⠂⠼⠁⠊⠠⠂⠼⠃⠉
+  - - (1 + 2 + 3) + 4 = 10
+    - ⠣⠼⠁ ⠖⠼⠃ ⠖⠼⠉⠜ ⠖⠼⠙ ⠶⠼⠁⠚
+  - - Нюрнберг (аптека муунтатыттан атын) муунтата 0,5095 кг (атыы-эргиэн кээмэйин быһыытынан орто Германияҕа уонна артиллерияҕа киин Европаҕа)
+    - ⠝⠳⠗⠝⠃⠑⠗⠛ ⠶⠁⠏⠞⠑⠅⠁ ⠍⠥⠥⠝⠞⠁⠞⠮⠞⠞⠁⠝ ⠁⠞⠮⠝⠶ ⠍⠥⠥⠝⠞⠁⠞⠁ ⠼⠚⠂⠑⠚⠊⠑ ⠅⠛ ⠶⠁⠞⠮⠮⠤⠪⠗⠛⠊⠪⠝ ⠅⠪⠪⠍⠪⠯⠊⠝ ⠃⠮⠩⠮⠮⠞⠮⠝⠁⠝ ⠕⠗⠞⠕ ⠛⠑⠗⠍⠁⠝⠊⠫⠹⠁ ⠥⠕⠝⠝⠁ ⠁⠗⠞⠊⠇⠇⠑⠗⠊⠫⠹⠁ ⠅⠊⠊⠝ ⠑⠺⠗⠕⠏⠁⠹⠁⠶
+  - - 1)
+    - ⠼⠁⠜
+
+# Spaces
+  - ['\x0009', '\x0020']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']

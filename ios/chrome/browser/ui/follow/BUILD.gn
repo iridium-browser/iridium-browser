@@ -1,0 +1,72 @@
+# Copyright 2021 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+source_set("follow") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  sources = [
+    "follow_block_types.h",
+    "follow_web_page_urls.h",
+    "follow_web_page_urls.mm",
+    "followed_web_channel.h",
+    "followed_web_channel.mm",
+  ]
+  deps = [ "//ios/chrome/browser/net:crurl" ]
+}
+
+source_set("first_follow") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  sources = [
+    "first_follow_coordinator.h",
+    "first_follow_coordinator.mm",
+  ]
+  deps = [
+    ":first_follow_ui",
+    "//ios/chrome/browser/favicon",
+    "//ios/chrome/browser/main:public",
+    "//ios/chrome/browser/ui/commands",
+    "//ios/chrome/browser/ui/coordinators:chrome_coordinators",
+  ]
+}
+
+source_set("first_follow_ui") {
+  sources = [
+    "first_follow_view_controller.h",
+    "first_follow_view_controller.mm",
+    "first_follow_view_delegate.h",
+  ]
+  configs += [ "//build/config/compiler:enable_arc" ]
+  deps = [
+    ":follow",
+    "//base",
+    "//ios/chrome/app/strings:ios_strings_grit",
+    "//ios/chrome/browser/favicon",
+    "//ios/chrome/browser/net:crurl",
+    "//ios/chrome/common/ui/colors",
+    "//ios/chrome/common/ui/favicon",
+    "//ios/chrome/common/ui/favicon:favicon_constants",
+    "//ui/base",
+  ]
+}
+
+source_set("utils") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  sources = [
+    "follow_util.h",
+    "follow_util.mm",
+  ]
+  deps = [
+    ":enums",
+    "//ios/chrome/browser/browser_state",
+    "//ios/chrome/browser/signin",
+    "//ios/chrome/browser/ui/ntp:feature_flags",
+    "//ios/web/public",
+    "//url",
+  ]
+}
+
+source_set("enums") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  sources = [ "follow_action_state.h" ]
+  deps = []
+}

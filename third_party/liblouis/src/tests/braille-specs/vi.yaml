@@ -1,0 +1,73 @@
+# Tests for Vietnamese
+# <https://www.saomaicenter.org/en/blog/rules-and-guidelines-vietnamese-braille>
+#
+# Copyright © 2021 by Sao Mai Center for the Blind <www.saomaicenter.org/en>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: |
+  include unicode-without-blank.dis
+  display 9 9
+  display a a
+
+table:
+  language: vi
+  contraction: no
+  grade: 0
+  system: vietnam
+  __assert-match: vi-vn-g0.utb
+
+flags: {testmode: bothDirections}
+tests:
+  # digits
+  - [1, ⠼⠁]
+  - [2, ⠼⠃]
+  - [3, ⠼⠉]
+  - [4, ⠼⠙]
+  - [5, ⠼⠑]
+  - [6, ⠼⠋]
+  - [7, ⠼⠛]
+  - [8, ⠼⠓]
+  - [9, ⠼⠊]
+  - [0, ⠼⠚]
+  - [123, ⠼⠁⠃⠉]
+  - [1.234, ⠼⠁⠲⠃⠉⠙]
+  - ["1,234", ⠼⠁⠂⠃⠉⠙]
+  - [1AB, ⠼⠁⠸⠁⠃]
+  - [1ab, ⠼⠁⠠⠁⠃, xfail: "backward translation fails"]
+  - [1+2, ⠼⠁⠐⠖⠼⠃]
+  - [2-1, ⠼⠃⠤⠼⠁]
+  - [2*3, ⠼⠃⠐⠦⠼⠉]
+  - [4/5, ⠼⠙⠌⠼⠑]
+  - [3+2(10-5)/6 = 4.16, ⠼⠉⠐⠖⠼⠃⠈⠣⠼⠁⠚⠤⠼⠑⠈⠜⠌⠼⠋ ⠐⠶ ⠼⠙⠲⠁⠋]
+  # latin characters
+  - [a A b c e f g h i j k l m n o p q r s t w, ⠁ ⠨⠁ ⠃ ⠉ ⠑ ⠋ ⠛ ⠓ ⠊ ⠚ ⠅ ⠇ ⠍ ⠝ ⠕ ⠏ ⠟ ⠗ ⠎ ⠞ ⠺]
+  # capital cases single, whole word and phrase
+  - [Hoa, ⠨⠓⠕⠁]
+  - [HOA, ⠸⠓⠕⠁]
+  - [HOA THẮM TƯƠI MUÔN ĐỜI!, ⠨⠨⠓⠕⠁ ⠞⠓⠔⠜⠍ ⠞⠳⠪⠊ ⠍⠥⠹⠝ ⠮⠰⠪⠊⠖⠨⠅]
+  # letters with accents
+  - [á à ả ã ạ â ấ ầ ẩ ẫ ậ ă ắ ằ ẳ ẵ ặ, ⠔⠁ ⠰⠁ ⠢⠁ ⠤⠁ ⠠⠁ ⠡ ⠔⠡ ⠰⠡ ⠢⠡ ⠤⠡ ⠠⠡ ⠜ ⠔⠜ ⠰⠜ ⠢⠜ ⠤⠜ ⠠⠜]
+  - [é è ẻ ẽ ẹ ê ế ề ể ễ ệ, ⠔⠑ ⠰⠑ ⠢⠑ ⠤⠑ ⠠⠑ ⠣ ⠔⠣ ⠰⠣ ⠢⠣ ⠤⠣ ⠠⠣, xfail: "backward translation fails"]
+  - [í ì ỉ ĩ ị, ⠔⠊ ⠰⠊ ⠢⠊ ⠤⠊ ⠠⠊]
+  - [ó ò ỏ õ ọ ô ố ồ ổ ỗ ộ ơ ớ ờ ở ỡ ợ, ⠔⠕ ⠰⠕ ⠢⠕ ⠤⠕ ⠠⠕ ⠹ ⠔⠹ ⠰⠹ ⠢⠹ ⠤⠹ ⠠⠹ ⠪ ⠔⠪ ⠰⠪ ⠢⠪ ⠤⠪ ⠠⠪]
+  - [ú ù ủ ũ ụ ư ứ ừ ử ữ ự, ⠔⠥ ⠰⠥ ⠢⠥ ⠤⠥ ⠠⠥ ⠳ ⠔⠳ ⠰⠳ ⠢⠳ ⠤⠳ ⠠⠳]
+flags: {testmode: forward}
+tests:
+  # two cases placing accents in print
+  - [hóa hoá hòa hoà hỏa hoả lõa loã họa hoạ, ⠓⠔⠕⠁ ⠓⠔⠕⠁ ⠓⠰⠕⠁ ⠓⠰⠕⠁ ⠓⠢⠕⠁ ⠓⠢⠕⠁ ⠇⠤⠕⠁ ⠇⠤⠕⠁ ⠓⠠⠕⠁ ⠓⠠⠕⠁]
+
+# spaces
+tests:
+  - ['\x0020', '\x0020']
+  - ['\x0009', '9']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000d', '\x0020']

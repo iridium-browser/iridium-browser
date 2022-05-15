@@ -1,0 +1,328 @@
+#
+#  Copyright (C) 2014 by Branislav Mamojka <mamojka@unss.sk>
+#  Copyright (C) 2016 by Peter Vagner <peter.v@datagate.sk>
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#--------------------------------------------------------------------------------
+#
+#  Slovak Braille
+#
+#     Created and maintained by Branislav Mamojka <mamojka@unss.sk>
+#                               Peter Vagner <peter.v@datagate.sk>
+#
+#     Based on the official Slovak Braille Standard
+#     Derived from the Czech braille table by Bert Frees and Jan Halousek
+# ----------------------------------------------------------------------------------------------
+
+space       \x0009        9                                       <control> HORIZONTAL TABULATION
+space       \x001B        1b                                      <control> ESCAPE
+space       \x00A0        a                                       NO-BREAK SPACE
+include spaces.uti
+
+# ==============================================================================================
+# SINGLE-CELL
+# ==============================================================================================
+
+lowercase      \x0061  1                   a                  LATIN SMALL LETTER A
+lowercase      \x0062  12                  b                  LATIN SMALL LETTER B
+lowercase      \x0063  14                  c                  LATIN SMALL LETTER C
+lowercase      \x0064  145                 d                  LATIN SMALL LETTER D
+lowercase      \x0065  15                  e                  LATIN SMALL LETTER E
+lowercase      \x0066  124                 f                  LATIN SMALL LETTER F
+lowercase      \x0067  1245                g                  LATIN SMALL LETTER G
+lowercase      \x0068  125                 h                  LATIN SMALL LETTER H
+lowercase      \x0069  24                  i                  LATIN SMALL LETTER I
+lowercase      \x006A  245                 j                  LATIN SMALL LETTER J
+lowercase      \x006B  13                  k                  LATIN SMALL LETTER K
+lowercase      \x006C  123                 l                  LATIN SMALL LETTER L
+lowercase      \x006D  134                 m                  LATIN SMALL LETTER M
+lowercase      \x006E  1345                n                  LATIN SMALL LETTER N
+lowercase      \x006F  135                 o                  LATIN SMALL LETTER O
+lowercase      \x0070  1234                p                  LATIN SMALL LETTER P
+lowercase      \x0071  12345               q                  LATIN SMALL LETTER Q
+lowercase      \x0072  1235                r                  LATIN SMALL LETTER R
+lowercase      \x0073  234                 s                  LATIN SMALL LETTER S
+lowercase      \x0074  2345                t                  LATIN SMALL LETTER T
+lowercase      \x0075  136                 u                  LATIN SMALL LETTER U
+lowercase      \x0076  1236                v                  LATIN SMALL LETTER V
+lowercase      \x0077  2456                w                  LATIN SMALL LETTER W
+lowercase      \x0078  1346                x                  LATIN SMALL LETTER X
+lowercase      \x0079  13456               y                  LATIN SMALL LETTER Y
+lowercase      \x007A  1356                z                  LATIN SMALL LETTER Z
+lowercase      \x00E1  16                  á                  LATIN SMALL LETTER A WITH ACUTE
+lowercase      \x00E4  4                   ä                  LATIN SMALL LETTER A WITH DIARESIS
+lowercase      \x00E9  345                 é                  LATIN SMALL LETTER E WITH ACUTE
+lowercase      \x00ED  34                  í                  LATIN SMALL LETTER I WITH ACUTE
+lowercase      \x00F3  246                 ó                  LATIN SMALL LETTER O WITH ACUTE
+lowercase      \x00FA  346                 ú                  LATIN SMALL LETTER U WITH ACUTE
+lowercase      \x00FD  12346               ý                  LATIN SMALL LETTER Y WITH ACUTE
+lowercase      \x010D  146                 č                  LATIN SMALL LETTER C WITH CARON
+lowercase      \x010F  1456                ď                  LATIN SMALL LETTER D WITH CARON
+lowercase      \x011B  126                 ě                  LATIN SMALL LETTER E WITH CARON
+lowercase      \x013E  456                 ľ                  LATIN SMALL LETTER L WITH CARON
+lowercase      \x013A  46                  ĺ                  LATIN SMALL LETTER L WITH Acute
+lowercase      \x0148  1246                ň                  LATIN SMALL LETTER N WITH CARON
+lowercase      \x00F4  23456               ô                  LATIN SMALL LETTER O WITH CARET
+lowercase      \x0155  12356               ŕ                  LATIN SMALL LETTER R WITH ACUTE
+lowercase      \x0161  156                 š                  LATIN SMALL LETTER S WITH CARON
+lowercase      \x0165  1256                ť                  LATIN SMALL LETTER T WITH CARON
+lowercase      \x016F  23456               ů                  LATIN SMALL LETTER U WITH RING ABOVE
+lowercase      \x017E  2346                ž                  LATIN SMALL LETTER Z WITH CARON
+
+base uppercase \x0041 \x0061               Aa                 LATIN CAPITAL LETTER A - LATIN SMALL LETTER A
+base uppercase \x0042 \x0062               Bb                 LATIN CAPITAL LETTER B - LATIN SMALL LETTER B
+base uppercase \x0043 \x0063               Cc                 LATIN CAPITAL LETTER C - LATIN SMALL LETTER C
+base uppercase \x0044 \x0064               Dd                 LATIN CAPITAL LETTER D - LATIN SMALL LETTER D
+base uppercase \x0045 \x0065               Ee                 LATIN CAPITAL LETTER E - LATIN SMALL LETTER E
+base uppercase \x0046 \x0066               Ff                 LATIN CAPITAL LETTER F - LATIN SMALL LETTER F
+base uppercase \x0047 \x0067               Gg                 LATIN CAPITAL LETTER G - LATIN SMALL LETTER G
+base uppercase \x0048 \x0068               Hh                 LATIN CAPITAL LETTER H - LATIN SMALL LETTER H
+base uppercase \x0049 \x0069               Ii                 LATIN CAPITAL LETTER I - LATIN SMALL LETTER I
+base uppercase \x004A \x006A               Jj                 LATIN CAPITAL LETTER J - LATIN SMALL LETTER J
+base uppercase \x004B \x006B               Kk                 LATIN CAPITAL LETTER K - LATIN SMALL LETTER K
+base uppercase \x004C \x006C               Ll                 LATIN CAPITAL LETTER L - LATIN SMALL LETTER L
+base uppercase \x004D \x006D               Mm                 LATIN CAPITAL LETTER M - LATIN SMALL LETTER M
+base uppercase \x004E \x006E               Nn                 LATIN CAPITAL LETTER N - LATIN SMALL LETTER N
+base uppercase \x004F \x006F               Oo                 LATIN CAPITAL LETTER O - LATIN SMALL LETTER O
+base uppercase \x0050 \x0070               Pp                 LATIN CAPITAL LETTER P - LATIN SMALL LETTER P
+base uppercase \x0051 \x0071               Qq                 LATIN CAPITAL LETTER Q - LATIN SMALL LETTER Q
+base uppercase \x0052 \x0072               Rr                 LATIN CAPITAL LETTER R - LATIN SMALL LETTER R
+base uppercase \x0053 \x0073               Ss                 LATIN CAPITAL LETTER S - LATIN SMALL LETTER S
+base uppercase \x0054 \x0074               Tt                 LATIN CAPITAL LETTER T - LATIN SMALL LETTER T
+base uppercase \x0055 \x0075               Uu                 LATIN CAPITAL LETTER U - LATIN SMALL LETTER U
+base uppercase \x0056 \x0076               Vv                 LATIN CAPITAL LETTER V - LATIN SMALL LETTER V
+base uppercase \x0057 \x0077               Ww                 LATIN CAPITAL LETTER W - LATIN SMALL LETTER W
+base uppercase \x0058 \x0078               Xx                 LATIN CAPITAL LETTER X - LATIN SMALL LETTER X
+base uppercase \x0059 \x0079               Yy                 LATIN CAPITAL LETTER Y - LATIN SMALL LETTER Y
+base uppercase \x005A \x007A               Zz                 LATIN CAPITAL LETTER Z - LATIN SMALL LETTER Z
+base uppercase \x00C1 \x00E1               Áá                 LATIN CAPITAL LETTER A WITH ACUTE - LATIN SMALL LETTER A WITH ACUTE
+base uppercase \x00C4 \x00E4               Ää                 LATIN CAPITAL LETTER A WITH DIARESIS - LATIN SMALL LETTER A WITH DIARESIS
+base uppercase \x00C9 \x00E9               Éé                 LATIN CAPITAL LETTER E WITH ACUTE - LATIN SMALL LETTER E WITH ACUTE
+base uppercase \x00CD \x00ED               Íí                 LATIN CAPITAL LETTER I WITH ACUTE - LATIN SMALL LETTER I WITH ACUTE
+base uppercase \x00D3 \x00F3               Óó                 LATIN CAPITAL LETTER O WITH ACUTE - LATIN SMALL LETTER O WITH ACUTE
+base uppercase \x00DA \x00FA               Úú                 LATIN CAPITAL LETTER U WITH ACUTE - LATIN SMALL LETTER U WITH ACUTE
+base uppercase \x00DD \x00FD               Ýý                 LATIN CAPITAL LETTER Y WITH ACUTE - LATIN SMALL LETTER Y WITH ACUTE
+base uppercase \x010C \x010D               Čč                 LATIN CAPITAL LETTER C WITH CARON - LATIN SMALL LETTER C WITH CARON
+base uppercase \x010E \x010F               Ďď                 LATIN CAPITAL LETTER D WITH CARON - LATIN SMALL LETTER D WITH CARON
+base uppercase \x011A \x011B               Ěě                 LATIN CAPITAL LETTER E WITH CARON - LATIN SMALL LETTER E WITH CARON
+base uppercase \x013D \x013E               Ľľ                 LATIN CAPITAL LETTER L WITH CARON - LATIN SMALL LETTER L WITH CARON
+base uppercase \x0139 \x013A               Ĺĺ                 LATIN CAPITAL LETTER L WITH Acute - LATIN SMALL LETTER L WITH Acute
+base uppercase \x0147 \x0148               Ňň                 LATIN CAPITAL LETTER N WITH CARON - LATIN SMALL LETTER N WITH CARON
+base uppercase \x00D4 \x00F4               Ôô                 LATIN CAPITAL LETTER O WITH CARET - LATIN SMALL LETTER O WITH CARET
+base uppercase \x0154 \x0155               Ŕŕ                 LATIN CAPITAL LETTER R WITH ACUTE - LATIN SMALL LETTER R WITH ACUTE
+base uppercase \x0160 \x0161               Šš                 LATIN CAPITAL LETTER S WITH CARON - LATIN SMALL LETTER S WITH CARON
+base uppercase \x0164 \x0165               Ťť                 LATIN CAPITAL LETTER T WITH CARON - LATIN SMALL LETTER T WITH CARON
+base uppercase \x016E \x016F               Ůů                 LATIN CAPITAL LETTER U WITH RING ABOVE - LATIN SMALL LETTER U WITH RING ABOVE
+base uppercase \x017D \x017E               Žž                 LATIN CAPITAL LETTER Z WITH CARON - LATIN SMALL LETTER Z WITH CARON
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 0000..007F  C0 Controls and Basic Latin
+# ----------------------------------------------------------------------------------------------
+
+punctuation \x0021        235                 !                   EXCLAMATION MARK
+punctuation \x0022        2356                "                   QUOTATION MARK
+sign        \x0023        3456                #                   NUMBER SIGN
+sign        \x0023        56-3456                #                   NUMBER SIGN
+punctuation \x0027        3                   '                   APOSTROPHE
+punctuation \x0028        236                 (                   LEFT PARENTHESIS
+punctuation \x0029        356                 )                   RIGHT PARENTHESIS
+sign        \x002A        35                  *                   ASTERISK
+noback math \x002B        235                 +                   PLUS SIGN
+math        \x002B        56-235                 +                   PLUS SIGN
+punctuation \x002C        2                   ,                   COMMA
+punctuation \x002D        36                  -                   HYPHEN-MINUS
+punctuation \x002E        256                   .                   FULL STOP
+math        \x002F        12456               /                   SOLIDUS
+include digits6Dots.uti
+punctuation \x003A        25                  :                   COLON
+punctuation \x003B        23                  ;                   SEMICOLON
+noback math \x003C        126                 <                   LESS-THAN SIGN
+math        \x003C        56-126                 <                   LESS-THAN SIGN
+noback math \x003D        2356                =                   EQUALS SIGN
+math        \x003D        56-2356             =                   EQUALS SIGN
+noback math \x003E        345                 >                   GREATER-THAN SIGN
+math        \x003E        56-345                 >                   GREATER-THAN SIGN
+punctuation \x003F        26                  ?                   QUESTION MARK
+noback sign \x005F        456                _                   LOW LINE
+sign        \x005F        56-456                _                   LOW LINE
+punctuation \x0060        6                   `                   GRAVE ACCENT
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 0080..00FF  C1 Controls and Latin-1 Supplement
+# ----------------------------------------------------------------------------------------------
+
+punctuation \x00A7        346                 §                   SECTION
+punctuation \x00AD        36                  ­                   SOFT HYPHEN
+sign        \x00B4        4                   ´                   ACUTE ACCENT
+noback math \x00D7        3                  ×                   MULTIPLICATION SIGN
+math        \x00D7        25-3               ×                   MULTIPLICATION SIGN
+math        \x00F7        25                  ÷                   DIVISION SIGN
+sign        \x00A9        236-6-14-356        ©                   COPYRIGHT
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 2000..206F  General Punctuation
+# ----------------------------------------------------------------------------------------------
+
+punctuation \x2010        36                  ‐                   HYPHEN
+punctuation \x2011        36                  ‑                   NON-BREAKING HYPHEN
+punctuation \x2012        36                  ‒                   FIGURE DASH
+punctuation \x2013        36                  –                   EN DASH
+punctuation \x2014        36                  —                   EM DASH
+punctuation \x2015        36                  ―                   HORIZONTAL BAR
+punctuation \x2018        3                   ‘                   LEFT SINGLE QUOTATION MARK
+punctuation \x2019        3                   ’                   RIGHT SINGLE QUOTATION MARK
+punctuation \x201A        3                   ‚                   SINGLE LOW-9 QUOTATION MARK
+punctuation \x201B        3                   ‛                   SINGLE HIGH-REVERSED-9 QUOTATION MARK
+punctuation \x201C        2356                “                   LEFT DOUBLE QUOTATION MARK
+punctuation \x201D        2356                ”                   RIGHT DOUBLE QUOTATION MARK
+punctuation \x201E        2356                „                   DOUBLE LOW-9 QUOTATION MARK
+punctuation \x201F        2356                ‟                   DOUBLE HIGH-REVERSED-9 QUOTATION MARK
+punctuation \x2026        256-256-256         …                   HORIZONTAL ELLIPSIS
+sign        \x20AC        15-136-1235-135     €                   EURO SIGN
+
+
+# ==============================================================================================
+# MULTI-CELL
+# ==============================================================================================
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 0000..007F  C0 Controls and Basic Latin
+# ----------------------------------------------------------------------------------------------
+
+sign        \x0024        3456-1246           $                   DOLLAR SIGN
+math        \x0025        3456-1234           %                   PERCENT SIGN
+sign        \x0026        3456-12346          &                   AMPERSAND
+sign        \x0040        3456-12456          @                   COMMERCIAL AT
+punctuation \x005B        6-236               [                   LEFT SQUARE BRACKET
+sign        \x005C        3456-1256           \                   REVERSE SOLIDUS
+punctuation \x005D        6-356               ]                   RIGHT SQUARE BRACKET
+sign        \x005E        6-45                ^                   CIRCUMFLEX ACCENT
+math        \x007B        5-236              {                   LEFT CURLY BRACKET
+sign        \x007C        456-123                 |                   VERTICAL LINE
+math        \x007D        5-356              }                   RIGHT CURLY BRACKET
+math        \x007E        56-26                 ~                   TILDE
+
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 0080..00FF  C1 Controls and Latin-1 Supplement
+# ----------------------------------------------------------------------------------------------
+
+sign        \x00B0        3456-234            °                   DEGREE SIGN
+math        \x00B1        56-256-36              ±                   PLUS-MINUS SIGN
+sign        \x00B5        45-134               µ                   MICRO SIGN
+math        \x00B9        34-1                ¹                   SUPERSCRIPT ONE
+noback lowercase \x00F6 135-15              ö                  LATIN SMALL LETTER O WITH DIAERESIS
+noback lowercase \x00FC 136-15              ü                  LATIN SMALL LETTER U WITH DIAERESIS
+
+base uppercase   \x00D6 \x00F6              Öö                 LATIN CAPITAL LETTER O WITH DIAERESIS - LATIN SMALL LETTER O WITH DIAERESIS
+base uppercase   \x00DC \x00FC              Üü                 LATIN CAPITAL LETTER U WITH DIAERESIS - LATIN SMALL LETTER U WITH DIAERESIS
+
+# ----------------------------------------------------------------------------------------------
+# Unicode 0370..03FF  Greek and Coptic
+# ----------------------------------------------------------------------------------------------
+
+letter      \x0391        6-45-1                Α                   GREEK CAPITAL LETTER ALPHA
+letter      \x0392        6-45-12               Β                   GREEK CAPITAL LETTER BETA
+letter      \x0393        6-45-1245             Γ                   GREEK CAPITAL LETTER GAMMA
+letter      \x0394        6-45-145              Δ                   GREEK CAPITAL LETTER DELTA
+letter      \x0395        6-45-15               Ε                   GREEK CAPITAL LETTER EPSILON
+letter      \x0398        6-45-1456             Θ                   GREEK CAPITAL LETTER THETA
+letter      \x0399        6-45-24               Ι                   GREEK CAPITAL LETTER IOTA
+letter      \x039A        6-45-13               Κ                   GREEK CAPITAL LETTER KAPPA
+letter      \x039B        6-45-123              Λ                   GREEK CAPITAL LETTER LAMDA
+letter      \x039C        6-45-134              Μ                   GREEK CAPITAL LETTER MU
+letter      \x039D        6-45-1345             Ν                   GREEK CAPITAL LETTER NU
+letter      \x039E        6-45-1346             Ξ                   GREEK CAPITAL LETTER XI
+letter      \x039F        6-45-135              Ο                   GREEK CAPITAL LETTER OMICRON
+letter      \x03A0        6-45-1234             Π                   GREEK CAPITAL LETTER PI
+letter      \x03A1        6-45-1235             Ρ                   GREEK CAPITAL LETTER RHO
+letter      \x03A3        6-45-234              Σ                   GREEK CAPITAL LETTER SIGMA
+letter      \x03A4        6-45-2345             Τ                   GREEK CAPITAL LETTER TAU
+letter      \x03A5        6-45-13456            Υ                   GREEK CAPITAL LETTER UPSILON
+letter      \x03A6        6-45-124              Φ                   GREEK CAPITAL LETTER PHI
+letter      \x03A7        6-45-125              Χ                   GREEK CAPITAL LETTER CHI
+letter      \x03A8        6-45-12346            Ψ                   GREEK CAPITAL LETTER PSI
+letter      \x03A9        6-45-2456             Ω                   GREEK CAPITAL LETTER OMEGA
+
+lowercase   \x03B1        45-1                α                   GREEK SMALL LETTER ALPHA
+lowercase   \x03B2        45-12               β                   GREEK SMALL LETTER BETA
+lowercase   \x03B3        45-1245             γ                   GREEK SMALL LETTER GAMMA
+lowercase   \x03B4        45-145              δ                   GREEK SMALL LETTER DELTA
+lowercase   \x03B5        45-15               ε                   GREEK SMALL LETTER EPSILON
+lowercase   \x03B8        45-1456             θ                   GREEK SMALL LETTER THETA
+lowercase   \x03B9        45-24               ι                   GREEK SMALL LETTER IOTA
+lowercase   \x03BA        45-13               κ                   GREEK SMALL LETTER KAPPA
+lowercase   \x03BB        45-123              λ                   GREEK SMALL LETTER LAMDA
+lowercase   \x03BC        45-134              μ                   GREEK SMALL LETTER MU
+lowercase   \x03BD        45-1345             ν                   GREEK SMALL LETTER NU
+lowercase   \x03BE        45-1346             ξ                   GREEK SMALL LETTER XI
+lowercase   \x03BF        45-135              ο                   GREEK SMALL LETTER OMICRON
+lowercase   \x03C0        45-1234             π                   GREEK SMALL LETTER PI
+lowercase   \x03C1        45-1235             ρ                   GREEK SMALL LETTER RHO
+lowercase   \x03C3        45-234              σ                   GREEK SMALL LETTER SIGMA
+lowercase   \x03C4        45-2345             τ                   GREEK SMALL LETTER TAU
+lowercase   \x03C5        45-13456            υ                   GREEK SMALL LETTER UPSILON
+lowercase   \x03C6        45-124              φ                   GREEK SMALL LETTER PHI
+lowercase   \x03C7        45-125              χ                   GREEK SMALL LETTER CHI
+lowercase   \x03C8        45-12346            ψ                   GREEK SMALL LETTER PSI
+lowercase   \x03C9        45-2456             ω                   GREEK SMALL LETTER OMEGA
+
+# ----------------------------------------------------------------------------------------------
+# Other Unicode characters
+# ----------------------------------------------------------------------------------------------
+
+noback math \x00AC        1345-135-1345       ¬                   LOGICAL NOT
+math        \x0609        3456-1235           ؉                   ARABIC-INDIC PER MILLE SIGN
+math        \x2030        3456-1235           ‰                   PER MILLE SIGN
+math        \x2190        246-25               ←                   left arrow
+math        \x2191        3456-12356               ↑                   up arrow
+math        \x2192        25-135               →                   right arrow
+math        \x2193        3456-12345               ↓                   down down arrow
+math        \x2194        246-25-135               ↔                   left right arrow
+math        \x2200        3456-1236           ∀                   FOR ALL
+math        \x2202        34-2                ∂                   PARTIAL DIFFERENTIAL
+math        \x2203        3456-134            ∃                   THERE EXISTS
+math        \x2205        3456-13456          ∅                   EMPTY SET
+math        \x2208        45-15               ∈                   ELEMENT OF
+math        \x2209        4-45-15             ∉                   NOT AN ELEMENT OF
+math        \x2211        46-234              ∑                   SUM
+math        \x2217        35                  ∗                   ASTERISK OPERATOR
+math        \x221E        3456-1345            ∞                   INFINITY
+math        \x2223        456                  ∣                   DIVIDES
+noback math \x2225        456-456              ∥                   PARALEL TO
+noback math \x2227        15-2345              ∧                   LOGICAL AND
+noback math \x22C0        15-2345              ∧                   LOGICAL AND
+noback math \x2228        145-24-234           ⋁                   LOGICAL OR
+noback math \x22C1        145-24-234           ⋁                   LOGICAL OR
+math        \x2229        45-156               ∩                   INTERSECTION
+math        \x222A        45-3456              ∪                   UNION
+math        \x222B        246                  ∫                   INTEGRAL
+math        \x2236        25                  ∶                   RATIO
+math        \x2260        4-2356              ≠                   NOT EQUAL TO
+math        \x2250        5-2356              ≐                   APPROACHES THE LIMIT
+math        \x2264        126-2356            ≤                   LESS-THAN OR EQUAL TO
+math        \x2265        345-2356            ≥                   GREATER-THAN OR EQUAL TO
+math        \x2282        12346               ⊂                   SUBSET OF
+math        \x2284        4-12346             ⊄                   NOT A SUBSET OF
+math        \x22C5        3                   ⋅                   DOT OPERATOR
+math        \x27E8        4-126               ⟨                   MATHEMATICAL LEFT ANGLE BRACKET
+math        \x27E8        4-345               ⟩                   MATHEMATICAL RIGHT ANGLE BRACKET
+
+# ----------------------------------------------------------------------------------------------

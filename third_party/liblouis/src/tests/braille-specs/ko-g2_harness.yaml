@@ -1,0 +1,12 @@
+display: unicode-without-blank.dis
+table:
+  language: ko
+  grade: 2
+  __assert-match: ko-g2.ctb
+tests:
+  - # Numbers followed by Korean words.
+    - 2000년
+    - ⠼⠃⠚⠚⠚ ⠉⠡
+  - # Korean mixed with English contractions
+    - unity
+    - ⠥⠝⠰⠽

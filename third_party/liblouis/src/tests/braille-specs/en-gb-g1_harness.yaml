@@ -1,0 +1,36 @@
+display: unicode-without-blank.dis
+table:
+  language: en
+  region: en-GB
+  grade: 1
+  __assert-match: en-gb-g1.utb
+tests:
+  - # using ordinary apostrophes.
+    - "we've I'm wasn't you're"
+    - ⠺⠑⠄⠧⠑ ⠠⠊⠄⠍ ⠺⠁⠎⠝⠄⠞ ⠽⠕⠥⠄⠗⠑
+  - # Using right single apostrophes, as often found on the web.
+    - we’ve I’m wasn’t you’re
+    - ⠺⠑⠄⠧⠑ ⠠⠊⠄⠍ ⠺⠁⠎⠝⠄⠞ ⠽⠕⠥⠄⠗⠑
+
+  # Converted from en_gb_g1_italics.c
+  - - This is a Test
+    - ⠠⠞⠓⠊⠎ ⠊⠎ ⠁ ⠠⠞⠑⠎⠞
+    - typeform:
+        italic: '              '
+  - - This is a Test in Italic.
+    - ⠨⠨⠠⠞⠓⠊⠎ ⠊⠎ ⠁ ⠠⠞⠑⠎⠞ ⠊⠝ ⠠⠊⠞⠁⠇⠊⠉⠲⠨⠄
+    - typeform:
+        italic: '+++++++++++++++++++++++++'
+      xfail: true
+  - - This is a Test
+    - ⠠⠞⠓⠊⠎ ⠨⠊⠎ ⠨⠁ ⠠⠞⠑⠎⠞
+    - typeform:
+        italic: '     ++++     '
+      xfail: true
+  - # Test case requested here:
+    # http://www.freelists.org/post/liblouis-liblouisxml/Mesar-here-are-some-test-possibilities
+    - time and spirit
+    - ⠨⠞⠊⠍⠑ ⠨⠁⠝⠙ ⠨⠎⠏⠊⠗⠊⠞
+    - typeform:
+        italic: '+++++++++++++++'
+      xfail: true

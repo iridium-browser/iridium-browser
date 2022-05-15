@@ -1,0 +1,70 @@
+display: |
+  include unicode-without-blank.dis
+  display 9 9
+  display a a
+
+table:
+  language: mn
+  contraction: no
+  __assert-match: mn-MN-g1.utb
+flags: {testmode: bothDirections}
+tests:
+  - - Сайн байна уу дэлхий
+    - ⠠⠎⠁⠯⠝ ⠃⠁⠯⠝⠁ ⠥⠥ ⠙⠪⠇⠓⠊⠯
+  - - Брайль бичиг бол хараагүй хүний ертөнцийг харах цонх мөн.
+    - ⠠⠃⠗⠁⠯⠇⠾ ⠃⠊⠟⠊⠛ ⠃⠕⠇ ⠓⠁⠗⠁⠁⠛⠹⠯ ⠓⠹⠝⠊⠯ ⠑⠗⠞⠧⠝⠉⠊⠯⠛ ⠓⠁⠗⠁⠓ ⠉⠕⠝⠓ ⠍⠧⠝⠲
+
+flags: {testmode: forward}
+tests:
+  - - The only thing worse than being blind is having sight but no vision.
+    - ⠠⠞⠓⠑ ⠕⠝⠇⠽ ⠞⠓⠊⠝⠛ ⠺⠕⠗⠎⠑ ⠞⠓⠁⠝ ⠃⠑⠊⠝⠛ ⠃⠇⠊⠝⠙ ⠊⠎ ⠓⠁⠧⠊⠝⠛ ⠎⠊⠛⠓⠞ ⠃⠥⠞ ⠝⠕ ⠧⠊⠎⠊⠕⠝⠲
+
+# spaces
+table: mn-MN-g1.utb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x200b', '\x0020']
+  - ['\x202f', '\x0020']
+table: mn-MN-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0009', '9']
+  - ['\x0020', '\x0020']
+  - ['\x00a0', 'a']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x200b', '\x0020']
+  - ['\x202f', '\x0020']

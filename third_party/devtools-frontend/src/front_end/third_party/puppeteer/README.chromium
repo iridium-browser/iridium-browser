@@ -1,0 +1,16 @@
+Name: Puppeteer
+Short Name: Puppeteer
+URL: https://github.com/puppeteer/puppeteer
+Version: 13.5.1
+License: Apache-2.0
+License File: package/LICENSE
+Security Critical: no
+
+Description:
+Puppeteer is a Node library which provides a high-level API to control Chrome or Chromium over the DevTools Protocol.
+
+To update this package, run the following command (replace version number with updated version number):
+
+```bash
+curl --output - $(npm view puppeteer dist.tarball) | tar xzf -
+```

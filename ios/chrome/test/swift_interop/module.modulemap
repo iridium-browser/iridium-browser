@@ -1,0 +1,26 @@
+// Copyright 2022 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+module Classes {
+  header "classes/inlined_class.h"
+  header "classes/outlined_class.h"
+  requires cplusplus
+}
+
+module Enums {
+  header "enum/enum.h"
+  requires cplusplus
+}
+
+module Namespace {
+  header "namespace/namespace.h"
+  requires cplusplus
+}
+
+
+module Pointer {
+  header "pointer/pointer_returner.h"
+  requires cplusplus
+}
+

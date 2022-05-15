@@ -1,0 +1,43 @@
+# Copyright 2022 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//third_party/protobuf/proto_library.gni")
+
+proto_library("screen_ai_proto") {
+  sources = [ "proto/chrome_screen_ai.proto" ]
+}
+
+source_set("screen_ai") {
+  sources = [
+    "screen_ai_service_impl.cc",
+    "screen_ai_service_impl.h",
+  ]
+
+  deps = [
+    ":screen_ai_proto",
+    "//base",
+    "//components/services/screen_ai/public/cpp:utilities",
+  ]
+
+  public_deps = [
+    "//components/services/screen_ai/public/mojom",
+    "//mojo/public/cpp/bindings",
+  ]
+}
+
+source_set("screen_ai_sandbox_hook") {
+  sources = [
+    "sandbox/screen_ai_sandbox_hook_linux.cc",
+    "sandbox/screen_ai_sandbox_hook_linux.h",
+  ]
+
+  deps = [
+    "//base",
+    "//components/component_updater",
+    "//components/services/screen_ai/public/cpp:utilities",
+    "//sandbox/linux:sandbox_services",
+  ]
+
+  public_deps = [ "//sandbox/policy" ]
+}

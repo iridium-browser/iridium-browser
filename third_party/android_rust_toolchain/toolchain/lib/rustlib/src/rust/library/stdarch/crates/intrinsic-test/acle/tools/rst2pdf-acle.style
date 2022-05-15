@@ -1,0 +1,147 @@
+# Copyright (c) 2020-2021, Arm Limited
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+pageTemplates:
+    oneColumn:
+        defaultFooter : ".. class:: center\n\n###Page###\n\n.. class:: center\n\n|footer|"
+
+"pageSetup" : {
+  "firstTemplate": "coverPage"
+}
+
+linkColor: #0366d6
+
+styles:
+    normal:
+        fontName: stdFont
+        textColor: #383745
+        fontSize: 9
+        alignment: TA_LEFT
+
+    heading:
+        fontName: stdBold
+        fontSize: 10
+        spaceBefore: 20
+        textColor: #0091bd
+
+    heading1:
+        parent: heading
+        fontSize: 24
+
+    code:
+        backColor: white
+
+    admonition:
+        backColor: white
+
+    table-title:
+        parent : heading
+        fontSize: 9
+        fontName: stdBold
+        backColor : white
+        alignment : TA_LEFT
+
+    table-heading:
+        parent : heading
+        fontSize: 9
+        fontName: stdBold
+        backColor : white
+        alignment : TA_LEFT
+
+    table:
+        commands: []
+            [VALIGN, [ 0, 0 ], [ -1, -1 ], TOP ]
+            [LINEBELOW, [0, 0], [-1, 0], 0.5, black]
+            [BOTTOMPADDING, [0, 1], [-1, -1], 5]
+            [TOPPADDING, [0, 1], [-1, -1], 5]
+            [ALIGN, [ 0, 0 ], [ -1, -1 ], LEFT ]
+            [INNERGRID, [ 0, 0 ], [ -1, -1 ], 0.25, black ]
+            [BOX, [ 0, 0 ], [ -1, -1 ], 0.25, black ]
+
+    headertable:
+        parent: table
+        textColor: #383745
+        commands: []
+        colWidths: [ 20%, 80% ]
+
+    clear-table:
+        commands: []
+
+    bullet-list:
+        parent: bodytext
+        commands: []
+            [VALIGN, [ 0, 0 ], [ -1, -1 ], TOP ]
+            [RIGHTPADDING, [ 0, 0 ], [ 1, -1 ], 0 ]
+        colWidths: ["20", null]
+        spaceAfter: 10
+
+    item-list:
+        parent: bullet-list
+
+    note-heading:
+        parent: heading4
+
+    code-heading:
+        parent : table-title
+
+    note:
+        parent: admonition
+        spaceBefore: 12
+        spaceAfter: 6
+        borderPadding: [5, 5, 5, 5]
+        borderWidth: 0.5
+
+    warning-heading:
+        parent: note-heading
+
+    warning:
+        parent: note
+
+    title:
+      parent: heading
+      fontName: stdBold
+      fontSize: 200%
+      alignment: TA_RIGHT
+      keepWithNext: false
+      spaceAfter: 10
+
+    version:
+      parent: heading
+      fontName: stdBold
+      fontSize: 150%
+      alignment: TA_RIGHT
+      spaceBefore: 20
+
+    issued:
+        parent: right
+        spaceBefore: 20
+
+    logo:
+        parent: right
+        spaceBefore: 100
+
+    refs:
+        parent : table
+        colWidths: [ 12%, 44%, 44% ]
+
+    rubric:
+        fontName: stdBold
+        fontSize: 10
+        textColor: #0091bd
+        alignment: TA_LEFT
+
+    morello-table-references:
+        parent : table
+        colWidths: [ 20%, 40%, 40% ]

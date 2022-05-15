@@ -1,0 +1,201 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package cast.bindings;
+
+option optimize_for = LITE_RUNTIME;
+
+// Using by Cast bindings to represent the media capabilities of a platform.
+message MediaCapabilitiesMessage {
+  // The maximum width, in pixels, supported by the screen.
+  int32 max_width = 1;
+
+  // The maximum height, in pixels, supported by the screen.
+  int32 max_height = 2;
+
+  // The maximum frame rate, per second, supported by the screen.
+  int32 max_frame_rate = 3;
+
+  // Unused.
+  string supported_cryptoblock_format = 4;
+
+  // The maximum number of audio channels supported by the platform. For
+  // example, stereo is 2 channels and 5.1 surround is 6 channels.
+  int32 max_channels = 5;
+
+  // The maximum fill rate supported by the system. Fill rate is the product of
+  // width, height, and framerate resulting in pixels/s.
+  int32 max_fill_rate = 6;
+
+  // Whether PCM surround sound is supported by the platform.
+  bool is_pcm_surround_sound_supported = 7;
+
+  // Unused.
+  bool is_platform_dolby_vision_enabled = 8;
+
+  // Whether Dolby Vision is supported by the current HDMI interface,
+  // independent of HDMI mode.
+  bool is_dolby_vision_supported = 9;
+
+  // Whether Dolby Vision at 4k60 is supported by the current HDMI interface,
+  // independent of HDMI mode.
+  bool is_dolby_vision4k_p60_supported = 10;
+
+  // Whether Dolby Vision is supported by the current HDMI mode.
+  bool is_dolby_vision_supported_by_current_hdmi_mode = 11;
+
+  // Whether the current HDMI mode is output.
+  bool is_hdmi_video_mode_switch_enabled = 12;
+
+  // Whether HEVC is enabled on the platform.
+  bool is_platform_hevc_enabled = 13;
+
+  // Whether HDR validation is enforced by the current HDMI mode.
+  bool is_hdmi_mode_hdr_check_enforced = 14;
+
+  // Whether HDR is supported by the current HDMI mode.
+  bool is_hdr_supported_by_current_hdmi_mode = 15;
+
+  // Whether SMPTE ST 2084 EOTF is supported by the current HDMI interface,
+  // independent of HDMI mode.
+  bool is_smpte_st2084_supported = 16;
+
+  // Whether HLG EOTF is supported by the current HDMI interface, independent of
+  // HDMI mode.
+  bool is_hlg_supported = 17;
+
+  // Unused.
+  bool is_hdr_feature_enabled = 18;
+
+  // The VP9 versions supported by the platform. Values are multiplied by 10,
+  // e.g. version 1.1 is encoded as 11.
+  repeated int32 supported_legacy_vp9_levels = 19;
+
+  // The HDCP version supported by the platform. The value is multiplied by 10,
+  // e.g. version 2.2. is encoded as 22.
+  int32 hdcp_version = 20;
+
+  // Mask indicating which audio codecs support spatial rendering:
+  //
+  // Supported bits:
+  // Ac3         = 1 << 0;
+  // Dts         = 1 << 1;
+  // DtsHd       = 1 << 2;
+  // Eac3        = 1 << 3;
+  // PcmSurround = 1 << 4;
+  // MpegHAudio  = 1 << 5;
+  int32 spatial_rendering_support_mask = 21;
+
+  // Audio configurations supported by the platform.
+  repeated AudioCodecInfo supported_audio_codecs = 22;
+
+  // Video configurations supported by the platform.
+  repeated VideoCodecInfo supported_video_codecs = 23;
+}
+
+// Represents an audio codec.
+message AudioCodecInfo {
+  enum AudioCodec {
+    AUDIO_CODEC_UNKNOWN = 0;
+    AUDIO_CODEC_AAC = 1;
+    AUDIO_CODEC_MP3 = 2;
+    AUDIO_CODEC_PCM = 3;
+    AUDIO_CODEC_PCM_S16BE = 4;
+    AUDIO_CODEC_VORBIS = 5;
+    AUDIO_CODEC_OPUS = 6;
+    AUDIO_CODEC_EAC3 = 7;
+    AUDIO_CODEC_AC3 = 8;
+    AUDIO_CODEC_DTS = 9;
+    AUDIO_CODEC_FLAC = 10;
+    AUDIO_CODEC_MPEG_H_AUDIO = 11;
+  }
+  AudioCodec codec = 1;
+
+  enum SampleFormat {
+    SAMPLE_FORMAT_UNKNOWN = 0;
+    SAMPLE_FORMAT_U8 = 1;          // Unsigned 8-bit w/ bias of 128.
+    SAMPLE_FORMAT_S16 = 2;         // Signed 16-bit.
+    SAMPLE_FORMAT_S32 = 3;         // Signed 32-bit.
+    SAMPLE_FORMAT_F32 = 4;         // Float 32-bit.
+    SAMPLE_FORMAT_PLANAR_S16 = 5;  // Signed 16-bit planar.
+    SAMPLE_FORMAT_PLANAR_F32 = 6;  // Float 32-bit planar.
+    SAMPLE_FORMAT_PLANAR_S32 = 7;  // Signed 32-bit planar.
+    SAMPLE_FORMAT_S24 = 8;         // Signed 24-bit.
+    SAMPLE_FORMAT_PLANAR_U8 = 9;   // Unsigned 8-bit w/ bias of 128 planar.
+  }
+  SampleFormat sample_format = 2;
+
+  // The maximum number of samples per second supported by the codec.
+  int32 max_samples_per_second = 3;
+
+  // The maximum number of audio channels supported by the codec.
+  //
+  // Supported values:
+  // Mono     = 1;
+  // Stereo   = 2;
+  // Surround = 6;
+  int32 max_audio_channels = 4;
+}
+
+// Represents a video codec.
+message VideoCodecInfo {
+  enum VideoCodec {
+    VIDEO_CODEC_UNKNOWN = 0;
+    VIDEO_CODEC_H264 = 1;
+    VIDEO_CODEC_VC1 = 2;
+    VIDEO_CODEC_MPEG2 = 3;
+    VIDEO_CODEC_MPEG4 = 4;
+    VIDEO_CODEC_THEORA = 5;
+    VIDEO_CODEC_VP8 = 6;
+    VIDEO_CODEC_VP9 = 7;
+    VIDEO_CODEC_HEVC = 8;
+    VIDEO_CODEC_DOLBY_VISION_H264 = 9;
+    VIDEO_CODEC_DOLBY_VISION_HEVC = 10;
+    VIDEO_CODEC_AV1 = 11;
+  }
+  VideoCodec codec = 1;
+
+  enum VideoProfile {
+    VIDEO_PROFILE_UNKNOWN = 0;
+    VIDEO_PROFILE_H264_BASELINE = 1;
+    VIDEO_PROFILE_H264_MAIN = 2;
+    VIDEO_PROFILE_H264_EXTENDED = 3;
+    VIDEO_PROFILE_H264_HIGH = 4;
+    VIDEO_PROFILE_H264_HIGH_10 = 5;
+    VIDEO_PROFILE_H264_HIGH_422 = 6;
+    VIDEO_PROFILE_H264_HIGH_444_PREDICTIVE = 7;
+    VIDEO_PROFILE_H264_SCALABLE_BASELINE = 8;
+    VIDEO_PROFILE_H264_SCALABLE_HIGH = 9;
+    VIDEO_PROFILE_H264_STEREO_HIGH = 10;
+    VIDEO_PROFILE_H264_MULTIVIEW_HIGH = 11;
+    VIDEO_PROFILE_VP8_PROFILE_ANY = 12;
+    VIDEO_PROFILE_VP9_PROFILE_0 = 13;
+    VIDEO_PROFILE_VP9_PROFILE_1 = 14;
+    VIDEO_PROFILE_VP9_PROFILE_2 = 15;
+    VIDEO_PROFILE_VP9_PROFILE_3 = 16;
+    VIDEO_PROFILE_DOLBY_VISION_COMPATIBLE_EL_MD = 17;
+    VIDEO_PROFILE_DOLBY_VISION_COMPATIBLE_BL_EL_MD = 18;
+    VIDEO_PROFILE_DOLBY_VISION_NON_COMPATIBLE_BL_MD = 19;
+    VIDEO_PROFILE_DOLBY_VISION_NON_COMPATIBLE_BL_EL_MD = 20;
+    VIDEO_PROFILE_HEVC_MAIN = 21;
+    VIDEO_PROFILE_HEVC_MAIN_10 = 22;
+    VIDEO_PROFILE_HEVC_MAIN_STILL_PICTURE = 23;
+    VIDEO_PROFILE_AV1_PROFILE_MAIN = 24;
+    VIDEO_PROFILE_AV1_PROFILE_HIGH = 25;
+    VIDEO_PROFILE_AV1_PROFILE_PRO = 26;
+  }
+  VideoProfile profile = 2;
+}

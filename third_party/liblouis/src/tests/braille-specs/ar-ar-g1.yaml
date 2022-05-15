@@ -1,0 +1,356 @@
+# Based on the official Unified Arabic Braille Project website
+# <https://mip.qa/braille>: a comprehensive resource containing all
+# details about Arabic braille, including complete references,
+# tutorials and awareness articles. It also provides a platform for
+# suggestions and comments to improve Arabic braille further.
+#
+# Copyright © 2018, 2020 Ikrami Ahmad
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+
+display: unicode.dis
+table:
+  language: ar
+  grade: 1
+  __assert-match: ar.tbl
+
+flags: {testmode: bothDirections}
+
+tests:
+  # Join two characters together when they follow each other in a single word which are: Arabic laam
+  # (\x0644) and Arabic Alef (\x0626).
+  - - سلام
+    - ⠎⠧⠍
+  # Arabic question mark should take priority over english question mark in backtranslation.
+  - - ماذا؟
+    - ⠍⠁⠮⠁⠦
+
+  # Cannot input punctuation marks and signs that consist of two cells, although they are
+  # forward-translated normally. This is because the first part of the symbol represents another
+  # symbol in the table. For example, the colon is 5-2 cannot be written because dot 5 represents
+  # the Arabic comma, and this is applied to any other symbol starts with dot 5. Similarly, because
+  # 56 represents semi-colon, it is not possible to input math symbols like + = or *. This happens
+  # on NVDA, as I don't have the necessary skills to test using the liblouis built-in tools.
+  - - "قال:"
+    - ⠟⠁⠇⠐⠂
+  - - ٥+٦=١١
+    - ⠼⠑⠰⠖⠼⠋⠰⠶⠼⠁⠁
+
+  # Back-translation of dots 2: comma if in between numbers, Fathah sign if preceded by letter
+  - - رَجَعَ
+    - ⠗⠂⠚⠂⠷⠂
+  - - ١,٠٠٠,٠٠٠
+    - ⠼⠁⠂⠚⠚⠚⠂⠚⠚⠚
+
+# The following are applied only for forward translation.
+flags: {testmode: forward}
+tests:
+  # Omiting the tatweel symbol (\x0640) from being backtranslated, as it is used only for decorating
+  # texts. I preferred though not to ignore it completely to allow braille transcribers to identify
+  # and correct it if it exists in a text.
+  - - مـرـحـبا
+    - ⠍⠒⠒⠗⠒⠒⠱⠒⠒⠃⠁
+  
+  # A rule to correct Shadda symbol (a diacritic mark to indicate that the letter follows it should
+  # be doubled in pronunciation). It should be written before the character in Arabic braille
+  # code. This will consist of every Arabic character followed by the Shadda diacritic symbol, and a
+  # dot pattern of the braille Shadda followed by the character.
+  
+  # I used the "noback" opcode so that I can avoid lots of input issues due to the conflict with the
+  # capital letter sign. This means that the user will have to input this symbol normally after the
+  # character as if he is writing from the standard keyboard, but it will be displayed correctly. In
+  # the standard Arabic braille, Shadda should be also typed before the character.
+  - - المحبّة
+    - ⠁⠇⠍⠱⠠⠃⠡
+  # It can not come at the begining of a word.
+  - - شدّة
+    - ⠩⠠⠙⠡
+  
+  # Linguistically correct, if a character has the Shadda and another diacritic symbol on it, Shadda
+  # should be typed first followed by the other diacritic mark. Typing the other diacritic symbol
+  # before it will result in inappropriate output, as the shadda will appear as if it belongs to the
+  # character that follows the stressed character.
+  
+  # correct
+  - - أُمَّة
+    - ⠌⠥⠠⠍⠂⠡
+  # incorrect
+  - - أُمَّة
+    - ⠌⠥⠍⠂⠠⠡
+  # The two characters we join together in the above rule can also be doubled.
+  - - ولاّدة
+    - ⠺⠠⠧⠙⠡
+  # I didn't add this rule for the characters that can never be stressed, so even if a user types
+  # this symbol after them, it will be displayed after the character, not before it. Moreover, these
+  # characters may represent contractions when preceded with dot 6 in grade 2.
+  - - أعلىّ
+    - ⠌⠷⠇⠕⠠
+  - - 5+6=11
+    - ⠼⠑⠰⠖⠼⠋⠰⠶⠼⠁⠁
+
+# back-translation of Arabic numerals
+flags: {testmode: backward}
+tests:
+- - ⠼⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚
+  - ١٢٣٤٥٦٧٨٩٠
+
+# math
+flags: {testmode: bothDirections}
+tests:
+  # numbers
+  - - ٤٩
+    - ⠼⠙⠊
+  - - ١٢
+    - ⠼⠁⠃
+  - - ٢ ٤ ٦ ٨
+    - ⠼⠃⠀⠼⠙⠀⠼⠋⠀⠼⠓
+  - - ٣١ ٤٧ ٥٩
+    - ⠼⠉⠁⠀⠼⠙⠛⠀⠼⠑⠊
+  # punctuation
+  - - ٣,٥٠٠,٠٠٠
+    - ⠼⠉⠂⠑⠚⠚⠂⠚⠚⠚
+  - - ٧:٣٠
+    - ⠼⠛⠐⠂⠼⠉⠚
+  - - ٥:١٥
+    - ⠼⠑⠐⠂⠼⠁⠑
+  - - ٦-١٠
+    - ⠼⠋⠤⠤⠼⠁⠚
+  - - ١-٢
+    - ⠼⠁⠤⠤⠼⠃
+  # plus and minus
+  - - ٣+٥
+    - ⠼⠉⠰⠖⠼⠑
+  - - ٧−٤
+    - ⠼⠛⠰⠤⠼⠙
+  # decimal point
+  - - ٩.٤٢
+    - ⠼⠊⠲⠙⠃
+  - - .٧٥
+    - ⠼⠲⠛⠑
+  # letter sign
+  - - ٥ا
+    - ⠼⠑⠰⠁
+
+# exhaustive symbols listing
+flags: {testmode: forward}
+tests:
+  - ['!', ⠖] # exclamation mark [!]
+  - ['"', ⠶] # nondirectional double quotation mark or seconds ["]
+  - ['#', ⠸⠔] # number sign (crosshatch, hash, pound sign) [#]
+  - [$, ⠈⠲] # dollar sign [$]
+  - ['%', ⠒⠏] # percent sign [%]
+  - ['&', ⠈⠯] # ampersand [&]
+  - ['''', ⠄] # apostrophe or nondirectional single quote [']
+  - [(, ⠦] # opening parenthesis (round bracket) [(]
+  - [), ⠴] # closing parenthesis (round bracket) [)]
+  - ['*', ⠰⠔] # asterisk [*]
+  - [+, ⠰⠖] # plus [+]
+  - ['،', ⠐] # arabic comma
+  - [',', ⠂] # english comma, comma as decimal [,]
+  - ['-', ⠤⠤] # hyphen [-]
+  - [., ⠲] # full stop (period), decimal point [.]
+  - [/, ⠸⠤] # solidus (forward slash) [/]
+  - [':', ⠐⠂] # colon [:]
+  - [؛, ⠐⠆] # arabic semicolon [;]
+  - [;, ⠐⠆] # semicolon [;]
+  - [<, ⠘⠢] # less-than [<]
+  - ['=', ⠰⠶] # equals [=]
+  - ['>', ⠘⠔] # greater-than [>]
+  - ['ا؟', ⠁⠦] # question mark [?]
+  - ['@', ⠈⠁] # commercial at sign [@]
+  - ['[', ⠠⠦] # opening square bracket ([)
+  - [']', ⠴⠄] # closing square bracket (])
+  - [^, ⠈⠢] # caret (hat) [^]
+  - [\\, ⠘⠤] # reverse solidus (backslash) [\]
+  - [_, ⠠⠤] # low line (underscore) [\x005f]
+  - ['`', ⠈] # grave accent alone [\x0060]
+  - ['{', ⠐⠦] # opening curly bracket (brace bracket) [\x007b]
+  - ['|', ⠸⠒] # vertical bar in mathematics [\x007c]
+  - ['}', ⠴⠂] # closing curly bracket (brace bracket) [\x007d]
+  - ['~', ⠘⠒] # tilde (swung dash) [\x007e]
+  - [¡, ⠘⠰⠖] # inverted exclamation mark [\x00a1]
+  - [¢, ⠈⠉] # cent sign [\x00a2]
+  - [£, ⠈⠇] # pound sign (pound sterling) [\x00a3]
+  - [¥, ⠈⠽] # yen sign (yuan sign) [\x00a5]
+  - [¦, ⠸⠳] # broken vertical bar [\x00a6]
+  - [§, ⠘⠎] # section sign [\x00a7]
+  - [©, ⠈⠘⠉] # copyright sign [\x00a9]
+  - [«, ⠠⠶] # opening Italian quotation mark (small double angle brackets) [\x00ab]
+  - [¬, ⠈⠹] # 'not' sign (line horizontal, then down at right) [\x00ac]
+  - [®, ⠈⠘⠗] # registered sign [\x00ae]
+  - [°, ⠘⠚] # degree sign [\x00b0]
+  - [±, ⠰⠖⠤] # plus-or-minus (plus over minus) [\x00b1]
+  - [¶, ⠘⠏] # paragraph sign [\x00b6]
+  - [», ⠶⠄] # closing Italian quotation mark (small double angle brackets) [\x00bb]
+  - [¿, ⠘⠰⠦] # inverted question mark [\x00bf]
+  - [×, ⠰⠦] # times (multiplication cross) [\x00d7]
+  - [÷, ⠰⠲] # divided by [\x00f7]
+  - [Α, ⠠⠈⠨⠁] # capital Greek alpha [\x0391]
+  - [Β, ⠠⠈⠨⠃] # capital Greek beta [\x0392]
+  - [Γ, ⠠⠈⠨⠛] # capital Greek gamma [\x0393]
+  - [Δ, ⠠⠈⠨⠙] # capital Greek delta [\x0394]
+  - [Ε, ⠠⠈⠨⠑] # capital Greek epsilon [\x0395]
+  - [Ζ, ⠠⠈⠨⠵] # capital Greek zeta [\x0396]
+  - [Η, ⠠⠈⠨⠱] # capital Greek eta [\x0397]
+  - [Θ, ⠠⠈⠨⠹] # capital Greek theta [\x0398]
+  - [Ι, ⠠⠈⠨⠊] # capital Greek iota [\x0399]
+  - [Κ, ⠠⠈⠨⠅] # capital Greek kappa [\x039a]
+  - [Λ, ⠠⠈⠨⠇] # capital Greek lambda [\x039b]
+  - [Μ, ⠠⠈⠨⠍] # capital Greek mu [\x039c]
+  - [Ν, ⠠⠈⠨⠝] # capital Greek nu [\x039d]
+  - [Ξ, ⠠⠈⠨⠭] # capital Greek xi [\x039e]
+  - [Ο, ⠠⠈⠨⠕] # capital Greek omicron [\x039f]
+  - [Π, ⠠⠈⠨⠏] # capital Greek pi [\x03a0]
+  - [Ρ, ⠠⠈⠨⠗] # capital Greek rho [\x03a1]
+  - [Σ, ⠠⠈⠨⠎] # capital Greek sigma [\x03a3]
+  - [Τ, ⠠⠈⠨⠞] # capital Greek tau [\x03a4]
+  - [Υ, ⠠⠈⠨⠥] # capital Greek upsilon [\x03a5]
+  - [Φ, ⠠⠈⠨⠋] # capital Greek phi [\x03a6]
+  - [Χ, ⠠⠈⠨⠯] # capital Greek chi [\x03a7]
+  - [Ψ, ⠠⠈⠨⠽] # capital Greek psi [\x03a8]
+  - [Ω, ⠠⠈⠨⠺] # capital Greek omega [\x03a9]
+  - [α, ⠈⠨⠁] # lowercase Greek alpha [\x03b1]
+  - [β, ⠈⠨⠃] # lowercase Greek beta [\x03b2]
+  - [γ, ⠈⠨⠛] # lowercase Greek gamma [\x03b3]
+  - [δ, ⠈⠨⠙] # lowercase Greek delta [\x03b4]
+  - [ε, ⠈⠨⠑] # lowercase Greek epsilon [\x03b5]
+  - [ζ, ⠈⠨⠵] # lowercase Greek zeta [\x03b6]
+  - [η, ⠈⠨⠱] # lowercase Greek eta [\x03b7]
+  - [θ, ⠈⠨⠹] # lowercase Greek theta [\x03b8]
+  - [ι, ⠈⠨⠊] # lowercase Greek iota [\x03b9]
+  - [κ, ⠈⠨⠅] # lowercase Greek kappa [\x03ba]
+  - [λ, ⠈⠨⠇] # lowercase Greek lambda [\x03bb]
+  - [μ, ⠈⠨⠍] # lowercase Greek mu [\x03bc]
+  - [ν, ⠈⠨⠝] # lowercase Greek nu [\x03bd]
+  - [ξ, ⠈⠨⠭] # lowercase Greek xi [\x03be]
+  - [ο, ⠈⠨⠕] # lowercase Greek omicron [\x03bf]
+  - [π, ⠈⠨⠏] # lowercase Greek pi [\x03c0]
+  - [ρ, ⠈⠨⠗] # lowercase Greek rho [\x03c1]
+  - [ς, ⠈⠨⠎] # lowercase Greek sigma [\x03c2]
+  - [σ, ⠈⠨⠎] # lowercase Greek sigma [\x03c3]
+  - [τ, ⠈⠨⠞] # lowercase Greek tau [\x03c4]
+  - [υ, ⠈⠨⠥] # lowercase Greek upsilon [\x03c5]
+  - [φ, ⠈⠨⠋] # lowercase Greek phi [\x03c6]
+  - [χ, ⠈⠨⠯] # lowercase Greek chi [\x03c7]
+  - [ψ, ⠈⠨⠽] # lowercase Greek psi [\x03c8]
+  - [ω, ⠈⠨⠺] # lowercase Greek omega [\x03c9]
+  - [–, ⠐⠤⠤] # dash [\x2013]
+  - [—, ⠘⠤⠤] # long dash [\x2014]
+  - [―, ⠸⠤⠤] # horizontal bar [\x2015]
+  - [‘, ⠄] # opening single quotation mark [\x2018]
+  - [’, ⠄] # closing one-cell (nonspecific) quotation mark [\x2019]
+  - [’, ⠄] # closing single quotation mark [\x2019]
+  - [“, ⠶] # opening double quotation mark [\x201c]
+  - [”, ⠶] # closing one-cell (nonspecific) quotation mark [\x201d]
+  - [”, ⠶] # closing double quotation mark [\x201d]
+  - [†, ⠈⠠⠹] # dagger [\x2020]
+  - [‡, ⠈⠠⠻] # double dagger [\x2021]
+  - [•, ⠸⠲] # bullet [\x2022]
+  - […, ⠲⠲⠲] # ellipsis [\x2026]
+  - [′, ⠘⠶] # prime [\x2032]
+  - [″, ⠘⠶⠶] # double prime [\x2033]
+  - [₣, ⠈⠋] # French franc sign [\x20a3]
+  - [₦, ⠈⠝] # Naira sign [\x20a6]
+  - [€, ⠈⠑] # euro sign [\x20ac]
+  - [™, ⠈⠘⠞] # trademark sign [\x2122]
+  - [⇌, ⠻⠘⠸⠶] # equilibrium arrow (harpoons) [\x21cc]
+  - [∀, ⠘⠁] # 'for all' (inverted A) [\x2200]
+  - [∂, ⠐⠫] # partial derivative (curly d) [\x2202]
+  - [∃, ⠈⠿] # 'there exists' (reverse E) [\x2203]
+  - [∅, ⠬⠴] # null set (slashed zero) [\x2205]
+  - [∇, ⠘⠙] # del, nabla (inverted capital delta) [\x2207]
+  - [∈, ⠘⠑] # is an element of (variant epsilon) [\x2208]
+  - [∋, ⠸⠨⠁] # contains as an element (reverse variant epsilon) [\x220b]
+  - [−, ⠰⠤] # minus (when distinguished from hyphen) [\x2212]
+  - [∓, ⠰⠤⠖] # minus-or-plus (minus over plus) [\x2213]
+  - [∘, ⠈⠘⠴] # 'hollow dot' or single small circle for electron [\x2218]
+  - [√, ⠐⠩] # radical without vinculum [\x221a]
+  - [∝, ⠸⠐⠶] # is proportional to (varies as) [\x221d]
+  - [∞, ⠼⠇] # infinity sign [\x221e]
+  - [∠, ⠻⠪] # angle sign [\x2220]
+  - [∡, ⠻⠸⠪] # measured angle sign [\x2221]
+  - [∥, ⠸⠸] # parallel to [\x2225]
+  - [∧, ⠈⠦] # and (inverted v shape) [\x2227]
+  - [∨, ⠈⠖] # or (upright v shape) [\x2228]
+  - [∩, ⠬⠦] # intersection (inverted U shape) [\x2229]
+  - [∪, ⠬⠖] # union (upright U shape) [\x222a]
+  - [∫, ⠐⠮] # integral sign [\x222b]
+  - [∮, ⠈⠮] # closed line integral (small circle halfway up) [\x222e]
+  - [∴, ⠈⠡] # 'therefore' (three dots in upright pyramid) [\x2234]
+  - [∵, ⠈⠌] # 'since' (three dots in inverted pyramid) [\x2235]
+  - [∶, ⠐⠂] # ratio [\x2236]
+  - [∷, ⠒⠇] # proportion [\x2237]
+  - [≃, ⠸⠶⠔] # approximately equal to (tilde over horizontal straight line) [\x2243]
+  - [≅, ⠸⠶⠶] # tilde over equals sign (approximately equal) [\x2245]
+  - [≈, ⠸⠶] # approximately equal to (tilde over tilde) [\x2248]
+  - [≏, ⠘⠐⠶] # equals sign with bump in top bar (difference between or approximately equal) [\x224f]
+  - [≑, ⠘⠰⠶] # equals sign dotted above and below (approximately equal) [\x2251]
+  - [≡, ⠰⠶⠶] # equivalent to (three horizontal lines) [\x2261]
+  - [≤, ⠸⠘⠢] # less than or equal to [\x2264]
+  - [≥, ⠸⠘⠔] # greater than or equal to [\x2265]
+  - [≪, ⠈⠘⠢] # is much less than [\x226a]
+  - [≫, ⠈⠘⠔] # is much greater than [\x226b]
+  - [⊂, ⠘⠣] # contained in, is a subset of (U open to right) [\x2282]
+  - [⊃, ⠘⠜] # contains, is a superset of (U open to left) [\x2283]
+  - [⊆, ⠸⠘⠣] # contained in or equal to [\x2286]
+  - [⊇, ⠸⠘⠜] # contains or equal to [\x2287]
+  - [⊊, ⠘⠘⠣] # contained in, but not equal to (proper subset) [\x228a]
+  - [⊋, ⠘⠘⠜] # contains, but is not equal to (proper superset) [\x228b]
+  - [⊣, ⠈⠸⠒] # reverse assertion ('T' lying on right side) [\x22a3]
+  - [⊥, ⠼⠤] # perpendicular to (up tack) [\x22a5]
+  - [⊦, ⠸⠸⠒] # # assertion ('is a theorem' sign, 'T' lying on left side) [\x22a6]
+  - [⊨, ⠘⠸⠒] # 'is valid' sign (assertion with double stem on 'T') [\x22a8]
+  - [⊲, ⠈⠸⠣] # is a normal subgroup of (closed 'less than') [\x22b2]
+  - [⊳, ⠈⠸⠜] # inverse 'is normal subgroup' (closed 'greater than') [\x22b3]
+  - [⊴, ⠸⠸⠣] # is normal subgroup of or equal (closed 'less than' with line under) [\x22b4]
+  - [⊵, ⠸⠸⠜] # inverse 'normal subgroup or equal'' (closed ''greater than'' with line under) [\x22b5]']
+  - [⊾, ⠻⠼⠪] # measured right angle sign [\x22be]
+  - [⋅, ⠐⠲] # multiplication dot [\x22c5]
+  - [│, ⠸] # tally mark [\x2502]
+  - [┊, ⠘] # first variant vertical line segment [\x250a]
+  - [║, ⠠⠸] # second variant vertical line segment [\x2551]
+  - [╱, ⠬] # right-leaning single solid diagonal line segment [\x2571]
+  - [╲, ⠪] # left-leaning single solid diagonal line segment [\x2572]
+  - [■, ⠻⠙⠒] # filled (solid) shape indicator applied on square [\x25a0]
+  - [□, ⠻⠙] # square [\x25a1]
+  - [▧, ⠻⠙⠤] # shaded shape indicator applied on square [\x25a7]
+  - [▲, ⠻⠉⠂] # filled (solid) (equilateral) triangle [\x25b2]
+  - [△, ⠻⠉] # regular (equilateral) triangle [\x25b3]
+  - [○, ⠻⠹] # circle [\x25cb]
+  - [◍, ⠻⠫⠿] # shaded circle [\x25cd]
+  - [⦵, ⠘⠈⠚] # 'normal' (superscript circle crossed by horizontal line) [\x29b5]
+  - [♀, ⠘⠹] # female sign (Venus) [\x2640]
+  - [♂, ⠘⠮] # male sign (Mars) [\x2642]
+  - [♭, ⠼⠣] # flat [\x266d]
+  - [♮, ⠼⠡] # natural [\x266e]
+  - [♯, ⠼⠩] # sharp [\x266f]
+  - [E♭, ⠠⠑⠼⠣]
+  - [B♮, ⠠⠃⠼⠡]
+  - [F♯, ⠠⠋⠼⠩]
+  - [⦵, ⠘⠈⠚] # 'normal' (superscript circle crossed by horizontal line) [\x29b5]
+  - [⊣, ⠈⠸⠒] # reverse assertion sign ('T' lying on right side) [\x22a3]
+  - [⫤, ⠬⠸⠒] # reverse 'is valid' sign [\x2ae4]
+  - [˦, ⠈⠪⠉] # high tone [\x02e6]
+  - [˧,⠈⠪⠒] # mid tone [\x02e7]
+  - [˨, ⠈⠪⠤] # low tone [\x02e8]
+  - [〃, ⠈⠐⠂] # ditto mark [\x3003]
+  - [●, ⠔] # black circle [\x25cf]
+  - [⅐, ⠼⠁⠌⠛] # vulgar fraction one seventh (1/7) [\x2150]
+  - [⅑, ⠼⠁⠌⠊] # vulgar fraction one ninth (1/9) [\x2151]
+  - [⅒, ⠼⠁⠌⠁⠚] # vulgar fraction one tenth (1/10) [\x2152]
+  - [⅓, ⠼⠁⠌⠉] # vulgar fraction one third (1/3) [\x2153]
+  - [⅔, ⠼⠃⠌⠉] # vulgar fraction two thirds (2/3) [\x2154]
+  - [⅕, ⠼⠁⠌⠑] # vulgar fraction one fifth (1/5) [\x2155]
+  - [⅖, ⠼⠃⠌⠑] # vulgar fraction two fifths (2/5) [\x2156]
+  - [⅗, ⠼⠉⠌⠑] # vulgar fraction three fifths (3/5) [\x2157]
+  - [⅘, ⠼⠙⠌⠑] # vulgar fraction four fifths (4/5) [\x2158]
+  - [⅙, ⠼⠁⠌⠋] # vulgar fraction one sixth (1/6) [\x2159]
+  - [⅚, ⠼⠑⠌⠋] # vulgar fraction five sixths (5/6) [\x215a]
+  - [⅛, ⠼⠁⠌⠓] # vulgar fraction one eighth (1/8) [\x215b]
+  - [⅜, ⠼⠉⠌⠓] # vulgar fraction three eighths (3/8) [\x215c]
+  - [⅝, ⠼⠑⠌⠓] # vulgar fraction five eighths (5/8) [\x215d]
+  - [⅞, ⠼⠛⠌⠓] # vulgar fraction seven eighths (7/8) [\x215e]
+  - [≠, ⠐⠶] # not equal [\x2260]

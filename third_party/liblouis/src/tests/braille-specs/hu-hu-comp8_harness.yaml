@@ -1,0 +1,84 @@
+display: unicode-without-blank.dis
+table:
+  language: hu
+  type: computer
+  dots: 8
+  __assert-match: hu-hu-comp8.ctb
+tests:
+  - [adásszerű, ⠁⠙⢈⠎⠎⠵⠑⠗⢾]
+  - [adásszünet, ⠁⠙⢈⠎⠎⠵⢷⠝⠑⠞]
+  - [adósszámla, ⠁⠙⢪⠎⠎⠵⢈⠍⠇⠁]
+  - [Agyagosszergény, ⡁⠛⠽⠁⠛⠕⠎⠎⠵⠑⠗⠛⢡⠝⠽]
+  - [agyaggyűrűiken, ⠁⠛⠽⠁⠛⠛⠽⢾⠗⢾⠊⠅⠑⠝]
+  - [agyonnyom, ⠁⠛⠽⠕⠝⠝⠽⠕⠍]
+  - # this testcase testing all accented letters
+    - árvíztűrőtükörfúrógép
+    - ⢈⠗⠧⢌⠵⠞⢾⠗⢻⠞⢷⠅⢟⠗⠋⢬⠗⢪⠛⢡⠏
+  - # this testcase containing a sentence with have normal characters and numbers.
+    - 'A telefonszámom: 06-1-256-256.'
+    - ⡁ ⠞⠑⠇⠑⠋⠕⠝⠎⠵⢈⠍⠕⠍⠒ ⠬⠫⠤⠡⠤⠣⠱⠫⠤⠣⠱⠫⠄
+  - ['A földrengés 7,5 erősségű volt.', ⡁ ⠋⢟⠇⠙⠗⠑⠝⠛⢡⠎ ⠻⠂⠱ ⠑⠗⢻⠎⠎⢡⠛⢾ ⠧⠕⠇⠞⠄]
+  - ['Tamás még nem tudta, hogy mi vár rá.', ⡞⠁⠍⢈⠎ ⠍⢡⠛ ⠝⠑⠍ ⠞⠥⠙⠞⠁⠂ ⠓⠕⠛⠽ ⠍⠊ ⠧⢈⠗ ⠗⢈⠄]
+  - ['"Tamás még nem tudta, hogy mi vár rá."', ⠈⡞⠁⠍⢈⠎ ⠍⢡⠛ ⠝⠑⠍ ⠞⠥⠙⠞⠁⠂ ⠓⠕⠛⠽ ⠍⠊ ⠧⢈⠗ ⠗⢈⠄⠈]
+  - [I don't no why happened this problem., ⡊ ⠙⠕⠝⠠⠞ ⠝⠕ ⠺⠓⠽ ⠓⠁⠏⠏⠑⠝⠑⠙ ⠞⠓⠊⠎ ⠏⠗⠕⠃⠇⠑⠍⠄]
+  - [Az 1§ paragrafus alapján a kedvezmény igénybe vehető., ⡁⠵ ⠡⡔ ⠏⠁⠗⠁⠛⠗⠁⠋⠥⠎ ⠁⠇⠁⠏⠚⢈⠝ ⠁ ⠅⠑⠙⠧⠑⠵⠍⢡⠝⠽ ⠊⠛⢡⠝⠽⠃⠑ ⠧⠑⠓⠑⠞⢻⠄]
+  - ['- A sivatagi karavánúton, negyven vagy ötven mérföldnyire innen. Egy Ford. De
+      mi nem megyünk magával. - Elővette az irattárcáját, és átadott Naszifnak egy
+      angol fontot. - Ha visszajön, keressen meg a vasútállomás mellett a Grand Hotelban.',
+    ⠤ ⡁ ⠎⠊⠧⠁⠞⠁⠛⠊ ⠅⠁⠗⠁⠧⢈⠝⢬⠞⠕⠝⠂ ⠝⠑⠛⠽⠧⠑⠝ ⠧⠁⠛⠽ ⢟⠞⠧⠑⠝ ⠍⢡⠗⠋⢟⠇⠙⠝⠽⠊⠗⠑ ⠊⠝⠝⠑⠝⠄ ⡑⠛⠽ ⡋⠕⠗⠙⠄ ⡙⠑ ⠍⠊ ⠝⠑⠍ ⠍⠑⠛⠽⢷⠝⠅ ⠍⠁⠛⢈⠧⠁⠇⠄ ⠤ ⡑⠇⢻⠧⠑⠞⠞⠑ ⠁⠵ ⠊⠗⠁⠞⠞⢈⠗⠉⢈⠚⢈⠞⠂ ⢡⠎ ⢈⠞⠁⠙⠕⠞⠞ ⡝⠁⠎⠵⠊⠋⠝⠁⠅ ⠑⠛⠽ ⠁⠝⠛⠕⠇ ⠋⠕⠝⠞⠕⠞⠄ ⠤ ⡓⠁ ⠧⠊⠎⠎⠵⠁⠚⢟⠝⠂ ⠅⠑⠗⠑⠎⠎⠑⠝ ⠍⠑⠛ ⠁ ⠧⠁⠎⢬⠞⢈⠇⠇⠕⠍⢈⠎ ⠍⠑⠇⠇⠑⠞⠞ ⠁ ⡛⠗⠁⠝⠙ ⡓⠕⠞⠑⠇⠃⠁⠝⠄]
+  - [A vételár 1 €., ⡁ ⠧⢡⠞⠑⠇⢈⠗ ⠡ ⡘⠄]
+  - [De nekem nagyon nehezemre esik a levélírás (nézd el a helyesírási hibákat és a csúnya írásomat).,
+    ⡙⠑ ⠝⠑⠅⠑⠍ ⠝⠁⠛⠽⠕⠝ ⠝⠑⠓⠑⠵⠑⠍⠗⠑ ⠑⠎⠊⠅ ⠁ ⠇⠑⠧⢡⠇⢌⠗⢈⠎ ⠦⠝⢡⠵⠙ ⠑⠇ ⠁ ⠓⠑⠇⠽⠑⠎⢌⠗⢈⠎⠊ ⠓⠊⠃⢈⠅⠁⠞ ⢡⠎ ⠁ ⠉⠎⢬⠝⠽⠁ ⢌⠗⢈⠎⠕⠍⠁⠞⠴⠄]
+  - [A kiállítás megnyitóján jelen volt az MVGYOSZ elnöke., ⡁ ⠅⠊⢈⠇⠇⢌⠞⢈⠎ ⠍⠑⠛⠝⠽⠊⠞⢪⠚⢈⠝ ⠚⠑⠇⠑⠝ ⠧⠕⠇⠞ ⠁⠵ ⡍⡧⡛⡽⡕⡎⡵ ⠑⠇⠝⢟⠅⠑⠄]
+  - ['A pontos idő 11:45 perc.', ⡁ ⠏⠕⠝⠞⠕⠎ ⠊⠙⢻ ⠡⠡⠒⠹⠱ ⠏⠑⠗⠉⠄]
+  - [•A kiadás újdonságai., ⠠⠔⡁ ⠅⠊⠁⠙⢈⠎ ⢬⠚⠙⠕⠝⠎⢈⠛⠁⠊⠄]
+  - [A hu_list fájl nem létezik., ⡁ ⠓⠥⡸⠇⠊⠎⠞ ⠋⢈⠚⠇ ⠝⠑⠍ ⠇⢡⠞⠑⠵⠊⠅⠄]
+  - ['Az e-mail címem: akarmi@akarmi.hu.', ⡁⠵ ⠑⠤⠍⠁⠊⠇ ⠉⢌⠍⠑⠍⠒ ⠁⠅⠁⠗⠍⠊⡜⠁⠅⠁⠗⠍⠊⠄⠓⠥⠄]
+
+# Space tests
+flags: {testmode: bothDirections}
+tests:
+  - ['\x0020', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x000a', '\x0020']
+  - ['\x000b', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x00a0', '\x0020']
+  - ['\x2000', '\x0020']
+  - ['\x2001', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x2028', '\x0020']
+  - ['\x2029', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+  - ['\x205f', '\x0020']
+flags: {testmode: forward}
+tests:
+  - ['\x0009', '\x0020']
+  - ['\x000a', '\x0020']
+  - ['\x000c', '\x0020']
+  - ['\x000d', '\x0020']
+  - ['\x2002', '\x0020']
+  - ['\x2003', '\x0020']
+  - ['\x2004', '\x0020']
+  - ['\x2005', '\x0020']
+  - ['\x2006', '\x0020']
+  - ['\x2007', '\x0020']
+  - ['\x2008', '\x0020']
+  - ['\x2009', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x200a', '\x0020']
+  - ['\x202f', '\x0020']
+  - ['\x205f', '\x0020']
+  - ['\x205f', '\x0020']

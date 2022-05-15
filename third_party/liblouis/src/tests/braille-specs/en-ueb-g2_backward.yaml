@@ -1,0 +1,107 @@
+display: unicode-without-blank.dis
+table:
+  language: en
+  grade: 2
+  system: ueb
+  __assert-match: en-ueb-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  # Patterns used for both punctuation and contractions.
+  - ["a!", ⠁⠖]
+  - [affa, ⠁⠖⠁]
+  - [his, ⠦]
+  - ["a?", ⠁⠦]
+  - ['"a', ⠦⠁]
+  - [was, ⠴]
+  - ['a"', ⠁⠴]
+  - ['"a"', ⠦⠁⠴]
+  - [were, ⠶]
+  - [agga, ⠁⠶⠁]
+  - [be, ⠆]
+# TODO: verify that this test is correct, because "bea" does not forward translate to "⠆⠁" (received: "⠃⠑⠁")
+flags: {testmode: backward}
+tests:
+  - [⠆⠁, bea]
+flags: {testmode: bothDirections}
+tests:
+  - [abba, ⠁⠆⠁]
+  - [a;, ⠁⠆]
+  - [":", ⠒]
+  - [cona, ⠒⠁]
+  - ["a:", ⠁⠒]
+  - [acca, ⠁⠒⠁]
+  # Contractions prefixed by an indicator which means nothing on its own.
+  # These indicators are tested by themselves with no following cell in en-ueb-g1.
+  - [word, ⠘⠺]
+  - [many, ⠸⠍]
+  - [name, ⠐⠝]
+  - [ation, ⠁⠰⠝]
+  # #311: The grade 1 symbol indicator.
+  - [b, ⠰⠃]
+  - [B, ⠰⠠⠃]
+  - [ab, ⠰⠁⠃]
+  - [Ab, ⠰⠠⠁⠃]
+  - [1a, ⠼⠁⠰⠁]
+  - [1A, ⠼⠁⠠⠁]
+# the cancel sign (56) is not strictly needed before a cap sign, but it is allowed
+flags: {testmode: backward}
+tests:
+  - [⠼⠁⠰⠠⠁, 1A]
+flags: {testmode: bothDirections}
+tests:
+  # #309: Ensure correct back-translation to "this".
+  - [this, ⠹]
+
+  # #360: Contractions followed by punctuation
+  # 1-letter contractions
+  - ["but,", ⠃⠂]
+  - ["but.", ⠃⠲]
+  - ["can,", ⠉⠂]
+  - ["do,", ⠙⠂]
+  # multi-letter contractions
+  - ["about,", ⠁⠃⠂]
+  - ["about.", ⠁⠃⠲]
+  - ["above,", ⠁⠃⠧⠂]
+
+  # Make sure back-translation for words with "ea" after letters that
+  # have contractions associated, such as words like meat, head and
+  # others works properly.
+  # See https://github.com/liblouis/liblouis/pull/350
+  - ["meat", ⠍⠂⠞]
+  - ["head", ⠓⠂⠙]
+
+  # #364: Whole word contractions followed by other contractions.
+  # In this case, the whole word contraction should not apply.
+  - [alone, ⠁⠇⠐⠕]
+  - [bar, ⠃⠜]
+  - [ben, ⠃⠢]
+  - [Ben, ⠠⠃⠢]
+  - [dance, ⠙⠨⠑]
+  - [fence, ⠋⠰⠑]
+  - [her, ⠓⠻]
+  - [sand, ⠎⠯]
+  - [sin, ⠎⠔]
+  - [sing, ⠎⠬]
+  - [Sing, ⠠⠎⠬]
+  - [sof, ⠎⠷]
+  - [song, ⠎⠰⠛]
+  - [thing, ⠹⠬]
+
+  # Issue #562 - "⠟⠅" erroneously back-translating as "quick's"
+  - [quick, ⠟⠅]
+
+  # Issue #572: "⠋⠌" erroneously back-translating as "first's"
+  - [first, ⠋⠌]
+
+  # Issue #572: "⠭⠄⠎" erroneously back-translating as "x's"
+  - ["it's", ⠭⠄⠎]
+  - ["x’s", ⠰⠭⠄⠎]
+
+# According to issue #434 ':)' should be translated as ⠒⠐⠜ (which
+# works) and backtranslation should translate it back to ':)' (which
+# doesn't work). See https://github.com/liblouis/liblouis/issues/434
+# and https://github.com/nvaccess/nvda/issues/7678
+
+flags: {testmode: bothDirections}
+tests:
+  - [":)", ⠒⠐⠜, {xfail: true}]

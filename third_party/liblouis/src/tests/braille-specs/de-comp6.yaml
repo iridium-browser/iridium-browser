@@ -1,0 +1,37 @@
+# Deutsches 6-Punkte Computerbraille
+#
+# Copyright © 2022 SBS Schweizerische Bibliothek für Blinde, Seh- und Lesebehinderte
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ----------------------------------------------------------------------------------------------
+
+display: de-eurobrl6.dis
+table:
+  language: de
+  grade: 0
+  type: computer
+  dots: 6
+  direction: both
+  __assert-match: de-comp6.utb
+tests:
+  - - www.xyz.ch
+    - www.xyz.ch
+  - - www.e-text.ch
+    - www.e-text.ch
+  - - meier_alex@ubs.com
+    - 'meier"_alex"`ubs.com'
+  - - http://www.google-test.ch/test?=:;+%#$
+    - http://www.google-test.ch/test?=:;+%#$$
+  - - peter34@gmx.net
+    - "peter34\"`gmx.net"
+  - - "@peter34"
+    - "\"`peter34"
+  - # Filenames
+    - C:/ordner/inhalt_version_1
+    - "\"c:/ordner/inhalt\"_version\"_1"
+  - # Code
+    - "for(i=0;i<=12; i++ { blabla }"
+    - "for(i=0;i<=12; i++ { blabla }"

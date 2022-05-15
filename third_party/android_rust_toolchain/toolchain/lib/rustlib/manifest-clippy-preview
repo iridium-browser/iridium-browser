@@ -1,0 +1,5 @@
+file:/buildbot/src/android/rust-toolchain/out/package/bin/clippy-driver
+file:/buildbot/src/android/rust-toolchain/out/package/bin/cargo-clippy
+file:/buildbot/src/android/rust-toolchain/out/package/share/doc/rust/LICENSE-MIT
+file:/buildbot/src/android/rust-toolchain/out/package/share/doc/rust/LICENSE-APACHE
+file:/buildbot/src/android/rust-toolchain/out/package/share/doc/rust/README.md

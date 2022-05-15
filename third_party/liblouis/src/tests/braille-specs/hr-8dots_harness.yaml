@@ -1,0 +1,20 @@
+display: unicode-without-blank.dis
+table:
+  language: hr
+  type: computer
+  dots: 8
+  __assert-match: hr-comp8.tbl # hr-comp8.utb
+flags: {testmode: bothDirections}
+tests:
+  # numbers
+  - [0 1 2 3 4 5 6 7 8 9, ⠬ ⠡ ⠌ ⠩ ⠹ ⠱ ⠫ ⠻ ⠳ ⠪]
+  # small letters
+  - [abcčćdđefghijklmnopqrsštuvwxyzž, ⠁⠃⠉⢡⢩⠙⢹⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⢱⠞⠥⠧⠺⠭⠽⠵⢮]
+  # capital letters
+  - [ABCČĆDĐEFGHIJKLMNOPQRSŠTUVWXYZŽ, ⡁⡃⡉⡡⡩⡙⡹⡑⡋⡛⡓⡊⡚⡅⡇⡍⡝⡕⡏⡟⡗⡎⡱⡞⡥⡧⡺⡭⡽⡵⡮]
+  - # all other symbols
+    - '!"#$%&/()=?*''+-.,;:_<>~^˘°`´\\|÷×¤ß[]@{}§€'
+    - ⠐⠶⠼⠮⠨⠯⠲⠣⠜⠿⠢⠔⠠⠖⠤⠄⠂⠆⠒⡸⠦⠴⠰⡰⡨⣐⢈⢘⠘⣒⢭⢨⣮⡷⡾⡈⠷⠾⣔⣳
+    - {xfail: true}
+
+

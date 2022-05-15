@@ -1,0 +1,20 @@
+display: unicode-without-blank.dis
+table:
+  language: de
+  type: computer
+  dots: 8
+  __assert-match: de-de-comp8.ctb
+tests:
+  # standard definitions from Eurobraille
+  # http://www.fakoo.de/braille/computerbraille-tabelle.html
+  - [a, ⠁]
+  - [A, ⡁]
+  - [O,⡕]
+  - [Q,⡟]
+  - [£,⡨]
+
+  # non-standard definitions
+  - [♭, ⠃]
+  - [♮, ⠶]
+  - [♯, ⠼]
+

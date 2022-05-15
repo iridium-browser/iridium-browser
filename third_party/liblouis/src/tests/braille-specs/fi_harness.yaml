@@ -1,0 +1,128 @@
+display: unicode-without-blank.dis
+table:
+  language: fi
+  type: literary
+  __assert-match: fi.utb
+tests:
+  - # Pangram
+    - törkylempijävongahdus bcfqwxzå
+    - ⠞⠪⠗⠅⠽⠇⠑⠍⠏⠊⠚⠜⠧⠕⠝⠛⠁⠓⠙⠥⠎ ⠃⠉⠋⠟⠺⠭⠵⠡
+  - # Single digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⠼⠁ ⠼⠃ ⠼⠉ ⠼⠙ ⠼⠑ ⠼⠋ ⠼⠛ ⠼⠓ ⠼⠊ ⠼⠚
+  - # Generic symbols
+    - '= ! + - _ | \\ / [ ] { } ( ) '' " # % ^ & * ~ , ? < > $ £ € ¢ @ ∞ √ ; : ° § . ·'
+    - ⠶ ⠲ ⠖ ⠤ ⠬ ⠸ ⠩ ⠌ ⠷ ⠾ ⠫ ⠻ ⠦ ⠴ ⠐ ⠰ ⠼ ⠹ ⠬ ⠯ ⠔ ⠘ ⠂ ⠢ ⠣ ⠱ ⠮ ⠇ ⠈⠑ ⠈⠉ ⠈ ⠿ ⠩ ⠆ ⠒ ⠴ ⠼ ⠄ ⠄
+  - # Dashes and hyphens, p. 42-43. Not very visible, but the first dash is en-dash, last one em-dash.
+    - 'Kari–Mäki: Leivot. Kari-Mäki, Maija. Jalkapallo-ottelu päättyi 2-3. — Hyvä.'
+    - ⠠⠅⠁⠗⠊ ⠤ ⠠⠍⠜⠅⠊⠒ ⠠⠇⠑⠊⠧⠕⠞⠄ ⠠⠅⠁⠗⠊⠤⠠⠍⠜⠅⠊⠂ ⠠⠍⠁⠊⠚⠁⠄ ⠠⠚⠁⠇⠅⠁⠏⠁⠇⠇⠕⠤⠕⠞⠞⠑⠇⠥ ⠏⠜⠜⠞⠞⠽⠊ ⠼⠃⠤⠼⠉⠄ ⠤ ⠠⠓⠽⠧⠜⠄
+  - # Degree sign and parenthesis, p. 44. Degree sign always has a space so as not to confuse it to closing parenthesis.
+    - Suora kulma on 90°. (Paitsi poikkeustapauksissa.)
+    - ⠠⠎⠥⠕⠗⠁ ⠅⠥⠇⠍⠁ ⠕⠝ ⠼⠊⠚ ⠴⠄ ⠦⠠⠏⠁⠊⠞⠎⠊ ⠏⠕⠊⠅⠅⠑⠥⠎⠞⠁⠏⠁⠥⠅⠎⠊⠎⠎⠁⠄⠴
+  - # Apostrophes, p. 44.
+    - Yht'ihanaisena
+    - ⠠⠽⠓⠞⠐⠊⠓⠁⠝⠁⠊⠎⠑⠝⠁
+  - # Common foreign language characters.
+    - é ß ü œ æ
+    - ⠿ ⠮ ⠳ ⠪ ⠜
+  - # Number-text-transitions, different combinations.
+    - 123abc abc123 abc123def 123abc456
+    - ⠼⠁⠃⠉⠰⠁⠃⠉ ⠁⠃⠉⠼⠁⠃⠉ ⠁⠃⠉⠼⠁⠃⠉⠰⠙⠑⠋ ⠼⠁⠃⠉⠰⠁⠃⠉⠼⠙⠑⠋
+  - # Capitalizations, p. 36 - 38.
+    - Haluan korostaa HYVÄÄ käytöstä. OPM TV STTK-J eKr. ETLAssa
+    - ⠠⠓⠁⠇⠥⠁⠝ ⠅⠕⠗⠕⠎⠞⠁⠁ ⠠⠠⠓⠽⠧⠜⠜ ⠅⠜⠽⠞⠪⠎⠞⠜⠄ ⠠⠠⠕⠏⠍ ⠠⠠⠞⠧ ⠠⠠⠎⠞⠞⠅⠤⠠⠚ ⠑⠠⠅⠗⠄ ⠠⠠⠑⠞⠇⠁⠰⠎⠎⠁
+  - [17jährig, ⠼⠁⠛⠰⠚⠜⠓⠗⠊⠛] # Small letter sign, p. 37.
+  - [<- ->, ⠣⠤ ⠤⠱] # Arrows, p. 47.
+  - ['1,50 10,56', ⠼⠁⠂⠑⠚ ⠼⠁⠚⠂⠑⠋] # Decimal *comma*, p. 51.
+  # Longer numbers, p. 51
+  - ['10 000 10.000 13 520.78 13.520,78', ⠼⠁⠚ ⠼⠚⠚⠚ ⠼⠁⠚⠄⠚⠚⠚ ⠼⠁⠉ ⠼⠑⠃⠚⠄⠛⠓ ⠼⠁⠉⠄⠑⠃⠚⠂⠛⠓]
+  # Powers, p. 52. If 2nd power, number sign and digit omitted.
+  - [m^2 m^3 m^ m^23 m^2., ⠍⠬ ⠍⠬⠼⠉ ⠍⠬ ⠍⠬⠼⠃⠉ ⠍⠬⠄]
+  - # Fractions, p. 52. The convention used here does not conform to mathematical standard, but using the mathematical standard would cause ambiguity in literary texts. Vulgar fractions are converted as well, especially because vulgar fractions are widely used in, for example, cookbooks, the readers of which can't be expected to know mathematical braille.
+    - 1/2 3/4 9/10 1 / 2 ¼
+    - ⠼⠁ ⠌⠼⠃ ⠼⠉ ⠌⠼⠙ ⠼⠊ ⠌⠼⠁⠚ ⠼⠁ ⠌ ⠼⠃ ⠼⠁ ⠌⠼⠙
+  - # Plus sign, p. 53 - again, non-conforming compromise for literary texts.
+    - 5+2 5 +2 a+
+    - ⠼⠑⠖⠼⠃ ⠼⠑ ⠖⠼⠃ ⠁⠖
+  - # Minus signs and hyphens, p. 53. The first one is unicode MINUS SYMBOL, second one a hyphen.
+    - 5−2 5-2 a−
+    - ⠼⠑ ⠤⠼⠃ ⠼⠑⠤⠼⠃ ⠁⠤
+  - # Multiplication, division and slash, p. 53. Unambiguously follows the standard. Note that '5/2' is not considered a fraction, but a division.
+    - 5×2 5÷2 5/2
+    - ⠼⠑ ⠄⠼⠃ ⠼⠑ ⠒⠼⠃ ⠼⠑ ⠌⠼⠃
+  - # Dates and times, p. 55.
+    - '31.12.1999 1.-15.6.1999 1998-2000 klo 21.00 klo 12:30 klo 8.15-10.30 24.45,8'
+    - ⠼⠉⠁⠄⠁⠃⠄⠁⠊⠊⠊ ⠼⠁⠄⠤⠼⠁⠑⠄⠋⠄⠁⠊⠊⠊ ⠼⠁⠊⠊⠓⠤⠼⠃⠚⠚⠚ ⠅⠇⠕ ⠼⠃⠁⠄⠚⠚ ⠅⠇⠕ ⠼⠁⠃⠒⠉⠚ ⠅⠇⠕ ⠼⠓⠄⠁⠑⠤⠼⠁⠚⠄⠉⠚ ⠼⠃⠙⠄⠙⠑⠂⠓
+  - # Currencies, p. 57.
+    - 5 € $20
+    - ⠼⠑ ⠈⠑ ⠮⠼⠃⠚
+  - # (Some) uncommon foreign letters, p. 38.
+    - ó Ó òÒ ï î
+    - ⠘⠕ ⠠⠘⠕ ⠘⠕⠠⠘⠕ ⠘⠊ ⠘⠊
+  - # URLs and email addresses, p. 45.
+    - 'http://www.hel.fi/linkit nvkirja@nvkirjasto.fi'
+    - ⠓⠞⠞⠏⠒⠌⠌⠺⠺⠺⠄⠓⠑⠇⠄⠋⠊⠌⠇⠊⠝⠅⠊⠞ ⠝⠧⠅⠊⠗⠚⠁⠈⠝⠧⠅⠊⠗⠚⠁⠎⠞⠕⠄⠋⠊
+  - # Underlines, p. 39
+    - Tietoa saa Näkövammaisten Keskusliitosta.
+    - ⠠⠞⠊⠑⠞⠕⠁ ⠎⠁⠁ ⠬⠠⠝⠜⠅⠪⠧⠁⠍⠍⠁⠊⠎⠞⠑⠝ ⠬⠠⠅⠑⠎⠅⠥⠎⠇⠊⠊⠞⠕⠎⠞⠁⠄
+    # if the period is not bold then liblouis assumes that the
+    # emphasis stops inside a word and adds an end emphasis indicator.
+    # For that reason the period is also marked up as bold.
+    - {typeform: {bold: '           ++++++++++++++++++++++++++++++'}}
+  - # Bold, p. 39
+    - Hän kiinnitti huomiota järjestysluvun taivutukseen sanassa tuhannennen.
+    - ⠠⠓⠜⠝ ⠅⠊⠊⠝⠝⠊⠞⠞⠊ ⠓⠥⠕⠍⠊⠕⠞⠁ ⠬⠚⠜⠗⠚⠑⠎⠞⠽⠎⠇⠥⠧⠥⠝ ⠞⠁⠊⠧⠥⠞⠥⠅⠎⠑⠑⠝ ⠎⠁⠝⠁⠎⠎⠁ ⠞⠥⠓⠁⠝⠬⠝⠑⠝⠬⠝⠑⠝⠄
+    - typeform:
+        underline: '                       ++++++++++++++                           +++    '
+  - # Italic, p. 40
+    - Ei kaikki ole kultaa, mikä kiiltää.
+    - ⠠⠑⠊ ⠨⠅⠁⠊⠅⠅⠊ ⠕⠇⠑ ⠅⠥⠇⠞⠁⠁⠂ ⠨⠍⠊⠅⠜ ⠅⠊⠊⠇⠞⠜⠜⠄
+    - typeform:
+        italic: '   ++++++             ++++         '
+  - # Longer emphasized phrase, p. 39
+    - Tämä on yli kolmen sanan testi.
+    - ⠠⠞⠜⠍⠜ ⠬⠬⠕⠝ ⠽⠇⠊ ⠅⠕⠇⠍⠑⠝ ⠎⠁⠝⠁⠝ ⠬⠞⠑⠎⠞⠊⠄
+    # if the period is not bold then liblouis assumes that the
+    # emphasis stops inside a word and adds an end emphasis indicator.
+    # For that reason the period is also marked up as bold.
+    - typeform:
+        underline: '     ++++++++++++++++++++++++++'
+
+  - # Character additions:
+    # Copyright symbol, registered trademark symbol, trademark symbol.
+    # Not covered by the official specification document, but
+    # conventionally marked as (c), (r) and tm.
+    - © ® ™
+    - ⠦⠉⠴ ⠦⠗⠴ ⠞⠍
+
+  - # Unknown characters.
+    # Not covered by the official specification document, but
+    # conventionally replaced with an asterisk.
+    - გ ●
+    - ⠔ ⠔
+
+  - # Emphasis only at the beginning of a word
+    - valtionpäämies
+    - ⠨⠧⠁⠇⠞⠊⠕⠝⠨⠏⠜⠜⠍⠊⠑⠎
+    - typeform:
+        italic: '+++++++       '
+  - # Emphasis only in the middle of a word
+    - valtionpäämies
+    - ⠧⠁⠇⠞⠊⠕⠝⠨⠏⠜⠜⠨⠍⠊⠑⠎
+    - typeform:
+        italic: '       +++    '
+  - # Emphasis only at the end of a word. According to a Finish
+    # braille expert this case is not specified, i.e. whether an
+    # indicator is needed if the emphasis ends at word end. So we
+    # assume no indicator is needed
+    - valtionpäämies
+    - ⠧⠁⠇⠞⠊⠕⠝⠏⠜⠜⠨⠍⠊⠑⠎
+    - typeform:
+        italic: '          ++++'
+  - # Emphasis at the beginning and the end of a word, but not in the middle
+    - valtionpäämies
+    - ⠨⠧⠁⠇⠞⠊⠕⠝⠨⠏⠜⠜⠨⠍⠊⠑⠎⠨
+    - typeform:
+        italic: '+++++++   ++++'
+      xfail: this test also fails in master, i.e. w/o the UEB improvements
+

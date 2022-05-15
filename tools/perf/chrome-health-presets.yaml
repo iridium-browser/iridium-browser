@@ -1,0 +1,235 @@
+# This file is for use with the Pinpoint CLI.
+# For more information, see https://source.chromium.org/chromium/infra/infra/+/main:go/src/infra/chromeperf/doc/pinpoint/cli/job-presets.md
+# Example command:
+# pinpoint experiment-telemetry-start \
+#   --presets-file /path/to/this/file \
+#   --preset=cwv <base-and-experiment-commit-flags>
+presets:
+  chrome_health:
+    telemetry_batch_experiment:
+      - benchmark: loading.desktop
+        configs:
+          - mac-laptop_low_end-perf
+          - mac-m1_mini_2020-perf
+          - linux-perf
+          - win-10-perf
+        stories:
+          - AirBnB_cold
+          - AirBnB_cold
+          - AirBnB_cold
+          - AirBnB_cold
+          - AllRecipes_cold
+          - AllRecipes_cold
+          - AllRecipes_cold
+          - AllRecipes_cold
+      - benchmark: loading.mobile
+        configs:
+          - android-pixel2-perf
+          - android-pixel4-perf
+        stories:
+          - Amazon
+          - Amazon
+          - Amazon
+          - Amazon
+          - Dailymotion
+          - Dailymotion
+          - Dailymotion
+          - Dailymotion
+      - benchmark: speedometer2-chrome-health
+        configs:
+          - mac-laptop_low_end-perf
+          - mac-m1_mini_2020-perf
+          - linux-perf
+          - win-10-perf
+          - android-pixel2-perf
+          - android-pixel4-perf
+        stories:
+          - Speedometer2
+          - Speedometer2
+          - Speedometer2
+          - Speedometer2
+      - benchmark: rendering.desktop
+        configs:
+          - mac-laptop_low_end-perf
+          - mac-m1_mini_2020-perf
+          - linux-perf
+          - win-10-perf
+        stories:
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_design
+          - motionmark_ramp_design
+          - motionmark_ramp_design
+          - motionmark_ramp_design
+          - motionmark_ramp_focus
+          - motionmark_ramp_focus
+          - motionmark_ramp_focus
+          - motionmark_ramp_focus
+          - motionmark_ramp_images
+          - motionmark_ramp_images
+          - motionmark_ramp_images
+          - motionmark_ramp_images
+          - motionmark_ramp_leaves
+          - motionmark_ramp_leaves
+          - motionmark_ramp_leaves
+          - motionmark_ramp_leaves
+          - motionmark_ramp_multiply
+          - motionmark_ramp_multiply
+          - motionmark_ramp_multiply
+          - motionmark_ramp_multiply
+          - motionmark_ramp_paths
+          - motionmark_ramp_paths
+          - motionmark_ramp_paths
+          - motionmark_ramp_paths
+          - motionmark_ramp_suits
+          - motionmark_ramp_suits
+          - motionmark_ramp_suits
+          - motionmark_ramp_suits
+      - benchmark: rendering.mobile
+        configs:
+          - android-pixel2-perf
+          - android-pixel4-perf
+        stories:
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_design
+          - motionmark_ramp_design
+          - motionmark_ramp_design
+          - motionmark_ramp_design
+          - motionmark_ramp_focus
+          - motionmark_ramp_focus
+          - motionmark_ramp_focus
+          - motionmark_ramp_focus
+          - motionmark_ramp_images
+          - motionmark_ramp_images
+          - motionmark_ramp_images
+          - motionmark_ramp_images
+          - motionmark_ramp_leaves
+          - motionmark_ramp_leaves
+          - motionmark_ramp_leaves
+          - motionmark_ramp_leaves
+          - motionmark_ramp_multiply
+          - motionmark_ramp_multiply
+          - motionmark_ramp_multiply
+          - motionmark_ramp_multiply
+          - motionmark_ramp_paths
+          - motionmark_ramp_paths
+          - motionmark_ramp_paths
+          - motionmark_ramp_paths
+          - motionmark_ramp_suits
+          - motionmark_ramp_suits
+          - motionmark_ramp_suits
+          - motionmark_ramp_suits
+  speedometer2:
+    telemetry_batch_experiment:
+      - benchmark: speedometer2-chrome-health
+        configs:
+          - mac-laptop_low_end-perf
+          - mac-m1_mini_2020-perf
+          - linux-perf
+          - win-10-perf
+          - android-pixel2-perf
+          - android-pixel4-perf
+        stories:
+          - Speedometer2
+          - Speedometer2
+          - Speedometer2
+          - Speedometer2
+  motionmark:
+    telemetry_batch_experiment:
+      - benchmark: rendering.desktop
+        configs:
+          - mac-laptop_low_end-perf
+          - mac-m1_mini_2020-perf
+          - linux-perf
+          - win-10-perf
+        stories:
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_design
+          - motionmark_ramp_design
+          - motionmark_ramp_design
+          - motionmark_ramp_design
+          - motionmark_ramp_focus
+          - motionmark_ramp_focus
+          - motionmark_ramp_focus
+          - motionmark_ramp_focus
+          - motionmark_ramp_images
+          - motionmark_ramp_images
+          - motionmark_ramp_images
+          - motionmark_ramp_images
+          - motionmark_ramp_leaves
+          - motionmark_ramp_leaves
+          - motionmark_ramp_leaves
+          - motionmark_ramp_leaves
+          - motionmark_ramp_multiply
+          - motionmark_ramp_multiply
+          - motionmark_ramp_multiply
+          - motionmark_ramp_multiply
+          - motionmark_ramp_paths
+          - motionmark_ramp_paths
+          - motionmark_ramp_paths
+          - motionmark_ramp_paths
+          - motionmark_ramp_suits
+          - motionmark_ramp_suits
+          - motionmark_ramp_suits
+          - motionmark_ramp_suits
+      - benchmark: rendering.mobile
+        configs:
+          - android-pixel2-perf
+          - android-pixel4-perf
+        stories:
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_arcs
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_canvas_lines
+          - motionmark_ramp_design
+          - motionmark_ramp_design
+          - motionmark_ramp_design
+          - motionmark_ramp_design
+          - motionmark_ramp_focus
+          - motionmark_ramp_focus
+          - motionmark_ramp_focus
+          - motionmark_ramp_focus
+          - motionmark_ramp_images
+          - motionmark_ramp_images
+          - motionmark_ramp_images
+          - motionmark_ramp_images
+          - motionmark_ramp_leaves
+          - motionmark_ramp_leaves
+          - motionmark_ramp_leaves
+          - motionmark_ramp_leaves
+          - motionmark_ramp_multiply
+          - motionmark_ramp_multiply
+          - motionmark_ramp_multiply
+          - motionmark_ramp_multiply
+          - motionmark_ramp_paths
+          - motionmark_ramp_paths
+          - motionmark_ramp_paths
+          - motionmark_ramp_paths
+          - motionmark_ramp_suits
+          - motionmark_ramp_suits
+          - motionmark_ramp_suits
+          - motionmark_ramp_suits

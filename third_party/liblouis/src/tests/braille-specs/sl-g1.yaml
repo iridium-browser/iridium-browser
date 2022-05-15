@@ -1,0 +1,187 @@
+# Slovenian braille based on the standard of 2016:
+# http://liblouis.org/braille-specs/slovenian
+#
+# Copyright © 2019 by Robert Merič <info@slepslaboviden.si>
+# Copyright © 2019 by Bert Frees
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table:
+  language: sl
+  type: literary
+  grade: 1
+  __assert-match: sl.tbl
+tests:
+
+  # Characters
+  - [č, ⠡]
+  - [Č, ⠨⠡]
+  - [š, ⠱]
+  - [Š, ⠨⠱]
+  - [ž, ⠮]
+  - [Ž, ⠨⠮]
+  - [đ, ⠹]
+  - [Đ, ⠨⠹]
+  - [ć, ⠩]
+  - [Ć, ⠨⠩]
+
+  # All caps
+  - [CŠOD, ⠸⠉⠱⠕⠙]
+
+  # Spealing notation
+  - [pǝs, ⠏⠈⠢⠎, {xfail: fix later}]
+  - [beséda, ⠃⠑⠎⠌⠑⠙⠁, {xfail: fix later}]
+
+  # Punctuations
+  - [",", ⠂]
+  - [";", ⠆]
+  - [":", ⠒]
+  - ["!", ⠖]
+  - ["?", ⠢]
+  - [".", ⠲]
+  - ["'", ⠄]
+  - ["-", ⠤]
+  - ["–", ⠠⠤]
+  - ["Zakaj? Zato!", ⠨⠵⠁⠅⠁⠚⠢ ⠨⠵⠁⠞⠕⠖]
+  - ["Pozor – hud pes!", ⠨⠏⠕⠵⠕⠗ ⠠⠤ ⠓⠥⠙ ⠏⠑⠎⠖]
+  - ["2004–2014", ⠼⠃⠚⠚⠙⠠⠤⠼⠃⠚⠁⠙]
+  - ["slovensko-angleški slovar", ⠎⠇⠕⠧⠑⠝⠎⠅⠕⠤⠁⠝⠛⠇⠑⠱⠅⠊ ⠎⠇⠕⠧⠁⠗]
+
+  # Abbreviations
+  - [F. S. Finžgar, ⠨⠋⠲ ⠨⠎⠲ ⠨⠋⠊⠝⠮⠛⠁⠗]
+  - [dr. med., ⠙⠗⠲ ⠍⠑⠙⠲]
+  - [itd., ⠊⠞⠙⠲]
+  - [d. o. o., ⠙⠲ ⠕⠲ ⠕⠲]
+
+  # Numbers
+  - ["0", ⠼⠚]
+  - [",", ⠂]
+  - [".", ⠲]
+  - ["2.000,00", ⠼⠃⠲⠚⠚⠚⠂⠚⠚]
+
+  # Roman letters
+  - [I, ⠸⠊]
+  - [V, ⠸⠧]
+  - [X, ⠸⠭]
+  - [L, ⠸⠇]
+  - [C, ⠸⠉]
+  - [D, ⠸⠙]
+  - [M, ⠸⠍]
+  - [XVII, ⠸⠭⠧⠊⠊]
+
+  # Date and time
+  - ["5. 6. 2014", ⠼⠑⠲ ⠼⠋⠲ ⠼⠃⠚⠁⠙]
+  - ["6.30", ⠼⠋⠲⠉⠚]
+  - ["1:55,15", ⠼⠁⠒⠑⠑⠂⠁⠑]
+
+  # Two part punctuations
+  - ["(", ⠣]
+  - [")", ⠜]
+  - ["[", ⠠⠖]
+  - ["]", ⠠⠲]
+  - ["{", ⠠⠣]
+  - ["}", ⠠⠜]
+  - ["<", ⠠⠦]
+  - [">", ⠠⠴]
+  - ['"Zdravo"', ⠦⠨⠵⠙⠗⠁⠧⠕⠴]
+  - ["'Zdravo'", ⠂⠨⠵⠙⠗⠁⠧⠕⠄]
+  - ["»Zdravo«", ⠦⠨⠵⠙⠗⠁⠧⠕⠴]
+  - [/, ⠾]
+  - [\\, ⠷]
+
+  # Symbols
+  - ["@", ⠪]
+  - ["%", ⠻]
+  - ["‰", ⠐⠻]
+  - ["_", ⠐⠤]
+  - ["&", ⠐⠊]
+  - ["#", ⠐⠝]
+  - ["^", ⠐⠱]
+  - ["|", ⠐⠧]
+  - ["~", ⠐⠵]
+  - ["°", ⠐⠎]
+  - ["“", ⠐⠶, {xfail: fix later}]
+  - ["€", ⠐⠑]
+  - ["$", ⠐⠙]
+  - ["£", ⠐⠏]
+  - ["™", ⠐⠞]
+  - ["©", ⠐⠉]
+  - ["®", ⠐⠗]
+  - ["a_b@gmail.com", ⠁⠐⠤⠃⠪⠛⠍⠁⠊⠇⠲⠉⠕⠍]
+
+  # Mathematical signs
+  - ["+", ⠳]
+  - ["-", ⠤]
+  - ["*", ⠔]
+  - [":", ⠒]
+  - ["=", ⠶]
+  - ["!=", ⠖]
+  - ["1 + 2 = 3", ⠼⠁ ⠳ ⠼⠃ ⠶ ⠼⠉]
+  - ["π/2", ⠆⠰⠏⠒⠼⠃⠰, {xfail: fix later}]
+  - ["7 3/4", ⠼⠛ ⠆⠼⠉⠒⠼⠙⠰, {xfail: fix later}]
+  - ["5^3x", ⠼⠑⠬⠣⠼⠉⠭⠜, {xfail: fix later}]
+  - ["x ≠ 0", ⠭ ⠖⠶ ⠼⠚, {xfail: fix later}]
+  - ["°C", ⠐⠎⠨⠉]
+  - ["km/h", ⠅⠍⠾⠓]
+
+  # Cancel sign
+  - ["http://goo.gl/6jBg", ⠓⠞⠞⠏⠒⠾⠾⠛⠕⠕⠲⠛⠇⠾⠼⠋⠠⠚⠨⠃⠛, {xfail: fix later}]
+  - ["http://bit.ly/1EGGKfZ", ⠓⠞⠞⠏⠒⠾⠾⠃⠊⠞⠲⠇⠽⠾⠼⠁⠸⠑⠛⠛⠅⠠⠋⠨⠵, {xfail: fix later}]
+  - ["@ARVOinfo", ⠪⠸⠁⠗⠧⠕⠠⠊⠝⠋⠕]
+  - ["123ab12AA33", ⠼⠁⠃⠉⠠⠁⠃⠼⠁⠃⠸⠁⠁⠼⠉⠉]
+
+  # Greek letters
+  - [α, ⠰⠁]
+  - [β, ⠰⠃]
+  - [γ, ⠰⠛]
+  - [δ, ⠰⠙]
+  - [ε, ⠰⠱]
+  - [ζ, ⠰⠵]
+  - [η, ⠰⠑]
+  - [θ, ⠰⠓]
+  - [ι, ⠰⠊]
+  - [κ, ⠰⠅]
+  - [λ, ⠰⠇]
+  - [μ, ⠰⠍]
+  - [ν, ⠰⠝]
+  - [ξ, ⠰⠭]
+  - [ο, ⠰⠕]
+  - [π, ⠰⠏]
+  - [ρ, ⠰⠗]
+  - [σ, ⠰⠎]
+  - [ς, ⠰⠎]
+  - [τ, ⠰⠞]
+  - [υ, ⠰⠥]
+  - [φ, ⠰⠋]
+  - [χ, ⠰⠉]
+  - [ψ, ⠰⠽]
+  - [ω, ⠰⠺]
+  - [Α, ⠰⠨⠁]
+  - [Β, ⠰⠨⠃]
+  - [Γ, ⠰⠨⠛]
+  - [Δ, ⠰⠨⠙]
+  - [Ε, ⠰⠨⠱]
+  - [Ζ, ⠰⠨⠵]
+  - [Η, ⠰⠨⠑]
+  - [Θ, ⠰⠨⠓]
+  - [Ι, ⠰⠨⠊]
+  - [Κ, ⠰⠨⠅]
+  - [Λ, ⠰⠨⠇]
+  - [Μ, ⠰⠨⠍]
+  - [Ν, ⠰⠨⠝]
+  - [Ξ, ⠰⠨⠭]
+  - [Ο, ⠰⠨⠕]
+  - [Π, ⠰⠨⠏]
+  - [Ρ, ⠰⠨⠗]
+  - [Σ, ⠰⠨⠎]
+  - [Τ, ⠰⠨⠞]
+  - [Υ, ⠰⠨⠥]
+  - [Φ, ⠰⠨⠋]
+  - [Χ, ⠰⠨⠉]
+  - [Ψ, ⠰⠨⠽]
+  - [Ω, ⠰⠨⠺]
+  - [ΑΒΓΔ, ⠰⠸⠁⠃⠛⠙]

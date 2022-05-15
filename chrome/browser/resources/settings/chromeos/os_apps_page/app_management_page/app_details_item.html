@@ -1,0 +1,20 @@
+<style include="app-management-cros-shared-css settings-shared">
+</style>
+<div class="permission-section-header">
+  <localized-link id="heading" class="header-text"
+    localized-string="$i18n{appManagementAppDetailsTitle}">
+  </localized-link>
+  </div>
+</div>
+<div class="indented-permission-block" id="type-and-source">
+  <localized-link
+    on-link-clicked="onStoreLinkClicked_"
+    localized-string="[[getTypeAndSourceString_(app)]]">
+    [[getTypeAndSourceString_(app)]]
+  </localized-link>
+</div>
+<template is="dom-if" if="[[shouldShowVersion_(app)]]" restamp>
+  <div class="indented-permission-block" id="version">
+    [[getVersionString_(app)]]
+  </div>
+</template>

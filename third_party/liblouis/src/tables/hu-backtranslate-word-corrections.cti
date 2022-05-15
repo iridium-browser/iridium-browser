@@ -1,0 +1,241 @@
+# liblouis: Hungarian Grade 1 table
+#
+#  Copyright (C) 2011-2022 Attila Hammer from IT Foundation for the Visually Impaired - Hungary. www.infoalap.hu
+#
+#  This file is part of liblouis.
+#
+#  liblouis is free software: you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as
+#  published by the Free Software Foundation, either version 2.1 of the
+#  License, or (at your option) any later version.
+#
+#  liblouis is distributed in the hope that it will be useful, but
+#  WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#  Lesser General Public License for more details.
+#
+#  You should have received a copy of the GNU Lesser General Public
+#  License along with liblouis. If not, see
+#  <http://www.gnu.org/licenses/>.
+#
+#  Maintained by Attila Hammer  hammer.attila@infoalap.hu
+#
+# If you found bugs with hungarian grade1 table, report it with following address:
+# Attila Hammer <hammer.attila@infoalap.hu
+#If you have a Launchpad account, report table related requests with following bug tracker address: https://bugs.launchpad.net/belin
+
+#This file containing only backtranslation correction related rules, for example inside a word have cscs letters, szsz letters, etc.
+#Because in hungarian Braille usual the dot combinations equals with single consonants letters and double consonants letters (for example 146 with cs, 146-146 with ccs, and 146-146 with cscs), need doing last correction when happening a back translation
+#cscs, ccs word part related backtranslate corrections
+nofor correct "aganccsap" "agancscsap"	For example agancscsapról word
+nofor correct "apoccsont" "apocscsont"	For example álkapocscsont, szárkapocscsont, szárkapocscsonttal word part corrections
+nofor correct "kapocscsal" "kapoccsal"
+nofor correct "csúccsap" "csúcscsap"	For example csúcscsapat word
+nofor correct "erkölccső" "erkölcscső"	For example erkölcscsősz, erkölcscsősszel words backtranslation correction
+nofor correct "furdanccsi" "furdancscsi"	With furdancscsiga backtranslation correction
+nofor correct "habarccsö" "habarcscsö"	For example habarcscsövekkel, habarcscsövet words backtranslation word correction
+nofor correct "habarccső" "habarcscső"	Similar correction, for example habarcscsővel, habarcscső word
+nofor correct "orbáccsap" "orbácscsap"	For example korbácscsapás word backtranslation correction
+nofor correct "ulccse" "ulcscse"	With kulcscsere word part backtranslation correction
+nofor correct "ulccso" "ulcscso"	For example kulcscsomó, kulcscsomag, kulcscsont backtranslation words corrections
+nofor correct "ulccsö" "ulcscsö"	For example áfakulcscsökkentés, kulcscsörgés words backtranslation correction
+nofor correct "ullanccsi" "ullancscsi"	With kullancscsipesz word part correction
+nofor correct "ullanccsí" "ullancscsí"	With kullancscsípés word correction
+nofor correct "anccsap" "ancscsap"	For example mancsapással word backtranslation
+nofor correct "kinccsemp" "kincscsemp"	With műkincscsempész word part backtranslation
+nofor correct "felejccsok" "felejcscsok"	For example nefelejcscsokorral word part
+nofor correct "akáccsapat" "akácscsapat"	For example szakácscsapat word
+nofor correct "endviccsi" "endvicscsi"	For example szendvicscsinálás word
+nofor correct "anáccsap" "anácscsap"
+nofor correct "tanáccsop" "tanácscsop"	For example tanácscsoport word correction
+nofor correct "kartácscsal" "kartáccsal"	For example fémkartáccsal, kartáccsal words backtranslation
+nofor correct "narancscsal" "naranccsal"
+
+
+#ggy, gygy backtranslation rule corrections
+nofor correct "jeggyűr" "jegygyűr"	For example jegygyűrű, jegygyűrűvel words backtranslation correction
+nofor correct "árggyű" "árgygyű"	For example tárgygyűjtemény, kegytárgygyűjtemény words backtranslation corrections
+nofor correct "csapággyá" "csapágygyá"	For example csapágygyár, csapágygyártás, csapágygyárában word
+nofor correct "naggyű" "nagygyű"	For example nagygyűlés, nagygyűlésen words backtranslation correction
+nofor correct "tőggyull" "tőgygyull"	For example tőgygyulladás word backtranslation correction
+
+#nyny, nyny letters related backtranslate corrections
+nofor correct "arannyel" "aranynyel"	For example aranynyelű word
+nofor correct "asszonnyer" "asszonynyer"	For example asszonynyereg word back translation
+nofor correct "báránnyelv" "báránynyelv"	For example báránynyelv, báránynyelvből, báránynyelvvel words
+nofor correct "báránnyí" "báránynyí"	For example báránynyíróként word back translation
+nofor correct "boszorkánnyom" "boszorkánynyom"
+nofor correct "ákánnyél" "ákánynyél"	For example csákánnyél, csákánynyélből, csákánynyél words
+nofor correct "énnyal" "énynyal"	For example edénynyalábokban, edénynyalábokból, edénynyalábról, fénynyalábbal, fénynyalábból, fénynyalábokban, fénynyalábokkal word
+nofor correct "énnyomás" "énynyomás"	For example fénynyomással, fénynyomatban, fénynyomatból fénynyomatról, fénynyomattól words
+nofor correct "ampánnyit" "ampánynyit"	For example kampánynyitó word backtransllation correction
+nofor correct "fénnyom" "fénynyom"	For example fénynyomatban word backtranslation correction
+nofor correct "versennyit" "versenynyit"	For example hangversenynyitány backtranslation correction
+nofor correct "horgonnyak" "horgonynyak"	For example horgonynyak backtranslation correction
+nofor correct "ormánnyak" "ormánynyak"	For example kormánynyakhoz, kormánynyakból words backtranslation correction
+nofor correct "öpennyú" "öpenynyú"	For example köpenynyúlvánnyal word backtranslation correction
+nofor correct "eánnyel" "eánynyel"	For example leánynyelv, leánynyelvekben words backtranslation corrections
+nofor correct "ősténnyú" "ősténynyú"	For example nősténynyúllal word backtranslation correction
+nofor correct "árnnyil" "árnynyil"	For example szárnynyilazás word backtranslation correction
+nofor correct "oronnyí" "oronynyí"	For example toronynyílás, toronynyílásban word backtranslation correction
+nofor correct "éleménnyil" "éleménynyil"	For example véleménynyilvánítás, véleménynyilvánításban words backtranslation corrections
+
+#lyly letters related backtranslate corrections
+nofor correct "amelylyel" *
+
+#szsz backtranstrated words related exceptions
+nofor correct "bortusszab" "bortuszszab"	For example abortuszszabadság, abortuszszabály words backtranslation
+nofor correct "bortusszabadsággal" "bortuszszabadsággal"
+nofor correct "bortusszá" "bortuszszá"
+nofor correct "bortusszi" "bortuszszi"
+nofor correct "knásszáz" "knászszáz"
+nofor correct "ananásszal" *
+nofor correct "ananássz" "ananászsz"	For example ananásszörp, ananászszelet, ananászszeletekből words
+nofor correct "aszszony" "asszony"
+nofor correct "árrésszab" *	Árrésszabály part not need applying the special szsz backtranslation correction
+nofor correct "résszabá" "részszabá"
+nofor correct "réssza" "részsza"	For example résszavaiból word
+nofor correct "résszá" "részszá"	For example alkatrésszám, alkatrésszámainak, alkatrésszámaival, részszámla words
+nofor correct "résszerel" "részszerel"	For example alkatrésszerelő word
+nofor correct "résszel" *	For example fűrésszel word not need applying next részsze word part related rule
+nofor correct "résszer" *	For example árverésszerű, kitörésszerű, lőrésszerű words not need applying the simple szsz backtranslation correction
+nofor correct "réssze" "részsze"	But for example résszempont, tulajdonrészszerzés words need applying a special replacement with backward translation
+nofor correct "résszo" "részszo"	For example részszolgáltatás, alkatrészszolgáltatás words
+nofor correct "résszó" "részszó"
+nofor correct "atlasszala" "atlaszszala"
+nofor correct "atlasszo" "atlaszszo"
+nofor correct "bajusszál" "bajuszszál"
+nofor correct "busszá" "buszszá"
+nofor correct "busszé" "buszszé"
+nofor correct "ányásszak" "ányászszak"	For example bányászszakszervezet word
+nofor correct "ányásszek" "ányászszek"	For example bányászszektor word back translation related
+nofor correct "ányásszob" "ányászszob"	For example bányászszobraival, Bányászszobraival word backtranslation related
+nofor correct "ányásszt" "ányászszt"	For example bányászsztrájk word backtranslation correction
+nofor correct "oksszöv" "okszszöv"	For example bokszszövetség word backtranslation correction
+nofor correct "ónusszám" "ónuszszám"	For example bónuszszám, bónuszszámaik backtranslation correction
+nofor correct "usszínház" "uszszínház"	For example buszszínház word backtranslation output correction
+nofor correct "ipésszöv" "ipészszöv"	For example cipészszövetkezet backtranslation correction
+nofor correct "ukrásszak" "ukrászszak"	For example cukrásszakmában word
+nofor correct "erkésszer" "erkészszer"	For example cserkészszervezet back translation correction
+nofor correct "erkésszob" "erkészszob"	For example cserkészszoba, cserkészszobájában backtranslation correction
+nofor correct "erkésszöv" "erkészszöv"	For example cserkészszövetkezet word backtranslation correction
+nofor correct "csillagássze" "csillagászsze"	For example csillagászszemmel word backtranslation correction
+nofor correct "íssza" "íszsza"	For example díszszakasszal, díszszalaggal words backtranslation correction
+nofor correct "ísszeg" "íszszeg"	For example díszszegély, díszszegéllyel words backtranslation correction
+nofor correct "ísszek" "íszszek"	For example díszszekrény, díszszekrényében words backtranslation correction
+nofor correct "ísszem" "íszszem"	For example díszszemle, díszszemléhez words backtranslation correction
+nofor correct "ísszer" "íszszer"	For example díszszertartás word backtranslation correction
+nofor correct "ísszobá" "íszszobá"	For example díszszobában word backtranslation correction
+nofor correct "egésszám" "egészszám"	For example egészszám-végrehajtás backtranslation correction
+nofor correct "pítésszak" "pítészszak"	For example építészszakon, építészszakmában words backtranslation correction
+nofor correct "pítésszem" "pítészszem"	For example építésszemmel word backtranslation correction
+nofor correct "fesszab" "feszszab"	For example feszszabályzó word backtranslation correction
+nofor correct "itnesszak" "itneszszak"	For example fitneszszakmában word backtranslation correction
+nofor correct "itnesszüne" "itneszszüne"	For example fitneszszünet word backtranslation correction
+nofor correct "odrásszak" "odrászszak"	For example fodrászszakszervezet, fodrászszakmában words backtranslation correction
+nofor correct "odrásszalo" "odrászszalo"	For example fodrászszalon, fodrászszalonból words backtranslation correction
+nofor correct "odrásszé" "odrászszé"	For example fodrászszék word backtranslation correction
+nofor correct "gépésszak" "gépészszak"	For example gépészszakterület backtranslation correction
+nofor correct "gyásszala" "gyászszala"	For example gyászszalaggal backtranslation correction
+nofor correct "gyásszab" "gyászszab"	For example gyászszabadság word backtranslation correction
+nofor correct "gyásszer" "gyászszer"	For example gyászszertartás backtranslation correction
+nofor correct "gyásszün" "gyászszün"	For example gyászszünet word backtranslation correction
+nofor correct "Gyásszün" "Gyászszün"
+nofor correct "gipsszob" "gipszszob"	For example gipszszoborként, gipszszoborral, gipszszobraival words backtranslation correction
+nofor correct "halássze" "halászsze"	For example halászszervezet, halászszerszámaikkal backtranslation correction
+nofor correct "halásszi" "halászszi"	For example halászszigony, halászszigonyokkal backtranslation correction
+nofor correct "orgásszé" "orgászszé"	For example horgászszék backtranslation correction
+nofor correct "orgássze" "orgászsze"	For example horgászszempontból backtranslation correction
+nofor correct "umusszin" "umuszszin"	For example humuszszint word backtranslation correction
+nofor correct "hússzáz" "húszszáz"	For example húszszázalék word backtranslation correction
+nofor correct "jásszak" "jászszak"	For example íjászszakkör word backtranslation correction
+nofor correct "jásszá" "jászszá"	For example íjászszázad word backtranslation correction
+nofor correct "jásszöv" "jászszöv"	for example íjászszövetség word backtranslation correction
+nofor correct "risszken" "riszszken"	For example íriszszkenner word backtranslation correction
+nofor correct "Jásszent" "Jászszent"	For example Jászszentlászló town name backtranslation correction
+nofor correct "ogásszak" "ogászszak"	For example jogászszakmában, jogászszakon backtranslation correction
+nofor correct "ogássze" "ogászsze"	For example jogászszemmel word backtranslation correction
+nofor correct "kaktusszá" "kaktuszszá"	for example kaktuszszár backtranslation correction
+nofor correct "kertésszen" "kertészszen"	For example kertészszenvedély word backtranslation correction
+nofor correct "ókusszi" "ókuszszi"	For example kókuszszirup word backtranslation correction
+nofor correct "kókussző" "kókuszsző"	For example kókusszőnyeg word backtranslation correction
+nofor correct "olesszo" "oleszszo"	For example koleszszobájából word backtranslation correction
+nofor correct "azdásszak" "azdászszak"	For example közgazdászszakmában word backtranslation correction
+nofor correct "azdássze" "azdászsze"	For example közgazdászszemmel word backtranslation correction
+nofor correct "ultusszo" "ultuszszo"	For example kultuszszoborral word backtranslation correction
+nofor correct "ótusszi" "ótuszszi"	For example lótuszszirmokból word backtranslation correction
+nofor correct "összakad" "öszszakad"	For example löszszakadékokból word backtranslation correction
+nofor correct "övéssza" "övészsza"	For example lövészszakasz, lövészszakazban, lövészszakazhoz words backtranslation correction
+nofor correct "övésszá" "övészszá"	For example lövészszázad, lövészszállító words backtranslation correction
+nofor correct "elassze" "elaszsze"	For example melaszszesz word backtranslation correction
+nofor correct "désszeg" *	For example szerződésszegés word not need apply the next line rule
+nofor correct "ésszeg" "észszeg"	For example mészszegény word backtranslation correction
+nofor correct "mésszi" "mészszi"	For example mészsziklákból word backtranslation correction
+nofor correct "ésszu" "észszu"	For example mészszurony word backtranslation correction
+nofor correct "űvésszak" "űvészszak"	For example művészszakszervezet, művészszakmában words backtranslation corrections
+nofor correct "űvésszem" "űvészszem"	For example művészszemmel word backtranslation correction
+nofor correct "űvésszí" "űvészszí"	For example művészszínház word backtranslation correction
+nofor correct "násszert" "nászszert"	For example nászszertartás word backtranslation correction
+nofor correct "omdásszak" "omdászszak"	For example nyomdászszakmában, nyomdászszakszervezetben words backtranslation corrections
+nofor correct "omdássztr" "omdászsztr"	For example nyomdászsztrájk word backtranslation correction
+nofor correct "panasszó" "panaszszó"	For example panaszszó, panaszszóval words backtranslation correction
+nofor correct "papirusszá" "papiruszszá"	For example papiruszszár, papiruszszárral words backtranslation correction
+nofor correct "penéssza" "penészsza"	For example penészszagban, penészszaggal words backtranslation corrections
+nofor correct "penésszöv" "penészszöv"	For example penészszövedék words backtranslation correction
+nofor correct "lusszab" "luszszab"	For example pluszszabadság, pluszszabadsággal words backtranslation correction
+nofor correct "lusszav" "luszszav"	For example pluszszavazat word backtranslation correction
+nofor correct "plusszin" "pluszszin"	For example pluszszint, pluszszinttel words backtranslation correction
+nofor correct "lusszo" "luszszo"	For example pluszszolgáltatás, pluszszoba words backtranslation correction
+nofor correct "poggyásszál" "poggyászszál"	For example poggyászszállító word backtranslation correction
+nofor correct "poggyássze" "poggyászsze"	For example poggyászszekerek, poggyászszett words backtranslation correction
+nofor correct "poggyásszí" "poggyászszí"	For example poggyászszíj word backtranslation correction
+nofor correct "régésszak" "régészszak"	For example régészszakon, régészszakmában words backtranslation correction
+nofor correct "régésszem" "régészszem"	For example régészszemmel word backtranslation correction
+nofor correct "rekesszerk" "rekeszszerk"	For example rekeszszerkezet word backtranslation correction
+nofor correct "rinocérosszar" "rinocéroszszar"	For example rinocéroszszarv, rinocéroszszarvakkal words backtranslation correction
+nofor correct "státusszim" "státuszszim"	For example státuszszimbólum word
+nofor correct "szakasszin" "szakaszszin"	For example szakaszszinttel word backtranslation correction
+nofor correct "eméssza" "emészsza"	For example szemésszakember word backtranslation correction
+nofor correct "ínésszak" "ínészszak"	For example színészszakmában, színészszakszervezet words
+nofor correct "ínésszelí" "ínészszelí"	For example színészszelídítő word backtranslation correction
+nofor correct "ínésszöv" "ínészszöv"	For example színészszövetség word
+nofor correct "ámasszin" "ámaszszin"	For example támaszszint, támaszszintről word
+nofor correct "téesszer" "téeszszer"	For example téeszszervezés word
+nofor correct "enisszöv" "eniszszöv"	For example Teniszszövetség, Teniszszövetségtől word correction
+nofor correct "enissztá" "eniszsztá"	For example teniszsztár word backtranslation correction
+nofor correct "erasszin" "eraszszin"	For example teraszszint, teraszszinttel word
+nofor correct "ojássz" *	For example tojásszán word not need applying special backtranslation
+nofor correct "történéssza" "történészsza"	For example történészszakmában word
+nofor correct "ranssze" "ranszsze"	For example transzszexuális, transzszexualitás word backtranslation correction
+nofor correct "ússzab" "úszszab"	For example túszszabadítás, túszszabadító word backtranslation
+nofor correct "ússzed" "úszszed"	For example túszszedő word backtranslation correction
+nofor correct "utásszak" "utászszak"	For example utászszakasz, utászszakaszaiban words backtranslation correction
+nofor correct "tásszáz" "tászszáz"	For example utásszázad, utászszázadból words backtranslation correction
+nofor correct "vadásszá" "vadászszá"	For example vadászszázad, vadászszázadban words backtranslation correction
+nofor correct "vadássze" "vadászsze"	For example vadászszemmel word backtranslation correction
+nofor correct "vadásszob" "vadászszob"	For example vadászszobában word backtranslation correction
+nofor correct "vésszavá" "vészszavá"	For example vészszavával word backtranslation correction
+nofor correct "vésszáz" "vészszáz"	For example vészszázad word backtranslation correction
+nofor correct "vésszele" "vészszele"	For example vészszelep word backtranslation correction
+nofor correct "iassze" "iaszsze"	for example viasszegély word backtranslation correction
+nofor correct "iasszob" "iaszszob"	For example viaszszobor, viaszszobrával words backtranslation correction
+nofor correct "enésszak" "enészszak"	For example Zenészszakszervezetében word backtranslation correction
+
+
+#zszs backtranslated word corrections
+nofor correct "törzszsel" "törzzsel"
+nofor correct "rizzsá" "rizszsá"	For example rizszsák, rizszsákokban words backtranslation correction
+
+
+nofor correct $D.["—"]$l. "--"
+nofor correct "\x0075\x030b" "ű"
+nofor correct "o\x030b" "ő"
+nofor correct "—" "--"
+
+#non hungarian words corrections (for example town names)
+nofor correct "Budejovic" "Budějovic"	For example Budějovicében, Budějovicéből words
+nofor correct "Caön" "Caën" For example Caënban, Caënból town names
+nofor correct "Citroön" "Citroën"	For example Citroën, Citroënben words
+nofor correct "citroön" "citroën"
+nofor correct "Fuzin" "Fužin"	For example Fužinában, Fužinából town names
+nofor correct "-_" "--"

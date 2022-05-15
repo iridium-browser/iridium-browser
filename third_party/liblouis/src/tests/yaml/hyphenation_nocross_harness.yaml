@@ -1,0 +1,56 @@
+display: tables/unicode.dis
+
+table: |
+  include tables/digits8Dots.uti
+  include tables/latinLetterDef8Dots.uti
+  sign . 46
+  sign $ 1246
+  sign = 123456
+  sign ? 26
+  nocross always ed 1246
+  nocross always en 26
+  nocross always den 123456
+  include tables/hyph_en_US.dic
+
+# First check hyphenation.
+flags: {testmode: hyphenate}
+tests:
+  - [deadened, dead-ened]
+  - [emboldened, em-bold-ened]
+  - [gardener, gar-den-er]
+  - [denounce, de-nounce]
+  - [denial, de-nial]
+  - [dental, den-tal]
+
+# Then test nocross rules
+flags: {testmode: forward}
+tests:
+  - [deadened, ⠙⠑⠁⠙⠢⠫] # dead-ened
+  - [emboldened, ⠑⠍⠃⠕⠇⠙⠢⠫] # em-bold-ened
+  - [gardener, ⠛⠁⠗⠿⠑⠗] # gar-den-er
+  - [denounce, ⠙⠑⠝⠕⠥⠝⠉⠑] # de-nounce
+  - [denial, ⠙⠑⠝⠊⠁⠇] # de-nial
+  - [dental, ⠿⠞⠁⠇] # den-tal
+
+# Combination of nocross with other opcode
+table: |
+  include tables/digits8Dots.uti
+  include tables/latinLetterDef8Dots.uti
+  sign . 46
+  sign $ 1246
+  sign = 123456
+  sign ? 26
+  nocross always ed 1246
+  nocross always en 26
+  nocross begword den 123456
+  include tables/hyph_en_US.dic
+  attribute x x
+  after x
+
+tests:
+  - [deadened, ⠙⠑⠁⠙⠢⠫] # dead-ened
+  - [emboldened, ⠑⠍⠃⠕⠇⠙⠢⠫] # em-bold-ened
+  - [gardener, ⠛⠁⠗⠙⠢⠑⠗] # gar-den-er
+  - [denounce, ⠙⠑⠝⠕⠥⠝⠉⠑] # de-nounce
+  - [denial, ⠙⠑⠝⠊⠁⠇] # de-nial
+  - [dental, ⠿⠞⠁⠇] # den-tal

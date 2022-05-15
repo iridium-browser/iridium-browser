@@ -1,0 +1,123 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package dlp;
+
+// Which restriction should be applied by the rule.
+enum DlpRuleLevel {
+  // Should not be used.
+  UNSPECIFIED = 0;
+
+  // The action will be allowed (overwrites BLOCK).
+  ALLOW = 1;
+
+  // The action won't be allowed.
+  BLOCK = 2;
+}
+
+message DlpFilesRule {
+  // Defines where from the file was originated.
+  // URL patterns according to this format
+  // ( https://www.chromium.org/administrators/url-blacklist-filter-format )
+  repeated string source_urls = 1;
+
+  // Defines where to the file is targeted.
+  // URL patterns according to this format
+  // ( https://www.chromium.org/administrators/url-blacklist-filter-format )
+  repeated string destination_urls = 2;
+
+  // Restriction level applied to files satisfying the pattern above.
+  optional DlpRuleLevel level = 3;
+}
+
+message SetDlpFilesPolicyRequest {
+  // List of rules applied to FILES class in DataLeakPreventionRules policy.
+  repeated DlpFilesRule rules = 1;
+}
+
+message SetDlpFilesPolicyResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+}
+
+message AddFileRequest {
+  // Path to the downloaded file.
+  optional string file_path = 1;
+
+  // Downloaded file source URL (the URL it was downloaded from).
+  optional string source_url = 2;
+
+  // Downloaded file referrer URL (the URL the download process was initiated
+  // from).
+  optional string referrer_url = 3;
+}
+
+message AddFileResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+}
+
+message RequestFileAccessRequest {
+  // Inode numbers of the files to which access is requested.
+  repeated uint64 inodes = 1;
+
+  // Process id for which an access is requested.
+  optional int32 process_id = 2;
+
+  // Destination where the files will be targeted by the process.
+  optional string destination_url = 3;
+}
+
+message RequestFileAccessResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+
+  // Whether file access for all requested files was approved.
+  optional bool allowed = 2;
+}
+
+message IsRestrictedRequest {
+  // URLs from where the files were downloaded.
+  repeated string source_urls = 1;
+  // URL where the files are going to be uploaded.
+  optional string destination_url = 2;
+}
+
+message IsRestrictedResponse {
+  // Whether the operation should be allowed or not.
+  optional bool restricted = 1;
+}
+
+message IsDlpPolicyMatchedRequest {
+  // URL from where the file was downloaded.
+  optional string source_url = 1;
+}
+
+message IsDlpPolicyMatchedResponse {
+  // Whether a DLP rule exists that might prevent operation on the file.
+  optional bool restricted = 1;
+}
+
+message GetFilesSourcesRequest {
+  // A list of files inodes.
+  repeated uint64 files_inodes = 1;
+}
+
+message FileMetadata {
+  // File inode number.
+  optional uint64 inode = 1;
+  // URL from where the file was downloaded.
+  optional string source_url = 2;
+}
+
+message GetFilesSourcesResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+  // A list of files source urls.
+  repeated FileMetadata files_metadata = 2;
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html dir="$i18n{textdirection}" lang="$i18n{language}">
+<head>
+  <meta charset="utf-8">
+  <title>Predictors</title>
+  <link rel="stylesheet" href="chrome://resources/css/tabs.css">
+  <link rel="stylesheet" href="chrome://resources/css/text_defaults.css">
+
+  <style>
+    <include src="predictors.css">
+  </style>
+
+</head>
+
+<body>
+  <tabbox id="predictor-page">
+    <tabs>
+      <tab>Autocomplete Action Predictor</tab>
+      <tab>Resource Prefetch Predictor</tab>
+    </tabs>
+    <tabpanels>
+      <tabpanel>
+        <include src="autocomplete_action_predictor.html">
+      </tabpanel>
+      <tabpanel>  
+        <include src="resource_prefetch_predictor.html">
+      </tabpanel>
+    </tabpanels>
+  </tabbox>
+  <script type="module" src="predictors.js"></script>
+</body>
+</html>

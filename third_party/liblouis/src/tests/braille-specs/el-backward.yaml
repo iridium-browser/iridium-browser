@@ -1,0 +1,46 @@
+# Copyright © 2017, 2019 by Dave Mielke <dave@mielke.cc>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table:
+  language: el
+  __assert-match: el.ctb
+flags: {testmode: backward}
+tests:
+
+- # lowercase Greek alphabet
+  - ⠁⠃⠛⠙⠑⠵⠜⠹⠊⠅⠇⠍⠝⠭⠕⠏⠗⠎⠞⠽⠋⠓⠯⠚⠎
+  - αβγδεζηθικλμνξοπρστυφχψως
+
+- # lowercase English alphabet
+  - ⠰⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵
+  - abcdefghijklmnopqrstuvwxyz
+
+- # uppercase English alphabet
+  - ⠰⠠⠁⠠⠃⠠⠉⠠⠙⠠⠑⠠⠋⠠⠛⠠⠓⠠⠊⠠⠚⠠⠅⠠⠇⠠⠍⠠⠝⠠⠕⠠⠏⠠⠟⠠⠗⠠⠎⠠⠞⠠⠥⠠⠧⠠⠺⠠⠭⠠⠽⠠⠵
+  - ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+- # a mixture of lowercase Greek and English letters
+  - ⠁⠃⠛⠰⠙⠑⠵⠜⠹⠊⠅⠰⠇⠍⠝ ⠭⠕⠏
+  - αβγdezηθικlmn ξοπ
+
+- # unaccented diphthongs
+  - ⠥ ⠡ ⠣ ⠩ ⠱ ⠻ ⠳ ⠪
+  - ου αυ αι ει ευ υι ηυ οι
+
+- # diphthongs with Dasia
+  - ⠧⠥ ⠧⠡ ⠧⠣ ⠧⠩ ⠧⠱ ⠧⠻ ⠧⠳ ⠧⠪
+  - οὑ αὑ αἱ εἱ εὑ υἱ ηὑ οἱ
+
+- # diphthongs with Dasia,Psili and Varia,Oxia,Perispomeni
+  - ⠷⠥ ⠢⠥ ⠖⠥ ⠾⠥ ⠴⠥ ⠲⠥
+  - οὓ οὕ οὗ οὒ οὔ οὖ
+
+- # diphthongs with Tonos,Varia,Perispomeni
+  - ⠐⠥ ⠈⠥ ⠠⠥
+  - ού οὺ οῦ
+

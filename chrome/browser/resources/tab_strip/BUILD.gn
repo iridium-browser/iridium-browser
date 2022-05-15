@@ -1,0 +1,131 @@
+# Copyright 2019 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//chrome/common/features.gni")
+import("//tools/grit/grit_rule.gni")
+import("//tools/grit/preprocess_if_expr.gni")
+import("//tools/polymer/html_to_js.gni")
+import("//tools/typescript/ts_library.gni")
+import("//ui/webui/resources/tools/generate_grd.gni")
+import("//ui/webui/webui_features.gni")
+
+assert(enable_webui_tab_strip)
+
+preprocess_folder = "preprocessed"
+
+generate_grd("build_grd") {
+  grd_prefix = "tab_strip"
+  out_grd = "$target_gen_dir/${grd_prefix}_resources.grd"
+  input_files = [
+    "alert_indicators/picture_in_picture_alt.svg",
+    "alert_indicators/serial_port.svg",
+    "alert_indicators/tab_audio_muting_rounded.svg",
+    "alert_indicators/tab_audio_rounded.svg",
+    "alert_indicators/tab_bluetooth_connected.svg",
+    "alert_indicators/tab_hid_connected.svg",
+    "alert_indicators/tab_media_capturing_with_arrow.svg",
+    "alert_indicators/tab_media_recording.svg",
+    "alert_indicators/tab_usb_connected.svg",
+    "alert_indicators/vr_headset.svg",
+    "tab_strip.html",
+  ]
+  input_files_base_dir = rebase_path(".", "//")
+
+  deps = [ ":build_ts" ]
+  manifest_files = [ "$target_gen_dir/tsconfig.manifest" ]
+}
+
+preprocess_if_expr("preprocess_mojo") {
+  deps = [ "//chrome/browser/ui/webui/tab_strip:mojo_bindings_webui_js" ]
+  in_folder = "$root_gen_dir/mojom-webui/chrome/browser/ui/webui/tab_strip/"
+  out_folder = "$target_gen_dir/$preprocess_folder"
+  in_files = [ "tab_strip.mojom-webui.js" ]
+}
+
+preprocess_if_expr("preprocess_tabs") {
+  deps = [ "//chrome/browser/ui/webui/tabs:mojo_bindings_webui_js" ]
+  in_folder = "$root_gen_dir/mojom-webui/chrome/browser/ui/webui/tabs/"
+  out_folder = "$target_gen_dir/$preprocess_folder"
+  in_files = [ "tabs.mojom-webui.js" ]
+}
+
+preprocess_if_expr("preprocess") {
+  in_folder = "./"
+  out_folder = "$target_gen_dir/$preprocess_folder"
+  in_files = [
+    "drag_manager.ts",
+    "tabs_api_proxy.ts",
+    "tab_swiper.ts",
+  ]
+}
+
+preprocess_if_expr("preprocess_generated") {
+  deps = [ ":web_components" ]
+  in_folder = target_gen_dir
+  out_folder = "$target_gen_dir/$preprocess_folder"
+  in_files = [
+    "alert_indicator.ts",
+    "alert_indicators.ts",
+    "tab_group.ts",
+    "tab_list.ts",
+    "tab.ts",
+  ]
+}
+
+grit("resources") {
+  defines = chrome_grit_defines
+
+  # These arguments are needed since the grd is generated at build time.
+  enable_input_discovery_for_gn_analyze = false
+  source = "$target_gen_dir/tab_strip_resources.grd"
+  deps = [ ":build_grd" ]
+
+  outputs = [
+    "grit/tab_strip_resources.h",
+    "grit/tab_strip_resources_map.cc",
+    "grit/tab_strip_resources_map.h",
+    "tab_strip_resources.pak",
+  ]
+  output_dir = "$root_gen_dir/chrome"
+}
+
+html_to_js("web_components") {
+  js_files = [
+    "alert_indicator.ts",
+    "alert_indicators.ts",
+    "tab_group.ts",
+    "tab_list.ts",
+    "tab.ts",
+  ]
+}
+
+ts_library("build_ts") {
+  root_dir = "$target_gen_dir/$preprocess_folder"
+  out_dir = "$target_gen_dir/tsc"
+  composite = true
+  tsconfig_base = "tsconfig_base.json"
+  in_files = [
+    "alert_indicator.ts",
+    "alert_indicators.ts",
+    "drag_manager.ts",
+    "tab_group.ts",
+    "tab.ts",
+    "tab_list.ts",
+    "tabs_api_proxy.ts",
+    "tabs.mojom-webui.js",
+    "tab_strip.mojom-webui.js",
+    "tab_swiper.ts",
+  ]
+  deps = [
+    "//third_party/polymer/v3_0:library",
+    "//ui/webui/resources:library",
+  ]
+  definitions = [ "//tools/typescript/definitions/metrics_private.d.ts" ]
+  extra_deps = [
+    ":preprocess",
+    ":preprocess_generated",
+    ":preprocess_mojo",
+    ":preprocess_tabs",
+  ]
+}

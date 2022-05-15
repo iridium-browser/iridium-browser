@@ -1,0 +1,39 @@
+// Copyright 2020 The Chromium OS Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// This file describes the request/reply protobug message type for
+// |pca_agentd|.
+
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+
+import "interface.proto";
+
+package attestation.pca_agent;
+
+// Sends the enroll request to the corresponding ACA server.
+message EnrollRequest {
+  // The request created by |attestationd|.
+  optional bytes request = 1;
+  // ACA server type.
+  optional ACAType aca_type = 2;
+}
+
+message EnrollReply {
+  optional AttestationStatus status = 1;
+  optional bytes response = 2;
+}
+
+// Sends the sign request to the corresponding ACA server.
+message GetCertificateRequest {
+  // The request created by |attestationd|.
+  optional bytes request = 1;
+  // ACA server type.
+  optional ACAType aca_type = 2;
+}
+
+message GetCertificateReply {
+  optional AttestationStatus status = 1;
+  optional bytes response = 2;
+}

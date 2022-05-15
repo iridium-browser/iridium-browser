@@ -1,0 +1,230 @@
+# Copyright © 2018, 2020 Ikrami Ahmad
+# Copyright © 2020 Bert Frees
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved.  This file is offered as-is,
+# without any warranty.
+
+display: unicode-without-blank.dis
+table:
+  language: ar
+  grade: 2
+  __assert-match: ar-ar-g2.ctb
+flags: {testmode: bothDirections}
+tests:
+  # 1) first rule: these should be abbreviated everywhere, whether as stand alone word or part of a
+  # bigger word.
+  
+  # stand alone
+  - [بعيد, ⠘⠃]
+  - [برنامج, ⠸⠃]
+  - [تعليم, ⠈⠞]
+  - [ثاني, ⠘⠹]
+  - [جميع, ⠐⠚]
+  - [مكفوف, ⠈⠍]
+  - [اللائي, ⠈⠉]
+  - [كان, ⠛]
+  - [كريم, ⠘⠛]
+  - [آفاق, ⠠⠜]
+  - [أدنى, ⠠⠕]
+  - [إنسان, ⠐⠪]
+  # some are contractions for two words
+  - - لم يكن
+    - ⠐⠑
+  - - ما زال
+    - ⠈⠏
+  - - لا يزال
+    - ⠸⠧
+  # they can be part of a word
+  - - ثقافة
+    - ⠈⠹⠡
+  - - ومرة
+    - ⠺⠐⠍
+  - - وتقطعت
+    - ⠺⠞⠈⠟⠞
+  # a word can have two contractions
+  - - الثالث
+    - ⠉⠸⠹
+  - - كبيرهم
+    - ⠘⠅⠻
+  # they can be used alongside punctuation marks
+  - - "ثانيا:"
+    - ⠘⠹⠁⠐⠂
+  - - (صغير)
+    - ⠦⠘⠯⠴
+
+  # 2) second rule: these should be abbreviated if they come as a single word only, they can't be
+  # abbreviated if part of bigger word.
+  
+  # abbreviated
+  - - أو
+    - ⠁
+  - - قد
+    - ⠄
+  # not abbreviated
+  - - لقد
+    - ⠇⠟⠙
+  - - كلهم
+    - ⠅⠇⠻
+  - - ثمرة
+    - ⠹⠐⠍
+
+  # 3) third rule: these should be abbreviated if they are a word or at the beginning of a word
+  # only, because of their similarity with diacritic symbols.
+  
+  # abbreviated
+  - - لم
+    - ⠑
+  - - إلى
+    - ⠢
+  - - عنوان
+    - ⠔⠺⠁⠝
+  - - معمعة
+    - ⠆⠍⠷⠡
+  - - حيثما
+    - ⠥⠏
+  # not abbreviated
+  - - ملل
+    - ⠍⠇⠇
+  - - لعنة
+    - ⠇⠷⠝⠡
+
+  # 4) fourth rule: these should be abbreviated if they came as a seperate word and if they came in
+  # the middle of words only, because of their similarity to punctuation marks.
+  
+  # abbreviated
+  - - هو
+    - ⠦
+  - - متى
+    - ⠶
+  - - مهووس
+    - ⠍⠦⠺⠎
+  - - هو الذي جاء
+    - ⠦ ⠐⠉ ⠚⠁⠄
+  # not abbreviated
+  - - ومتى
+    - ⠺⠍⠞⠕
+  - - هوشة
+    - ⠓⠺⠩⠡
+  - - من هو؟
+    - ⠴ ⠓⠺⠦
+  - - (متى هذا
+    - ⠦⠍⠞⠕ ⠐⠓
+  
+  # 5) fifth rule: these should be abbreviated if they come as a word or part of a word at the
+  # beginning or the middle, because of their similarity with punctuation marks that close
+  # sentences.
+  
+  # abbreviated
+  - - من
+    - ⠴
+  - - في
+    - ⠖
+  - - منتهى
+    - ⠴⠞⠓⠕
+  - - مستنقع
+    - ⠍⠲⠝⠟⠷
+  # not abbreviated
+  - - وفي
+    - ⠺⠋⠊
+  - - لبست
+    - ⠇⠃⠎⠞
+  - - مدمن
+    - ⠍⠙⠍⠝
+  - - (ثم من)
+    - ⠦⠹ ⠍⠝⠴
+  
+  # 6) sixth rule: if the following abbriviations come as single words, they should be abbreviated
+  # normally. but if they come as a part of bigger word, dots 36 must be placed before the character
+  # that represents the abbreviated word.
+  
+  # as a seperate word
+  - - ليس
+    - ⠇
+  - - مثل
+    - ⠍
+  - - ذاكر
+    - ⠮
+  - - شيء نحو الهدف
+    - ⠩ ⠝ ⠉⠓⠙⠋
+  # due to the use of "lowword", they will not be translated next to punctuations.
+  - - قريب جدا
+    - ⠘⠟ ⠚
+  # as part of a word:
+  - - الخير
+    - ⠉⠤⠭
+  - - فإذا
+    - ⠋⠤⠪
+  - - مثلما
+    - ⠤⠍⠏
+  - - ونحوه
+    - ⠺⠤⠝⠓
+  
+  # 7) seventh rule: if the letter that procedes any of these abbreviations consists of dots 1 2 and
+  # 3 only, they should not be abbreviated.
+  - - علية
+    - ⠷⠇⠊⠡
+  - - تائبون
+    - ⠞⠁⠽⠃⠺⠝
+  - - مرتبات
+    - ⠍⠗⠞⠃⠁⠞
+  
+  # 8) eighth rule: those should be abbreviated only at the end of word.
+  - - بنات
+    - ⠃⠝⠨
+  - - قائمون
+    - ⠘⠽⠸
+  - - قالوا
+    - ⠟⠉⠼
+
+  # grade 1 indicator
+
+  # whatever is followed by dots 56 should be treated as grade 1 until terminated by a space
+  - - صار
+    - ⠯
+  - - صديق
+    - ⠈⠯
+  - - ص # letter ص is abbreviation for word صار
+    - ⠰⠯
+  - - "&"
+    - ⠰⠈⠯
+  # some contractions also start with dots 56: if this leads to ambiguities an extra dots 56 is needed
+  # to indicate a grade 1 symbol
+  # example: dots 15 is the grade 1 symbol for kasrah, but also a contraction, and when prefixed
+  # with 56 it's another contraction
+  - - لم يستطع
+    - ⠰⠑
+  - - لم # grade 2 contraction
+    - ⠑
+  - - ِ # grade 1 symbol (kasrah)
+    - ⠰⠰⠑
+  # another example
+  - - حيث # grade 2 contraction
+    - ⠥
+  - - حدود # grade 2 contraction
+    - ⠰⠥
+  - - ُ # grade 1 symbol (dammah)
+    - ⠰⠰⠥
+  # more grade 1 symbols that require a double dots 56
+  - - ى
+    - ⠰⠰⠕
+  - -  ة
+    - ⠰⠰⠡
+  - - ؤ
+    - ⠰⠰⠳
+  - - ئ
+    - ⠰⠰⠽
+  - - آ
+    - ⠰⠰⠜
+  - - أ
+    - ⠰⠰⠌
+  # some examples where a grade 1 symbol is immediately followed by punctuation
+  # (note that the braille translation of the punctuation signs is the same in grade 1 and 2, but in
+  # principle the grade 1 mode ends only after the punctuation)
+  - - اختر ا أو ب.
+    - ⠁⠭⠞⠗ ⠰⠁ ⠁ ⠰⠃⠲
+  - - ماذا تعني ص؟
+    - ⠐⠏ ⠞⠷⠝⠊ ⠰⠯⠦
+  - - 'علامة الكسرة هكذا ِ:'
+    - ⠷⠧⠍⠡ ⠉⠅⠎⠗⠡ ⠈⠓ ⠰⠰⠑⠐⠂

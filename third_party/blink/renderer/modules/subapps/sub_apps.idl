@@ -1,0 +1,15 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// https://github.com/ivansandrk/multi-apps/blob/main/explainer.md
+
+[
+  Exposed=Window,
+  SecureContext,
+  RuntimeEnabled=DesktopPWAsSubApps
+] interface SubApps {
+  [CallWith=ScriptState, RaisesException] Promise<void> add(DOMString install_url);
+  [CallWith=ScriptState, RaisesException] Promise<FrozenArray<DOMString>> list();
+  [CallWith=ScriptState, RaisesException] Promise<void> remove(DOMString app_id);
+};

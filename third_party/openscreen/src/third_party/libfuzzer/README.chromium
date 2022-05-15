@@ -1,0 +1,9 @@
+Name: libFuzzer
+URL: http://llvm.org/docs/LibFuzzer.html
+License: University of Illinois/NCSA Open Source
+License File: LICENSE.txt
+Security Critical: no
+
+Description:
+Library for in-process coverage-guided fuzz testing (fuzzing) of other
+libraries.

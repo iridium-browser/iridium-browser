@@ -1,0 +1,32 @@
+display: unicode-without-blank.dis
+table:
+  language: en
+  region: en-US
+  grade: 2
+  __assert-match: en_US.tbl # en-us-g2.ctb
+
+# Converted from backtranslate.c
+flags: {testmode: backward}
+tests:
+  - [⠅⠢, ken]
+  - [⠍⠢, men]
+  - [⠍⠜⠅, mark]
+  - [⠋⠢, fen]
+  - [⠇⠢, len]
+  - [⠞⠢, ten]
+
+# Converted from backtranslate_with_letsign.c
+flags: {testmode: bothDirections}
+tests:
+  - ["but b can ", "⠃ ⠰⠃ ⠉ "]
+
+# Converted from inpos_compbrl.c
+tests:
+  - - 'user@example.com'
+    - '⠸⠬⠥⠎⠑⠗⠈⠑⠭⠁⠍⠏⠇⠑⠨⠉⠕⠍⠸⠱'
+    - inputPos: [0,0,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,15,15]
+
+#bullets
+  - - '\x0095 \x2022 \x25cb \x25d8 \x25d9'
+    - '⠸⠲ ⠸⠲ ⠸⠲ ⠸⠲ ⠸⠲'
+    

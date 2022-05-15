@@ -1,0 +1,78 @@
+<style include="cr-shared-style shimless-rma-shared">
+  .small-icon {
+    height: 30px;
+    width: 30px;
+  }
+
+  #nextButtonCaret {
+    margin-inline-start: 5px;
+  }
+
+  #navigationButtonWrapper {
+    bottom: var(--footer-height);
+    position: absolute;
+  }
+
+  #getStartedButton {
+    margin-inline-end: 8px;
+  }
+</style>
+
+<base-page>
+  <div slot="left-pane">
+    <h1>[[i18n('welcomeTitleText')]]</h1>
+    <div class="instructions">[[i18n('beginRmaWarningText')]]</div>
+    <div id="verificationMessage">
+      <paper-spinner-lite id="busyIcon" hidden$="[[!verificationInProgress_]]"
+        active>
+      </paper-spinner-lite>
+      <iron-icon id="verificationIcon"
+        icon="[[getVerificationIcon_(isCompliant_)]]"
+        hidden$="[[verificationInProgress_]]" class="small-icon">
+      </iron-icon>
+      <span hidden$="[[!verificationInProgress_]]" class="instructions">
+        [[i18n('validatingComponentsText')]]
+      </span>
+      <span hidden$="[[verificationInProgress_]]">
+        <span hidden$="[[!isCompliant_]]" class="instructions">
+          [[i18n('validatedComponentsSuccessText')]]
+        </span>
+        <span inner-h-t-m-l="[[verificationFailedMessage_]]"
+            hidden$="[[isCompliant_]]" class="instructions">
+        </span>
+      </span>
+    </div>
+    <div id="navigationButtonWrapper">
+      <cr-button id="getStartedButton" class="action-button"
+          on-click="onGetStartedButtonClicked_"
+          disabled="[[isGetStartedButtonDisabled_(verificationInProgress_,
+          allButtonsDisabled)]]">
+        [[i18n('getStartedButtonLabel')]]
+        <span id="nextButtonCaret">&#62;</span>
+      </cr-button>
+      <cr-button id="landingCancel" class="pill"
+          on-click="onLandingCancelButtonClicked_"
+          disabled="[[allButtonsDisabled]]">
+        <span id="cancelButtonLabel">
+          [[i18n('cancelButtonLabel')]]
+        </span>
+      </cr-button>
+    </div>
+  </div>
+  <div slot="right-pane">
+    <div class="illustration-wrapper">
+      <img class="illustration" src="illustrations/repair_start.svg">
+    </div>
+  </div>
+</base-page>
+
+<cr-dialog id="unqualifiedComponentsDialog" on-cancel="closeDialog_"
+    ignore-popstate>
+  <div slot="title">[[i18n('unqualifiedComponentsTitle')]]</div>
+  <div slot="body" id="dialogBody">[[componentsList_]]</div>
+  <div class="dialog-footer" slot="button-container">
+    <cr-button class="action-button" on-click="closeDialog_">
+      [[i18n('okButtonLabel')]]
+    </cr-button>
+  </div>
+</cr-dialog>

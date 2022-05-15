@@ -1,0 +1,60 @@
+/*
+ * Copyright 2016 Google Inc.
+ *
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+#ifndef SKSL_FUNCTIONREFERENCE
+#define SKSL_FUNCTIONREFERENCE
+
+#include "src/sksl/SkSLContext.h"
+#include "src/sksl/ir/SkSLExpression.h"
+#include "src/sksl/ir/SkSLFunctionDeclaration.h"
+
+namespace SkSL {
+
+/**
+ * An identifier referring to a function name. This is an intermediate value: FunctionReferences are
+ * always eventually replaced by FunctionCalls in valid programs.
+ */
+class FunctionReference final : public Expression {
+public:
+    inline static constexpr Kind kExpressionKind = Kind::kFunctionReference;
+
+    FunctionReference(const Context& context, Position pos,
+                      std::vector<const FunctionDeclaration*> functions)
+        : INHERITED(pos, kExpressionKind, context.fTypes.fInvalid.get())
+        , fFunctions(std::move(functions)) {}
+
+    const std::vector<const FunctionDeclaration*>& functions() const {
+        return fFunctions;
+    }
+
+    bool hasProperty(Property property) const override {
+        return false;
+    }
+
+    std::unique_ptr<Expression> clone() const override {
+        return std::unique_ptr<Expression>(new FunctionReference(fPosition, this->functions(),
+                                                                 &this->type()));
+    }
+
+    std::string description() const override {
+        return "<function>";
+    }
+
+private:
+    FunctionReference(Position pos, std::vector<const FunctionDeclaration*> functions,
+                      const Type* type)
+        : INHERITED(pos, kExpressionKind, type)
+        , fFunctions(std::move(functions)) {}
+
+    std::vector<const FunctionDeclaration*> fFunctions;
+
+    using INHERITED = Expression;
+};
+
+}  // namespace SkSL
+
+#endif

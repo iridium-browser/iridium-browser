@@ -1,0 +1,76 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto2";
+
+package perfetto.protos;
+
+message FtraceConfig {
+  repeated string ftrace_events = 1;
+  repeated string atrace_categories = 2;
+  repeated string atrace_apps = 3;
+  // *Per-CPU* buffer size.
+  optional uint32 buffer_size_kb = 10;
+  optional uint32 drain_period_ms = 11;
+
+  // Configuration for compact encoding of scheduler events. When enabled (and
+  // recording the relevant ftrace events), specific high-volume events are
+  // encoded in a denser format than normal.
+  message CompactSchedConfig {
+    // If true, and sched_switch or sched_waking ftrace events are enabled,
+    // record those events in the compact format.
+    optional bool enabled = 1;
+  }
+  optional CompactSchedConfig compact_sched = 12;
+
+  // Enables symbol name resolution against /proc/kallsyms.
+  // It requires that either traced_probes is running as root or that
+  // kptr_restrict has been manually lowered.
+  // It does not disclose KASLR, symbol addresses are mangled.
+  optional bool symbolize_ksyms = 13;
+
+  // By default the kernel symbolizer is lazily initialized on a deferred task
+  // to reduce ftrace's time-to-start-recording. Unfortunately that makes
+  // ksyms integration tests hard. This flag forces the kernel symbolizer to be
+  // initialized synchronously on the data source start and hence avoiding
+  // timing races in tests.
+  optional bool initialize_ksyms_synchronously_for_testing = 14;
+
+  // When this boolean is true AND the ftrace_events contains "kmem/rss_stat",
+  // this option causes traced_probes to enable the "kmem/rss_stat_throttled"
+  // event instad if present, and fall back to "kmem/rss_stat" if not present.
+  // The historical context for this is the following:
+  // - Up to Android S (12), the rss_stat was internally throttled in its
+  //   kernel implementation.
+  // - A change introduced in the kernels after S has introduced a new
+  //   "rss_stat_throttled" making the original "rss_stat" event unthrottled
+  //   (hence very spammy).
+  // - Not all Android T/13 devices will receive a new kernel though, hence we
+  //   need to deal with both cases.
+  // For more context: go/rss-stat-throttled.
+  // TODO(kaleshsingh): implement the logic behind this. Right now this flag
+  // does nothing.
+  optional bool throttle_rss_stat = 15;
+
+  // If true, avoid enabling events that aren't statically known by
+  // traced_probes. Otherwise, the default is to emit such events as
+  // GenericFtraceEvent protos.
+  // Prefer to keep this flag at its default. This was added for Android
+  // tracing, where atrace categories and/or atrace HAL requested events can
+  // expand to events that aren't of interest to the tracing user.
+  // Introduced in: Android T.
+  optional bool disable_generic_events = 16;
+}

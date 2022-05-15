@@ -1,0 +1,28 @@
+# Copyright 2016 PDFium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+buildconfig = "//build/config/BUILDCONFIG.gn"
+
+# The python interpreter to use by default. On Windows, this will look
+# for python3.exe and python3.bat.
+script_executable = "python3"
+
+default_args = {
+  v8_extra_library_files = []
+  v8_experimental_extra_library_files = []
+
+  # PDFs only need to run JavaScript.
+  v8_enable_webassembly = false
+
+  # Turns on compiler optimizations in V8 in Debug build.
+  v8_optimized_debug = true
+}
+
+no_check_targets = [
+  "//third_party/icu/*",
+  "//v8:cppgc_base",
+  "//v8:v8_internal_headers",
+  "//v8/src/inspector:inspector",
+  "//v8/test/cctest:cctest_sources",
+]

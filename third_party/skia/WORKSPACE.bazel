@@ -1,0 +1,193 @@
+workspace(name = "skia")
+
+load("//toolchain:download_toolchains.bzl", "download_toolchains_for_skia")
+
+download_toolchains_for_skia("clang_linux_amd64", "clang_mac_m1")
+
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+# See https://github.com/emscripten-core/emsdk/tree/85d27a4a2a60d591613a305b14ae438c2bb3ce11/bazel#setup-instructions
+http_archive(
+    name = "emsdk",
+    sha256 = "7dc13d967705582e11ff62ae143425dbc63c38372f1a1b14f0cb681fda413714",
+    strip_prefix = "emsdk-3.1.4/bazel",
+    urls = [
+        "https://github.com/emscripten-core/emsdk/archive/refs/tags/3.1.4.tar.gz",
+        "https://storage.googleapis.com/skia-world-readable/bazel/7dc13d967705582e11ff62ae143425dbc63c38372f1a1b14f0cb681fda413714.tar.gz",
+    ],
+)
+
+load("@emsdk//:deps.bzl", emsdk_deps = "deps")
+
+# One of the deps here is build_bazel_rules_nodejs, currently version 4.4.1
+# If we try to install it ourselves after this, it won't work.
+emsdk_deps()
+
+load("@emsdk//:emscripten_deps.bzl", emsdk_emscripten_deps = "emscripten_deps")
+
+emsdk_emscripten_deps(emscripten_version = "3.1.4")
+
+http_archive(
+    name = "bazel_skylib",
+    sha256 = "c6966ec828da198c5d9adbaa94c05e3a1c7f21bd012a0b29ba8ddbccb2c93b0d",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.1.1/bazel-skylib-1.1.1.tar.gz",
+        "https://github.com/bazelbuild/bazel-skylib/releases/download/1.1.1/bazel-skylib-1.1.1.tar.gz",
+    ],
+)
+
+load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
+
+bazel_skylib_workspace()
+
+http_archive(
+    name = "bazel_toolchains",
+    sha256 = "e52789d4e89c3e2dc0e3446a9684626a626b6bec3fde787d70bae37c6ebcc47f",
+    strip_prefix = "bazel-toolchains-5.1.1",
+    urls = [
+        "https://github.com/bazelbuild/bazel-toolchains/archive/refs/tags/v5.1.1.tar.gz",
+        "https://storage.googleapis.com/skia-world-readable/bazel/e52789d4e89c3e2dc0e3446a9684626a626b6bec3fde787d70bae37c6ebcc47f.tar.gz",
+    ],
+)
+
+load("@bazel_toolchains//repositories:repositories.bzl", bazel_toolchains_repositories = "repositories")
+
+bazel_toolchains_repositories()
+
+#######################################################################################
+# Python
+#######################################################################################
+
+# https://github.com/bazelbuild/rules_python
+http_archive(
+    name = "rules_python",
+    sha256 = "9fcf91dbcc31fde6d1edb15f117246d912c33c36f44cf681976bd886538deba6",
+    strip_prefix = "rules_python-0.8.0",
+    urls = [
+        "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.8.0.tar.gz",
+        "https://storage.googleapis.com/skia-world-readable/bazel/9fcf91dbcc31fde6d1edb15f117246d912c33c36f44cf681976bd886538deba6.tar.gz",
+    ],
+)
+
+# This sets up a hermetic python3, rather than depending on what is installed.
+load("@rules_python//python:repositories.bzl", "python_register_toolchains")
+
+python_register_toolchains(
+    name = "python3_9",
+    # https://github.com/bazelbuild/rules_python/blob/main/python/versions.bzl
+    python_version = "3.9",
+)
+
+load("@python3_9//:defs.bzl", "interpreter")
+load("@rules_python//python:pip.bzl", "pip_install")
+
+pip_install(
+    name = "py_deps",
+    python_interpreter_target = interpreter,
+    requirements = "//:requirements.txt",
+)
+
+#######################################################################################
+# Gazelle
+#######################################################################################
+http_archive(
+    name = "io_bazel_rules_go",
+    sha256 = "2b1641428dff9018f9e85c0384f03ec6c10660d935b750e3fa1492a281a53b0f",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.29.0/rules_go-v0.29.0.zip",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.29.0/rules_go-v0.29.0.zip",
+    ],
+)
+
+http_archive(
+    name = "bazel_gazelle",
+    sha256 = "de69a09dc70417580aabf20a28619bb3ef60d038470c7cf8442fafcf627c21cb",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.24.0/bazel-gazelle-v0.24.0.tar.gz",
+        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.24.0/bazel-gazelle-v0.24.0.tar.gz",
+    ],
+)
+
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("//:go_repositories.bzl", "go_repositories")
+
+# gazelle:repository_macro go_repositories.bzl%go_repositories
+go_repositories()
+
+go_rules_dependencies()
+
+go_register_toolchains(version = "1.17.2")
+
+gazelle_dependencies(go_repository_default_config = "//:WORKSPACE.bazel")
+
+# Because the skia infra repo has a dependency on google.golang.org/grpc (aka
+# @org_golang_google_grpc), we need to have this library available to build protos.
+# https://github.com/bazelbuild/rules_go#protobuf-and-grpc
+http_archive(
+    name = "com_google_protobuf",
+    sha256 = "d0f5f605d0d656007ce6c8b5a82df3037e1d8fe8b121ed42e536f569dec16113",
+    strip_prefix = "protobuf-3.14.0",
+    urls = [
+        "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.14.0.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/v3.14.0.tar.gz",
+    ],
+)
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
+
+###################################################
+# JavaScript / TypeScript rules and dependencies. #
+###################################################
+
+# The npm_install rule runs anytime the package.json or package-lock.json file changes. It also
+# extracts any Bazel rules distributed in an npm package.
+load("@build_bazel_rules_nodejs//:index.bzl", "npm_install")
+
+# Manages the node_modules directory.
+npm_install(
+    name = "npm",
+    package_json = "//:package.json",
+    package_lock_json = "//:package-lock.json",
+)
+
+# io_bazel_rules_webtesting allows us to download browsers in a hermetic, repeatable way. This
+# currently includes Chromium and Firefox. Note that the version on this does not necessarily
+# match the version below of the browsers-X.Y.Z below that is available.
+http_archive(
+    name = "io_bazel_rules_webtesting",
+    sha256 = "e9abb7658b6a129740c0b3ef6f5a2370864e102a5ba5ffca2cea565829ed825a",
+    urls = [
+        "https://github.com/bazelbuild/rules_webtesting/releases/download/0.3.5/rules_webtesting.tar.gz",
+        "https://storage.googleapis.com/skia-world-readable/bazel/e9abb7658b6a129740c0b3ef6f5a2370864e102a5ba5ffca2cea565829ed825a.tar.gz",
+    ],
+)
+
+# https://github.com/bazelbuild/rules_webtesting/blob/e9cf17123068b1123c68219edf9b274bf057b9cc/web/versioned/browsers-0.3.3.bzl
+load("@io_bazel_rules_webtesting//web/versioned:browsers-0.3.3.bzl", "browser_repositories")
+
+browser_repositories(
+    chromium = True,
+    firefox = True,
+)
+
+###################################################
+# External C++ deps with Bazel support            #
+###################################################
+local_repository(
+    name = "abseil_cpp",
+    path = "third_party/externals/abseil-cpp",
+)
+
+local_repository(
+    name = "spirv_tools",
+    path = "third_party/externals/spirv-tools",
+)
+
+local_repository(
+    # This name is important because spirv_tools expects @spirv_headers to exist by that name.
+    name = "spirv_headers",
+    path = "third_party/externals/spirv-headers",
+)

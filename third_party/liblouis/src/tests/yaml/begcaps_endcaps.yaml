@@ -1,0 +1,14 @@
+table: |
+  include tables/nl-BE.dis
+  include tables/braille-patterns.cti
+  include tables/latinLetterDef6Dots.uti
+  capsletter 46
+  begcaps 45
+  endcaps 6
+tests:
+  - [foo, 'foo']
+  - [Foo, '$foo']
+  - [FOo, '>fo''o']
+  - [FOObar, '>foo''bar']
+  - [FO, '>fo', {xfail: true}]
+  - [FOO, '>foo', {xfail: true}]

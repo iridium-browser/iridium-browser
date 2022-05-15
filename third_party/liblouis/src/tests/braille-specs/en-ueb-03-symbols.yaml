@@ -1,0 +1,242 @@
+table:
+  language: en
+  grade: 2
+  system: ueb
+  __assert-match: en-ueb-g2.ctb
+tests:
+# 3.1.1 page 21
+
+- - Marks & Spencer
+  - ',m>ks `& ,sp;er'
+- - AT&T
+  - ',,at`&,t'
+- - B&B
+  - ',b`&,b'
+- - '&c (etc)'
+  - '`&c "<etc">'
+
+# 3.2.1 page 21
+
+- - Road signs of → and ← mark detours.
+  - ',road signs ( ;|o & ;|{ m>k det|rs4'
+- - Put a ↑ on the map to indicate north.
+  - ',put a ;|+ on ! map to 9dicate nor?4'
+- - The ENTER key is the one with ↵ on it.
+  - ',! ,,5t} key is ! "o ) ;|4% on x4'
+
+# 3.3.1 page 21
+
+- - M*A*S*H
+  - ',m"9,a"9,s"9,h'
+- - Spelling words marked with an * have a silent letter.
+  - ',spell+ ~ws m>k$ ) an "9 h a sil5t lr4'
+- - To access your voicemail, strike *98 on your telephone.
+  - ',to a3ess yr voicemail1 /rike "9#ih on yr teleph"o4'
+- - Speed * time = distance.
+  - ',spe$ "9 "t "7 4t.e4'
+- - showing *emphasis* in email messages
+  - '%{+ "9emphasis"9 9 email messages'
+- - Irene V***
+  - ',ir5e ,v"9"9"9'
+- - foul language such as *#*$!* or with omitted letters as in D***
+  - f|l language s* z "9_?"9`s6"9 or ) omitt$ lrs z 9 ,d"9"9"9
+- - New World Hotel ****
+  - ',new ,_w ,hotel "9"9"9"9'
+- - brothers Jed* and Ben** Chan *born in Hong Kong **born in Canada
+  - bro!rs ,j$"9 & ,b5"9"9 ,*an "9born 9 ,h;g ,k;g "9"9born 9 ,canada
+- - 'Authors: Roy Brown,† Shirley Jones, Walter Smith,† Douglas White'
+  - ',au?ors3 ,roy ,br{n1`,? ,%irley ,j"os1 ,walt} ,smi?1`,? ,d|glas ,:ite'
+- - The painter included daisies,* white roses† and ivy‡ in the portrait. *symbolizing innocence †symbolizing virtue ‡symbolizing fidelity
+  - ',! pa9t} 9clud$ daisies1"9 :ite roses`,? & ivy`,} 9 ! portrait4 "9symboliz+ 9noc;e
+    `,?symboliz+ virtue `,}symboliz+ fidel;y'
+- - –dash*–or parentheses (round brackets†)
+  - ',-da%"9,-or p>5!ses "<r.d brackets`,?">'
+- - Rev. Robert Lowin†
+  - ',rev4 ,rob}t ,l{9`,?'
+- - '* * *'
+  - '"9 "9 "9'
+
+# 3.4.1 page 23
+
+- - 'Nutritional considerations include: • carbohydrates • protein • fat • cholesterol • fiber • sodium'
+  - ',nutri;nal 3sid}a;ns 9clude3 _4 c>bohydrates _4 prote9 _4 fat _4 *ole/}ol _4 fib} _4 sodium'
+
+# 3.6.1 page 24
+
+- - My favourite pets are my dog^ my cat ^ my hamster. My job ^ to feed them.
+  - '`7,my fav|rite pets >e my dog`5 my cat `5 my ham/}4 ,my job `5 to fe$ !m4`'''
+  - {typeform: {script: "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"}}
+
+# 3.7.1 page 25
+
+- - FLASH@lightning.net
+  - ',,fla%`ali<tn+4net'
+- - Sell the candies @ 10¢ each.
+  - ',sell ! c&ies `a #aj`c ea*4'
+
+# 3.8.1 page 25
+
+- - Copyright © 2009
+  - ',copy"r ~c #bjji'
+- - ©2009
+  - ~c#bjji
+- - QuickTax™ from Intuit® Canada Limited
+  - ',quick,tax~t f ,9tuit~r ,canada ,limit$'
+
+# 3.9.1 page 25
+
+- - With love, XXOO
+  - ',) love1 ,,xxoo'
+- - Sealed with a X
+  - ',s1l$ ) a ;,x'
+- - Illiterate people usually signed their name with an X.
+  - ',illit}ate p usually sign$ _! "n ) an ;,x4'
+- - a 4x4 vehicle
+  - 'a #dx#d vehicle'
+- - a 2×4 board
+  - 'a #b"8#d bo>d'
+- - 15×15×20 cm
+  - '#ae"8#ae"8#bj cm'
+- - The room is 12 ft. × 16 ft.
+  - ',! room is #ab ft4 "8 #af ft4'
+- - a 10× lens
+  - 'a #aj"8 l5s'
+- - Labrador × Poodle
+  - ',labrador "8 ,poodle'
+
+# 3.10.1 page 26
+
+- - 10¢
+  - '#aj`c'
+- - 99c
+  - '#ii;c'
+- - DM8
+  - ',,dm#h'
+- - $6
+  - '`s#f'
+- - A$40
+  - ',a`s#dj'
+- - $19.95
+  - '`s#ai4ie'
+- - $23,783,200
+  - '`s#bc1ghc1bjj'
+- - $2bn (2 billion dollars)
+  - '`s#b;bn "<#b billion doll>s">'
+- - US$
+  - ',,us`s'
+- - $X
+  - '`s,x'
+- - The $ rose.
+  - ',! `s rose4'
+- - $hop for $aving$
+  - '`shop = `sav+`s'
+- - 20$00 (20 escudos)
+  - '#bj`s#jj "<#bj escudos">'
+- - €75
+  - '`e#ge'
+- - 30,00€
+  - '#cj1jj`e'
+- - € and £ accepted
+  - '`e & `l a3ept$'
+- - 6€50
+  - '#f`e#ej'
+- - ₣1
+  - '`f#a'
+- - 1 € = 6.55957₣
+  - '#a `e "7 #f4eeieg`f'
+- - 5F coin
+  - '#e,f co9'
+- - ₦0.20 = 20 kobo
+  - '`n#j4bj "7 #bj kobo'
+- - £24
+  - '`l#bd'
+- - Ir£
+  - ',ir`l'
+- - £3m (3 million pounds)
+  - '`l#cm "<#c million p.ds">'
+- - the £ rose
+  - '! `l rose'
+- - £7 8s 9d
+  - '`l#g #hs #i;d'
+  - xfail: true
+- - £7/8/9
+  - '`l#g_/#h_/#i'
+- - £7-8-9
+  - '`l#g-#h-#i'
+- - 2p coin
+  - '#bp co9'
+- - R25
+  - ',r#be'
+- - R5,70
+  - ',r#e1gj'
+- - ¥360
+  - '`y#cfj'
+
+# 3.11.1 page 27
+
+- - 60 °
+  - '#fj ~j'
+- - 21°C
+  - '#ba~j,c'
+- - 70° F
+  - '#gj~j ;,f'
+- - °C
+  - ~j,c
+- - X°
+  - ',x~j'
+- - 250°, 350°, or 450°?
+  - '#bej~j1 #cej~j1 or #dej~j8'
+- - 33°51′35.9″S
+  - '#cc~j#ea7#ce4i77,s'
+- - 151° 12' 40" E
+  - '#aea~j #ab'' #dj,7 ;,e'
+
+# 3.12.1 page 28
+
+- - 'living room: pioneer blue'
+  - liv+ room3 pione} blue
+- - 'dining room: 〃 〃'
+  - d9+ room3 "1 "1
+- - 'kitchen: 〃 yellow'
+  - kit*53 "1 yell{
+- - Mon 10-12 study 2-4 Eng pt1
+  - ',mon #aj-#ab /udy #b-#d ,5g pt#a'
+- - Tues 〃 〃 〃 〃 pt2
+  - ',tues "1 "1 "1 "1 pt#b'
+- - Wed 〃 Science 〃 Art
+  - ',w$ "1 ,sci;e "1 ,>t'
+- - Anne – village girl
+  - ',anne ,- village girl'
+- - Joan – 〃 〃
+  - ',joan ,- "1 "1'
+
+
+# 3.22.1 page 34
+
+- - '• Vice-President Client Services'
+  - _4 ,vice-,presid5t ,cli5t ,s}vices
+- - '□ Director Library Services'
+  - ;$#d ,director ,libr>y ,s}vices
+- - '○ Manager Braille Production'
+  - ;$= ,manag} ,brl ,produc;n
+- - '○ Manager Audio Production'
+  - ;$= ,manag} ,audio ,produc;n
+- - '□ Director Rehabilitation Services'
+  - ;$#d ,director ,rehabilita;n ,s}vices
+
+
+# 3.28.1 (2019 update) page 2
+
+- - '✓ 1. 14'
+  - '`% #a4 #ad'
+- - '✓ 2. 25'
+  - '`% #b4 #be'
+- - '✓ 4. 11'
+  - '`% #d4 #aa'
+- - '[Their✓ There] son is kind.'
+  - '.<,_!`% ,"!.> son is k9d4'
+- - 'I will go [yesterday ✓tomorrow].'
+  - ',i w g .<ye/}"d `%tomorr{.>4'
+- - 'The [child✓ children] is happy.'
+  - ',! .<*ild`% *n.> is happy4'
+

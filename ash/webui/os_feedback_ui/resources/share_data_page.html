@@ -1,0 +1,119 @@
+<style include="os-feedback-shared">
+
+  #privacyNote {
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-top: 20px;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  #attachFiles {
+    display: flex;
+    flex-direction: column;
+    height: 96px;
+    margin-bottom: 24px;
+  }
+
+  #attachFilesContainer {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .card-frame {
+    align-items: center;
+    border: 1px solid var(--google-grey-200);
+    border-radius: 4px;
+    display: flex;
+  }
+
+  #screenshotContainer {
+    align-items: center;
+    height: 48px;
+    margin-inline-end: 12px;
+    width: 50%;
+  }
+
+  #addFile {
+    align-items: center;
+    height: 48px;
+    margin-inline-start: 12px;
+    width: 50%;
+  }
+
+  #userEmail {
+    height: 72px;
+    margin-bottom: 24px;
+  }
+
+  #shareDiagnosticData {
+    height: 96px;
+    margin-bottom: 24px;
+  }
+
+</style>
+<div id="container">
+  <div id="header">
+    <h1 id="title">Send feedback</h1>
+  </div>
+  <div id="content">
+    <!-- Attach files -->
+    <div id="attachFiles">
+      <p>Attach files</p>
+      <div id="attachFilesContainer">
+        <!-- Attach a screenshot -->
+        <div id="screenshotContainer" class="card-frame">
+          <input id="screenshotCheckbox" type="checkbox"
+              aria-labelledby="screenshotCheckLabel">
+          <label id="screenshotCheckLabel">Screenshot</label>
+          <img id="screenshotImage" aria-label="$i18n{screenshotA11y}">
+        </div>
+        <!-- Attach a file -->
+        <!-- TODO(xiangdongkong): Create a polymer element.-->
+        <div id="addFile" class="card-frame">Add file</div>
+      </div>
+    </div>
+    <!-- User e-mail -->
+    <div id="userEmail" class="text-field-container"
+        hidden$="[[!hasEmail_(feedbackContext)]]">
+      <label id="userEmailLabel">Email</label>
+      <select id="userEmailDropDown" aria-labelledby="userEmailLabel">
+        <option value$="[[feedbackContext.email]]">[[feedbackContext.email]]</option>
+        <option value="">Don't include email address</option>
+      </select>
+    </div>
+    <!-- Diagnostic data -->
+    <div id="shareDiagnosticData">
+      <p>Share diagnostic data</p>
+      <!-- URL -->
+      <div id="pageUrl" class="checkbox-field-container">
+        <input id="pageUrlCheckbox" type="checkbox" aria-labelledby="pageUrlLabel"
+            checked>
+        <label id="pageUrlLabel">share url:</label>
+        <input id="pageUrlText" aria-labelledby="pageUrlLabel" type="text"
+            value$="[[feedbackContext.pageUrl.url]]" dir="ltr">
+      </div>
+      <!-- System Information -->
+      <div id="sysInfoContainer" class="checkbox-field-container">
+        <input id="sysInfoCheckbox" type="checkbox" aria-labelledby="sysInfoLabel"
+            checked>
+        <label id="sysInfoLabel">Send system and app info and metrics</label>
+      </div>
+    </div>
+    <!-- Privacy note -->
+    <div id="privacyNote">
+      Go to the Legal Help page to request content changes for legal reasons. Some
+      account and system information may be sent to Google. We
+      will use the information you give us to help address technical issues and to
+      improve our services, subject to our Privacy Policy and Terms of Service.
+    </div>
+  </div>
+  <div id="navButtons">
+    <cr-button id="buttonBack" class="cancel-button"
+        on-click="handleBackButtonClicked_">
+      Back
+    </cr-button>
+    <cr-button id="buttonSend" class="action-button">Send</cr-button>
+  </div>
+</div>

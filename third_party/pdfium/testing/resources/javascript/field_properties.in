@@ -1,0 +1,164 @@
+{{header}}
+{{include field.fragment}}
+% JS program to execute
+{{object 16 0}} <<
+  {{streamlen}}
+>>
+stream
+{{include property_test_helpers.js}}
+function testProperties() {
+  try {
+    var field = this.getField("MyField");
+    var text = this.getField("MyField.MyText");
+    var button = this.getField("MyField.MyPushButton");
+    var badbutton = this.getField("MyField.MyBadPushButton");
+    var radio = this.getField("MyField.MyRadio");
+    var list = this.getField("MyField.MyMultiSelect");
+    var check = this.getField("MyField.MyCheckBox");
+    var file = this.getField("MyField.MyFile");
+    app.alert('Testing properties under delay');
+    testRWProperty(field, "delay", false, true);
+    // TODO(tsepez): try this case, too.
+    app.alert('Testing properties under non-delay');
+    testRWProperty(field, "delay", true, false);
+    testFieldPropertiesCase(field);
+    testTextPropertiesCase(text);
+    testPushButtonPropertiesCase(button);
+    testBadPushButtonPropertiesCase(badbutton);
+    testRadioButtonPropertiesCase(radio);
+    testCheckBoxPropertiesCase(check);
+    testListBoxPropertiesCase(list);
+    testFileSelectPropertiesCase(file);
+  } catch (e) {
+    app.alert("Unexpected error: " + e);
+  }
+}
+
+function testFieldPropertiesCase(field) {
+  testROProperty(field, "name", "MyField");
+  // TODO(tsepez): this is rect of first child somehow.
+  testRWProperty(field, "rect", [200,221,220,201], [100,121,120,101]);
+ // Put it back to where it started.
+  testRWProperty(field, "rect", [100,121,120,101], [200,221,220,201]);
+}
+
+function testTextPropertiesCase(field) {
+  try {
+    // TODO(tsepez): devise tests and uncomment.
+    testRIProperty(field, "alignment", "left", "center");
+    testRWProperty(field, "borderStyle", "solid", "inset");
+    testRIProperty(field, "calcOrderIndex", -1, 100);
+    testRIProperty(field, "charLimit", 0, 100);
+    testRIProperty(field, "comb", false, true);
+    // testRIProperty(field, "commitOnSelChange", false, true);
+    // testROProperty(field, "currentValueIndices", "clams");
+    testXXProperty(field, "defaultStyle");
+    testRIProperty(field, "defaultValue", "grue", "clams");
+    testRIProperty(field, "doNotScroll", false, true);
+    testRIProperty(field, "doNotSpellCheck", false, true);
+    testRWProperty(field, "display", 2, 3);
+    testROProperty(field, "doc", "[object global]");
+    // testROProperty(field, "editable", "clams");
+    testRWProperty(field, "hidden", false, true);
+    testRIProperty(field, "fileSelect", false, true);
+    testRIProperty(field, "fillColor", "T", ["RGB", 0, 0, 0]);
+    testRWProperty(field, "lineWidth", 1, 4);
+    testRIProperty(field, "multiline", false, true);
+    // testROProperty(field, "multipleSelection", "clams");
+    testROProperty(field, "name", "MyField.MyText");
+    // testROProperty(field, "numItems", "clams");
+    testROProperty(field, "page", 0);
+    testRIProperty(field, "password", false, 42);
+    testRWProperty(field, "print", true, false);
+    testRWProperty(field, "readonly", false, true);
+    testROProperty(field, "rect", [200,221,220,201]);
+    // testROProperty(field, "required", "clams");
+    testRIProperty(field, "richText", false, true);
+    testRIProperty(field, "richValue", undefined, "clams");
+    testRIProperty(field, "rotation", 0, 42);
+    testRIProperty(field, "source", undefined, "clams");
+    testRIProperty(field, "strokeColor", "T", ["RGB", 0, 0, 0]);
+    testRIProperty(field, "submitName", undefined, "clams");
+    testRIProperty(field, "textColor", "T", ["RGB", 0, 0, 0]);
+    // testROProperty(field, "textFont", "clams");
+    testRIProperty(field, "textSize", 0, 32);
+    testROProperty(field, "type", "text");
+    testRIProperty(field, "userName", "");
+    testRWProperty(field, "value", "bleen", "clams");
+    testROProperty(field, "valueAsString", "clams");  // Set by previous line.
+  } catch (e) {
+    app.alert("Unexpected error: " + e);
+  }
+}
+
+function testPushButtonPropertiesCase(field) {
+  try {
+    testRIProperty(field, "buttonAlignX", 0, 50);
+    testRIProperty(field, "buttonAlignY", 0, 50);
+    testRIProperty(field, "buttonFitBounds", false);
+    testRIProperty(field, "buttonPosition", 4);
+    testRIProperty(field, "buttonScaleHow", 0);
+    testRIProperty(field, "buttonScaleWhen", 0);
+    testRIProperty(field, "highlight", "invert");
+    testROProperty(field, "type", "button");
+  } catch (e) {
+    app.alert("Unexpected error: " + e);
+  }
+}
+
+function testBadPushButtonPropertiesCase(field) {
+  try {
+    testRIProperty(field, "buttonPosition", 7); // not checked.
+  } catch (e) {
+    app.alert("Unexpected error: " + e);
+  }
+}
+
+function testRadioButtonPropertiesCase(field) {
+  try {
+    testROProperty(field, "exportValues", "Yes");
+    testRIProperty(field, "radiosInUnison", false);
+    testRIProperty(field, "style", "circle");
+    testROProperty(field, "type", "radiobutton");
+    testRIProperty(field, "value", "Off");
+    testROProperty(field, "valueAsString", "Off");
+  } catch (e) {
+    app.alert("Unexpected error: " + e);
+  }
+}
+
+function testCheckBoxPropertiesCase(field) {
+  try {
+    testROProperty(field, "exportValues", "Yes");
+    testRIProperty(field, "style", "check");
+    testROProperty(field, "type", "checkbox");
+    testRIProperty(field, "value", "Off");
+    testROProperty(field, "valueAsString", "Off");
+  } catch (e) {
+    app.alert("Unexpected error: " + e);
+  }
+}
+
+function testListBoxPropertiesCase(field) {
+  try {
+    testRWProperty(field, "currentValueIndices", 2, 1);
+  } catch (e) {
+    app.alert("Unexpected error: " + e);
+  }
+}
+
+function testFileSelectPropertiesCase(field) {
+  try {
+    testRIProperty(field, "fileSelect", true);
+  } catch (e) {
+    app.alert("Unexpected error: " + e);
+  }
+}
+
+testProperties();
+endstream
+endobj
+{{xref}}
+{{trailer}}
+{{startxref}}
+%%EOF

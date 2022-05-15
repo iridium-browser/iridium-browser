@@ -1,0 +1,116 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+//
+// **** DO NOT EDIT - this file was automatically generated. ****
+syntax = "proto3";
+
+package cast.v2;
+
+import "cast/cast_core/api/bindings/api_bindings.proto";
+import "cast/cast_core/api/common/application_config.proto";
+import "cast/cast_core/api/common/service_info.proto";
+import "cast/cast_core/api/v2/cast_message.proto";
+import "cast/cast_core/api/v2/url_rewrite.proto";
+import "cast/cast_core/api/web/message_channel.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// This service is implemented by the CastCore and used by Cast application in
+// Runtime to report status and request additional application information. This
+// service is scoped per application.
+service CoreApplicationService {
+  // Returns application config. Idempotent call. Errors are signaled through
+  // the gRPC status code.
+  rpc GetConfig(GetConfigRequest) returns (GetConfigResponse);
+
+  // DEPRECATED
+  // Send a Cast V2 message to core application.
+  rpc SendCastMessage(CastMessageRequest) returns (CastMessageResponse);
+
+  // Notifies Cast Core on the application state changes. The callback must be
+  // called by the Runtime whenever the internal state of the application
+  // changes. Cast Core may discard any resources associated with the
+  // application upon failures.
+  rpc SetApplicationStatus(ApplicationStatusRequest)
+      returns (ApplicationStatusResponse);
+
+  // DEPRECATED
+  // Posts messages between MessagePorts. MessagePorts are connected using other
+  // services (e.g. ApiBindings), then registered with the
+  // MessageConnectorService to communicate over IPC.
+  rpc PostMessage(cast.web.Message) returns (cast.web.MessagePortStatus);
+
+  // DEPRECATED
+  // Gets the list of bindings to early-inject into javascript at page load.
+  rpc GetAll(cast.bindings.GetAllRequest)
+      returns (cast.bindings.GetAllResponse);
+
+  // DEPRECATED
+  // Connects to a binding returned by GetAll.
+  rpc Connect(cast.bindings.ConnectRequest)
+      returns (cast.bindings.ConnectResponse);
+
+  // GetWebUIResource request
+  rpc GetWebUIResource(GetWebUIResourceRequest)
+      returns (GetWebUIResourceResponse);
+}
+
+message GetConfigRequest {
+  // Cast session ID.
+  string cast_session_id = 1;
+}
+
+message GetConfigResponse {
+  // Cast application config.
+  cast.common.ApplicationConfig application_config = 1;
+  // Initial rules to rewrite URL headers.
+  UrlRequestRewriteRules url_rewrite_rules = 2;
+  // CastMedia service info for this application in CastCore.
+  cast.common.ServiceInfo cast_media_service_info = 3;
+}
+
+// Contains information about an application status in the runtime.
+message ApplicationStatusRequest {
+  // The Cast session ID whose application status changed.
+  string cast_session_id = 1;
+
+  // Application state.
+  enum State {
+    STATE_UNDEFINED = 0;  // Added to avoid empty |state| value.
+    STARTED = 1;          // Notifies that application has successfully started.
+    STOPPED = 2;          // Notified that application has stopped or failed to
+                          // start. The |stop_reason| will be populated.
+  }
+  State state = 2;
+
+  // Reason why the application was stopped. Only valid when |state| is STOPPED.
+  enum StopReason {
+    REASON_UNDEFINED = 0;     // Added to avoid empty |stop_reason| value.
+    APPLICATION_REQUEST = 1;  // Receiver application stopped itself.
+    IDLE_TIMEOUT = 2;         // Runtime stopped an idle application.
+    USER_REQUEST = 3;         // User closed the application, e.g.
+                              // via remote control or system UI. (Normally this
+                              // is handled by Cast Core).
+    HTTP_ERROR = 4;           // HTTP error while loading the Application. The
+                              // |http_response_code| will be populated.
+    RUNTIME_ERROR = 5;        // Unrecoverable error in the runtime.
+  }
+  StopReason stop_reason = 3;
+
+  // HTTP response code if Application URL failed to load. Only valid when
+  // |stop_reason| is HTTP_ERROR.
+  int32 http_response_code = 4;
+}
+
+message ApplicationStatusResponse {}
+
+message GetWebUIResourceRequest {
+  // Resource identifier. It can either be name of the resource or a url.
+  string resource_id = 1;
+}
+
+message GetWebUIResourceResponse {
+  // Path to the resource file on device.
+  string resource_path = 1;
+}

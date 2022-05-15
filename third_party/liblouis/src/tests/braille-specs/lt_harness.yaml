@@ -1,0 +1,21 @@
+display: unicode-without-blank.dis
+table:
+  language: lt
+  dots: 8
+  __assert-match: lt.tbl # lt.ctb
+tests:
+  - - Pangram
+    - Įlinkdama fechtuotojo špaga sublykčiojusi pragręžė apvalų arbūzą.
+    - ⡪⠇⠊⠝⠅⠙⠁⠍⠁ ⠋⠑⠉⠓⠞⠥⠕⠞⠕⠚⠕ ⠮⠏⠁⠛⠁ ⠎⠥⠃⠇⠽⠅⠩⠊⠕⠚⠥⠎⠊ ⠏⠗⠁⠛⠗⠱⠣⠜ ⠁⠏⠧⠁⠇⠬ ⠁⠗⠃⠳⠵⠡⠲
+  - - Single digits
+    - 1 2 3 4 5 6 7 8 9 0
+    - ⢁ ⢃ ⢉ ⢙ ⢑ ⢋ ⢛ ⢓ ⢊ ⢚
+  - - Quotation symbols
+    - Programa „Writer“, programa "Notepad", sistema “WordPress”
+    - ⡏⠗⠕⠛⠗⠁⠍⠁ ⡦⡺⠗⠊⠞⠑⠗⡴⠂ ⠏⠗⠕⠛⠗⠁⠍⠁ ⡦⡝⠕⠞⠑⠏⠁⠙⡴⠂ ⠎⠊⠎⠞⠑⠍⠁ ⡦⡺⠕⠗⠙⡏⠗⠑⠎⠎⡴
+  - - Punctuation and other symbols
+    - '= ! + - _ | \\ / [ ] { } ( ) '' " # % ^ & * ~ , ? < > $ £ ¢ @ ; : ° § . ·'
+    - ⠶ ⠖ ⢖ ⠤ ⡸ ⠸ ⡌ ⠌ ⠷ ⠾ ⣪ ⣕ ⡶ ⢶ ⠄ ⠈ ⠼ ⠿ ⢲ ⠯ ⠔ ⢢ ⠂ ⠢ ⢪ ⢕ ⠨ ⡨ ⢐ ⣜ ⠆ ⠒ ⢸ ⢬ ⠲ ⡄
+  - - Dashes and hyphens # Not very visible, but the first dash is en-dash, last one em-dash.
+    - Vilnius–Kaunas; lopšelis-darželis; 1992–1995 m.; — Rimas
+    - ⡧⠊⠇⠝⠊⠥⠎⠤⡅⠁⠥⠝⠁⠎⠆ ⠇⠕⠏⠮⠑⠇⠊⠎⠤⠙⠁⠗⠣⠑⠇⠊⠎⠆ ⢁⢊⢊⢃⠤⢁⢊⢊⢑ ⠍⠲⠆ ⠤ ⡗⠊⠍⠁⠎

@@ -1,0 +1,175 @@
+# Based on http://liblouis.org/braille-specs/polish
+#
+# Copyright © 2019-2021 by Łukasz Golonka <lukasz.golonka@mailbox.org>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode-without-blank.dis
+table:
+  language: pl
+  type: literary
+  __assert-match: pl.tbl
+flags: {testmode: bothDirections}
+tests:
+  # consecutive capital letters
+  - [BIP, ⠨⠨⠃⠊⠏]
+  - [HACCP, ⠨⠨⠓⠁⠉⠉⠏]
+  # consecutive capitals with lover case letter between them
+  - [WSiP, ⠨⠺⠨⠎⠊⠨⠏]
+flags: {testmode: forward}
+tests:
+  # digits with comma between them
+  - ["22,333", ⠼⠃⠃⠂⠉⠉⠉]
+  # digits with dot between them
+  - [22.333, ⠼⠃⠃⠄⠉⠉⠉]
+flags: {testmode: bothDirections}
+tests:
+  # minus sign with white spaces on both sides
+  - [" - "," ⠤ "]
+  # dollar sign
+  - ["22$","⠼⠃⠃⠈⠙"]
+  # percent sign
+  - ["22%","⠼⠃⠃⠼⠚⠴"]
+flags: {testmode: forward}
+tests:
+  # apostrophe
+  - ["Tomorrow is John's birthday", "⠨⠞⠕⠍⠕⠗⠗⠕⠺ ⠊⠎ ⠨⠚⠕⠓⠝⠄⠎ ⠃⠊⠗⠞⠓⠙⠁⠽"]
+  # mathematical operators and signs between numbers
+  - ["2+2=4","⠼⠃⠖⠼⠃⠶⠼⠙"]
+  - ["2*2=4","⠼⠃⠔⠼⠃⠶⠼⠙"]
+  - ["2-2=0","⠼⠃⠤⠼⠃⠶⠼⠚"]
+  - ["1/2+1/2=1","⠼⠁⠲⠼⠃⠖⠼⠁⠲⠼⠃⠶⠼⠁"]
+  # Unicode minus symbol
+  - ["−", "⠤"]
+flags: {testmode: bothDirections}
+tests:
+  - ["2:22","⠼⠃⠒⠼⠃⠃"]
+  # Unicode multiplication symbol
+flags: {testmode: forward}
+tests:
+  - ["2×2=4","⠼⠃⠄⠼⠃⠶⠼⠙"]
+flags: {testmode: bothDirections}
+tests:
+  # backslash
+  - [\\,"⠌"]
+  # at sign
+  - ["aa@a.com","⠁⠁⠜⠁⠄⠉⠕⠍"]
+flags: {testmode: forward}
+tests:
+  # em dash
+  - [—, ⠤]
+  # micro sign
+  - [µ, ⠰⠍]
+  # two apostrophes in a row (not treated as double quotation mark)
+  - ["''","⠄⠄"]
+  # two grave accents in a row (not treated as double quotation mark)
+  - ["``","⠈⠈"]
+flags: {testmode: bothDirections}
+tests:
+  # double quotation mark
+  - ['"xxx"', "⠦⠭⠭⠭⠴"]
+  # letters
+  - [pchnąć w tę łódź jeża lub ośm skrzyń fig, ⠏⠉⠓⠝⠡⠩ ⠺ ⠞⠱ ⠣⠬⠙⠮ ⠚⠑⠯⠁ ⠇⠥⠃ ⠕⠪⠍ ⠎⠅⠗⠵⠽⠹ ⠋⠊⠛]
+  - [Ą, ⠨⠡]
+  - [Ć, ⠨⠩]
+  - [Ę, ⠨⠱]
+  - [Ł, ⠨⠣]
+  - [Ń, ⠨⠹]
+  - [Ó, ⠨⠬]
+  - [Ś, ⠨⠪]
+  - [Ż, ⠨⠯]
+  - [Ź, ⠨⠮]
+  - [A, ⠨⠁]
+  - [B, ⠨⠃]
+  - [C, ⠨⠉]
+  - [D, ⠨⠙]
+  - [E, ⠨⠑]
+  - [F, ⠨⠋]
+  - [G, ⠨⠛]
+  - [H, ⠨⠓]
+  - [I, ⠨⠊]
+  - [J, ⠨⠚]
+  - [K, ⠨⠅]
+  - [L, ⠨⠇]
+  - [M, ⠨⠍]
+  - [N, ⠨⠝]
+  - [O, ⠨⠕]
+  - [P, ⠨⠏]
+  - [Q, ⠨⠟]
+  - [R, ⠨⠗]
+  - [S, ⠨⠎]
+  - [T, ⠨⠞]
+  - [U, ⠨⠥]
+  - [W, ⠨⠺]
+  - [Y, ⠨⠽]
+  - [Z, ⠨⠵]
+  - [X, ⠨⠭]
+  - [V, ⠨⠧]
+  
+  # URLs and file paths: no special handling (no computer braille mode)
+  - [testing.zip, ⠞⠑⠎⠞⠊⠝⠛⠄⠵⠊⠏ ]
+  - [testing12.zip, ⠞⠑⠎⠞⠊⠝⠛⠼⠁⠃⠄⠵⠊⠏ ]
+  - [testFile.zip, ⠞⠑⠎⠞⠨⠋⠊⠇⠑⠄⠵⠊⠏ ]
+  - [testing.tar, ⠞⠑⠎⠞⠊⠝⠛⠄⠞⠁⠗ ]
+  - [testing12.tar, ⠞⠑⠎⠞⠊⠝⠛⠼⠁⠃⠄⠞⠁⠗ ]
+  - [testFile.tar, ⠞⠑⠎⠞⠨⠋⠊⠇⠑⠄⠞⠁⠗ ]
+  - [testing.wav, ⠞⠑⠎⠞⠊⠝⠛⠄⠺⠁⠧ ]
+  - [testing12.wav, ⠞⠑⠎⠞⠊⠝⠛⠼⠁⠃⠄⠺⠁⠧ ]
+  - [testFile.wav, ⠞⠑⠎⠞⠨⠋⠊⠇⠑⠄⠺⠁⠧ ]
+  - [testing.png, ⠞⠑⠎⠞⠊⠝⠛⠄⠏⠝⠛ ]
+  - [testing12.png, ⠞⠑⠎⠞⠊⠝⠛⠼⠁⠃⠄⠏⠝⠛ ]
+  - [testFile.png, ⠞⠑⠎⠞⠨⠋⠊⠇⠑⠄⠏⠝⠛ ]
+  - [testing.jpg, ⠞⠑⠎⠞⠊⠝⠛⠄⠚⠏⠛ ]
+  - [testing12.jpg, ⠞⠑⠎⠞⠊⠝⠛⠼⠁⠃⠄⠚⠏⠛ ]
+  - [testFile.jpg, ⠞⠑⠎⠞⠨⠋⠊⠇⠑⠄⠚⠏⠛ ]
+  - [testing.gif, ⠞⠑⠎⠞⠊⠝⠛⠄⠛⠊⠋ ]
+  - [testing12.gif, ⠞⠑⠎⠞⠊⠝⠛⠼⠁⠃⠄⠛⠊⠋ ]
+  - [testFile.gif, ⠞⠑⠎⠞⠨⠋⠊⠇⠑⠄⠛⠊⠋ ]
+  - [testing.txt, ⠞⠑⠎⠞⠊⠝⠛⠄⠞⠭⠞ ]
+  - [testing12.txt, ⠞⠑⠎⠞⠊⠝⠛⠼⠁⠃⠄⠞⠭⠞ ]
+  - [testFile.txt, ⠞⠑⠎⠞⠨⠋⠊⠇⠑⠄⠞⠭⠞ ]
+  - [testing.tex, ⠞⠑⠎⠞⠊⠝⠛⠄⠞⠑⠭ ]
+  - [testing12.tex, ⠞⠑⠎⠞⠊⠝⠛⠼⠁⠃⠄⠞⠑⠭ ]
+  - [testFile.tex, ⠞⠑⠎⠞⠨⠋⠊⠇⠑⠄⠞⠑⠭ ]
+  - [testing.html, ⠞⠑⠎⠞⠊⠝⠛⠄⠓⠞⠍⠇ ]
+  - [testing12.html, ⠞⠑⠎⠞⠊⠝⠛⠼⠁⠃⠄⠓⠞⠍⠇ ]
+  - [testFile.html, ⠞⠑⠎⠞⠨⠋⠊⠇⠑⠄⠓⠞⠍⠇ ]
+  - [testing.htm, ⠞⠑⠎⠞⠊⠝⠛⠄⠓⠞⠍ ]
+  - [testing12.htm, ⠞⠑⠎⠞⠊⠝⠛⠼⠁⠃⠄⠓⠞⠍ ]
+  - [testFile.htm, ⠞⠑⠎⠞⠨⠋⠊⠇⠑⠄⠓⠞⠍ ]
+  - [testing.doc, ⠞⠑⠎⠞⠊⠝⠛⠄⠙⠕⠉ ]
+  - [testing12.doc, ⠞⠑⠎⠞⠊⠝⠛⠼⠁⠃⠄⠙⠕⠉ ]
+  - [testFile.doc, ⠞⠑⠎⠞⠨⠋⠊⠇⠑⠄⠙⠕⠉ ]
+  - [testing.docx, ⠞⠑⠎⠞⠊⠝⠛⠄⠙⠕⠉⠭ ]
+  - [testing12.docx, ⠞⠑⠎⠞⠊⠝⠛⠼⠁⠃⠄⠙⠕⠉⠭ ]
+  - [testFile.docx, ⠞⠑⠎⠞⠨⠋⠊⠇⠑⠄⠙⠕⠉⠭ ]
+  - [mydomain.org/test.mp3, ⠍⠽⠙⠕⠍⠁⠊⠝⠄⠕⠗⠛⠲⠞⠑⠎⠞⠄⠍⠏⠼⠉]
+  - [mydomain.net/test.mp3, ⠍⠽⠙⠕⠍⠁⠊⠝⠄⠝⠑⠞⠲⠞⠑⠎⠞⠄⠍⠏⠼⠉]
+  - [mydomain.mil/test.mp3, ⠍⠽⠙⠕⠍⠁⠊⠝⠄⠍⠊⠇⠲⠞⠑⠎⠞⠄⠍⠏⠼⠉]
+  - [mydomain.edu/test.mp3, ⠍⠽⠙⠕⠍⠁⠊⠝⠄⠑⠙⠥⠲⠞⠑⠎⠞⠄⠍⠏⠼⠉]
+  - [mydomain.gov/test.mp3, ⠍⠽⠙⠕⠍⠁⠊⠝⠄⠛⠕⠧⠲⠞⠑⠎⠞⠄⠍⠏⠼⠉]
+  - [mydomain.com/test.mp3, ⠍⠽⠙⠕⠍⠁⠊⠝⠄⠉⠕⠍⠲⠞⠑⠎⠞⠄⠍⠏⠼⠉]
+  - [www.mydomain.com/test.mp3, ⠺⠺⠺⠄⠍⠽⠙⠕⠍⠁⠊⠝⠄⠉⠕⠍⠲⠞⠑⠎⠞⠄⠍⠏⠼⠉]
+  - ["https://mydomain.com/test.mp3", ⠓⠞⠞⠏⠎⠒⠲⠲⠍⠽⠙⠕⠍⠁⠊⠝⠄⠉⠕⠍⠲⠞⠑⠎⠞⠄⠍⠏⠼⠉]
+flags: {testmode: forward}
+tests:
+  # Indexes squared, cubed etc.
+  - [2² = 4, ⠼⠃⠬⠆ ⠶ ⠼⠙]
+  - [2³ = 8, ⠼⠃⠬⠒ ⠶ ⠼⠓]
+  - [2¹ = 2, ⠼⠃⠬⠂ ⠶ ⠼⠃]
+  # Fractions:
+  - [¼, ⠼⠁⠲]
+  - [½, ⠼⠁⠆]
+  - [¾, ⠼⠉⠲]
+  - [¼ + ½ = ¾, ⠼⠁⠲ ⠖ ⠼⠁⠆ ⠶ ⠼⠉⠲]
+
+  # Tests for underscore.
+  # Unfortunately there is no official standard to follow for this character therefore use dot 6 following the most common representation in screen readers.
+  # The previous representation (dots 4-6) can be easily confused with a capital letter indicator.
+  - [testowy_plik_o_długiej_nazwie.format, ⠞⠑⠎⠞⠕⠺⠽⠠⠏⠇⠊⠅⠠⠕⠠⠙⠣⠥⠛⠊⠑⠚⠠⠝⠁⠵⠺⠊⠑⠄⠋⠕⠗⠍⠁⠞]
+  - ["_Alicja", ⠠⠨⠁⠇⠊⠉⠚⠁]

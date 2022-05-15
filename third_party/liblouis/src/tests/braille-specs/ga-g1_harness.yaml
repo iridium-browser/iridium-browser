@@ -1,0 +1,69 @@
+# Updated Irish braille (UIB): http://liblouis.org/braille-specs/irish/#updated-irish-braille-2019
+#
+# Copyright © 2019 by Ronan McGuirk, <ronan.p.mcguirk@gmail.com>
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+#
+# ----------------------------------------------------------------------------------------------
+
+display: unicode.dis
+table:
+  language: ga
+  grade: 1
+  system: INBAF
+  __assert-match: ga-g1.utb
+tests:
+- ["Tá Áine ar scoil.", ⠠⠞⠯⠀⠠⠯⠊⠝⠑⠀⠁⠗⠀⠎⠉⠕⠊⠇⠲]
+- ["Éist leis an éan.", ⠠⠿⠊⠎⠞⠀⠇⠑⠊⠎⠀⠁⠝⠀⠿⠁⠝⠲]
+- ["Íosfaidh Síle a dinnéar.", ⠠⠷⠕⠎⠋⠁⠊⠙⠓⠀⠠⠎⠷⠇⠑⠀⠁⠀⠙⠊⠝⠝⠿⠁⠗⠲]
+- ["Tá Órla san óstán.", ⠠⠞⠯⠀⠠⠮⠗⠇⠁⠀⠎⠁⠝⠀⠮⠎⠞⠯⠝⠲]
+- ["D'ith  Úna úl glas.", ⠠⠙⠄⠊⠞⠓⠀⠀⠠⠾⠝⠁⠀⠾⠇⠀⠛⠇⠁⠎⠲]
+- ["Léigh é caibidil agus véarsa agus scríobh do thuairim síos.", ⠠⠇⠿⠊⠛⠓⠀⠿⠀⠉⠁⠊⠃⠊⠙⠊⠇⠀⠁⠛⠥⠎⠀⠧⠿⠁⠗⠎⠁⠀⠁⠛⠥⠎⠀⠎⠉⠗⠷⠕⠃⠓⠀⠙⠕⠀⠞⠓⠥⠁⠊⠗⠊⠍⠀⠎⠷⠕⠎⠲]
+- ["Téacs as An Triail Scagadh agus Nótaí.", ⠠⠞⠿⠁⠉⠎⠀⠁⠎⠀⠠⠁⠝⠀⠠⠞⠗⠊⠁⠊⠇⠀⠠⠎⠉⠁⠛⠁⠙⠓⠀⠁⠛⠥⠎⠀⠠⠝⠮⠞⠁⠷⠲]
+- ["Maidir le Liam an deartháir eile rinne sé iarracht.", ⠠⠍⠁⠊⠙⠊⠗⠀⠇⠑⠀⠠⠇⠊⠁⠍⠀⠁⠝⠀⠙⠑⠁⠗⠞⠓⠯⠊⠗⠀⠑⠊⠇⠑⠀⠗⠊⠝⠝⠑⠀⠎⠿⠀⠊⠁⠗⠗⠁⠉⠓⠞⠲]
+- ["Léiríodh an dráma seo den chéad uair ar 22ú Meán Fómhair 1964 le linn Féile Amharclainne i Halla an Damer i mBaile Átha Cliath.", ⠠⠇⠿⠊⠗⠷⠕⠙⠓⠀⠁⠝⠀⠙⠗⠯⠍⠁⠀⠎⠑⠕⠀⠙⠑⠝⠀⠉⠓⠿⠁⠙⠀⠥⠁⠊⠗⠀⠁⠗⠀⠼⠃⠃⠾⠀⠠⠍⠑⠯⠝⠀⠠⠋⠮⠍⠓⠁⠊⠗⠀⠼⠁⠊⠋⠙⠀⠇⠑⠀⠇⠊⠝⠝⠀⠠⠋⠿⠊⠇⠑⠀⠠⠁⠍⠓⠁⠗⠉⠇⠁⠊⠝⠝⠑⠀⠊⠀⠠⠓⠁⠇⠇⠁⠀⠁⠝⠀⠠⠙⠁⠍⠑⠗⠀⠊⠀⠍⠠⠃⠁⠊⠇⠑⠀⠠⠯⠞⠓⠁⠀⠠⠉⠇⠊⠁⠞⠓⠲]
+- ["Ach lean Mixer agus a bhuíon ag éisteacht leis nuair nach raibh sé ar a laethanta saoire in óstán Mountjoy.", ⠠⠁⠉⠓⠀⠇⠑⠁⠝⠀⠠⠍⠊⠭⠑⠗⠀⠁⠛⠥⠎⠀⠁⠀⠃⠓⠥⠷⠕⠝⠀⠁⠛⠀⠿⠊⠎⠞⠑⠁⠉⠓⠞⠀⠇⠑⠊⠎⠀⠝⠥⠁⠊⠗⠀⠝⠁⠉⠓⠀⠗⠁⠊⠃⠓⠀⠎⠿⠀⠁⠗⠀⠁⠀⠇⠁⠑⠞⠓⠁⠝⠞⠁⠀⠎⠁⠕⠊⠗⠑⠀⠊⠝⠀⠮⠎⠞⠯⠝⠀⠠⠍⠕⠥⠝⠞⠚⠕⠽⠲]
+- ["Ó tabhair jab dom le do thoil!", ⠠⠮⠀⠞⠁⠃⠓⠁⠊⠗⠀⠚⠁⠃⠀⠙⠕⠍⠀⠇⠑⠀⠙⠕⠀⠞⠓⠕⠊⠇⠖]
+- ["Oíche eile, chuala mé Dean Swift ag caint le Strongbow. Chuala mé Handel ag seinm ceol san Ardeaglais, Messiah II á chumadh aige.", ⠠⠕⠷⠉⠓⠑⠀⠑⠊⠇⠑⠂⠀⠉⠓⠥⠁⠇⠁⠀⠍⠿⠀⠠⠙⠑⠁⠝⠀⠠⠎⠺⠊⠋⠞⠀⠁⠛⠀⠉⠁⠊⠝⠞⠀⠇⠑⠀⠠⠎⠞⠗⠕⠝⠛⠃⠕⠺⠲⠀⠠⠉⠓⠥⠁⠇⠁⠀⠍⠿⠀⠠⠓⠁⠝⠙⠑⠇⠀⠁⠛⠀⠎⠑⠊⠝⠍⠀⠉⠑⠕⠇⠀⠎⠁⠝⠀⠠⠁⠗⠙⠑⠁⠛⠇⠁⠊⠎⠂⠀⠠⠍⠑⠎⠎⠊⠁⠓⠀⠠⠠⠊⠊⠀⠯⠀⠉⠓⠥⠍⠁⠙⠓⠀⠁⠊⠛⠑⠲]
+- ["Nuair a bhíonn m'Uncail Albert anseo, bíonn mo dhóthain airgid agam.", ⠠⠝⠥⠁⠊⠗⠀⠁⠀⠃⠓⠷⠕⠝⠝⠀⠍⠄⠠⠥⠝⠉⠁⠊⠇⠀⠠⠁⠇⠃⠑⠗⠞⠀⠁⠝⠎⠑⠕⠂⠀⠃⠷⠕⠝⠝⠀⠍⠕⠀⠙⠓⠮⠞⠓⠁⠊⠝⠀⠁⠊⠗⠛⠊⠙⠀⠁⠛⠁⠍⠲]
+- ["Uaireanta, nuair nach raibh a dhóthain airgead ag an rialtas, d'iarradh siad ar a Uncail Albert é a chló.", ⠠⠥⠁⠊⠗⠑⠁⠝⠞⠁⠂⠀⠝⠥⠁⠊⠗⠀⠝⠁⠉⠓⠀⠗⠁⠊⠃⠓⠀⠁⠀⠙⠓⠮⠞⠓⠁⠊⠝⠀⠁⠊⠗⠛⠑⠁⠙⠀⠁⠛⠀⠁⠝⠀⠗⠊⠁⠇⠞⠁⠎⠂⠀⠙⠄⠊⠁⠗⠗⠁⠙⠓⠀⠎⠊⠁⠙⠀⠁⠗⠀⠁⠀⠠⠥⠝⠉⠁⠊⠇⠀⠠⠁⠇⠃⠑⠗⠞⠀⠿⠀⠁⠀⠉⠓⠇⠮⠲]
+- ["agus go raibh an pobal Caitliceach an-dílis don eaglais chéanna", ⠁⠛⠥⠎⠀⠛⠕⠀⠗⠁⠊⠃⠓⠀⠁⠝⠀⠏⠕⠃⠁⠇⠀⠠⠉⠁⠊⠞⠇⠊⠉⠑⠁⠉⠓⠀⠁⠝⠤⠙⠷⠇⠊⠎⠀⠙⠕⠝⠀⠑⠁⠛⠇⠁⠊⠎⠀⠉⠓⠿⠁⠝⠝⠁]
+- ["D'inis Máire dó go mbeadh sí gnóthach an oíche sin - agus an oíche ina dhiaidh sin chomh maith.", ⠠⠙⠄⠊⠝⠊⠎⠀⠠⠍⠯⠊⠗⠑⠀⠙⠮⠀⠛⠕⠀⠍⠃⠑⠁⠙⠓⠀⠎⠷⠀⠛⠝⠮⠞⠓⠁⠉⠓⠀⠁⠝⠀⠕⠷⠉⠓⠑⠀⠎⠊⠝⠀⠤⠀⠁⠛⠥⠎⠀⠁⠝⠀⠕⠷⠉⠓⠑⠀⠊⠝⠁⠀⠙⠓⠊⠁⠊⠙⠓⠀⠎⠊⠝⠀⠉⠓⠕⠍⠓⠀⠍⠁⠊⠞⠓⠲]
+- ["Tréimhse aisteach i stair na hÉireann ba ea an tréimhse iar-chogaidh ó 1945 go 1960.", ⠠⠞⠗⠿⠊⠍⠓⠎⠑⠀⠁⠊⠎⠞⠑⠁⠉⠓⠀⠊⠀⠎⠞⠁⠊⠗⠀⠝⠁⠀⠓⠠⠿⠊⠗⠑⠁⠝⠝⠀⠃⠁⠀⠑⠁⠀⠁⠝⠀⠞⠗⠿⠊⠍⠓⠎⠑⠀⠊⠁⠗⠤⠉⠓⠕⠛⠁⠊⠙⠓⠀⠮⠀⠼⠁⠊⠙⠑⠀⠛⠕⠀⠼⠁⠊⠋⠚⠲]
+- ["Bíonn sé ag déanamh an obair.", ⠠⠃⠷⠕⠝⠝⠀⠎⠿⠀⠁⠛⠀⠙⠿⠁⠝⠁⠍⠓⠀⠁⠝⠀⠕⠃⠁⠊⠗⠲]
+- ["Cathain a bhíonn sé á déanamh?", ⠠⠉⠁⠞⠓⠁⠊⠝⠀⠁⠀⠃⠓⠷⠕⠝⠝⠀⠎⠿⠀⠯⠀⠙⠿⠁⠝⠁⠍⠓⠦]
+- ["Cén caoi a mbíonn siad ag déanamh na dtascanna?", ⠠⠉⠿⠝⠀⠉⠁⠕⠊⠀⠁⠀⠍⠃⠷⠕⠝⠝⠀⠎⠊⠁⠙⠀⠁⠛⠀⠙⠿⠁⠝⠁⠍⠓⠀⠝⠁⠀⠙⠞⠁⠎⠉⠁⠝⠝⠁⠦]
+- ["B'fhéidir gur féidir leo iad a dhéanamh gach lá!", ⠠⠃⠄⠋⠓⠿⠊⠙⠊⠗⠀⠛⠥⠗⠀⠋⠿⠊⠙⠊⠗⠀⠇⠑⠕⠀⠊⠁⠙⠀⠁⠀⠙⠓⠿⠁⠝⠁⠍⠓⠀⠛⠁⠉⠓⠀⠇⠯⠖]
+- ["I ngach cás is féidir iad a dhéanamh lá eile.", ⠠⠊⠀⠝⠛⠁⠉⠓⠀⠉⠯⠎⠀⠊⠎⠀⠋⠿⠊⠙⠊⠗⠀⠊⠁⠙⠀⠁⠀⠙⠓⠿⠁⠝⠁⠍⠓⠀⠇⠯⠀⠑⠊⠇⠑⠲]
+- ["É cóngarach go leor don chathair, ach i slite eile bhí sé i bhfad uaithi freisin.", ⠠⠿⠀⠉⠮⠝⠛⠁⠗⠁⠉⠓⠀⠛⠕⠀⠇⠑⠕⠗⠀⠙⠕⠝⠀⠉⠓⠁⠞⠓⠁⠊⠗⠂⠀⠁⠉⠓⠀⠊⠀⠎⠇⠊⠞⠑⠀⠑⠊⠇⠑⠀⠃⠓⠷⠀⠎⠿⠀⠊⠀⠃⠓⠋⠁⠙⠀⠥⠁⠊⠞⠓⠊⠀⠋⠗⠑⠊⠎⠊⠝⠲]
+- ["Tugadh bualadh bos dóibh agus iad ag imeacht ón halla mór. Bígí aireach! a dúirt na príosúnaigh leo.", ⠠⠞⠥⠛⠁⠙⠓⠀⠃⠥⠁⠇⠁⠙⠓⠀⠃⠕⠎⠀⠙⠮⠊⠃⠓⠀⠁⠛⠥⠎⠀⠊⠁⠙⠀⠁⠛⠀⠊⠍⠑⠁⠉⠓⠞⠀⠮⠝⠀⠓⠁⠇⠇⠁⠀⠍⠮⠗⠲⠀⠠⠃⠷⠛⠷⠀⠁⠊⠗⠑⠁⠉⠓⠖⠀⠁⠀⠙⠾⠊⠗⠞⠀⠝⠁⠀⠏⠗⠷⠕⠎⠾⠝⠁⠊⠛⠓⠀⠇⠑⠕⠲]
+- ["Ní rabhamar sa phríosún.", ⠠⠝⠷⠀⠗⠁⠃⠓⠁⠍⠁⠗⠀⠎⠁⠀⠏⠓⠗⠷⠕⠎⠾⠝⠲]
+- ["Bhí gach duine ag tabhairt moladh dóibh.", ⠠⠃⠓⠷⠀⠛⠁⠉⠓⠀⠙⠥⠊⠝⠑⠀⠁⠛⠀⠞⠁⠃⠓⠁⠊⠗⠞⠀⠍⠕⠇⠁⠙⠓⠀⠙⠮⠊⠃⠓⠲]
+- ["Bhí siad á dtabhairt mórthimpeall an phríosúin liom.", ⠠⠃⠓⠷⠀⠎⠊⠁⠙⠀⠯⠀⠙⠞⠁⠃⠓⠁⠊⠗⠞⠀⠍⠮⠗⠞⠓⠊⠍⠏⠑⠁⠇⠇⠀⠁⠝⠀⠏⠓⠗⠷⠕⠎⠾⠊⠝⠀⠇⠊⠕⠍⠲]
+- ["Bhíomar ag dul suas staighre.", ⠠⠃⠓⠷⠕⠍⠁⠗⠀⠁⠛⠀⠙⠥⠇⠀⠎⠥⠁⠎⠀⠎⠞⠁⠊⠛⠓⠗⠑⠲]
+- ["Bhí píos aráin againn.", ⠠⠃⠓⠷⠀⠏⠷⠕⠎⠀⠁⠗⠯⠊⠝⠀⠁⠛⠁⠊⠝⠝⠲]
+- ["Ní raibh aon im ar an bpíosa a bhí agam. Thug mé mo phíosa dó ach níor ith sé é.", ⠠⠝⠷⠀⠗⠁⠊⠃⠓⠀⠁⠕⠝⠀⠊⠍⠀⠁⠗⠀⠁⠝⠀⠃⠏⠷⠕⠎⠁⠀⠁⠀⠃⠓⠷⠀⠁⠛⠁⠍⠲⠀⠠⠞⠓⠥⠛⠀⠍⠿⠀⠍⠕⠀⠏⠓⠷⠕⠎⠁⠀⠙⠮⠀⠁⠉⠓⠀⠝⠷⠕⠗⠀⠊⠞⠓⠀⠎⠿⠀⠿⠲]
+- ["Chuamar chun leabhar Braille a fháil. Gheomar é .", ⠠⠉⠓⠥⠁⠍⠁⠗⠀⠉⠓⠥⠝⠀⠇⠑⠁⠃⠓⠁⠗⠀⠠⠃⠗⠁⠊⠇⠇⠑⠀⠁⠀⠋⠓⠯⠊⠇⠲⠀⠠⠛⠓⠑⠕⠍⠁⠗⠀⠿⠀⠲]
+- ["Ní rabhamar ann. Chuaigh sé abhaile.", ⠠⠝⠷⠀⠗⠁⠃⠓⠁⠍⠁⠗⠀⠁⠝⠝⠲⠀⠠⠉⠓⠥⠁⠊⠛⠓⠀⠎⠿⠀⠁⠃⠓⠁⠊⠇⠑⠲]
+- ["Príomh-Aire", ⠠⠏⠗⠷⠕⠍⠓⠤⠠⠁⠊⠗⠑]
+- ["Gheobhaidh mé obair mhaith mar shampla mar péintéir.", ⠠⠛⠓⠑⠕⠃⠓⠁⠊⠙⠓⠀⠍⠿⠀⠕⠃⠁⠊⠗⠀⠍⠓⠁⠊⠞⠓⠀⠍⠁⠗⠀⠎⠓⠁⠍⠏⠇⠁⠀⠍⠁⠗⠀⠏⠿⠊⠝⠞⠿⠊⠗⠲]
+- ["Ní bheidh a fhios agat conas a iompóidh do leanbh amach. ", ⠠⠝⠷⠀⠃⠓⠑⠊⠙⠓⠀⠁⠀⠋⠓⠊⠕⠎⠀⠁⠛⠁⠞⠀⠉⠕⠝⠁⠎⠀⠁⠀⠊⠕⠍⠏⠮⠊⠙⠓⠀⠙⠕⠀⠇⠑⠁⠝⠃⠓⠀⠁⠍⠁⠉⠓⠲⠀]
+- ["Chonaic an tAire an t-asal.", ⠠⠉⠓⠕⠝⠁⠊⠉⠀⠁⠝⠀⠞⠠⠁⠊⠗⠑⠀⠁⠝⠀⠞⠤⠁⠎⠁⠇⠲]
+- ["Baineann Ní Ghráda leas as teicníc an iardhearcaidh (flashback) freisin.", ⠠⠃⠁⠊⠝⠑⠁⠝⠝⠀⠠⠝⠷⠀⠠⠛⠓⠗⠯⠙⠁⠀⠇⠑⠁⠎⠀⠁⠎⠀⠞⠑⠊⠉⠝⠷⠉⠀⠁⠝⠀⠊⠁⠗⠙⠓⠑⠁⠗⠉⠁⠊⠙⠓⠀⠐⠣⠋⠇⠁⠎⠓⠃⠁⠉⠅⠐⠜⠀⠋⠗⠑⠊⠎⠊⠝⠲]
+- ["Ghlaoigh siad ar an zú is tháinig na fir.", ⠠⠛⠓⠇⠁⠕⠊⠛⠓⠀⠎⠊⠁⠙⠀⠁⠗⠀⠁⠝⠀⠵⠾⠀⠊⠎⠀⠞⠓⠯⠊⠝⠊⠛⠀⠝⠁⠀⠋⠊⠗⠲]
+- ["An é €3.50 an costas ceart?", ⠠⠁⠝⠀⠿⠀⠈⠑⠼⠉⠲⠑⠚⠀⠁⠝⠀⠉⠕⠎⠞⠁⠎⠀⠉⠑⠁⠗⠞⠦]
+- ["bád", ⠃⠯⠙]
+- ["Post ⁊ Telegrafa", ⠠⠏⠕⠎⠞⠀⠎⠀⠠⠞⠑⠇⠑⠛⠗⠁⠋⠁]
+- ["Ċuaiġ bé ṁórṡáċ le dlúṫspád fíorḟinn trí hata mo ḋea-ṗorcáin ḃig, ", ⠠⠡⠥⠁⠊⠣⠀⠃⠿⠀⠍⠓⠮⠗⠩⠯⠡⠀⠇⠑⠀⠙⠇⠾⠹⠎⠏⠯⠙⠀⠋⠷⠕⠗⠋⠓⠊⠝⠝⠀⠞⠗⠷⠀⠓⠁⠞⠁⠀⠍⠕⠀⠙⠓⠑⠁⠤⠏⠓⠕⠗⠉⠯⠊⠝⠀⠃⠓⠊⠛⠂⠀]
+- ["Ḃí", ⠠⠃⠓⠷]
+- ["Ċuaiġ ", ⠠⠡⠥⠁⠊⠣⠀]
+- ["Ḋún mé é", ⠠⠙⠓⠾⠝⠀⠍⠿⠀⠿]
+- ["Ḟionn", ⠠⠋⠓⠊⠕⠝⠝]
+- ["Ġaeilge", ⠠⠣⠁⠑⠊⠇⠛⠑]
+- ["Ṁol sé", ⠠⠍⠓⠕⠇⠀⠎⠿]
+- ["Ṗeann", ⠠⠏⠓⠑⠁⠝⠝]
+- ["Ṡíl mé", ⠠⠩⠷⠇⠀⠍⠿]
+- ["Ṫug sé", ⠠⠹⠥⠛⠀⠎⠿]

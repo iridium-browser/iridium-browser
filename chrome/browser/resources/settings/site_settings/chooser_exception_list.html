@@ -1,0 +1,21 @@
+    <style include="cr-shared-style settings-shared">
+      #empty-list-message {
+        padding: 0 var(--cr-section-padding);
+        padding-top: 30px;
+      }
+    </style>
+
+    <div id="empty-list-message"
+        hidden$="[[hasExceptions_(chooserExceptions.*)]]">
+      <div class="secondary">[[emptyListMessage_]]</div>
+    </div>
+
+    <template is="dom-repeat" items="[[chooserExceptions]]">
+      <chooser-exception-list-entry exception="[[item]]"
+          on-show-tooltip="onShowTooltip_">
+      </chooser-exception-list-entry>
+    </template>
+
+    <paper-tooltip id="tooltip" manual-mode position="top">
+      [[tooltipText_]]
+    </paper-tooltip>

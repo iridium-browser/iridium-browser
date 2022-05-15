@@ -1,0 +1,8 @@
+include_rules = [
+  "+components/os_crypt",
+  "+components/sync/base",
+  "+components/sync/engine",
+  "+components/sync/model",
+  "+components/sync/protocol",
+  "+crypto",
+]

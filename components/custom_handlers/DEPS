@@ -1,0 +1,16 @@
+include_rules = [
+  "+components/keyed_service",
+  "+components/permissions",
+  "+components/pref_registry",
+  "+components/prefs",
+  "+components/strings",
+  "+components/sync_preferences",
+  "+components/user_prefs",
+  "+content/public/browser",
+  "+content/public/common",
+  "+content/public/test",
+  "+net/base",
+  "+third_party/blink/public/common",
+  "+services/network/public/cpp",
+  "+ui/base/l10n",
+]

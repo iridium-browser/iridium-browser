@@ -1,0 +1,127 @@
+# Copyright 2018 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/ui_mode.gni")
+import("//chrome/common/features.gni")
+import("//printing/buildflags/buildflags.gni")
+import("//tools/grit/grit_rule.gni")
+import("//tools/grit/preprocess_if_expr.gni")
+import("//tools/polymer/html_to_js.gni")
+import("//tools/polymer/html_to_wrapper.gni")
+import("//tools/typescript/ts_library.gni")
+import("//ui/webui/resources/tools/generate_grd.gni")
+import("../tools/optimize_webui.gni")
+import("./print_preview.gni")
+
+assert(enable_print_preview, "enable_print_preview check failed")
+
+preprocess_folder = "preprocessed"
+
+if (optimize_webui) {
+  build_manifest = "build_manifest.json"
+
+  optimize_webui("build") {
+    host = "print"
+    input = rebase_path("$target_gen_dir/tsc", root_build_dir)
+    js_out_files = [ "print_preview.rollup.js" ]
+    js_module_in_files = [ "print_preview.js" ]
+    out_manifest = "$target_gen_dir/$build_manifest"
+
+    deps = [
+      ":build_ts",
+      "../../../../ui/webui/resources:preprocess",
+    ]
+    excludes = [
+      "chrome://resources/js/cr.m.js",
+      "pdf/pdf_scripting_api.js",
+    ]
+  }
+}
+
+generate_grd("build_grd") {
+  input_files = [ "print_preview.html" ]
+  input_files_base_dir = rebase_path(".", "//")
+  deps = [ "../pdf:build_print_preview_grdp" ]
+  grdp_files = [ "$root_gen_dir/chrome/browser/resources/pdf/print_preview_pdf_resources.grdp" ]
+  if (optimize_webui) {
+    deps += [ ":build" ]
+    resource_path_rewrites = [ "print_preview.rollup.js|print_preview.js" ]
+    manifest_files = [ "$target_gen_dir/$build_manifest" ]
+  } else {
+    deps += [ ":build_ts" ]
+    manifest_files = [ "$target_gen_dir/tsconfig.manifest" ]
+  }
+  grd_prefix = "print_preview"
+  out_grd = "$target_gen_dir/${grd_prefix}_resources.grd"
+}
+
+html_to_js("css_wrapper_files") {
+  js_files = css_wrapper_files
+}
+
+html_to_wrapper("html_wrapper_files") {
+  in_files = html_files
+}
+
+preprocess_if_expr("preprocess") {
+  in_folder = "./"
+  out_folder = "$target_gen_dir/$preprocess_folder"
+  in_files = ts_files
+}
+
+preprocess_if_expr("preprocess_generated") {
+  deps = [
+    ":css_wrapper_files",
+    ":html_wrapper_files",
+  ]
+  in_folder = target_gen_dir
+  out_folder = "$target_gen_dir/$preprocess_folder"
+  in_files = html_wrapper_files + css_wrapper_files
+}
+
+grit("resources") {
+  defines = chrome_grit_defines
+
+  # These arguments are needed since the grd is generated at build time.
+  enable_input_discovery_for_gn_analyze = false
+  source = "$target_gen_dir/print_preview_resources.grd"
+  deps = [ ":build_grd" ]
+
+  outputs = [
+    "grit/print_preview_resources.h",
+    "grit/print_preview_resources_map.cc",
+    "grit/print_preview_resources_map.h",
+    "print_preview_resources.pak",
+  ]
+  output_dir = "$root_gen_dir/chrome"
+}
+
+ts_library("build_ts") {
+  root_dir = "$target_gen_dir/$preprocess_folder"
+  out_dir = "$target_gen_dir/tsc"
+  composite = true
+  tsconfig_base = "tsconfig_base.json"
+  in_files = ts_files + css_wrapper_files + html_wrapper_files
+
+  deps = [
+    "//chrome/browser/resources/pdf:build_ts",
+    "//third_party/polymer/v3_0:library",
+    "//ui/webui/resources:library",
+  ]
+
+  definitions = [
+    "//tools/typescript/definitions/chrome_send.d.ts",
+    "//tools/typescript/definitions/mime_handler_private.d.ts",
+    "//tools/typescript/definitions/pending.d.ts",
+  ]
+
+  path_mappings = [ "chrome://print/pdf/*|" + rebase_path(
+                        "$root_gen_dir/chrome/browser/resources/pdf/tsc/*",
+                        target_gen_dir) ]
+
+  extra_deps = [
+    ":preprocess",
+    ":preprocess_generated",
+  ]
+}

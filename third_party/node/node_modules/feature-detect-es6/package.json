@@ -1,0 +1,42 @@
+{
+  "name": "feature-detect-es6",
+  "author": "Lloyd Brookes <75pound@gmail.com>",
+  "version": "1.5.0",
+  "description": "Detect which ES6 (ES2015 and above) features are available",
+  "repository": "https://github.com/75lb/feature-detect-es6.git",
+  "license": "MIT",
+  "keywords": [
+    "detect",
+    "es6",
+    "feature",
+    "class",
+    "arrow function",
+    "let",
+    "array",
+    "Map",
+    "Set",
+    "generator",
+    "promise",
+    "template string",
+    "symbol",
+    "destructuring",
+    "language",
+    "es2015",
+    "spread",
+    "default parameter value"
+  ],
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "echo 'Run the appropriate script in test/ for your version of node.'",
+    "docs": "jsdoc2md -t README.hbs index.js > README.md; echo"
+  },
+  "devDependencies": {
+    "jsdoc-to-markdown": "^4.0.1",
+    "tape": "^4.9.0"
+  },
+  "dependencies": {
+    "array-back": "^1.0.4"
+  }
+}

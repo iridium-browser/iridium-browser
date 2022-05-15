@@ -1,0 +1,195 @@
+// Copyright 2020 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+module content.mojom;
+
+import "url/mojom/origin.mojom";
+import "url/mojom/url.mojom";
+
+// Represents AttributionSourceType.
+enum AttributionSourceType {
+  kNavigation,
+  kEvent,
+};
+
+// Represents `AttributionReport::EventLevelData::Id`.
+// Will be used to issue commands for individual reports.
+struct AttributionReportEventLevelID {
+  int64 value;
+};
+
+// Represents `AttributionReport::AggregatableAttributionData::Id`.
+// Will be used to issue commands for individual reports.
+struct AttributionReportAggregatableAttributionID {
+  int64 value;
+};
+
+// Contains event-level data to be displayed.
+struct WebUIAttributionReportEventLevelData {
+  // Allows the WebUI to issue commands for individual reports.
+  // Not intended to be displayed.
+  AttributionReportEventLevelID? id;
+  int64 priority;
+  bool attributed_truthfully;
+};
+
+// Represents `AttributionAggregatableKey`.
+struct AttributionAggregatableKey {
+  uint64 high_bits;
+  uint64 low_bits;
+};
+
+// Represents `AggregatableHistogramContribution`.
+struct AttributionReportHistogramContribution {
+  AttributionAggregatableKey key;
+  uint32 value;
+};
+
+// Contains aggregatable attribution data to be displayed.
+struct WebUIAttributionReportAggregatableAttributionData {
+  // Allows the WebUI to issue commands for individual reports.
+  // Not intended to be displayed.
+  AttributionReportAggregatableAttributionID? id;
+  array<AttributionReportHistogramContribution> contributions;
+};
+
+union WebUIAttributionReportData {
+  WebUIAttributionReportEventLevelData event_level_data;
+  WebUIAttributionReportAggregatableAttributionData
+      aggregatable_attribution_data;
+};
+
+// Struct containing stored data that will be sent in a future attribution
+// report.
+struct WebUIAttributionReport {
+  string attribution_destination;
+  url.mojom.Url report_url;
+  double trigger_time;
+  double report_time;
+  string report_body;
+
+  enum Status {
+    kPending,
+    kDroppedDueToExcessiveAttributions,
+    kDroppedDueToExcessiveReportingOrigins,
+    kDroppedDueToLowPriority,
+    kDroppedForNoise,
+    kDeduplicated,
+    kNoReportCapacityForDestinationSite,
+    kInternalError,
+    kProhibitedByBrowserPolicy,
+    kSent,
+    kNetworkError,
+    kNoMatchingSourceFilterData,
+    kFailedToAssemble,
+    kInsufficientAggregatableBudget,
+  };
+
+  Status status;
+
+  // Only valid if `status == kSent`.
+  int32 http_response_code;
+
+  WebUIAttributionReportData data;
+};
+
+struct AttributionDebugKey {
+  uint64 value;
+};
+
+// Struct representing a stored attribution source that will be displayed by WebUI.
+struct WebUIAttributionSource {
+  uint64 source_event_id;
+  url.mojom.Origin impression_origin;
+  // Replace SchemefulSite with string if this struct is ever reused elsewhere.
+  string attribution_destination;
+  url.mojom.Origin reporting_origin;
+  double impression_time;
+  double expiry_time;
+  AttributionSourceType source_type;
+  int64 priority;
+  AttributionDebugKey? debug_key;
+  array<uint64> dedup_keys;
+  map<string, array<string>> filter_data;
+  map<string, AttributionAggregatableKey> aggregatable_source;
+
+  // Union of `StorableSource::Result` and `StoredSource::AttributionLogic`,
+  // and `AttributionStorage::DeactivatedSource::Reason`.
+  enum Attributability {
+    kAttributable,
+    // The source was dropped due to `CommonSourceInfo::AttributionLogic::kNever`.
+    kNoised,
+    kReplacedByNewerSource,
+    kReachedEventLevelAttributionLimit,
+    kInternalError,
+    kInsufficientSourceCapacity,
+    kInsufficientUniqueDestinationCapacity,
+    kExcessiveReportingOrigins,
+  };
+  Attributability attributability;
+};
+
+// Represents `AttributionReport::ReportType`.
+enum AttributionReportType {
+  kEventLevel,
+  kAggregatableAttribution,
+};
+
+// Observer for events relevant to the attribution internals WebUI.
+interface AttributionInternalsObserver {
+  // Called when the sources in storage changed, indicating that the observer
+  // should call `AttributionInternalsHandler::GetActiveSources()`.
+  OnSourcesChanged();
+
+  // Called when the reports in storage changed, indicating that the observer
+  // should call `AttributionInternalsHandler::GetReports()`.
+  OnReportsChanged(AttributionReportType report_type);
+
+  // Called when a source-registration attempt fails or a stored source is
+  // deactivated.
+  OnSourceRejectedOrDeactivated(WebUIAttributionSource source);
+
+  // Called when a report is sent, regardless of success.
+  OnReportSent(WebUIAttributionReport report);
+
+  // Called when a report is dropped from storage or prevented from being
+  // created in the first place.
+  OnReportDropped(WebUIAttributionReport report);
+};
+
+// Mojo interface for the attribution internals WebUI to communicate with the
+// storage layer.
+interface AttributionInternalsHandler {
+  // Returns whether attribution reporting and the debug mode are enabled in
+  // the browsing context the WebUI is in.
+  IsAttributionReportingEnabled() => (bool enabled, bool debug_mode);
+
+  // Returns all active sources that are persisted in storage. This does
+  // not include expired sources, or sources that can no longer be attributed
+  // due to reaching policy limits.
+  GetActiveSources() => (array<WebUIAttributionSource> sources);
+
+  // Returns all reports of the specified type contained in storage, including
+  // those that are actively being sent.
+  GetReports(AttributionReportType report_type) => (
+      array<WebUIAttributionReport> reports);
+
+  // Sends the given event-level reports, ignoring delay, returning when the
+  // operation has been completed and the reports have been cleared from
+  // storage.
+  SendEventLevelReports(array<AttributionReportEventLevelID> ids) => ();
+
+  // Sends the given aggregate reports, ignoring delay, returning when the
+  // operation has been completed and the reports have been cleared from
+  // storage.
+  SendAggregatableAttributionReports(
+      array<AttributionReportAggregatableAttributionID> ids) => ();
+
+  // Deletes all persisted data for the attribution reporting API, returning when the
+  // operation has been completed.
+  ClearStorage() => ();
+
+  // Registers an observer to be notified of attribution reporting events.
+  AddObserver(pending_remote<AttributionInternalsObserver> observer) => (bool success);
+};

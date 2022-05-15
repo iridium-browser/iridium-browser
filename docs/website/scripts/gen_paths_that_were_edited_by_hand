@@ -1,0 +1,42 @@
+#!/bin/bash
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# List of bulk edits as of 12/7:
+
+# 4d7339a3 - initial import (11/4)
+# 3d5e48fc - 2nd import (11/5)
+# 7aa01375 - rowspan/colspan fix
+# 4cd78e70 - 3rd import (11/9)
+# 0f82ab83 - outbound URL fix
+# f1f62e9f - master->main fix
+# 6ca49749 - 4th import (11/23)
+# d154bcbe - fix spaces in filenames
+# d1d2e861 - fix '%3A'
+# 8a4fd299 - HEAD
+
+# Command to list all pages that were edited by hand and should not be
+# re-imported automatically:
+
+(git diff --name-only 4d7339a3..3d5e48fc^ site && \
+ git diff --name-only 3d5e48fc..7aa01375^ site && \
+ git diff --name-only 7aa01375..4cd78e70^ site && \
+ git diff --name-only 4cd78e70..0f82ab83^ site && \
+ git diff --name-only 0f82ab83..f1f62e9f^ site && \
+ git diff --name-only f1f62e9f..6ca49749^ site && \
+ git diff --name-only 9308f80e..8a4fd299) | \
+ grep index.md | sort | uniq | sed -e 's-^site--' -e 's-/index.md--' | \
+ grep -v '^$'
+ 

@@ -1,0 +1,4 @@
+include_rules = [
+  "+components/cdm",
+  "+components/web_cache/renderer",
+]

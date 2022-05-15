@@ -1,0 +1,34 @@
+# https://crbug.com/gn/156 -----------------------------------------------------
+if (aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa &&
+    (bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb ||
+     cccccccccccccccccccccc)) {
+}
+
+if (!is_nacl && !use_libfzzzzuzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzer &&
+    (target_os == "android" || target_os == "chromeos" ||
+     target_os == "fuchsia" || target_os == "linux" ||
+     target_os == "winnnnn")) {
+  print("hi")
+}
+
+foo("bar") {
+  if (foo) {
+    if (!is_nacl && !use_libfuzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzer &&
+        (target_os == "android" || target_os == "chromeos" ||
+         target_os == "fuchsia" || target_os == "linux" ||
+         target_os == "win")) {
+      cflags += [ "-Wunreachable-code" ]
+    }
+  }
+}
+
+foo("bar") {
+  if (foo) {
+    if (!is_nacl && !use_libfuzzer &&
+        (target_os == "android" || target_os == "chromeos" ||
+         target_os == "fuchsia" || target_os == "linux" ||
+         target_os == "win")) {
+      cflags += [ "-Wunreachable-code" ]
+    }
+  }
+}

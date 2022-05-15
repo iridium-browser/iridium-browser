@@ -1,0 +1,114 @@
+# Copyright 2016 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+source_set("signin") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  sources = [
+    "chrome_identity.h",
+    "chrome_identity.mm",
+    "chrome_identity_interaction_manager.h",
+    "chrome_identity_interaction_manager.mm",
+    "chrome_identity_service.h",
+    "chrome_identity_service.mm",
+    "chrome_trusted_vault_service.h",
+    "chrome_trusted_vault_service.mm",
+  ]
+  deps = [
+    "//base",
+    "//components/signin/internal/identity_manager",
+    "//components/sync/driver",
+    "//google_apis",
+  ]
+}
+
+source_set("signin_error_api") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  sources = [ "signin_error_api.h" ]
+  deps = []
+  frameworks = [ "Foundation.framework" ]
+}
+
+source_set("signin_resources_api") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  sources = [ "signin_resources_api.h" ]
+  deps = []
+  frameworks = [ "UIKit.framework" ]
+}
+
+source_set("signin_sso_api") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  sources = [ "signin_sso_api.h" ]
+  deps = []
+  frameworks = [ "Foundation.framework" ]
+}
+
+source_set("test_support") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  testonly = true
+  sources = [
+    "fake_chrome_identity_interaction_manager.h",
+    "fake_chrome_identity_interaction_manager.mm",
+    "fake_chrome_identity_service.h",
+    "fake_chrome_identity_service.mm",
+    "fake_chrome_trusted_vault_service.h",
+    "fake_chrome_trusted_vault_service.mm",
+  ]
+  deps = [
+    ":constants",
+    ":fake_chrome_identity",
+    ":signin",
+    "//base",
+    "//base/test:test_support",
+    "//components/signin/public/identity_manager",
+    "//google_apis",
+    "//ios/public/provider/chrome/browser",
+    "//ios/public/provider/chrome/browser/signin:signin_error_api",
+    "//ios/public/provider/chrome/browser/signin:signin_resources_api",
+    "//ui/base:test_support",
+  ]
+  public_deps = [ "//testing/gmock" ]
+}
+
+source_set("fake_chrome_identity") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  testonly = true
+  sources = [
+    "fake_chrome_identity.h",
+    "fake_chrome_identity.mm",
+  ]
+  deps = [
+    ":signin",
+    "//base",
+  ]
+}
+
+source_set("constants") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  testonly = true
+  sources = [
+    "fake_chrome_identity_interaction_manager_constants.h",
+    "fake_chrome_identity_interaction_manager_constants.mm",
+    "fake_chrome_identity_service_constants.h",
+    "fake_chrome_identity_service_constants.mm",
+  ]
+  deps = [ "//base" ]
+}
+
+source_set("unit_tests") {
+  configs += [ "//build/config/compiler:enable_arc" ]
+  testonly = true
+  sources = [
+    "chrome_identity_service_unittest.mm",
+    "chrome_trusted_vault_service_unittest.mm",
+  ]
+  deps = [
+    ":fake_chrome_identity",
+    ":signin",
+    "//base",
+    "//base/test:test_support",
+    "//components/signin/internal/identity_manager",
+    "//testing/gmock",
+    "//testing/gtest",
+  ]
+}

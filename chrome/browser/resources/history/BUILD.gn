@@ -1,0 +1,140 @@
+# Copyright 2018 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//chrome/common/features.gni")
+import("//tools/grit/grit_rule.gni")
+import("//tools/grit/preprocess_if_expr.gni")
+import("//tools/polymer/html_to_js.gni")
+import("//tools/polymer/html_to_wrapper.gni")
+import("//tools/typescript/ts_library.gni")
+import("//ui/webui/resources/tools/generate_grd.gni")
+import("../tools/optimize_webui.gni")
+import("history.gni")
+
+preprocess_folder = "preprocessed"
+
+if (optimize_webui) {
+  build_manifest = "build_manifest.json"
+
+  optimize_webui("build") {
+    host = "history"
+    js_module_in_files = [
+      "history.js",
+      "lazy_load.js",
+    ]
+    input = rebase_path("$target_gen_dir/tsc", root_build_dir)
+    js_out_files = [
+      "history.rollup.js",
+      "lazy_load.rollup.js",
+      "shared.rollup.js",
+    ]
+    out_manifest = "$target_gen_dir/$build_manifest"
+
+    deps = [
+      ":build_ts",
+      "//ui/webui/resources:preprocess",
+    ]
+    excludes = [
+      "chrome://resources/js/cr.m.js",
+      "chrome://resources/mojo/mojo/public/js/bindings.js",
+    ]
+  }
+}
+
+generate_grd("build_grd") {
+  grd_prefix = "history"
+  out_grd = "$target_gen_dir/${grd_prefix}_resources.grd"
+  input_files = [
+    "history.html",
+    "images/journeys.svg",
+    "images/list.svg",
+    "images/sign_in_promo_dark.svg",
+    "images/sign_in_promo.svg",
+  ]
+  input_files_base_dir = rebase_path(".", "//")
+
+  if (optimize_webui) {
+    deps = [ ":build" ]
+    manifest_files = [ "$target_gen_dir/$build_manifest" ]
+    resource_path_rewrites = [
+      "history.rollup.js|history.js",
+      "lazy_load.rollup.js|lazy_load.js",
+    ]
+  } else {
+    deps = [ ":build_ts" ]
+    manifest_files = [ "$target_gen_dir/tsconfig.manifest" ]
+  }
+}
+
+preprocess_if_expr("preprocess") {
+  in_folder = "."
+  out_folder = "$target_gen_dir/$preprocess_folder"
+  in_files = ts_files
+}
+
+preprocess_if_expr("preprocess_generated") {
+  deps = [
+    ":css_wrapper_files",
+    ":html_wrapper_files",
+  ]
+  in_folder = target_gen_dir
+  out_folder = "$target_gen_dir/$preprocess_folder"
+  in_files = html_wrapper_files + css_wrapper_files
+}
+
+grit("resources") {
+  defines = chrome_grit_defines
+
+  # These arguments are needed since the grd is generated at build time.
+  enable_input_discovery_for_gn_analyze = false
+  source = "$target_gen_dir/history_resources.grd"
+  deps = [ ":build_grd" ]
+
+  outputs = [
+    "grit/history_resources.h",
+    "grit/history_resources_map.cc",
+    "grit/history_resources_map.h",
+    "history_resources.pak",
+  ]
+  output_dir = "$root_gen_dir/chrome"
+}
+
+html_to_js("css_wrapper_files") {
+  js_files = css_wrapper_files
+}
+
+html_to_wrapper("html_wrapper_files") {
+  in_files = html_files
+}
+
+ts_library("build_ts") {
+  root_dir = "$target_gen_dir/$preprocess_folder"
+  out_dir = "$target_gen_dir/tsc"
+  composite = true
+  tsconfig_base = "tsconfig_base.json"
+  in_files = ts_files + css_wrapper_files + html_wrapper_files +
+             [ "history_clusters/history_clusters.mojom-webui.js" ]
+  deps = [
+    "//third_party/polymer/v3_0:library",
+    "//ui/webui/resources:library",
+    "//ui/webui/resources/mojo:library",
+  ]
+  definitions = [
+    "//tools/typescript/definitions/chrome_send.d.ts",
+    "//tools/typescript/definitions/metrics_private.d.ts",
+  ]
+  extra_deps = [
+    ":copy_history_clusters_mojom",
+    ":preprocess",
+    ":preprocess_generated",
+  ]
+}
+
+copy("copy_history_clusters_mojom") {
+  sources = [ "$root_gen_dir/mojom-webui/chrome/browser/ui/webui/history_clusters/history_clusters.mojom-webui.js" ]
+  outputs = [
+    "$target_gen_dir/$preprocess_folder/history_clusters/{{source_file_part}}",
+  ]
+  deps = [ "//chrome/browser/ui/webui/history_clusters:mojo_bindings_webui_js" ]
+}

@@ -1,0 +1,11 @@
+oshima@chromium.org
+
+# For Graphics
+fangzhoug@chromium.org
+jshargo@chromium.org
+
+# For Input (keyboard, mouse, touch, data_device)
+yhanada@chromium.org
+
+# Not working on chromium anymore, but kept just in case we need his review.
+dcastagna@chromium.org

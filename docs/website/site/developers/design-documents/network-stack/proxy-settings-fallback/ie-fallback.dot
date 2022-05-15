@@ -1,0 +1,27 @@
+digraph Fallback {
+
+  subgraph cluster_automatic {
+    label="Automatic settings";
+    style=dotted;
+
+    WPAD [label="WPAD (Automatically detect)"];
+    CustomPac [label="Custom PAC script"];
+  }
+
+  subgraph cluster_manual {
+    label="Manual settings";
+    style=dotted;
+
+    ProxyForAllSchemes [label="Single proxy server for all schemes"];
+    SchemeSpecific [label="Proxy server per URL scheme"];
+    Socks [label="SOCKS proxy server"];
+  }
+
+  Direct;
+
+  WPAD -> CustomPac [style=bold, color="blue"];
+  CustomPac -> ProxyForAllSchemes [style=bold, color="blue"];
+  ProxyForAllSchemes -> SchemeSpecific;
+  SchemeSpecific -> Socks;
+  Socks -> Direct;
+}

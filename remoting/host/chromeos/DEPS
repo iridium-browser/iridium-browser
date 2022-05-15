@@ -1,0 +1,17 @@
+include_rules = [
+  "+ui/display",
+]
+
+specific_include_rules = {
+  "remoting_service.cc": [
+    "+chrome/browser/browser_process.h",
+    "+content/public/browser/browser_task_traits.h",
+    "+content/public/browser/browser_thread.h",
+    "+content/public/browser/storage_partition.h",
+  ],
+  "host_event_reporter_impl*": [
+    "+chrome/browser/policy/messaging_layer/proto",  # For ERP events prototypes
+    "+components/reporting",  # For ERP
+    "+remoting/protocol",
+  ]
+}

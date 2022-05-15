@@ -1,0 +1,37 @@
+table: |
+  include tables/unicode.dis
+  include tables/latinLetterDef8Dots.uti
+  include tables/loweredDigits6Dots.uti
+  punctuation ( 2356
+  prepunc     ( 2356
+  punctuation ; 23
+  postpunc    ; 23
+  punctuation . 25
+  postpunc    . 256
+  word about 1-12
+  lowword were 2356
+  lowword was 356
+  joinword by 356
+  prfword necessary 1345-15-14
+  midword bb 23
+  midword dd 256
+
+flags: {testmode: backward}
+tests:
+  - [⠁⠃, about]
+  - [⠁⠃, ab, mode: [partialTrans]]
+
+  - [⠶, were]
+  - [⠶, "(", mode: [partialTrans]]
+
+  - [⠴, was]
+  - [⠴, by, mode: [partialTrans]]
+
+  - [⠥⠝⠝⠑⠉, unnecessary]
+  - [⠥⠝⠝⠑⠉, unnec, mode: [partialTrans]]
+
+  - [⠁⠆, "a;"]
+  - [⠁⠆, abb, mode: [partialTrans]]
+
+  - [⠁⠲, "a."]
+  - [⠁⠲, add, mode: [partialTrans]]

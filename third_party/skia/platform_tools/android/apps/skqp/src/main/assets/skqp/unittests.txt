@@ -1,0 +1,71 @@
+# This file is a list of regular expressions, one per line.
+# Any test name matching an expression will be excluded from the set run by SKQP.
+# Empty lines and comments starting with # are ignored.
+# This is parsed by tools/skqp/src/skqp.cpp
+# The sheet at go/skqp-cts-tests was the basis of this file.
+
+# Exclude all unit tests that end with the ES3 suffix because Android does not
+# require ES3 support.
+.+ES3
+
+SkRemoteGlyphCache_.+
+ApplyGamma
+ResourceAllocatorTest
+ClipStack_SWMask
+ComposedImageFilter.+
+DDL.+
+DSL.+
+GpuDrawPath
+GpuRectanizer
+ProcessorOptimizationValidationTest
+
+# Don't test Ganesh internals
+GrContextDump
+GrContextFactory_abandon
+GrContextFactory_executorAndTaskGroup
+GrThreadSafeCache.+
+
+ImageFilter.+
+MorphologyFilterRadiusWithMirrorCTM_Gpu
+
+# Android doesn't use promise images
+PromiseImage*
+
+SkipCopyTaskTest
+SkipOpsTaskTest
+SmallBoxBlurBug
+SrcSrcOverBatchTest
+
+# Tests chaining/batching logic, not actual execution
+TextureOpTest
+
+# These tests mostly stress the CPU-side math of triangulating, not the GPU drawing triangles, which hopefully we can trust to just work
+TriangulatingPath.+
+
+VkDRMModifierTest
+VkImageLayoutTest
+VkProtectedContext_AsyncReadFromProtectedSurface
+VkProtectedContext_CreateNonprotectedContext
+VkProtectedContext_CreateNonprotectedTextureInProtectedContext
+VkProtectedContext_CreateProtectedContext
+VkProtectedContext_CreateProtectedSkSurface
+VkProtectedContext_CreateProtectedTextureInNonprotectedContext
+VkProtectedContext_DDLMakeRenderTargetTest
+VkProtectedContext_DDLSurfaceCharacterizationTest
+VkProtectedContext_DrawProtectedImageOnProtectedSurface
+VkProtectedContext_DrawRectangle
+VkProtectedContext_DrawRectangleWithAntiAlias
+VkProtectedContext_DrawRectangleWithBlendMode
+VkProtectedContext_DrawRectangleWithFilter
+VkProtectedContext_DrawThinPath
+VkProtectedContext_ReadFromProtectedSurface
+VkProtectedContext_SaveLayer
+VkWrapTests
+
+XfermodeImageFilterCroppedInput_Gpu
+skbug5221_GPU
+
+# Tests which don't pass on some Qualcomm devices without workarounds b/222736702
+DMSAA_dual_source_blend_disable
+GLBackendAllocationTest
+GrSurfaceRenderability

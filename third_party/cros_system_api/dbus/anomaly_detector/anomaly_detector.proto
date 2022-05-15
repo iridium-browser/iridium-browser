@@ -1,0 +1,16 @@
+// Copyright 2019 The Chromium OS Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+// This file defines messages used by anomaly_detector.
+package anomaly_detector;
+
+// This signal is sent whenever anomaly_detector sees that a VM has
+// encountered filesystem corruption.
+message GuestFileCorruptionSignal {
+  // The vsock context identifier used by the VM that triggered this signal.
+  int32 vsock_cid = 1;
+}

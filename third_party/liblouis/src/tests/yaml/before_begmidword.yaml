@@ -1,0 +1,172 @@
+# FIXME: This test demonstrated a bug that has been fixed now. The
+# comments are not accurate anymore. Test should probably be removed.
+
+# -------------------------------------------------------------------
+
+# This test case illustrates a bug with the before opcode. When we
+# have more than 19 class definitions a before rule is triggered that
+# should not match. In the following scenario the `begmidword lande`
+# rule should only trigger when 'lande' is before a 'u'. If one class
+# definition is removed as in the second test then the correct rules
+# are triggered.
+
+table: |
+  include tables/unicode.dis
+  include tables/de-chardefs6.cti
+  attribute foo zz
+  attribute a a
+  attribute b b
+  attribute c c
+  attribute d d
+  attribute e e
+  attribute er er
+  attribute f f
+  attribute h h
+  attribute g g
+  attribute i i
+  attribute j j
+  attribute k k
+  attribute l l
+  attribute m m
+  attribute n n
+  attribute r r
+  attribute s s
+  attribute t t
+  attribute u u
+  begmidword an 235
+  always en 14
+  before u begmidword lande 123-235-145-15
+
+tests:
+  # the only rules that should match here are the begmidword an and
+  # the always en rule. The rule `before u begmidword lande` shouldn't
+  # match but for some reason it does
+  - [landend, ⠇⠖⠙⠉⠙]
+
+# if we remove one of the class definitions then the correct rules
+# match
+table: |
+  include tables/unicode.dis
+  include tables/de-chardefs6.cti
+  attribute a a
+  attribute b b
+  attribute c c
+  attribute d d
+  attribute e e
+  attribute er er
+  attribute f f
+  attribute h h
+  attribute g g
+  attribute i i
+  attribute j j
+  attribute k k
+  attribute l l
+  attribute m m
+  attribute n n
+  attribute r r
+  attribute s s
+  attribute t t
+  attribute u u
+  begmidword an 235
+  always en 14
+  before u begmidword lande 123-235-145-15
+
+tests:
+  - [landend, ⠇⠖⠙⠉⠙]
+
+# it looks like it doesn't matter which class definition we remove
+# match, as long as we remove one
+table: |
+  include tables/unicode.dis
+  include tables/de-chardefs6.cti
+  attribute foo zz
+  attribute b b
+  attribute c c
+  attribute d d
+  attribute e e
+  attribute er er
+  attribute f f
+  attribute h h
+  attribute g g
+  attribute i i
+  attribute j j
+  attribute k k
+  attribute l l
+  attribute m m
+  attribute n n
+  attribute r r
+  attribute s s
+  attribute t t
+  attribute u u
+  begmidword an 235
+  always en 14
+  before u begmidword lande 123-235-145-15
+
+tests:
+  - [landend, ⠇⠖⠙⠉⠙]
+
+# same story with a different word. What should match are the rules
+# `always en`, `begmidword be` and `syllable stärk`. The rule
+# `before u begmidword stärke` should not match at all. Again this
+# seems to depend on the number of classes defined
+table: |
+  include tables/unicode.dis
+  include tables/de-chardefs6.cti
+  attribute foo zz
+  attribute a a
+  attribute b b
+  attribute c c
+  attribute d d
+  attribute e e
+  attribute er er
+  attribute f f
+  attribute h h
+  attribute g g
+  attribute i i
+  attribute j j
+  attribute k k
+  attribute l l
+  attribute m m
+  attribute n n
+  attribute r r
+  attribute s s
+  attribute t t
+  attribute u u
+  always en 14
+  begmidword be 23
+  syllable stärk 23456-345-1235-13
+  before u begmidword stärke 23456-345-1235-13-15
+  
+tests:
+  - [bestärkend, ⠆⠾⠜⠗⠅⠉⠙]
+
+# If we remove a class then the translation is correct
+table: |
+  include tables/unicode.dis
+  include tables/de-chardefs6.cti
+  attribute a a
+  attribute b b
+  attribute c c
+  attribute d d
+  attribute e e
+  attribute er er
+  attribute f f
+  attribute h h
+  attribute g g
+  attribute i i
+  attribute j j
+  attribute k k
+  attribute l l
+  attribute m m
+  attribute n n
+  attribute r r
+  attribute s s
+  attribute t t
+  attribute u u
+  always en 14
+  begmidword be 23
+  syllable stärk 23456-345-1235-13
+  before u begmidword stärke 23456-345-1235-13-15
+  
+tests:
+  - [bestärkend, ⠆⠾⠜⠗⠅⠉⠙]

@@ -1,0 +1,48 @@
+// Copyright 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#include "cc/test/fake_proxy.h"
+
+#include <memory>
+
+#include "cc/paint/paint_worklet_layer_painter.h"
+#include "cc/trees/layer_tree_mutator.h"
+
+namespace cc {
+
+void FakeProxy::SetLayerTreeHost(LayerTreeHost* host) {
+  layer_tree_host_ = host;
+}
+
+bool FakeProxy::RequestedAnimatePending() {
+  return false;
+}
+
+bool FakeProxy::IsStarted() const { return true; }
+
+bool FakeProxy::StartDeferringCommits(base::TimeDelta timeout,
+                                      PaintHoldingReason reason) {
+  return false;
+}
+
+bool FakeProxy::IsDeferringCommits() const {
+  return false;
+}
+
+bool FakeProxy::CommitRequested() const { return false; }
+
+void FakeProxy::SetMutator(std::unique_ptr<LayerTreeMutator> mutator) {}
+
+void FakeProxy::SetPaintWorkletLayerPainter(
+    std::unique_ptr<PaintWorkletLayerPainter> painter) {}
+
+bool FakeProxy::MainFrameWillHappenForTesting() {
+  return false;
+}
+
+uint32_t FakeProxy::GetAverageThroughput() const {
+  return 0u;
+}
+
+}  // namespace cc

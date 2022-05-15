@@ -1,0 +1,7 @@
+Added diff to change _SC_CLK_TCK to 2. For some reason,
+our headers don't define _SC_CLK_TCK. (they probably should)
+
+Commented out -DHAS_ERRLIST from CFLAGS_EXTRA, since
+our headers don't seem to provide sys_nerr, sys_errlist.
+
+Changed SRC to CPPSRC in Makefile.

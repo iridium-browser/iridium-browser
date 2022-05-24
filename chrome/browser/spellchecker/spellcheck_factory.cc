@@ -69,7 +69,7 @@ void SpellcheckServiceFactory::RegisterProfilePrefs(
 #else
   uint32_t flags = user_prefs::PrefRegistrySyncable::SYNCABLE_PREF;
 #endif
-  user_prefs->RegisterBooleanPref(spellcheck::prefs::kSpellCheckEnable, true,
+  user_prefs->RegisterBooleanPref(spellcheck::prefs::kSpellCheckEnable, false,
                                   flags);
 }
 

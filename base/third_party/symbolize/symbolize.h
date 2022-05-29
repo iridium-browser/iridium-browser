@@ -63,6 +63,7 @@
 #ifdef HAVE_SYMBOLIZE
 
 #include <algorithm>
+#include <utility>
 
 #if defined(__ELF__)  // defined by gcc
 #if defined(__OpenBSD__)

@@ -6,8 +6,8 @@
 #define SQL_RECOVER_MODULE_PAGER_H_
 
 #include <cstdint>
-#include <memory>
 #include <ostream>
+#include <vector>
 
 #include "base/check_op.h"
 #include "base/memory/raw_ptr.h"
@@ -72,7 +72,7 @@ class DatabasePageReader {
     DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
     DCHECK_NE(page_id_, kInvalidPageId)
         << "Successful ReadPage() required before accessing pager state";
-    return page_data_.get();
+    return page_data_.data();
   }
 
   // The number of bytes in the page read by the last ReadPage() call.
@@ -139,7 +139,7 @@ class DatabasePageReader {
   int page_id_ = kInvalidPageId;
   // Stores the bytes of the last page successfully read by ReadPage().
   // The content is undefined if the last call to ReadPage() did not succeed.
-  const std::unique_ptr<uint8_t[]> page_data_;
+  std::vector<uint8_t> page_data_;
   // Raw pointer usage is acceptable because this instance's owner is expected
   // to ensure that the VirtualTable outlives this.
   const raw_ptr<VirtualTable> table_;

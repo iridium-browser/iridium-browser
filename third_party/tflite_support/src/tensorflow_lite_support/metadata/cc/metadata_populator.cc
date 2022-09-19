@@ -19,8 +19,8 @@ limitations under the License.
 #include <cstring>
 #include <functional>
 
-#include "contrib/minizip/ioapi.h"
-#include "contrib/minizip/zip.h"
+#include "third_party/zlib/contrib/minizip/ioapi.h"
+#include "third_party/zlib/contrib/minizip/zip.h"
 #include "flatbuffers/flatbuffers.h"  // from @flatbuffers
 #include "tensorflow/lite/schema/schema_generated.h"
 #include "tensorflow_lite_support/cc/common.h"

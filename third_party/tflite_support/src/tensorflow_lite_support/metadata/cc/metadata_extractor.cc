@@ -21,8 +21,8 @@ limitations under the License.
 #include "absl/status/status.h"        // from @com_google_absl
 #include "absl/strings/str_format.h"   // from @com_google_absl
 #include "absl/strings/string_view.h"  // from @com_google_absl
-#include "contrib/minizip/ioapi.h"
-#include "contrib/minizip/unzip.h"
+#include "third_party/zlib/contrib/minizip/ioapi.h"
+#include "third_party/zlib/contrib/minizip/unzip.h"
 #include "flatbuffers/flatbuffers.h"  // from @flatbuffers
 #include "tensorflow/lite/schema/schema_generated.h"
 #include "tensorflow_lite_support/cc/common.h"

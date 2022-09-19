@@ -1,0 +1,56 @@
+From 0205f99a266c762d00c3f2fa4e3d87ec2366928f Mon Sep 17 00:00:00 2001
+From: Ben Wagner <bungeman@chromium.org>
+Date: Fri, 17 Dec 2021 23:12:05 -0500
+Subject: [PATCH] Add trace-pc-guard to -fno-sanitize-coverage.
+
+This allows libcxx, libcxxabi, and libunwind to be built with HonggFuzz.
+The '-fsanitize-coverage=0' to disable all sanitize-coverage options is
+undocumented but tested by clang.
+---
+ libcxx/cmake/config-ix.cmake    | 2 +-
+ libcxxabi/cmake/config-ix.cmake | 2 +-
+ libunwind/cmake/config-ix.cmake | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/libcxx/cmake/config-ix.cmake b/libcxx/cmake/config-ix.cmake
+index a2f1ff9f1a3b..91b1749c75af 100644
+--- a/libcxx/cmake/config-ix.cmake
++++ b/libcxx/cmake/config-ix.cmake
+@@ -73,7 +73,7 @@ if (LIBCXX_SUPPORTS_NOSTDLIBXX_FLAG OR LIBCXX_SUPPORTS_NODEFAULTLIBS_FLAG)
+     set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -fno-sanitize=all")
+   endif ()
+   if (CMAKE_C_FLAGS MATCHES -fsanitize-coverage OR CMAKE_CXX_FLAGS MATCHES -fsanitize-coverage)
+-    set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -fno-sanitize-coverage=edge,trace-cmp,indirect-calls,8bit-counters")
++    set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -fsanitize-coverage=0")
+   endif ()
+ endif ()
+ 
+diff --git a/libcxxabi/cmake/config-ix.cmake b/libcxxabi/cmake/config-ix.cmake
+index 7f1cecbcd254..86370a712220 100644
+--- a/libcxxabi/cmake/config-ix.cmake
++++ b/libcxxabi/cmake/config-ix.cmake
+@@ -66,7 +66,7 @@ if (LIBCXXABI_SUPPORTS_NOSTDLIBXX_FLAG OR LIBCXXABI_SUPPORTS_NODEFAULTLIBS_FLAG)
+     set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -fno-sanitize=all")
+   endif ()
+   if (CMAKE_C_FLAGS MATCHES -fsanitize-coverage OR CMAKE_CXX_FLAGS MATCHES -fsanitize-coverage)
+-    set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -fno-sanitize-coverage=edge,trace-cmp,indirect-calls,8bit-counters")
++    set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -fsanitize-coverage=0")
+   endif ()
+ endif ()
+ 
+diff --git a/libunwind/cmake/config-ix.cmake b/libunwind/cmake/config-ix.cmake
+index 4ca6bdd8e95d..34381fbd8721 100644
+--- a/libunwind/cmake/config-ix.cmake
++++ b/libunwind/cmake/config-ix.cmake
+@@ -67,7 +67,7 @@ if (LIBUNWIND_SUPPORTS_NOSTDLIBXX_FLAG OR LIBUNWIND_SUPPORTS_NODEFAULTLIBS_FLAG)
+     set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -fno-sanitize=all")
+   endif ()
+   if (CMAKE_C_FLAGS MATCHES -fsanitize-coverage OR CMAKE_CXX_FLAGS MATCHES -fsanitize-coverage)
+-    set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -fno-sanitize-coverage=edge,trace-cmp,indirect-calls,8bit-counters")
++    set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -fsanitize-coverage=0")
+   endif ()
+ endif ()
+ 
+-- 
+2.34.1.173.g76aa8bc2d0-goog
+

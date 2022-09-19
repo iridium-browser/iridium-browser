@@ -1,0 +1,11 @@
+display A 17
+sign a 1
+sign b 12
+
+# attribute names can only contain letters (a-z and A-Z, case
+# matters), so the following is wrong and should make the table
+# compilation fail in a test
+
+attribute foo1 b
+
+noback context _%foo1["a"] @17

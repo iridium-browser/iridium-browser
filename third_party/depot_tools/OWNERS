@@ -1,0 +1,37 @@
+set noparent
+
+ajp@google.com
+aravindvasudev@google.com
+gavinmak@google.com
+sokcevic@google.com
+
+per-file ninja*=thakis@chromium.org
+
+per-file autoninja*=brucedawson@chromium.org
+per-file post_build_ninja_summary.py=brucedawson@chromium.org
+
+per-file presubmit*.py=brucedawson@chromium.org
+
+per-file ninjalog*=tikuta@chromium.org
+
+per-file pylint*=vapier@chromium.org
+
+per-file cbuildbot=file://CROS_OWNERS
+per-file cros=file://CROS_OWNERS
+per-file cros_sdk=file://CROS_OWNERS
+per-file repo=file://CROS_OWNERS
+per-file repo_launcher=file://CROS_OWNERS
+per-file CROS_OWNERS=file://CROS_OWNERS
+
+# for the Goma client update
+per-file cipd_manifest*=file://GOMA_OWNERS
+
+# LUCI related tooling
+per-file bb*=file://LUCI_OWNERS
+per-file .cipd_impl.ps1=file://LUCI_OWNERS
+per-file cipd*=file://LUCI_OWNERS
+per-file cit*=file://LUCI_OWNERS
+per-file led*=file://LUCI_OWNERS
+per-file luci*=file://LUCI_OWNERS
+per-file vpython*=file://LUCI_OWNERS
+per-file LUCI_OWNERS=file://LUCI_OWNERS

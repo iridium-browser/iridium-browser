@@ -1,0 +1,11 @@
+PROJECT_NAME           = "Tools"
+OUTPUT_DIRECTORY       = @top_builddir@/docs/tools
+JAVADOC_AUTOBRIEF      = YES
+OPTIMIZE_OUTPUT_FOR_C  = YES
+INPUT                  = \
+		       @top_srcdir@/doc/doxygen/tools.dox \
+		       @top_srcdir@/tools/zunitc/doc/zunitc.dox \
+		       @top_srcdir@/tools/zunitc/inc/zunitc/zunitc.h
+GENERATE_LATEX         = NO
+DOTFILE_DIRS           = @top_srcdir@/doc/doxygen
+STRIP_FROM_PATH        = @top_srcdir@

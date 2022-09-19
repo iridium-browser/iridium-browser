@@ -1,0 +1,2 @@
+GROUP ( Scrt1-real.o libc_musl_linker_object.o )
+INCLUDE linker.script

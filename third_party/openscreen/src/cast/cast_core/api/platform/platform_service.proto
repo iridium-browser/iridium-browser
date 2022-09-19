@@ -1,0 +1,48 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+//
+// **** DO NOT EDIT - this file was automatically generated. ****
+syntax = "proto3";
+
+package cast.platform;
+
+import "cast/cast_core/api/common/service_info.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// Platform service. Implemented and hosted by Platform.
+service PlatformService {
+  // Starts a runtime. Called by CastCoreService which endpoint is fetched from
+  // the ServerContext.
+  rpc StartRuntime(StartRuntimeRequest) returns (StartRuntimeResponse);
+
+  // Stops a runtime.
+  rpc StopRuntime(StopRuntimeRequest) returns (StopRuntimeResponse);
+
+  // Gets device info.
+  rpc GetDeviceInfo(GetDeviceInfoRequest) returns (GetDeviceInfoResponse);
+}
+
+message StartRuntimeRequest {
+  // Cast Runtime ID assigned in CastCoreService.RegisterRuntime.
+  string runtime_id = 1;
+  // gRPC endpoint Cast Runtime must run on.
+  cast.common.ServiceInfo runtime_service_info = 2;
+}
+
+message StartRuntimeResponse {}
+
+message StopRuntimeRequest {
+  string runtime_id = 1;
+}
+
+message StopRuntimeResponse {}
+
+message GetDeviceInfoRequest {}
+
+message GetDeviceInfoResponse {
+  // TODO: Add device information that Cast needs. Below is an approximation of
+  // such information.
+  bool has_surface = 1;
+}

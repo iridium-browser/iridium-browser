@@ -1,0 +1,3 @@
+commented out:
+#include <sys/ioctl.h>
+as nacl does not have anything like ioctl.

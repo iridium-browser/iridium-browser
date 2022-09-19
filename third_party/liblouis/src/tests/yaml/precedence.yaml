@@ -1,0 +1,132 @@
+# The purpose of this test is just to document the current behavior of
+# Liblouis when a table contains conflicting rules. This might be
+# different from the desired behavior.
+# ---------------------------------------------
+
+# last undefined rule wins
+table: |
+  display 1 1
+  display 2 2
+  undefined 1
+  undefined 2
+tests:
+  - [x, 2]
+
+# normally the first character definition rule wins
+table: |
+  display 1 1
+  display 2 2
+  display 3 3
+  sign P 1
+  sign P 2
+  sign P 3
+flags: {testmode: forward}
+tests:
+  - - "P"
+    - "1"
+
+# but in compbrlAtCursor mode the last character definition wins
+# (see https://github.com/liblouis/liblouis/issues/869)
+  - - "P"
+    - "3"
+    - mode: [compbrlAtCursor]
+      cursorPos: [0,0]
+
+# the last character definition wins if a context rule with * in the
+# action part is matched
+table: |
+  display 1 1
+  display 2 2
+  display 3 3
+  sign P 1
+  sign P 2
+  sign P 3
+  noback context ["P"] *
+flags: {testmode: forward}
+tests:
+  - - "P"
+    - "3"
+
+# the first character definition rule wins
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/spaces.uti
+  lowercase a 1
+  uppercase A 1
+  uppercase B 12
+  lowercase b 12
+  lowercase c 14
+  uppercase C 14
+  lowercase d 145
+  uppercase D 145
+  lowercase e 15
+  uppercase E 15
+  lowercase f 124
+  uppercase F 124
+  lowercase g 1245
+  uppercase G 1245
+  lowercase h 125
+  uppercase H 125
+  uppercase B 1
+  lowercase b 1
+  lowercase d 14
+  uppercase D 14
+  lowercase f 15
+  uppercase F 15
+  lowercase h 1245
+  uppercase H 1245
+tests:
+  - - Aa Bb Cc Dd Ee Ff Gg Hh
+    - ⠁⠁ ⠃⠃ ⠉⠉ ⠙⠙ ⠑⠑ ⠋⠋ ⠛⠛ ⠓⠓
+
+# if capsletter is defined
+# - and "X" is defined as "uppercase X ...", the first "uppercase X" wins
+# - and "X" is defined as "base uppercase X x", the last definition of "x" wins
+# (original issue: https://github.com/liblouis/liblouis/issues/384)
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/spaces.uti
+  lowercase a 1
+  base uppercase A a
+  uppercase B 12
+  lowercase b 12
+  lowercase c 14
+  base uppercase C c
+  lowercase d 145
+  base uppercase D d
+  lowercase e 15
+  base uppercase E e
+  lowercase f 124
+  base uppercase F f
+  lowercase g 1245
+  base uppercase G g
+  lowercase h 125
+  base uppercase H h
+  capsletter 6
+  uppercase B 1
+  lowercase b 1
+  lowercase d 14
+  lowercase f 15
+  lowercase h 1245
+tests:
+  - - Aa Bb Cc Dd Ee Ff Gg Hh
+    - ⠠⠁⠁ ⠠⠃⠃ ⠠⠉⠉ ⠠⠉⠙ ⠠⠑⠑ ⠠⠑⠋ ⠠⠛⠛ ⠠⠛⠓
+
+# for printing escape sequences for undefined characters, only
+# character definitions that map to a single dot are used and the
+# first definition wins. display rules are ignored.
+table: |
+  include tables/unicode-without-blank.dis
+  digit 0 356
+  digit 2 23
+  digit 6 235
+  letter x 1346
+  sign \\ 16
+  sign ' 3-3
+  display ' 6
+  sign ' 3
+  sign ' 6
+flags: {testmode: forward}
+tests:
+  - - "\u2026"
+    - ⠄⠡⠭⠆⠴⠆⠖⠄

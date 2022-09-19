@@ -1,0 +1,20 @@
+basni@chromium.org
+dbehr@chromium.org
+ddavenport@chromium.org
+gurchetansingh@chromium.org
+hiroh@chromium.org
+hoegsberg@chromium.org
+marcheu@chromium.org
+mcasas@chromium.org
+olv@google.com
+robdclark@chromium.org
+tfiga@chromium.org
+zzyiwei@chromium.org
+
+# just reference for backend specific reviews
+per-file amdgpu.c = basni@chromium.org, ddavenport@chromium.org
+per-file i915.c = chadversary@chromium.org, hoegsberg@chromium.org
+per-file mediatek.c = fshao@chromium.org, hsinyi@chromium.org, tzungbi@chromium.org
+per-file msm.c = robdclark@chromium.org, hoegsberg@chromium.org
+per-file rockchip.c = tfiga@chromium.org
+per-file virtgpu* = jbates@chromium.org, natsu@google.com, olv@google.com, zzyiwei@chromium.org

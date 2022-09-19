@@ -1,0 +1,127 @@
+    <style include="cr-shared-style settings-shared iron-flex">
+      #defaultDownloadPath {
+        word-break: break-word;
+      }
+    </style>
+    <template is="dom-if" if="[[showConnection_]]">
+      <template is="dom-if" if="[[!connectionAccountInfo_.linked]]">
+      <div class="cr-row first" id="downloadsRoutingConnectionUnlinked">
+        <div class="flex cr-padded-text">
+          <div id="connectionLabel">
+            $i18n{downloadsConnectionTitle}
+          </div>
+          <div class="secondary" id="connectionMessage">
+            $i18n{downloadsConnectionUnlinkedMessage}
+            <a href="[[connectionLearnMoreLink_]]" target="_blank"
+               id="learnMore" aria-labelledby="connectionMessage learnMore">
+              $i18n{downloadConnectionLearnMore}
+            </a>
+          </div>
+        </div>
+        <div class="separator"></div>
+        <cr-button class="action-button cr-button-gap" id="linkAccountButton"
+            on-click="onLinkDownloadsConnectionClick_"
+            disabled="[[connectionSetupInProgress_]]"
+            aria-labelledby="connectionLabel linkAccountButton">
+            $i18n{downloadsConnectionLinkButton}
+        </cr-button>
+      </div>
+      </template>
+      <template is="dom-if" if="[[connectionAccountInfo_.linked]]">
+        <div class="cr-row first" id="downloadsRoutingConnectionLinked">
+          <div class="flex cr-padded-text">
+            <div id="connectionLabel">
+              $i18n{downloadsConnectionTitle}
+            </div>
+            <div class="secondary" id="connectionLinkedMessage">
+              $i18n{downloadsConnectionLinkedMessage}
+              <a href="[[connectionLearnMoreLink_]]" target="_blank"
+                  id="learnMore"
+                  aria-labelledby="connectionLinkedMessage learnMore">
+                $i18n{downloadConnectionLearnMore}
+              </a>
+            </div>
+          </div>
+          <div class="separator"></div>
+          <cr-button class="action-button cr-button-gap"
+              id="unlinkAccountButton"
+              on-click="onUnlinkDownloadsConnectionClick_"
+              disabled="[[connectionSetupInProgress_]]"
+              aria-labelledby="connectionLabel connectionAccountLabel
+                  connectionAccountName connectionAccountLogin
+                  unlinkAccountButton">
+              $i18n{downloadsConnectionUnlinkButton}
+          </cr-button>
+        </div>
+        <div class="cr-row first" id="downloadsRoutingConnectionAccount">
+          <div class="flex cr-padded-text">
+            <div id="connectionAccountLabel">
+              $i18n{downloadConnectionAccountTitle}
+            </div>
+            <div class="secondary" id="connectionAccountName">
+              [[connectionAccountInfo_.account.name]]
+            </div>
+            <div class="secondary" id="connectionAccountLogin">
+              [[connectionAccountInfo_.account.login]]
+            </div>
+          </div>
+          <div class="flex cr-padded-text">
+            <div id="connectionFolderLabel">
+              $i18n{downloadConnectionLinkedFolder}
+            </div>
+            <div class="secondary">
+              <a href="[[connectionAccountInfo_.folder.link]]" target="_blank"
+                  id="connectionFolderLink"
+                  aria-labelledby="connectionFolderLabel connectionFolderLink">
+                [[connectionAccountInfo_.folder.name]]
+              </a>
+            </div>
+          </div>
+        </div>
+      </template>
+    </template>
+    <div class="cr-row first">
+      <div class="flex cr-padded-text">
+        <template is="dom-if" if="[[showConnection_]]">
+          <div id="locationLabel">
+            $i18n{downloadLocalLocation}
+          </div>
+        </template>
+        <template is="dom-if" if="[[!showConnection_]]">
+          <div id="locationLabel">
+            $i18n{downloadLocation}
+          </div>
+        </template>
+        <div class="secondary" id="defaultDownloadPath" aria-hidden="true">
+<if expr="not chromeos_ash">
+          [[prefs.download.default_directory.value]]
+</if>
+<if expr="chromeos_ash">
+          [[downloadLocation_]]
+</if>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <controlled-button id="changeDownloadsPath"
+          label="$i18n{changeDownloadLocation}"
+          aria-labelledby="locationLabel defaultDownloadPath"
+          on-click="selectDownloadLocation_"
+          pref="[[prefs.download.default_directory]]"
+          end-justified>
+      </controlled-button>
+    </div>
+    <settings-toggle-button
+        class="hr"
+        pref="{{prefs.download.prompt_for_download}}"
+        label="$i18n{promptForDownload}">
+    </settings-toggle-button>
+    <template is="dom-if" if="[[autoOpenDownloads_]]" restamp>
+      <div class="cr-row">
+        <div class="flex">$i18n{openFileTypesAutomatically}</div>
+        <div class="separator"></div>
+        <cr-button id="resetAutoOpenFileTypes"
+            on-click="onClearAutoOpenFileTypesTap_">
+          $i18n{clear}
+        </cr-button>
+      </div>
+    </template>

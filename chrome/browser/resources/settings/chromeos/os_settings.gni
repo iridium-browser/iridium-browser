@@ -1,0 +1,45 @@
+# Copyright 2020 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//third_party/closure_compiler/compile_js.gni")
+import("../settings.gni")
+
+# TODO(crbug.com/1121865): browser_resolver_prefix_replacements allows path
+# from ../../shared/* to resolve to ../../../nearby_share/shared/* for closure
+# purposes.
+nearby_share_closure_flags = [
+  "js_module_root=../../chrome/browser/resources/nearby_share",
+  "js_module_root=./gen/chrome/browser/resources/nearby_share",
+  "browser_resolver_prefix_replacements=\"../../shared/=../../../nearby_share/shared/\"",
+]
+
+# TODO(crbug.com/1179821) This allows WebUI mojom files listed under the
+# mojom-webui/ folder to be properly resolved during closure compilation.
+mojom_webui_closure_flags = [
+  "js_module_root=" + rebase_path(
+          "$root_gen_dir/mojom-webui/chrome/browser/ui/webui/settings/chromeos/constants",
+          root_build_dir),
+  "js_module_root=" + rebase_path(
+          "$root_gen_dir/mojom-webui/chrome/browser/ui/webui/settings/ash",
+          root_build_dir),
+  "browser_resolver_prefix_replacements=\"../../../mojom-webui/=../../../\"",
+  "browser_resolver_prefix_replacements=\"../../mojom-webui/=../../\"",
+  "browser_resolver_prefix_replacements=\"../mojom-webui/=../\"",
+  "js_module_root=" + rebase_path(
+          "$root_gen_dir/mojom-webui/ash/webui/personalization_app/search",
+          root_build_dir),
+  "browser_resolver_prefix_replacements=\"../../mojom-webui/personalization/=../../\"",
+  "browser_resolver_prefix_replacements=\"../mojom-webui/personalization/=../\"",
+  "js_module_root=" +
+      rebase_path("$root_gen_dir/mojom-webui/ash/components/audio/public/mojom",
+                  root_build_dir),
+  "browser_resolver_prefix_replacements=\"../../mojom-webui/audio/=../../\"",
+  "browser_resolver_prefix_replacements=\"../mojom-webui/audio/=../\"",
+]
+
+# TODO(crbug.com/1315757) Remove once ChromeOS Settings is fully migrated to
+# TypeScript and no longer using Closure compilation
+os_settings_closure_flags =
+    settings_closure_flags + nearby_share_closure_flags + mojom_js_args +
+    mojom_webui_closure_flags

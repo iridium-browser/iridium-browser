@@ -1,0 +1,313 @@
+#   9.2.1 page 93
+
+##the set of real numbers, ℝ
+##! set ( r1l numb}s1 `2;,r
+
+~italic
++
+pneumonia
+.2pneumonia
+
+~italic
++
+8 chickens!
+.2#h *ick5s6
+
+~under
+    +     +
+story stories
+/or_2y /or_2ies
+
+~under
+             +
+24 should be 34
+#bd %d 2 _2#cd
+
+~bold
++      +    +
+bright blue ball
+~2b"r ~2blue ~2ball
+
+~under
+  +
+27.9
+#bg_24#i
+
+~bold
+    +           +
+Stop! May I help?
+,/op~26 ,may ,i help~28
+
+~under
+  +
+83%
+#hc_2.0
+
+~bold
+             +       +
+It will cost $45 not €45.
+,x w co/ ~2`s#de n ~2`e#de4
+
+~bold
+                    +
+For help, click the ? icon.
+,= help1 click ! ~2;8 icon4
+
+~italic
+       +    +
+change y to i
+*ange .2;y to .2i
+
+~bold
+ +      +
+55 not 56
+#e~2#e n #e~2#f
+
+#   9.2.2 page 94
+
+~under
++ +    +      +
+I have enough knowledge.
+_2,i _2h _25 _2k4
+
+~italic
+  +      +
+("Beyond belief!")
+"<8.2,2y .22lief60">
+
+~bold
++  +   +          +
+Which bowl is broken?
+~2,:i~2* b~2{l is brok~258
+
+~italic
+         +
+M is for Mother
+;,m is = .2,"m
+
+#   9.2.3 page 94
+
+~bold
+     +    +         +      +
+mother  mother  mother  mother
+mo!~2r  mo~2!r  mo?~2}  mot~2h}
+
+#   9.3.2 page 94
+
+~under
+       +++
+Who is for the people?
+,:o is _1= ! p8
+
+~bold
+    +++
+She was right.
+,%e ~10 "r4
+
+~italic
+++++++++
+R.S.V.P.
+.1,r4,s4,v4,p4
+
+~italic
++++++++++++++++
+l'oeil-de-boeuf (Fr.: bull's eye)
+.1l'oeil-de-boeuf "<;,fr43 bull's eye">
+
+~italic
++++++++++++++
+one two–three
+.1"o .1two,-?ree
+
+~under
++++++++++ +++++++++
+##1,500,000 1 500 000
+_1#a1ejj1jjj _1#a"ejj"jjj
+
+~italic
++++++++++
+1939-1945
+.1#aici-#aide
+
+##on the paper was written
+##on ! pap} 0 writt5 `1#eee"aihb
+
+~italic
+     ++
+briefly
+brief.1ly
+
+~under
+   ++++
+daytime
+"d_1"t
+
+~bold
+    +++++++
+13.86666...
+#ac4h~1#ffff444
+
+~italic
+      ++++++++++++++++++++++++
+Go to http://www.wikipedia.org for general information.
+,g to .1http3_/_/www4wikip$ia4org = g5}al 9=ma;n4
+
+~italic
+    +++++++++               ++++
+the ionogenic (ion-forming) form
+! .1ionog5ic "<ion-=m+"> .1=m
+
+##   switched italic and bold
+##   444 ref}r$ to z ~1sea ~1waves or "<f ! ,japanese"> ~1.1tsunami4
+~bold
+                   +++++++++                        ++++++++
+~italic
+                                                    ++++++++
+... referred to as sea waves or (from the Japanese) tsunami.
+444 ref}r$ to z ~1sea ~1waves or "<f ! ,japanese"> .1~1tsunami4
+
+~italic
+             ++++++++++
+HarperCollinsPublishers
+,h>p},coll9s.1,publi%}s
+
+~bold
+++++               +++++++++    +++++++++
+~italic
+  +
+N(S) is called the empty set or null set.
+~1,n"<.2,s"> is call$ ! ~1empty ~1set or ~1null ~1set4
+
+#   9.4.4 page 96
+
+##Today's lunchbox note says
+##,td's lun*box note says `7,y c d x6`'
+
+~italic
+                      ++++++++++++++++++++++++++++++++     +++++++++++++++++++++
+Charles Dickens wrote Oliver Twist, Great Expectations and A Tale of Two Cities.
+,*>les ,dick5s wrote .7,oliv} ,twi/1 ,grt ,expecta;ns.' & .7,a ,tale ( ,two ,cities4.'
+
+~bold
++++++                                                        ++++++
+~italic
+                                ++++++++++++++++++++++++++++                                       ++++++++++++++++++++
+Maybe as an adverb is one word: Maybe it will rain tomorrow. May be as a verb phrase is two words: He may be home soon.
+~1,maybe z an adv}b is "o ~w3 .7,maybe x w ra9 tm4.' ~1,may ~12 z a v}b phrase is two ~ws3 .7,he may 2 home soon4.'
+
+~bold
+          ++++++++++++
+Click the Up One Level button.
+,click ! ~7,up ,"o ,level~' button4
+
+~under
+                           +++++++++++++++++++++
+~italic
+                                                                                   +++++++++++++++++++++++++++++
+When using the typewriter, words were underlined but, when using a word processor, the italic font is preferred.
+,:5 us+ ! typewrit}1 _7~ws 7 "ul9$_' b1 :5 us+ a ~w processor1 .7! italic font is pref}r$4.'
+
+~under
+                   ++++++++++++++++++++
+In C:\My Documents\letter to dad 041023.doc, the underlined part is the filename.
+,9 ,c3_*,my ,docu;ts_*_7lett}"" to dad #jdajbc_'4doc1 ! "ul9$ "p is ! file"n4
+
+~bold
+++++
+textbook
+~1text~'book
+
+~under
++++
+and/or
+_1&_'_/or
+
+~under
++++      ++
+syllable emphasis
+_1syl_'lable _1em_'phasis
+
+~italic
++++++         ++    +         +   +
+Radar is from radio detecting and ranging.
+.1,rad> is f .1ra.'dio .2detect+ .2& .2rang+4
+
+~italic
+      ++++++++
+HarperFlamingoCanada
+,h>p}.1,flam+o.',canada
+
+~italic
+    +++++
+the Globe's business section
+! .1,globe.''s busi;s sec;n
+
+#   9.7.1 page 99
+
+#~italic
+#               ++++++++++++++++
+#~passage_break
+#       +                       +
+#plays (such as Romeo and Juliet)
+#plays "<s* z .7,romeo & ,juliet.'">
+
+#~passage_break
+# +                       +
+#~bold
+# ++++++++++++++++++++++++
+#"Venite exultemus Domino!" his father sang.
+#8~7,venite exultemus ,domino6~'0 8 "f sang4
+
+#   9.7.2 page 99
+
+~italic
+++++++++++++++++++
+Hänsel und Gretel, a fairy tale
+.7,h~3ansel und ,gretel1.' a fairy tale
+
+~italic
+    ++++++
+out-of-the-way
+|-.1(-!.'-way
+
+##~passage_break
+##                           +
+~italic
++++++++++++++++++++++++++++
+Brevity is the soul of wit.–Shakespeare
+.7,brev;y is ! s|l ( wit4.',,%akespe>e
+
+~italic
+         ++++++++++++++
+Remember Do unto others ...
+,rememb} .7,d unto o!rs.' 444
+
+#   9.7.3 page 100
+
+~under
+             ++++++
+Did you read Hamlet?
+,did y r1d _1,hamlet8
+
+~italic
+ +++++     ++++++++
+"Help! I'm falling."
+8.1,help6 ,i'm .1fall+40
+
+#   9.8.1 page 101
+
+~italic
+                                                                               ++++++++++++++++++++++
+~under
+                                                                               ++++++++++++++++++++++
+The object of the following sentence is underlined: Lucy Maud Montgomery wrote Anne of Green Gables.
+,! object ( ! foll{+ s5t;e is "ul9$3 ,lucy ,maud ,montgom}y wrote .7_7,anne ( ,gre5 ,gables4_'.'
+
+~italic
+                   ++++++++++++++++++++++++++++++++ ++++++++++++++++++++++
+~bold
+                   ++++++++++++++++++++++++++++++++
+the bank's dictum: Pecunia Felicitatibus Honoratur. Money welcomed gladly.
+! bank's dictum3 .7~7,pecunia ,felicitatibus ,honoratur4~' ,m"oy welcom$ gladly4.'
+
+

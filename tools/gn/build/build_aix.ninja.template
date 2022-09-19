@@ -1,0 +1,13 @@
+rule cxx
+  command = $cxx -MMD -MF $out.d $includes $cflags -c $in -o $out
+  description = CXX $out
+  depfile = $out.d
+  deps = gcc
+
+rule alink_thin
+  command = rm -f $out && $ar rcsT $out $in
+  description = AR $out
+
+rule link
+  command = $ld $ldflags -o $out $in $libs $solibs
+  description = LINK $out

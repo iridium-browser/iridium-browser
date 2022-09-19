@@ -1,0 +1,171 @@
+# Copyright 2021 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//third_party/grpc/grpc_library.gni")
+import("//third_party/protobuf/proto_library.gni")
+
+# NOTE: Our local lite versions of the builtin protos have to retain their
+# "google/protobuf" path in order to generate certain correct symbols.  However,
+# this leads to include confusion with the default committed full versions.  The
+# work-around is to force an extra include path to reach our local compiled
+# versions.
+config("force_local_well_known_protos") {
+  include_dirs = [ "$target_gen_dir" ]
+}
+
+proto_library("base_protos") {
+  generate_python = false
+  proto_in_dir = "//third_party/protobuf/src"
+  proto_out_dir = rebase_path(".", "//")
+  sources = [ "//third_party/protobuf/src/google/protobuf/duration.proto" ]
+  cc_generator_options = "lite"
+  extra_configs = [ ":force_local_well_known_protos" ]
+}
+
+template("cast_core_proto_library_base") {
+  target(invoker.target_type, target_name) {
+    proto_in_dir = "//" + rebase_path("../../..", "//")
+    generate_python = false
+
+    # NOTE: For using built-in proto files like empty.proto.
+    import_dirs = [ "//third_party/protobuf/src" ]
+
+    forward_variables_from(invoker,
+                           [
+                             "deps",
+                             "sources",
+                           ])
+    if (!defined(deps)) {
+      deps = []
+    }
+    deps += [ ":base_protos" ]
+    extra_configs = [ ":force_local_well_known_protos" ]
+  }
+}
+
+# For .proto files without RPC definitions.
+template("cast_core_proto_library") {
+  cast_core_proto_library_base(target_name) {
+    target_type = "proto_library"
+    forward_variables_from(invoker,
+                           [
+                             "deps",
+                             "sources",
+                           ])
+  }
+}
+
+# For .proto files with RPC definitions.
+template("cast_core_grpc_library") {
+  cast_core_proto_library_base(target_name) {
+    target_type = "grpc_library"
+    forward_variables_from(invoker,
+                           [
+                             "deps",
+                             "sources",
+                           ])
+  }
+}
+
+group("api") {
+  public_deps = [
+    ":api_bindings_proto",
+    ":application_config_proto",
+    ":cast_audio_channel_service_proto",
+    ":cast_core_service_proto",
+    ":cast_message_proto",
+    ":core_application_service_proto",
+    ":message_channel_proto",
+    ":metrics_recorder_proto",
+    ":platform_service_proto",
+    ":runtime_application_service_proto",
+    ":runtime_message_port_application_service_proto",
+    ":runtime_metadata_proto",
+    ":runtime_service_proto",
+    ":service_info_proto",
+    ":url_rewrite_proto",
+  ]
+}
+
+cast_core_proto_library("api_bindings_proto") {
+  sources = [ "bindings/api_bindings.proto" ]
+  deps = [ ":message_channel_proto" ]
+}
+
+cast_core_proto_library("application_config_proto") {
+  sources = [ "common/application_config.proto" ]
+}
+
+cast_core_proto_library("runtime_metadata_proto") {
+  sources = [ "common/runtime_metadata.proto" ]
+}
+
+cast_core_proto_library("service_info_proto") {
+  sources = [ "common/service_info.proto" ]
+}
+
+cast_core_grpc_library("cast_core_service_proto") {
+  sources = [ "core/cast_core_service.proto" ]
+  deps = [ ":runtime_metadata_proto" ]
+}
+
+cast_core_grpc_library("platform_service_proto") {
+  sources = [ "platform/platform_service.proto" ]
+  deps = [ ":service_info_proto" ]
+}
+
+cast_core_grpc_library("cast_audio_channel_service_proto") {
+  sources = [ "runtime/cast_audio_channel_service.proto" ]
+}
+
+cast_core_grpc_library("runtime_service_proto") {
+  sources = [ "runtime/runtime_service.proto" ]
+  deps = [
+    ":application_config_proto",
+    ":service_info_proto",
+    ":url_rewrite_proto",
+  ]
+}
+
+cast_core_proto_library("cast_message_proto") {
+  sources = [ "v2/cast_message.proto" ]
+}
+
+cast_core_grpc_library("core_application_service_proto") {
+  sources = [ "v2/core_application_service.proto" ]
+  deps = [
+    ":api_bindings_proto",
+    ":application_config_proto",
+    ":cast_message_proto",
+    ":message_channel_proto",
+    ":service_info_proto",
+    ":url_rewrite_proto",
+  ]
+}
+
+cast_core_grpc_library("runtime_application_service_proto") {
+  sources = [ "v2/runtime_application_service.proto" ]
+  deps = [
+    ":cast_message_proto",
+    ":message_channel_proto",
+    ":url_rewrite_proto",
+  ]
+}
+
+cast_core_grpc_library("runtime_message_port_application_service_proto") {
+  sources = [ "v2/runtime_message_port_application_service.proto" ]
+  deps = [ ":message_channel_proto" ]
+}
+
+cast_core_proto_library("url_rewrite_proto") {
+  sources = [ "v2/url_rewrite.proto" ]
+}
+
+cast_core_proto_library("message_channel_proto") {
+  sources = [ "web/message_channel.proto" ]
+}
+
+cast_core_grpc_library("metrics_recorder_proto") {
+  sources = [ "metrics/metrics_recorder.proto" ]
+}

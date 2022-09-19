@@ -1,0 +1,124 @@
+# Copyright 2019 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/ui_mode.gni")
+import("//chrome/common/features.gni")
+import("//components/signin/features.gni")
+import("//tools/grit/grit_rule.gni")
+import("//tools/grit/preprocess_if_expr.gni")
+import("//tools/polymer/css_to_wrapper.gni")
+import("//tools/polymer/html_to_wrapper.gni")
+import("//tools/typescript/ts_library.gni")
+import("//ui/webui/resources/tools/generate_grd.gni")
+import("signin.gni")
+
+assert(!is_android)
+
+preprocess_folder = "preprocessed"
+
+grit("resources") {
+  defines = chrome_grit_defines
+
+  # These arguments are needed since the grd is generated at build time.
+  enable_input_discovery_for_gn_analyze = false
+  source = "$target_gen_dir/resources.grd"
+  deps = [ ":build_grd" ]
+
+  outputs = [
+    "grit/signin_resources.h",
+    "grit/signin_resources_map.cc",
+    "grit/signin_resources_map.h",
+    "signin_resources.pak",
+  ]
+  output_dir = "$root_gen_dir/chrome"
+}
+
+html_to_wrapper("html_wrapper_files") {
+  in_files = html_files
+}
+
+css_to_wrapper("css_wrapper_files") {
+  in_files = css_files
+}
+
+preprocess_if_expr("preprocess") {
+  out_folder = "$target_gen_dir/$preprocess_folder"
+  in_files = ts_files
+}
+
+preprocess_if_expr("preprocess_gen") {
+  in_folder = target_gen_dir
+  out_folder = "$target_gen_dir/$preprocess_folder"
+  in_files = html_wrapper_files + css_wrapper_files
+  deps = [
+    ":css_wrapper_files",
+    ":html_wrapper_files",
+  ]
+}
+
+ts_library("build_ts") {
+  root_dir = "$target_gen_dir/$preprocess_folder"
+  out_dir = "$target_gen_dir/tsc"
+  composite = true
+  tsconfig_base = "tsconfig_base.json"
+  in_files = ts_files + html_wrapper_files + css_wrapper_files
+
+  definitions = [ "//tools/typescript/definitions/chrome_send.d.ts" ]
+
+  deps = [
+    "//third_party/polymer/v3_0:library",
+    "//ui/webui/resources:library",
+    "//ui/webui/resources/cr_components/customize_themes:build_ts",
+  ]
+  extra_deps = [
+    ":preprocess",
+    ":preprocess_gen",
+  ]
+}
+
+generate_grd("build_grd") {
+  grd_prefix = "signin"
+  out_grd = "$target_gen_dir/resources.grd"
+
+  input_files = [
+    "profile_customization/images/profile_customization_illustration.svg",
+    "sync_confirmation/sync_confirmation.html",
+    "sync_confirmation/sync_disabled_confirmation.html",
+    "sync_confirmation/sync_loading_confirmation.html",
+    "sync_confirmation/images/sync_confirmation_refreshed_illustration_dark.svg",
+    "sync_confirmation/images/sync_confirmation_illustration.svg",
+    "sync_confirmation/images/sync_confirmation_illustration_dark.svg",
+    "sync_confirmation/images/sync_confirmation_refreshed_illustration.svg",
+  ]
+  if (!is_chromeos_ash) {
+    input_files += [
+      "enterprise_profile_welcome/enterprise_profile_welcome.html",
+      "profile_customization/profile_customization.html",
+      "signin_email_confirmation/signin_email_confirmation.html",
+      "signin_error/signin_error.html",
+    ]
+  }
+  if (is_chromeos_lacros) {
+    input_files += [ "enterprise_profile_welcome/images/lacros_enterprise_profile_welcome_illustration.svg" ]
+  }
+  if (!is_chromeos_ash && !is_chromeos_lacros) {
+    input_files += [ "enterprise_profile_welcome/images/enterprise_profile_welcome_illustration.svg" ]
+  }
+  if (enable_dice_support) {
+    input_files += [
+      "dice_web_signin_intercept/dice_web_signin_intercept.html",
+      "dice_web_signin_intercept/images/split_header.svg",
+      "signin_reauth/images/account_passwords_reauth_illustration_dark_v2.svg",
+      "signin_reauth/images/account_passwords_reauth_illustration_dark.svg",
+      "signin_reauth/images/account_passwords_reauth_illustration_v2.svg",
+      "signin_reauth/images/account_passwords_reauth_illustration.svg",
+      "signin_reauth/signin_reauth.html",
+    ]
+  }
+  input_files_base_dir = rebase_path(".", "//")
+
+  deps = [ ":build_ts" ]
+  manifest_files =
+      filter_include(get_target_outputs(":build_ts"), [ "*.manifest" ])
+}

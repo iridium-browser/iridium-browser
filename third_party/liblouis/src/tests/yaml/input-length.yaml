@@ -1,0 +1,27 @@
+# backward translation
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef8Dots.uti
+  word people 1234
+flags: {testmode: backward}
+tests:
+  - - p
+    - people
+  - - p
+    - ""
+    - maxOutputLength: 3
+      realInputLength: 0
+
+ # forward translation
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef8Dots.uti
+  word p 1234-15-135-1234-123-15
+flags: {testmode: forward}
+tests:
+  - - p
+    - people
+  - - p
+    - ""
+    - maxOutputLength: 3
+      realInputLength: 0

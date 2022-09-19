@@ -1,0 +1,38 @@
+load("//bazel:macros.bzl", "exports_files_legacy", "split_srcs_and_hdrs")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+GRADIENT_FILES = [
+    "Sk4fGradientBase.cpp",
+    "Sk4fGradientBase.h",
+    "Sk4fGradientPriv.h",
+    "Sk4fLinearGradient.cpp",
+    "Sk4fLinearGradient.h",
+    "SkGradientShader.cpp",
+    "SkGradientShaderBase.cpp",
+    "SkGradientShaderBase.h",
+    "SkLinearGradient.cpp",
+    "SkLinearGradient.h",
+    "SkRadialGradient.cpp",
+    "SkSweepGradient.cpp",
+    "SkTwoPointConicalGradient.cpp",
+]
+
+split_srcs_and_hdrs(
+    name = "gradient",
+    files = GRADIENT_FILES,
+)
+
+filegroup(
+    name = "srcs",
+    srcs = [":gradient_srcs"],
+    visibility = ["//src/shaders:__pkg__"],
+)
+
+filegroup(
+    name = "private_hdrs",
+    srcs = [":gradient_hdrs"],
+    visibility = ["//src/shaders:__pkg__"],
+)

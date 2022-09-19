@@ -1,0 +1,9 @@
+dpapad@chromium.org
+khorimoto@chromium.org
+zentaro@chromium.org
+
+# Chrome OS Settings
+per-file *os_settings*=file://chrome/browser/resources/settings/chromeos/OWNERS
+
+# Happiness Tracking Surveys (HaTS)
+per-file hats_browser_proxy.ts=sauski@google.com

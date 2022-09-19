@@ -1,0 +1,44 @@
+// Copyright 2022 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package cast.common;
+
+option optimize_for = LITE_RUNTIME;
+
+// Application media state types. Default value is UNBLOCKED.
+message MediaState {
+  enum Type {
+    UNDEFINED = 0;
+    // Cast application media elements cannot be loaded.
+    LOAD_BLOCKED = 1;
+    // Cast application media elements can loaded, but no playback can happen.
+    START_BLOCKED = 2;
+    // Cast application media can be loaded and playback started.
+    UNBLOCKED = 3;
+  }
+}
+
+// Application visibility types. Default value is FULL_SCREEN.
+message Visibility {
+  enum Type {
+    UNDEFINED = 0;
+    // Hide Cast application.
+    HIDDEN = 1;
+    // Show Cast application and occupy the whole area of the screen provided by
+    // the system.
+    FULL_SCREEN = 2;
+  }
+}

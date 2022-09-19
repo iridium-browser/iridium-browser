@@ -1,0 +1,995 @@
+diff --git a/source/common/brkiter.cpp b/source/common/brkiter.cpp
+index 8a191588..dae67554 100644
+--- a/source/common/brkiter.cpp
++++ b/source/common/brkiter.cpp
+@@ -279,7 +279,7 @@ ICUBreakIteratorService::~ICUBreakIteratorService() {}
+ // defined in ucln_cmn.h
+ U_NAMESPACE_END
+ 
+-static icu::UInitOnce gInitOnceBrkiter = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gInitOnceBrkiter {};
+ static icu::ICULocaleService* gService = NULL;
+ 
+ 
+diff --git a/source/common/characterproperties.cpp b/source/common/characterproperties.cpp
+index a2e051a4..15bd9228 100644
+--- a/source/common/characterproperties.cpp
++++ b/source/common/characterproperties.cpp
+@@ -40,7 +40,7 @@ constexpr int32_t NUM_INCLUSIONS = UPROPS_SRC_COUNT + (UCHAR_INT_LIMIT - UCHAR_I
+ 
+ struct Inclusion {
+     UnicodeSet  *fSet = nullptr;
+-    UInitOnce    fInitOnce = U_INITONCE_INITIALIZER;
++    UInitOnce    fInitOnce {};
+ };
+ Inclusion gInclusions[NUM_INCLUSIONS]; // cached getInclusions()
+ 
+diff --git a/source/common/emojiprops.cpp b/source/common/emojiprops.cpp
+index 2a05e860..d07e07c6 100644
+--- a/source/common/emojiprops.cpp
++++ b/source/common/emojiprops.cpp
+@@ -22,7 +22,7 @@ U_NAMESPACE_BEGIN
+ namespace {
+ 
+ EmojiProps *singleton = nullptr;
+-icu::UInitOnce emojiInitOnce = U_INITONCE_INITIALIZER;
++icu::UInitOnce emojiInitOnce {};
+ 
+ UBool U_CALLCONV emojiprops_cleanup() {
+     delete singleton;
+diff --git a/source/common/loadednormalizer2impl.cpp b/source/common/loadednormalizer2impl.cpp
+index 905fc1de..ef3a0c6a 100644
+--- a/source/common/loadednormalizer2impl.cpp
++++ b/source/common/loadednormalizer2impl.cpp
+@@ -134,14 +134,14 @@ U_CDECL_END
+ 
+ #if !NORM2_HARDCODE_NFC_DATA
+ static Norm2AllModes *nfcSingleton;
+-static icu::UInitOnce nfcInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce nfcInitOnce {};
+ #endif
+ 
+ static Norm2AllModes *nfkcSingleton;
+-static icu::UInitOnce nfkcInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce nfkcInitOnce {};
+ 
+ static Norm2AllModes *nfkc_cfSingleton;
+-static icu::UInitOnce nfkc_cfInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce nfkc_cfInitOnce {};
+ 
+ static UHashtable    *cache=NULL;
+ 
+diff --git a/source/common/locavailable.cpp b/source/common/locavailable.cpp
+index e8ec512e..8fe74ea1 100644
+--- a/source/common/locavailable.cpp
++++ b/source/common/locavailable.cpp
+@@ -37,7 +37,7 @@ U_NAMESPACE_BEGIN
+ 
+ static icu::Locale*  availableLocaleList = NULL;
+ static int32_t  availableLocaleListCount;
+-static icu::UInitOnce gInitOnceLocale = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gInitOnceLocale {};
+ 
+ U_NAMESPACE_END
+ 
+@@ -102,7 +102,7 @@ namespace {
+ // Enough capacity for the two lists in the res_index.res file
+ const char** gAvailableLocaleNames[2] = {};
+ int32_t gAvailableLocaleCounts[2] = {};
+-icu::UInitOnce ginstalledLocalesInitOnce = U_INITONCE_INITIALIZER;
++icu::UInitOnce ginstalledLocalesInitOnce {};
+ 
+ class AvailableLocalesSink : public ResourceSink {
+   public:
+diff --git a/source/common/locdistance.cpp b/source/common/locdistance.cpp
+index ff889279..0f649679 100644
+--- a/source/common/locdistance.cpp
++++ b/source/common/locdistance.cpp
+@@ -45,7 +45,7 @@ enum {
+ };
+ 
+ LocaleDistance *gLocaleDistance = nullptr;
+-UInitOnce gInitOnce = U_INITONCE_INITIALIZER;
++UInitOnce gInitOnce {};
+ 
+ UBool U_CALLCONV cleanup() {
+     delete gLocaleDistance;
+diff --git a/source/common/locid.cpp b/source/common/locid.cpp
+index 96d38518..876cdc47 100644
+--- a/source/common/locid.cpp
++++ b/source/common/locid.cpp
+@@ -64,7 +64,7 @@ U_CDECL_END
+ U_NAMESPACE_BEGIN
+ 
+ static Locale   *gLocaleCache = NULL;
+-static UInitOnce gLocaleCacheInitOnce = U_INITONCE_INITIALIZER;
++static UInitOnce gLocaleCacheInitOnce {};
+ 
+ // gDefaultLocaleMutex protects all access to gDefaultLocalesHashT and gDefaultLocale.
+ static UMutex gDefaultLocaleMutex;
+@@ -491,7 +491,7 @@ Locale::operator==( const   Locale& other) const
+ 
+ namespace {
+ 
+-UInitOnce gKnownCanonicalizedInitOnce = U_INITONCE_INITIALIZER;
++UInitOnce gKnownCanonicalizedInitOnce {};
+ UHashtable *gKnownCanonicalized = nullptr;
+ 
+ static const char* const KNOWN_CANONICALIZED[] = {
+@@ -682,7 +682,7 @@ private:
+ 
+ 
+ const AliasData* AliasData::gSingleton = nullptr;
+-UInitOnce AliasData::gInitOnce = U_INITONCE_INITIALIZER;
++UInitOnce AliasData::gInitOnce {};
+ 
+ UBool U_CALLCONV
+ AliasData::cleanup()
+diff --git a/source/common/loclikelysubtags.cpp b/source/common/loclikelysubtags.cpp
+index aa592e6e..fcf10b0b 100644
+--- a/source/common/loclikelysubtags.cpp
++++ b/source/common/loclikelysubtags.cpp
+@@ -245,7 +245,7 @@ private:
+ namespace {
+ 
+ XLikelySubtags *gLikelySubtags = nullptr;
+-UInitOnce gInitOnce = U_INITONCE_INITIALIZER;
++UInitOnce gInitOnce {};
+ 
+ UBool U_CALLCONV cleanup() {
+     delete gLikelySubtags;
+diff --git a/source/common/locutil.cpp b/source/common/locutil.cpp
+index 3d9d69ff..52b5f7ab 100644
+--- a/source/common/locutil.cpp
++++ b/source/common/locutil.cpp
+@@ -21,7 +21,7 @@
+ #include "umutex.h"
+ 
+ // see LocaleUtility::getAvailableLocaleNames
+-static icu::UInitOnce   LocaleUtilityInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce   LocaleUtilityInitOnce {};
+ static icu::Hashtable * LocaleUtility_cache = NULL;
+ 
+ #define UNDERSCORE_CHAR ((UChar)0x005f)
+diff --git a/source/common/normalizer2.cpp b/source/common/normalizer2.cpp
+index 6be7e0b2..36ad5b8b 100644
+--- a/source/common/normalizer2.cpp
++++ b/source/common/normalizer2.cpp
+@@ -183,7 +183,7 @@ static UBool U_CALLCONV uprv_normalizer2_cleanup();
+ U_CDECL_END
+ 
+ static Normalizer2   *noopSingleton;
+-static icu::UInitOnce noopInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce noopInitOnce {};
+ 
+ static void U_CALLCONV initNoopSingleton(UErrorCode &errorCode) {
+     if(U_FAILURE(errorCode)) {
+@@ -245,7 +245,7 @@ Norm2AllModes::createNFCInstance(UErrorCode &errorCode) {
+ 
+ static Norm2AllModes *nfcSingleton;
+ 
+-static icu::UInitOnce nfcInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce nfcInitOnce {};
+ 
+ static void U_CALLCONV initNFCSingleton(UErrorCode &errorCode) {
+     nfcSingleton=Norm2AllModes::createNFCInstance(errorCode);
+diff --git a/source/common/normalizer2impl.h b/source/common/normalizer2impl.h
+index 7c85448b..5c971772 100644
+--- a/source/common/normalizer2impl.h
++++ b/source/common/normalizer2impl.h
+@@ -730,7 +730,7 @@ private:
+     const uint16_t *extraData;  // mappings and/or compositions for yesYes, yesNo & noNo characters
+     const uint8_t *smallFCD;  // [0x100] one bit per 32 BMP code points, set if any FCD!=0
+ 
+-    UInitOnce       fCanonIterDataInitOnce = U_INITONCE_INITIALIZER;
++    UInitOnce       fCanonIterDataInitOnce {};
+     CanonIterData  *fCanonIterData;
+ };
+ 
+diff --git a/source/common/putil.cpp b/source/common/putil.cpp
+index 68be079b..41f6e3c6 100644
+--- a/source/common/putil.cpp
++++ b/source/common/putil.cpp
+@@ -1260,10 +1260,10 @@ uprv_tzname(int n)
+ 
+ /* Get and set the ICU data directory --------------------------------------- */
+ 
+-static icu::UInitOnce gDataDirInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gDataDirInitOnce {};
+ static char *gDataDirectory = NULL;
+ 
+-UInitOnce gTimeZoneFilesInitOnce = U_INITONCE_INITIALIZER;
++UInitOnce gTimeZoneFilesInitOnce {};
+ static CharString *gTimeZoneFilesDirectory = NULL;
+ 
+ #if U_POSIX_LOCALE || U_PLATFORM_USES_ONLY_WIN32_API
+diff --git a/source/common/rbbi.cpp b/source/common/rbbi.cpp
+index cae8d154..acc1f5b3 100644
+--- a/source/common/rbbi.cpp
++++ b/source/common/rbbi.cpp
+@@ -1153,8 +1153,8 @@ U_NAMESPACE_END
+ 
+ static icu::UStack *gLanguageBreakFactories = nullptr;
+ static const icu::UnicodeString *gEmptyString = nullptr;
+-static icu::UInitOnce gLanguageBreakFactoriesInitOnce = U_INITONCE_INITIALIZER;
+-static icu::UInitOnce gRBBIInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gLanguageBreakFactoriesInitOnce {};
++static icu::UInitOnce gRBBIInitOnce {};
+ 
+ /**
+  * Release all static memory held by breakiterator.
+diff --git a/source/common/static_unicode_sets.cpp b/source/common/static_unicode_sets.cpp
+index 5dab3931..f0f222cd 100644
+--- a/source/common/static_unicode_sets.cpp
++++ b/source/common/static_unicode_sets.cpp
+@@ -129,7 +129,7 @@ class ParseDataSink : public ResourceSink {
+ };
+ 
+ 
+-icu::UInitOnce gNumberParseUniSetsInitOnce = U_INITONCE_INITIALIZER;
++icu::UInitOnce gNumberParseUniSetsInitOnce {};
+ 
+ UBool U_CALLCONV cleanupNumberParseUniSets() {
+     if (gEmptyUnicodeSetInitialized) {
+diff --git a/source/common/ucnv_bld.cpp b/source/common/ucnv_bld.cpp
+index d08eec73..548fae83 100644
+--- a/source/common/ucnv_bld.cpp
++++ b/source/common/ucnv_bld.cpp
+@@ -200,7 +200,7 @@ static icu::UMutex cnvCacheMutex;
+ 
+ static const char **gAvailableConverters = NULL;
+ static uint16_t gAvailableConverterCount = 0;
+-static icu::UInitOnce gAvailableConvertersInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gAvailableConvertersInitOnce {};
+ 
+ #if !U_CHARSET_IS_UTF8
+ 
+diff --git a/source/common/ucnv_io.cpp b/source/common/ucnv_io.cpp
+index 7a95a3f1..6d8258ce 100644
+--- a/source/common/ucnv_io.cpp
++++ b/source/common/ucnv_io.cpp
+@@ -175,7 +175,7 @@ static const char DATA_NAME[] = "cnvalias";
+ static const char DATA_TYPE[] = "icu";
+ 
+ static UDataMemory *gAliasData=NULL;
+-static icu::UInitOnce gAliasDataInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gAliasDataInitOnce {};
+ 
+ enum {
+     tocLengthIndex=0,
+diff --git a/source/common/ucurr.cpp b/source/common/ucurr.cpp
+index 6e489e05..2d7cb7ad 100644
+--- a/source/common/ucurr.cpp
++++ b/source/common/ucurr.cpp
+@@ -97,11 +97,11 @@ static const char CURRENCYPLURALS[] = "CurrencyPlurals";
+ 
+ // ISO codes mapping table
+ static const UHashtable* gIsoCodes = NULL;
+-static icu::UInitOnce gIsoCodesInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gIsoCodesInitOnce {};
+ 
+ // Currency symbol equivalances
+ static const icu::Hashtable* gCurrSymbolsEquiv = NULL;
+-static icu::UInitOnce gCurrSymbolsEquivInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gCurrSymbolsEquivInitOnce {};
+ 
+ U_NAMESPACE_BEGIN
+ 
+diff --git a/source/common/udata.cpp b/source/common/udata.cpp
+index 07156da5..2d580291 100644
+--- a/source/common/udata.cpp
++++ b/source/common/udata.cpp
+@@ -106,10 +106,10 @@ static UDataMemory *udata_findCachedData(const char *path, UErrorCode &err);
+  */
+ static UDataMemory *gCommonICUDataArray[10] = { NULL };   // Access protected by icu global mutex.
+ 
+-static u_atomic_int32_t gHaveTriedToLoadCommonData = ATOMIC_INT32_T_INITIALIZER(0);  //  See extendICUData().
++static u_atomic_int32_t gHaveTriedToLoadCommonData {0};  //  See extendICUData().
+ 
+ static UHashtable  *gCommonDataCache = NULL;  /* Global hash table of opened ICU data files.  */
+-static icu::UInitOnce gCommonDataCacheInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gCommonDataCacheInitOnce {};
+ 
+ #if !defined(ICU_DATA_DIR_WINDOWS)
+ static UDataFileAccess  gDataFileAccess = UDATA_DEFAULT_ACCESS;  // Access not synchronized.
+diff --git a/source/common/uinit.cpp b/source/common/uinit.cpp
+index 624431be..fa534e92 100644
+--- a/source/common/uinit.cpp
++++ b/source/common/uinit.cpp
+@@ -26,7 +26,7 @@
+ 
+ U_NAMESPACE_BEGIN
+ 
+-static UInitOnce gICUInitOnce = U_INITONCE_INITIALIZER;
++static UInitOnce gICUInitOnce {};
+ 
+ static UBool U_CALLCONV uinit_cleanup() {
+     gICUInitOnce.reset();
+diff --git a/source/common/uloc_keytype.cpp b/source/common/uloc_keytype.cpp
+index 58024412..ea9b9030 100644
+--- a/source/common/uloc_keytype.cpp
++++ b/source/common/uloc_keytype.cpp
+@@ -24,7 +24,7 @@
+ #include "udataswp.h" /* for InvChar functions */
+ 
+ static UHashtable* gLocExtKeyMap = NULL;
+-static icu::UInitOnce gLocExtKeyMapInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gLocExtKeyMapInitOnce {};
+ 
+ // bit flags for special types
+ typedef enum {
+diff --git a/source/common/umutex.h b/source/common/umutex.h
+index 8d76b3f3..1b833240 100644
+--- a/source/common/umutex.h
++++ b/source/common/umutex.h
+@@ -71,7 +71,6 @@ U_NAMESPACE_BEGIN
+  ****************************************************************************/
+ 
+ typedef std::atomic<int32_t> u_atomic_int32_t;
+-#define ATOMIC_INT32_T_INITIALIZER(val) ATOMIC_VAR_INIT(val)
+ 
+ inline int32_t umtx_loadAcquire(u_atomic_int32_t &var) {
+     return var.load(std::memory_order_acquire);
+@@ -96,18 +95,15 @@ inline int32_t umtx_atomic_dec(u_atomic_int32_t *var) {
+  *
+  *************************************************************************************************/
+ 
+-struct UInitOnce {
+-    u_atomic_int32_t   fState;
+-    UErrorCode       fErrCode;
++struct U_COMMON_API UInitOnce {
++    u_atomic_int32_t   fState {0};
++    UErrorCode       fErrCode {U_ZERO_ERROR};
+     void reset() {fState = 0;}
+     UBool isReset() {return umtx_loadAcquire(fState) == 0;}
+ // Note: isReset() is used by service registration code.
+ //                 Thread safety of this usage needs review.
+ };
+ 
+-#define U_INITONCE_INITIALIZER {ATOMIC_INT32_T_INITIALIZER(0), U_ZERO_ERROR}
+-
+-
+ U_COMMON_API UBool U_EXPORT2 umtx_initImplPreInit(UInitOnce &);
+ U_COMMON_API void  U_EXPORT2 umtx_initImplPostInit(UInitOnce &);
+ 
+diff --git a/source/common/unames.cpp b/source/common/unames.cpp
+index 5776058f..e5233b85 100644
+--- a/source/common/unames.cpp
++++ b/source/common/unames.cpp
+@@ -105,7 +105,7 @@ typedef struct {
+ 
+ static UDataMemory *uCharNamesData=NULL;
+ static UCharNames *uCharNames=NULL;
+-static icu::UInitOnce gCharNamesInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gCharNamesInitOnce {};
+ 
+ /*
+  * Maximum length of character names (regular & 1.0).
+diff --git a/source/common/unifiedcache.cpp b/source/common/unifiedcache.cpp
+index 493ab79f..bf83e975 100644
+--- a/source/common/unifiedcache.cpp
++++ b/source/common/unifiedcache.cpp
+@@ -22,7 +22,7 @@
+ static icu::UnifiedCache *gCache = NULL;
+ static std::mutex *gCacheMutex = nullptr;
+ static std::condition_variable *gInProgressValueAddedCond;
+-static icu::UInitOnce gCacheInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gCacheInitOnce {};
+ 
+ static const int32_t MAX_EVICT_ITERATIONS = 10;
+ static const int32_t DEFAULT_MAX_UNUSED = 1000;
+diff --git a/source/common/uniset_props.cpp b/source/common/uniset_props.cpp
+index 49d6caab..80f8e0f8 100644
+--- a/source/common/uniset_props.cpp
++++ b/source/common/uniset_props.cpp
+@@ -62,7 +62,7 @@ U_CDECL_BEGIN
+ static UBool U_CALLCONV uset_cleanup();
+ 
+ static UnicodeSet *uni32Singleton;
+-static icu::UInitOnce uni32InitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce uni32InitOnce {};
+ 
+ /**
+  * Cleanup function for UnicodeSet
+diff --git a/source/common/uprops.cpp b/source/common/uprops.cpp
+index 5186a0c7..a878a9c5 100644
+--- a/source/common/uprops.cpp
++++ b/source/common/uprops.cpp
+@@ -49,7 +49,7 @@ U_NAMESPACE_USE
+ 
+ namespace {
+ 
+-icu::UInitOnce gLayoutInitOnce = U_INITONCE_INITIALIZER;
++icu::UInitOnce gLayoutInitOnce {};
+ UDataMemory *gLayoutMemory = nullptr;
+ 
+ UCPTrie *gInpcTrie = nullptr;  // Indic_Positional_Category
+diff --git a/source/common/uresbund.cpp b/source/common/uresbund.cpp
+index a9c64594..bbf45538 100644
+--- a/source/common/uresbund.cpp
++++ b/source/common/uresbund.cpp
+@@ -49,7 +49,7 @@ TODO: This cache should probably be removed when the deprecated code is
+       completely removed.
+ */
+ static UHashtable *cache = NULL;
+-static icu::UInitOnce gCacheInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gCacheInitOnce {};
+ 
+ static UMutex resbMutex;
+ 
+diff --git a/source/common/usprep.cpp b/source/common/usprep.cpp
+index 41a1f56c..bdb352da 100644
+--- a/source/common/usprep.cpp
++++ b/source/common/usprep.cpp
+@@ -45,7 +45,7 @@ U_CDECL_BEGIN
+ Static cache for already opened StringPrep profiles
+ */
+ static UHashtable *SHARED_DATA_HASHTABLE = NULL;
+-static icu::UInitOnce gSharedDataInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gSharedDataInitOnce {};
+ 
+ static UMutex usprepMutex;
+ /* format version of spp file */
+diff --git a/source/i18n/buddhcal.cpp b/source/i18n/buddhcal.cpp
+index 6083349e..4b75b5e0 100644
+--- a/source/i18n/buddhcal.cpp
++++ b/source/i18n/buddhcal.cpp
+@@ -133,7 +133,7 @@ void BuddhistCalendar::timeToFields(UDate theTime, UBool quick, UErrorCode& stat
+  */
+ static UDate     gSystemDefaultCenturyStart       = DBL_MIN;
+ static int32_t   gSystemDefaultCenturyStartYear   = -1;
+-static icu::UInitOnce gBCInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gBCInitOnce {};
+ 
+ 
+ UBool BuddhistCalendar::haveDefaultCentury() const
+diff --git a/source/i18n/calendar.cpp b/source/i18n/calendar.cpp
+index 8405d08d..233400be 100644
+--- a/source/i18n/calendar.cpp
++++ b/source/i18n/calendar.cpp
+@@ -65,7 +65,7 @@
+ 
+ #if !UCONFIG_NO_SERVICE
+ static icu::ICULocaleService* gService = NULL;
+-static icu::UInitOnce gServiceInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gServiceInitOnce {};
+ 
+ // INTERNAL - for cleanup
+ U_CDECL_BEGIN
+diff --git a/source/i18n/chnsecal.cpp b/source/i18n/chnsecal.cpp
+index f8fb4a40..a58272e8 100644
+--- a/source/i18n/chnsecal.cpp
++++ b/source/i18n/chnsecal.cpp
+@@ -59,7 +59,7 @@ static icu::CalendarCache *gChineseCalendarWinterSolsticeCache = NULL;
+ static icu::CalendarCache *gChineseCalendarNewYearCache = NULL;
+ 
+ static icu::TimeZone *gChineseCalendarZoneAstroCalc = NULL;
+-static icu::UInitOnce gChineseCalendarZoneAstroCalcInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gChineseCalendarZoneAstroCalcInitOnce {};
+ 
+ /**
+  * The start year of the Chinese calendar, the 61st year of the reign
+@@ -843,7 +843,7 @@ ChineseCalendar::inDaylightTime(UErrorCode& status) const
+ 
+ static UDate     gSystemDefaultCenturyStart       = DBL_MIN;
+ static int32_t   gSystemDefaultCenturyStartYear   = -1;
+-static icu::UInitOnce gSystemDefaultCenturyInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gSystemDefaultCenturyInitOnce {};
+ 
+ 
+ UBool ChineseCalendar::haveDefaultCentury() const
+diff --git a/source/i18n/coll.cpp b/source/i18n/coll.cpp
+index 7bdd80f3..d14f76c8 100644
+--- a/source/i18n/coll.cpp
++++ b/source/i18n/coll.cpp
+@@ -65,9 +65,9 @@ static icu::Locale* availableLocaleList = NULL;
+ static int32_t  availableLocaleListCount;
+ #if !UCONFIG_NO_SERVICE
+ static icu::ICULocaleService* gService = NULL;
+-static icu::UInitOnce gServiceInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gServiceInitOnce {};
+ #endif
+-static icu::UInitOnce gAvailableLocaleListInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gAvailableLocaleListInitOnce {};
+ 
+ /**
+  * Release all static memory held by collator.
+diff --git a/source/i18n/collationroot.cpp b/source/i18n/collationroot.cpp
+index 71753bd6..3f262920 100644
+--- a/source/i18n/collationroot.cpp
++++ b/source/i18n/collationroot.cpp
+@@ -33,7 +33,7 @@ U_NAMESPACE_BEGIN
+ namespace {
+ 
+ static const CollationCacheEntry *rootSingleton = NULL;
+-static UInitOnce initOnce = U_INITONCE_INITIALIZER;
++static UInitOnce initOnce {};
+ 
+ }  // namespace
+ 
+diff --git a/source/i18n/coptccal.cpp b/source/i18n/coptccal.cpp
+index 9c2b1ebb..0be700ca 100644
+--- a/source/i18n/coptccal.cpp
++++ b/source/i18n/coptccal.cpp
+@@ -103,7 +103,7 @@ CopticCalendar::handleComputeFields(int32_t julianDay, UErrorCode &/*status*/)
+  */
+ static UDate           gSystemDefaultCenturyStart       = DBL_MIN;
+ static int32_t         gSystemDefaultCenturyStartYear   = -1;
+-static icu::UInitOnce  gSystemDefaultCenturyInit        = U_INITONCE_INITIALIZER;
++static icu::UInitOnce  gSystemDefaultCenturyInit        {};
+ 
+ 
+ static void U_CALLCONV initializeSystemDefaultCentury() {
+diff --git a/source/i18n/csdetect.cpp b/source/i18n/csdetect.cpp
+index d866eb66..29a0aded 100644
+--- a/source/i18n/csdetect.cpp
++++ b/source/i18n/csdetect.cpp
+@@ -47,7 +47,7 @@ struct CSRecognizerInfo : public UMemory {
+ U_NAMESPACE_END
+ 
+ static icu::CSRecognizerInfo **fCSRecognizers = NULL;
+-static icu::UInitOnce gCSRecognizersInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gCSRecognizersInitOnce {};
+ static int32_t fCSRecognizers_size = 0;
+ 
+ U_CDECL_BEGIN
+diff --git a/source/i18n/dangical.cpp b/source/i18n/dangical.cpp
+index 57fe8022..e16174cb 100644
+--- a/source/i18n/dangical.cpp
++++ b/source/i18n/dangical.cpp
+@@ -24,7 +24,7 @@
+ 
+ // --- The cache --
+ static icu::TimeZone *gDangiCalendarZoneAstroCalc = NULL;
+-static icu::UInitOnce gDangiCalendarInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gDangiCalendarInitOnce {};
+ 
+ /**
+  * The start year of the Korean traditional calendar (Dan-gi) is the inaugural
+diff --git a/source/i18n/dayperiodrules.cpp b/source/i18n/dayperiodrules.cpp
+index efe92dd7..24d3afdb 100644
+--- a/source/i18n/dayperiodrules.cpp
++++ b/source/i18n/dayperiodrules.cpp
+@@ -301,7 +301,7 @@ DayPeriodRulesCountSink::~DayPeriodRulesCountSink() {}
+ 
+ namespace {
+ 
+-UInitOnce initOnce = U_INITONCE_INITIALIZER;
++UInitOnce initOnce {};
+ 
+ U_CFUNC UBool U_CALLCONV dayPeriodRulesCleanup() {
+     delete[] data->rules;
+diff --git a/source/i18n/dtptngen.cpp b/source/i18n/dtptngen.cpp
+index e781c6e2..a029b2aa 100644
+--- a/source/i18n/dtptngen.cpp
++++ b/source/i18n/dtptngen.cpp
+@@ -473,7 +473,7 @@ DateTimePatternGenerator::~DateTimePatternGenerator() {
+ 
+ namespace {
+ 
+-UInitOnce initOnce = U_INITONCE_INITIALIZER;
++UInitOnce initOnce {};
+ UHashtable *localeToAllowedHourFormatsMap = nullptr;
+ 
+ // Value deleter for hashmap.
+diff --git a/source/i18n/ethpccal.cpp b/source/i18n/ethpccal.cpp
+index 7c7c0ba3..07937872 100644
+--- a/source/i18n/ethpccal.cpp
++++ b/source/i18n/ethpccal.cpp
+@@ -143,7 +143,7 @@ EthiopicCalendar::handleGetLimit(UCalendarDateFields field, ELimitType limitType
+  */
+ static UDate           gSystemDefaultCenturyStart       = DBL_MIN;
+ static int32_t         gSystemDefaultCenturyStartYear   = -1;
+-static icu::UInitOnce  gSystemDefaultCenturyInit        = U_INITONCE_INITIALIZER;
++static icu::UInitOnce  gSystemDefaultCenturyInit        {};
+ 
+ static void U_CALLCONV initializeSystemDefaultCentury()
+ {
+diff --git a/source/i18n/gender.cpp b/source/i18n/gender.cpp
+index dc5def6a..0fe674fc 100644
+--- a/source/i18n/gender.cpp
++++ b/source/i18n/gender.cpp
+@@ -37,7 +37,7 @@ static const char* gNeutralStr = "neutral";
+ static const char* gMailTaintsStr = "maleTaints";
+ static const char* gMixedNeutralStr = "mixedNeutral";
+ static icu::GenderInfo* gObjs = NULL;
+-static icu::UInitOnce gGenderInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gGenderInitOnce {};
+ 
+ enum GenderStyle {
+   NEUTRAL,
+diff --git a/source/i18n/gregocal.cpp b/source/i18n/gregocal.cpp
+index 31d36300..6e26ed83 100644
+--- a/source/i18n/gregocal.cpp
++++ b/source/i18n/gregocal.cpp
+@@ -1274,7 +1274,7 @@ GregorianCalendar::getType() const {
+  */
+ static UDate           gSystemDefaultCenturyStart       = DBL_MIN;
+ static int32_t         gSystemDefaultCenturyStartYear   = -1;
+-static icu::UInitOnce  gSystemDefaultCenturyInit        = U_INITONCE_INITIALIZER;
++static icu::UInitOnce  gSystemDefaultCenturyInit        {};
+ 
+ 
+ UBool GregorianCalendar::haveDefaultCentury() const
+diff --git a/source/i18n/hebrwcal.cpp b/source/i18n/hebrwcal.cpp
+index 4d8e59ce..770634d6 100644
+--- a/source/i18n/hebrwcal.cpp
++++ b/source/i18n/hebrwcal.cpp
+@@ -686,7 +686,7 @@ HebrewCalendar::inDaylightTime(UErrorCode& status) const
+  */
+ static UDate           gSystemDefaultCenturyStart       = DBL_MIN;
+ static int32_t         gSystemDefaultCenturyStartYear   = -1;
+-static icu::UInitOnce  gSystemDefaultCenturyInit        = U_INITONCE_INITIALIZER;
++static icu::UInitOnce  gSystemDefaultCenturyInit        {};
+ 
+ UBool HebrewCalendar::haveDefaultCentury() const
+ {
+diff --git a/source/i18n/indiancal.cpp b/source/i18n/indiancal.cpp
+index 7bba7f50..e879cdf1 100644
+--- a/source/i18n/indiancal.cpp
++++ b/source/i18n/indiancal.cpp
+@@ -320,7 +320,7 @@ IndianCalendar::inDaylightTime(UErrorCode& status) const
+  */
+ static UDate           gSystemDefaultCenturyStart       = DBL_MIN;
+ static int32_t         gSystemDefaultCenturyStartYear   = -1;
+-static icu::UInitOnce  gSystemDefaultCenturyInit        = U_INITONCE_INITIALIZER;
++static icu::UInitOnce  gSystemDefaultCenturyInit        {};
+ 
+ 
+ UBool IndianCalendar::haveDefaultCentury() const
+diff --git a/source/i18n/islamcal.cpp b/source/i18n/islamcal.cpp
+index de37e6b9..d44bdcde 100644
+--- a/source/i18n/islamcal.cpp
++++ b/source/i18n/islamcal.cpp
+@@ -712,7 +712,7 @@ IslamicCalendar::inDaylightTime(UErrorCode& status) const
+  */
+ static UDate           gSystemDefaultCenturyStart       = DBL_MIN;
+ static int32_t         gSystemDefaultCenturyStartYear   = -1;
+-static icu::UInitOnce  gSystemDefaultCenturyInit        = U_INITONCE_INITIALIZER;
++static icu::UInitOnce  gSystemDefaultCenturyInit        {};
+ 
+ 
+ UBool IslamicCalendar::haveDefaultCentury() const
+diff --git a/source/i18n/japancal.cpp b/source/i18n/japancal.cpp
+index 75a248f4..be9e53ff 100644
+--- a/source/i18n/japancal.cpp
++++ b/source/i18n/japancal.cpp
+@@ -39,7 +39,7 @@
+ #include "cstring.h"
+ 
+ static icu::EraRules * gJapaneseEraRules = nullptr;
+-static icu::UInitOnce gJapaneseEraRulesInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gJapaneseEraRulesInitOnce {};
+ static int32_t gCurrentEra = 0;
+ 
+ U_CDECL_BEGIN
+diff --git a/source/i18n/measunit_extra.cpp b/source/i18n/measunit_extra.cpp
+index 2df9edee..57eb25b9 100644
+--- a/source/i18n/measunit_extra.cpp
++++ b/source/i18n/measunit_extra.cpp
+@@ -312,7 +312,7 @@ class CategoriesSink : public icu::ResourceSink {
+     int32_t outIndex;
+ };
+ 
+-icu::UInitOnce gUnitExtrasInitOnce = U_INITONCE_INITIALIZER;
++icu::UInitOnce gUnitExtrasInitOnce {};
+ 
+ // Array of simple unit IDs.
+ //
+diff --git a/source/i18n/number_decimfmtprops.cpp b/source/i18n/number_decimfmtprops.cpp
+index 7fa58bbc..6dbfc69e 100644
+--- a/source/i18n/number_decimfmtprops.cpp
++++ b/source/i18n/number_decimfmtprops.cpp
+@@ -18,7 +18,7 @@ namespace {
+ alignas(DecimalFormatProperties)
+ char kRawDefaultProperties[sizeof(DecimalFormatProperties)];
+ 
+-icu::UInitOnce gDefaultPropertiesInitOnce = U_INITONCE_INITIALIZER;
++icu::UInitOnce gDefaultPropertiesInitOnce {};
+ 
+ void U_CALLCONV initDefaultProperties(UErrorCode&) {
+     // can't fail, uses placement new into statically allocated space.
+diff --git a/source/i18n/number_modifiers.cpp b/source/i18n/number_modifiers.cpp
+index b74bfd06..50f5e97c 100644
+--- a/source/i18n/number_modifiers.cpp
++++ b/source/i18n/number_modifiers.cpp
+@@ -22,7 +22,7 @@ const int32_t ARG_NUM_LIMIT = 0x100;
+ // These are the default currency spacing UnicodeSets in CLDR.
+ // Pre-compute them for performance.
+ // The Java unit test testCurrencySpacingPatternStability() will start failing if these change in CLDR.
+-icu::UInitOnce gDefaultCurrencySpacingInitOnce = U_INITONCE_INITIALIZER;
++icu::UInitOnce gDefaultCurrencySpacingInitOnce {};
+ 
+ UnicodeSet *UNISET_DIGIT = nullptr;
+ UnicodeSet *UNISET_NOTSZ = nullptr;
+diff --git a/source/i18n/number_skeletons.cpp b/source/i18n/number_skeletons.cpp
+index c51831b6..6a1572ad 100644
+--- a/source/i18n/number_skeletons.cpp
++++ b/source/i18n/number_skeletons.cpp
+@@ -33,7 +33,7 @@ using namespace icu::number::impl::skeleton;
+ 
+ namespace {
+ 
+-icu::UInitOnce gNumberSkeletonsInitOnce = U_INITONCE_INITIALIZER;
++icu::UInitOnce gNumberSkeletonsInitOnce {};
+ 
+ char16_t* kSerializedStemTrie = nullptr;
+ 
+diff --git a/source/i18n/numfmt.cpp b/source/i18n/numfmt.cpp
+index b8ce1c93..8c90fdd5 100644
+--- a/source/i18n/numfmt.cpp
++++ b/source/i18n/numfmt.cpp
+@@ -156,11 +156,11 @@ static const icu::number::impl::CldrPatternStyle gFormatCldrStyles[UNUM_FORMAT_S
+ 
+ // Static hashtable cache of NumberingSystem objects used by NumberFormat
+ static UHashtable * NumberingSystem_cache = NULL;
+-static icu::UInitOnce gNSCacheInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gNSCacheInitOnce {};
+ 
+ #if !UCONFIG_NO_SERVICE
+ static icu::ICULocaleService* gService = NULL;
+-static icu::UInitOnce gServiceInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gServiceInitOnce {};
+ #endif
+ 
+ /**
+diff --git a/source/i18n/numsys.cpp b/source/i18n/numsys.cpp
+index 93414903..25034939 100644
+--- a/source/i18n/numsys.cpp
++++ b/source/i18n/numsys.cpp
+@@ -271,7 +271,7 @@ UBool NumberingSystem::isAlgorithmic() const {
+ namespace {
+ 
+ UVector* gNumsysNames = nullptr;
+-UInitOnce gNumSysInitOnce = U_INITONCE_INITIALIZER;
++UInitOnce gNumSysInitOnce {};
+ 
+ U_CFUNC UBool U_CALLCONV numSysCleanup() {
+     delete gNumsysNames;
+diff --git a/source/i18n/olsontz.h b/source/i18n/olsontz.h
+index 75d86781..525bbd2b 100644
+--- a/source/i18n/olsontz.h
++++ b/source/i18n/olsontz.h
+@@ -400,7 +400,7 @@ private:
+     TimeArrayTimeZoneRule   **historicRules;
+     int16_t             historicRuleCount;
+     SimpleTimeZone      *finalZoneWithStartYear; // hack
+-    UInitOnce           transitionRulesInitOnce = U_INITONCE_INITIALIZER;
++    UInitOnce           transitionRulesInitOnce {};
+ };
+ 
+ inline int16_t
+diff --git a/source/i18n/persncal.cpp b/source/i18n/persncal.cpp
+index d30577f3..873f4e58 100644
+--- a/source/i18n/persncal.cpp
++++ b/source/i18n/persncal.cpp
+@@ -250,7 +250,7 @@ PersianCalendar::inDaylightTime(UErrorCode& status) const
+ 
+ static UDate           gSystemDefaultCenturyStart       = DBL_MIN;
+ static int32_t         gSystemDefaultCenturyStartYear   = -1;
+-static icu::UInitOnce  gSystemDefaultCenturyInit        = U_INITONCE_INITIALIZER;
++static icu::UInitOnce  gSystemDefaultCenturyInit        {};
+ 
+ UBool PersianCalendar::haveDefaultCentury() const
+ {
+diff --git a/source/i18n/regexst.cpp b/source/i18n/regexst.cpp
+index 97e417ab..b0140137 100644
+--- a/source/i18n/regexst.cpp
++++ b/source/i18n/regexst.cpp
+@@ -69,7 +69,7 @@ constexpr char16_t const *gGC_LVTPattern     = u"[\\p{Hangul_Syllable_Type=LVT}]
+ 
+ 
+ RegexStaticSets *RegexStaticSets::gStaticSets = nullptr;
+-UInitOnce gStaticSetsInitOnce = U_INITONCE_INITIALIZER;
++UInitOnce gStaticSetsInitOnce {};
+ 
+ 
+ RegexStaticSets::RegexStaticSets(UErrorCode *status) {
+diff --git a/source/i18n/region.cpp b/source/i18n/region.cpp
+index 277a22fd..70d88974 100644
+--- a/source/i18n/region.cpp
++++ b/source/i18n/region.cpp
+@@ -53,7 +53,7 @@ U_CDECL_END
+ 
+ U_NAMESPACE_BEGIN
+ 
+-static UInitOnce gRegionDataInitOnce = U_INITONCE_INITIALIZER;
++static UInitOnce gRegionDataInitOnce {};
+ static UVector* availableRegions[URGN_LIMIT];
+ 
+ static UHashtable *regionAliases = NULL;
+diff --git a/source/i18n/smpdtfst.cpp b/source/i18n/smpdtfst.cpp
+index db59a4b4..2c8278df 100644
+--- a/source/i18n/smpdtfst.cpp
++++ b/source/i18n/smpdtfst.cpp
+@@ -30,7 +30,7 @@
+ U_NAMESPACE_BEGIN
+ 
+ SimpleDateFormatStaticSets *gStaticSets = NULL;
+-UInitOnce gSimpleDateFormatStaticSetsInitOnce = U_INITONCE_INITIALIZER;
++UInitOnce gSimpleDateFormatStaticSetsInitOnce {};
+ 
+ SimpleDateFormatStaticSets::SimpleDateFormatStaticSets(UErrorCode &status)
+ : fDateIgnorables(NULL),
+diff --git a/source/i18n/taiwncal.cpp b/source/i18n/taiwncal.cpp
+index 27352aa1..c790605e 100644
+--- a/source/i18n/taiwncal.cpp
++++ b/source/i18n/taiwncal.cpp
+@@ -140,7 +140,7 @@ void TaiwanCalendar::timeToFields(UDate theTime, UBool quick, UErrorCode& status
+  */
+ static UDate           gSystemDefaultCenturyStart       = DBL_MIN;
+ static int32_t         gSystemDefaultCenturyStartYear   = -1;
+-static icu::UInitOnce  gSystemDefaultCenturyInit        = U_INITONCE_INITIALIZER;
++static icu::UInitOnce  gSystemDefaultCenturyInit        {};
+ 
+ UBool TaiwanCalendar::haveDefaultCentury() const
+ {
+diff --git a/source/i18n/timezone.cpp b/source/i18n/timezone.cpp
+index 8115a45e..a0bc7460 100644
+--- a/source/i18n/timezone.cpp
++++ b/source/i18n/timezone.cpp
+@@ -113,7 +113,7 @@ static const int32_t       GMT_ID_LENGTH = 3;
+ static const int32_t       UNKNOWN_ZONE_ID_LENGTH = 11;
+ 
+ static icu::TimeZone* DEFAULT_ZONE = NULL;
+-static icu::UInitOnce gDefaultZoneInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gDefaultZoneInitOnce {};
+ 
+ alignas(icu::SimpleTimeZone)
+ static char gRawGMT[sizeof(icu::SimpleTimeZone)];
+@@ -121,11 +121,11 @@ static char gRawGMT[sizeof(icu::SimpleTimeZone)];
+ alignas(icu::SimpleTimeZone)
+ static char gRawUNKNOWN[sizeof(icu::SimpleTimeZone)];
+ 
+-static icu::UInitOnce gStaticZonesInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gStaticZonesInitOnce {};
+ static UBool gStaticZonesInitialized = FALSE; // Whether the static zones are initialized and ready to use.
+ 
+ static char TZDATA_VERSION[16];
+-static icu::UInitOnce gTZDataVersionInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gTZDataVersionInitOnce {};
+ 
+ static int32_t* MAP_SYSTEM_ZONES = NULL;
+ static int32_t* MAP_CANONICAL_SYSTEM_ZONES = NULL;
+@@ -135,9 +135,9 @@ static int32_t LEN_SYSTEM_ZONES = 0;
+ static int32_t LEN_CANONICAL_SYSTEM_ZONES = 0;
+ static int32_t LEN_CANONICAL_SYSTEM_LOCATION_ZONES = 0;
+ 
+-static icu::UInitOnce gSystemZonesInitOnce = U_INITONCE_INITIALIZER;
+-static icu::UInitOnce gCanonicalZonesInitOnce = U_INITONCE_INITIALIZER;
+-static icu::UInitOnce gCanonicalLocationZonesInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gSystemZonesInitOnce {};
++static icu::UInitOnce gCanonicalZonesInitOnce {};
++static icu::UInitOnce gCanonicalLocationZonesInitOnce {};
+ 
+ U_CDECL_BEGIN
+ static UBool U_CALLCONV timeZone_cleanup(void)
+diff --git a/source/i18n/tridpars.cpp b/source/i18n/tridpars.cpp
+index 0ca168e7..873a159f 100644
+--- a/source/i18n/tridpars.cpp
++++ b/source/i18n/tridpars.cpp
+@@ -45,7 +45,7 @@ static const int32_t FORWARD = UTRANS_FORWARD;
+ static const int32_t REVERSE = UTRANS_REVERSE;
+ 
+ static Hashtable* SPECIAL_INVERSES = NULL;
+-static UInitOnce gSpecialInversesInitOnce = U_INITONCE_INITIALIZER;
++static UInitOnce gSpecialInversesInitOnce {};
+ 
+ /**
+  * The mutex controlling access to SPECIAL_INVERSES
+diff --git a/source/i18n/tzfmt.cpp b/source/i18n/tzfmt.cpp
+index 9d046c30..2d08193f 100644
+--- a/source/i18n/tzfmt.cpp
++++ b/source/i18n/tzfmt.cpp
+@@ -145,10 +145,10 @@ static const int32_t ALL_GENERIC_NAME_TYPES = UTZGNM_LOCATION | UTZGNM_LONG | UT
+ 
+ // Time Zone ID/Short ID trie
+ static TextTrieMap *gZoneIdTrie = NULL;
+-static icu::UInitOnce gZoneIdTrieInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gZoneIdTrieInitOnce {};
+ 
+ static TextTrieMap *gShortZoneIdTrie = NULL;
+-static icu::UInitOnce gShortZoneIdTrieInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gShortZoneIdTrieInitOnce {};
+ 
+ static UMutex gLock;
+ 
+diff --git a/source/i18n/tznames_impl.cpp b/source/i18n/tznames_impl.cpp
+index 69991dfe..dcddafcd 100644
+--- a/source/i18n/tznames_impl.cpp
++++ b/source/i18n/tznames_impl.cpp
+@@ -55,10 +55,10 @@ static const int32_t TZDBNAMES_KEYS_SIZE = UPRV_LENGTHOF(TZDBNAMES_KEYS);
+ static UMutex gDataMutex;
+ 
+ static UHashtable* gTZDBNamesMap = NULL;
+-static icu::UInitOnce gTZDBNamesMapInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gTZDBNamesMapInitOnce {};
+ 
+ static TextTrieMap* gTZDBNamesTrie = NULL;
+-static icu::UInitOnce gTZDBNamesTrieInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gTZDBNamesTrieInitOnce {};
+ 
+ // The order in which strings are stored may be different than the order in the public enum.
+ enum UTimeZoneNameTypeIndex {
+diff --git a/source/i18n/ucol_res.cpp b/source/i18n/ucol_res.cpp
+index b277cf3b..65cc5e19 100644
+--- a/source/i18n/ucol_res.cpp
++++ b/source/i18n/ucol_res.cpp
+@@ -62,7 +62,7 @@ namespace {
+ static const UChar *rootRules = NULL;
+ static int32_t rootRulesLength = 0;
+ static UResourceBundle *rootBundle = NULL;
+-static UInitOnce gInitOnceUcolRes = U_INITONCE_INITIALIZER;
++static UInitOnce gInitOnceUcolRes {};
+ 
+ }  // namespace
+ 
+diff --git a/source/i18n/uspoof.cpp b/source/i18n/uspoof.cpp
+index dd4618ba..a05426ab 100644
+--- a/source/i18n/uspoof.cpp
++++ b/source/i18n/uspoof.cpp
+@@ -41,7 +41,7 @@ U_NAMESPACE_USE
+ static UnicodeSet *gInclusionSet = NULL;
+ static UnicodeSet *gRecommendedSet = NULL;
+ static const Normalizer2 *gNfdNormalizer = NULL;
+-static UInitOnce gSpoofInitStaticsOnce = U_INITONCE_INITIALIZER;
++static UInitOnce gSpoofInitStaticsOnce {};
+ 
+ namespace {
+ 
+diff --git a/source/i18n/uspoof_impl.cpp b/source/i18n/uspoof_impl.cpp
+index f96826f8..3e2386e0 100644
+--- a/source/i18n/uspoof_impl.cpp
++++ b/source/i18n/uspoof_impl.cpp
+@@ -538,7 +538,7 @@ spoofDataIsAcceptable(void *context,
+ //  uspoof_cleanupDefaultData - Called during cleanup.
+ //
+ 
+-static UInitOnce gSpoofInitDefaultOnce = U_INITONCE_INITIALIZER;
++static UInitOnce gSpoofInitDefaultOnce {};
+ static SpoofData* gDefaultSpoofData;
+ 
+ static UBool U_CALLCONV
+diff --git a/source/i18n/zonemeta.cpp b/source/i18n/zonemeta.cpp
+index e60215c9..2522ebc3 100644
+--- a/source/i18n/zonemeta.cpp
++++ b/source/i18n/zonemeta.cpp
+@@ -34,21 +34,21 @@ static icu::UMutex gZoneMetaLock;
+ 
+ // CLDR Canonical ID mapping table
+ static UHashtable *gCanonicalIDCache = NULL;
+-static icu::UInitOnce gCanonicalIDCacheInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gCanonicalIDCacheInitOnce {};
+ 
+ // Metazone mapping table
+ static UHashtable *gOlsonToMeta = NULL;
+-static icu::UInitOnce gOlsonToMetaInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gOlsonToMetaInitOnce {};
+ 
+ // Available metazone IDs vector and table
+ static icu::UVector *gMetaZoneIDs = NULL;
+ static UHashtable *gMetaZoneIDTable = NULL;
+-static icu::UInitOnce gMetaZoneIDsInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gMetaZoneIDsInitOnce {};
+ 
+ // Country info vectors
+ static icu::UVector *gSingleZoneCountries = NULL;
+ static icu::UVector *gMultiZonesCountries = NULL;
+-static icu::UInitOnce gCountryInfoVectorsInitOnce = U_INITONCE_INITIALIZER;
++static icu::UInitOnce gCountryInfoVectorsInitOnce {};
+ 
+ U_CDECL_BEGIN
+ 
+diff --git a/source/io/uprintf.cpp b/source/io/uprintf.cpp
+index 3c9effaa..18dbc8f2 100644
+--- a/source/io/uprintf.cpp
++++ b/source/io/uprintf.cpp
+@@ -41,7 +41,7 @@
+ U_NAMESPACE_USE
+ 
+ static UFILE *gStdOut = NULL;
+-static UInitOnce gStdOutInitOnce = U_INITONCE_INITIALIZER;
++static UInitOnce gStdOutInitOnce {};
+ 
+ static UBool U_CALLCONV uprintf_cleanup(void)
+ {

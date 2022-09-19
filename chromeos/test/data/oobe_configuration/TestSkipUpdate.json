@@ -1,0 +1,8 @@
+{
+  "welcomeNext": true,
+  "networkSelectGuid": "eth1_guid",
+  "eulaAutoAccept": true,
+  "eulaSendStatistics": true,
+  "updateSkipNonCritical": true,
+  "wizardAutoEnroll": true
+}

@@ -1,0 +1,5 @@
+# Primary
+file://chrome/browser/sync_file_system/OWNERS
+
+# Secondary
+file://ash/projector/OWNERS

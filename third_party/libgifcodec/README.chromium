@@ -1,0 +1,9 @@
+Name: libgif codec for Skia
+Short Name: libgifcodec
+URL: https://skia.googlesource.com/libgifcodec/
+Version: unknown
+License: MPL-1.1/GPL-2.0/LGPL-2.1 + BSD-3-Clause + BSD-2-Clause
+License File: LICENSE.md
+Security Critical: yes
+Description: See file README.md
+Local Modifications: None

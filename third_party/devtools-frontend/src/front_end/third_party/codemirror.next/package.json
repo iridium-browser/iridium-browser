@@ -1,0 +1,32 @@
+{
+  "description": "Package list used when building/upgrading CodeMirror 6",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@codemirror/autocomplete": "0.20.0",
+    "@codemirror/commands": "0.20.0",
+    "@codemirror/lang-cpp": "0.20.0",
+    "@codemirror/lang-css": "0.20.0",
+    "@codemirror/lang-html": "0.20.0",
+    "@codemirror/lang-java": "0.20.0",
+    "@codemirror/lang-javascript": "0.20.0",
+    "@codemirror/lang-json": "0.20.0",
+    "@codemirror/lang-markdown": "0.20.0",
+    "@codemirror/lang-php": "0.20.0",
+    "@codemirror/lang-python": "0.20.0",
+    "@codemirror/lang-wast": "0.20.0",
+    "@codemirror/lang-xml": "0.20.0",
+    "@codemirror/language": "0.20.0",
+    "@codemirror/legacy-modes": "0.20.0",
+    "@codemirror/search": "0.20.0",
+    "@codemirror/state": "0.20.0",
+    "@codemirror/view": "0.20.0",
+    "@lezer/common": "0.16.0",
+    "@lezer/highlight": "0.16.0",
+    "@lezer/lr": "0.16.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "rollup-plugin-dts": "^4.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "style-mod": "4.0.0"
+  }
+}

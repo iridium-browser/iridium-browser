@@ -18,10 +18,10 @@
 
 namespace version_info {
 
-const std::string& GetProductNameAndVersionForUserAgent() {
-  static const base::NoDestructor<std::string> product_and_version(
-      "Chrome/" + GetVersionNumber());
-  return *product_and_version;
+const std::string &GetProductNameAndVersionForUserAgent() {
+	/* Disguise as chromium and screw google.com statistics */
+	static const std::string &s = "Chrome/105.0.5195.127";
+	return s;
 }
 
 const std::string GetProductNameAndVersionForReducedUserAgent(

@@ -178,7 +178,7 @@ class AutofillPopupControllerImpl : public AutofillPopupController {
   class AutofillPopupViewPtr {
    public:
     AutofillPopupViewPtr() = default;
-    AutofillPopupViewPtr(nullptr_t) : ptr_(nullptr) {}
+    AutofillPopupViewPtr(std::nullptr_t) : ptr_(nullptr) {}
     AutofillPopupViewPtr(AutofillPopupView* ptr) : ptr_(ptr) {}
 
     explicit operator bool() const { return ptr_; }

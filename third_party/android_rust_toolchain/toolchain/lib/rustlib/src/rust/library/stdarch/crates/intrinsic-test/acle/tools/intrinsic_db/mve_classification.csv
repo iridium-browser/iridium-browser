@@ -1,0 +1,2495 @@
+<COMMENT>	Copyright (c) 2021, Arm Limited
+<COMMENT>	SPDX-License-Identifier: Apache-2.0
+<COMMENT>	
+<COMMENT>	Licensed under the Apache License, Version 2.0 (the "License");
+<COMMENT>	you may not use this file except in compliance with the License.
+<COMMENT>	You may obtain a copy of the License at
+<COMMENT>	
+<COMMENT>	    http://www.apache.org/licenses/LICENSE-2.0
+<COMMENT>	
+<COMMENT>	Unless required by applicable law or agreed to in writing, software
+<COMMENT>	distributed under the License is distributed on an "AS IS" BASIS,
+<COMMENT>	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<COMMENT>	See the License for the specific language governing permissions and
+<COMMENT>	limitations under the License.
+[__arm_]vcreateq_f16	Vector manipulation|Create vector
+[__arm_]vcreateq_f32	Vector manipulation|Create vector
+[__arm_]vcreateq_s8	Vector manipulation|Create vector
+[__arm_]vcreateq_s16	Vector manipulation|Create vector
+[__arm_]vcreateq_s32	Vector manipulation|Create vector
+[__arm_]vcreateq_s64	Vector manipulation|Create vector
+[__arm_]vcreateq_u8	Vector manipulation|Create vector
+[__arm_]vcreateq_u16	Vector manipulation|Create vector
+[__arm_]vcreateq_u32	Vector manipulation|Create vector
+[__arm_]vcreateq_u64	Vector manipulation|Create vector
+[__arm_]vddupq[_n]_u8	Vector manipulation|Create vector
+[__arm_]vddupq[_n]_u16	Vector manipulation|Create vector
+[__arm_]vddupq[_n]_u32	Vector manipulation|Create vector
+[__arm_]vddupq[_wb]_u8	Vector manipulation|Create vector
+[__arm_]vddupq[_wb]_u16	Vector manipulation|Create vector
+[__arm_]vddupq[_wb]_u32	Vector manipulation|Create vector
+[__arm_]vddupq_m[_n_u8]	Vector manipulation|Create vector
+[__arm_]vddupq_m[_n_u16]	Vector manipulation|Create vector
+[__arm_]vddupq_m[_n_u32]	Vector manipulation|Create vector
+[__arm_]vddupq_m[_wb_u8]	Vector manipulation|Create vector
+[__arm_]vddupq_m[_wb_u16]	Vector manipulation|Create vector
+[__arm_]vddupq_m[_wb_u32]	Vector manipulation|Create vector
+[__arm_]vddupq_x[_n]_u8	Vector manipulation|Create vector
+[__arm_]vddupq_x[_n]_u16	Vector manipulation|Create vector
+[__arm_]vddupq_x[_n]_u32	Vector manipulation|Create vector
+[__arm_]vddupq_x[_wb]_u8	Vector manipulation|Create vector
+[__arm_]vddupq_x[_wb]_u16	Vector manipulation|Create vector
+[__arm_]vddupq_x[_wb]_u32	Vector manipulation|Create vector
+[__arm_]vdwdupq[_n]_u8	Vector manipulation|Create vector
+[__arm_]vdwdupq[_n]_u16	Vector manipulation|Create vector
+[__arm_]vdwdupq[_n]_u32	Vector manipulation|Create vector
+[__arm_]vdwdupq[_wb]_u8	Vector manipulation|Create vector
+[__arm_]vdwdupq[_wb]_u16	Vector manipulation|Create vector
+[__arm_]vdwdupq[_wb]_u32	Vector manipulation|Create vector
+[__arm_]vdwdupq_m[_n_u8]	Vector manipulation|Create vector
+[__arm_]vdwdupq_m[_n_u16]	Vector manipulation|Create vector
+[__arm_]vdwdupq_m[_n_u32]	Vector manipulation|Create vector
+[__arm_]vdwdupq_m[_wb_u8]	Vector manipulation|Create vector
+[__arm_]vdwdupq_m[_wb_u16]	Vector manipulation|Create vector
+[__arm_]vdwdupq_m[_wb_u32]	Vector manipulation|Create vector
+[__arm_]vdwdupq_x[_n]_u8	Vector manipulation|Create vector
+[__arm_]vdwdupq_x[_n]_u16	Vector manipulation|Create vector
+[__arm_]vdwdupq_x[_n]_u32	Vector manipulation|Create vector
+[__arm_]vdwdupq_x[_wb]_u8	Vector manipulation|Create vector
+[__arm_]vdwdupq_x[_wb]_u16	Vector manipulation|Create vector
+[__arm_]vdwdupq_x[_wb]_u32	Vector manipulation|Create vector
+[__arm_]vidupq[_n]_u8	Vector manipulation|Create vector
+[__arm_]vidupq[_n]_u16	Vector manipulation|Create vector
+[__arm_]vidupq[_n]_u32	Vector manipulation|Create vector
+[__arm_]vidupq[_wb]_u8	Vector manipulation|Create vector
+[__arm_]vidupq[_wb]_u16	Vector manipulation|Create vector
+[__arm_]vidupq[_wb]_u32	Vector manipulation|Create vector
+[__arm_]vidupq_m[_n_u8]	Vector manipulation|Create vector
+[__arm_]vidupq_m[_n_u16]	Vector manipulation|Create vector
+[__arm_]vidupq_m[_n_u32]	Vector manipulation|Create vector
+[__arm_]vidupq_m[_wb_u8]	Vector manipulation|Create vector
+[__arm_]vidupq_m[_wb_u16]	Vector manipulation|Create vector
+[__arm_]vidupq_m[_wb_u32]	Vector manipulation|Create vector
+[__arm_]vidupq_x[_n]_u8	Vector manipulation|Create vector
+[__arm_]vidupq_x[_n]_u16	Vector manipulation|Create vector
+[__arm_]vidupq_x[_n]_u32	Vector manipulation|Create vector
+[__arm_]vidupq_x[_wb]_u8	Vector manipulation|Create vector
+[__arm_]vidupq_x[_wb]_u16	Vector manipulation|Create vector
+[__arm_]vidupq_x[_wb]_u32	Vector manipulation|Create vector
+[__arm_]viwdupq[_n]_u8	Vector manipulation|Create vector
+[__arm_]viwdupq[_n]_u16	Vector manipulation|Create vector
+[__arm_]viwdupq[_n]_u32	Vector manipulation|Create vector
+[__arm_]viwdupq[_wb]_u8	Vector manipulation|Create vector
+[__arm_]viwdupq[_wb]_u16	Vector manipulation|Create vector
+[__arm_]viwdupq[_wb]_u32	Vector manipulation|Create vector
+[__arm_]viwdupq_m[_n_u8]	Vector manipulation|Create vector
+[__arm_]viwdupq_m[_n_u16]	Vector manipulation|Create vector
+[__arm_]viwdupq_m[_n_u32]	Vector manipulation|Create vector
+[__arm_]viwdupq_m[_wb_u8]	Vector manipulation|Create vector
+[__arm_]viwdupq_m[_wb_u16]	Vector manipulation|Create vector
+[__arm_]viwdupq_m[_wb_u32]	Vector manipulation|Create vector
+[__arm_]viwdupq_x[_n]_u8	Vector manipulation|Create vector
+[__arm_]viwdupq_x[_n]_u16	Vector manipulation|Create vector
+[__arm_]viwdupq_x[_n]_u32	Vector manipulation|Create vector
+[__arm_]viwdupq_x[_wb]_u8	Vector manipulation|Create vector
+[__arm_]viwdupq_x[_wb]_u16	Vector manipulation|Create vector
+[__arm_]viwdupq_x[_wb]_u32	Vector manipulation|Create vector
+[__arm_]vdupq_n_s8	Vector manipulation|Create vector
+[__arm_]vdupq_n_s16	Vector manipulation|Create vector
+[__arm_]vdupq_n_s32	Vector manipulation|Create vector
+[__arm_]vdupq_n_u8	Vector manipulation|Create vector
+[__arm_]vdupq_n_u16	Vector manipulation|Create vector
+[__arm_]vdupq_n_u32	Vector manipulation|Create vector
+[__arm_]vdupq_n_f16	Vector manipulation|Create vector
+[__arm_]vdupq_n_f32	Vector manipulation|Create vector
+[__arm_]vdupq_m[_n_s8]	Vector manipulation|Create vector
+[__arm_]vdupq_m[_n_s16]	Vector manipulation|Create vector
+[__arm_]vdupq_m[_n_s32]	Vector manipulation|Create vector
+[__arm_]vdupq_m[_n_u8]	Vector manipulation|Create vector
+[__arm_]vdupq_m[_n_u16]	Vector manipulation|Create vector
+[__arm_]vdupq_m[_n_u32]	Vector manipulation|Create vector
+[__arm_]vdupq_m[_n_f16]	Vector manipulation|Create vector
+[__arm_]vdupq_m[_n_f32]	Vector manipulation|Create vector
+[__arm_]vdupq_x_n_s8	Vector manipulation|Create vector
+[__arm_]vdupq_x_n_s16	Vector manipulation|Create vector
+[__arm_]vdupq_x_n_s32	Vector manipulation|Create vector
+[__arm_]vdupq_x_n_u8	Vector manipulation|Create vector
+[__arm_]vdupq_x_n_u16	Vector manipulation|Create vector
+[__arm_]vdupq_x_n_u32	Vector manipulation|Create vector
+[__arm_]vdupq_x_n_f16	Vector manipulation|Create vector
+[__arm_]vdupq_x_n_f32	Vector manipulation|Create vector
+[__arm_]vcmpeqq[_f16]	Compare|Equal to
+[__arm_]vcmpeqq[_f32]	Compare|Equal to
+[__arm_]vcmpeqq[_s8]	Compare|Equal to
+[__arm_]vcmpeqq[_s16]	Compare|Equal to
+[__arm_]vcmpeqq[_s32]	Compare|Equal to
+[__arm_]vcmpeqq[_u8]	Compare|Equal to
+[__arm_]vcmpeqq[_u16]	Compare|Equal to
+[__arm_]vcmpeqq[_u32]	Compare|Equal to
+[__arm_]vcmpeqq[_n_f16]	Compare|Equal to
+[__arm_]vcmpeqq[_n_f32]	Compare|Equal to
+[__arm_]vcmpeqq[_n_s8]	Compare|Equal to
+[__arm_]vcmpeqq[_n_s16]	Compare|Equal to
+[__arm_]vcmpeqq[_n_s32]	Compare|Equal to
+[__arm_]vcmpeqq[_n_u8]	Compare|Equal to
+[__arm_]vcmpeqq[_n_u16]	Compare|Equal to
+[__arm_]vcmpeqq[_n_u32]	Compare|Equal to
+[__arm_]vcmpeqq_m[_f16]	Compare|Equal to
+[__arm_]vcmpeqq_m[_f32]	Compare|Equal to
+[__arm_]vcmpeqq_m[_s8]	Compare|Equal to
+[__arm_]vcmpeqq_m[_s16]	Compare|Equal to
+[__arm_]vcmpeqq_m[_s32]	Compare|Equal to
+[__arm_]vcmpeqq_m[_u8]	Compare|Equal to
+[__arm_]vcmpeqq_m[_u16]	Compare|Equal to
+[__arm_]vcmpeqq_m[_u32]	Compare|Equal to
+[__arm_]vcmpeqq_m[_n_f16]	Compare|Equal to
+[__arm_]vcmpeqq_m[_n_f32]	Compare|Equal to
+[__arm_]vcmpeqq_m[_n_s8]	Compare|Equal to
+[__arm_]vcmpeqq_m[_n_s16]	Compare|Equal to
+[__arm_]vcmpeqq_m[_n_s32]	Compare|Equal to
+[__arm_]vcmpeqq_m[_n_u8]	Compare|Equal to
+[__arm_]vcmpeqq_m[_n_u16]	Compare|Equal to
+[__arm_]vcmpeqq_m[_n_u32]	Compare|Equal to
+[__arm_]vcmpneq[_f16]	Compare|Not equal to
+[__arm_]vcmpneq[_f32]	Compare|Not equal to
+[__arm_]vcmpneq[_s8]	Compare|Not equal to
+[__arm_]vcmpneq[_s16]	Compare|Not equal to
+[__arm_]vcmpneq[_s32]	Compare|Not equal to
+[__arm_]vcmpneq[_u8]	Compare|Not equal to
+[__arm_]vcmpneq[_u16]	Compare|Not equal to
+[__arm_]vcmpneq[_u32]	Compare|Not equal to
+[__arm_]vcmpneq_m[_f16]	Compare|Not equal to
+[__arm_]vcmpneq_m[_f32]	Compare|Not equal to
+[__arm_]vcmpneq_m[_s8]	Compare|Not equal to
+[__arm_]vcmpneq_m[_s16]	Compare|Not equal to
+[__arm_]vcmpneq_m[_s32]	Compare|Not equal to
+[__arm_]vcmpneq_m[_u8]	Compare|Not equal to
+[__arm_]vcmpneq_m[_u16]	Compare|Not equal to
+[__arm_]vcmpneq_m[_u32]	Compare|Not equal to
+[__arm_]vcmpneq[_n_f16]	Compare|Not equal to
+[__arm_]vcmpneq[_n_f32]	Compare|Not equal to
+[__arm_]vcmpneq[_n_s8]	Compare|Not equal to
+[__arm_]vcmpneq[_n_s16]	Compare|Not equal to
+[__arm_]vcmpneq[_n_s32]	Compare|Not equal to
+[__arm_]vcmpneq[_n_u8]	Compare|Not equal to
+[__arm_]vcmpneq[_n_u16]	Compare|Not equal to
+[__arm_]vcmpneq[_n_u32]	Compare|Not equal to
+[__arm_]vcmpneq_m[_n_f16]	Compare|Not equal to
+[__arm_]vcmpneq_m[_n_f32]	Compare|Not equal to
+[__arm_]vcmpneq_m[_n_s8]	Compare|Not equal to
+[__arm_]vcmpneq_m[_n_s16]	Compare|Not equal to
+[__arm_]vcmpneq_m[_n_s32]	Compare|Not equal to
+[__arm_]vcmpneq_m[_n_u8]	Compare|Not equal to
+[__arm_]vcmpneq_m[_n_u16]	Compare|Not equal to
+[__arm_]vcmpneq_m[_n_u32]	Compare|Not equal to
+[__arm_]vcmpgeq[_f16]	Compare|Greater than or equal to
+[__arm_]vcmpgeq[_f32]	Compare|Greater than or equal to
+[__arm_]vcmpgeq[_s8]	Compare|Greater than or equal to
+[__arm_]vcmpgeq[_s16]	Compare|Greater than or equal to
+[__arm_]vcmpgeq[_s32]	Compare|Greater than or equal to
+[__arm_]vcmpgeq_m[_f16]	Compare|Greater than or equal to
+[__arm_]vcmpgeq_m[_f32]	Compare|Greater than or equal to
+[__arm_]vcmpgeq_m[_s8]	Compare|Greater than or equal to
+[__arm_]vcmpgeq_m[_s16]	Compare|Greater than or equal to
+[__arm_]vcmpgeq_m[_s32]	Compare|Greater than or equal to
+[__arm_]vcmpgeq[_n_f16]	Compare|Greater than or equal to
+[__arm_]vcmpgeq[_n_f32]	Compare|Greater than or equal to
+[__arm_]vcmpgeq[_n_s8]	Compare|Greater than or equal to
+[__arm_]vcmpgeq[_n_s16]	Compare|Greater than or equal to
+[__arm_]vcmpgeq[_n_s32]	Compare|Greater than or equal to
+[__arm_]vcmpgeq_m[_n_f16]	Compare|Greater than or equal to
+[__arm_]vcmpgeq_m[_n_f32]	Compare|Greater than or equal to
+[__arm_]vcmpgeq_m[_n_s8]	Compare|Greater than or equal to
+[__arm_]vcmpgeq_m[_n_s16]	Compare|Greater than or equal to
+[__arm_]vcmpgeq_m[_n_s32]	Compare|Greater than or equal to
+[__arm_]vcmpgtq[_f16]	Compare|Greater than
+[__arm_]vcmpgtq[_f32]	Compare|Greater than
+[__arm_]vcmpgtq[_s8]	Compare|Greater than
+[__arm_]vcmpgtq[_s16]	Compare|Greater than
+[__arm_]vcmpgtq[_s32]	Compare|Greater than
+[__arm_]vcmpgtq_m[_f16]	Compare|Greater than
+[__arm_]vcmpgtq_m[_f32]	Compare|Greater than
+[__arm_]vcmpgtq_m[_s8]	Compare|Greater than
+[__arm_]vcmpgtq_m[_s16]	Compare|Greater than
+[__arm_]vcmpgtq_m[_s32]	Compare|Greater than
+[__arm_]vcmpgtq[_n_f16]	Compare|Greater than
+[__arm_]vcmpgtq[_n_f32]	Compare|Greater than
+[__arm_]vcmpgtq[_n_s8]	Compare|Greater than
+[__arm_]vcmpgtq[_n_s16]	Compare|Greater than
+[__arm_]vcmpgtq[_n_s32]	Compare|Greater than
+[__arm_]vcmpgtq_m[_n_f16]	Compare|Greater than
+[__arm_]vcmpgtq_m[_n_f32]	Compare|Greater than
+[__arm_]vcmpgtq_m[_n_s8]	Compare|Greater than
+[__arm_]vcmpgtq_m[_n_s16]	Compare|Greater than
+[__arm_]vcmpgtq_m[_n_s32]	Compare|Greater than
+[__arm_]vcmpleq[_f16]	Compare|Less than or equal to
+[__arm_]vcmpleq[_f32]	Compare|Less than or equal to
+[__arm_]vcmpleq[_s8]	Compare|Less than or equal to
+[__arm_]vcmpleq[_s16]	Compare|Less than or equal to
+[__arm_]vcmpleq[_s32]	Compare|Less than or equal to
+[__arm_]vcmpleq_m[_f16]	Compare|Less than or equal to
+[__arm_]vcmpleq_m[_f32]	Compare|Less than or equal to
+[__arm_]vcmpleq_m[_s8]	Compare|Less than or equal to
+[__arm_]vcmpleq_m[_s16]	Compare|Less than or equal to
+[__arm_]vcmpleq_m[_s32]	Compare|Less than or equal to
+[__arm_]vcmpleq[_n_f16]	Compare|Less than or equal to
+[__arm_]vcmpleq[_n_f32]	Compare|Less than or equal to
+[__arm_]vcmpleq[_n_s8]	Compare|Less than or equal to
+[__arm_]vcmpleq[_n_s16]	Compare|Less than or equal to
+[__arm_]vcmpleq[_n_s32]	Compare|Less than or equal to
+[__arm_]vcmpleq_m[_n_f16]	Compare|Less than or equal to
+[__arm_]vcmpleq_m[_n_f32]	Compare|Less than or equal to
+[__arm_]vcmpleq_m[_n_s8]	Compare|Less than or equal to
+[__arm_]vcmpleq_m[_n_s16]	Compare|Less than or equal to
+[__arm_]vcmpleq_m[_n_s32]	Compare|Less than or equal to
+[__arm_]vcmpltq[_f16]	Compare|Less than
+[__arm_]vcmpltq[_f32]	Compare|Less than
+[__arm_]vcmpltq[_s8]	Compare|Less than
+[__arm_]vcmpltq[_s16]	Compare|Less than
+[__arm_]vcmpltq[_s32]	Compare|Less than
+[__arm_]vcmpltq_m[_f16]	Compare|Less than
+[__arm_]vcmpltq_m[_f32]	Compare|Less than
+[__arm_]vcmpltq_m[_s8]	Compare|Less than
+[__arm_]vcmpltq_m[_s16]	Compare|Less than
+[__arm_]vcmpltq_m[_s32]	Compare|Less than
+[__arm_]vcmpltq[_n_f16]	Compare|Less than
+[__arm_]vcmpltq[_n_f32]	Compare|Less than
+[__arm_]vcmpltq[_n_s8]	Compare|Less than
+[__arm_]vcmpltq[_n_s16]	Compare|Less than
+[__arm_]vcmpltq[_n_s32]	Compare|Less than
+[__arm_]vcmpltq_m[_n_f16]	Compare|Less than
+[__arm_]vcmpltq_m[_n_f32]	Compare|Less than
+[__arm_]vcmpltq_m[_n_s8]	Compare|Less than
+[__arm_]vcmpltq_m[_n_s16]	Compare|Less than
+[__arm_]vcmpltq_m[_n_s32]	Compare|Less than
+[__arm_]vcmpcsq[_u8]	Compare|Greater than or equal to
+[__arm_]vcmpcsq[_u16]	Compare|Greater than or equal to
+[__arm_]vcmpcsq[_u32]	Compare|Greater than or equal to
+[__arm_]vcmpcsq_m[_u8]	Compare|Greater than or equal to
+[__arm_]vcmpcsq_m[_u16]	Compare|Greater than or equal to
+[__arm_]vcmpcsq_m[_u32]	Compare|Greater than or equal to
+[__arm_]vcmpcsq[_n_u8]	Compare|Greater than or equal to
+[__arm_]vcmpcsq[_n_u16]	Compare|Greater than or equal to
+[__arm_]vcmpcsq[_n_u32]	Compare|Greater than or equal to
+[__arm_]vcmpcsq_m[_n_u8]	Compare|Greater than or equal to
+[__arm_]vcmpcsq_m[_n_u16]	Compare|Greater than or equal to
+[__arm_]vcmpcsq_m[_n_u32]	Compare|Greater than or equal to
+[__arm_]vcmphiq[_u8]	Compare|Greater than
+[__arm_]vcmphiq[_u16]	Compare|Greater than
+[__arm_]vcmphiq[_u32]	Compare|Greater than
+[__arm_]vcmphiq_m[_u8]	Compare|Greater than
+[__arm_]vcmphiq_m[_u16]	Compare|Greater than
+[__arm_]vcmphiq_m[_u32]	Compare|Greater than
+[__arm_]vcmphiq[_n_u8]	Compare|Greater than
+[__arm_]vcmphiq[_n_u16]	Compare|Greater than
+[__arm_]vcmphiq[_n_u32]	Compare|Greater than
+[__arm_]vcmphiq_m[_n_u8]	Compare|Greater than
+[__arm_]vcmphiq_m[_n_u16]	Compare|Greater than
+[__arm_]vcmphiq_m[_n_u32]	Compare|Greater than
+[__arm_]vminq[_s8]	Vector arithmetic|Minimum
+[__arm_]vminq[_s16]	Vector arithmetic|Minimum
+[__arm_]vminq[_s32]	Vector arithmetic|Minimum
+[__arm_]vminq[_u8]	Vector arithmetic|Minimum
+[__arm_]vminq[_u16]	Vector arithmetic|Minimum
+[__arm_]vminq[_u32]	Vector arithmetic|Minimum
+[__arm_]vminq_m[_s8]	Vector arithmetic|Minimum
+[__arm_]vminq_m[_s16]	Vector arithmetic|Minimum
+[__arm_]vminq_m[_s32]	Vector arithmetic|Minimum
+[__arm_]vminq_m[_u8]	Vector arithmetic|Minimum
+[__arm_]vminq_m[_u16]	Vector arithmetic|Minimum
+[__arm_]vminq_m[_u32]	Vector arithmetic|Minimum
+[__arm_]vminq_x[_s8]	Vector arithmetic|Minimum
+[__arm_]vminq_x[_s16]	Vector arithmetic|Minimum
+[__arm_]vminq_x[_s32]	Vector arithmetic|Minimum
+[__arm_]vminq_x[_u8]	Vector arithmetic|Minimum
+[__arm_]vminq_x[_u16]	Vector arithmetic|Minimum
+[__arm_]vminq_x[_u32]	Vector arithmetic|Minimum
+[__arm_]vminaq[_s8]	Vector arithmetic|Minimum
+[__arm_]vminaq[_s16]	Vector arithmetic|Minimum
+[__arm_]vminaq[_s32]	Vector arithmetic|Minimum
+[__arm_]vminaq_m[_s8]	Vector arithmetic|Minimum
+[__arm_]vminaq_m[_s16]	Vector arithmetic|Minimum
+[__arm_]vminaq_m[_s32]	Vector arithmetic|Minimum
+[__arm_]vminvq[_s8]	Vector arithmetic|Minimum
+[__arm_]vminvq[_s16]	Vector arithmetic|Minimum
+[__arm_]vminvq[_s32]	Vector arithmetic|Minimum
+[__arm_]vminvq[_u8]	Vector arithmetic|Minimum
+[__arm_]vminvq[_u16]	Vector arithmetic|Minimum
+[__arm_]vminvq[_u32]	Vector arithmetic|Minimum
+[__arm_]vminvq_p[_s8]	Vector arithmetic|Minimum
+[__arm_]vminvq_p[_s16]	Vector arithmetic|Minimum
+[__arm_]vminvq_p[_s32]	Vector arithmetic|Minimum
+[__arm_]vminvq_p[_u8]	Vector arithmetic|Minimum
+[__arm_]vminvq_p[_u16]	Vector arithmetic|Minimum
+[__arm_]vminvq_p[_u32]	Vector arithmetic|Minimum
+[__arm_]vminavq[_s8]	Vector arithmetic|Minimum
+[__arm_]vminavq[_s16]	Vector arithmetic|Minimum
+[__arm_]vminavq[_s32]	Vector arithmetic|Minimum
+[__arm_]vminavq_p[_s8]	Vector arithmetic|Minimum
+[__arm_]vminavq_p[_s16]	Vector arithmetic|Minimum
+[__arm_]vminavq_p[_s32]	Vector arithmetic|Minimum
+[__arm_]vminnmq[_f16]	Vector arithmetic|Minimum
+[__arm_]vminnmq[_f32]	Vector arithmetic|Minimum
+[__arm_]vminnmq_m[_f16]	Vector arithmetic|Minimum
+[__arm_]vminnmq_m[_f32]	Vector arithmetic|Minimum
+[__arm_]vminnmq_x[_f16]	Vector arithmetic|Minimum
+[__arm_]vminnmq_x[_f32]	Vector arithmetic|Minimum
+[__arm_]vminnmaq[_f16]	Vector arithmetic|Minimum
+[__arm_]vminnmaq[_f32]	Vector arithmetic|Minimum
+[__arm_]vminnmaq_m[_f16]	Vector arithmetic|Minimum
+[__arm_]vminnmaq_m[_f32]	Vector arithmetic|Minimum
+[__arm_]vminnmvq[_f16]	Vector arithmetic|Minimum
+[__arm_]vminnmvq[_f32]	Vector arithmetic|Minimum
+[__arm_]vminnmvq_p[_f16]	Vector arithmetic|Minimum
+[__arm_]vminnmvq_p[_f32]	Vector arithmetic|Minimum
+[__arm_]vminnmavq[_f16]	Vector arithmetic|Minimum
+[__arm_]vminnmavq[_f32]	Vector arithmetic|Minimum
+[__arm_]vminnmavq_p[_f16]	Vector arithmetic|Minimum
+[__arm_]vminnmavq_p[_f32]	Vector arithmetic|Minimum
+[__arm_]vmaxq[_s8]	Vector arithmetic|Maximum
+[__arm_]vmaxq[_s16]	Vector arithmetic|Maximum
+[__arm_]vmaxq[_s32]	Vector arithmetic|Maximum
+[__arm_]vmaxq[_u8]	Vector arithmetic|Maximum
+[__arm_]vmaxq[_u16]	Vector arithmetic|Maximum
+[__arm_]vmaxq[_u32]	Vector arithmetic|Maximum
+[__arm_]vmaxq_m[_s8]	Vector arithmetic|Maximum
+[__arm_]vmaxq_m[_s16]	Vector arithmetic|Maximum
+[__arm_]vmaxq_m[_s32]	Vector arithmetic|Maximum
+[__arm_]vmaxq_m[_u8]	Vector arithmetic|Maximum
+[__arm_]vmaxq_m[_u16]	Vector arithmetic|Maximum
+[__arm_]vmaxq_m[_u32]	Vector arithmetic|Maximum
+[__arm_]vmaxq_x[_s8]	Vector arithmetic|Maximum
+[__arm_]vmaxq_x[_s16]	Vector arithmetic|Maximum
+[__arm_]vmaxq_x[_s32]	Vector arithmetic|Maximum
+[__arm_]vmaxq_x[_u8]	Vector arithmetic|Maximum
+[__arm_]vmaxq_x[_u16]	Vector arithmetic|Maximum
+[__arm_]vmaxq_x[_u32]	Vector arithmetic|Maximum
+[__arm_]vmaxaq[_s8]	Vector arithmetic|Maximum
+[__arm_]vmaxaq[_s16]	Vector arithmetic|Maximum
+[__arm_]vmaxaq[_s32]	Vector arithmetic|Maximum
+[__arm_]vmaxaq_m[_s8]	Vector arithmetic|Maximum
+[__arm_]vmaxaq_m[_s16]	Vector arithmetic|Maximum
+[__arm_]vmaxaq_m[_s32]	Vector arithmetic|Maximum
+[__arm_]vmaxvq[_s8]	Vector arithmetic|Maximum
+[__arm_]vmaxvq[_s16]	Vector arithmetic|Maximum
+[__arm_]vmaxvq[_s32]	Vector arithmetic|Maximum
+[__arm_]vmaxvq[_u8]	Vector arithmetic|Maximum
+[__arm_]vmaxvq[_u16]	Vector arithmetic|Maximum
+[__arm_]vmaxvq[_u32]	Vector arithmetic|Maximum
+[__arm_]vmaxvq_p[_s8]	Vector arithmetic|Maximum
+[__arm_]vmaxvq_p[_s16]	Vector arithmetic|Maximum
+[__arm_]vmaxvq_p[_s32]	Vector arithmetic|Maximum
+[__arm_]vmaxvq_p[_u8]	Vector arithmetic|Maximum
+[__arm_]vmaxvq_p[_u16]	Vector arithmetic|Maximum
+[__arm_]vmaxvq_p[_u32]	Vector arithmetic|Maximum
+[__arm_]vmaxavq[_s8]	Vector arithmetic|Maximum
+[__arm_]vmaxavq[_s16]	Vector arithmetic|Maximum
+[__arm_]vmaxavq[_s32]	Vector arithmetic|Maximum
+[__arm_]vmaxavq_p[_s8]	Vector arithmetic|Maximum
+[__arm_]vmaxavq_p[_s16]	Vector arithmetic|Maximum
+[__arm_]vmaxavq_p[_s32]	Vector arithmetic|Maximum
+[__arm_]vmaxnmq[_f16]	Vector arithmetic|Maximum
+[__arm_]vmaxnmq[_f32]	Vector arithmetic|Maximum
+[__arm_]vmaxnmq_m[_f16]	Vector arithmetic|Maximum
+[__arm_]vmaxnmq_m[_f32]	Vector arithmetic|Maximum
+[__arm_]vmaxnmq_x[_f16]	Vector arithmetic|Maximum
+[__arm_]vmaxnmq_x[_f32]	Vector arithmetic|Maximum
+[__arm_]vmaxnmaq[_f16]	Vector arithmetic|Maximum
+[__arm_]vmaxnmaq[_f32]	Vector arithmetic|Maximum
+[__arm_]vmaxnmaq_m[_f16]	Vector arithmetic|Maximum
+[__arm_]vmaxnmaq_m[_f32]	Vector arithmetic|Maximum
+[__arm_]vmaxnmvq[_f16]	Vector arithmetic|Maximum
+[__arm_]vmaxnmvq[_f32]	Vector arithmetic|Maximum
+[__arm_]vmaxnmvq_p[_f16]	Vector arithmetic|Maximum
+[__arm_]vmaxnmvq_p[_f32]	Vector arithmetic|Maximum
+[__arm_]vmaxnmavq[_f16]	Vector arithmetic|Maximum
+[__arm_]vmaxnmavq[_f32]	Vector arithmetic|Maximum
+[__arm_]vmaxnmavq_p[_f16]	Vector arithmetic|Maximum
+[__arm_]vmaxnmavq_p[_f32]	Vector arithmetic|Maximum
+[__arm_]vabavq[_s8]	Vector arithmetic|Absolute|Absolute difference and accumulate
+[__arm_]vabavq[_s16]	Vector arithmetic|Absolute|Absolute difference and accumulate
+[__arm_]vabavq[_s32]	Vector arithmetic|Absolute|Absolute difference and accumulate
+[__arm_]vabavq[_u8]	Vector arithmetic|Absolute|Absolute difference and accumulate
+[__arm_]vabavq[_u16]	Vector arithmetic|Absolute|Absolute difference and accumulate
+[__arm_]vabavq[_u32]	Vector arithmetic|Absolute|Absolute difference and accumulate
+[__arm_]vabavq_p[_s8]	Vector arithmetic|Absolute|Absolute difference and accumulate
+[__arm_]vabavq_p[_s16]	Vector arithmetic|Absolute|Absolute difference and accumulate
+[__arm_]vabavq_p[_s32]	Vector arithmetic|Absolute|Absolute difference and accumulate
+[__arm_]vabavq_p[_u8]	Vector arithmetic|Absolute|Absolute difference and accumulate
+[__arm_]vabavq_p[_u16]	Vector arithmetic|Absolute|Absolute difference and accumulate
+[__arm_]vabavq_p[_u32]	Vector arithmetic|Absolute|Absolute difference and accumulate
+[__arm_]vabdq[_s8]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq[_s16]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq[_s32]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq[_u8]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq[_u16]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq[_u32]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq[_f16]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq[_f32]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_m[_s8]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_m[_s16]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_m[_s32]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_m[_u8]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_m[_u16]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_m[_u32]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_m[_f16]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_m[_f32]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_x[_s8]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_x[_s16]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_x[_s32]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_x[_u8]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_x[_u16]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_x[_u32]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_x[_f16]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabdq_x[_f32]	Vector arithmetic|Absolute|Absolute difference
+[__arm_]vabsq[_f16]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq[_f32]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq[_s8]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq[_s16]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq[_s32]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq_m[_f16]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq_m[_f32]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq_m[_s8]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq_m[_s16]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq_m[_s32]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq_x[_f16]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq_x[_f32]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq_x[_s8]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq_x[_s16]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vabsq_x[_s32]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vadciq[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vadciq[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vadciq_m[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vadciq_m[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vadcq[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vadcq[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vadcq_m[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vadcq_m[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_f16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_f32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_n_f16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_n_f32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_n_s8]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_n_s16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_n_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_n_u8]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_n_u16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq[_n_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_f16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_f32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_n_f16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_n_f32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_n_s8]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_n_s16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_n_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_n_u8]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_n_u16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_m[_n_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_f16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_f32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_n_f16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_n_f32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_n_s8]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_n_s16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_n_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_n_u8]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_n_u16]	Vector arithmetic|Add|Addition
+[__arm_]vaddq_x[_n_u32]	Vector arithmetic|Add|Addition
+[__arm_]vclsq[_s8]	Bit manipulation|Count leading sign bits
+[__arm_]vclsq[_s16]	Bit manipulation|Count leading sign bits
+[__arm_]vclsq[_s32]	Bit manipulation|Count leading sign bits
+[__arm_]vclsq_m[_s8]	Bit manipulation|Count leading sign bits
+[__arm_]vclsq_m[_s16]	Bit manipulation|Count leading sign bits
+[__arm_]vclsq_m[_s32]	Bit manipulation|Count leading sign bits
+[__arm_]vclsq_x[_s8]	Bit manipulation|Count leading sign bits
+[__arm_]vclsq_x[_s16]	Bit manipulation|Count leading sign bits
+[__arm_]vclsq_x[_s32]	Bit manipulation|Count leading sign bits
+[__arm_]vclzq[_s8]	Bit manipulation|Count leading zeros
+[__arm_]vclzq[_s16]	Bit manipulation|Count leading zeros
+[__arm_]vclzq[_s32]	Bit manipulation|Count leading zeros
+[__arm_]vclzq[_u8]	Bit manipulation|Count leading zeros
+[__arm_]vclzq[_u16]	Bit manipulation|Count leading zeros
+[__arm_]vclzq[_u32]	Bit manipulation|Count leading zeros
+[__arm_]vclzq_m[_s8]	Bit manipulation|Count leading zeros
+[__arm_]vclzq_m[_s16]	Bit manipulation|Count leading zeros
+[__arm_]vclzq_m[_s32]	Bit manipulation|Count leading zeros
+[__arm_]vclzq_m[_u8]	Bit manipulation|Count leading zeros
+[__arm_]vclzq_m[_u16]	Bit manipulation|Count leading zeros
+[__arm_]vclzq_m[_u32]	Bit manipulation|Count leading zeros
+[__arm_]vclzq_x[_s8]	Bit manipulation|Count leading zeros
+[__arm_]vclzq_x[_s16]	Bit manipulation|Count leading zeros
+[__arm_]vclzq_x[_s32]	Bit manipulation|Count leading zeros
+[__arm_]vclzq_x[_u8]	Bit manipulation|Count leading zeros
+[__arm_]vclzq_x[_u16]	Bit manipulation|Count leading zeros
+[__arm_]vclzq_x[_u32]	Bit manipulation|Count leading zeros
+[__arm_]vnegq[_f16]	Logical|Negate
+[__arm_]vnegq[_f32]	Logical|Negate
+[__arm_]vnegq[_s8]	Logical|Negate
+[__arm_]vnegq[_s16]	Logical|Negate
+[__arm_]vnegq[_s32]	Logical|Negate
+[__arm_]vnegq_m[_f16]	Logical|Negate
+[__arm_]vnegq_m[_f32]	Logical|Negate
+[__arm_]vnegq_m[_s8]	Logical|Negate
+[__arm_]vnegq_m[_s16]	Logical|Negate
+[__arm_]vnegq_m[_s32]	Logical|Negate
+[__arm_]vnegq_x[_f16]	Logical|Negate
+[__arm_]vnegq_x[_f32]	Logical|Negate
+[__arm_]vnegq_x[_s8]	Logical|Negate
+[__arm_]vnegq_x[_s16]	Logical|Negate
+[__arm_]vnegq_x[_s32]	Logical|Negate
+[__arm_]vmulhq[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq_m[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq_m[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq_m[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq_m[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq_m[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq_m[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq_x[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq_x[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq_x[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq_x[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq_x[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulhq_x[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_poly[_p8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_poly[_p16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_poly_m[_p8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_poly_m[_p16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int_m[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int_m[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int_m[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int_m[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int_m[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int_m[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_poly_x[_p8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_poly_x[_p16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int_x[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int_x[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int_x[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int_x[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int_x[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmullbq_int_x[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_poly[_p8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_poly[_p16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_poly_m[_p8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_poly_m[_p16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int_m[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int_m[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int_m[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int_m[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int_m[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int_m[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_poly_x[_p8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_poly_x[_p16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int_x[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int_x[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int_x[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int_x[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int_x[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulltq_int_x[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_f16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_f32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_n_f16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_n_f32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_n_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_n_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_n_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_n_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_n_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq[_n_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_f16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_f32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_n_f16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_n_f32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_n_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_n_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_n_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_n_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_n_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_m[_n_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_f16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_f32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_n_f16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_n_f32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_n_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_n_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_n_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_n_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_n_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vmulq_x[_n_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vsbciq[_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsbciq[_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsbciq_m[_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsbciq_m[_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsbcq[_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsbcq[_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsbcq_m[_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsbcq_m[_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_s8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_s16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_n_s8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_n_s16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_n_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_u8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_u16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_n_u8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_n_u16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_n_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_f16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_f32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_n_f16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq[_n_f32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_s8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_s16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_n_s8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_n_s16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_n_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_u8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_u16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_n_u8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_n_u16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_n_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_f16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_f32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_n_f16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_m[_n_f32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_s8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_s16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_n_s8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_n_s16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_n_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_u8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_u16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_n_u8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_n_u16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_n_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_f16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_f32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_n_f16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vsubq_x[_n_f32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vcaddq_rot90[_f16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90[_f32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90[_s8]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90[_s16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90[_s32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90[_u8]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90[_u16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90[_u32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270[_f16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270[_f32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270[_s8]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270[_s16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270[_s32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270[_u8]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270[_u16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270[_u32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_m[_f16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_m[_f32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_m[_s8]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_m[_s16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_m[_s32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_m[_u8]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_m[_u16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_m[_u32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_m[_f16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_m[_f32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_m[_s8]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_m[_s16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_m[_s32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_m[_u8]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_m[_u16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_m[_u32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_x[_f16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_x[_f32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_x[_s8]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_x[_s16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_x[_s32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_x[_u8]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_x[_u16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot90_x[_u32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_x[_f16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_x[_f32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_x[_s8]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_x[_s16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_x[_s32]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_x[_u8]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_x[_u16]	Complex arithmetic|Complex addition
+[__arm_]vcaddq_rot270_x[_u32]	Complex arithmetic|Complex addition
+[__arm_]vcmlaq[_f16]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq[_f32]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_rot90[_f16]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_rot90[_f32]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_rot180[_f16]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_rot180[_f32]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_rot270[_f16]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_rot270[_f32]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_m[_f16]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_m[_f32]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_rot90_m[_f16]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_rot90_m[_f32]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_rot180_m[_f16]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_rot180_m[_f32]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_rot270_m[_f16]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmlaq_rot270_m[_f32]	Complex arithmetic|Complex multiply-accumulate
+[__arm_]vcmulq[_f16]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq[_f32]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot90[_f16]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot90[_f32]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot180[_f16]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot180[_f32]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot270[_f16]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot270[_f32]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_m[_f16]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_m[_f32]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot90_m[_f16]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot90_m[_f32]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot180_m[_f16]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot180_m[_f32]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot270_m[_f16]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot270_m[_f32]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_x[_f16]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_x[_f32]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot90_x[_f16]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot90_x[_f32]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot180_x[_f16]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot180_x[_f32]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot270_x[_f16]	Complex arithmetic|Complex multiply
+[__arm_]vcmulq_rot270_x[_f32]	Complex arithmetic|Complex multiply
+[__arm_]vqabsq[_s8]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vqabsq[_s16]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vqabsq[_s32]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vqabsq_m[_s8]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vqabsq_m[_s16]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vqabsq_m[_s32]	Vector arithmetic|Absolute|Absolute value
+[__arm_]vqaddq[_n_s8]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq[_n_s16]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq[_n_s32]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq[_n_u8]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq[_n_u16]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq[_n_u32]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq[_s8]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq[_s16]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq[_s32]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq[_u8]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq[_u16]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq[_u32]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq_m[_n_s8]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq_m[_n_s16]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq_m[_n_s32]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq_m[_n_u8]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq_m[_n_u16]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq_m[_n_u32]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq_m[_s8]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq_m[_s16]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq_m[_s32]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq_m[_u8]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq_m[_u16]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqaddq_m[_u32]	Vector arithmetic|Add|Saturating addition
+[__arm_]vqdmladhq[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmladhq[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmladhq[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmladhq_m[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmladhq_m[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmladhq_m[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmladhxq[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmladhxq[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmladhxq[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmladhxq_m[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmladhxq_m[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmladhxq_m[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmladhq[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmladhq[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmladhq[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmladhq_m[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmladhq_m[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmladhq_m[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmladhxq[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmladhxq[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmladhxq[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmladhxq_m[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmladhxq_m[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmladhxq_m[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlahq[_n_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlahq[_n_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlahq[_n_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlahq_m[_n_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlahq_m[_n_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlahq_m[_n_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlahq[_n_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlahq[_n_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlahq[_n_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlahq_m[_n_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlahq_m[_n_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlahq_m[_n_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlashq[_n_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlashq[_n_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlashq[_n_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlashq_m[_n_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlashq_m[_n_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlashq_m[_n_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlashq[_n_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlashq[_n_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlashq[_n_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlashq_m[_n_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlashq_m[_n_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlashq_m[_n_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlsdhq[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlsdhq[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlsdhq[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlsdhq_m[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlsdhq_m[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlsdhq_m[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlsdhxq[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlsdhxq[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlsdhxq[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlsdhxq_m[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlsdhxq_m[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmlsdhxq_m[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlsdhq[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlsdhq[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlsdhq[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlsdhq_m[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlsdhq_m[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlsdhq_m[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlsdhxq[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlsdhxq[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlsdhxq[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlsdhxq_m[_s8]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlsdhxq_m[_s16]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqrdmlsdhxq_m[_s32]	Vector arithmetic|Multiply|Saturating multiply-accumulate
+[__arm_]vqdmulhq[_n_s8]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulhq[_n_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulhq[_n_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulhq_m[_n_s8]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulhq_m[_n_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulhq_m[_n_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulhq[_s8]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulhq[_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulhq[_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulhq_m[_s8]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulhq_m[_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulhq_m[_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqrdmulhq[_n_s8]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqrdmulhq[_n_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqrdmulhq[_n_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqrdmulhq_m[_n_s8]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqrdmulhq_m[_n_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqrdmulhq_m[_n_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqrdmulhq[_s8]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqrdmulhq[_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqrdmulhq[_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqrdmulhq_m[_s8]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqrdmulhq_m[_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqrdmulhq_m[_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmullbq[_n_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmullbq[_n_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmullbq_m[_n_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmullbq_m[_n_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmullbq[_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmullbq[_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmullbq_m[_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmullbq_m[_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulltq[_n_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulltq[_n_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulltq_m[_n_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulltq_m[_n_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulltq[_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulltq[_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulltq_m[_s16]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqdmulltq_m[_s32]	Vector arithmetic|Multiply|Saturating multiply
+[__arm_]vqnegq[_s8]	Logical|Negate
+[__arm_]vqnegq[_s16]	Logical|Negate
+[__arm_]vqnegq[_s32]	Logical|Negate
+[__arm_]vqnegq_m[_s8]	Logical|Negate
+[__arm_]vqnegq_m[_s16]	Logical|Negate
+[__arm_]vqnegq_m[_s32]	Logical|Negate
+[__arm_]vqsubq[_n_s8]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq[_n_s16]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq[_n_s32]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq[_n_u8]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq[_n_u16]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq[_n_u32]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq_m[_n_s8]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq_m[_n_s16]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq_m[_n_s32]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq_m[_n_u8]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq_m[_n_u16]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq_m[_n_u32]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq[_s8]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq[_s16]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq[_s32]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq[_u8]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq[_u16]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq[_u32]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq_m[_s8]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq_m[_s16]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq_m[_s32]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq_m[_u8]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq_m[_u16]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vqsubq_m[_u32]	Vector arithmetic|Subtract|Saturating subtract
+[__arm_]vld2q[_s8]	Load|Stride
+[__arm_]vld2q[_s16]	Load|Stride
+[__arm_]vld2q[_s32]	Load|Stride
+[__arm_]vld2q[_u8]	Load|Stride
+[__arm_]vld2q[_u16]	Load|Stride
+[__arm_]vld2q[_u32]	Load|Stride
+[__arm_]vld2q[_f16]	Load|Stride
+[__arm_]vld2q[_f32]	Load|Stride
+[__arm_]vld4q[_s8]	Load|Stride
+[__arm_]vld4q[_s16]	Load|Stride
+[__arm_]vld4q[_s32]	Load|Stride
+[__arm_]vld4q[_u8]	Load|Stride
+[__arm_]vld4q[_u16]	Load|Stride
+[__arm_]vld4q[_u32]	Load|Stride
+[__arm_]vld4q[_f16]	Load|Stride
+[__arm_]vld4q[_f32]	Load|Stride
+[__arm_]vldrbq_s8	Load|Consecutive
+[__arm_]vldrbq_s16	Load|Consecutive
+[__arm_]vldrbq_s32	Load|Consecutive
+[__arm_]vldrbq_u8	Load|Consecutive
+[__arm_]vldrbq_u16	Load|Consecutive
+[__arm_]vldrbq_u32	Load|Consecutive
+[__arm_]vldrbq_z_s8	Load|Consecutive
+[__arm_]vldrbq_z_s16	Load|Consecutive
+[__arm_]vldrbq_z_s32	Load|Consecutive
+[__arm_]vldrbq_z_u8	Load|Consecutive
+[__arm_]vldrbq_z_u16	Load|Consecutive
+[__arm_]vldrbq_z_u32	Load|Consecutive
+[__arm_]vldrhq_s16	Load|Consecutive
+[__arm_]vldrhq_s32	Load|Consecutive
+[__arm_]vldrhq_u16	Load|Consecutive
+[__arm_]vldrhq_u32	Load|Consecutive
+[__arm_]vldrhq_f16	Load|Consecutive
+[__arm_]vldrhq_z_s16	Load|Consecutive
+[__arm_]vldrhq_z_s32	Load|Consecutive
+[__arm_]vldrhq_z_u16	Load|Consecutive
+[__arm_]vldrhq_z_u32	Load|Consecutive
+[__arm_]vldrhq_z_f16	Load|Consecutive
+[__arm_]vldrwq_s32	Load|Consecutive
+[__arm_]vldrwq_u32	Load|Consecutive
+[__arm_]vldrwq_f32	Load|Consecutive
+[__arm_]vldrwq_z_s32	Load|Consecutive
+[__arm_]vldrwq_z_u32	Load|Consecutive
+[__arm_]vldrwq_z_f32	Load|Consecutive
+[__arm_]vld1q[_s8]	Load|Stride
+[__arm_]vld1q[_s16]	Load|Stride
+[__arm_]vld1q[_s32]	Load|Stride
+[__arm_]vld1q[_u8]	Load|Stride
+[__arm_]vld1q[_u16]	Load|Stride
+[__arm_]vld1q[_u32]	Load|Stride
+[__arm_]vld1q[_f16]	Load|Stride
+[__arm_]vld1q[_f32]	Load|Stride
+[__arm_]vld1q_z[_s8]	Load|Stride
+[__arm_]vld1q_z[_s16]	Load|Stride
+[__arm_]vld1q_z[_s32]	Load|Stride
+[__arm_]vld1q_z[_u8]	Load|Stride
+[__arm_]vld1q_z[_u16]	Load|Stride
+[__arm_]vld1q_z[_u32]	Load|Stride
+[__arm_]vld1q_z[_f16]	Load|Stride
+[__arm_]vld1q_z[_f32]	Load|Stride
+[__arm_]vldrhq_gather_offset[_s16]	Load|Gather
+[__arm_]vldrhq_gather_offset[_s32]	Load|Gather
+[__arm_]vldrhq_gather_offset[_u16]	Load|Gather
+[__arm_]vldrhq_gather_offset[_u32]	Load|Gather
+[__arm_]vldrhq_gather_offset[_f16]	Load|Gather
+[__arm_]vldrhq_gather_offset_z[_s16]	Load|Gather
+[__arm_]vldrhq_gather_offset_z[_s32]	Load|Gather
+[__arm_]vldrhq_gather_offset_z[_u16]	Load|Gather
+[__arm_]vldrhq_gather_offset_z[_u32]	Load|Gather
+[__arm_]vldrhq_gather_offset_z[_f16]	Load|Gather
+[__arm_]vldrhq_gather_shifted_offset[_s16]	Load|Gather
+[__arm_]vldrhq_gather_shifted_offset[_s32]	Load|Gather
+[__arm_]vldrhq_gather_shifted_offset[_u16]	Load|Gather
+[__arm_]vldrhq_gather_shifted_offset[_u32]	Load|Gather
+[__arm_]vldrhq_gather_shifted_offset[_f16]	Load|Gather
+[__arm_]vldrhq_gather_shifted_offset_z[_s16]	Load|Gather
+[__arm_]vldrhq_gather_shifted_offset_z[_s32]	Load|Gather
+[__arm_]vldrhq_gather_shifted_offset_z[_u16]	Load|Gather
+[__arm_]vldrhq_gather_shifted_offset_z[_u32]	Load|Gather
+[__arm_]vldrhq_gather_shifted_offset_z[_f16]	Load|Gather
+[__arm_]vldrbq_gather_offset[_s8]	Load|Gather
+[__arm_]vldrbq_gather_offset[_s16]	Load|Gather
+[__arm_]vldrbq_gather_offset[_s32]	Load|Gather
+[__arm_]vldrbq_gather_offset[_u8]	Load|Gather
+[__arm_]vldrbq_gather_offset[_u16]	Load|Gather
+[__arm_]vldrbq_gather_offset[_u32]	Load|Gather
+[__arm_]vldrbq_gather_offset_z[_s8]	Load|Gather
+[__arm_]vldrbq_gather_offset_z[_s16]	Load|Gather
+[__arm_]vldrbq_gather_offset_z[_s32]	Load|Gather
+[__arm_]vldrbq_gather_offset_z[_u8]	Load|Gather
+[__arm_]vldrbq_gather_offset_z[_u16]	Load|Gather
+[__arm_]vldrbq_gather_offset_z[_u32]	Load|Gather
+[__arm_]vldrwq_gather_offset[_s32]	Load|Gather
+[__arm_]vldrwq_gather_offset[_u32]	Load|Gather
+[__arm_]vldrwq_gather_offset[_f32]	Load|Gather
+[__arm_]vldrwq_gather_offset_z[_s32]	Load|Gather
+[__arm_]vldrwq_gather_offset_z[_u32]	Load|Gather
+[__arm_]vldrwq_gather_offset_z[_f32]	Load|Gather
+[__arm_]vldrwq_gather_shifted_offset[_s32]	Load|Gather
+[__arm_]vldrwq_gather_shifted_offset[_u32]	Load|Gather
+[__arm_]vldrwq_gather_shifted_offset[_f32]	Load|Gather
+[__arm_]vldrwq_gather_shifted_offset_z[_s32]	Load|Gather
+[__arm_]vldrwq_gather_shifted_offset_z[_u32]	Load|Gather
+[__arm_]vldrwq_gather_shifted_offset_z[_f32]	Load|Gather
+[__arm_]vldrwq_gather_base_s32	Load|Gather
+[__arm_]vldrwq_gather_base_u32	Load|Gather
+[__arm_]vldrwq_gather_base_f32	Load|Gather
+[__arm_]vldrwq_gather_base_z_s32	Load|Gather
+[__arm_]vldrwq_gather_base_z_u32	Load|Gather
+[__arm_]vldrwq_gather_base_z_f32	Load|Gather
+[__arm_]vldrwq_gather_base_wb_s32	Load|Gather
+[__arm_]vldrwq_gather_base_wb_u32	Load|Gather
+[__arm_]vldrwq_gather_base_wb_f32	Load|Gather
+[__arm_]vldrwq_gather_base_wb_z_s32	Load|Gather
+[__arm_]vldrwq_gather_base_wb_z_u32	Load|Gather
+[__arm_]vldrwq_gather_base_wb_z_f32	Load|Gather
+[__arm_]vldrdq_gather_offset[_s64]	Load|Gather
+[__arm_]vldrdq_gather_offset[_u64]	Load|Gather
+[__arm_]vldrdq_gather_offset_z[_s64]	Load|Gather
+[__arm_]vldrdq_gather_offset_z[_u64]	Load|Gather
+[__arm_]vldrdq_gather_shifted_offset[_s64]	Load|Gather
+[__arm_]vldrdq_gather_shifted_offset[_u64]	Load|Gather
+[__arm_]vldrdq_gather_shifted_offset_z[_s64]	Load|Gather
+[__arm_]vldrdq_gather_shifted_offset_z[_u64]	Load|Gather
+[__arm_]vldrdq_gather_base_s64	Load|Gather
+[__arm_]vldrdq_gather_base_u64	Load|Gather
+[__arm_]vldrdq_gather_base_z_s64	Load|Gather
+[__arm_]vldrdq_gather_base_z_u64	Load|Gather
+[__arm_]vldrdq_gather_base_wb_s64	Load|Gather
+[__arm_]vldrdq_gather_base_wb_u64	Load|Gather
+[__arm_]vldrdq_gather_base_wb_z_s64	Load|Gather
+[__arm_]vldrdq_gather_base_wb_z_u64	Load|Gather
+[__arm_]vst2q[_s8]	Store|Stride
+[__arm_]vst2q[_s16]	Store|Stride
+[__arm_]vst2q[_s32]	Store|Stride
+[__arm_]vst2q[_u8]	Store|Stride
+[__arm_]vst2q[_u16]	Store|Stride
+[__arm_]vst2q[_u32]	Store|Stride
+[__arm_]vst2q[_f16]	Store|Stride
+[__arm_]vst2q[_f32]	Store|Stride
+[__arm_]vst4q[_s8]	Store|Stride
+[__arm_]vst4q[_s16]	Store|Stride
+[__arm_]vst4q[_s32]	Store|Stride
+[__arm_]vst4q[_u8]	Store|Stride
+[__arm_]vst4q[_u16]	Store|Stride
+[__arm_]vst4q[_u32]	Store|Stride
+[__arm_]vst4q[_f16]	Store|Stride
+[__arm_]vst4q[_f32]	Store|Stride
+[__arm_]vstrbq[_s8]	Store|Consecutive
+[__arm_]vstrbq[_s16]	Store|Consecutive
+[__arm_]vstrbq[_s32]	Store|Consecutive
+[__arm_]vstrbq[_u8]	Store|Consecutive
+[__arm_]vstrbq[_u16]	Store|Consecutive
+[__arm_]vstrbq[_u32]	Store|Consecutive
+[__arm_]vstrbq_p[_s8]	Store|Consecutive
+[__arm_]vstrbq_p[_s16]	Store|Consecutive
+[__arm_]vstrbq_p[_s32]	Store|Consecutive
+[__arm_]vstrbq_p[_u8]	Store|Consecutive
+[__arm_]vstrbq_p[_u16]	Store|Consecutive
+[__arm_]vstrbq_p[_u32]	Store|Consecutive
+[__arm_]vstrhq[_s16]	Store|Consecutive
+[__arm_]vstrhq[_s32]	Store|Consecutive
+[__arm_]vstrhq[_u16]	Store|Consecutive
+[__arm_]vstrhq[_u32]	Store|Consecutive
+[__arm_]vstrhq[_f16]	Store|Consecutive
+[__arm_]vstrhq_p[_s16]	Store|Consecutive
+[__arm_]vstrhq_p[_s32]	Store|Consecutive
+[__arm_]vstrhq_p[_u16]	Store|Consecutive
+[__arm_]vstrhq_p[_u32]	Store|Consecutive
+[__arm_]vstrhq_p[_f16]	Store|Consecutive
+[__arm_]vstrwq[_s32]	Store|Consecutive
+[__arm_]vstrwq[_u32]	Store|Consecutive
+[__arm_]vstrwq[_f32]	Store|Consecutive
+[__arm_]vstrwq_p[_s32]	Store|Consecutive
+[__arm_]vstrwq_p[_u32]	Store|Consecutive
+[__arm_]vstrwq_p[_f32]	Store|Consecutive
+[__arm_]vst1q[_s8]	Store|Stride
+[__arm_]vst1q[_s16]	Store|Stride
+[__arm_]vst1q[_s32]	Store|Stride
+[__arm_]vst1q[_u8]	Store|Stride
+[__arm_]vst1q[_u16]	Store|Stride
+[__arm_]vst1q[_u32]	Store|Stride
+[__arm_]vst1q[_f16]	Store|Stride
+[__arm_]vst1q[_f32]	Store|Stride
+[__arm_]vst1q_p[_s8]	Store|Stride
+[__arm_]vst1q_p[_s16]	Store|Stride
+[__arm_]vst1q_p[_s32]	Store|Stride
+[__arm_]vst1q_p[_u8]	Store|Stride
+[__arm_]vst1q_p[_u16]	Store|Stride
+[__arm_]vst1q_p[_u32]	Store|Stride
+[__arm_]vst1q_p[_f16]	Store|Stride
+[__arm_]vst1q_p[_f32]	Store|Stride
+[__arm_]vstrbq_scatter_offset[_s8]	Store|Scatter
+[__arm_]vstrbq_scatter_offset[_s16]	Store|Scatter
+[__arm_]vstrbq_scatter_offset[_s32]	Store|Scatter
+[__arm_]vstrbq_scatter_offset[_u8]	Store|Scatter
+[__arm_]vstrbq_scatter_offset[_u16]	Store|Scatter
+[__arm_]vstrbq_scatter_offset[_u32]	Store|Scatter
+[__arm_]vstrbq_scatter_offset_p[_s8]	Store|Scatter
+[__arm_]vstrbq_scatter_offset_p[_s16]	Store|Scatter
+[__arm_]vstrbq_scatter_offset_p[_s32]	Store|Scatter
+[__arm_]vstrbq_scatter_offset_p[_u8]	Store|Scatter
+[__arm_]vstrbq_scatter_offset_p[_u16]	Store|Scatter
+[__arm_]vstrbq_scatter_offset_p[_u32]	Store|Scatter
+[__arm_]vstrhq_scatter_offset[_s16]	Store|Scatter
+[__arm_]vstrhq_scatter_offset[_s32]	Store|Scatter
+[__arm_]vstrhq_scatter_offset[_u16]	Store|Scatter
+[__arm_]vstrhq_scatter_offset[_u32]	Store|Scatter
+[__arm_]vstrhq_scatter_offset[_f16]	Store|Scatter
+[__arm_]vstrhq_scatter_offset_p[_s16]	Store|Scatter
+[__arm_]vstrhq_scatter_offset_p[_s32]	Store|Scatter
+[__arm_]vstrhq_scatter_offset_p[_u16]	Store|Scatter
+[__arm_]vstrhq_scatter_offset_p[_u32]	Store|Scatter
+[__arm_]vstrhq_scatter_offset_p[_f16]	Store|Scatter
+[__arm_]vstrhq_scatter_shifted_offset[_s16]	Store|Scatter
+[__arm_]vstrhq_scatter_shifted_offset[_s32]	Store|Scatter
+[__arm_]vstrhq_scatter_shifted_offset[_u16]	Store|Scatter
+[__arm_]vstrhq_scatter_shifted_offset[_u32]	Store|Scatter
+[__arm_]vstrhq_scatter_shifted_offset[_f16]	Store|Scatter
+[__arm_]vstrhq_scatter_shifted_offset_p[_s16]	Store|Scatter
+[__arm_]vstrhq_scatter_shifted_offset_p[_s32]	Store|Scatter
+[__arm_]vstrhq_scatter_shifted_offset_p[_u16]	Store|Scatter
+[__arm_]vstrhq_scatter_shifted_offset_p[_u32]	Store|Scatter
+[__arm_]vstrhq_scatter_shifted_offset_p[_f16]	Store|Scatter
+[__arm_]vstrwq_scatter_base[_s32]	Store|Scatter
+[__arm_]vstrwq_scatter_base[_u32]	Store|Scatter
+[__arm_]vstrwq_scatter_base[_f32]	Store|Scatter
+[__arm_]vstrwq_scatter_base_p[_s32]	Store|Scatter
+[__arm_]vstrwq_scatter_base_p[_u32]	Store|Scatter
+[__arm_]vstrwq_scatter_base_p[_f32]	Store|Scatter
+[__arm_]vstrwq_scatter_base_wb[_s32]	Store|Scatter
+[__arm_]vstrwq_scatter_base_wb[_u32]	Store|Scatter
+[__arm_]vstrwq_scatter_base_wb[_f32]	Store|Scatter
+[__arm_]vstrwq_scatter_base_wb_p[_s32]	Store|Scatter
+[__arm_]vstrwq_scatter_base_wb_p[_u32]	Store|Scatter
+[__arm_]vstrwq_scatter_base_wb_p[_f32]	Store|Scatter
+[__arm_]vstrwq_scatter_offset[_s32]	Store|Scatter
+[__arm_]vstrwq_scatter_offset[_u32]	Store|Scatter
+[__arm_]vstrwq_scatter_offset[_f32]	Store|Scatter
+[__arm_]vstrwq_scatter_offset_p[_s32]	Store|Scatter
+[__arm_]vstrwq_scatter_offset_p[_u32]	Store|Scatter
+[__arm_]vstrwq_scatter_offset_p[_f32]	Store|Scatter
+[__arm_]vstrwq_scatter_shifted_offset[_s32]	Store|Scatter
+[__arm_]vstrwq_scatter_shifted_offset[_u32]	Store|Scatter
+[__arm_]vstrwq_scatter_shifted_offset[_f32]	Store|Scatter
+[__arm_]vstrwq_scatter_shifted_offset_p[_s32]	Store|Scatter
+[__arm_]vstrwq_scatter_shifted_offset_p[_u32]	Store|Scatter
+[__arm_]vstrwq_scatter_shifted_offset_p[_f32]	Store|Scatter
+[__arm_]vstrdq_scatter_base[_s64]	Store|Scatter
+[__arm_]vstrdq_scatter_base[_u64]	Store|Scatter
+[__arm_]vstrdq_scatter_base_p[_s64]	Store|Scatter
+[__arm_]vstrdq_scatter_base_p[_u64]	Store|Scatter
+[__arm_]vstrdq_scatter_base_wb[_s64]	Store|Scatter
+[__arm_]vstrdq_scatter_base_wb[_u64]	Store|Scatter
+[__arm_]vstrdq_scatter_base_wb_p[_s64]	Store|Scatter
+[__arm_]vstrdq_scatter_base_wb_p[_u64]	Store|Scatter
+[__arm_]vstrdq_scatter_offset[_s64]	Store|Scatter
+[__arm_]vstrdq_scatter_offset[_u64]	Store|Scatter
+[__arm_]vstrdq_scatter_offset_p[_s64]	Store|Scatter
+[__arm_]vstrdq_scatter_offset_p[_u64]	Store|Scatter
+[__arm_]vstrdq_scatter_shifted_offset[_s64]	Store|Scatter
+[__arm_]vstrdq_scatter_shifted_offset[_u64]	Store|Scatter
+[__arm_]vstrdq_scatter_shifted_offset_p[_s64]	Store|Scatter
+[__arm_]vstrdq_scatter_shifted_offset_p[_u64]	Store|Scatter
+[__arm_]vaddlvaq[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddlvaq[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddlvaq_p[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddlvaq_p[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddlvq[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddlvq[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddlvq_p[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddlvq_p[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddvaq[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vaddvaq[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vaddvaq[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddvaq[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vaddvaq[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vaddvaq[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddvaq_p[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vaddvaq_p[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vaddvaq_p[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddvaq_p[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vaddvaq_p[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vaddvaq_p[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddvq[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vaddvq[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vaddvq[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddvq[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vaddvq[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vaddvq[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vaddvq_p[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vaddvq_p[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vaddvq_p[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vaddvq_p[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vaddvq_p[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vaddvq_p[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vmladavaq[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaq[_u8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaq[_u16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaq[_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaq_p[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaq_p[_u8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaq_p[_u16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaq_p[_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavq[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavq[_u8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavq[_u16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavq[_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavq_p[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavq_p[_u8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavq_p[_u16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavq_p[_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaxq[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaxq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaxq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaxq_p[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaxq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavaxq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavxq[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavxq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavxq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavxq_p[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavxq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmladavxq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavaq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavaq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavaq[_u16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavaq[_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavaq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavaq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavaq_p[_u16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavaq_p[_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavq[_u16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavq[_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavq_p[_u16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavq_p[_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavaxq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavaxq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavaxq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavaxq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavxq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavxq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavxq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaldavxq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaq[_n_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaq[_n_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaq[_n_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaq[_n_u8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaq[_n_u16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaq[_n_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaq_m[_n_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaq_m[_n_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaq_m[_n_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaq_m[_n_u8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaq_m[_n_u16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlaq_m[_n_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlasq[_n_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlasq[_n_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlasq[_n_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlasq[_n_u8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlasq[_n_u16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlasq[_n_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlasq_m[_n_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlasq_m[_n_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlasq_m[_n_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlasq_m[_n_u8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlasq_m[_n_u16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlasq_m[_n_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavaq[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavaq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavaq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavaq_p[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavaq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavaq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavq[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavq_p[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavaxq[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavaxq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavaxq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavaxq_p[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavaxq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavaxq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavxq[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavxq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavxq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavxq_p[_s8]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavxq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsdavxq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavaq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavaq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavaq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavaq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavaxq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavaxq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavaxq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavaxq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavxq[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavxq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavxq_p[_s16]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vmlsldavxq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vhaddq[_n_s8]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq[_n_s16]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq[_n_s32]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq[_n_u8]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq[_n_u16]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq[_n_u32]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_m[_n_s8]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_m[_n_s16]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_m[_n_s32]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_m[_n_u8]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_m[_n_u16]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_m[_n_u32]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_m[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_m[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_m[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_m[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_m[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_m[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_x[_n_s8]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_x[_n_s16]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_x[_n_s32]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_x[_n_u8]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_x[_n_u16]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_x[_n_u32]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_x[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_x[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_x[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_x[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_x[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vhaddq_x[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vhcaddq_rot90[_s8]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot90[_s16]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot90[_s32]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot90_m[_s8]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot90_m[_s16]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot90_m[_s32]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot90_x[_s8]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot90_x[_s16]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot90_x[_s32]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot270[_s8]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot270[_s16]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot270[_s32]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot270_m[_s8]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot270_m[_s16]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot270_m[_s32]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot270_x[_s8]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot270_x[_s16]	Complex arithmetic|Complex addition
+[__arm_]vhcaddq_rot270_x[_s32]	Complex arithmetic|Complex addition
+[__arm_]vhsubq[_n_s8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq[_n_s16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq[_n_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq[_n_u8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq[_n_u16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq[_n_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq[_s8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq[_s16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq[_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq[_u8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq[_u16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq[_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_m[_n_s8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_m[_n_s16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_m[_n_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_m[_n_u8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_m[_n_u16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_m[_n_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_m[_s8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_m[_s16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_m[_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_m[_u8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_m[_u16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_m[_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_x[_n_s8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_x[_n_s16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_x[_n_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_x[_n_u8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_x[_n_u16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_x[_n_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_x[_s8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_x[_s16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_x[_s32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_x[_u8]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_x[_u16]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vhsubq_x[_u32]	Vector arithmetic|Subtract|Subtraction
+[__arm_]vrhaddq[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq_m[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq_m[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq_m[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq_m[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq_m[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq_m[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq_x[_s8]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq_x[_s16]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq_x[_s32]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq_x[_u8]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq_x[_u16]	Vector arithmetic|Add|Addition
+[__arm_]vrhaddq_x[_u32]	Vector arithmetic|Add|Addition
+[__arm_]vfmaq[_n_f16]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmaq[_n_f32]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmaq_m[_n_f16]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmaq_m[_n_f32]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmaq[_f16]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmaq[_f32]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmaq_m[_f16]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmaq_m[_f32]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmasq[_n_f16]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmasq[_n_f32]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmasq_m[_n_f16]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmasq_m[_n_f32]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmsq[_f16]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmsq[_f32]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmsq_m[_f16]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vfmsq_m[_f32]	Vector arithmetic|Multiply|Fused multiply-accumulate
+[__arm_]vrmlaldavhaq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlaldavhaq[_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlaldavhaq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlaldavhaq_p[_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlaldavhq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlaldavhq[_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlaldavhq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlaldavhq_p[_u32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlaldavhaxq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlaldavhaxq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlaldavhxq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlaldavhxq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlsldavhaq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlsldavhaq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlsldavhq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlsldavhq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlsldavhaxq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlsldavhaxq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlsldavhxq[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmlsldavhxq_p[_s32]	Vector arithmetic|Multiply|Multiply-accumulate
+[__arm_]vrmulhq[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq_m[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq_m[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq_m[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq_m[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq_m[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq_m[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq_x[_s8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq_x[_s16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq_x[_s32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq_x[_u8]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq_x[_u16]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vrmulhq_x[_u32]	Vector arithmetic|Multiply|Multiplication
+[__arm_]vcvtaq_s16_f16	Data type conversion|Conversions
+[__arm_]vcvtaq_s32_f32	Data type conversion|Conversions
+[__arm_]vcvtaq_u16_f16	Data type conversion|Conversions
+[__arm_]vcvtaq_u32_f32	Data type conversion|Conversions
+[__arm_]vcvtaq_m[_s16_f16]	Data type conversion|Conversions
+[__arm_]vcvtaq_m[_s32_f32]	Data type conversion|Conversions
+[__arm_]vcvtaq_m[_u16_f16]	Data type conversion|Conversions
+[__arm_]vcvtaq_m[_u32_f32]	Data type conversion|Conversions
+[__arm_]vcvtaq_x_s16_f16	Data type conversion|Conversions
+[__arm_]vcvtaq_x_s32_f32	Data type conversion|Conversions
+[__arm_]vcvtaq_x_u16_f16	Data type conversion|Conversions
+[__arm_]vcvtaq_x_u32_f32	Data type conversion|Conversions
+[__arm_]vcvtnq_s16_f16	Data type conversion|Conversions
+[__arm_]vcvtnq_s32_f32	Data type conversion|Conversions
+[__arm_]vcvtnq_u16_f16	Data type conversion|Conversions
+[__arm_]vcvtnq_u32_f32	Data type conversion|Conversions
+[__arm_]vcvtnq_m[_s16_f16]	Data type conversion|Conversions
+[__arm_]vcvtnq_m[_s32_f32]	Data type conversion|Conversions
+[__arm_]vcvtnq_m[_u16_f16]	Data type conversion|Conversions
+[__arm_]vcvtnq_m[_u32_f32]	Data type conversion|Conversions
+[__arm_]vcvtnq_x_s16_f16	Data type conversion|Conversions
+[__arm_]vcvtnq_x_s32_f32	Data type conversion|Conversions
+[__arm_]vcvtnq_x_u16_f16	Data type conversion|Conversions
+[__arm_]vcvtnq_x_u32_f32	Data type conversion|Conversions
+[__arm_]vcvtpq_s16_f16	Data type conversion|Conversions
+[__arm_]vcvtpq_s32_f32	Data type conversion|Conversions
+[__arm_]vcvtpq_u16_f16	Data type conversion|Conversions
+[__arm_]vcvtpq_u32_f32	Data type conversion|Conversions
+[__arm_]vcvtpq_m[_s16_f16]	Data type conversion|Conversions
+[__arm_]vcvtpq_m[_s32_f32]	Data type conversion|Conversions
+[__arm_]vcvtpq_m[_u16_f16]	Data type conversion|Conversions
+[__arm_]vcvtpq_m[_u32_f32]	Data type conversion|Conversions
+[__arm_]vcvtpq_x_s16_f16	Data type conversion|Conversions
+[__arm_]vcvtpq_x_s32_f32	Data type conversion|Conversions
+[__arm_]vcvtpq_x_u16_f16	Data type conversion|Conversions
+[__arm_]vcvtpq_x_u32_f32	Data type conversion|Conversions
+[__arm_]vcvtmq_s16_f16	Data type conversion|Conversions
+[__arm_]vcvtmq_s32_f32	Data type conversion|Conversions
+[__arm_]vcvtmq_u16_f16	Data type conversion|Conversions
+[__arm_]vcvtmq_u32_f32	Data type conversion|Conversions
+[__arm_]vcvtmq_m[_s16_f16]	Data type conversion|Conversions
+[__arm_]vcvtmq_m[_s32_f32]	Data type conversion|Conversions
+[__arm_]vcvtmq_m[_u16_f16]	Data type conversion|Conversions
+[__arm_]vcvtmq_m[_u32_f32]	Data type conversion|Conversions
+[__arm_]vcvtmq_x_s16_f16	Data type conversion|Conversions
+[__arm_]vcvtmq_x_s32_f32	Data type conversion|Conversions
+[__arm_]vcvtmq_x_u16_f16	Data type conversion|Conversions
+[__arm_]vcvtmq_x_u32_f32	Data type conversion|Conversions
+[__arm_]vcvtbq_f16_f32	Data type conversion|Conversions
+[__arm_]vcvtbq_f32_f16	Data type conversion|Conversions
+[__arm_]vcvtbq_m_f16_f32	Data type conversion|Conversions
+[__arm_]vcvtbq_m_f32_f16	Data type conversion|Conversions
+[__arm_]vcvtbq_x_f32_f16	Data type conversion|Conversions
+[__arm_]vcvttq_f16_f32	Data type conversion|Conversions
+[__arm_]vcvttq_f32_f16	Data type conversion|Conversions
+[__arm_]vcvttq_m_f16_f32	Data type conversion|Conversions
+[__arm_]vcvttq_m_f32_f16	Data type conversion|Conversions
+[__arm_]vcvttq_x_f32_f16	Data type conversion|Conversions
+[__arm_]vcvtq[_f16_s16]	Data type conversion|Conversions
+[__arm_]vcvtq[_f16_u16]	Data type conversion|Conversions
+[__arm_]vcvtq[_f32_s32]	Data type conversion|Conversions
+[__arm_]vcvtq[_f32_u32]	Data type conversion|Conversions
+[__arm_]vcvtq_m[_f16_s16]	Data type conversion|Conversions
+[__arm_]vcvtq_m[_f16_u16]	Data type conversion|Conversions
+[__arm_]vcvtq_m[_f32_s32]	Data type conversion|Conversions
+[__arm_]vcvtq_m[_f32_u32]	Data type conversion|Conversions
+[__arm_]vcvtq_x[_f16_u16]	Data type conversion|Conversions
+[__arm_]vcvtq_x[_f16_s16]	Data type conversion|Conversions
+[__arm_]vcvtq_x[_f32_s32]	Data type conversion|Conversions
+[__arm_]vcvtq_x[_f32_u32]	Data type conversion|Conversions
+[__arm_]vcvtq_n[_f16_s16]	Data type conversion|Conversions
+[__arm_]vcvtq_n[_f16_u16]	Data type conversion|Conversions
+[__arm_]vcvtq_n[_f32_s32]	Data type conversion|Conversions
+[__arm_]vcvtq_n[_f32_u32]	Data type conversion|Conversions
+[__arm_]vcvtq_m_n[_f16_s16]	Data type conversion|Conversions
+[__arm_]vcvtq_m_n[_f16_u16]	Data type conversion|Conversions
+[__arm_]vcvtq_m_n[_f32_s32]	Data type conversion|Conversions
+[__arm_]vcvtq_m_n[_f32_u32]	Data type conversion|Conversions
+[__arm_]vcvtq_x_n[_f16_s16]	Data type conversion|Conversions
+[__arm_]vcvtq_x_n[_f16_u16]	Data type conversion|Conversions
+[__arm_]vcvtq_x_n[_f32_s32]	Data type conversion|Conversions
+[__arm_]vcvtq_x_n[_f32_u32]	Data type conversion|Conversions
+[__arm_]vcvtq_s16_f16	Data type conversion|Conversions
+[__arm_]vcvtq_s32_f32	Data type conversion|Conversions
+[__arm_]vcvtq_u16_f16	Data type conversion|Conversions
+[__arm_]vcvtq_u32_f32	Data type conversion|Conversions
+[__arm_]vcvtq_m[_s16_f16]	Data type conversion|Conversions
+[__arm_]vcvtq_m[_s32_f32]	Data type conversion|Conversions
+[__arm_]vcvtq_m[_u16_f16]	Data type conversion|Conversions
+[__arm_]vcvtq_m[_u32_f32]	Data type conversion|Conversions
+[__arm_]vcvtq_x_s16_f16	Data type conversion|Conversions
+[__arm_]vcvtq_x_s32_f32	Data type conversion|Conversions
+[__arm_]vcvtq_x_u16_f16	Data type conversion|Conversions
+[__arm_]vcvtq_x_u32_f32	Data type conversion|Conversions
+[__arm_]vcvtq_n_s16_f16	Data type conversion|Conversions
+[__arm_]vcvtq_n_s32_f32	Data type conversion|Conversions
+[__arm_]vcvtq_n_u16_f16	Data type conversion|Conversions
+[__arm_]vcvtq_n_u32_f32	Data type conversion|Conversions
+[__arm_]vcvtq_m_n[_s16_f16]	Data type conversion|Conversions
+[__arm_]vcvtq_m_n[_s32_f32]	Data type conversion|Conversions
+[__arm_]vcvtq_m_n[_u16_f16]	Data type conversion|Conversions
+[__arm_]vcvtq_m_n[_u32_f32]	Data type conversion|Conversions
+[__arm_]vcvtq_x_n_s16_f16	Data type conversion|Conversions
+[__arm_]vcvtq_x_n_s32_f32	Data type conversion|Conversions
+[__arm_]vcvtq_x_n_u16_f16	Data type conversion|Conversions
+[__arm_]vcvtq_x_n_u32_f32	Data type conversion|Conversions
+[__arm_]vrndq[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndq[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndq_m[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndq_m[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndq_x[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndq_x[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndnq[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndnq[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndnq_m[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndnq_m[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndnq_x[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndnq_x[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndmq[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndmq[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndmq_m[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndmq_m[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndmq_x[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndmq_x[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndpq[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndpq[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndpq_m[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndpq_m[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndpq_x[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndpq_x[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndaq[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndaq[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndaq_m[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndaq_m[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndaq_x[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndaq_x[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndxq[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndxq[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndxq_m[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndxq_m[_f32]	Vector arithmetic|Rounding
+[__arm_]vrndxq_x[_f16]	Vector arithmetic|Rounding
+[__arm_]vrndxq_x[_f32]	Vector arithmetic|Rounding
+[__arm_]vandq[_s8]	Logical|AND
+[__arm_]vandq[_s16]	Logical|AND
+[__arm_]vandq[_s32]	Logical|AND
+[__arm_]vandq[_u8]	Logical|AND
+[__arm_]vandq[_u16]	Logical|AND
+[__arm_]vandq[_u32]	Logical|AND
+[__arm_]vandq[_f16]	Logical|AND
+[__arm_]vandq[_f32]	Logical|AND
+[__arm_]vandq_m[_s8]	Logical|AND
+[__arm_]vandq_m[_s16]	Logical|AND
+[__arm_]vandq_m[_s32]	Logical|AND
+[__arm_]vandq_m[_u8]	Logical|AND
+[__arm_]vandq_m[_u16]	Logical|AND
+[__arm_]vandq_m[_u32]	Logical|AND
+[__arm_]vandq_m[_f16]	Logical|AND
+[__arm_]vandq_m[_f32]	Logical|AND
+[__arm_]vandq_x[_s8]	Logical|AND
+[__arm_]vandq_x[_s16]	Logical|AND
+[__arm_]vandq_x[_s32]	Logical|AND
+[__arm_]vandq_x[_u8]	Logical|AND
+[__arm_]vandq_x[_u16]	Logical|AND
+[__arm_]vandq_x[_u32]	Logical|AND
+[__arm_]vandq_x[_f16]	Logical|AND
+[__arm_]vandq_x[_f32]	Logical|AND
+[__arm_]vbicq[_s8]	Bit manipulation|Bitwise clear
+[__arm_]vbicq[_s16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq[_s32]	Bit manipulation|Bitwise clear
+[__arm_]vbicq[_u8]	Bit manipulation|Bitwise clear
+[__arm_]vbicq[_u16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq[_u32]	Bit manipulation|Bitwise clear
+[__arm_]vbicq[_f16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq[_f32]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_m[_s8]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_m[_s16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_m[_s32]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_m[_u8]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_m[_u16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_m[_u32]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_m[_f16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_m[_f32]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_x[_s8]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_x[_s16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_x[_s32]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_x[_u8]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_x[_u16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_x[_u32]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_x[_f16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_x[_f32]	Bit manipulation|Bitwise clear
+[__arm_]vbicq[_n_s16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq[_n_s32]	Bit manipulation|Bitwise clear
+[__arm_]vbicq[_n_u16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq[_n_u32]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_m_n[_s16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_m_n[_s32]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_m_n[_u16]	Bit manipulation|Bitwise clear
+[__arm_]vbicq_m_n[_u32]	Bit manipulation|Bitwise clear
+[__arm_]vbrsrq[_n_s8]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq[_n_s16]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq[_n_s32]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq[_n_u8]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq[_n_u16]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq[_n_u32]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq[_n_f16]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq[_n_f32]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_m[_n_s8]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_m[_n_s16]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_m[_n_s32]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_m[_n_u8]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_m[_n_u16]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_m[_n_u32]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_m[_n_f16]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_m[_n_f32]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_x[_n_s8]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_x[_n_s16]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_x[_n_s32]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_x[_n_u8]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_x[_n_u16]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_x[_n_u32]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_x[_n_f16]	Shift|Right|Vector bit reverse and shift right
+[__arm_]vbrsrq_x[_n_f32]	Shift|Right|Vector bit reverse and shift right
+[__arm_]veorq[_s8]	Logical|Exclusive OR
+[__arm_]veorq[_s16]	Logical|Exclusive OR
+[__arm_]veorq[_s32]	Logical|Exclusive OR
+[__arm_]veorq[_u8]	Logical|Exclusive OR
+[__arm_]veorq[_u16]	Logical|Exclusive OR
+[__arm_]veorq[_u32]	Logical|Exclusive OR
+[__arm_]veorq[_f16]	Logical|Exclusive OR
+[__arm_]veorq[_f32]	Logical|Exclusive OR
+[__arm_]veorq_m[_s8]	Logical|Exclusive OR
+[__arm_]veorq_m[_s16]	Logical|Exclusive OR
+[__arm_]veorq_m[_s32]	Logical|Exclusive OR
+[__arm_]veorq_m[_u8]	Logical|Exclusive OR
+[__arm_]veorq_m[_u16]	Logical|Exclusive OR
+[__arm_]veorq_m[_u32]	Logical|Exclusive OR
+[__arm_]veorq_m[_f16]	Logical|Exclusive OR
+[__arm_]veorq_m[_f32]	Logical|Exclusive OR
+[__arm_]veorq_x[_s8]	Logical|Exclusive OR
+[__arm_]veorq_x[_s16]	Logical|Exclusive OR
+[__arm_]veorq_x[_s32]	Logical|Exclusive OR
+[__arm_]veorq_x[_u8]	Logical|Exclusive OR
+[__arm_]veorq_x[_u16]	Logical|Exclusive OR
+[__arm_]veorq_x[_u32]	Logical|Exclusive OR
+[__arm_]veorq_x[_f16]	Logical|Exclusive OR
+[__arm_]veorq_x[_f32]	Logical|Exclusive OR
+[__arm_]vmovlbq[_s8]	Move|Vector move
+[__arm_]vmovlbq[_s16]	Move|Vector move
+[__arm_]vmovlbq[_u8]	Move|Vector move
+[__arm_]vmovlbq[_u16]	Move|Vector move
+[__arm_]vmovlbq_m[_s8]	Move|Vector move
+[__arm_]vmovlbq_m[_s16]	Move|Vector move
+[__arm_]vmovlbq_m[_u8]	Move|Vector move
+[__arm_]vmovlbq_m[_u16]	Move|Vector move
+[__arm_]vmovlbq_x[_s8]	Move|Vector move
+[__arm_]vmovlbq_x[_s16]	Move|Vector move
+[__arm_]vmovlbq_x[_u8]	Move|Vector move
+[__arm_]vmovlbq_x[_u16]	Move|Vector move
+[__arm_]vmovltq[_s8]	Move|Vector move
+[__arm_]vmovltq[_s16]	Move|Vector move
+[__arm_]vmovltq[_u8]	Move|Vector move
+[__arm_]vmovltq[_u16]	Move|Vector move
+[__arm_]vmovltq_m[_s8]	Move|Vector move
+[__arm_]vmovltq_m[_s16]	Move|Vector move
+[__arm_]vmovltq_m[_u8]	Move|Vector move
+[__arm_]vmovltq_m[_u16]	Move|Vector move
+[__arm_]vmovltq_x[_s8]	Move|Vector move
+[__arm_]vmovltq_x[_s16]	Move|Vector move
+[__arm_]vmovltq_x[_u8]	Move|Vector move
+[__arm_]vmovltq_x[_u16]	Move|Vector move
+[__arm_]vmovnbq[_s16]	Move|Vector move
+[__arm_]vmovnbq[_s32]	Move|Vector move
+[__arm_]vmovnbq[_u16]	Move|Vector move
+[__arm_]vmovnbq[_u32]	Move|Vector move
+[__arm_]vmovnbq_m[_s16]	Move|Vector move
+[__arm_]vmovnbq_m[_s32]	Move|Vector move
+[__arm_]vmovnbq_m[_u16]	Move|Vector move
+[__arm_]vmovnbq_m[_u32]	Move|Vector move
+[__arm_]vmovntq[_s16]	Move|Vector move
+[__arm_]vmovntq[_s32]	Move|Vector move
+[__arm_]vmovntq[_u16]	Move|Vector move
+[__arm_]vmovntq[_u32]	Move|Vector move
+[__arm_]vmovntq_m[_s16]	Move|Vector move
+[__arm_]vmovntq_m[_s32]	Move|Vector move
+[__arm_]vmovntq_m[_u16]	Move|Vector move
+[__arm_]vmovntq_m[_u32]	Move|Vector move
+[__arm_]vmvnq[_s8]	Logical|Bitwise NOT
+[__arm_]vmvnq[_s16]	Logical|Bitwise NOT
+[__arm_]vmvnq[_s32]	Logical|Bitwise NOT
+[__arm_]vmvnq[_u8]	Logical|Bitwise NOT
+[__arm_]vmvnq[_u16]	Logical|Bitwise NOT
+[__arm_]vmvnq[_u32]	Logical|Bitwise NOT
+[__arm_]vmvnq_m[_s8]	Logical|Bitwise NOT
+[__arm_]vmvnq_m[_s16]	Logical|Bitwise NOT
+[__arm_]vmvnq_m[_s32]	Logical|Bitwise NOT
+[__arm_]vmvnq_m[_u8]	Logical|Bitwise NOT
+[__arm_]vmvnq_m[_u16]	Logical|Bitwise NOT
+[__arm_]vmvnq_m[_u32]	Logical|Bitwise NOT
+[__arm_]vmvnq_x[_s8]	Logical|Bitwise NOT
+[__arm_]vmvnq_x[_s16]	Logical|Bitwise NOT
+[__arm_]vmvnq_x[_s32]	Logical|Bitwise NOT
+[__arm_]vmvnq_x[_u8]	Logical|Bitwise NOT
+[__arm_]vmvnq_x[_u16]	Logical|Bitwise NOT
+[__arm_]vmvnq_x[_u32]	Logical|Bitwise NOT
+[__arm_]vmvnq_n_s16	Logical|Bitwise NOT
+[__arm_]vmvnq_n_s32	Logical|Bitwise NOT
+[__arm_]vmvnq_n_u16	Logical|Bitwise NOT
+[__arm_]vmvnq_n_u32	Logical|Bitwise NOT
+[__arm_]vmvnq_m[_n_s16]	Logical|Bitwise NOT
+[__arm_]vmvnq_m[_n_s32]	Logical|Bitwise NOT
+[__arm_]vmvnq_m[_n_u16]	Logical|Bitwise NOT
+[__arm_]vmvnq_m[_n_u32]	Logical|Bitwise NOT
+[__arm_]vmvnq_x_n_s16	Logical|Bitwise NOT
+[__arm_]vmvnq_x_n_s32	Logical|Bitwise NOT
+[__arm_]vmvnq_x_n_u16	Logical|Bitwise NOT
+[__arm_]vmvnq_x_n_u32	Logical|Bitwise NOT
+[__arm_]vpnot	Predication|Vector Predicate NOT
+[__arm_]vpselq[_s8]	Predication|Predicated select
+[__arm_]vpselq[_s16]	Predication|Predicated select
+[__arm_]vpselq[_s32]	Predication|Predicated select
+[__arm_]vpselq[_s64]	Predication|Predicated select
+[__arm_]vpselq[_u8]	Predication|Predicated select
+[__arm_]vpselq[_u16]	Predication|Predicated select
+[__arm_]vpselq[_u32]	Predication|Predicated select
+[__arm_]vpselq[_u64]	Predication|Predicated select
+[__arm_]vpselq[_f16]	Predication|Predicated select
+[__arm_]vpselq[_f32]	Predication|Predicated select
+[__arm_]vornq[_f16]	Logical|OR-NOT
+[__arm_]vornq[_f32]	Logical|OR-NOT
+[__arm_]vornq[_s8]	Logical|OR-NOT
+[__arm_]vornq[_s16]	Logical|OR-NOT
+[__arm_]vornq[_s32]	Logical|OR-NOT
+[__arm_]vornq[_u8]	Logical|OR-NOT
+[__arm_]vornq[_u16]	Logical|OR-NOT
+[__arm_]vornq[_u32]	Logical|OR-NOT
+[__arm_]vornq_m[_f16]	Logical|OR-NOT
+[__arm_]vornq_m[_f32]	Logical|OR-NOT
+[__arm_]vornq_m[_s8]	Logical|OR-NOT
+[__arm_]vornq_m[_s16]	Logical|OR-NOT
+[__arm_]vornq_m[_s32]	Logical|OR-NOT
+[__arm_]vornq_m[_u8]	Logical|OR-NOT
+[__arm_]vornq_m[_u16]	Logical|OR-NOT
+[__arm_]vornq_m[_u32]	Logical|OR-NOT
+[__arm_]vornq_x[_f16]	Logical|OR-NOT
+[__arm_]vornq_x[_f32]	Logical|OR-NOT
+[__arm_]vornq_x[_s8]	Logical|OR-NOT
+[__arm_]vornq_x[_s16]	Logical|OR-NOT
+[__arm_]vornq_x[_s32]	Logical|OR-NOT
+[__arm_]vornq_x[_u8]	Logical|OR-NOT
+[__arm_]vornq_x[_u16]	Logical|OR-NOT
+[__arm_]vornq_x[_u32]	Logical|OR-NOT
+[__arm_]vorrq[_f16]	Logical|OR
+[__arm_]vorrq[_f32]	Logical|OR
+[__arm_]vorrq[_s8]	Logical|OR
+[__arm_]vorrq[_s16]	Logical|OR
+[__arm_]vorrq[_s32]	Logical|OR
+[__arm_]vorrq[_u8]	Logical|OR
+[__arm_]vorrq[_u16]	Logical|OR
+[__arm_]vorrq[_u32]	Logical|OR
+[__arm_]vorrq_m[_f16]	Logical|OR
+[__arm_]vorrq_m[_f32]	Logical|OR
+[__arm_]vorrq_m[_s8]	Logical|OR
+[__arm_]vorrq_m[_s16]	Logical|OR
+[__arm_]vorrq_m[_s32]	Logical|OR
+[__arm_]vorrq_m[_u8]	Logical|OR
+[__arm_]vorrq_m[_u16]	Logical|OR
+[__arm_]vorrq_m[_u32]	Logical|OR
+[__arm_]vorrq_x[_f16]	Logical|OR
+[__arm_]vorrq_x[_f32]	Logical|OR
+[__arm_]vorrq_x[_s8]	Logical|OR
+[__arm_]vorrq_x[_s16]	Logical|OR
+[__arm_]vorrq_x[_s32]	Logical|OR
+[__arm_]vorrq_x[_u8]	Logical|OR
+[__arm_]vorrq_x[_u16]	Logical|OR
+[__arm_]vorrq_x[_u32]	Logical|OR
+[__arm_]vorrq[_n_s16]	Logical|OR
+[__arm_]vorrq[_n_s32]	Logical|OR
+[__arm_]vorrq[_n_u16]	Logical|OR
+[__arm_]vorrq[_n_u32]	Logical|OR
+[__arm_]vorrq_m_n[_s16]	Logical|OR
+[__arm_]vorrq_m_n[_s32]	Logical|OR
+[__arm_]vorrq_m_n[_u16]	Logical|OR
+[__arm_]vorrq_m_n[_u32]	Logical|OR
+[__arm_]vqmovnbq[_s16]	Move|Vector saturating move and narrow
+[__arm_]vqmovnbq[_s32]	Move|Vector saturating move and narrow
+[__arm_]vqmovnbq[_u16]	Move|Vector saturating move and narrow
+[__arm_]vqmovnbq[_u32]	Move|Vector saturating move and narrow
+[__arm_]vqmovnbq_m[_s16]	Move|Vector saturating move and narrow
+[__arm_]vqmovnbq_m[_s32]	Move|Vector saturating move and narrow
+[__arm_]vqmovnbq_m[_u16]	Move|Vector saturating move and narrow
+[__arm_]vqmovnbq_m[_u32]	Move|Vector saturating move and narrow
+[__arm_]vqmovntq[_s16]	Move|Vector saturating move and narrow
+[__arm_]vqmovntq[_s32]	Move|Vector saturating move and narrow
+[__arm_]vqmovntq[_u16]	Move|Vector saturating move and narrow
+[__arm_]vqmovntq[_u32]	Move|Vector saturating move and narrow
+[__arm_]vqmovntq_m[_s16]	Move|Vector saturating move and narrow
+[__arm_]vqmovntq_m[_s32]	Move|Vector saturating move and narrow
+[__arm_]vqmovntq_m[_u16]	Move|Vector saturating move and narrow
+[__arm_]vqmovntq_m[_u32]	Move|Vector saturating move and narrow
+[__arm_]vqmovunbq[_s16]	Move|Vector saturating move and narrow
+[__arm_]vqmovunbq[_s32]	Move|Vector saturating move and narrow
+[__arm_]vqmovunbq_m[_s16]	Move|Vector saturating move and narrow
+[__arm_]vqmovunbq_m[_s32]	Move|Vector saturating move and narrow
+[__arm_]vqmovuntq[_s16]	Move|Vector saturating move and narrow
+[__arm_]vqmovuntq[_s32]	Move|Vector saturating move and narrow
+[__arm_]vqmovuntq_m[_s16]	Move|Vector saturating move and narrow
+[__arm_]vqmovuntq_m[_s32]	Move|Vector saturating move and narrow
+[__arm_]vqrshlq[_n_s8]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq[_n_s16]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq[_n_s32]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq[_n_u8]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq[_n_u16]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq[_n_u32]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq_m_n[_s8]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq_m_n[_s16]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq_m_n[_s32]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq_m_n[_u8]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq_m_n[_u16]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq_m_n[_u32]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq[_s8]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq[_s16]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq[_s32]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq[_u8]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq[_u16]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq[_u32]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq_m[_s8]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq_m[_s16]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq_m[_s32]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq_m[_u8]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq_m[_u16]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshlq_m[_u32]	Shift|Left|Vector saturating rounding shift left
+[__arm_]vqrshrnbq[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrnbq[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrnbq[_n_u16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrnbq[_n_u32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrnbq_m[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrnbq_m[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrnbq_m[_n_u16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrnbq_m[_n_u32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrntq[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrntq[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrntq[_n_u16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrntq[_n_u32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrntq_m[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrntq_m[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrntq_m[_n_u16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrntq_m[_n_u32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrunbq[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrunbq[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrunbq_m[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshrunbq_m[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshruntq[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshruntq[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshruntq_m[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqrshruntq_m[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshlq[_s8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq[_s16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq[_s32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq[_u8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq[_u16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq[_u32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m[_s8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m[_s16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m[_s32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m[_u8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m[_u16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m[_u32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_n[_s8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_n[_s16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_n[_s32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_n[_u8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_n[_u16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_n[_u32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m_n[_s8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m_n[_s16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m_n[_s32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m_n[_u8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m_n[_u16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m_n[_u32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_r[_s8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_r[_s16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_r[_s32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_r[_u8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_r[_u16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_r[_u32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m_r[_s8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m_r[_s16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m_r[_s32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m_r[_u8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m_r[_u16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshlq_m_r[_u32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshluq[_n_s8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshluq[_n_s16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshluq[_n_s32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshluq_m[_n_s8]	Shift|Left|Vector saturating shift left
+[__arm_]vqshluq_m[_n_s16]	Shift|Left|Vector saturating shift left
+[__arm_]vqshluq_m[_n_s32]	Shift|Left|Vector saturating shift left
+[__arm_]vqshrnbq[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrnbq[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrnbq[_n_u16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrnbq[_n_u32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrnbq_m[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrnbq_m[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrnbq_m[_n_u16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrnbq_m[_n_u32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrntq[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrntq[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrntq[_n_u16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrntq[_n_u32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrntq_m[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrntq_m[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrntq_m[_n_u16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrntq_m[_n_u32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrunbq[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrunbq[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrunbq_m[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshrunbq_m[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshruntq[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshruntq[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshruntq_m[_n_s16]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vqshruntq_m[_n_s32]	Shift|Right|Vector saturating rounding shift right and narrow
+[__arm_]vrev16q[_s8]	Vector manipulation|Reverse elements
+[__arm_]vrev16q[_u8]	Vector manipulation|Reverse elements
+[__arm_]vrev16q_m[_s8]	Vector manipulation|Reverse elements
+[__arm_]vrev16q_m[_u8]	Vector manipulation|Reverse elements
+[__arm_]vrev16q_x[_s8]	Vector manipulation|Reverse elements
+[__arm_]vrev16q_x[_u8]	Vector manipulation|Reverse elements
+[__arm_]vrev32q[_s8]	Vector manipulation|Reverse elements
+[__arm_]vrev32q[_s16]	Vector manipulation|Reverse elements
+[__arm_]vrev32q[_u8]	Vector manipulation|Reverse elements
+[__arm_]vrev32q[_u16]	Vector manipulation|Reverse elements
+[__arm_]vrev32q[_f16]	Vector manipulation|Reverse elements
+[__arm_]vrev32q_m[_s8]	Vector manipulation|Reverse elements
+[__arm_]vrev32q_m[_s16]	Vector manipulation|Reverse elements
+[__arm_]vrev32q_m[_u8]	Vector manipulation|Reverse elements
+[__arm_]vrev32q_m[_u16]	Vector manipulation|Reverse elements
+[__arm_]vrev32q_m[_f16]	Vector manipulation|Reverse elements
+[__arm_]vrev32q_x[_s8]	Vector manipulation|Reverse elements
+[__arm_]vrev32q_x[_s16]	Vector manipulation|Reverse elements
+[__arm_]vrev32q_x[_u8]	Vector manipulation|Reverse elements
+[__arm_]vrev32q_x[_u16]	Vector manipulation|Reverse elements
+[__arm_]vrev32q_x[_f16]	Vector manipulation|Reverse elements
+[__arm_]vrev64q[_s8]	Vector manipulation|Reverse elements
+[__arm_]vrev64q[_s16]	Vector manipulation|Reverse elements
+[__arm_]vrev64q[_s32]	Vector manipulation|Reverse elements
+[__arm_]vrev64q[_u8]	Vector manipulation|Reverse elements
+[__arm_]vrev64q[_u16]	Vector manipulation|Reverse elements
+[__arm_]vrev64q[_u32]	Vector manipulation|Reverse elements
+[__arm_]vrev64q[_f16]	Vector manipulation|Reverse elements
+[__arm_]vrev64q[_f32]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_m[_s8]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_m[_s16]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_m[_s32]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_m[_u8]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_m[_u16]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_m[_u32]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_m[_f16]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_m[_f32]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_x[_s8]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_x[_s16]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_x[_s32]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_x[_u8]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_x[_u16]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_x[_u32]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_x[_f16]	Vector manipulation|Reverse elements
+[__arm_]vrev64q_x[_f32]	Vector manipulation|Reverse elements
+[__arm_]vrshlq[_n_s8]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq[_n_s16]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq[_n_s32]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq[_n_u8]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq[_n_u16]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq[_n_u32]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_m_n[_s8]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_m_n[_s16]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_m_n[_s32]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_m_n[_u8]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_m_n[_u16]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_m_n[_u32]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq[_s8]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq[_s16]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq[_s32]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq[_u8]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq[_u16]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq[_u32]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_m[_s8]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_m[_s16]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_m[_s32]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_m[_u8]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_m[_u16]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_m[_u32]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_x[_s8]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_x[_s16]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_x[_s32]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_x[_u8]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_x[_u16]	Shift|Left|Vector rounding shift left
+[__arm_]vrshlq_x[_u32]	Shift|Left|Vector rounding shift left
+[__arm_]vshlcq[_s8]	Shift|Left|Whole vector left shift with carry
+[__arm_]vshlcq[_s16]	Shift|Left|Whole vector left shift with carry
+[__arm_]vshlcq[_s32]	Shift|Left|Whole vector left shift with carry
+[__arm_]vshlcq[_u8]	Shift|Left|Whole vector left shift with carry
+[__arm_]vshlcq[_u16]	Shift|Left|Whole vector left shift with carry
+[__arm_]vshlcq[_u32]	Shift|Left|Whole vector left shift with carry
+[__arm_]vshlcq_m[_s8]	Shift|Left|Whole vector left shift with carry
+[__arm_]vshlcq_m[_s16]	Shift|Left|Whole vector left shift with carry
+[__arm_]vshlcq_m[_s32]	Shift|Left|Whole vector left shift with carry
+[__arm_]vshlcq_m[_u8]	Shift|Left|Whole vector left shift with carry
+[__arm_]vshlcq_m[_u16]	Shift|Left|Whole vector left shift with carry
+[__arm_]vshlcq_m[_u32]	Shift|Left|Whole vector left shift with carry
+[__arm_]vshllbq[_n_s8]	Shift|Left|Vector shift left
+[__arm_]vshllbq[_n_s16]	Shift|Left|Vector shift left
+[__arm_]vshllbq[_n_u8]	Shift|Left|Vector shift left
+[__arm_]vshllbq[_n_u16]	Shift|Left|Vector shift left
+[__arm_]vshllbq_m[_n_s8]	Shift|Left|Vector shift left
+[__arm_]vshllbq_m[_n_s16]	Shift|Left|Vector shift left
+[__arm_]vshllbq_m[_n_u8]	Shift|Left|Vector shift left
+[__arm_]vshllbq_m[_n_u16]	Shift|Left|Vector shift left
+[__arm_]vshllbq_x[_n_s8]	Shift|Left|Vector shift left
+[__arm_]vshllbq_x[_n_s16]	Shift|Left|Vector shift left
+[__arm_]vshllbq_x[_n_u8]	Shift|Left|Vector shift left
+[__arm_]vshllbq_x[_n_u16]	Shift|Left|Vector shift left
+[__arm_]vshlltq[_n_s8]	Shift|Left|Vector shift left
+[__arm_]vshlltq[_n_s16]	Shift|Left|Vector shift left
+[__arm_]vshlltq[_n_u8]	Shift|Left|Vector shift left
+[__arm_]vshlltq[_n_u16]	Shift|Left|Vector shift left
+[__arm_]vshlltq_m[_n_s8]	Shift|Left|Vector shift left
+[__arm_]vshlltq_m[_n_s16]	Shift|Left|Vector shift left
+[__arm_]vshlltq_m[_n_u8]	Shift|Left|Vector shift left
+[__arm_]vshlltq_m[_n_u16]	Shift|Left|Vector shift left
+[__arm_]vshlltq_x[_n_s8]	Shift|Left|Vector shift left
+[__arm_]vshlltq_x[_n_s16]	Shift|Left|Vector shift left
+[__arm_]vshlltq_x[_n_u8]	Shift|Left|Vector shift left
+[__arm_]vshlltq_x[_n_u16]	Shift|Left|Vector shift left
+[__arm_]vshlq[_s8]	Shift|Left|Vector shift left
+[__arm_]vshlq[_s16]	Shift|Left|Vector shift left
+[__arm_]vshlq[_s32]	Shift|Left|Vector shift left
+[__arm_]vshlq[_u8]	Shift|Left|Vector shift left
+[__arm_]vshlq[_u16]	Shift|Left|Vector shift left
+[__arm_]vshlq[_u32]	Shift|Left|Vector shift left
+[__arm_]vshlq_m[_s8]	Shift|Left|Vector shift left
+[__arm_]vshlq_m[_s16]	Shift|Left|Vector shift left
+[__arm_]vshlq_m[_s32]	Shift|Left|Vector shift left
+[__arm_]vshlq_m[_u8]	Shift|Left|Vector shift left
+[__arm_]vshlq_m[_u16]	Shift|Left|Vector shift left
+[__arm_]vshlq_m[_u32]	Shift|Left|Vector shift left
+[__arm_]vshlq_x[_s8]	Shift|Left|Vector shift left
+[__arm_]vshlq_x[_s16]	Shift|Left|Vector shift left
+[__arm_]vshlq_x[_s32]	Shift|Left|Vector shift left
+[__arm_]vshlq_x[_u8]	Shift|Left|Vector shift left
+[__arm_]vshlq_x[_u16]	Shift|Left|Vector shift left
+[__arm_]vshlq_x[_u32]	Shift|Left|Vector shift left
+[__arm_]vshlq_n[_s8]	Shift|Left|Vector shift left
+[__arm_]vshlq_n[_s16]	Shift|Left|Vector shift left
+[__arm_]vshlq_n[_s32]	Shift|Left|Vector shift left
+[__arm_]vshlq_n[_u8]	Shift|Left|Vector shift left
+[__arm_]vshlq_n[_u16]	Shift|Left|Vector shift left
+[__arm_]vshlq_n[_u32]	Shift|Left|Vector shift left
+[__arm_]vshlq_m_n[_s8]	Shift|Left|Vector shift left
+[__arm_]vshlq_m_n[_s16]	Shift|Left|Vector shift left
+[__arm_]vshlq_m_n[_s32]	Shift|Left|Vector shift left
+[__arm_]vshlq_m_n[_u8]	Shift|Left|Vector shift left
+[__arm_]vshlq_m_n[_u16]	Shift|Left|Vector shift left
+[__arm_]vshlq_m_n[_u32]	Shift|Left|Vector shift left
+[__arm_]vshlq_x_n[_s8]	Shift|Left|Vector shift left
+[__arm_]vshlq_x_n[_s16]	Shift|Left|Vector shift left
+[__arm_]vshlq_x_n[_s32]	Shift|Left|Vector shift left
+[__arm_]vshlq_x_n[_u8]	Shift|Left|Vector shift left
+[__arm_]vshlq_x_n[_u16]	Shift|Left|Vector shift left
+[__arm_]vshlq_x_n[_u32]	Shift|Left|Vector shift left
+[__arm_]vshlq_r[_s8]	Shift|Left|Vector shift left
+[__arm_]vshlq_r[_s16]	Shift|Left|Vector shift left
+[__arm_]vshlq_r[_s32]	Shift|Left|Vector shift left
+[__arm_]vshlq_r[_u8]	Shift|Left|Vector shift left
+[__arm_]vshlq_r[_u16]	Shift|Left|Vector shift left
+[__arm_]vshlq_r[_u32]	Shift|Left|Vector shift left
+[__arm_]vshlq_m_r[_s8]	Shift|Left|Vector shift left
+[__arm_]vshlq_m_r[_s16]	Shift|Left|Vector shift left
+[__arm_]vshlq_m_r[_s32]	Shift|Left|Vector shift left
+[__arm_]vshlq_m_r[_u8]	Shift|Left|Vector shift left
+[__arm_]vshlq_m_r[_u16]	Shift|Left|Vector shift left
+[__arm_]vshlq_m_r[_u32]	Shift|Left|Vector shift left
+[__arm_]vrshrnbq[_n_s16]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrnbq[_n_s32]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrnbq[_n_u16]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrnbq[_n_u32]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrnbq_m[_n_s16]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrnbq_m[_n_s32]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrnbq_m[_n_u16]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrnbq_m[_n_u32]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrntq[_n_s16]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrntq[_n_s32]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrntq[_n_u16]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrntq[_n_u32]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrntq_m[_n_s16]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrntq_m[_n_s32]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrntq_m[_n_u16]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrntq_m[_n_u32]	Shift|Right|Vector rounding shift right and narrow
+[__arm_]vrshrq[_n_s8]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq[_n_s16]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq[_n_s32]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq[_n_u8]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq[_n_u16]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq[_n_u32]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq_m[_n_s8]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq_m[_n_s16]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq_m[_n_s32]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq_m[_n_u8]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq_m[_n_u16]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq_m[_n_u32]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq_x[_n_s8]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq_x[_n_s16]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq_x[_n_s32]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq_x[_n_u8]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq_x[_n_u16]	Shift|Right|Vector rounding shift right
+[__arm_]vrshrq_x[_n_u32]	Shift|Right|Vector rounding shift right
+[__arm_]vshrnbq[_n_s16]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrnbq[_n_s32]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrnbq[_n_u16]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrnbq[_n_u32]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrnbq_m[_n_s16]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrnbq_m[_n_s32]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrnbq_m[_n_u16]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrnbq_m[_n_u32]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrntq[_n_s16]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrntq[_n_s32]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrntq[_n_u16]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrntq[_n_u32]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrntq_m[_n_s16]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrntq_m[_n_s32]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrntq_m[_n_u16]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrntq_m[_n_u32]	Shift|Right|Vector shift right and narrow
+[__arm_]vshrq[_n_s8]	Shift|Right|Vector shift right
+[__arm_]vshrq[_n_s16]	Shift|Right|Vector shift right
+[__arm_]vshrq[_n_s32]	Shift|Right|Vector shift right
+[__arm_]vshrq[_n_u8]	Shift|Right|Vector shift right
+[__arm_]vshrq[_n_u16]	Shift|Right|Vector shift right
+[__arm_]vshrq[_n_u32]	Shift|Right|Vector shift right
+[__arm_]vshrq_m[_n_s8]	Shift|Right|Vector shift right
+[__arm_]vshrq_m[_n_s16]	Shift|Right|Vector shift right
+[__arm_]vshrq_m[_n_s32]	Shift|Right|Vector shift right
+[__arm_]vshrq_m[_n_u8]	Shift|Right|Vector shift right
+[__arm_]vshrq_m[_n_u16]	Shift|Right|Vector shift right
+[__arm_]vshrq_m[_n_u32]	Shift|Right|Vector shift right
+[__arm_]vshrq_x[_n_s8]	Shift|Right|Vector shift right
+[__arm_]vshrq_x[_n_s16]	Shift|Right|Vector shift right
+[__arm_]vshrq_x[_n_s32]	Shift|Right|Vector shift right
+[__arm_]vshrq_x[_n_u8]	Shift|Right|Vector shift right
+[__arm_]vshrq_x[_n_u16]	Shift|Right|Vector shift right
+[__arm_]vshrq_x[_n_u32]	Shift|Right|Vector shift right
+[__arm_]vsliq[_n_s8]	Shift|Left|Vector shift left and insert
+[__arm_]vsliq[_n_s16]	Shift|Left|Vector shift left and insert
+[__arm_]vsliq[_n_s32]	Shift|Left|Vector shift left and insert
+[__arm_]vsliq[_n_u8]	Shift|Left|Vector shift left and insert
+[__arm_]vsliq[_n_u16]	Shift|Left|Vector shift left and insert
+[__arm_]vsliq[_n_u32]	Shift|Left|Vector shift left and insert
+[__arm_]vsliq_m[_n_s8]	Shift|Left|Vector shift left and insert
+[__arm_]vsliq_m[_n_s16]	Shift|Left|Vector shift left and insert
+[__arm_]vsliq_m[_n_s32]	Shift|Left|Vector shift left and insert
+[__arm_]vsliq_m[_n_u8]	Shift|Left|Vector shift left and insert
+[__arm_]vsliq_m[_n_u16]	Shift|Left|Vector shift left and insert
+[__arm_]vsliq_m[_n_u32]	Shift|Left|Vector shift left and insert
+[__arm_]vsriq[_n_s8]	Shift|Right|Vector shift right and insert
+[__arm_]vsriq[_n_s16]	Shift|Right|Vector shift right and insert
+[__arm_]vsriq[_n_s32]	Shift|Right|Vector shift right and insert
+[__arm_]vsriq[_n_u8]	Shift|Right|Vector shift right and insert
+[__arm_]vsriq[_n_u16]	Shift|Right|Vector shift right and insert
+[__arm_]vsriq[_n_u32]	Shift|Right|Vector shift right and insert
+[__arm_]vsriq_m[_n_s8]	Shift|Right|Vector shift right and insert
+[__arm_]vsriq_m[_n_s16]	Shift|Right|Vector shift right and insert
+[__arm_]vsriq_m[_n_s32]	Shift|Right|Vector shift right and insert
+[__arm_]vsriq_m[_n_u8]	Shift|Right|Vector shift right and insert
+[__arm_]vsriq_m[_n_u16]	Shift|Right|Vector shift right and insert
+[__arm_]vsriq_m[_n_u32]	Shift|Right|Vector shift right and insert
+[__arm_]vgetq_lane[_f16]	Vector manipulation|Extract one element from vector
+[__arm_]vgetq_lane[_f32]	Vector manipulation|Extract one element from vector
+[__arm_]vgetq_lane[_s8]	Vector manipulation|Extract one element from vector
+[__arm_]vgetq_lane[_s16]	Vector manipulation|Extract one element from vector
+[__arm_]vgetq_lane[_s32]	Vector manipulation|Extract one element from vector
+[__arm_]vgetq_lane[_s64]	Vector manipulation|Extract one element from vector
+[__arm_]vgetq_lane[_u8]	Vector manipulation|Extract one element from vector
+[__arm_]vgetq_lane[_u16]	Vector manipulation|Extract one element from vector
+[__arm_]vgetq_lane[_u32]	Vector manipulation|Extract one element from vector
+[__arm_]vgetq_lane[_u64]	Vector manipulation|Extract one element from vector
+[__arm_]vsetq_lane[_f16]	Vector manipulation|Set vector lane
+[__arm_]vsetq_lane[_f32]	Vector manipulation|Set vector lane
+[__arm_]vsetq_lane[_s8]	Vector manipulation|Set vector lane
+[__arm_]vsetq_lane[_s16]	Vector manipulation|Set vector lane
+[__arm_]vsetq_lane[_s32]	Vector manipulation|Set vector lane
+[__arm_]vsetq_lane[_s64]	Vector manipulation|Set vector lane
+[__arm_]vsetq_lane[_u8]	Vector manipulation|Set vector lane
+[__arm_]vsetq_lane[_u16]	Vector manipulation|Set vector lane
+[__arm_]vsetq_lane[_u32]	Vector manipulation|Set vector lane
+[__arm_]vsetq_lane[_u64]	Vector manipulation|Set vector lane
+[__arm_]vctp8q	Predication|Create vector tail predicate
+[__arm_]vctp16q	Predication|Create vector tail predicate
+[__arm_]vctp32q	Predication|Create vector tail predicate
+[__arm_]vctp64q	Predication|Create vector tail predicate
+[__arm_]vctp8q_m	Predication|Create vector tail predicate
+[__arm_]vctp16q_m	Predication|Create vector tail predicate
+[__arm_]vctp32q_m	Predication|Create vector tail predicate
+[__arm_]vctp64q_m	Predication|Create vector tail predicate
+[__arm_]vuninitializedq_s8	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq_s16	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq_s32	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq_s64	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq_u8	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq_u16	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq_u32	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq_u64	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq_f16	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq_f32	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq	Vector manipulation|Create uninitialized vector
+[__arm_]vuninitializedq	Vector manipulation|Create uninitialized vector
+[__arm_]vreinterpretq_s16[_s8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s32[_s8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f32[_s8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u8[_s8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u16[_s8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u32[_s8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u64[_s8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s64[_s8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f16[_s8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s8[_s16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s32[_s16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f32[_s16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u8[_s16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u16[_s16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u32[_s16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u64[_s16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s64[_s16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f16[_s16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s8[_s32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s16[_s32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f32[_s32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u8[_s32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u16[_s32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u32[_s32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u64[_s32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s64[_s32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f16[_s32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s8[_f32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s16[_f32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s32[_f32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u8[_f32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u16[_f32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u32[_f32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u64[_f32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s64[_f32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f16[_f32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s8[_u8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s16[_u8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s32[_u8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f32[_u8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u16[_u8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u32[_u8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u64[_u8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s64[_u8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f16[_u8]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s8[_u16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s16[_u16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s32[_u16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f32[_u16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u8[_u16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u32[_u16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u64[_u16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s64[_u16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f16[_u16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s8[_u32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s16[_u32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s32[_u32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f32[_u32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u8[_u32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u16[_u32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u64[_u32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s64[_u32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f16[_u32]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s8[_u64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s16[_u64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s32[_u64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f32[_u64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u8[_u64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u16[_u64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u32[_u64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s64[_u64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f16[_u64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s8[_s64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s16[_s64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s32[_s64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f32[_s64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u8[_s64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u16[_s64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u32[_s64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u64[_s64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f16[_s64]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s8[_f16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s16[_f16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s32[_f16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_f32[_f16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u8[_f16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u16[_f16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u32[_f16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_u64[_f16]	Data type conversion|Reinterpret casts
+[__arm_]vreinterpretq_s64[_f16]	Data type conversion|Reinterpret casts
+[__arm_]lsll	64-bit arithmetic|Logical shift left long
+[__arm_]asrl	64-bit arithmetic|Arithmetic shift right long
+[__arm_]uqrshll	Shift|Left|Vector saturating rounding shift left
+[__arm_]uqrshll_sat48	Shift|Left|Vector saturating rounding shift left
+[__arm_]sqrshrl	64-bit arithmetic|Saturating rounding shift right long
+[__arm_]sqrshrl_sat48	64-bit arithmetic|Saturating rounding shift right long
+[__arm_]uqshll	Shift|Left|Vector saturating rounding shift left
+[__arm_]urshrl	64-bit arithmetic|Rounding shift right long
+[__arm_]srshrl	64-bit arithmetic|Rounding shift right long
+[__arm_]sqshll	Shift|Left|Vector saturating shift left
+[__arm_]uqrshl	Shift|Left|Vector saturating rounding shift left
+[__arm_]sqrshr	64-bit arithmetic|Saturating rounding shift right long
+[__arm_]uqshl	Shift|Left|Vector saturating shift left
+[__arm_]urshr	64-bit arithmetic|Rounding shift right long
+[__arm_]sqshl	Shift|Left|Vector saturating shift left
+[__arm_]srshr	64-bit arithmetic|Rounding shift right long

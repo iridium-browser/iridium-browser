@@ -1,0 +1,20 @@
+# This file allows mapping several author and committer email addresses and
+# names to a single canonical one for `git shortlog`, `git log --author`,
+# or `git check-mailmap`.
+#
+# For example, if you commit as `random.person@example.com` but sometimes use
+# "Rañdom Person" and sometimes "Random Person" as name and you want the former
+# to be your canonical name, add
+#
+#     Rañdom Person <random.person@example.com>
+#
+# If you commit as both `random.person@example.com` and `ranp@example.com` and
+# you want the former to be your canonical email address, add
+#
+#     <random.person@example.com> <ranp@example.com>
+#
+# Combinations of both are possible too, see
+# https://git-scm.com/docs/gitmailmap for format details.
+
+Nico Weber <thakis@chromium.org>
+Nico Weber <thakis@chromium.org> <thakis@chromium.org@0039d316-1c4b-4281-b951-d872f2087c98>

@@ -1,0 +1,15 @@
+# https://crbug.com/1189284
+# Not applicable to emulator due to not supporting fence sync
+-PaintCanvasVideoRendererWithGLTest.CopyVideoFrameTexturesToGLTexture*
+-PaintCanvasVideoRendererWithGLTest.CopyVideoFrameYUVDataToGLTexture*
+-PaintCanvasVideoRendererWithGLTest.Paint*
+
+# Tests are flaky.
+# https://crbug.com/1352098
+-PaintCanvasVideoRendererWithGLTest.CopyVideoFrameToWebGLTextureRGBA
+-PaintCanvasVideoRendererWithGLTest.CopyVideoFrameToWebGLTexture_FlipY
+-PaintCanvasVideoRendererWithGLTest.CopyVideoFrameToWebGLTextureRGBA_ReadLockFence
+-PaintCanvasVideoRendererWithGLTest.CopyVideoFrameToWebGLTextureI420
+-PaintCanvasVideoRendererWithGLTest.CopyVideoFrameToWebGLTexture
+-PaintCanvasVideoRendererWithGLTest.CopyVideoFrameToWebGLTextureNV12
+

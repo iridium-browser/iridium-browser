@@ -1,0 +1,9 @@
+# -*- Mode: Python; -*-
+
+include_rules = [
+  # Intra-discovery dependencies must be explicit.
+  '-discovery',
+
+  # All discovery code can use discovery/common.
+  '+discovery/common',
+]

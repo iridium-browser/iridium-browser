@@ -1,0 +1,100 @@
+/* Copyright (c) 2012 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file. */
+
+html {
+  --google-grey-200: rgb(232, 234, 237);
+  --google-grey-900: rgb(32, 33, 36);
+
+  --primary-color: var(--google-grey-900);
+  background: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --primary-color: var(--google-grey-200);
+    background: var(--google-grey-900);
+  }
+}
+
+body {
+  color: var(--primary-color);
+  font-size: 100%;
+  margin: 0;
+}
+
+#outer {
+  margin-inline-end: auto;
+  margin-inline-start: auto;
+  margin-top: 10px;
+  min-width: 800px;
+  width: 60%;
+}
+
+#inner {
+  padding-top: 10px;
+  word-break: break-word;
+}
+
+.label {
+  font-size: 0.9em;
+  font-weight: bold;
+  padding-inline-end: 5px;
+  text-align: end;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.label::after {
+  content: ':';
+}
+
+#logo {
+  float: right;
+  margin-inline-start: 40px;
+  text-align: end;
+  width: 180px;
+}
+
+#company {
+  font-size: 0.7em;
+  text-align: end;
+}
+
+#copyright {
+  font-size: 0.7em;
+  text-align: end;
+}
+
+#useragent {
+  font-family: monospace;
+}
+
+.version {
+  font-family: monospace;
+  max-width: 430px;
+  padding-inline-start: 5px;
+  vertical-align: bottom;
+}
+
+.version-wide {
+  font-family: monospace;
+  max-width: auto;
+  padding-inline-start: 5px;
+  vertical-align: bottom;
+}
+
+#copy-to-clipboard,
+#copy-os-content-to-clipboard {
+  -webkit-mask-image: url(chrome://resources/images/icon_copy_content.svg);
+  -webkit-mask-size: cover;
+  background: none;
+  background-color: var(--primary-color);
+  border: none;
+  display: inline-block;
+  height: 1em;
+  padding: 0;
+  position: relative;
+  top: .2em;
+  width: 1em;
+}

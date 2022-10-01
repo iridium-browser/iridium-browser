@@ -1,0 +1,17 @@
+dictionary NavigationTransitionWhileOptions : NavigationInterceptOrTransitionWhileOptions {
+  NavigationScrollBehavior scrollRestoration;
+};
+
+dictionary NavigationInterceptOrTransitionWhileOptions {
+  NavigationFocusReset focusReset;
+};
+
+enum NavigationFocusReset {
+  "after-transition",
+  "manual"
+};
+
+enum NavigationScrollBehavior {
+  "after-transition",
+  "manual"
+};

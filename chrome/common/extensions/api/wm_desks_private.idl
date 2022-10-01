@@ -1,0 +1,70 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// Private API for trusted extensions/apps to do desk related operations.
+[platforms=("chromeos"),
+ implemented_in="chrome/browser/chromeos/extensions/wm/wm_desks_private_api.h"]
+namespace wmDesksPrivate {
+  dictionary RemoveDeskOptions {
+    // Define whether close all windows on the desk and combine them to the
+    // active desk to the left.
+    boolean combineDesks;
+  };
+
+  dictionary Desk {
+    // Unique ID for a desk.
+    DOMString deskUuid;
+
+    // User readable name of the desk.
+    DOMString deskName;
+  };
+
+  // Launch desk options
+  dictionary LaunchOptions {
+    // User readable name of the desk.
+    DOMString? deskName;
+};
+
+  // Window properties
+  dictionary WindowProperties {
+    // If window show up on all desks.
+    boolean allDesks;
+  };
+
+  callback DeskIdCallback = void (DOMString deskId);
+  callback VoidCallback = void ();
+  callback GetDeskTemplateJsonCallback = void (DOMString templateJson);
+  callback GetAllDesksCallback = void (Desk[] desks);
+
+  interface Functions {
+    // Launches a desk, if `templateUuid` is present in the options, launches a
+    // desk template, otherwise launches an empty desk. If `deskName` is present
+    // in the options, using provided name as desk name, otherwise launches with
+    // auto generated name.
+    static void launchDesk(LaunchOptions launchOptions,
+                           DeskIdCallback callback);
+
+    // Gets the template associated with the templateUuid and returns its JSON
+    // representation.  Returns an error if either the template could not be
+    // found or the user profile is not valid.
+    static void getDeskTemplateJson(DOMString templateUuid,
+                                    GetDeskTemplateJsonCallback callback);
+
+    // Removes a desk as specified in `deskId`. If `combineDesks` of
+    // `RemoveDeskOptions` is present or set to true, remove the desk and
+    // combine windows to the active desk to the left. Otherwise close all
+    // windows on the desk.
+    static void removeDesk(DOMString deskId,
+                           optional RemoveDeskOptions removeDeskOptions,
+                           VoidCallback callback);
+
+    // Returns all available desks.
+    static void getAllDesks(GetAllDesksCallback callback);
+
+    // Set the window properties for window identified by the `windowId`.
+    static void setWindowProperties(long windowId,
+                                    WindowProperties windowProperties,
+                                    VoidCallback callback);
+  };
+};

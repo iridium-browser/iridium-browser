@@ -1,0 +1,183 @@
+# Copyright 2014 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("./config/gni/devtools_grd_files.gni")
+import("./config/gni/devtools_image_files.gni")
+import("./front_end/emulated_devices/optimized/optimized_images.gni")
+import("./scripts/build/ninja/node.gni")
+import("./scripts/build/ninja/vars.gni")
+import("./third_party/blink/public/public_features.gni")
+
+#-------------------------------------------------------------------------------
+
+devtools_frontend_resources_deps = [
+  "front_end",
+  "test",
+]
+
+group("devtools_all_files") {
+  testonly = true
+  data = [
+    # This enables us to test bots with whitespace changes.
+    "scripts/whitespaces.txt",
+  ]
+  data_deps = devtools_frontend_resources_deps
+
+  public_deps = [ "front_end/ui/components/docs" ]
+}
+
+group("devtools_frontend_resources") {
+  public_deps = devtools_frontend_resources_deps
+  deps = [
+    ":assert_grd",
+    ":assert_third_party_readmes",
+  ]
+}
+
+group("generate_devtools_inspector_overlay_resources") {
+  public_deps = [ "inspector_overlay:build_inspector_overlay" ]
+}
+
+action("assert_grd") {
+  script = "scripts/build/assert_grd.py"
+
+  deps = [
+    ":expected_grd_files",
+    ":input_grd_files",
+  ]
+
+  inputs = [
+    "$target_gen_dir/expected_grd_files.json",
+    "$target_gen_dir/input_grd_files.json",
+  ]
+
+  args = [
+    rebase_path("$target_gen_dir/expected_grd_files.json", root_build_dir),
+    rebase_path("$target_gen_dir/input_grd_files.json", root_build_dir),
+    rebase_path("$target_gen_dir/assert_grd.stamp", root_build_dir),
+  ]
+
+  outputs = [ "$target_gen_dir/assert_grd.stamp" ]
+}
+
+action("assert_third_party_readmes") {
+  script = "scripts/build/assert_third_party_readmes.py"
+
+  deps = [ ":expected_grd_files" ]
+
+  inputs = [
+    "$target_gen_dir/expected_grd_files.json",
+    "front_end/third_party/additional_readme_paths.json",
+  ]
+
+  args = [
+    rebase_path("$target_gen_dir/expected_grd_files.json", root_build_dir),
+    rebase_path("front_end/third_party/additional_readme_paths.json",
+                root_build_dir),
+    rebase_path("$target_gen_dir/assert_third_party_readmes.stamp",
+                root_build_dir),
+  ]
+
+  outputs = [ "$target_gen_dir/assert_third_party_readmes.stamp" ]
+}
+
+_expected_grd_files = []
+_expected_grd_files += grd_files_release_sources
+if (is_debug) {
+  _expected_grd_files += grd_files_debug_sources
+}
+
+generated_file("expected_grd_files") {
+  outputs = [ "$target_gen_dir/expected_grd_files.json" ]
+
+  contents = _expected_grd_files
+
+  output_conversion = "json"
+}
+
+generated_file("input_grd_files") {
+  outputs = [ "$target_gen_dir/input_grd_files.json" ]
+
+  data_keys = [ "grd_files" ]
+
+  output_conversion = "json"
+  rebase = target_gen_dir
+
+  deps = [ "front_end" ]
+}
+
+_compressable_grd_files = filter_include(_expected_grd_files,
+                                         [
+                                           "*.css",
+                                           "*.html",
+                                           "*.js",
+                                           "*.svg",
+                                           "*.json",
+                                           "*.md",
+                                         ])
+
+if (!is_debug) {
+  node_action("compress") {
+    script = "scripts/build/compress_files.js"
+    public_deps = [ ":devtools_frontend_resources" ]
+
+    sources = []
+    foreach(_grd_file, _compressable_grd_files) {
+      sources += [ "$target_gen_dir/$_grd_file" ]
+    }
+
+    response_file_contents = rebase_path(sources, root_build_dir)
+
+    outputs = []
+    foreach(_grd_file, _compressable_grd_files) {
+      outputs += [
+        "$target_gen_dir/$_grd_file.compressed",
+        "$target_gen_dir/$_grd_file.hash",
+      ]
+    }
+
+    args = [
+      "--file_list",
+      "{{response_file_name}}",
+    ]
+  }
+} else {
+  not_needed([ "_compressable_grd_files" ])
+}
+
+action("generate_devtools_grd") {
+  script = "scripts/build/generate_devtools_grd.py"
+
+  response_file_contents = rebase_path(_expected_grd_files, "front_end")
+  outfile = "$target_gen_dir/front_end/devtools_resources.grd"
+  outputs = [ outfile ]
+
+  args = [
+    "--file_list",
+    "{{response_file_name}}",
+    "--output",
+    rebase_path(outfile, root_build_dir),
+  ]
+
+  inputs = []
+
+  if (is_debug) {
+    deps = [ ":devtools_frontend_resources" ]
+    foreach(_grd_file, _expected_grd_files) {
+      inputs += [ "$target_gen_dir/$_grd_file" ]
+    }
+  } else {
+    deps = [ ":compress" ]
+    foreach(_grd_file, _expected_grd_files) {
+      inputs += [ "$target_gen_dir/$_grd_file" ]
+    }
+    foreach(_grd_file, _compressable_grd_files) {
+      inputs += [ "$target_gen_dir/$_grd_file.compressed" ]
+    }
+
+    # Compression is slow, particularly in debug builds, so only compress in
+    # non-debug builds.
+    args += [ "--compress" ]
+  }
+}

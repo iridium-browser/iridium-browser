@@ -1,0 +1,340 @@
+# Copyright 2014 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//chrome/common/features.gni")
+import("//third_party/closure_compiler/compile_js.gni")
+import("//tools/grit/grit_rule.gni")
+import("//tools/grit/preprocess_if_expr.gni")
+import("//tools/polymer/html_to_wrapper.gni")
+import("//tools/typescript/ts_definitions.gni")
+import("//tools/typescript/ts_library.gni")
+import("//ui/file_manager/file_names.gni")
+import("//ui/webui/resources/tools/generate_grd.gni")
+
+grit("resources") {
+  source = "file_manager_resources.grd"
+  defines = [ "optimize_webui=$optimize_webui" ]
+  outputs = [
+    "grit/file_manager_resources.h",
+    "grit/file_manager_resources_map.cc",
+    "grit/file_manager_resources_map.h",
+    "file_manager_resources.pak",
+    "file_manager_resources.rc",
+  ]
+}
+
+component("file_manager") {
+  sources = [ "file_manager_export.h" ]
+  public_deps = [
+    ":file_manager_gen_resources",
+    ":resources",
+    "//base",
+  ]
+  defines = [ "FILE_MANAGER_IMPLEMENTATION" ]
+}
+
+group("closure_compile") {
+  # Subfolders' closure_compile groups bundle the non-test "module" type-check
+  # groups as well as unittests and test_support.
+  testonly = true
+
+  deps = [
+    "file_manager/background/js:closure_compile",
+    "file_manager/common/js:closure_compile",
+    "file_manager/foreground/elements:closure_compile",
+    "file_manager/foreground/js:closure_compile",
+    "file_manager/foreground/js/metadata:closure_compile",
+    "file_manager/foreground/js/ui:closure_compile",
+    "file_manager/foreground/js/ui/banners:closure_compile",
+    "image_loader:closure_compile",
+    "integration_tests:closure_compile",
+    "integration_tests/file_manager:closure_compile",
+  ]
+}
+
+group("unit_test_data") {
+  testonly = true
+  deps = [
+    "file_manager/background/js:js_test_type_check",
+    "file_manager/common/js:js_test_type_check",
+    "file_manager/foreground/elements:js_test_type_check",
+    "file_manager/foreground/js:js_test_type_check",
+    "file_manager/foreground/js/metadata:js_test_type_check",
+    "file_manager/foreground/js/ui:js_test_type_check",
+    "file_manager/foreground/js/ui/banners:js_test_type_check",
+    "image_loader:js_test_type_check",
+  ]
+  data_deps = [ "image_loader:copy_from_filesapp" ]
+}
+
+preprocess_folder = "$target_gen_dir/preprocessed"
+
+# Move files to the preprocessed folder to combine all resources in the same
+# folder for JS bundling with rollup.
+# This is for files direct from the src/:  input_folder="./".
+preprocess_if_expr("preprocess_static") {
+  in_folder = "./"
+  out_folder = preprocess_folder
+  out_manifest = "$target_gen_dir/manifest_preprocess_static.json"
+
+  in_files = static_js_files
+
+  deps = [
+    "//ui/file_manager/file_manager/background/js:js_modules",
+    "//ui/file_manager/file_manager/background/js:main_background",
+    "//ui/file_manager/file_manager/common/js:js_modules",
+    "//ui/file_manager/file_manager/foreground/elements:web_components",
+    "//ui/file_manager/file_manager/foreground/js:deferred_elements",
+    "//ui/file_manager/file_manager/foreground/js:main",
+  ]
+}
+
+preprocess_if_expr("preprocess_static_image_loader") {
+  in_folder = "."
+  out_folder = preprocess_folder
+  out_manifest = "$target_gen_dir/manifest_preprocess_static_image_loader.json"
+
+  in_files = image_loader_static_js_files
+
+  deps = [
+    "//ui/file_manager/image_loader:background",
+    "//ui/file_manager/image_loader:js_modules",
+  ]
+}
+
+# This is for files that are generated in "gen/": input_folder=target_gen_dir.
+preprocess_if_expr("preprocess_generated") {
+  in_folder = target_gen_dir
+  out_folder = preprocess_folder
+  out_manifest = "$target_gen_dir/manifest_preprocess_generated.json"
+
+  in_files = generated_js_files + ts_generated_templates
+
+  deps = [
+    ":html_wrapper_files",
+    "//ui/file_manager/base/gn:file_types_data_gen_js",
+    "//ui/file_manager/file_manager/foreground/elements:elements",
+    "//ui/file_manager/file_manager/foreground/elements:web_components",
+    "//ui/file_manager/file_manager/foreground/js/ui/banners:web_components",
+  ]
+}
+
+preprocess_if_expr("preprocess_generated_image_loader") {
+  in_folder = target_gen_dir
+  out_folder = preprocess_folder
+  out_manifest =
+      "$target_gen_dir/manifest_preprocess_generated_image_loader.json"
+
+  in_files = image_loader_generated_js_files
+
+  deps = [ "//ui/file_manager/image_loader:copy_from_filesapp" ]
+}
+
+ts_library("build_ts") {
+  root_dir = preprocess_folder
+  out_dir = "$target_gen_dir/tsc"
+  tsconfig_base = "tsconfig_base.json"
+  composite = true
+
+  extra_deps = [
+    ":copy_definition",
+    ":copy_fmp",
+    ":copy_ts",
+    ":generate_definitions",
+    ":preprocess_generated",
+    ":preprocess_generated_image_loader",
+    ":preprocess_static",
+    ":preprocess_static_image_loader",
+  ]
+
+  deps = [ "//ui/webui/resources:library" ]
+
+  in_files =
+      static_js_files + generated_js_files + ts_files + ts_generated_templates +
+      image_loader_static_js_files + image_loader_generated_js_files
+
+  definitions = [
+    "$preprocess_folder/file_manager/externs/file_manager_private.js",
+    "$target_gen_dir/file_manager/definitions/file_manager.d.ts",
+    "$target_gen_dir/file_manager/externs/volume_manager.d.ts",
+  ]
+}
+
+ts_library("test_build_ts") {
+  testonly = true
+  root_dir = preprocess_folder
+  out_dir = "$target_gen_dir/tsc"
+  tsconfig_base = "tsconfig_base.json"
+
+  in_files = ts_test_files
+
+  path_mappings = [
+    # for chai_assert.js.
+    "chrome://webui-test/*|" +
+        rebase_path("$root_gen_dir/chrome/test/data/webui/tsc/*",
+                    target_gen_dir),
+  ]
+
+  definitions = [
+    "$preprocess_folder/file_manager/externs/file_manager_private.js",
+    "$target_gen_dir/file_manager/definitions/file_error.d.ts",
+    "$target_gen_dir/file_manager/definitions/file_manager.d.ts",
+    "$target_gen_dir/file_manager/externs/volume_manager.d.ts",
+  ]
+
+  deps = [ ":build_ts" ]
+  extra_deps = [
+    ":copy_definition",
+    ":copy_fmp",
+    ":copy_ts",
+    ":generate_definitions",
+  ]
+}
+
+ts_definitions("generate_definitions") {
+  root_dir = "."
+  out_dir = target_gen_dir
+
+  js_files = [
+    "file_manager/common/js/volume_manager_types.js",
+    "file_manager/externs/entry_location.js",
+    "file_manager/externs/files_app_entry_interfaces.js",
+    "file_manager/externs/volume_info.js",
+    "file_manager/externs/volume_info_list.js",
+    "file_manager/externs/volume_manager.js",
+  ]
+}
+
+# Copy definition files to GEN folder, so they can import relatively the
+# generated definitions.
+copy("copy_definition") {
+  sources = [
+    "file_manager/definitions/file_error.d.ts",
+    "file_manager/definitions/file_manager.d.ts",
+  ]
+  outputs = [ "$target_gen_dir/{{source_target_relative}}" ]
+}
+
+copy("copy_ts") {
+  sources = ts_files + ts_test_files
+  outputs = [ "$preprocess_folder/{{source_target_relative}}" ]
+}
+
+copy("copy_fmp") {
+  sources = [ "//third_party/closure_compiler/externs/file_manager_private.js" ]
+  outputs = [ "$preprocess_folder/file_manager/externs/{{source_file_part}}" ]
+}
+
+js_library("js_from_ts") {
+  sources = []
+  foreach(_t, ts_files) {
+    sources += [ "$target_gen_dir/tsc/" + string_replace(_t, ".ts", ".js") ]
+  }
+  extra_deps = [ ":build_ts" ]
+}
+
+grd_prefix = "file_manager_gen"
+generated_grd = "$target_gen_dir/${grd_prefix}_resources.grd"
+
+generate_grd("build_grd") {
+  out_grd = generated_grd
+
+  grdp_files = [ "$target_gen_dir/file_manager/static_resources.grdp" ]
+
+  deps = [
+    ":build_ts",
+    "file_manager:build_static_grdp",
+    "//ui/file_manager/image_loader:build",
+  ]
+
+  input_files_base_dir = rebase_path(target_gen_dir, root_build_dir)
+  input_files = [ "image_loader/background.rollup.js" ]
+
+  resource_path_rewrites =
+      [ "image_loader/background.rollup.js|image_loader/background.js" ]
+
+  if (optimize_webui) {
+    input_files += [
+      "file_manager/background/js/main_background.rollup.js",
+      "file_manager/background/js/runtime_loaded_test_util.rollup.js",
+      "file_manager/background/js/shared.rollup.js",
+      "file_manager/foreground/js/deferred_elements.rollup.js",
+      "file_manager/foreground/js/main.rollup.js",
+      "file_manager/foreground/js/metadata_dispatcher.rollup.js",
+      "file_manager/foreground/js/shared.rollup.js",
+
+      "image_loader/image_orientation.js",
+      "image_loader/lru_cache.js",
+
+      "file_manager/common/js/file_types_data.js",
+    ]
+
+    resource_path_rewrites += [
+      "file_manager/background/js/main_background.rollup.js|file_manager/background/js/main_background.js",
+      "file_manager/background/js/runtime_loaded_test_util.rollup.js|file_manager/background/js/runtime_loaded_test_util.js",
+      "file_manager/foreground/js/deferred_elements.rollup.js|file_manager/foreground/js/deferred_elements.js",
+      "file_manager/foreground/js/main.rollup.js|file_manager/foreground/js/main.js",
+      "file_manager/foreground/js/metadata_dispatcher.rollup.js|file_manager/foreground/js/metadata/metadata_dispatcher.js",
+    ]
+
+    deps += [
+      "//ui/file_manager/file_manager/background/js:build",
+      "//ui/file_manager/file_manager/foreground/elements:elements",
+      "//ui/file_manager/file_manager/foreground/js:build",
+      "//ui/file_manager/file_manager/foreground/js:build_worker",
+    ]
+  } else {
+    manifest_files =
+        filter_include(get_target_outputs(":build_ts"), [ "*.manifest" ])
+  }
+}
+
+# Resources for the JS modules.
+grit("file_manager_gen_resources") {
+  defines = chrome_grit_defines
+
+  # These arguments are needed since the grd is generated at build time.
+  enable_input_discovery_for_gn_analyze = false
+
+  source = generated_grd
+  deps = [ ":build_grd" ]
+
+  outputs = [
+    "grit/file_manager_gen_resources.h",
+    "grit/file_manager_gen_resources_map.cc",
+    "grit/file_manager_gen_resources_map.h",
+    "file_manager_gen_resources.pak",
+  ]
+  output_dir = target_gen_dir
+}
+
+html_to_wrapper("html_wrapper_files") {
+  in_files = ts_templates
+}
+
+# GRD for test files.
+generate_grd("build_tests_grdp") {
+  testonly = true
+  grd_prefix = "file_manager_test"
+  out_grd = "$target_gen_dir/tests_resources.grdp"
+
+  input_files_base_dir = rebase_path(".", "//")
+  input_files = unittest_files
+}
+
+# GRD for the actual application files that are processed by TS compiler.
+generate_grd("build_tests_gen_grdp") {
+  testonly = true
+  grd_prefix = "file_manager_test"
+  out_grd = "$target_gen_dir/tests_gen_resources.grdp"
+
+  manifest_files =
+      filter_include(get_target_outputs(":build_ts"), [ "*.manifest" ]) +
+      filter_include(get_target_outputs(":test_build_ts"), [ "*.manifest" ])
+
+  deps = [
+    ":build_ts",
+    ":test_build_ts",
+  ]
+}

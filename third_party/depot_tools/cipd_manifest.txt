@@ -1,0 +1,81 @@
+# Copyright 2017 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# This file contains version pins of a few infrastructure tools.
+# If a tool is broken, revert a recent CL touching this file.
+# Note that Chromium has its own depot_tools pin, so if in a rush, revert the
+# depot_tools roll as well: https://chromium-review.googlesource.com/q/project:chromium/src+file:DEPS+depot_tools
+# or just wait for the autoroller to auto-roll your revert to Chromium.
+
+# Pin resolved versions in the repo, to reduce trust in the CIPD backend.
+#
+# Most of these tools are generated via builders at
+# https://ci.chromium.org/p/infra/g/infra/console
+#
+# For these, the git revision is the one of
+# https://chromium.googlesource.com/infra/infra.git.
+#
+# For goma client, generated via builders at
+# https://ci.chromium.org/p/infra-internal/g/goma-client/console
+# the git revision is the one of
+# https://chromium.googlesource.com/infra/goma/client.git
+#
+# To regenerate them (after modifying this file):
+#   cipd ensure-file-resolve -ensure-file cipd_manifest.txt
+$ResolvedVersions cipd_manifest.versions
+
+# Fully supported platforms.
+$VerifiedPlatform linux-amd64 linux-arm64 mac-amd64 mac-arm64 windows-amd64
+
+# Platform with best-effort support: we have some binaries cross-compiled for
+# them, but we do not test they work. They also may not have all necessary
+# vpython packages.
+$VerifiedPlatform linux-386 linux-ppc64 linux-ppc64le linux-s390x
+$VerifiedPlatform linux-armv6l linux-mips64 linux-mips64le linux-mipsle
+
+# vpython.
+infra/tools/luci/vpython/${platform} git_revision:7979d954927af292bd5a57dd398a9791cc43099c
+
+# LUCI editor
+infra/tools/luci/led/${platform} git_revision:f09dbc988cae854052bc20d21a90089d9c188119
+
+# LUCI config generator
+infra/tools/luci/lucicfg/${platform} git_revision:eb24a3f8d027a68e8b3e3deed440d72cfb2f7393
+
+# Mac toolchain installer
+infra/tools/mac_toolchain/${os=mac}-${arch} git_revision:d14d3b7a182f083b41d2df282885d3db210eba79
+
+# LUCI rpc command line tool
+infra/tools/prpc/${platform} git_revision:5a038afb97f6b77e0fcefe1185317da216fced1f
+
+# LUCI authentication command line tool
+infra/tools/luci-auth/${platform} git_revision:297491c0babda68d84d8240c9d4504be671bc804
+
+# LUCI Buildbucket CLI
+infra/tools/bb/${platform} git_revision:a6af4ce16f5006eae354d82017564141476c6fe7
+
+# LUCI ResultDB CLI
+infra/tools/rdb/${platform} git_revision:0fbf0c3c84a67bca202dd5002fb38bd93b08d0a1
+
+# CHROMEOS Buildjobs CLI
+chromiumos/infra/crosjobs/${platform=linux-amd64} git_revision:ed616d595eb7241d39d34907050d2949121d6ae8
+
+# goma client
+infra/goma/client/${os=linux,windows}-${arch=amd64} git_revision:07a4e71760fa04f271c55755211d8e4eb15e52e5
+infra/goma/client/${os=mac}-${arch} git_revision:07a4e71760fa04f271c55755211d8e4eb15e52e5
+
+# ninja
+infra/3pp/tools/ninja/${os=linux,windows}-${arch=amd64} version:2@1.8.2.chromium.3
+infra/3pp/tools/ninja/${os=mac}-${arch} version:2@1.8.2.chromium.3
+
+# dirmd, a tool to work with DIR_METADATA files
+infra/tools/dirmd/${platform} git_revision:6ccfc187ae31591c9ce32acb35334062530c5333
+
+# Pinpoint CLI
+infra/chromeperf/pinpoint/${platform} git_revision:53d72e5099bc6f080370ae5f23560383027b947f
+
+@Subdir reclient
+# reclient, currently this is only for ChromeOS build.
+# TODO(http://b/242680623): we may change how to distribute reclient.
+infra/rbe/client/${platform=linux-amd64} re_client_version:0.76.0.f4c4bc4-gomaip

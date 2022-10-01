@@ -1,0 +1,9 @@
+# -*- Mode: Python; -*-
+
+include_rules = [
+  # Allowed to use discovery module.
+  '+discovery/public',
+  '+discovery/dnssd/public',
+  # Also necessary to implement discovery APIs.
+  '+discovery/common',
+]

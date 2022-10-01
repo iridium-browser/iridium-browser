@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkAdjustment" id="scale_adj">
+    <property name="upper">24</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">4</property>
+  </object>
+  <object class="GtkWindow" id="window">
+    <property name="default-width">1080</property>
+    <property name="default-height">430</property>
+    <child type="titlebar">
+      <object class="GtkHeaderBar">
+        <child type="title">
+          <object class="GtkBox">
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <style>
+              <class name="linked"/>
+            </style>
+            <child>
+              <object class="GtkToggleButton" id="text_radio">
+                <property name="label">Text</property>
+                <property name="active">1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkToggleButton" id="grid_radio">
+                <property name="label">Grid</property>
+                <property name="group">text_radio</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkGrid">
+            <property name="halign">center</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="row-spacing">10</property>
+            <property name="column-spacing">10</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="margin-start">10</property>
+                <property name="label">Text</property>
+                <property name="xalign">1</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+                <layout>
+                  <property name="column">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry" id="entry">
+                <property name="text">Fonts render</property>
+                <layout>
+                  <property name="column">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="margin-start">10</property>
+                <property name="label">Font</property>
+                <property name="xalign">1</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkFontButton" id="font_button">
+                <layout>
+                  <property name="column">2</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Hinting</property>
+                <property name="xalign">1</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+                <layout>
+                  <property name="column">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="hinting">
+                <property name="active">0</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes" id="none">None</item>
+                  <item translatable="yes" id="slight">Slight</item>
+                  <item translatable="yes" id="medium">Medium</item>
+                  <item translatable="yes" id="full">Full</item>
+                </items>
+                <layout>
+                  <property name="column">4</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="hint_metrics">
+                <property name="label">Hint Metrics</property>
+                <layout>
+                  <property name="column">4</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="show_extents">
+                <property name="label">Show Extents</property>
+                <property name="active">1</property>
+                <layout>
+                  <property name="column">5</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="show_grid">
+                <property name="active">1</property>
+                <property name="label">Show Grid</property>
+                <layout>
+                  <property name="column">5</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="up_button">
+                <property name="icon-name">list-add-symbolic</property>
+                <style>
+                  <class name="circular"/>
+                </style>
+                <layout>
+                  <property name="column">6</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="down_button">
+                <property name="icon-name">list-remove-symbolic</property>
+                <style>
+                  <class name="circular"/>
+                </style>
+                <layout>
+                  <property name="column">6</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="hexpand">1</property>
+                <layout>
+                  <property name="column">7</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator"/>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="propagate-natural-height">1</property>
+            <property name="hexpand">1</property>
+            <property name="vexpand">1</property>
+            <child>
+              <object class="GtkPicture" id="image">
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="can-shrink">0</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

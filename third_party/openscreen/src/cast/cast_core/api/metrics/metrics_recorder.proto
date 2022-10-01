@@ -1,0 +1,54 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+//
+// **** DO NOT EDIT - this file was automatically generated. ****
+syntax = "proto3";
+
+package cast.metrics;
+
+option optimize_for = LITE_RUNTIME;
+
+service MetricsRecorderService {
+  // Record a set of|Event|
+  rpc Record(RecordRequest) returns (RecordResponse);
+}
+
+message RecordRequest {
+  repeated Event event = 1;
+}
+
+message RecordResponse {}
+
+// This repliciates the Fuchsia approach to Cast metrics; for documentation on
+// event structure, refer to
+// fuchsia.googlesource.com/fuchsia/+/master/sdk/fidl/fuchsia.legacymetrics/event.fidl
+message Event {
+  oneof event_type {
+    UserActionEvent user_action_event = 1;
+    Histogram histogram = 2;
+    ImplementationDefinedEvent impl_defined_event = 3;
+  }
+}
+
+message UserActionEvent {
+  string name = 1;
+  int64 time = 2;
+}
+
+message Histogram {
+  string name = 1;
+  repeated HistogramBucket bucket = 2;
+  int64 sum = 3;
+}
+
+message HistogramBucket {
+  int64 min = 1;
+  int64 max = 2;
+  int64 count = 3;
+}
+
+message ImplementationDefinedEvent {
+  bytes data = 1;
+  string name = 2;
+}

@@ -1,0 +1,35 @@
+#!/usr/bin/mscgen -Tpng
+
+msc {
+	hscale="1.5";
+
+	c [label = "compositor"], w [label = "libweston core"],
+	b [label = "backend"];
+
+	|||;
+
+	c => w [label = "weston_compositor_load_backend()"];
+	w => b [label = "init"];
+
+	--- [label = "Create initial heads"];
+	b box b [label = "Backend discovers an entity to create a head for."];
+
+	w <: b [label = "weston_head_init()"];
+	b box b [label = "assign hw resource to head"];
+	w <: b [label = "weston_head_set_monitor_strings()"];
+	w <: b [label = "weston_head_set_physical_size()"];
+	w <: b [label = "weston_head_set_subpixel()"];
+	w <: b [label = "weston_head_set_connection_status()"];
+	w <= b [label = "weston_compositor_add_head()"];
+	w <= w [label = "schedule heads_changed"];
+	w << b [label = "init success"];
+	c << w [label = "load success"];
+
+	|||;
+
+	--- [label = "Compositor start-up"];
+
+	c => w [label = "weston_compositor_flush_heads_changed()"];
+	c <<= w [label = "heads_changed callback"];
+
+}

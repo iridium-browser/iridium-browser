@@ -1,0 +1,46 @@
+# Test related to issue #500: Deprecate the use of = (equals) as a dots operand in opcodes or fix documentation
+# (https://github.com/liblouis/liblouis/issues/500)
+
+# The reason the `=` operand works most of the time is the fact that
+# most of the time, a given dot pattern will back-translate to its
+# original characters if no rules tell the back-translator otherwise.
+
+# It will not work when the "=" rule exists to circumvent another rule
+# that would also affect back-translation, e.g. if a table contains
+# the following rules:
+
+# always ooo 135-135
+# word foobar =
+
+# The dot pattern 124-135-135-12-1-1235 will back-translate to fooobar
+# as specified by the first rule.
+
+# Not a very practical example, I admit, but it demonstrates the
+# problem.
+
+# I think the = operand is originally a good idea, because it is a
+# clear way of saying that the string should be matched by the basic
+# dot pattern. If it were to work also for back-translation, perhaps
+# the = sign should be replaced internally by the corresponding dot
+# pattern at compile time.
+
+table: |
+  include tables/unicode.dis
+  punctuation ; 56
+  include tables/latinLetterDef6Dots.uti
+  lowercase ó 56-135
+  include tables/unicode-braille.utb
+  always ooo 135-135
+  word foobar =
+  word fóóbar =
+
+tests:
+  - - foobar
+    - ⠋⠕⠕⠃⠁⠗
+  - ["fóóbar", "⠋⠰⠕⠰⠕⠃⠁⠗"]
+
+flags: {testmode: backward}
+tests:
+  - - ⠋⠕⠕⠃⠁⠗
+    - foobar
+    - xfail: does not work and this is now mentioned in the documentation as a limitation

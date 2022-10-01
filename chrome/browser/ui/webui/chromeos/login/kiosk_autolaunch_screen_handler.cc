@@ -1,0 +1,139 @@
+// Copyright 2013 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#include "chrome/browser/ui/webui/chromeos/login/kiosk_autolaunch_screen_handler.h"
+
+#include <string>
+
+#include "base/command_line.h"
+#include "base/strings/utf_string_conversions.h"
+#include "chrome/browser/ash/app_mode/kiosk_app_manager.h"
+#include "chrome/browser/ash/login/oobe_screen.h"
+#include "chrome/browser/ash/login/screens/kiosk_autolaunch_screen.h"
+#include "chrome/browser/browser_process.h"
+#include "chrome/common/chrome_switches.h"
+#include "chrome/grit/generated_resources.h"
+#include "chromeos/ash/components/dbus/dbus_thread_manager.h"
+#include "chromeos/ash/components/dbus/session_manager/session_manager_client.h"
+#include "components/login/localized_values_builder.h"
+#include "components/prefs/pref_service.h"
+#include "components/strings/grit/components_strings.h"
+#include "ui/base/webui/web_ui_util.h"
+
+namespace chromeos {
+
+constexpr StaticOobeScreenId KioskAutolaunchScreenView::kScreenId;
+
+KioskAutolaunchScreenHandler::KioskAutolaunchScreenHandler()
+    : BaseScreenHandler(kScreenId) {
+  KioskAppManager::Get()->AddObserver(this);
+}
+
+KioskAutolaunchScreenHandler::~KioskAutolaunchScreenHandler() {
+  if (delegate_)
+    delegate_->OnViewDestroyed(this);
+
+  KioskAppManager::Get()->RemoveObserver(this);
+}
+
+void KioskAutolaunchScreenHandler::Show() {
+  if (!IsJavascriptAllowed()) {
+    show_on_init_ = true;
+    return;
+  }
+  UpdateKioskApp();
+  ShowInWebUI();
+}
+
+void KioskAutolaunchScreenHandler::SetDelegate(
+    KioskAutolaunchScreen* delegate) {
+  delegate_ = delegate;
+  if (IsJavascriptAllowed())
+    InitializeDeprecated();
+}
+
+void KioskAutolaunchScreenHandler::UpdateKioskApp() {
+  if (!is_visible_)
+    return;
+
+  KioskAppManager* manager = KioskAppManager::Get();
+  KioskAppManager::App app;
+  std::string app_id = manager->GetAutoLaunchApp();
+  if (app_id.empty() ||
+      manager->IsAutoLaunchEnabled() ||
+      !manager->GetApp(app_id, &app)) {
+    return;
+  }
+
+  base::Value::Dict app_info;
+  app_info.Set("appName", app.name);
+
+  std::string icon_url("chrome://theme/IDR_APP_DEFAULT_ICON");
+  if (!app.icon.isNull())
+    icon_url = webui::GetBitmapDataUrl(*app.icon.bitmap());
+
+  app_info.Set("appIconUrl", icon_url);
+  CallJS("login.AutolaunchScreen.updateApp", std::move(app_info));
+}
+
+void KioskAutolaunchScreenHandler::DeclareLocalizedValues(
+    ::login::LocalizedValuesBuilder* builder) {
+  builder->Add("autolaunchTitle", IDS_AUTOSTART_WARNING_TITLE);
+  builder->Add("autolaunchWarningTitle", IDS_AUTOSTART_WARNING_TITLE);
+  builder->Add("autolaunchWarning", IDS_KIOSK_AUTOSTART_SCREEN_WARNING_MSG);
+  builder->Add("autolaunchConfirmButton", IDS_KIOSK_AUTOSTART_CONFIRM);
+  builder->Add("autolaunchCancelButton", IDS_CANCEL);
+}
+
+void KioskAutolaunchScreenHandler::InitializeDeprecated() {
+  if (!IsJavascriptAllowed() || !delegate_)
+    return;
+
+  if (show_on_init_) {
+    Show();
+    show_on_init_ = false;
+  }
+}
+
+void KioskAutolaunchScreenHandler::RegisterMessages() {
+  AddCallback("autolaunchVisible",
+              &KioskAutolaunchScreenHandler::HandleOnVisible);
+  AddCallback("autolaunchOnCancel",
+              &KioskAutolaunchScreenHandler::HandleOnCancel);
+  AddCallback("autolaunchOnConfirm",
+              &KioskAutolaunchScreenHandler::HandleOnConfirm);
+}
+
+void KioskAutolaunchScreenHandler::HandleOnCancel() {
+  KioskAppManager::Get()->RemoveObserver(this);
+  KioskAppManager::Get()->SetEnableAutoLaunch(false);
+  if (delegate_)
+    delegate_->OnExit(false);
+}
+
+void KioskAutolaunchScreenHandler::HandleOnConfirm() {
+  KioskAppManager::Get()->RemoveObserver(this);
+  KioskAppManager::Get()->SetEnableAutoLaunch(true);
+  if (delegate_)
+    delegate_->OnExit(true);
+}
+
+void KioskAutolaunchScreenHandler::HandleOnVisible() {
+  if (is_visible_)
+    return;
+
+  is_visible_ = true;
+  UpdateKioskApp();
+}
+
+void KioskAutolaunchScreenHandler::OnKioskAppsSettingsChanged() {
+  UpdateKioskApp();
+}
+
+void KioskAutolaunchScreenHandler::OnKioskAppDataChanged(
+    const std::string& app_id) {
+  UpdateKioskApp();
+}
+
+}  // namespace chromeos

@@ -1,0 +1,122 @@
+load("//bazel:macros.bzl", "exports_files_legacy", "selects", "split_srcs_and_hdrs")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+CORE_FILES = [
+    "SkAnimCodecPlayer.cpp",
+    "SkBase64.cpp",
+    "SkBitSet.h",
+    "SkBlitterTrace.h",
+    "SkBlitterTraceCommon.h",
+    "SkCallableTraits.h",
+    "SkCamera.cpp",
+    "SkCanvasStack.cpp",
+    "SkCanvasStack.h",
+    "SkCanvasStateUtils.cpp",
+    "SkCharToGlyphCache.cpp",
+    "SkCharToGlyphCache.h",
+    "SkClipStackUtils.cpp",
+    "SkClipStackUtils.h",
+    "SkCustomTypeface.cpp",
+    "SkCycles.h",
+    "SkDashPath.cpp",
+    "SkDashPathPriv.h",
+    "SkEventTracer.cpp",
+    "SkFloatToDecimal.cpp",
+    "SkFloatToDecimal.h",
+    "SkFloatUtils.h",
+    "SkGaussianColorFilter.cpp",
+    "SkJSON.h",
+    "SkJSONWriter.h",
+    "SkMatrix22.cpp",
+    "SkMatrix22.h",
+    "SkMultiPictureDocument.cpp",
+    "SkMultiPictureDocument.h",
+    "SkMultiPictureDocumentPriv.h",
+    "SkNWayCanvas.cpp",
+    "SkNullCanvas.cpp",
+    "SkOSPath.cpp",
+    "SkOSPath.h",
+    "SkOrderedFontMgr.cpp",
+    "SkPaintFilterCanvas.cpp",
+    "SkParse.cpp",
+    "SkParseColor.cpp",
+    "SkParsePath.cpp",
+    "SkPatchUtils.cpp",
+    "SkPatchUtils.h",
+    "SkPolyUtils.cpp",
+    "SkPolyUtils.h",
+    "SkShadowTessellator.cpp",
+    "SkShadowTessellator.h",
+    "SkShadowUtils.cpp",
+    "SkTestCanvas.h",
+    "SkTextUtils.cpp",
+    "SkUTF.cpp",
+    "SkUTF.h",
+    "SkVMVisualizer.cpp",
+    "SkVMVisualizer.h",
+]
+
+split_srcs_and_hdrs(
+    name = "core",
+    files = CORE_FILES,
+)
+
+filegroup(
+    name = "json_hdrs",
+    srcs = [
+        "SkJSON.h",
+        "SkJSONWriter.h",
+    ],
+    visibility = [
+        "//modules/skottie:__pkg__",
+    ],
+)
+
+filegroup(
+    name = "json_srcs",
+    srcs = [
+        "SkJSON.cpp",
+        "SkJSONWriter.cpp",
+    ],
+    visibility = [
+        "//modules/skottie:__pkg__",
+    ],
+)
+
+selects.config_setting_group(
+    name = "needs_json",
+    match_any = [
+        "//src/sksl:enable_sksl_tracing_true",
+    ],
+)
+
+filegroup(
+    name = "srcs",
+    srcs = [
+        ":core_srcs",
+    ] + select({
+        "//src/sksl:needs_sksl": ["SkShaderUtils.cpp"],
+        "//conditions:default": [],
+    }) + select({
+        ":needs_json": [":json_srcs"],
+        "//conditions:default": [],
+    }),
+    visibility = ["//src:__pkg__"],
+)
+
+filegroup(
+    name = "private_hdrs",
+    srcs = [
+        ":core_hdrs",
+    ] + select({
+        "//src/sksl:needs_sksl": ["SkShaderUtils.h"],
+        "//conditions:default": [],
+    }) + select({
+        ":needs_json": [":json_hdrs"],
+        "//conditions:default": [],
+    }),
+    visibility = ["//src:__pkg__"],
+)

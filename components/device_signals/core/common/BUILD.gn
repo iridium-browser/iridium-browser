@@ -1,0 +1,44 @@
+# Copyright 2022 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+static_library("common") {
+  public = [
+    "common_types.h",
+    "signals_constants.h",
+  ]
+
+  sources = [
+    "common_types.cc",
+    "signals_constants.cc",
+  ]
+
+  public_deps = [ "//third_party/abseil-cpp:absl" ]
+
+  deps = [ "//base" ]
+}
+
+source_set("features") {
+  public = [ "signals_features.h" ]
+
+  sources = [ "signals_features.cc" ]
+
+  public_deps = [ "//base" ]
+}
+
+source_set("unit_tests") {
+  testonly = true
+  sources = [ "signals_features_unittest.cc" ]
+
+  deps = [
+    ":common",
+    ":features",
+    "//base",
+    "//base/test:test_support",
+    "//testing/gmock",
+    "//testing/gtest",
+  ]
+  if (is_win) {
+    deps += [ "//components/device_signals/core/common/win:unit_tests" ]
+  }
+}

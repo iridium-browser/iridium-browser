@@ -1,0 +1,48 @@
+include_directories(
+	..
+	${DEQP_INL_DIR}
+	)
+
+set(DEQP_VK_SPARSE_RESOURCES_SRCS
+	vktSparseResourcesBase.cpp
+	vktSparseResourcesBase.hpp
+	vktSparseResourcesBufferMemoryAliasing.cpp
+	vktSparseResourcesBufferMemoryAliasing.hpp
+	vktSparseResourcesBufferSparseBinding.cpp
+	vktSparseResourcesBufferSparseBinding.hpp
+	vktSparseResourcesBufferSparseResidency.cpp
+	vktSparseResourcesBufferSparseResidency.hpp
+	vktSparseResourcesBufferTests.cpp
+	vktSparseResourcesBufferTests.hpp
+	vktSparseResourcesImageMemoryAliasing.cpp
+	vktSparseResourcesImageMemoryAliasing.hpp
+	vktSparseResourcesImageSparseBinding.cpp
+	vktSparseResourcesImageSparseBinding.hpp
+	vktSparseResourcesImageSparseResidency.cpp
+	vktSparseResourcesImageSparseResidency.hpp
+	vktSparseResourcesImageAlignedMipSize.cpp
+	vktSparseResourcesImageAlignedMipSize.hpp
+	vktSparseResourcesImageBlockShapes.cpp
+	vktSparseResourcesImageBlockShapes.hpp
+	vktSparseResourcesMipmapSparseResidency.cpp
+	vktSparseResourcesMipmapSparseResidency.hpp
+	vktSparseResourcesQueueBindSparseTests.cpp
+	vktSparseResourcesQueueBindSparseTests.hpp
+	vktSparseResourcesShaderIntrinsics.cpp
+	vktSparseResourcesShaderIntrinsics.hpp
+	vktSparseResourcesShaderIntrinsicsBase.cpp
+	vktSparseResourcesShaderIntrinsicsBase.hpp
+	vktSparseResourcesShaderIntrinsicsSampled.cpp
+	vktSparseResourcesShaderIntrinsicsSampled.hpp
+	vktSparseResourcesShaderIntrinsicsStorage.cpp
+	vktSparseResourcesShaderIntrinsicsStorage.hpp
+	vktSparseResourcesTests.cpp
+	vktSparseResourcesTests.hpp
+	vktSparseResourcesTestsUtil.cpp
+	vktSparseResourcesTestsUtil.hpp
+	)
+
+PCH(DEQP_VK_SPARSE_RESOURCES_SRCS ../pch.cpp)
+
+add_library(deqp-vk-sparse-resources STATIC ${DEQP_VK_SPARSE_RESOURCES_SRCS})
+target_link_libraries(deqp-vk-sparse-resources tcutil vkutil)

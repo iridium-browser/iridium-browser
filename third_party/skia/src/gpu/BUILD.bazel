@@ -1,0 +1,112 @@
+load("//bazel:macros.bzl", "bool_flag", "exports_files_legacy", "selects", "skia_cc_deps", "split_srcs_and_hdrs", "string_flag_with_values")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+CORE_FILES = [
+    "AtlasTypes.cpp",
+    "AtlasTypes.h",
+    "Blend.cpp",
+    "Blend.h",
+    "BufferWriter.h",
+    "GrAHardwareBufferUtils.h",
+    "GrRectanizer.h",
+    "KeyBuilder.h",
+    "Rectanizer.h",
+    "RectanizerPow2.cpp",
+    "RectanizerPow2.h",
+    "RectanizerSkyline.cpp",
+    "RectanizerSkyline.h",
+    "RefCntedCallback.h",
+    "ResourceKey.cpp",
+    "ResourceKey.h",
+    "ShaderErrorHandler.cpp",
+    "Swizzle.cpp",
+    "Swizzle.h",
+]
+
+split_srcs_and_hdrs(
+    name = "core",
+    files = CORE_FILES,
+)
+
+string_flag_with_values(
+    flag_name = "gpu_backend",
+    multiple = True,
+    values = [
+        "gl_backend",
+        "vulkan_backend",
+        "dawn_backend",
+    ],
+)
+
+string_flag_with_values(
+    flag_name = "with_gl_standard",
+    values = [
+        "gles_standard",
+        "gl_standard",
+        "webgl_standard",
+    ],
+)
+
+selects.config_setting_group(
+    name = "has_gpu_backend",
+    match_any = [
+        ":gl_backend",
+        ":dawn_backend",
+        ":vulkan_backend",
+    ],
+    visibility = ["//:__subpackages__"],
+)
+
+selects.config_setting_group(
+    name = "vulkan_with_vma",
+    match_all = [
+        ":vulkan_backend",
+        ":use_vulkan_memory_allocator_true",
+    ],
+    visibility = ["//:__subpackages__"],
+)
+
+bool_flag(
+    default = True,
+    flag_name = "use_vulkan_memory_allocator",
+    public = False,  # Users should use :vulkan_with_vma
+)
+
+bool_flag(
+    default = False,
+    flag_name = "enable_gpu_test_utils",
+)
+
+filegroup(
+    name = "srcs",
+    srcs = [
+        ":core_srcs",
+        "//src/gpu/ganesh:srcs",
+        "//src/gpu/tessellate:srcs",
+    ],
+    visibility = ["//src:__pkg__"],
+)
+
+filegroup(
+    name = "private_hdrs",
+    srcs = [
+        ":core_hdrs",
+        "//src/gpu/ganesh:private_hdrs",
+        "//src/gpu/tessellate:private_hdrs",
+    ] + select({
+        "//src/gpu:vulkan_backend": ["//src/gpu/vk:private_hdrs"],
+        "//conditions:default": [],
+    }),
+    visibility = ["//src:__pkg__"],
+)
+
+skia_cc_deps(
+    name = "deps",
+    visibility = ["//src:__pkg__"],
+    deps = [
+        "//src/gpu/ganesh:deps",
+    ],
+)

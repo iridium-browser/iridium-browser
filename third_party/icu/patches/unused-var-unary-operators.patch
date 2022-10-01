@@ -1,0 +1,82 @@
+diff --git a/source/i18n/csrmbcs.cpp b/source/i18n/csrmbcs.cpp
+index 4c5bdfa5..1c43c900 100644
+--- a/source/i18n/csrmbcs.cpp
++++ b/source/i18n/csrmbcs.cpp
+@@ -145,8 +145,8 @@ CharsetRecog_mbcs::~CharsetRecog_mbcs()
+     // nothing to do.
+ }
+ 
+-int32_t CharsetRecog_mbcs::match_mbcs(InputText *det, const uint16_t commonChars[], int32_t commonCharsLen) const {
+-    int32_t singleByteCharCount = 0;
++int32_t CharsetRecog_mbcs::match_mbcs(InputText *det, const uint16_t commonChars[],
++                                      int32_t commonCharsLen) const {
+     int32_t doubleByteCharCount = 0;
+     int32_t commonCharCount     = 0;
+     int32_t badCharCount        = 0;
+@@ -160,9 +160,7 @@ int32_t CharsetRecog_mbcs::match_mbcs(InputText *det, const uint16_t commonChars
+         if (iter.error) {
+             badCharCount++;
+         } else {
+-            if (iter.charValue <= 0xFF) {
+-                singleByteCharCount++;
+-            } else {
++            if (iter.charValue > 0xFF) {
+                 doubleByteCharCount++;
+ 
+                 if (commonChars != 0) {
+diff --git a/source/i18n/nfsubs.cpp b/source/i18n/nfsubs.cpp
+index 70ac18be..7e50a81c 100644
+--- a/source/i18n/nfsubs.cpp
++++ b/source/i18n/nfsubs.cpp
+@@ -1310,10 +1310,8 @@ NumeratorSubstitution::doParse(const UnicodeString& text,
+         // compute the 'effective' base and prescale the value down
+         int64_t n = result.getLong(status); // force conversion!
+         int64_t d = 1;
+-        int32_t pow = 0;
+         while (d <= n) {
+             d *= 10;
+-            ++pow;
+         }
+         // now add the zeros
+         while (zeroCount > 0) {
+diff --git a/source/i18n/transreg.cpp b/source/i18n/transreg.cpp
+index 726ad56f..2d371f27 100644
+--- a/source/i18n/transreg.cpp
++++ b/source/i18n/transreg.cpp
+@@ -141,16 +141,10 @@ Transliterator* TransliteratorAlias::create(UParseError& pe,
+             // to see whether there really are ID blocks at the beginning and end (by looking for U+FFFF, which
+             // marks the position where an anonymous transliterator goes) and adjust accordingly
+             int32_t anonymousRBTs = transes->size();
+-            int32_t transCount = anonymousRBTs * 2 + 1;
+-            if (!aliasesOrRules.isEmpty() && aliasesOrRules[0] == (UChar)(0xffff))
+-                --transCount;
+-            if (aliasesOrRules.length() >= 2 && aliasesOrRules[aliasesOrRules.length() - 1] == (UChar)(0xffff))
+-                --transCount;
+             UnicodeString noIDBlock((UChar)(0xffff));
+             noIDBlock += ((UChar)(0xffff));
+             int32_t pos = aliasesOrRules.indexOf(noIDBlock);
+             while (pos >= 0) {
+-                --transCount;
+                 pos = aliasesOrRules.indexOf(noIDBlock, pos + 1);
+             }
+ 
+diff --git a/source/i18n/unesctrn.cpp b/source/i18n/unesctrn.cpp
+index 0636fe1d..6b09334f 100644
+--- a/source/i18n/unesctrn.cpp
++++ b/source/i18n/unesctrn.cpp
+@@ -175,13 +175,13 @@ void UnescapeTransliterator::handleTransliterate(Replaceable& text, UTransPositi
+                                                  UBool isIncremental) const {
+     int32_t start = pos.start;
+     int32_t limit = pos.limit;
+-    int32_t i, j, ipat;
++    int32_t i, ipat;
+ 
+     while (start < limit) {
+         // Loop over the forms in spec[].  Exit this loop when we
+         // match one of the specs.  Exit the outer loop if a
+         // partial match is detected and isIncremental is true.
+-        for (j=0, ipat=0; spec[ipat] != END; ++j) {
++        for (ipat = 0; spec[ipat] != END;) {
+ 
+             // Read the header
+             int32_t prefixLen = spec[ipat++];

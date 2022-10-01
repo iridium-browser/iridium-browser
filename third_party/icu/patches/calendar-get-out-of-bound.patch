@@ -1,0 +1,556 @@
+diff --git a/source/i18n/calendar.cpp b/source/i18n/calendar.cpp
+index 233400be..0f5bf522 100644
+--- a/source/i18n/calendar.cpp
++++ b/source/i18n/calendar.cpp
+@@ -639,8 +639,8 @@ static const int32_t kCalendarLimits[UCAL_FIELD_COUNT][4] = {
+     {           0,            0,            59,            59  }, // MINUTE
+     {           0,            0,            59,            59  }, // SECOND
+     {           0,            0,           999,           999  }, // MILLISECOND
+-    {-12*kOneHour, -12*kOneHour,   12*kOneHour,   15*kOneHour  }, // ZONE_OFFSET
+-    {           0,            0,    1*kOneHour,    1*kOneHour  }, // DST_OFFSET
++    {-12*kOneHour, -12*kOneHour,   12*kOneHour,   30*kOneHour  }, // ZONE_OFFSET
++    { -1*kOneHour,  -1*kOneHour,    2*kOneHour,    2*kOneHour  }, // DST_OFFSET
+     {/*N/A*/-1,       /*N/A*/-1,     /*N/A*/-1,       /*N/A*/-1}, // YEAR_WOY
+     {           1,            1,             7,             7  }, // DOW_LOCAL
+     {/*N/A*/-1,       /*N/A*/-1,     /*N/A*/-1,       /*N/A*/-1}, // EXTENDED_YEAR
+@@ -1537,7 +1537,8 @@ void Calendar::computeFields(UErrorCode &ec)
+     // JULIAN_DAY field and also removes some inelegant code. - Liu
+     // 11/6/00
+ 
+-    int32_t days =  (int32_t)ClockMath::floorDivide(localMillis, (double)kOneDay);
++    int32_t millisInDay;
++    int32_t days = ClockMath::floorDivide(localMillis, kOneDay, &millisInDay);
+ 
+     internalSet(UCAL_JULIAN_DAY,days + kEpochStartAsJulianDay);
+ 
+@@ -1561,19 +1562,47 @@ void Calendar::computeFields(UErrorCode &ec)
+     // Compute time-related fields.  These are independent of the date and
+     // of the subclass algorithm.  They depend only on the local zone
+     // wall milliseconds in day.
+-    int32_t millisInDay =  (int32_t) (localMillis - (days * kOneDay));
++
+     fFields[UCAL_MILLISECONDS_IN_DAY] = millisInDay;
++    U_ASSERT(getMinimum(UCAL_MILLISECONDS_IN_DAY) <=
++             fFields[UCAL_MILLISECONDS_IN_DAY]);
++    U_ASSERT(fFields[UCAL_MILLISECONDS_IN_DAY] <=
++             getMaximum(UCAL_MILLISECONDS_IN_DAY));
++
+     fFields[UCAL_MILLISECOND] = millisInDay % 1000;
++    U_ASSERT(getMinimum(UCAL_MILLISECOND) <= fFields[UCAL_MILLISECOND]);
++    U_ASSERT(fFields[UCAL_MILLISECOND] <= getMaximum(UCAL_MILLISECOND));
++
+     millisInDay /= 1000;
+     fFields[UCAL_SECOND] = millisInDay % 60;
++    U_ASSERT(getMinimum(UCAL_SECOND) <= fFields[UCAL_SECOND]);
++    U_ASSERT(fFields[UCAL_SECOND] <= getMaximum(UCAL_SECOND));
++
+     millisInDay /= 60;
+     fFields[UCAL_MINUTE] = millisInDay % 60;
++    U_ASSERT(getMinimum(UCAL_MINUTE) <= fFields[UCAL_MINUTE]);
++    U_ASSERT(fFields[UCAL_MINUTE] <= getMaximum(UCAL_MINUTE));
++
+     millisInDay /= 60;
+     fFields[UCAL_HOUR_OF_DAY] = millisInDay;
++    U_ASSERT(getMinimum(UCAL_HOUR_OF_DAY) <= fFields[UCAL_HOUR_OF_DAY]);
++    U_ASSERT(fFields[UCAL_HOUR_OF_DAY] <= getMaximum(UCAL_HOUR_OF_DAY));
++
+     fFields[UCAL_AM_PM] = millisInDay / 12; // Assume AM == 0
++    U_ASSERT(getMinimum(UCAL_AM_PM) <= fFields[UCAL_AM_PM]);
++    U_ASSERT(fFields[UCAL_AM_PM] <= getMaximum(UCAL_AM_PM));
++
+     fFields[UCAL_HOUR] = millisInDay % 12;
++    U_ASSERT(getMinimum(UCAL_HOUR) <= fFields[UCAL_HOUR]);
++    U_ASSERT(fFields[UCAL_HOUR] <= getMaximum(UCAL_HOUR));
++
+     fFields[UCAL_ZONE_OFFSET] = rawOffset;
++    U_ASSERT(getMinimum(UCAL_ZONE_OFFSET) <= fFields[UCAL_ZONE_OFFSET]);
++    U_ASSERT(fFields[UCAL_ZONE_OFFSET] <= getMaximum(UCAL_ZONE_OFFSET));
++
+     fFields[UCAL_DST_OFFSET] = dstOffset;
++    U_ASSERT(getMinimum(UCAL_DST_OFFSET) <= fFields[UCAL_DST_OFFSET]);
++    U_ASSERT(fFields[UCAL_DST_OFFSET] <= getMaximum(UCAL_DST_OFFSET));
+ }
+ 
+ uint8_t Calendar::julianDayToDayOfWeek(double julian)
+@@ -1699,11 +1728,20 @@ void Calendar::computeWeekFields(UErrorCode &ec) {
+     }
+     fFields[UCAL_WEEK_OF_YEAR] = woy;
+     fFields[UCAL_YEAR_WOY] = yearOfWeekOfYear;
++    // min/max of years are not constrains for caller, so not assert here.
+     // WEEK_OF_YEAR end
+ 
+     int32_t dayOfMonth = fFields[UCAL_DAY_OF_MONTH];
+     fFields[UCAL_WEEK_OF_MONTH] = weekNumber(dayOfMonth, dayOfWeek);
++    U_ASSERT(getMinimum(UCAL_WEEK_OF_MONTH) <= fFields[UCAL_WEEK_OF_MONTH]);
++    U_ASSERT(fFields[UCAL_WEEK_OF_MONTH] <= getMaximum(UCAL_WEEK_OF_MONTH));
++
+     fFields[UCAL_DAY_OF_WEEK_IN_MONTH] = (dayOfMonth-1) / 7 + 1;
++    U_ASSERT(getMinimum(UCAL_DAY_OF_WEEK_IN_MONTH) <=
++             fFields[UCAL_DAY_OF_WEEK_IN_MONTH]);
++    U_ASSERT(fFields[UCAL_DAY_OF_WEEK_IN_MONTH] <=
++             getMaximum(UCAL_DAY_OF_WEEK_IN_MONTH));
++
+ #if defined (U_DEBUG_CAL)
+     if(fFields[UCAL_DAY_OF_WEEK_IN_MONTH]==0) fprintf(stderr, "%s:%d: DOWIM %d on %g\n",
+         __FILE__, __LINE__,fFields[UCAL_DAY_OF_WEEK_IN_MONTH], fTime);
+diff --git a/source/i18n/cecal.cpp b/source/i18n/cecal.cpp
+index cb97c40a..cd9871e4 100644
+--- a/source/i18n/cecal.cpp
++++ b/source/i18n/cecal.cpp
+@@ -135,7 +135,7 @@ CECalendar::jdToCE(int32_t julianDay, int32_t jdEpochOffset, int32_t& year, int3
+     int32_t c4; // number of 4 year cycle (1461 days)
+     int32_t r4; // remainder of 4 year cycle, always positive
+ 
+-    c4 = ClockMath::floorDivide(julianDay - jdEpochOffset, 1461, r4);
++    c4 = ClockMath::floorDivide(julianDay - jdEpochOffset, 1461, &r4);
+ 
+     year = 4 * c4 + (r4/365 - r4/1460); // 4 * <number of 4year cycle> + <years within the last cycle>
+ 
+diff --git a/source/i18n/chnsecal.cpp b/source/i18n/chnsecal.cpp
+index a58272e8..678de096 100644
+--- a/source/i18n/chnsecal.cpp
++++ b/source/i18n/chnsecal.cpp
+@@ -328,7 +328,7 @@ int32_t ChineseCalendar::handleComputeMonthStart(int32_t eyear, int32_t month, U
+     // modify the extended year value accordingly.
+     if (month < 0 || month > 11) {
+         double m = month;
+-        eyear += (int32_t)ClockMath::floorDivide(m, 12.0, m);
++        eyear += (int32_t)ClockMath::floorDivide(m, 12.0, &m);
+         month = (int32_t)m;
+     }
+ 
+@@ -727,7 +727,7 @@ void ChineseCalendar::computeChineseFields(int32_t days, int32_t gyear, int32_t
+ 
+         // 0->0,60  1->1,1  60->1,60  61->2,1  etc.
+         int32_t yearOfCycle;
+-        int32_t cycle = ClockMath::floorDivide(cycle_year - 1, 60, yearOfCycle);
++        int32_t cycle = ClockMath::floorDivide(cycle_year - 1, 60, &yearOfCycle);
+         internalSet(UCAL_ERA, cycle + 1);
+         internalSet(UCAL_YEAR, yearOfCycle + 1);
+ 
+diff --git a/source/i18n/gregocal.cpp b/source/i18n/gregocal.cpp
+index 6e26ed83..886c30b7 100644
+--- a/source/i18n/gregocal.cpp
++++ b/source/i18n/gregocal.cpp
+@@ -388,7 +388,7 @@ void GregorianCalendar::handleComputeFields(int32_t julianDay, UErrorCode& statu
+         // The Julian epoch day (not the same as Julian Day)
+         // is zero on Saturday December 30, 0 (Gregorian).
+         int32_t julianEpochDay = julianDay - (kJan1_1JulianDay - 2);
+-		eyear = (int32_t) ClockMath::floorDivide((4.0*julianEpochDay) + 1464.0, (int32_t) 1461, unusedRemainder);
++		eyear = (int32_t) ClockMath::floorDivide((4.0*julianEpochDay) + 1464.0, (int32_t) 1461, &unusedRemainder);
+ 
+         // Compute the Julian calendar day number for January 1, eyear
+         int32_t january1 = 365*(eyear-1) + ClockMath::floorDivide(eyear-1, (int32_t)4);
+@@ -537,7 +537,7 @@ int32_t GregorianCalendar::handleComputeMonthStart(int32_t eyear, int32_t month,
+     // If the month is out of range, adjust it into range, and
+     // modify the extended year value accordingly.
+     if (month < 0 || month > 11) {
+-        eyear += ClockMath::floorDivide(month, 12, month);
++        eyear += ClockMath::floorDivide(month, 12, &month);
+     }
+ 
+     UBool isLeap = eyear%4 == 0;
+@@ -580,7 +580,7 @@ int32_t GregorianCalendar::handleGetMonthLength(int32_t extendedYear, int32_t mo
+     // If the month is out of range, adjust it into range, and
+     // modify the extended year value accordingly.
+     if (month < 0 || month > 11) {
+-        extendedYear += ClockMath::floorDivide(month, 12, month);
++        extendedYear += ClockMath::floorDivide(month, 12, &month);
+     }
+ 
+     return isLeapYear(extendedYear) ? kLeapMonthLength[month] : kMonthLength[month];
+diff --git a/source/i18n/gregoimp.cpp b/source/i18n/gregoimp.cpp
+index 101a8b8b..f862cd1d 100644
+--- a/source/i18n/gregoimp.cpp
++++ b/source/i18n/gregoimp.cpp
+@@ -33,28 +33,33 @@ int64_t ClockMath::floorDivide(int64_t numerator, int64_t denominator) {
+ }
+ 
+ int32_t ClockMath::floorDivide(double numerator, int32_t denominator,
+-                          int32_t& remainder) {
+-    double quotient;
+-    quotient = uprv_floor(numerator / denominator);
+-    remainder = (int32_t) (numerator - (quotient * denominator));
++                          int32_t* remainder) {
++    // For an integer n and representable ⌊x/n⌋, ⌊RN(x/n)⌋=⌊x/n⌋, where RN is
++    // rounding to nearest.
++    double quotient = uprv_floor(numerator / denominator);
++    // For doubles x and n, where n is an integer and ⌊x+n⌋ < 2³¹, the
++    // expression `(int32_t) (x + n)` evaluated with rounding to nearest
++    // differs from ⌊x+n⌋ if 0 < ⌈x⌉−x ≪ x+n, as `x + n` is rounded up to
++    // n+⌈x⌉ = ⌊x+n⌋ + 1.  Rewriting it as ⌊x⌋+n makes the addition exact.
++    *remainder = (int32_t) (uprv_floor(numerator) - (quotient * denominator));
+     return (int32_t) quotient;
+ }
+ 
+ double ClockMath::floorDivide(double dividend, double divisor,
+-                         double& remainder) {
++                         double* remainder) {
+     // Only designed to work for positive divisors
+     U_ASSERT(divisor > 0);
+     double quotient = floorDivide(dividend, divisor);
+-    remainder = dividend - (quotient * divisor);
++    *remainder = dividend - (quotient * divisor);
+     // N.B. For certain large dividends, on certain platforms, there
+     // is a bug such that the quotient is off by one.  If you doubt
+     // this to be true, set a breakpoint below and run cintltst.
+-    if (remainder < 0 || remainder >= divisor) {
++    if (*remainder < 0 || *remainder >= divisor) {
+         // E.g. 6.7317038241449352e+022 / 86400000.0 is wrong on my
+         // machine (too high by one).  4.1792057231752762e+024 /
+         // 86400000.0 is wrong the other way (too low).
+         double q = quotient;
+-        quotient += (remainder < 0) ? -1 : +1;
++        quotient += (*remainder < 0) ? -1 : +1;
+         if (q == quotient) {
+             // For quotients > ~2^53, we won't be able to add or
+             // subtract one, since the LSB of the mantissa will be >
+@@ -65,12 +70,12 @@ double ClockMath::floorDivide(double dividend, double divisor,
+             // values give back an approximate answer rather than
+             // crashing.  For example, UDate values above a ~10^25
+             // might all have a time of midnight.
+-            remainder = 0;
++            *remainder = 0;
+         } else {
+-            remainder = dividend - (quotient * divisor);
++            *remainder = dividend - (quotient * divisor);
+         }
+     }
+-    U_ASSERT(0 <= remainder && remainder < divisor);
++    U_ASSERT(0 <= *remainder && *remainder < divisor);
+     return quotient;
+ }
+ 
+@@ -106,10 +111,10 @@ void Grego::dayToFields(double day, int32_t& year, int32_t& month,
+     // representation.  We use 400-year, 100-year, and 4-year cycles.
+     // For example, the 4-year cycle has 4 years + 1 leap day; giving
+     // 1461 == 365*4 + 1 days.
+-    int32_t n400 = ClockMath::floorDivide(day, 146097, doy); // 400-year cycle length
+-    int32_t n100 = ClockMath::floorDivide(doy, 36524, doy); // 100-year cycle length
+-    int32_t n4   = ClockMath::floorDivide(doy, 1461, doy); // 4-year cycle length
+-    int32_t n1   = ClockMath::floorDivide(doy, 365, doy);
++    int32_t n400 = ClockMath::floorDivide(day, 146097, &doy); // 400-year cycle length
++    int32_t n100 = ClockMath::floorDivide(doy, 36524, &doy); // 100-year cycle length
++    int32_t n4   = ClockMath::floorDivide(doy, 1461, &doy); // 4-year cycle length
++    int32_t n1   = ClockMath::floorDivide(doy, 365, &doy);
+     year = 400*n400 + 100*n100 + 4*n4 + n1;
+     if (n100 == 4 || n1 == 4) {
+         doy = 365; // Dec 31 at end of 4- or 400-year cycle
+@@ -137,14 +142,14 @@ void Grego::dayToFields(double day, int32_t& year, int32_t& month,
+ void Grego::timeToFields(UDate time, int32_t& year, int32_t& month,
+                         int32_t& dom, int32_t& dow, int32_t& doy, int32_t& mid) {
+     double millisInDay;
+-    double day = ClockMath::floorDivide((double)time, (double)U_MILLIS_PER_DAY, millisInDay);
++    double day = ClockMath::floorDivide((double)time, (double)U_MILLIS_PER_DAY, &millisInDay);
+     mid = (int32_t)millisInDay;
+     dayToFields(day, year, month, dom, dow, doy);
+ }
+ 
+ int32_t Grego::dayOfWeek(double day) {
+     int32_t dow;
+-    ClockMath::floorDivide(day + int{UCAL_THURSDAY}, 7, dow);
++    ClockMath::floorDivide(day + int{UCAL_THURSDAY}, 7, &dow);
+     return (dow == 0) ? UCAL_SATURDAY : dow;
+ }
+ 
+diff --git a/source/i18n/gregoimp.h b/source/i18n/gregoimp.h
+index b1a5bc22..d65d6a4f 100644
+--- a/source/i18n/gregoimp.h
++++ b/source/i18n/gregoimp.h
+@@ -78,7 +78,7 @@ class ClockMath {
+      * @return the floor of the quotient
+      */
+     static int32_t floorDivide(double numerator, int32_t denominator,
+-                               int32_t& remainder);
++                               int32_t* remainder);
+ 
+     /**
+      * For a positive divisor, return the quotient and remainder
+@@ -91,7 +91,7 @@ class ClockMath {
+      * Calling with a divisor <= 0 is disallowed.
+      */
+     static double floorDivide(double dividend, double divisor,
+-                              double& remainder);
++                              double* remainder);
+ };
+ 
+ // Useful millisecond constants
+diff --git a/source/i18n/indiancal.cpp b/source/i18n/indiancal.cpp
+index e879cdf1..5755892d 100644
+--- a/source/i18n/indiancal.cpp
++++ b/source/i18n/indiancal.cpp
+@@ -110,7 +110,7 @@ static UBool isGregorianLeap(int32_t year)
+  */
+ int32_t IndianCalendar::handleGetMonthLength(int32_t eyear, int32_t month) const {
+    if (month < 0 || month > 11) {
+-      eyear += ClockMath::floorDivide(month, 12, month);
++      eyear += ClockMath::floorDivide(month, 12, &month);
+    }
+ 
+    if (isGregorianLeap(eyear + INDIAN_ERA_START) && month == 0) {
+@@ -210,7 +210,7 @@ int32_t IndianCalendar::handleComputeMonthStart(int32_t eyear, int32_t month, UB
+ 
+     // If the month is out of range, adjust it into range, and adjust the extended year accordingly
+    if (month < 0 || month > 11) {
+-      eyear += (int32_t)ClockMath::floorDivide(month, 12, month);
++      eyear += (int32_t)ClockMath::floorDivide(month, 12, &month);
+    }
+ 
+    if(month == 12){
+diff --git a/source/i18n/persncal.cpp b/source/i18n/persncal.cpp
+index 873f4e58..2a15cae0 100644
+--- a/source/i18n/persncal.cpp
++++ b/source/i18n/persncal.cpp
+@@ -110,7 +110,7 @@ int32_t PersianCalendar::handleGetLimit(UCalendarDateFields field, ELimitType li
+ UBool PersianCalendar::isLeapYear(int32_t year)
+ {
+     int32_t remainder;
+-    ClockMath::floorDivide(25 * year + 11, 33, remainder);
++    ClockMath::floorDivide(25 * year + 11, 33, &remainder);
+     return (remainder < 8);
+ }
+     
+@@ -147,7 +147,7 @@ int32_t PersianCalendar::handleGetMonthLength(int32_t extendedYear, int32_t mont
+     // If the month is out of range, adjust it into range, and
+     // modify the extended year value accordingly.
+     if (month < 0 || month > 11) {
+-        extendedYear += ClockMath::floorDivide(month, 12, month);
++        extendedYear += ClockMath::floorDivide(month, 12, &month);
+     }
+ 
+     return isLeapYear(extendedYear) ? kPersianLeapMonthLength[month] : kPersianMonthLength[month];
+@@ -169,7 +169,7 @@ int32_t PersianCalendar::handleComputeMonthStart(int32_t eyear, int32_t month, U
+     // If the month is out of range, adjust it into range, and
+     // modify the extended year value accordingly.
+     if (month < 0 || month > 11) {
+-        eyear += ClockMath::floorDivide(month, 12, month);
++        eyear += ClockMath::floorDivide(month, 12, &month);
+     }
+ 
+     int32_t julianDay = PERSIAN_EPOCH - 1 + 365 * (eyear - 1) + ClockMath::floorDivide(8 * eyear + 21, 33);
+diff --git a/source/i18n/simpletz.cpp b/source/i18n/simpletz.cpp
+index d9b0cd8e..0036effc 100644
+--- a/source/i18n/simpletz.cpp
++++ b/source/i18n/simpletz.cpp
+@@ -518,9 +518,8 @@ SimpleTimeZone::getOffsetFromLocal(UDate date, UTimeZoneLocalOption nonExistingT
+     }
+ 
+     rawOffsetGMT = getRawOffset();
+-    int32_t year, month, dom, dow;
+-    double day = uprv_floor(date / U_MILLIS_PER_DAY);
+-    int32_t millis = (int32_t) (date - day * U_MILLIS_PER_DAY);
++    int32_t year, month, dom, dow, millis;
++    int32_t day = ClockMath::floorDivide(date, U_MILLIS_PER_DAY, &millis);
+ 
+     Grego::dayToFields(day, year, month, dom, dow);
+ 
+@@ -549,8 +548,7 @@ SimpleTimeZone::getOffsetFromLocal(UDate date, UTimeZoneLocalOption nonExistingT
+         }
+     }
+     if (recalc) {
+-        day = uprv_floor(date / U_MILLIS_PER_DAY);
+-        millis = (int32_t) (date - day * U_MILLIS_PER_DAY);
++        day = ClockMath::floorDivide(date, U_MILLIS_PER_DAY, &millis);
+         Grego::dayToFields(day, year, month, dom, dow);
+         savingsDST = getOffset(GregorianCalendar::AD, year, month, dom,
+                           (uint8_t) dow, millis,
+diff --git a/source/i18n/timezone.cpp b/source/i18n/timezone.cpp
+index a0bc7460..b5a1aec0 100644
+--- a/source/i18n/timezone.cpp
++++ b/source/i18n/timezone.cpp
+@@ -729,9 +729,8 @@ void TimeZone::getOffset(UDate date, UBool local, int32_t& rawOffset,
+     // (with 7 args) twice when local == true and DST is
+     // detected in the initial call.
+     for (int32_t pass=0; ; ++pass) {
+-        int32_t year, month, dom, dow;
+-        double day = uprv_floor(date / U_MILLIS_PER_DAY);
+-        int32_t millis = (int32_t) (date - day * U_MILLIS_PER_DAY);
++        int32_t year, month, dom, dow, millis;
++        double day = ClockMath::floorDivide(date, U_MILLIS_PER_DAY, &millis);
+ 
+         Grego::dayToFields(day, year, month, dom, dow);
+ 
+diff --git a/source/test/intltest/calregts.cpp b/source/test/intltest/calregts.cpp
+index 1a5a9728..930f5032 100644
+--- a/source/test/intltest/calregts.cpp
++++ b/source/test/intltest/calregts.cpp
+@@ -97,6 +97,7 @@ CalendarRegressionTest::runIndexedTest( int32_t index, UBool exec, const char* &
+         CASE(53,TestIslamicCalOverflow);
+         CASE(54,TestWeekOfYear13548);
+         CASE(55,Test13745);
++        CASE(56,TestUTCWrongAMPM22023);
+     default: name = ""; break;
+     }
+ }
+@@ -3089,6 +3090,105 @@ void CalendarRegressionTest::TestIslamicCalOverflow(void) {
+     }
+ }
+ 
++void CalendarRegressionTest::VerifyGetStayInBound(double time) {
++    UErrorCode status = U_ZERO_ERROR;
++    LocalPointer<Calendar> utc(
++        Calendar::createInstance(TimeZone::createTimeZone(u"UTC"), status));
++    utc->setTime(time, status);
++    if (U_FAILURE(status)) {
++        errln("UTC setTime(%e, status)", time);
++    }
++
++    status = U_ZERO_ERROR;
++    LocalPointer<Calendar> gmt(Calendar::createInstance(
++        *TimeZone::getGMT(), status));
++    gmt->setTime(time, status);
++    if (U_FAILURE(status)) {
++        errln("UTC setTime(%e, status)", time);
++    }
++
++    status = U_ZERO_ERROR;
++    int32_t value = utc->get(UCAL_AM_PM, status);
++    if (U_FAILURE(status)) {
++        errln("UTC %e get(UCAL_AM_PM, status)", time);
++    }
++    if (value != UCAL_AM && value != UCAL_PM) {
++        errln("UTC %e UCAL_AM_PM should be either UCAL_AM | UCAL_PM  but is %d",
++              time, value);
++    }
++
++    status = U_ZERO_ERROR;
++    value = gmt->get(UCAL_AM_PM, status);
++    if (U_FAILURE(status)) {
++        errln("GMT %e get(UCAL_AM_PM, status)", time);
++    }
++    if (value != UCAL_AM && value != UCAL_PM) {
++        errln("GMT %e UCAL_AM_PM should be either UCAL_AM | UCAL_PM  but is %d",
++              time, value);
++    }
++
++    int32_t fields[] = {
++        UCAL_WEEK_OF_YEAR,
++        UCAL_YEAR_WOY,
++        UCAL_DAY_OF_MONTH,
++        UCAL_WEEK_OF_MONTH,
++        UCAL_DAY_OF_WEEK_IN_MONTH,
++        UCAL_MILLISECONDS_IN_DAY,
++        UCAL_MILLISECOND,
++        UCAL_SECOND,
++        UCAL_MINUTE,
++        UCAL_HOUR_OF_DAY,
++        UCAL_AM_PM,
++        UCAL_HOUR,
++        UCAL_ZONE_OFFSET,
++        UCAL_DST_OFFSET
++    };
++    for (auto& f : fields) {
++        UnicodeString info("Fields = ");
++        info += f;
++        status = U_ZERO_ERROR;
++        UCalendarDateFields field = static_cast<UCalendarDateFields>(f);
++        value = utc->get(field, status);
++        if (U_FAILURE(status)) {
++            errln("UTC %e get(%d)", time, field);
++        }
++        int32_t min = utc->getMinimum(field);
++        int32_t max = utc->getMaximum(field);
++        if (value < min) {
++            errln("UTC %e get(%d) < getMinimum(%d) : %d < %d", time, field,
++                  field, value, min);
++        }
++        if (max < value) {
++            errln("UTC %e getMaximum(%d) < get(%d) : %d < %d", time, field,
++                  field, max, value);
++        }
++
++        status = U_ZERO_ERROR;
++        value = gmt->get(field, status);
++        if (U_FAILURE(status)) {
++            errln("GMT %e get(%d)", time, field);
++        }
++        min = gmt->getMinimum(field);
++        max = gmt->getMaximum(field);
++        if (value < min) {
++            errln("GMT %e get(%d) < getMinimum(%d) : %d < %d", time, field,
++                  field, value, min);
++        }
++        if (max < value) {
++            errln("GMT %e getMaximum(%d) < get(%d) : %d < %d", time, field,
++                  field, max, value);
++        }
++    }
++}
++
++void CalendarRegressionTest::TestUTCWrongAMPM22023(void) {
++    VerifyGetStayInBound(-1);
++    VerifyGetStayInBound(0);
++    VerifyGetStayInBound(-1e-8);
++    VerifyGetStayInBound(-1e-9);
++    VerifyGetStayInBound(-1e-15);
++}
++
+ void CalendarRegressionTest::TestWeekOfYear13548(void) {
+     int32_t year = 2000;
+     UErrorCode status = U_ZERO_ERROR;
+diff --git a/source/test/intltest/calregts.h b/source/test/intltest/calregts.h
+index 5770be51..9581eac2 100644
+--- a/source/test/intltest/calregts.h
++++ b/source/test/intltest/calregts.h
+@@ -81,12 +81,14 @@ public:
+     void TestPersianCalOverflow(void);
+     void TestIslamicCalOverflow(void);
+     void TestWeekOfYear13548(void);
++    void TestUTCWrongAMPM22023(void);
+ 
+     void Test13745(void);
+ 
+     void printdate(GregorianCalendar *cal, const char *string);
+     void dowTest(UBool lenient) ;
+ 
++    void VerifyGetStayInBound(double test_value);
+ 
+     static UDate getAssociatedDate(UDate d, UErrorCode& status);
+     static UDate makeDate(int32_t y, int32_t m = 0, int32_t d = 0, int32_t hr = 0, int32_t min = 0, int32_t sec = 0);
+diff --git a/source/test/intltest/dtfmttst.cpp b/source/test/intltest/dtfmttst.cpp
+index 920ec75c..ecc90e94 100644
+--- a/source/test/intltest/dtfmttst.cpp
++++ b/source/test/intltest/dtfmttst.cpp
+@@ -130,6 +130,7 @@ void DateFormatTest::runIndexedTest( int32_t index, UBool exec, const char* &nam
+     TESTCASE_AUTO(TestParseRegression13744);
+     TESTCASE_AUTO(TestAdoptCalendarLeak);
+     TESTCASE_AUTO(Test20741_ABFields);
++    TESTCASE_AUTO(Test22023_UTCWithMinusZero);
+ 
+     TESTCASE_AUTO_END;
+ }
+@@ -5726,6 +5727,22 @@ void DateFormatTest::Test20741_ABFields() {
+     }
+ }
+ 
++void DateFormatTest::Test22023_UTCWithMinusZero() {
++    IcuTestErrorCode status(*this, "Test22023_UTCWithMinusZero");
++    Locale locale("en");
++    SimpleDateFormat fmt("h a", locale, status);
++    ASSERT_OK(status);
++    fmt.adoptCalendar(Calendar::createInstance(
++        TimeZone::createTimeZone("UTC"), locale, status));
++    ASSERT_OK(status);
++    FieldPositionIterator fp_iter;
++    icu::UnicodeString formatted;
++    // very small negative value in double cause it to be -0
++    // internally and trigger the assertion and bug.
++    fmt.format(-1e-9, formatted, &fp_iter, status);
++    ASSERT_OK(status);
++}
++
+ #endif /* #if !UCONFIG_NO_FORMATTING */
+ 
+ //eof
+diff --git a/source/test/intltest/dtfmttst.h b/source/test/intltest/dtfmttst.h
+index 2fe94984..f5e07697 100644
+--- a/source/test/intltest/dtfmttst.h
++++ b/source/test/intltest/dtfmttst.h
+@@ -266,6 +266,7 @@ public:
+     void TestParseRegression13744();
+     void TestAdoptCalendarLeak();
+     void Test20741_ABFields();
++    void Test22023_UTCWithMinusZero();
+ 
+ private:
+     UBool showParse(DateFormat &format, const UnicodeString &formattedString);

@@ -1,0 +1,42 @@
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+//
+// **** DO NOT EDIT - this file was automatically generated. ****
+syntax = "proto3";
+
+package cast.core;
+
+import "cast/cast_core/api/common/runtime_metadata.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// CastCore service.
+service CastCoreService {
+  // Registers a Cast Runtime. Usually called by platform.
+  rpc RegisterRuntime(RegisterRuntimeRequest) returns (RegisterRuntimeResponse);
+
+  // Unregisters a Cast Runtime. Usually called by platform.
+  rpc UnregisterRuntime(UnregisterRuntimeRequest)
+      returns (UnregisterRuntimeResponse);
+}
+
+message RegisterRuntimeRequest {
+  // DEPRECATED.
+  string runtime_id = 1 [deprecated = true];
+  // Metadata about the runtime.
+  cast.common.RuntimeMetadata runtime_metadata = 2;
+}
+
+message RegisterRuntimeResponse {
+  // A randomly generated runtime ID. Cast Core will use this ID to reference a
+  // particular Runtime.
+  string runtime_id = 1;
+}
+
+message UnregisterRuntimeRequest {
+  // Runtime ID.
+  string runtime_id = 1;
+}
+
+message UnregisterRuntimeResponse {}

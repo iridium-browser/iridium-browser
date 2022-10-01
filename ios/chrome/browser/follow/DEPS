@@ -1,0 +1,6 @@
+specific_include_rules = {
+  # TODO(crbug.com/1294160): Remove this dependency.
+  "follow_browser_agent.mm": [
+    "+ios/chrome/browser/ui/ntp/feed_metrics_recorder.h",
+  ]
+}

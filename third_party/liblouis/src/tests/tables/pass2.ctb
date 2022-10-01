@@ -1,0 +1,17 @@
+lowercase e 15       LATIN SMALL LETTER E
+lowercase n 1345     LATIN SMALL LETTER N
+lowercase r 1235     LATIN SMALL LETTER R
+lowercase o 135      LATIN SMALL LETTER O
+lowercase x 1346
+
+base uppercase E e   LATIN CAPITAL LETTER E - LATIN SMALL LETTER E
+base uppercase N n   LATIN CAPITAL LETTER N - LATIN SMALL LETTER N
+base uppercase R r   LATIN CAPITAL LETTER R - LATIN SMALL LETTER R
+base uppercase O o   LATIN CAPITAL LETTER O - LATIN SMALL LETTER O
+base uppercase X x
+
+punctuation ' 6      APOSTROPHE APOSTROPHE-QUOTE
+
+noback pass2 @135   @6-135
+noback pass2 @1346  ?
+

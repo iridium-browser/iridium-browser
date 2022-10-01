@@ -1,0 +1,74 @@
+diff -Naurb src2/main.c src/main.c
+--- src2/main.c 2016-08-15 20:29:35.487496988 -0700
++++ src/main.c 2016-08-15 20:27:50.297937988 -0700
+@@ -1034,7 +1034,8 @@
+     }
+ }
+
+-int compare_parse(Linkage_info * p1, Linkage_info * p2) {
++int compare_parse(const void* a, const void* b) {
++    const Linkage_info *p1 = (Linkage_info*) a, *p2 = (Linkage_info*) b;
+ /* for sorting the linkages */
+     if (p1->N_violations != p2->N_violations) {
+       return (p1->N_violations - p2->N_violations);
+@@ -1420,8 +1421,7 @@
+            N_canonical_linkages ++;
+        }
+        qsort((void *)linkage, N_canonical_linkages,
+-                      sizeof(Linkage_info),
+-                      (int (*)(const void *, const void *))compare_parse);
++                      sizeof(Linkage_info), compare_parse);
+    }
+
+    assert(! ((N_canonical_linkages == 0) && (N_linkages > 0) && (N_linkages < linkage_count_limit)),
+@@ -1622,8 +1622,7 @@
+            N_canonical_linkages ++;
+        }
+        qsort((void *)linkage, N_canonical_linkages,
+-                      sizeof(Linkage_info),
+-                      (int (*)(const void *, const void *))compare_parse);
++                      sizeof(Linkage_info), compare_parse);
+    }
+
+    print_time("Postprocessed some linkages");
+diff -Naurb src2/post-process.c src/post-process.c
+--- src2/post-process.c 2016-08-15 20:29:35.483496929 -0700
++++ src/post-process.c 2016-08-15 20:27:59.902080352 -0700
+@@ -379,7 +379,8 @@
+     }
+ }
+
+-int domain_compare(Domain * d1, Domain * d2) {
++int domain_compare(const void *a, const void *b) {
++    const Domain *d1 = (Domain*) a, *d2 = (Domain*) b;
+ /* for sorting the domains by size */
+     return (d1->size - d2->size) ;
+ }
+@@ -434,8 +435,7 @@
+            N_domains++;
+        }
+    }
+-    qsort((void *)domain_array, N_domains, sizeof(Domain),
+-        (int (*)(const void *, const void *))domain_compare);
++    qsort((void *)domain_array, N_domains, sizeof(Domain), domain_compare);
+    /* sort the domains by size */
+
+    for (d=0; d<N_domains; d++) {
+diff -Naurb src2/strncasecmp.c src/strncasecmp.c
+--- src2/strncasecmp.c 2016-08-15 20:29:35.487496988 -0700
++++ src/strncasecmp.c 2016-08-15 15:29:09.408238838 -0700
+@@ -15,6 +15,7 @@
+ }
+ #endif
+
++#ifndef __EMSCRIPTEN__
+ int strncasecmp(const char *s1, const char *s2, size_t n)
+ {
+
+@@ -35,5 +36,6 @@
+       if (*j) return  1;
+       return 0;
+ }
++#endif
+
+

@@ -1,0 +1,5 @@
+specific_include_rules = {
+  "two_client_web_apps_integration_test_base.h": [
+    "+chrome/browser/ui/views",
+  ],
+}

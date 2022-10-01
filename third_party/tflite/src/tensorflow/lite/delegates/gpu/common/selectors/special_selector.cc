@@ -1,0 +1,67 @@
+/* Copyright 2020 The TensorFlow Authors. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+==============================================================================*/
+
+#include "tensorflow/lite/delegates/gpu/common/selectors/special_selector.h"
+
+#include <map>
+#include <memory>
+#include <set>
+#include <string>
+#include <utility>
+
+#include "absl/types/any.h"
+#include "tensorflow/lite/delegates/gpu/common/status.h"
+#include "tensorflow/lite/delegates/gpu/common/task/tensor_desc.h"
+#include "tensorflow/lite/delegates/gpu/common/tasks/mean_stddev_normalization.h"
+#include "tensorflow/lite/delegates/gpu/common/tasks/special/conv_pointwise.h"
+#include "tensorflow/lite/delegates/gpu/common/tasks/special/depthwise_conv_plus_1x1_conv.h"
+#include "tensorflow/lite/delegates/gpu/common/tasks/special/fc_fc_add.h"
+
+namespace tflite {
+namespace gpu {
+absl::Status GPUSubgraphFromGraph(
+    const GpuInfo& gpu_info, CalculationsPrecision precision,
+    const GraphFloat32& graph, NodeId first_node_id,
+    const std::map<ValueId, TensorDescriptor>& tensor_descriptors,
+    std::set<NodeId>* consumed_nodes, GPUOperationsSubgraph* gpu_subgraph) {
+  if (TryDepthwiseConvPlus1x1Conv(gpu_info, precision, graph, first_node_id,
+                                  tensor_descriptors, consumed_nodes,
+                                  gpu_subgraph)
+          .ok()) {
+    return absl::OkStatus();
+  }
+  if (TryFCFCAdd(gpu_info, precision, graph, first_node_id, tensor_descriptors,
+                 consumed_nodes, gpu_subgraph)
+          .ok()) {
+    return absl::OkStatus();
+  }
+  if (TryFusedPointwiseConv(graph, first_node_id, precision, tensor_descriptors,
+                            consumed_nodes, gpu_subgraph)
+          .ok()) {
+    gpu_subgraph->operations[0].name = "slice_mul_mean_concat";
+    return absl::OkStatus();
+  }
+  if (TryMeanStdDevNormalization(gpu_info, precision, graph, first_node_id,
+                                 tensor_descriptors, consumed_nodes,
+                                 gpu_subgraph)
+          .ok()) {
+    gpu_subgraph->operations[0].name = "mean_stddev_normalization";
+    return absl::OkStatus();
+  }
+  return absl::NotFoundError("No special combination.");
+}
+
+}  // namespace gpu
+}  // namespace tflite

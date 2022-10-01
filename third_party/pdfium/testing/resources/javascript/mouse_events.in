@@ -1,0 +1,203 @@
+{{header}}
+{{object 1 0}} <<
+  /Type /Catalog
+  /Pages 2 0 R
+  /AcroForm 4 0 R
+>>
+endobj
+{{object 2 0}} <<
+  /Type /Pages
+  /Count 1
+  /Kids [
+    3 0 R
+  ]
+>>
+endobj
+% Page number 0.
+{{object 3 0}} <<
+  /Type /Page
+  /Parent 2 0 R
+  /Resources <<
+    /Font <</F1 20 0 R>>
+  >>
+  /Annots [ 5 0 R ]
+  /Contents [21 0 R]
+  /MediaBox [0 0 612 792]
+>>
+endobj
+% Forms
+{{object 4 0}} <<
+  /Fields [
+    5 0 R
+    6 0 R
+    7 0 R
+  ]
+>>
+endobj
+% Field with actions:
+% Cursor enter: E
+% Cursor exit: X
+% Mouse down: D
+% Mouse up: U
+% Focus: Fo
+% Blur: Bl
+{{object 5 0}} <<
+ /Type /Annot
+ /Subtype /Widget
+ /FT /Tx
+ /T (MyField)
+ /Rect [100 200 150 250]
+ /AA <<
+   /E 10 0 R
+   /X 11 0 R
+   /D 12 0 R
+   /U 13 0 R
+   /Fo 14 0 R
+   /Bl 15 0 R
+ >>
+>>
+endobj
+{{object 6 0}} <<
+ /Type /Annot
+ /Subtype /Widget
+ /FT /Tx
+ /T (name)
+ /Rect [400 400 500 429]
+ /V (Tralfaz)
+>>
+endobj
+{{object 7 0}} <<
+ /Type /Annot
+ /Subtype /Widget
+ /FT /Tx
+ /T (age)
+ /Rect [400 440 500 469]
+ /V (12)
+>>
+endobj
+{{object 10 0}} <<
+  /Type /Action
+  /S /JavaScript
+  /JS (
+    app.alert\("enter"\);
+    try {
+       this.submitForm\("myform", true, true, ["name", "age"]\);
+       app.alert\("ERROR: this.submitForm\(\) must not be allowed to execute"\);
+    } catch \(e\) {
+       app.alert\("PASS: this.submitForm blocked with " + e\);
+    }
+    try {
+       this.print\(\);
+       app.alert\("ERROR: this.print\(\) must not be allowed to execute"\);
+    } catch \(e\) {
+       app.alert\("PASS: this.print blocked with " + e\);
+    }
+  )
+>>
+endobj
+{{object 11 0}} <<
+  /Type /Action
+  /S /JavaScript
+  /JS (
+    app.alert\("exit"\);
+    try {
+       this.submitForm\("myform", true, true, ["name", "age"]\);
+       app.alert\("ERROR: this.submitForm\(\) must not be allowed to execute"\);
+    } catch \(e\) {
+       app.alert\("PASS: this.submitForm blocked with " + e\);
+    }
+    try {
+       this.print\(\);
+       app.alert\("ERROR: this.print\(\) must not be allowed to execute"\);
+    } catch \(e\) {
+       app.alert\("PASS: this.print blocked with " + e\);
+    }
+  )
+>>
+endobj
+{{object 12 0}} <<
+  /Type /Action
+  /S /JavaScript
+  /JS (
+    app.alert\("down"\);
+    try {
+       this.submitForm\("https://example.com", true, true, ["name", "age"]\);
+    } catch \(e\) {
+       app.alert\("ERROR: " + e\);
+    }
+    try {
+       this.print\(\);
+       this.print\(false, 1, 10, true, true, true, true, true\);
+       this.print\({}\);
+       this.print\({"bUi": false, "nStart": 42, "nEnd": 17,
+            "bSilent": true, "bShrinkToFit": true, "bPrintAsImage": true,
+            "bReverse": true, "bAnnotations": true, "bogus": "yes"}\);
+    } catch \(e\) {
+       app.alert\("ERROR: " + e\);
+    }
+  )
+>>
+endobj
+{{object 13 0}} <<
+  /Type /Action
+  /S /JavaScript
+  /JS (
+    app.alert\("up"\);
+    try {
+       // Use different bUrl value this time around.
+       this.submitForm\("https://example.com", false, true, ["name", "age"]\);
+    } catch \(e\) {
+       app.alert\("ERROR: " + e\);
+    }
+    try {
+       this.print\(\);
+    } catch \(e\) {
+       app.alert\("ERROR: " + e\);
+    }
+  )
+>>
+endobj
+{{object 14 0}} <<
+  /Type /Action
+  /S /JavaScript
+  /JS (
+    app.alert\("focus"\);
+    try {
+       this.submitForm\("myform", true, true, ["name", "age"]\);
+       app.alert\("ERROR: this.submitForm\(\) must not be allowed to execute"\);
+    } catch \(e\) {
+       app.alert\("PASS: this.submitForm blocked with " + e\);
+    }
+    try {
+       this.print\(\);
+       app.alert\("ERROR: this.print\(\) must not be allowed to execute"\);
+    } catch \(e\) {
+       app.alert\("PASS: this.print blocked with " + e\);
+    }
+  )
+>>
+endobj
+{{object 15 0}} <<
+  /Type /Action
+  /S /JavaScript
+  /JS (
+    app.alert\("blur"\);
+    try {
+       this.submitForm\("myform", true, true, ["name", "age"]\);
+       app.alert\("ERROR: this.submitForm\(\) must not be allowed to execute"\);
+    } catch \(e\) {
+       app.alert\("PASS: this.submitForm blocked with " + e\);
+    }
+    try {
+       this.print\(\);
+       app.alert\("ERROR: this.print\(\) must not be allowed to execute"\);
+    } catch \(e\) {
+       app.alert\("PASS: this.print blocked with " + e\);
+    }
+  )
+>>
+endobj
+{{xref}}
+{{trailer}}
+{{startxref}}
+%%EOF

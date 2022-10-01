@@ -1,0 +1,27 @@
+[submodule "freetype2"]
+  path = external/freetype2
+  url = https://gitlab.freedesktop.org/freetype/freetype.git
+  branch = master
+[submodule "glog"]
+  path = external/glog
+  url = https://github.com/google/glog.git
+  branch = master
+[submodule "libarchive"]
+  path = external/libarchive
+  url = https://github.com/libarchive/libarchive.git
+  branch = master
+[submodule "external/bzip2"]
+  path = external/bzip2
+  url = git://sourceware.org/git/bzip2.git
+[submodule "external/brotli"]
+  path = external/brotli
+  url = https://github.com/google/brotli.git
+[submodule "external/zlib"]
+  path = external/zlib
+  url = https://github.com/madler/zlib.git
+[submodule "external/libpng"]
+  path = external/libpng
+  url = https://github.com/glennrp/libpng.git
+[submodule "external/llvm-project"]
+	path = external/llvm-project
+	url = https://github.com/llvm/llvm-project.git

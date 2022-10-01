@@ -1,0 +1,97 @@
+<template>
+  <style include="cr-shared-style md-select">
+    :host {
+      --feedback-google-sans-font-family: "Google Sans", Roboto, sans-serif;
+      --feedback-regular-font-weight: 400;
+      --feedback-roboto-font-family: Roboto, sans-serif;
+      --feedback-medium-font-weight: 500;
+    }
+
+    html {
+      background-color: var(--cros-bg-color);
+    }
+
+    a {
+      color: var(--cros-link-color);
+      text-decoration: none;
+    }
+
+    a:focus,
+    a:hover {
+      text-decoration: underline;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    #header {
+      display: flex;
+      height: 68px;
+      margin: 0 0 24px 0;
+    }
+
+    #content {
+      display: flex;
+      flex-direction: column;
+      height: 456px;
+    }
+
+    .page-title {
+      color: var(--cros-text-color-primary);
+      font-family: var(--feedback-google-sans-font-family);
+      font-size: 22px;
+      font-weight: var(--feedback-medium-font-weight);
+      line-height: 28px;
+      margin: auto 0 0 0;
+      margin-block-end: 0;
+    }
+
+    .overflow-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .image-preview {
+      display: block;
+      height: auto;
+      margin: auto;
+      max-height: 600px;
+      width: 580px;
+    }
+
+    cr-dialog::part(dialog) {
+      --cr-dialog-body-padding-horizontal: 0px;
+      --cr-dialog-title-slot-padding-start: 0px;
+      --cr-icon-button-margin-end: 20px;
+      width: 590px;
+    }
+
+    h2 {
+      color: var(--cros-text-color-secondary);
+      font-family: var(--feedback-google-sans-font-family);
+      font-size: 15px;
+      font-weight: var(--feedback-medium-font-weight);
+      line-height: 22px;
+    }
+
+    #navButtons {
+      align-self: flex-end;
+      display: flex;
+      margin: auto 0 40px 0;
+    }
+
+    cr-button {
+      line-height: 20px;
+    }
+
+    cr-checkbox {
+      --cr-checkbox-label-padding-start: 0;
+      --cr-checkbox-size: 20px;
+      margin-inline-end: 12px;
+    }
+  </style>
+</template>

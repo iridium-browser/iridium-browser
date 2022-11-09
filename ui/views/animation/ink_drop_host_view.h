@@ -229,6 +229,11 @@ class VIEWS_EXPORT InkDropHost {
   // Used to observe View and inform the InkDrop of host-transform changes.
   ViewLayerTransformObserver host_view_transform_observer_;
 
+  // Declared before |ink_drop_|, because InkDropImpl may call
+  // RemoveInkDropLayer on partly destructed InkDropHost. In
+  // that case |ink_drop_mask_| must be still valid.
+  std::unique_ptr<views::InkDropMask> ink_drop_mask_;
+
   // Should not be accessed directly. Use GetInkDrop() instead.
   std::unique_ptr<InkDrop> ink_drop_;
 
@@ -249,8 +254,6 @@ class VIEWS_EXPORT InkDropHost {
   // Radii used for the SquareInkDropRipple.
   int ink_drop_small_corner_radius_ = 2;
   int ink_drop_large_corner_radius_ = 4;
-
-  std::unique_ptr<views::InkDropMask> ink_drop_mask_;
 
   base::RepeatingCallback<std::unique_ptr<InkDrop>()> create_ink_drop_callback_;
   base::RepeatingCallback<std::unique_ptr<InkDropRipple>()>

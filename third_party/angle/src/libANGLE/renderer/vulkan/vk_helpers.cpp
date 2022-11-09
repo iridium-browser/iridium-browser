@@ -69,7 +69,7 @@ constexpr gl::ShaderMap<PipelineStage> kPipelineStageShaderMap = {
 
 struct ImageMemoryBarrierData
 {
-    char name[44];
+    const char *name;
 
     // The Vk layout corresponding to the ImageLayout key.
     VkImageLayout layout;

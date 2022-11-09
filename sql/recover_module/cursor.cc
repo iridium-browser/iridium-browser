@@ -28,7 +28,7 @@ VirtualCursor::~VirtualCursor() {
 int VirtualCursor::First() {
   DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
   inner_decoders_.clear();
-  leaf_decoder_ = nullptr;
+  leaf_decoder_.Reset();
 
   AppendPageDecoder(table_->root_page_id());
   return Next();
@@ -38,18 +38,18 @@ int VirtualCursor::Next() {
   DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
   record_reader_.Reset();
 
-  while (!inner_decoders_.empty() || leaf_decoder_.get()) {
-    if (leaf_decoder_.get()) {
-      if (!leaf_decoder_->CanAdvance()) {
+  while (!inner_decoders_.empty() || leaf_decoder_.IsValid()) {
+    if (leaf_decoder_.IsValid()) {
+      if (!leaf_decoder_.CanAdvance()) {
         // The leaf has been exhausted. Remove it from the DFS stack.
-        leaf_decoder_ = nullptr;
+        leaf_decoder_.Reset();
         continue;
       }
-      if (!leaf_decoder_->TryAdvance())
+      if (!leaf_decoder_.TryAdvance())
         continue;
 
-      if (!payload_reader_.Initialize(leaf_decoder_->last_record_size(),
-                                      leaf_decoder_->last_record_offset())) {
+      if (!payload_reader_.Initialize(leaf_decoder_.last_record_size(),
+                                      leaf_decoder_.last_record_offset())) {
         continue;
       }
       if (!record_reader_.Initialize())
@@ -101,13 +101,13 @@ int VirtualCursor::ReadColumn(int column_index,
 int64_t VirtualCursor::RowId() {
   DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
   DCHECK(record_reader_.IsInitialized());
-  DCHECK(leaf_decoder_.get());
-  return leaf_decoder_->last_record_rowid();
+  DCHECK(leaf_decoder_.IsValid());
+  return leaf_decoder_.last_record_rowid();
 }
 
 void VirtualCursor::AppendPageDecoder(int page_id) {
   DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
-  DCHECK(leaf_decoder_.get() == nullptr)
+  DCHECK(!leaf_decoder_.IsValid())
       << __func__
       << " must only be called when the current path has no leaf decoder";
 
@@ -115,7 +115,7 @@ void VirtualCursor::AppendPageDecoder(int page_id) {
     return;
 
   if (LeafPageDecoder::IsOnValidPage(&db_reader_)) {
-    leaf_decoder_ = std::make_unique<LeafPageDecoder>(&db_reader_);
+    leaf_decoder_.Initialize(&db_reader_);
     return;
   }
 

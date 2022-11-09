@@ -1,0 +1,16 @@
+table: |
+  include tables/unicode-without-blank.dis
+  # excerpts from no-no-g1.ctb:
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  sign & 346
+  noback sign \x2820 6
+  capsletter 6
+  begcapsword 6-6
+  capsnocont
+  word et 346
+  word under 12345
+
+tests:
+  - [UNDER et, ⠠⠠⠥⠝⠙⠑⠗ ⠬]
+  - ["ABC Under et", "⠠⠠⠁⠃⠉ ⠠⠟ ⠬"]

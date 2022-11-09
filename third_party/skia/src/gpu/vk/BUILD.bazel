@@ -1,0 +1,48 @@
+load("//bazel:macros.bzl", "exports_files_legacy", "skia_cc_deps", "split_srcs_and_hdrs")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+# In separate group for exporting to //gn/gpu.gni:skia_vk_sources.
+filegroup(
+    name = "impl_vk_hdrs",
+    srcs = ["GrVkSecondaryCBDrawContext.h"],
+)
+
+VK_FILES = [
+    "VulkanAMDMemoryAllocator.cpp",
+    "VulkanAMDMemoryAllocator.h",
+    "VulkanExtensions.cpp",
+    "VulkanInterface.cpp",
+    "VulkanInterface.h",
+]
+
+split_srcs_and_hdrs(
+    name = "vk",
+    files = VK_FILES,
+)
+
+filegroup(
+    name = "srcs",
+    srcs = [":vk_srcs"],
+    visibility = ["//src/gpu:__pkg__"],
+)
+
+filegroup(
+    name = "private_hdrs",
+    srcs = [
+        ":impl_vk_hdrs",
+        ":vk_hdrs",
+    ],
+    visibility = ["//src/gpu:__pkg__"],
+)
+
+skia_cc_deps(
+    name = "deps",
+    visibility = ["//src/gpu:__pkg__"],
+    deps = select({
+        "//src/gpu:vulkan_with_vma": ["//third_party/vulkanmemoryallocator"],
+        "//conditions:default": [],
+    }),
+)

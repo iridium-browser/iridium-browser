@@ -1,0 +1,9 @@
+include tables/latinLetterDef8Dots.uti
+include tables/loweredDigits6Dots.uti
+space \s 0
+letter ç 4-14
+punctuation ! 2346
+punctuation . 46
+punctuation - 36
+sign % 146
+sign _ 145

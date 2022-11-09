@@ -1,0 +1,65 @@
+// Copyright 2013 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package power_manager;
+option go_package = "chromiumos/system_api/power_manager_proto";
+
+message PeripheralBatteryStatus {
+  // Path of the battery sysfs.
+  optional string path = 1;
+
+  // Name of the peripheral device.
+  optional string name = 2;
+
+  // Battery level in range [0, 100]. Unset if the level is
+  // unknown or the device is disconnected.
+  optional int32 level = 3;
+
+  enum ChargeStatus {
+    // Status unknown, either permanently, or temporarily, e.g.,
+    // due to a charger not being connected to chargable target.
+    CHARGE_STATUS_UNKNOWN = 0;
+
+    // Discharging may show up in normal operation of a device.
+    // e.g., a powered stylus is always discharging if it is not
+    // actually being charged.
+    CHARGE_STATUS_DISCHARGING = 1;
+
+    // Actively charging state, level is expected to rise.
+    CHARGE_STATUS_CHARGING = 2;
+
+    // Full will be returned if device is charging and at 100%
+    CHARGE_STATUS_FULL = 3;
+
+    // Not charging is equivalent to full if charger has decided
+    // battery has reached maximum possible capacity, and there is
+    // no error; level may not be 100% in this case.
+    CHARGE_STATUS_NOT_CHARGING = 4;
+
+    // Any health error will override charge status.
+    CHARGE_STATUS_ERROR = 5;
+  }
+
+  // Charging status; peripherals may rarely expose a useful
+  // status, primary usage is built-in peripheral chargers.
+  optional ChargeStatus charge_status = 4;
+
+  // Indicates if this is an active update, driven by udev (or other)
+  // notification.
+  //
+  // The distinction is important for styluses and
+  // other HID devices, as they will express their last known battery level
+  // until a change, and a periodic poll (or powerd restart) that re-reads the
+  // same value does not provide any new information, while a udev update
+  // (even if the charge level is identical) does provide valid information
+  // about the item.
+  optional bool active_update = 5;
+
+  // If present, contains the serial number of the battery, as a text field.
+  optional string serial_number = 6;
+}

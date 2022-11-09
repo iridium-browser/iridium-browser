@@ -1,0 +1,24 @@
+// Copyright 2021 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package privacy_screen;
+
+message PrivacyScreenSetting {
+  // While not strictly required, this is kept the same as
+  // ui/display/types/display_constants.h
+  enum PrivacyScreenState {
+    DISABLED = 0;
+    ENABLED = 1;
+    NOT_SUPPORTED = 2;
+
+    // Next ID to use: 3
+  };
+
+  PrivacyScreenState state = 1;
+
+  // Next ID to use: 2
+}

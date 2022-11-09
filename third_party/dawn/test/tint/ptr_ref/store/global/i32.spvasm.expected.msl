@@ -1,0 +1,15 @@
+#include <metal_stdlib>
+
+using namespace metal;
+void main_1() {
+  thread int tint_symbol_1 = 0;
+  tint_symbol_1 = 123;
+  tint_symbol_1 = 123;
+  return;
+}
+
+kernel void tint_symbol() {
+  main_1();
+  return;
+}
+

@@ -1,0 +1,91 @@
+// Copyright 2018 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package power_manager;
+option go_package = "chromiumos/system_api/power_manager_proto";
+
+// See
+// https://chromium.googlesource.com/chromiumos/platform2/+/HEAD/power_manager/docs/screen_brightness.md
+// for information about the mapping between brightness percents and backlight
+// hardware levels.
+
+// Request to change the backlight brightness sent from Chrome to powerd in a
+// SetScreenBrightness D-Bus method call.
+message SetBacklightBrightnessRequest {
+  // Desired backlight brightness as a percent in the range [0.0, 100.0].
+  optional double percent = 1;
+
+  // The speed at which the brightness should go to the requested percent.
+  enum Transition {
+    // The brightness will be instantaneously set to the new percent.
+    INSTANT = 1;
+    // The brightness will quickly animate to the new percent. This should
+    // typically be used in response to a user request.
+    FAST = 0;
+    // The brightness will slowly animate to the new percent. This should
+    // typically be used to perform an automated change that was not directly
+    // requested by the user.
+    SLOW = 2;
+  }
+  optional Transition transition = 2;
+
+  // The reason the request was sent.
+  enum Cause {
+    // Explicit user request (typically using the onscreen brightness slider).
+    USER_REQUEST = 0;
+    // Automated request based on a prediction of the desired brightness.
+    MODEL = 1;
+  }
+  optional Cause cause = 3;
+
+  // Next value to use: 4
+}
+
+// Announcement of a backlight brightness change emitted by powerd via a
+// ScreenBrightnessChanged or KeyboardBrightnessChanged D-Bus signal.
+message BacklightBrightnessChange {
+  // Current backlight brightness as a percent in the range [0.0, 100.0].
+  optional double percent = 1;
+
+  // The reason the brightness was changed.
+  enum Cause {
+    // Explicit user request, e.g. brightness keys or brightness slider.
+    USER_REQUEST = 0;
+    // Automated change in response to user activity (input event, video
+    // activity, etc.).
+    USER_ACTIVITY = 1;
+    // Automated powerd change triggered by idle timeout due to user inactivity.
+    USER_INACTIVITY = 2;
+    // Automated powerd change due by a change to the ambient light level.
+    AMBIENT_LIGHT_CHANGED = 3;
+    // An external power source was connected.
+    EXTERNAL_POWER_CONNECTED = 4;
+    // An external power source was disconnected.
+    EXTERNAL_POWER_DISCONNECTED = 5;
+    // Backlights were forced off by Chrome (typically due to the user tapping
+    // the power button on a convertible device).
+    FORCED_OFF = 6;
+    // Backlights are no longer being forced off by Chrome.
+    NO_LONGER_FORCED_OFF = 7;
+    // Unspecified automated change (suspend/resume, shutdown, etc.).
+    OTHER = 8;
+    // Automated request based on a prediction of the desired brightness.
+    MODEL = 9;
+    // A notification that is allowed to wake the device was created or updated.
+    WAKE_NOTIFICATION = 10;
+    // Backlights were toggled off by the user (typically due to the
+    // user pressing the keyboard backlight toggle keyboard key).
+    USER_TOGGLED_OFF = 11;
+    // Backlights are toggled on by user.
+    USER_TOGGLED_ON = 12;
+    // Next value to use: 13
+  }
+  optional Cause cause = 2;
+
+  // Next value to use: 3
+}

@@ -1,0 +1,48 @@
+# These tests cannot work on Wayland because the platform does not allow clients
+# to position top level windows, activate them, and set focus.
+-All/HostedOrWebAppTest.CtrlClickLink/HostedApp
+-All/HostedOrWebAppTest.CtrlClickLink/WebApp
+-All/PopupBrowserTest.MoveClampedToCurrentDisplay/0
+-All/PopupBrowserTest.MoveClampedToCurrentDisplay/1
+-AutomationManagerAuraBrowserTest.EventFromAction
+-AutomationManagerAuraBrowserTest.TransientFocusChangesAreSuppressed
+-BrowserViewTest.F6CyclesThroughCaptionBubbleToo
+-BrowserViewTest.GetAccessibleTabModalDialogTitle
+-ChromeSitePerProcessTest.PopupWindowFocus
+-ExternalProtocolDialogBrowserTest.TestFocus
+-FolderUploadConfirmationViewTest.InitiallyFocusesCancel
+-JavaScriptTabModalDialogViewViewsBrowserTest.AlertDialogAccessibleNameDescriptionAndRole
+-JavaScriptTabModalDialogViewViewsBrowserTest.AlertDialogCloseButtonAccessibilityIgnored
+-PreservedWindowPlacement.Test
+-ProfileHelperTest.OpenNewWindowForProfile
+-TabHoverCardBubbleViewBrowserTest.WidgetNotVisibleOnMousePressAfterTabFocus
+-TabHoverCardBubbleViewBrowserTest.WidgetVisibleOnKeyPressAfterTabFocus
+
+# Screen capture on Wayland is tricky.
+-All/WebRtcScreenCaptureBrowserTestWithPicker.ScreenCaptureVideo/0
+-All/WebRtcScreenCaptureBrowserTestWithPicker.ScreenCaptureVideoAndAudio/0
+-WebRtcDesktopCaptureBrowserTest.RunsScreenshareFromOneTabToAnother
+
+# Fail on the bot, pass locally.
+-BackForwardCachePageLoadMetricsObserverBrowserTest.CumulativeLayoutShiftAfterBackForwardCacheRestore
+-DesktopCaptureApiTest.ChooseDesktopMedia
+-IconLoaderBrowserTest.LoadGroup
+
+# TODO(https://crbug.com/1084469): fix these tests.
+
+# Failed:
+-BrowserViewTest.GetAccessibleTabModalDialogTree
+-OmniboxPopupContentsViewTest.ClickOmnibox
+-OmniboxPopupContentsViewTest.PopupMatchesLocationBarBackground
+-PageInfoBubbleViewBrowserTest.FocusDoesNotReturnToContentsOnReloadPrompt
+-PageInfoBubbleViewBrowserTest.FocusReturnsToContentOnClose
+-PrintBrowserTest.PDFPluginNotKeyboardFocusable
+
+# #TODO (b/235882005): These tests fail due to a NOT_IMPLEMENTED_LOG_ONCE()
+# within the  wayland_surface.cc implementation. This causes our focused
+# dialog object to instantly close and causes these tests to fail. Until a
+# solution is introduced with wayland support or a workaround can be discovered
+# in the browser tests, simply disable them.
+-AccessCodeCastDialogBrowserTest.*
+-AccessCodeCastHandlerBrowserTest.*
+-AccessCodeCastSinkServiceBrowserTest.*

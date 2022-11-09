@@ -1,0 +1,31 @@
+// Copyright 2018 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package metrics_event;
+option go_package = "chromiumos/system_api/metrics_event_proto";
+
+// Content of signals emitted by Chrome (the ChromeEvent signal in the
+// MetricsEventService) and the anomaly_detector daemon (the AnomalyEvent
+// signal in the AnomalyEventService) to report events of interest for
+// measurements.
+message Event {
+  // Event types.
+  enum Type {
+    TAB_DISCARD = 0;
+    OOM_KILL = 1;   // obsolete---use OOM_KILL_BROWSER instead
+    TAB_SWITCH = 2;
+    OOM_KILL_BROWSER = 3;
+    OOM_KILL_KERNEL = 4;
+  }
+
+  // The type of the event being signaled.
+  Type type = 1;
+
+  // The time of the event (CLOCK_MONOTONIC in milliseconds).
+  int64 timestamp = 2;
+}

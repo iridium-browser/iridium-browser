@@ -1,0 +1,15 @@
+# -*- Mode: Python; -*-
+
+include_rules = [
+  # OSP code is strictly verboten.
+  '-api',
+  '-demo',
+  '-go',
+  '-msgs',
+
+  # Intra-libcast dependencies must be explicit.
+  '-cast',
+
+  # Includes from third_party/jsoncpp/src/include
+  '+json/value.h'
+]

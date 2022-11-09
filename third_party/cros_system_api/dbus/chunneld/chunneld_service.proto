@@ -1,0 +1,48 @@
+// Copyright 2019 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+// This file defines messages used for interacting with the chunneld service.
+package vm_tools.chunneld;
+option go_package = "chromiumos/system_api/chunneld_proto";
+
+// Sent to chunneld to update the listening ports across all VMs/containers.
+message UpdateListeningPortsRequest {
+  // Identifies a particular container that has a listening port.
+  message Tcp4ForwardTarget {
+    // Name of the target VM.
+    string vm_name = 1;
+
+    // Name of the target container.
+    string container_name = 2;
+
+    // Owner of the target VM/container.
+    string owner_id = 3;
+
+    // Expected cid of the target VM.
+    uint32 vsock_cid = 4;
+  }
+
+  // Map of port numbers to the containers that will be tunneled to..
+  map<uint32, Tcp4ForwardTarget> tcp4_forward_targets = 1;
+}
+
+// Response to the UpdateListeningPortsRequest message.
+message UpdateListeningPortsResponse {
+  enum Status {
+    // The status is unknown.
+    UNKNOWN = 0;
+
+    // Listening ports in chunneld were updated successfully.
+    SUCCESS = 1;
+
+    // Failed to update listening ports in chunneld.
+    FAILED = 2;
+  }
+
+  // Result of the UpdateListeningPorts method.
+  Status status = 1;
+}

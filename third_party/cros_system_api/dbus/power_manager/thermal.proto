@@ -1,0 +1,39 @@
+// Copyright 2020 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package power_manager;
+option go_package = "chromiumos/system_api/power_manager_proto";
+
+// Device thermal state change notification from powerd to Chrome.
+message ThermalEvent {
+
+  // Current device's temperature-related state.
+  // This is similar to MacOS NSProcessInfoThermalState.
+  enum ThermalState {
+    UNKNOWN = 0;
+    // The device's temperature-related conditions (thermals) are at an
+    // acceptable level. There is no noticeable negative impact to the user.
+    NOMINAL = 1;
+    // Thermals are minimally elevated. On devices with fans, those fans may
+    // become active, audible, and distracting to the user. Energy usage is
+    // elevated, potentially reducing battery life.
+    FAIR = 2;
+    // Thermals are highly elevated. Fans are active, running at maximum speed,
+    // audible, and distracting to the user. System performance may also be
+    // impacted as the system begins enacting countermeasures to reduce thermals
+    // to a more acceptable level.
+    SERIOUS = 3;
+    // Thermals are significantly elevated. The device needs to cool down.
+    CRITICAL = 4;
+  }
+  optional ThermalState thermal_state = 1;
+
+  // Monotonically-increasing time at which this event occurred, as given by
+  // base::TimeTicks::ToInternalValue().
+  optional int64 timestamp = 2;
+}

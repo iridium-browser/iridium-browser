@@ -1,0 +1,205 @@
+# Copyright 2020 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/ui_mode.gni")
+import("//chrome/common/features.gni")
+import("//chrome/test/base/js2gtest.gni")
+import("//chrome/test/include_js_tests.gni")
+import("//third_party/closure_compiler/compile_js.gni")
+import("//tools/grit/grit_rule.gni")
+import("//tools/grit/preprocess_if_expr.gni")
+import("//ui/webui/resources/tools/generate_grd.gni")
+import("//ui/webui/resources/tools/js_modulizer.gni")
+
+grd_prefix = "gaia_auth_host"
+manifest_existing_files = "gaia_auth_host_existing_manifest.json"
+manifest_generated_files = "gaia_auth_host_generated_manifest.json"
+
+generate_grd("build_grd") {
+  out_grd = "$target_gen_dir/resources.grd"
+  deps = [
+    ":preprocess_gen",
+    ":preprocess_src",
+  ]
+
+  # Resources are expected to be registered with paths like:
+  # gaia_auth_host/resource_name.js
+  resource_path_prefix = "gaia_auth_host"
+
+  manifest_files = [
+    "$target_gen_dir/$manifest_existing_files",
+    "$target_gen_dir/$manifest_generated_files",
+  ]
+}
+
+preprocess_if_expr("preprocess_gen") {
+  defines = chrome_grit_defines
+  deps = [ ":modulize" ]
+  in_folder = target_gen_dir
+  out_folder = "$target_gen_dir/gaia_auth_host_preprocessed"
+  out_manifest = "$target_gen_dir/$manifest_generated_files"
+
+  in_files = [
+    "authenticator.m.js",
+    "channel.m.js",
+    "password_change_authenticator.m.js",
+    "post_message_channel.m.js",
+    "saml_handler.m.js",
+    "saml_password_attributes.m.js",
+    "saml_timestamps.m.js",
+    "saml_username_autofill.m.js",
+    "webview_event_manager.m.js",
+  ]
+}
+
+# Preprocess existing files.
+preprocess_if_expr("preprocess_src") {
+  out_folder = "$target_gen_dir/gaia_auth_host_preprocessed"
+  out_manifest = "$target_gen_dir/$manifest_existing_files"
+  in_files = [ "okta_detect_success_injected.js" ]
+}
+
+grit("resources") {
+  defines = chrome_grit_defines
+
+  # These arguments are needed since the grd is generated at build time.
+  enable_input_discovery_for_gn_analyze = false
+  source = "$target_gen_dir/resources.grd"
+  deps = [ ":build_grd" ]
+  outputs = [
+    "grit/gaia_auth_host_resources.h",
+    "grit/gaia_auth_host_resources_map.cc",
+    "grit/gaia_auth_host_resources_map.h",
+    "gaia_auth_host_resources.pak",
+  ]
+  output_dir = "$root_gen_dir/chrome"
+}
+
+js_type_check("closure_compile") {
+  closure_flags =
+      default_closure_args + [
+        "js_module_root=" +
+            rebase_path("//chrome/browser/resources/gaia_auth_host/",
+                        root_build_dir),
+        "js_module_root=./gen/chrome/browser/resources/gaia_auth_host/",
+      ]
+  deps = [
+    ":authenticator.m",
+    ":channel.m",
+    ":password_change_authenticator.m",
+    ":post_message_channel.m",
+    ":saml_handler.m",
+    ":saml_password_attributes.m",
+    ":saml_timestamps.m",
+    ":saml_username_autofill.m",
+    ":webview_event_manager.m",
+  ]
+}
+
+js_library("channel.m") {
+  sources =
+      [ "$root_gen_dir/chrome/browser/resources/gaia_auth_host/channel.m.js" ]
+  extra_deps = [ ":modulize" ]
+}
+
+js_library("webview_event_manager.m") {
+  sources = [ "$root_gen_dir/chrome/browser/resources/gaia_auth_host/webview_event_manager.m.js" ]
+  extra_deps = [ ":modulize" ]
+}
+
+js_library("post_message_channel.m") {
+  sources = [ "$root_gen_dir/chrome/browser/resources/gaia_auth_host/post_message_channel.m.js" ]
+  deps = [ ":channel.m" ]
+  extra_deps = [ ":modulize" ]
+}
+
+js_library("saml_password_attributes.m") {
+  sources = [ "$root_gen_dir/chrome/browser/resources/gaia_auth_host/saml_password_attributes.m.js" ]
+  deps = [ ":saml_timestamps.m" ]
+  extra_deps = [ ":modulize" ]
+}
+
+js_library("saml_timestamps.m") {
+  sources = [ "$root_gen_dir/chrome/browser/resources/gaia_auth_host/saml_timestamps.m.js" ]
+  extra_deps = [ ":modulize" ]
+}
+
+js_library("saml_username_autofill.m") {
+  sources = [ "$root_gen_dir/chrome/browser/resources/gaia_auth_host/saml_username_autofill.m.js" ]
+  deps = [ "//ui/webui/resources/js:util.m" ]
+  extra_deps = [ ":modulize" ]
+}
+
+js_library("saml_handler.m") {
+  sources = [
+    "$root_gen_dir/chrome/browser/resources/gaia_auth_host/saml_handler.m.js",
+  ]
+  deps = [
+    ":channel.m",
+    ":post_message_channel.m",
+    ":saml_password_attributes.m",
+    ":saml_username_autofill.m",
+    ":webview_event_manager.m",
+  ]
+  extra_deps = [ ":modulize" ]
+}
+
+js_library("authenticator.m") {
+  sources = [
+    "$root_gen_dir/chrome/browser/resources/gaia_auth_host/authenticator.m.js",
+  ]
+  deps = [
+    ":saml_handler.m",
+    ":saml_password_attributes.m",
+    "//ui/webui/resources/js:assert.m",
+    "//ui/webui/resources/js:cr.m",
+    "//ui/webui/resources/js:util.m",
+    "//ui/webui/resources/js/cr:event_target",
+  ]
+  externs_list = [
+    "$externs_path/chrome_extensions.js",
+    "$externs_path/webview_tag.js",
+  ]
+  extra_deps = [ ":modulize" ]
+}
+
+js_library("password_change_authenticator.m") {
+  sources = [ "$root_gen_dir/chrome/browser/resources/gaia_auth_host/password_change_authenticator.m.js" ]
+  deps = [
+    ":saml_handler.m",
+    "//ui/webui/resources/js:assert.m",
+    "//ui/webui/resources/js:util.m",
+    "//ui/webui/resources/js/cr:event_target",
+  ]
+  externs_list = [
+    "$externs_path/chrome_extensions.js",
+    "$externs_path/webview_tag.js",
+  ]
+  extra_deps = [ ":modulize" ]
+}
+
+js_modulizer("modulize") {
+  input_files = [
+    "authenticator.js",
+    "channel.js",
+    "password_change_authenticator.js",
+    "post_message_channel.js",
+    "saml_handler.js",
+    "saml_password_attributes.js",
+    "saml_timestamps.js",
+    "saml_username_autofill.js",
+    "webview_event_manager.js",
+  ]
+  namespace_rewrites = [
+    "DOMWindow|Object",
+    "cr.EventTarget|EventTarget",
+    "cr.getPropertyDescriptor|getPropertyDescriptor",
+    "cr.login.SamlHandler|SamlHandler",
+    "samlPasswordAttributes.PasswordAttributes|PasswordAttributes",
+    "samlPasswordAttributes.readPasswordAttributes|readPasswordAttributes",
+    "samlTimestamps.decodeTimestamp|decodeTimestamp",
+    "samlUsernameAutofill.maybeAutofillUsername|maybeAutofillUsername",
+    "XMLDocument|Object",
+  ]
+}

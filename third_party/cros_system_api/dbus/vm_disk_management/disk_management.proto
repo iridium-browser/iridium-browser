@@ -1,0 +1,76 @@
+// Copyright 2021 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package vm_tools.disk_management;
+
+message MessageOrigin {
+  // Name of the VM this came from.
+  string vm_name = 1;
+
+  // Name of the container this came from.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+}
+
+// Used by the container to get information about the disk it's on.
+message GetDiskInfoRequest {
+  // Information about where the request originated from.
+  MessageOrigin origin = 1;
+}
+
+// Response for a GetDiskInfoRequest.
+message GetDiskInfoResponse {
+  // 0 if the request was successful.
+  int64 error = 1;
+
+  // Current space available in bytes.
+  uint64 available_space = 2;
+
+  // How much the disk can be expanded by in bytes.
+  uint64 expandable_space = 3;
+
+  // The size of the disk.
+  uint64 disk_size = 4;
+}
+
+// Used by the container to request for additional space.
+message RequestSpaceRequest {
+  // Information about where the request originated from.
+  MessageOrigin origin = 1;
+
+  // The amount of space requested in bytes
+  uint64 space_requested = 2;
+}
+
+// Response for RequestSpaceRequest.
+message RequestSpaceResponse {
+  // 0 if the request was successful.
+  int64 error = 1;
+
+  // The amount of space granted in bytes
+  uint64 space_granted = 2;
+}
+
+// Used by the container to alert the host that space has been freed.
+message ReleaseSpaceRequest {
+  // Information about where the request originated from.
+  MessageOrigin origin = 1;
+
+  // Amount of space that can be released in bytes.
+  uint64 space_to_release = 2;
+}
+
+// Response for ReleaseSpaceRequest.
+message ReleaseSpaceResponse {
+  // 0 if the request was successful.
+  int64 error = 1;
+
+  // Amount of space that was released in bytes.
+  uint64 space_released = 2;
+}

@@ -1,0 +1,129 @@
+table: |
+  display , 456
+  display # 3456
+  display ; 56
+  display . 5
+  display - 36
+  sign % 123456
+  punctuation - 36
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  include tables/litdigits6Dots.uti
+  include tables/braille-patterns.cti
+  numsign 3456
+  nocontractsign 56
+  nonumsign 56
+  numericnocontchars abcdefghij
+  begcapsword 456
+  endcapsword 5
+  capsmodechars -
+
+flags: {testmode: bothDirections}
+tests:
+  # endcapsword cancels a word in capitals
+  - - "ABCabc"
+    - ",abc.abc"
+  # whitespace cancels a word in capitals
+  - - "ABC abc"
+    - ",abc abc"
+  # non-letter cancels a word in capitals
+  - - "ABC%abc"
+    - ",abc%abc"
+  # number cancels a word in capitals
+  # see https://github.com/liblouis/liblouis/issues/400
+  - - "ABC123abc"
+    - ",abc#abc;abc"
+  # capsmodechars do not cancel a capsword
+  - - "ABC-abc"
+    - ",abc-.abc"
+
+# endcapsword should cancel capsword no matter what and should be ignored if not needed
+flags: {testmode: backward}
+tests:
+  - - ",abc-abc."
+    - "ABC-ABC"
+flags: {testmode: forward}
+tests:
+  - - "ABC-ABC"
+    - ",abc-abc"
+
+# Compare with behavior of begcaps/endcaps
+table: |
+  display , 456
+  display # 3456
+  display ; 56
+  display . 5
+  display - 36
+  sign % 123456
+  punctuation - 36
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  include tables/litdigits6Dots.uti
+  include tables/braille-patterns.cti
+  numsign 3456
+  nocontractsign 56
+  nonumsign 56
+  numericnocontchars abcdefghijABC
+  begcaps 456
+  endcaps 5
+  capsmodechars -
+
+flags: {testmode: bothDirections}
+tests:
+  # endcaps cancels a block in capitals
+  - - "ABCabc"
+    - ",abc.abc"
+  # whitespace does not cancel a block in capitals
+  - - "ABC ABC"
+    - ",abc abc."
+  # non-letter does not cancel a block in capitals
+  - - "ABC%ABC"
+    - ",abc%abc."
+  # number does not cancel a block in capitals
+  # contractsign before "ABC" because "A" is a numericnocontchars
+  - - "ABC123ABC"
+    - ",abc#abc;abc."
+  # numericnocontchars are case sensitive, so no contractsign before "DEF"
+  - - "ABC123DEF"
+    - ",abc#abc;abc."
+    - {xfail: "missing nocontractsign after number (see issue #631)"}
+  # capsmodechars should have no effect on begcaps and endcaps
+  - - "ABC-abc"
+    - ",abc-.abc"
+  - - "ABC-ABC"
+    - ",abc-abc."
+
+# endcaps not needed at the end of a string
+flags: {testmode: backward}
+tests:
+  - - ",abc abc"
+    - "ABC ABC"
+  - - ",abc%abc"
+    - "ABC%ABC"
+  - - ",abc-abc"
+    - "ABC-ABC"
+
+# Regression test for issue #361: Consistency between for and back trans with capsword and punctuation/math
+# (https://github.com/liblouis/liblouis/issues/361)
+# The issue was fixed by https://github.com/liblouis/liblouis/pull/611.
+table: |
+  include tables/unicode.dis
+  punctuation . 3
+  punctuation , 2
+  punctuation - 36
+  math + 235
+  include tables/latinLetterDef6Dots.uti
+  include tables/braille-patterns.cti
+  capsletter 6
+  begcapsword 6-6
+  endcapsword 6-3
+flags: {testmode: bothDirections}
+tests:
+  - [Foobar, ⠠⠋⠕⠕⠃⠁⠗]
+  - [FOOBAR, ⠠⠠⠋⠕⠕⠃⠁⠗]
+  - [FOObar, ⠠⠠⠋⠕⠕⠠⠄⠃⠁⠗]
+  - [FOO-bar, ⠠⠠⠋⠕⠕⠤⠃⠁⠗]
+  - [FOO.bar, ⠠⠠⠋⠕⠕⠄⠃⠁⠗]
+  - [FOO+bar, ⠠⠠⠋⠕⠕⠖⠃⠁⠗]

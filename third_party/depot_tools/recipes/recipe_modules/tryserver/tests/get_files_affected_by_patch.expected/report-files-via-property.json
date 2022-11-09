@@ -1,0 +1,24 @@
+[
+  {
+    "cmd": [
+      "git",
+      "-c",
+      "core.quotePath=false",
+      "diff",
+      "--cached",
+      "--name-only"
+    ],
+    "cwd": "[START_DIR]/test/patch/root",
+    "infra_step": true,
+    "name": "git diff to analyze patch",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@files@test/patch/root/baz/shaz.cc@@@",
+      "@@@STEP_LOG_LINE@files@test/patch/root/foo/bar.cc@@@",
+      "@@@STEP_LOG_END@files@@@",
+      "@@@SET_BUILD_PROPERTY@affected-files@{\"first_100\": [\"test/patch/root/baz/shaz.cc\", \"test/patch/root/foo/bar.cc\"], \"total_count\": 2}@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]

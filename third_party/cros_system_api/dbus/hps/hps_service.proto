@@ -1,0 +1,96 @@
+// Copyright 2021 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+package hps;
+option go_package = "chromiumos/system_api/hps_proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// Configuration of an HPS feature for the Enable method
+// More FilterConfigs will be added here as more filters are added
+message FeatureConfig {
+  // The simplest filter with a default threshold
+  message BasicFilterConfig {}
+  // A filter that changes state when number of same consecutive inference
+  // results is above a count limit.
+  message ConsecutiveResultsFilterConfig {
+    // *threshold are values that a single inference score is compared against.
+    // (1) A single inference score is converted into an inference result as:
+    // inference_result = score >= positive_score_threshold
+    //                    ? POSITIVE
+    //                    : score< negative_score_threshold
+    //                        ? NEGATIVE
+    //                        : UNKNOWN
+    // Note: The inference score is a value from [-128, 128), so should the
+    // thresholds be.
+    // (2) the inference_result is then used to update the counter as:
+    // consecutive_result_counter = inference_result is the same as last round
+    //                             ? consecutive_result_counter + 1
+    //                             : 1
+    int32 positive_score_threshold = 4;
+    int32 negative_score_threshold = 5;
+
+    // *count_threshold are thresholds for the filter to change its state.
+    // If current inference result is POSITIVE and consecutive_result_counter
+    // is >= positive_count_threshold, then the filter state is set to
+    // POSITIVE.
+    // If current inference result is NEGATIVE and consecutive_result_counter
+    // is >= negative_count_threshold, then the filter state is set to
+    // NEGATIVE.
+    // If current inference result is UNKNOWN and consecutive_result_counter
+    // is >= uncertain_count_threshold, then the filter state is set to
+    // UNKNOWN.
+    int32 positive_count_threshold = 6;
+    int32 negative_count_threshold = 7;
+    int32 uncertain_count_threshold = 8;
+
+    // Deprecated fields that were removed.
+    reserved 1, 2, 3;
+  }
+
+  message AverageFilterConfig {
+    // The inference score will be averged among last `average_window_size`
+    // results.
+    int32 average_window_size = 1;
+
+    // *threshold are values that the inference result is compared against.
+    // If the average inference score is >= the positive_score_threshold it is
+    // considered a positive result; if the average inference score is < the
+    // negative_score_threshold then it is considered a negative result;
+    // otherwise it is considered as a uncertain result.
+    int32 positive_score_threshold = 2;
+    int32 negative_score_threshold = 3;
+
+    // If the inference result is invalid, then this default score will be used.
+    int32 default_uncertain_score = 4;
+  }
+  oneof filter_config {
+    BasicFilterConfig basic_filter_config = 1;
+    ConsecutiveResultsFilterConfig consecutive_results_filter_config = 2;
+    AverageFilterConfig average_filter_config = 3;
+  }
+  // Enable raw inference result reporting. Disabled by default.
+  bool report_raw_results = 4;
+}
+
+// Represent the result from Hps Daemon to other client.
+// Used for HpsNotify and HpsSense.
+enum HpsResult {
+  UNKNOWN = 0;
+  NEGATIVE = 1;
+  POSITIVE = 2;
+}
+
+message HpsResultProto {
+  // Processed feature detection result.
+  HpsResult value = 1;
+
+  // Raw (unfiltered) inference score in the range [-128, 128). Used for testing
+  // model performance. Only included if `report_raw_results` is set in the
+  // config.
+  int32 inference_result = 2;
+  bool inference_result_valid = 3;
+}

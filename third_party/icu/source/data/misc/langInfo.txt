@@ -1,0 +1,2831 @@
+﻿// © 2016 and later: Unicode, Inc. and others.
+// License & terms of use: http://www.unicode.org/copyright.html
+// Generated using tools/cldr/cldr-to-icu/build-icu-data.xml
+langInfo:table(nofallback){
+    likely{
+        languageAliases{
+            "aam","aas",
+            "adp","dz",
+            "agp","apf",
+            "ais","ami",
+            "aju","jrb",
+            "alb","sq",
+            "als","sq",
+            "arb","ar",
+            "arm","hy",
+            "asd","snz",
+            "aue","ktz",
+            "ayr","ay",
+            "ayx","nun",
+            "azj","az",
+            "baq","eu",
+            "baz","nvo",
+            "bcc","bal",
+            "bcl","bik",
+            "bgm","bcg",
+            "bh","bho",
+            "bhk","fbl",
+            "bic","bir",
+            "bjd","drl",
+            "bjq","bzc",
+            "bkb","ebk",
+            "blg","iba",
+            "btb","beb",
+            "bur","my",
+            "bxk","luy",
+            "bxr","bua",
+            "ccq","rki",
+            "chi","zh",
+            "cjr","mom",
+            "cka","cmr",
+            "cld","syr",
+            "cmk","xch",
+            "cmn","zh",
+            "coy","pij",
+            "cqu","quh",
+            "cwd","cr",
+            "cze","cs",
+            "daf","dnj",
+            "dap","njz",
+            "dgo","doi",
+            "dhd","mwr",
+            "dik","din",
+            "diq","zza",
+            "dit","dif",
+            "djl","dze",
+            "dkl","aqd",
+            "drh","mn",
+            "drr","kzk",
+            "dud","uth",
+            "duj","dwu",
+            "dut","nl",
+            "dwl","dbt",
+            "ekk","et",
+            "elp","amq",
+            "emk","man",
+            "esk","ik",
+            "fat","ak",
+            "fre","fr",
+            "fuc","ff",
+            "gav","dev",
+            "gaz","om",
+            "gbc","wny",
+            "gbo","grb",
+            "geo","ka",
+            "ger","de",
+            "gfx","vaj",
+            "ggn","gvr",
+            "ggo","esg",
+            "ggr","gtu",
+            "gio","aou",
+            "gli","kzk",
+            "gno","gon",
+            "gre","el",
+            "gti","nyc",
+            "gug","gn",
+            "guv","duz",
+            "gya","gba",
+            "hdn","hai",
+            "hea","hmn",
+            "him","srx",
+            "hrr","jal",
+            "ibi","opa",
+            "ice","is",
+            "ike","iu",
+            "ill","ilm",
+            "ilw","gal",
+            "in","id",
+            "iw","he",
+            "izi","eza",
+            "jar","jgk",
+            "jeg","oyb",
+            "ji","yi",
+            "jw","jv",
+            "kdv","zkd",
+            "kgc","tdf",
+            "kgd","ncq",
+            "kgh","kml",
+            "khk","mn",
+            "kmr","ku",
+            "knc","kr",
+            "kng","kg",
+            "knn","kok",
+            "koj","kwv",
+            "kpp","jkm",
+            "kpv","kv",
+            "krm","bmf",
+            "ktr","dtp",
+            "kvs","gdj",
+            "kwq","yam",
+            "kxe","tvd",
+            "kxl","kru",
+            "kzh","dgl",
+            "kzj","dtp",
+            "kzt","dtp",
+            "lbk","bnc",
+            "leg","enl",
+            "lii","raq",
+            "llo","ngt",
+            "lmm","rmx",
+            "lvs","lv",
+            "mac","mk",
+            "mao","mi",
+            "may","ms",
+            "meg","cir",
+            "mgx","jbk",
+            "mhr","chm",
+            "mnk","man",
+            "mnt","wnn",
+            "mo","ro",
+            "mof","xnt",
+            "mst","mry",
+            "mup","raj",
+            "mwd","dmw",
+            "mwj","vaj",
+            "myd","aog",
+            "myt","mry",
+            "nad","xny",
+            "nbf","nru",
+            "nbx","ekc",
+            "ncp","kdz",
+            "nln","azd",
+            "nlr","nrk",
+            "nns","nbr",
+            "nnx","ngv",
+            "noo","dtd",
+            "npi","ne",
+            "nts","pij",
+            "nxu","bpp",
+            "ojg","oj",
+            "ory","or",
+            "oun","vaj",
+            "pat","kxr",
+            "pbu","ps",
+            "pcr","adx",
+            "per","fa",
+            "pes","fa",
+            "plt","mg",
+            "pmc","huw",
+            "pmu","phr",
+            "pnb","lah",
+            "ppa","bfy",
+            "ppr","lcq",
+            "pry","prt",
+            "puz","pub",
+            "quz","qu",
+            "rmr","emx",
+            "rmy","rom",
+            "rum","ro",
+            "sap","aqt",
+            "sca","hle",
+            "scc","sr",
+            "scr","hr",
+            "sgl","isk",
+            "skk","oyb",
+            "slo","sk",
+            "spy","kln",
+            "src","sc",
+            "sul","sgd",
+            "sum","ulw",
+            "swh","sw",
+            "tdu","dtp",
+            "tgg","bjp",
+            "thc","tpo",
+            "thw","ola",
+            "thx","oyb",
+            "tib","bo",
+            "tid","itd",
+            "tie","ras",
+            "tkk","twm",
+            "tl","fil",
+            "tlw","weo",
+            "tmp","tyj",
+            "tne","kak",
+            "tsf","taj",
+            "ttq","tmh",
+            "tw","ak",
+            "umu","del",
+            "unp","wro",
+            "uok","ema",
+            "uzn","uz",
+            "wel","cy",
+            "wgw","wgb",
+            "wit","nol",
+            "wiw","nwo",
+            "xba","cax",
+            "xia","acn",
+            "xkh","waw",
+            "xpe","kpe",
+            "xrq","dmw",
+            "xsj","suj",
+            "xsl","den",
+            "ybd","rki",
+            "ydd","yi",
+            "yen","ynq",
+            "yiy","yrm",
+            "yma","lrr",
+            "ymt","mtm",
+            "yos","zom",
+            "yuu","yug",
+            "zai","zap",
+            "zir","scv",
+            "zsm","ms",
+            "zyb","za",
+        }
+        lsrs{
+            "","","",
+            "skip","script","",
+            "aa","Latn","ET",
+            "aai","Latn","ZZ",
+            "aak","Latn","ZZ",
+            "aau","Latn","ZZ",
+            "ab","Cyrl","GE",
+            "abi","Latn","ZZ",
+            "abq","Cyrl","ZZ",
+            "abr","Latn","GH",
+            "abt","Latn","ZZ",
+            "aby","Latn","ZZ",
+            "acd","Latn","ZZ",
+            "ace","Latn","ID",
+            "ach","Latn","UG",
+            "ada","Latn","GH",
+            "ade","Latn","ZZ",
+            "adj","Latn","ZZ",
+            "dz","Tibt","BT",
+            "ady","Cyrl","RU",
+            "adz","Latn","ZZ",
+            "ae","Avst","IR",
+            "aeb","Arab","TN",
+            "aey","Latn","ZZ",
+            "af","Latn","ZA",
+            "agc","Latn","ZZ",
+            "agd","Latn","ZZ",
+            "agg","Latn","ZZ",
+            "agm","Latn","ZZ",
+            "ago","Latn","ZZ",
+            "agq","Latn","CM",
+            "aha","Latn","ZZ",
+            "ahl","Latn","ZZ",
+            "aho","Ahom","IN",
+            "ajg","Latn","ZZ",
+            "ak","Latn","GH",
+            "akk","Xsux","IQ",
+            "ala","Latn","ZZ",
+            "sq","Latn","AL",
+            "ali","Latn","ZZ",
+            "aln","Latn","XK",
+            "alt","Cyrl","RU",
+            "am","Ethi","ET",
+            "amm","Latn","ZZ",
+            "amn","Latn","ZZ",
+            "amo","Latn","NG",
+            "amp","Latn","ZZ",
+            "an","Latn","ES",
+            "anc","Latn","ZZ",
+            "ank","Latn","ZZ",
+            "ann","Latn","ZZ",
+            "any","Latn","ZZ",
+            "aoj","Latn","ZZ",
+            "aom","Latn","ZZ",
+            "aoz","Latn","ID",
+            "apc","Arab","ZZ",
+            "apd","Arab","TG",
+            "ape","Latn","ZZ",
+            "apr","Latn","ZZ",
+            "aps","Latn","ZZ",
+            "apz","Latn","ZZ",
+            "ar","Arab","EG",
+            "arc","Armi","IR",
+            "arc","Nbat","JO",
+            "arc","Palm","SY",
+            "arh","Latn","ZZ",
+            "hy","Armn","AM",
+            "arn","Latn","CL",
+            "aro","Latn","BO",
+            "arq","Arab","DZ",
+            "ars","Arab","SA",
+            "ary","Arab","MA",
+            "arz","Arab","EG",
+            "as","Beng","IN",
+            "asa","Latn","TZ",
+            "ase","Sgnw","US",
+            "asg","Latn","ZZ",
+            "aso","Latn","ZZ",
+            "ast","Latn","ES",
+            "ata","Latn","ZZ",
+            "atg","Latn","ZZ",
+            "atj","Latn","CA",
+            "auy","Latn","ZZ",
+            "av","Cyrl","RU",
+            "avl","Arab","ZZ",
+            "avn","Latn","ZZ",
+            "avt","Latn","ZZ",
+            "avu","Latn","ZZ",
+            "awa","Deva","IN",
+            "awb","Latn","ZZ",
+            "awo","Latn","ZZ",
+            "awx","Latn","ZZ",
+            "ay","Latn","BO",
+            "ayb","Latn","ZZ",
+            "az","Latn","AZ",
+            "az","Arab","IQ",
+            "az","Arab","IR",
+            "az","Cyrl","RU",
+            "ba","Cyrl","RU",
+            "bal","Arab","PK",
+            "ban","Latn","ID",
+            "bap","Deva","NP",
+            "eu","Latn","ES",
+            "bar","Latn","AT",
+            "bas","Latn","CM",
+            "bav","Latn","ZZ",
+            "bax","Bamu","CM",
+            "bba","Latn","ZZ",
+            "bbb","Latn","ZZ",
+            "bbc","Latn","ID",
+            "bbd","Latn","ZZ",
+            "bbj","Latn","CM",
+            "bbp","Latn","ZZ",
+            "bbr","Latn","ZZ",
+            "bcf","Latn","ZZ",
+            "bch","Latn","ZZ",
+            "bci","Latn","CI",
+            "bik","Latn","PH",
+            "bcm","Latn","ZZ",
+            "bcn","Latn","ZZ",
+            "bco","Latn","ZZ",
+            "bcq","Ethi","ZZ",
+            "bcu","Latn","ZZ",
+            "bdd","Latn","ZZ",
+            "be","Cyrl","BY",
+            "bef","Latn","ZZ",
+            "beh","Latn","ZZ",
+            "bej","Arab","SD",
+            "bem","Latn","ZM",
+            "bet","Latn","ZZ",
+            "bew","Latn","ID",
+            "bex","Latn","ZZ",
+            "bez","Latn","TZ",
+            "bfd","Latn","CM",
+            "bfq","Taml","IN",
+            "bft","Arab","PK",
+            "bfy","Deva","IN",
+            "bg","Cyrl","BG",
+            "bgc","Deva","IN",
+            "bgn","Arab","PK",
+            "bgx","Grek","TR",
+            "bho","Deva","IN",
+            "bhb","Deva","IN",
+            "bhg","Latn","ZZ",
+            "bhi","Deva","IN",
+            "bhl","Latn","ZZ",
+            "bhy","Latn","ZZ",
+            "bi","Latn","VU",
+            "bib","Latn","ZZ",
+            "big","Latn","ZZ",
+            "bim","Latn","ZZ",
+            "bin","Latn","NG",
+            "bio","Latn","ZZ",
+            "biq","Latn","ZZ",
+            "bjh","Latn","ZZ",
+            "bji","Ethi","ZZ",
+            "bjj","Deva","IN",
+            "bjn","Latn","ID",
+            "bjo","Latn","ZZ",
+            "bjr","Latn","ZZ",
+            "bjt","Latn","SN",
+            "bjz","Latn","ZZ",
+            "bkc","Latn","ZZ",
+            "bkm","Latn","CM",
+            "bkq","Latn","ZZ",
+            "bku","Latn","PH",
+            "bkv","Latn","ZZ",
+            "bla","Latn","CA",
+            "iba","Latn","MY",
+            "blt","Tavt","VN",
+            "bm","Latn","ML",
+            "bmh","Latn","ZZ",
+            "bmk","Latn","ZZ",
+            "bmq","Latn","ML",
+            "bmu","Latn","ZZ",
+            "bn","Beng","BD",
+            "bng","Latn","ZZ",
+            "bnm","Latn","ZZ",
+            "bnp","Latn","ZZ",
+            "bo","Tibt","CN",
+            "boj","Latn","ZZ",
+            "bom","Latn","ZZ",
+            "bon","Latn","ZZ",
+            "bpy","Beng","IN",
+            "bqc","Latn","ZZ",
+            "bqi","Arab","IR",
+            "bqp","Latn","ZZ",
+            "bqv","Latn","CI",
+            "br","Latn","FR",
+            "bra","Deva","IN",
+            "brh","Arab","PK",
+            "brx","Deva","IN",
+            "brz","Latn","ZZ",
+            "bs","Latn","BA",
+            "bsj","Latn","ZZ",
+            "bsq","Bass","LR",
+            "bss","Latn","CM",
+            "bst","Ethi","ZZ",
+            "bto","Latn","PH",
+            "btt","Latn","ZZ",
+            "btv","Deva","PK",
+            "bua","Cyrl","RU",
+            "buc","Latn","YT",
+            "bud","Latn","ZZ",
+            "bug","Latn","ID",
+            "buk","Latn","ZZ",
+            "bum","Latn","CM",
+            "buo","Latn","ZZ",
+            "my","Mymr","MM",
+            "bus","Latn","ZZ",
+            "buu","Latn","ZZ",
+            "bvb","Latn","GQ",
+            "bwd","Latn","ZZ",
+            "bwr","Latn","ZZ",
+            "bxh","Latn","ZZ",
+            "luy","Latn","KE",
+            "bye","Latn","ZZ",
+            "byn","Ethi","ER",
+            "byr","Latn","ZZ",
+            "bys","Latn","ZZ",
+            "byv","Latn","CM",
+            "byx","Latn","ZZ",
+            "bza","Latn","ZZ",
+            "bze","Latn","ML",
+            "bzf","Latn","ZZ",
+            "bzh","Latn","ZZ",
+            "bzw","Latn","ZZ",
+            "ca","Latn","ES",
+            "cad","Latn","US",
+            "can","Latn","ZZ",
+            "cbj","Latn","ZZ",
+            "cch","Latn","NG",
+            "ccp","Cakm","BD",
+            "ce","Cyrl","RU",
+            "ceb","Latn","PH",
+            "cfa","Latn","ZZ",
+            "cgg","Latn","UG",
+            "ch","Latn","GU",
+            "zh","Hans","CN",
+            "zh","Hant","AU",
+            "zh","Hant","BN",
+            "zh","Hant","GF",
+            "zh","Hant","HK",
+            "zh","Hant","ID",
+            "zh","Hant","MO",
+            "zh","Hant","PF",
+            "zh","Hant","PH",
+            "zh","Hant","PA",
+            "zh","Hant","SR",
+            "zh","Hant","TH",
+            "zh","Hant","TW",
+            "zh","Hant","GB",
+            "zh","Hant","US",
+            "zh","Hant","VN",
+            "zh","Bopo","TW",
+            "zh","Hanb","TW",
+            "chk","Latn","FM",
+            "chm","Cyrl","RU",
+            "cho","Latn","US",
+            "chp","Latn","CA",
+            "chr","Cher","US",
+            "cic","Latn","US",
+            "cja","Arab","KH",
+            "cjm","Cham","VN",
+            "cjv","Latn","ZZ",
+            "ckb","Arab","IQ",
+            "ckl","Latn","ZZ",
+            "cko","Latn","ZZ",
+            "cky","Latn","ZZ",
+            "cla","Latn","ZZ",
+            "clc","Latn","CA",
+            "syr","Syrc","IQ",
+            "cme","Latn","ZZ",
+            "cmg","Soyo","MN",
+            "co","Latn","FR",
+            "cop","Copt","EG",
+            "cps","Latn","PH",
+            "cr","Cans","CA",
+            "crg","Latn","CA",
+            "crh","Cyrl","UA",
+            "crk","Cans","CA",
+            "crl","Cans","CA",
+            "crs","Latn","SC",
+            "cs","Latn","CZ",
+            "csb","Latn","PL",
+            "csw","Cans","CA",
+            "ctd","Pauc","MM",
+            "cu","Cyrl","RU",
+            "cu","Glag","BG",
+            "cv","Cyrl","RU",
+            "cy","Latn","GB",
+            "da","Latn","DK",
+            "dad","Latn","ZZ",
+            "dnj","Latn","CI",
+            "dag","Latn","ZZ",
+            "dah","Latn","ZZ",
+            "dak","Latn","US",
+            "dar","Cyrl","RU",
+            "dav","Latn","KE",
+            "dbd","Latn","ZZ",
+            "dbq","Latn","ZZ",
+            "dcc","Arab","IN",
+            "ddn","Latn","ZZ",
+            "de","Latn","DE",
+            "ded","Latn","ZZ",
+            "den","Latn","CA",
+            "dga","Latn","ZZ",
+            "dgh","Latn","ZZ",
+            "dgi","Latn","ZZ",
+            "dgl","Arab","ZZ",
+            "doi","Deva","IN",
+            "dgr","Latn","CA",
+            "dgz","Latn","ZZ",
+            "mwr","Deva","IN",
+            "dia","Latn","ZZ",
+            "zza","Latn","TR",
+            "dje","Latn","NE",
+            "dmf","Medf","NG",
+            "dob","Latn","ZZ",
+            "dop","Latn","ZZ",
+            "dow","Latn","ZZ",
+            "mn","Cyrl","MN",
+            "mn","Mong","CN",
+            "dri","Latn","ZZ",
+            "drs","Ethi","ZZ",
+            "dsb","Latn","DE",
+            "dtm","Latn","ML",
+            "dtp","Latn","MY",
+            "dts","Latn","ZZ",
+            "dty","Deva","NP",
+            "dua","Latn","CM",
+            "duc","Latn","ZZ",
+            "uth","Latn","ZZ",
+            "dug","Latn","ZZ",
+            "nl","Latn","NL",
+            "dv","Thaa","MV",
+            "dva","Latn","ZZ",
+            "dww","Latn","ZZ",
+            "dyo","Latn","SN",
+            "dyu","Latn","BF",
+            "dzg","Latn","ZZ",
+            "ebu","Latn","KE",
+            "ee","Latn","GH",
+            "efi","Latn","NG",
+            "egl","Latn","IT",
+            "egy","Egyp","EG",
+            "eka","Latn","ZZ",
+            "et","Latn","EE",
+            "eky","Kali","MM",
+            "el","Grek","GR",
+            "ema","Latn","ZZ",
+            "emi","Latn","ZZ",
+            "man","Latn","GM",
+            "man","Nkoo","GN",
+            "en","Latn","US",
+            "en","Shaw","GB",
+            "enn","Latn","ZZ",
+            "enq","Latn","ZZ",
+            "eo","Latn","001",
+            "eri","Latn","ZZ",
+            "es","Latn","ES",
+            "esg","Gonm","IN",
+            "ik","Latn","US",
+            "esu","Latn","US",
+            "etr","Latn","ZZ",
+            "ett","Ital","IT",
+            "etu","Latn","ZZ",
+            "etx","Latn","ZZ",
+            "ewo","Latn","CM",
+            "ext","Latn","ES",
+            "eza","Latn","ZZ",
+            "fa","Arab","IR",
+            "faa","Latn","ZZ",
+            "fab","Latn","ZZ",
+            "fag","Latn","ZZ",
+            "fai","Latn","ZZ",
+            "fan","Latn","GQ",
+            "ff","Latn","SN",
+            "ff","Adlm","GN",
+            "ffi","Latn","ZZ",
+            "ffm","Latn","ML",
+            "fi","Latn","FI",
+            "fia","Arab","SD",
+            "fil","Latn","PH",
+            "fit","Latn","SE",
+            "fj","Latn","FJ",
+            "flr","Latn","ZZ",
+            "fmp","Latn","ZZ",
+            "fo","Latn","FO",
+            "fod","Latn","ZZ",
+            "fon","Latn","BJ",
+            "for","Latn","ZZ",
+            "fpe","Latn","ZZ",
+            "fqs","Latn","ZZ",
+            "fr","Latn","FR",
+            "frc","Latn","US",
+            "frp","Latn","FR",
+            "frr","Latn","DE",
+            "frs","Latn","DE",
+            "fub","Arab","CM",
+            "fud","Latn","WF",
+            "fue","Latn","ZZ",
+            "fuf","Latn","GN",
+            "fuh","Latn","ZZ",
+            "fuq","Latn","NE",
+            "fur","Latn","IT",
+            "fuv","Latn","NG",
+            "fuy","Latn","ZZ",
+            "fvr","Latn","SD",
+            "fy","Latn","NL",
+            "ga","Latn","IE",
+            "gaa","Latn","GH",
+            "gaf","Latn","ZZ",
+            "gag","Latn","MD",
+            "gah","Latn","ZZ",
+            "gaj","Latn","ZZ",
+            "gam","Latn","ZZ",
+            "gan","Hans","CN",
+            "gaw","Latn","ZZ",
+            "gay","Latn","ID",
+            "om","Latn","ET",
+            "gba","Latn","ZZ",
+            "gbf","Latn","ZZ",
+            "gbm","Deva","IN",
+            "grb","Latn","ZZ",
+            "gby","Latn","ZZ",
+            "gbz","Arab","IR",
+            "gcr","Latn","GF",
+            "gd","Latn","GB",
+            "gde","Latn","ZZ",
+            "gdn","Latn","ZZ",
+            "gdr","Latn","ZZ",
+            "geb","Latn","ZZ",
+            "gej","Latn","ZZ",
+            "gel","Latn","ZZ",
+            "ka","Geor","GE",
+            "gez","Ethi","ET",
+            "gfk","Latn","ZZ",
+            "gvr","Deva","NP",
+            "ghs","Latn","ZZ",
+            "gil","Latn","KI",
+            "gim","Latn","ZZ",
+            "gjk","Arab","PK",
+            "gjn","Latn","ZZ",
+            "gju","Arab","PK",
+            "gkn","Latn","ZZ",
+            "gkp","Latn","ZZ",
+            "gl","Latn","ES",
+            "glk","Arab","IR",
+            "gmm","Latn","ZZ",
+            "gmv","Ethi","ZZ",
+            "gn","Latn","PY",
+            "gnd","Latn","ZZ",
+            "gng","Latn","ZZ",
+            "gon","Telu","IN",
+            "god","Latn","ZZ",
+            "gof","Ethi","ZZ",
+            "goi","Latn","ZZ",
+            "gom","Deva","IN",
+            "gor","Latn","ID",
+            "gos","Latn","NL",
+            "got","Goth","UA",
+            "grc","Cprt","CY",
+            "grc","Linb","GR",
+            "grt","Beng","IN",
+            "grw","Latn","ZZ",
+            "gsw","Latn","CH",
+            "gu","Gujr","IN",
+            "gub","Latn","BR",
+            "guc","Latn","CO",
+            "gud","Latn","ZZ",
+            "gur","Latn","GH",
+            "guw","Latn","ZZ",
+            "gux","Latn","ZZ",
+            "guz","Latn","KE",
+            "gv","Latn","IM",
+            "gvf","Latn","ZZ",
+            "gvs","Latn","ZZ",
+            "gwc","Arab","ZZ",
+            "gwi","Latn","CA",
+            "gwt","Arab","ZZ",
+            "gyi","Latn","ZZ",
+            "ha","Latn","NG",
+            "ha","Arab","SD",
+            "ha","Arab","CM",
+            "hag","Latn","ZZ",
+            "hak","Hans","CN",
+            "ham","Latn","ZZ",
+            "haw","Latn","US",
+            "haz","Arab","AF",
+            "hbb","Latn","ZZ",
+            "hdy","Ethi","ZZ",
+            "he","Hebr","IL",
+            "hhy","Latn","ZZ",
+            "hi","Deva","IN",
+            "hi","Latn","IN",
+            "hia","Latn","ZZ",
+            "hif","Latn","FJ",
+            "hig","Latn","ZZ",
+            "hih","Latn","ZZ",
+            "hil","Latn","PH",
+            "srx","Deva","IN",
+            "hla","Latn","ZZ",
+            "hlu","Hluw","TR",
+            "hmd","Plrd","CN",
+            "hmt","Latn","ZZ",
+            "hnd","Arab","PK",
+            "hne","Deva","IN",
+            "hnj","Hmnp","US",
+            "hnn","Latn","PH",
+            "hno","Arab","PK",
+            "ho","Latn","PG",
+            "hoc","Deva","IN",
+            "hoj","Deva","IN",
+            "hot","Latn","ZZ",
+            "hr","Latn","HR",
+            "hsb","Latn","DE",
+            "hsn","Hans","CN",
+            "ht","Latn","HT",
+            "hu","Latn","HU",
+            "hui","Latn","ZZ",
+            "hur","Latn","CA",
+            "hz","Latn","NA",
+            "ia","Latn","001",
+            "ian","Latn","ZZ",
+            "iar","Latn","ZZ",
+            "ibb","Latn","NG",
+            "iby","Latn","ZZ",
+            "ica","Latn","ZZ",
+            "is","Latn","IS",
+            "ich","Latn","ZZ",
+            "id","Latn","ID",
+            "idd","Latn","ZZ",
+            "idi","Latn","ZZ",
+            "idu","Latn","ZZ",
+            "ife","Latn","TG",
+            "ig","Latn","NG",
+            "igb","Latn","ZZ",
+            "ige","Latn","ZZ",
+            "ii","Yiii","CN",
+            "ijj","Latn","ZZ",
+            "iu","Cans","CA",
+            "ikk","Latn","ZZ",
+            "ikw","Latn","ZZ",
+            "ikx","Latn","ZZ",
+            "ilo","Latn","PH",
+            "imo","Latn","ZZ",
+            "in","Latn","ID",
+            "inh","Cyrl","RU",
+            "io","Latn","001",
+            "iou","Latn","ZZ",
+            "iri","Latn","ZZ",
+            "it","Latn","IT",
+            "iw","Hebr","IL",
+            "iwm","Latn","ZZ",
+            "iws","Latn","ZZ",
+            "izh","Latn","RU",
+            "izi","Latn","ZZ",
+            "ja","Jpan","JP",
+            "jab","Latn","ZZ",
+            "jam","Latn","JM",
+            "jgk","Latn","ZZ",
+            "jbo","Latn","001",
+            "jbu","Latn","ZZ",
+            "jen","Latn","ZZ",
+            "jgo","Latn","CM",
+            "yi","Hebr","001",
+            "jib","Latn","ZZ",
+            "jmc","Latn","TZ",
+            "jml","Deva","NP",
+            "jra","Latn","ZZ",
+            "jut","Latn","DK",
+            "jv","Latn","ID",
+            "jw","Latn","ID",
+            "kaa","Cyrl","UZ",
+            "kab","Latn","DZ",
+            "kac","Latn","MM",
+            "kad","Latn","ZZ",
+            "kai","Latn","ZZ",
+            "kaj","Latn","NG",
+            "kam","Latn","KE",
+            "kao","Latn","ML",
+            "kaw","Kawi","ID",
+            "kbd","Cyrl","RU",
+            "kbm","Latn","ZZ",
+            "kbp","Latn","ZZ",
+            "kbq","Latn","ZZ",
+            "kbx","Latn","ZZ",
+            "kby","Arab","NE",
+            "kcg","Latn","NG",
+            "kck","Latn","ZW",
+            "kcl","Latn","ZZ",
+            "kct","Latn","ZZ",
+            "kde","Latn","TZ",
+            "kdh","Latn","TG",
+            "kdl","Latn","ZZ",
+            "kdt","Thai","TH",
+            "kea","Latn","CV",
+            "ken","Latn","CM",
+            "kez","Latn","ZZ",
+            "kfo","Latn","CI",
+            "kfr","Deva","IN",
+            "kfy","Deva","IN",
+            "kg","Latn","CD",
+            "kge","Latn","ID",
+            "kgf","Latn","ZZ",
+            "kgp","Latn","BR",
+            "kha","Latn","IN",
+            "khb","Talu","CN",
+            "khn","Deva","IN",
+            "khq","Latn","ML",
+            "khs","Latn","ZZ",
+            "kht","Mymr","IN",
+            "khw","Arab","PK",
+            "khz","Latn","ZZ",
+            "ki","Latn","KE",
+            "kij","Latn","ZZ",
+            "kiu","Latn","TR",
+            "kiw","Latn","ZZ",
+            "kj","Latn","NA",
+            "kjd","Latn","ZZ",
+            "kjg","Laoo","LA",
+            "kjs","Latn","ZZ",
+            "kjy","Latn","ZZ",
+            "kk","Cyrl","KZ",
+            "kk","Arab","AF",
+            "kk","Arab","CN",
+            "kk","Arab","IR",
+            "kk","Arab","MN",
+            "kkc","Latn","ZZ",
+            "kkj","Latn","CM",
+            "kl","Latn","GL",
+            "kln","Latn","KE",
+            "klq","Latn","ZZ",
+            "klt","Latn","ZZ",
+            "klx","Latn","ZZ",
+            "km","Khmr","KH",
+            "kmb","Latn","AO",
+            "kmh","Latn","ZZ",
+            "kmo","Latn","ZZ",
+            "ku","Latn","TR",
+            "ku","Arab","IR",
+            "ku","Arab","LB",
+            "ku","Arab","IQ",
+            "ku","Yezi","GE",
+            "kms","Latn","ZZ",
+            "kmu","Latn","ZZ",
+            "kmw","Latn","ZZ",
+            "kn","Knda","IN",
+            "kr","Latn","ZZ",
+            "knf","Latn","GW",
+            "kok","Deva","IN",
+            "knp","Latn","ZZ",
+            "ko","Kore","KR",
+            "koi","Cyrl","RU",
+            "kol","Latn","ZZ",
+            "kos","Latn","FM",
+            "koz","Latn","ZZ",
+            "kpe","Latn","LR",
+            "kpf","Latn","ZZ",
+            "kpo","Latn","ZZ",
+            "kpr","Latn","ZZ",
+            "kv","Cyrl","RU",
+            "kpx","Latn","ZZ",
+            "kqb","Latn","ZZ",
+            "kqf","Latn","ZZ",
+            "kqs","Latn","ZZ",
+            "kqy","Ethi","ZZ",
+            "krc","Cyrl","RU",
+            "kri","Latn","SL",
+            "krj","Latn","PH",
+            "krl","Latn","RU",
+            "krs","Latn","ZZ",
+            "kru","Deva","IN",
+            "ks","Arab","IN",
+            "ksb","Latn","TZ",
+            "ksd","Latn","ZZ",
+            "ksf","Latn","CM",
+            "ksh","Latn","DE",
+            "ksj","Latn","ZZ",
+            "ksr","Latn","ZZ",
+            "ktb","Ethi","ZZ",
+            "ktm","Latn","ZZ",
+            "kto","Latn","ZZ",
+            "ktr","Latn","MY",
+            "kub","Latn","ZZ",
+            "kud","Latn","ZZ",
+            "kue","Latn","ZZ",
+            "kuj","Latn","ZZ",
+            "kum","Cyrl","RU",
+            "kun","Latn","ZZ",
+            "kup","Latn","ZZ",
+            "kus","Latn","ZZ",
+            "kvg","Latn","ZZ",
+            "kvr","Latn","ID",
+            "kvx","Arab","PK",
+            "kw","Latn","GB",
+            "kwj","Latn","ZZ",
+            "kwk","Latn","CA",
+            "kwo","Latn","ZZ",
+            "yam","Latn","ZZ",
+            "kxa","Latn","ZZ",
+            "kxc","Ethi","ZZ",
+            "tvd","Latn","ZZ",
+            "kxl","Deva","IN",
+            "kxm","Thai","TH",
+            "kxp","Arab","PK",
+            "kxw","Latn","ZZ",
+            "kxz","Latn","ZZ",
+            "ky","Cyrl","KG",
+            "ky","Arab","CN",
+            "ky","Latn","TR",
+            "kye","Latn","ZZ",
+            "kyx","Latn","ZZ",
+            "kzh","Arab","ZZ",
+            "kzj","Latn","MY",
+            "kzr","Latn","ZZ",
+            "kzt","Latn","MY",
+            "la","Latn","VA",
+            "lab","Lina","GR",
+            "lad","Hebr","IL",
+            "lag","Latn","TZ",
+            "lah","Arab","PK",
+            "laj","Latn","UG",
+            "las","Latn","ZZ",
+            "lb","Latn","LU",
+            "lbe","Cyrl","RU",
+            "lbu","Latn","ZZ",
+            "lbw","Latn","ID",
+            "lcm","Latn","ZZ",
+            "lcp","Thai","CN",
+            "ldb","Latn","ZZ",
+            "led","Latn","ZZ",
+            "lee","Latn","ZZ",
+            "lem","Latn","ZZ",
+            "lep","Lepc","IN",
+            "leq","Latn","ZZ",
+            "leu","Latn","ZZ",
+            "lez","Cyrl","RU",
+            "lg","Latn","UG",
+            "lgg","Latn","ZZ",
+            "li","Latn","NL",
+            "lia","Latn","ZZ",
+            "lid","Latn","ZZ",
+            "lif","Deva","NP",
+            "lif","Limb","IN",
+            "lig","Latn","ZZ",
+            "lih","Latn","ZZ",
+            "lij","Latn","IT",
+            "lil","Latn","CA",
+            "lis","Lisu","CN",
+            "ljp","Latn","ID",
+            "lki","Arab","IR",
+            "lkt","Latn","US",
+            "lle","Latn","ZZ",
+            "lln","Latn","ZZ",
+            "lmn","Telu","IN",
+            "lmo","Latn","IT",
+            "lmp","Latn","ZZ",
+            "ln","Latn","CD",
+            "lns","Latn","ZZ",
+            "lnu","Latn","ZZ",
+            "lo","Laoo","LA",
+            "loj","Latn","ZZ",
+            "lok","Latn","ZZ",
+            "lol","Latn","CD",
+            "lor","Latn","ZZ",
+            "los","Latn","ZZ",
+            "loz","Latn","ZM",
+            "lrc","Arab","IR",
+            "lt","Latn","LT",
+            "ltg","Latn","LV",
+            "lu","Latn","CD",
+            "lua","Latn","CD",
+            "luo","Latn","KE",
+            "luz","Arab","IR",
+            "lv","Latn","LV",
+            "lwl","Thai","TH",
+            "lzh","Hans","CN",
+            "lzz","Latn","TR",
+            "mk","Cyrl","MK",
+            "mad","Latn","ID",
+            "maf","Latn","CM",
+            "mag","Deva","IN",
+            "mai","Deva","IN",
+            "mak","Latn","ID",
+            "mi","Latn","NZ",
+            "mas","Latn","KE",
+            "maw","Latn","ZZ",
+            "ms","Latn","MY",
+            "ms","Arab","CC",
+            "maz","Latn","MX",
+            "mbh","Latn","ZZ",
+            "mbo","Latn","ZZ",
+            "mbq","Latn","ZZ",
+            "mbu","Latn","ZZ",
+            "mbw","Latn","ZZ",
+            "mci","Latn","ZZ",
+            "mcp","Latn","ZZ",
+            "mcq","Latn","ZZ",
+            "mcr","Latn","ZZ",
+            "mcu","Latn","ZZ",
+            "mda","Latn","ZZ",
+            "mde","Arab","ZZ",
+            "mdf","Cyrl","RU",
+            "mdh","Latn","PH",
+            "mdj","Latn","ZZ",
+            "mdr","Latn","ID",
+            "mdx","Ethi","ZZ",
+            "med","Latn","ZZ",
+            "mee","Latn","ZZ",
+            "mek","Latn","ZZ",
+            "men","Latn","SL",
+            "mer","Latn","KE",
+            "met","Latn","ZZ",
+            "meu","Latn","ZZ",
+            "mfa","Arab","TH",
+            "mfe","Latn","MU",
+            "mfn","Latn","ZZ",
+            "mfo","Latn","ZZ",
+            "mfq","Latn","ZZ",
+            "mg","Latn","MG",
+            "mgh","Latn","MZ",
+            "mgl","Latn","ZZ",
+            "mgo","Latn","CM",
+            "mgp","Deva","NP",
+            "mgy","Latn","TZ",
+            "mh","Latn","MH",
+            "mhi","Latn","ZZ",
+            "mhl","Latn","ZZ",
+            "mic","Latn","CA",
+            "mif","Latn","ZZ",
+            "min","Latn","ID",
+            "miw","Latn","ZZ",
+            "mki","Arab","ZZ",
+            "mkl","Latn","ZZ",
+            "mkp","Latn","ZZ",
+            "mkw","Latn","ZZ",
+            "ml","Mlym","IN",
+            "mle","Latn","ZZ",
+            "mlp","Latn","ZZ",
+            "mls","Latn","SD",
+            "mmo","Latn","ZZ",
+            "mmu","Latn","ZZ",
+            "mmx","Latn","ZZ",
+            "mna","Latn","ZZ",
+            "mnf","Latn","ZZ",
+            "mni","Beng","IN",
+            "mnw","Mymr","MM",
+            "ro","Latn","RO",
+            "moa","Latn","ZZ",
+            "moe","Latn","CA",
+            "moh","Latn","CA",
+            "mos","Latn","BF",
+            "mox","Latn","ZZ",
+            "mpp","Latn","ZZ",
+            "mps","Latn","ZZ",
+            "mpt","Latn","ZZ",
+            "mpx","Latn","ZZ",
+            "mql","Latn","ZZ",
+            "mr","Deva","IN",
+            "mrd","Deva","NP",
+            "mrj","Cyrl","RU",
+            "mro","Mroo","BD",
+            "mt","Latn","MT",
+            "mtc","Latn","ZZ",
+            "mtf","Latn","ZZ",
+            "mti","Latn","ZZ",
+            "mtr","Deva","IN",
+            "mua","Latn","CM",
+            "raj","Deva","IN",
+            "mur","Latn","ZZ",
+            "mus","Latn","US",
+            "mva","Latn","ZZ",
+            "mvn","Latn","ZZ",
+            "mvy","Arab","PK",
+            "mwk","Latn","ML",
+            "mwv","Latn","ID",
+            "mww","Hmnp","US",
+            "mxc","Latn","ZW",
+            "mxm","Latn","ZZ",
+            "myk","Latn","ZZ",
+            "mym","Ethi","ZZ",
+            "myv","Cyrl","RU",
+            "myw","Latn","ZZ",
+            "myx","Latn","UG",
+            "myz","Mand","IR",
+            "mzk","Latn","ZZ",
+            "mzm","Latn","ZZ",
+            "mzn","Arab","IR",
+            "mzp","Latn","ZZ",
+            "mzw","Latn","ZZ",
+            "mzz","Latn","ZZ",
+            "na","Latn","NR",
+            "nac","Latn","ZZ",
+            "naf","Latn","ZZ",
+            "nak","Latn","ZZ",
+            "nan","Hans","CN",
+            "nap","Latn","IT",
+            "naq","Latn","NA",
+            "nas","Latn","ZZ",
+            "nb","Latn","NO",
+            "nca","Latn","ZZ",
+            "nce","Latn","ZZ",
+            "ncf","Latn","ZZ",
+            "nch","Latn","MX",
+            "nco","Latn","ZZ",
+            "ncu","Latn","ZZ",
+            "nd","Latn","ZW",
+            "ndc","Latn","MZ",
+            "nds","Latn","DE",
+            "ne","Deva","NP",
+            "neb","Latn","ZZ",
+            "new","Deva","NP",
+            "nex","Latn","ZZ",
+            "nfr","Latn","ZZ",
+            "ng","Latn","NA",
+            "nga","Latn","ZZ",
+            "ngb","Latn","ZZ",
+            "ngl","Latn","MZ",
+            "nhb","Latn","ZZ",
+            "nhe","Latn","MX",
+            "nhw","Latn","MX",
+            "nif","Latn","ZZ",
+            "nii","Latn","ZZ",
+            "nij","Latn","ID",
+            "nin","Latn","ZZ",
+            "niu","Latn","NU",
+            "niy","Latn","ZZ",
+            "niz","Latn","ZZ",
+            "njo","Latn","IN",
+            "nkg","Latn","ZZ",
+            "nko","Latn","ZZ",
+            "nmg","Latn","CM",
+            "nmz","Latn","ZZ",
+            "nn","Latn","NO",
+            "nnf","Latn","ZZ",
+            "nnh","Latn","CM",
+            "nnk","Latn","ZZ",
+            "nnm","Latn","ZZ",
+            "nnp","Wcho","IN",
+            "no","Latn","NO",
+            "nod","Lana","TH",
+            "noe","Deva","IN",
+            "non","Runr","SE",
+            "nop","Latn","ZZ",
+            "nou","Latn","ZZ",
+            "nqo","Nkoo","GN",
+            "nr","Latn","ZA",
+            "nrb","Latn","ZZ",
+            "nsk","Cans","CA",
+            "nsn","Latn","ZZ",
+            "nso","Latn","ZA",
+            "nss","Latn","ZZ",
+            "nst","Tnsa","IN",
+            "ntm","Latn","ZZ",
+            "ntr","Latn","ZZ",
+            "nui","Latn","ZZ",
+            "nup","Latn","ZZ",
+            "nus","Latn","SS",
+            "nuv","Latn","ZZ",
+            "nux","Latn","ZZ",
+            "nv","Latn","US",
+            "nwb","Latn","ZZ",
+            "nxq","Latn","CN",
+            "nxr","Latn","ZZ",
+            "ny","Latn","MW",
+            "nym","Latn","TZ",
+            "nyn","Latn","UG",
+            "nzi","Latn","GH",
+            "oc","Latn","FR",
+            "ogc","Latn","ZZ",
+            "oj","Cans","CA",
+            "ojs","Cans","CA",
+            "oka","Latn","CA",
+            "okr","Latn","ZZ",
+            "okv","Latn","ZZ",
+            "ong","Latn","ZZ",
+            "onn","Latn","ZZ",
+            "ons","Latn","ZZ",
+            "opm","Latn","ZZ",
+            "or","Orya","IN",
+            "oro","Latn","ZZ",
+            "oru","Arab","ZZ",
+            "os","Cyrl","GE",
+            "osa","Osge","US",
+            "ota","Arab","ZZ",
+            "otk","Orkh","MN",
+            "oui","Ougr","143",
+            "ozm","Latn","ZZ",
+            "pa","Guru","IN",
+            "pa","Arab","PK",
+            "pag","Latn","PH",
+            "pal","Phli","IR",
+            "pal","Phlp","CN",
+            "pam","Latn","PH",
+            "pap","Latn","AW",
+            "pau","Latn","PW",
+            "pbi","Latn","ZZ",
+            "ps","Arab","AF",
+            "pcd","Latn","FR",
+            "pcm","Latn","NG",
+            "pdc","Latn","US",
+            "pdt","Latn","CA",
+            "ped","Latn","ZZ",
+            "peo","Xpeo","IR",
+            "pex","Latn","ZZ",
+            "pfl","Latn","DE",
+            "phl","Arab","ZZ",
+            "phn","Phnx","LB",
+            "pil","Latn","ZZ",
+            "pip","Latn","ZZ",
+            "pka","Brah","IN",
+            "pko","Latn","KE",
+            "pl","Latn","PL",
+            "pla","Latn","ZZ",
+            "pms","Latn","IT",
+            "png","Latn","ZZ",
+            "pnn","Latn","ZZ",
+            "pnt","Grek","GR",
+            "pon","Latn","FM",
+            "ppa","Deva","IN",
+            "ppo","Latn","ZZ",
+            "pqm","Latn","CA",
+            "pra","Khar","PK",
+            "prd","Arab","IR",
+            "prg","Latn","001",
+            "pss","Latn","ZZ",
+            "pt","Latn","BR",
+            "ptp","Latn","ZZ",
+            "puu","Latn","GA",
+            "pwa","Latn","ZZ",
+            "qu","Latn","PE",
+            "quc","Latn","GT",
+            "qug","Latn","EC",
+            "rai","Latn","ZZ",
+            "rao","Latn","ZZ",
+            "rcf","Latn","RE",
+            "rej","Latn","ID",
+            "rel","Latn","ZZ",
+            "res","Latn","ZZ",
+            "rgn","Latn","IT",
+            "rhg","Rohg","MM",
+            "ria","Latn","IN",
+            "rif","Tfng","MA",
+            "rif","Latn","NL",
+            "rjs","Deva","NP",
+            "rkt","Beng","BD",
+            "rm","Latn","CH",
+            "rmf","Latn","FI",
+            "rmo","Latn","CH",
+            "rmt","Arab","IR",
+            "rmu","Latn","SE",
+            "rn","Latn","BI",
+            "rna","Latn","ZZ",
+            "rng","Latn","MZ",
+            "rob","Latn","ID",
+            "rof","Latn","TZ",
+            "roo","Latn","ZZ",
+            "rro","Latn","ZZ",
+            "rtm","Latn","FJ",
+            "ru","Cyrl","RU",
+            "rue","Cyrl","UA",
+            "rug","Latn","SB",
+            "rw","Latn","RW",
+            "rwk","Latn","TZ",
+            "rwo","Latn","ZZ",
+            "ryu","Kana","JP",
+            "sa","Deva","IN",
+            "saf","Latn","GH",
+            "sah","Cyrl","RU",
+            "saq","Latn","KE",
+            "sas","Latn","ID",
+            "sat","Olck","IN",
+            "sav","Latn","SN",
+            "saz","Saur","IN",
+            "sba","Latn","ZZ",
+            "sbe","Latn","ZZ",
+            "sbp","Latn","TZ",
+            "sc","Latn","IT",
+            "sr","Cyrl","RS",
+            "sr","Latn","RU",
+            "sr","Latn","ME",
+            "sr","Latn","RO",
+            "sr","Latn","TR",
+            "sck","Deva","IN",
+            "scl","Arab","ZZ",
+            "scn","Latn","IT",
+            "sco","Latn","GB",
+            "sd","Arab","PK",
+            "sd","Deva","IN",
+            "sd","Khoj","IN",
+            "sd","Sind","IN",
+            "sdc","Latn","IT",
+            "sdh","Arab","IR",
+            "se","Latn","NO",
+            "sef","Latn","CI",
+            "seh","Latn","MZ",
+            "sei","Latn","MX",
+            "ses","Latn","ML",
+            "sg","Latn","CF",
+            "sga","Ogam","IE",
+            "sgs","Latn","LT",
+            "sgw","Ethi","ZZ",
+            "sgz","Latn","ZZ",
+            "sr","Latn","RS",
+            "shi","Tfng","MA",
+            "shk","Latn","ZZ",
+            "shn","Mymr","MM",
+            "shu","Arab","ZZ",
+            "si","Sinh","LK",
+            "sid","Latn","ET",
+            "sig","Latn","ZZ",
+            "sil","Latn","ZZ",
+            "sim","Latn","ZZ",
+            "sjr","Latn","ZZ",
+            "sk","Latn","SK",
+            "skc","Latn","ZZ",
+            "skr","Arab","PK",
+            "sks","Latn","ZZ",
+            "sl","Latn","SI",
+            "sld","Latn","ZZ",
+            "sli","Latn","PL",
+            "sll","Latn","ZZ",
+            "sly","Latn","ID",
+            "sm","Latn","WS",
+            "sma","Latn","SE",
+            "smj","Latn","SE",
+            "smn","Latn","FI",
+            "smp","Samr","IL",
+            "smq","Latn","ZZ",
+            "sms","Latn","FI",
+            "sn","Latn","ZW",
+            "snc","Latn","ZZ",
+            "snk","Latn","ML",
+            "snp","Latn","ZZ",
+            "snx","Latn","ZZ",
+            "sny","Latn","ZZ",
+            "so","Latn","SO",
+            "sog","Sogd","UZ",
+            "sok","Latn","ZZ",
+            "soq","Latn","ZZ",
+            "sou","Thai","TH",
+            "soy","Latn","ZZ",
+            "spd","Latn","ZZ",
+            "spl","Latn","ZZ",
+            "sps","Latn","ZZ",
+            "srb","Sora","IN",
+            "srn","Latn","SR",
+            "srr","Latn","SN",
+            "ss","Latn","ZA",
+            "ssd","Latn","ZZ",
+            "ssg","Latn","ZZ",
+            "ssy","Latn","ER",
+            "st","Latn","ZA",
+            "stk","Latn","ZZ",
+            "stq","Latn","DE",
+            "su","Latn","ID",
+            "sua","Latn","ZZ",
+            "sue","Latn","ZZ",
+            "suk","Latn","TZ",
+            "sur","Latn","ZZ",
+            "sus","Latn","GN",
+            "sv","Latn","SE",
+            "sw","Latn","TZ",
+            "swb","Arab","YT",
+            "swc","Latn","CD",
+            "swg","Latn","DE",
+            "swp","Latn","ZZ",
+            "swv","Deva","IN",
+            "sxn","Latn","ID",
+            "sxw","Latn","ZZ",
+            "syl","Beng","BD",
+            "szl","Latn","PL",
+            "ta","Taml","IN",
+            "taj","Deva","NP",
+            "tal","Latn","ZZ",
+            "tan","Latn","ZZ",
+            "taq","Latn","ZZ",
+            "tbc","Latn","ZZ",
+            "tbd","Latn","ZZ",
+            "tbf","Latn","ZZ",
+            "tbg","Latn","ZZ",
+            "tbo","Latn","ZZ",
+            "tbw","Latn","PH",
+            "tbz","Latn","ZZ",
+            "tci","Latn","ZZ",
+            "tcy","Knda","IN",
+            "tdd","Tale","CN",
+            "tdg","Deva","NP",
+            "tdh","Deva","NP",
+            "tdu","Latn","MY",
+            "te","Telu","IN",
+            "ted","Latn","ZZ",
+            "tem","Latn","SL",
+            "teo","Latn","UG",
+            "tet","Latn","TL",
+            "tfi","Latn","ZZ",
+            "tg","Cyrl","TJ",
+            "tg","Arab","PK",
+            "tgc","Latn","ZZ",
+            "tgo","Latn","ZZ",
+            "tgu","Latn","ZZ",
+            "th","Thai","TH",
+            "thl","Deva","NP",
+            "thq","Deva","NP",
+            "thr","Deva","NP",
+            "ti","Ethi","ET",
+            "tif","Latn","ZZ",
+            "tig","Ethi","ER",
+            "tik","Latn","ZZ",
+            "tim","Latn","ZZ",
+            "tio","Latn","ZZ",
+            "tiv","Latn","NG",
+            "tk","Latn","TM",
+            "tkl","Latn","TK",
+            "tkr","Latn","AZ",
+            "tkt","Deva","NP",
+            "tl","Latn","PH",
+            "tlf","Latn","ZZ",
+            "tlx","Latn","ZZ",
+            "tly","Latn","AZ",
+            "tmh","Latn","NE",
+            "tmy","Latn","ZZ",
+            "tn","Latn","ZA",
+            "tnh","Latn","ZZ",
+            "to","Latn","TO",
+            "tof","Latn","ZZ",
+            "tog","Latn","MW",
+            "toq","Latn","ZZ",
+            "tpi","Latn","PG",
+            "tpm","Latn","ZZ",
+            "tpz","Latn","ZZ",
+            "tqo","Latn","ZZ",
+            "tr","Latn","TR",
+            "tru","Latn","TR",
+            "trv","Latn","TW",
+            "trw","Arab","PK",
+            "ts","Latn","ZA",
+            "tsd","Grek","GR",
+            "tsf","Deva","NP",
+            "tsg","Latn","PH",
+            "tsj","Tibt","BT",
+            "tsw","Latn","ZZ",
+            "tt","Cyrl","RU",
+            "ttd","Latn","ZZ",
+            "tte","Latn","ZZ",
+            "ttj","Latn","UG",
+            "ttr","Latn","ZZ",
+            "tts","Thai","TH",
+            "ttt","Latn","AZ",
+            "tuh","Latn","ZZ",
+            "tul","Latn","ZZ",
+            "tum","Latn","MW",
+            "tuq","Latn","ZZ",
+            "tvl","Latn","TV",
+            "tvu","Latn","ZZ",
+            "twh","Latn","ZZ",
+            "twq","Latn","NE",
+            "txg","Tang","CN",
+            "txo","Toto","IN",
+            "ty","Latn","PF",
+            "tya","Latn","ZZ",
+            "tyv","Cyrl","RU",
+            "tzm","Latn","MA",
+            "ubu","Latn","ZZ",
+            "udi","Aghb","RU",
+            "udm","Cyrl","RU",
+            "ug","Arab","CN",
+            "ug","Cyrl","KZ",
+            "ug","Cyrl","MN",
+            "uga","Ugar","SY",
+            "uk","Cyrl","UA",
+            "uli","Latn","FM",
+            "umb","Latn","AO",
+            "en","Latn","NG",
+            "en","Latn","AU",
+            "es","Latn","MX",
+            "sw","Latn","CD",
+            "en","Latn","ZA",
+            "es","Latn","CU",
+            "en","Latn","PG",
+            "en","Latn","GU",
+            "uz","Latn","UZ",
+            "ar","Arab","SA",
+            "en","Latn","GB",
+            "es","Latn","419",
+            "pap","Latn","CW",
+            "ar","Arab","SD",
+            "ar","Arab","YE",
+            "ca","Latn","AD",
+            "ar","Arab","AE",
+            "fa","Arab","AF",
+            "pt","Latn","AO",
+            "und","Latn","AQ",
+            "es","Latn","AR",
+            "sm","Latn","AS",
+            "de","Latn","AT",
+            "nl","Latn","AW",
+            "sv","Latn","AX",
+            "nl","Latn","BE",
+            "fr","Latn","BF",
+            "ar","Arab","BH",
+            "fr","Latn","BJ",
+            "fr","Latn","BL",
+            "ms","Latn","BN",
+            "es","Latn","BO",
+            "pap","Latn","BQ",
+            "und","Latn","BV",
+            "fr","Latn","CF",
+            "fr","Latn","CG",
+            "de","Latn","CH",
+            "fr","Latn","CI",
+            "es","Latn","CL",
+            "fr","Latn","CM",
+            "es","Latn","CO",
+            "und","Latn","CP",
+            "es","Latn","CR",
+            "pt","Latn","CV",
+            "el","Grek","CY",
+            "aa","Latn","DJ",
+            "es","Latn","DO",
+            "ar","Arab","DZ",
+            "es","Latn","EA",
+            "es","Latn","EC",
+            "ar","Arab","EH",
+            "ti","Ethi","ER",
+            "en","Latn","IE",
+            "de","Latn","EZ",
+            "fr","Latn","GA",
+            "fr","Latn","GF",
+            "fr","Latn","GN",
+            "fr","Latn","GP",
+            "es","Latn","GQ",
+            "und","Latn","GS",
+            "es","Latn","GT",
+            "pt","Latn","GW",
+            "und","Latn","HM",
+            "es","Latn","HN",
+            "es","Latn","IC",
+            "ar","Arab","IQ",
+            "ar","Arab","JO",
+            "sw","Latn","KE",
+            "ar","Arab","KM",
+            "ko","Kore","KP",
+            "ar","Arab","KW",
+            "ru","Cyrl","KZ",
+            "ar","Arab","LB",
+            "de","Latn","LI",
+            "st","Latn","LS",
+            "fr","Latn","LU",
+            "ar","Arab","LY",
+            "ar","Arab","MA",
+            "fr","Latn","MC",
+            "ro","Latn","MD",
+            "fr","Latn","MF",
+            "fr","Latn","MQ",
+            "ar","Arab","MR",
+            "pt","Latn","MZ",
+            "af","Latn","NA",
+            "fr","Latn","NC",
+            "ha","Latn","NE",
+            "es","Latn","NI",
+            "ar","Arab","OM",
+            "es","Latn","PA",
+            "es","Latn","PE",
+            "fr","Latn","PF",
+            "ur","Arab","PK",
+            "fr","Latn","PM",
+            "es","Latn","PR",
+            "ar","Arab","PS",
+            "pt","Latn","PT",
+            "ar","Arab","QA",
+            "en","Latn","DG",
+            "fr","Latn","RE",
+            "fr","Latn","SC",
+            "nb","Latn","SJ",
+            "it","Latn","SM",
+            "fr","Latn","SN",
+            "nl","Latn","SR",
+            "pt","Latn","ST",
+            "es","Latn","SV",
+            "ar","Arab","SY",
+            "fr","Latn","TD",
+            "fr","Latn","TF",
+            "fr","Latn","TG",
+            "pt","Latn","TL",
+            "ar","Arab","TN",
+            "sw","Latn","UG",
+            "es","Latn","UY",
+            "it","Latn","VA",
+            "vi","Latn","VN",
+            "es","Latn","VE",
+            "fr","Latn","WF",
+            "sq","Latn","XK",
+            "fr","Latn","YT",
+            "rhg","Arab","MM",
+            "ur","Arab","GB",
+            "ms","Arab","ID",
+            "ur","Arab","IN",
+            "ur","Arab","MU",
+            "ha","Arab","NG",
+            "fa","Arab","TJ",
+            "az","Arab","TR",
+            "ban","Bali","ID",
+            "bbc","Batk","ID",
+            "sa","Bhks","IN",
+            "fr","Brai","FR",
+            "bug","Bugi","ID",
+            "bku","Buhd","PH",
+            "xcr","Cari","TR",
+            "xco","Chrs","UZ",
+            "und","Cpmn","CY",
+            "mk","Cyrl","AL",
+            "sr","Cyrl","BA",
+            "mk","Cyrl","GR",
+            "uk","Cyrl","MD",
+            "bg","Cyrl","RO",
+            "uk","Cyrl","SK",
+            "kbd","Cyrl","TR",
+            "sr","Cyrl","XK",
+            "ne","Deva","BT",
+            "hif","Deva","FJ",
+            "bho","Deva","MU",
+            "dv","Diak","MV",
+            "doi","Dogr","IN",
+            "fr","Dupl","FR",
+            "sq","Elba","AL",
+            "arc","Elym","IR",
+            "wsg","Gong","IN",
+            "sa","Gran","IN",
+            "ko","Hang","KR",
+            "zh","Hani","CN",
+            "hnn","Hano","PH",
+            "yue","Hant","CA",
+            "yi","Hebr","SE",
+            "yi","Hebr","UA",
+            "yi","Hebr","US",
+            "ja","Hira","JP",
+            "hnj","Hmng","LA",
+            "hu","Hung","HU",
+            "ko","Jamo","KR",
+            "jv","Java","ID",
+            "ja","Kana","JP",
+            "zkt","Kits","CN",
+            "bho","Kthi","IN",
+            "en","Latn","ET",
+            "tk","Latn","AF",
+            "ku","Latn","AM",
+            "za","Latn","CN",
+            "tr","Latn","CY",
+            "fr","Latn","DZ",
+            "ku","Latn","GE",
+            "tk","Latn","IR",
+            "fr","Latn","KM",
+            "fr","Latn","MA",
+            "sq","Latn","MK",
+            "pt","Latn","MO",
+            "fr","Latn","MR",
+            "fr","Latn","SY",
+            "fr","Latn","TN",
+            "pl","Latn","UA",
+            "xlc","Lyci","TR",
+            "xld","Lydi","TR",
+            "hi","Mahj","IN",
+            "mak","Maka","ID",
+            "xmn","Mani","CN",
+            "bo","Marc","CN",
+            "men","Mend","SL",
+            "xmr","Merc","SD",
+            "xmr","Mero","SD",
+            "mr","Modi","IN",
+            "mni","Mtei","IN",
+            "skr","Mult","PK",
+            "mnw","Mymr","TH",
+            "unr","Nagm","IN",
+            "sa","Nand","IN",
+            "xna","Narb","SA",
+            "new","Newa","NP",
+            "zhx","Nshu","CN",
+            "so","Osma","SO",
+            "kv","Perm","RU",
+            "lzh","Phag","CN",
+            "xpr","Prti","IR",
+            "rej","Rjng","ID",
+            "xsa","Sarb","YE",
+            "sa","Shrd","IN",
+            "sa","Sidd","IN",
+            "sog","Sogo","UZ",
+            "su","Sund","ID",
+            "syl","Sylo","BD",
+            "tbw","Tagb","PH",
+            "doi","Takr","IN",
+            "zgh","Tfng","MA",
+            "fil","Tglg","PH",
+            "kdt","Thai","KH",
+            "kdt","Thai","LA",
+            "mai","Tirh","IN",
+            "vai","Vaii","LR",
+            "sq","Vith","AL",
+            "hoc","Wara","IN",
+            "cmg","Zanb","MN",
+            "unr","Beng","IN",
+            "unr","Deva","NP",
+            "unx","Beng","IN",
+            "uok","Latn","ZZ",
+            "uri","Latn","ZZ",
+            "urt","Latn","ZZ",
+            "urw","Latn","ZZ",
+            "usa","Latn","ZZ",
+            "utr","Latn","ZZ",
+            "uvh","Latn","ZZ",
+            "uvl","Latn","ZZ",
+            "uz","Arab","AF",
+            "uz","Cyrl","CN",
+            "vag","Latn","ZZ",
+            "van","Latn","ZZ",
+            "ve","Latn","ZA",
+            "vec","Latn","IT",
+            "vep","Latn","RU",
+            "vic","Latn","SX",
+            "viv","Latn","ZZ",
+            "vls","Latn","BE",
+            "vmf","Latn","DE",
+            "vmw","Latn","MZ",
+            "vo","Latn","001",
+            "vot","Latn","RU",
+            "vro","Latn","EE",
+            "vun","Latn","TZ",
+            "vut","Latn","ZZ",
+            "wa","Latn","BE",
+            "wae","Latn","CH",
+            "waj","Latn","ZZ",
+            "wal","Ethi","ET",
+            "wan","Latn","ZZ",
+            "war","Latn","PH",
+            "wbp","Latn","AU",
+            "wbq","Telu","IN",
+            "wbr","Deva","IN",
+            "wci","Latn","ZZ",
+            "wer","Latn","ZZ",
+            "wgi","Latn","ZZ",
+            "whg","Latn","ZZ",
+            "wib","Latn","ZZ",
+            "wiu","Latn","ZZ",
+            "wiv","Latn","ZZ",
+            "wja","Latn","ZZ",
+            "wji","Latn","ZZ",
+            "wls","Latn","WF",
+            "wmo","Latn","ZZ",
+            "wnc","Latn","ZZ",
+            "wni","Arab","KM",
+            "wnu","Latn","ZZ",
+            "wo","Latn","SN",
+            "wob","Latn","ZZ",
+            "wos","Latn","ZZ",
+            "wrs","Latn","ZZ",
+            "wsk","Latn","ZZ",
+            "wtm","Deva","IN",
+            "wuu","Hans","CN",
+            "wuv","Latn","ZZ",
+            "wwa","Latn","ZZ",
+            "xav","Latn","BR",
+            "xbi","Latn","ZZ",
+            "xes","Latn","ZZ",
+            "xh","Latn","ZA",
+            "xla","Latn","ZZ",
+            "xmf","Geor","GE",
+            "xnr","Deva","IN",
+            "xog","Latn","UG",
+            "xon","Latn","ZZ",
+            "xrb","Latn","ZZ",
+            "xsi","Latn","ZZ",
+            "xsm","Latn","ZZ",
+            "xsr","Deva","NP",
+            "xwe","Latn","ZZ",
+            "yao","Latn","MZ",
+            "yap","Latn","FM",
+            "yas","Latn","ZZ",
+            "yat","Latn","ZZ",
+            "yav","Latn","CM",
+            "yay","Latn","ZZ",
+            "yaz","Latn","ZZ",
+            "yba","Latn","ZZ",
+            "ybb","Latn","CM",
+            "yby","Latn","ZZ",
+            "yer","Latn","ZZ",
+            "ygr","Latn","ZZ",
+            "ygw","Latn","ZZ",
+            "yko","Latn","ZZ",
+            "yle","Latn","ZZ",
+            "ylg","Latn","ZZ",
+            "yll","Latn","ZZ",
+            "yml","Latn","ZZ",
+            "yo","Latn","NG",
+            "yon","Latn","ZZ",
+            "yrb","Latn","ZZ",
+            "yre","Latn","ZZ",
+            "yrl","Latn","BR",
+            "yss","Latn","ZZ",
+            "yua","Latn","MX",
+            "yue","Hant","HK",
+            "yue","Hans","CN",
+            "yuj","Latn","ZZ",
+            "yut","Latn","ZZ",
+            "yuw","Latn","ZZ",
+            "zag","Latn","SD",
+            "zdj","Arab","KM",
+            "zea","Latn","NL",
+            "zia","Latn","ZZ",
+            "zlm","Latn","TG",
+            "zmi","Latn","MY",
+            "zne","Latn","ZZ",
+            "zu","Latn","ZA",
+        }
+        regionAliases{
+            "062","034",
+            "172","RU",
+            "200","CZ",
+            "230","ET",
+            "280","DE",
+            "532","CW",
+            "582","FM",
+            "736","SD",
+            "830","JE",
+            "886","YE",
+            "890","RS",
+            "AN","CW",
+            "BU","MM",
+            "CS","RS",
+            "CT","KI",
+            "DD","DE",
+            "DY","BJ",
+            "FQ","AQ",
+            "FX","FR",
+            "HV","BF",
+            "JT","UM",
+            "MI","UM",
+            "NH","VU",
+            "NQ","AQ",
+            "NT","SA",
+            "PC","FM",
+            "PU","UM",
+            "PZ","PA",
+            "QU","EU",
+            "RH","ZW",
+            "SU","RU",
+            "TP","TL",
+            "UK","GB",
+            "VD","VN",
+            "WK","UM",
+            "YD","YE",
+            "YU","RS",
+            "ZR","CD",
+        }
+        trie:bin{
+001a6dcc3574c4f977c26777a2b778a4
+5279a4c27a0f6d7d7a5c7a30e1ada9e8
+2ef5af4d10e1a53b022a3c42cc584811
+616e01e2a3fff4a3fa0b4d25540e54cc
+05552a5610cea3fd10d3a3fc4dd81ec7
+502a5310d2a3f802c1a3f7c6a3f5c8a3
+f647d514473248d81ea94910c4a3f301
+c2a3fbc6a3f16d326e36733a7910e2ad
+a910e9af4b10e5af4c10ed22012aa915
+4310c3a9166817683269366b3a6c10ed
+af4a10f8adc710e1af4910f4ada46132
+6436653a6710e8add510e7af4610eaaf
+4710e1af4800126d46741b7434753877
+42e1adfaefaf1110edaf1601f5af17f6
+af1810e1af196d3c6e406f50725a7301
+e7ad95ebaf1510efaf0d02e3af0ee9af
+0ff5af1001e2af12f3af1310f3af1467
+266736683a693e6a4e6c10f3af0c10e9
+af0510e7af0602e2af07f5af08f6af09
+01e1af0ae9af0b6138625463646501ec
+a522f2af0404e5adfbeaadfcecadfdee
+adfef2adff02f0af00f1af01f2af0210
+e9af030c6e3d7221722e7332774ee8af
+1d10e2af2304e1adcde9af24eca531ed
+af25f2af2610e5af276e346f3e7001e5
+a792f2adcb01e1adc5f2af2001e7af21
+eeaf22651d653a6c3e6d02e6af1feead
+baf2adbd10f3af1c02e1af1ee3adb6e4
+adb7613462386301efad83f2ad8210f6
+af1a10e9af1b0d6d49733073307534e9
+a736efaf3a10f3af3f04e1af40e532ea
+af43f4af44f7af45012a2e4812616ef3
+af42012aaf414310ceaf426d3a6f3e72
+02e2af3ce5af3decaf3e10ecaf3910ee
+af3b6520653e67426b4c6c02e5af36e7
+af37ecaf3810f2af3201f2af33f7af34
+10efaf35612e62606410e4a73607f40c
+f4af2bf6af2cf9af2dfaaf2eeda7bcef
+af28f0af29f3af2a02e1af2fe2af30f9
+af3174a25275a4d6760a6f1fe509e5ad
+ede9ad6fefadf56f3472387501eeadf8
+f4adf910f4adf610efadf7613c654c69
+566c606d01e6adf3f7adf402e7adebe9
+addaeeadec01e3adeef0adef01e3adf0
+f6adf110f3adf20026757ce91ff20ef2
+abd2f3abd6f4abdcf767f9abede9abb7
+ebabbeecabc2eeabc8efabca7a247a36
+e1ab96e5aba8e72ee8abb310edabf001
+2a2e41127261e2abaf012aabae5010cb
+abaf753c76527762786c7901e1abeef6
+abef03e8abe3ecabe4edabe5f1abe602
+e4a7bfecabe7f5abe801e8abe9f1abea
+01e7abebefabec6b7d7049705e716e72
+7273827406f10cf1abc6f2abe0f3abe1
+f4abe2e4abdde5abdeeaabdf02e9abce
+edabcffaabd010efabd102f5abd3f6ab
+d4f7abd504e4abd7e6abd8e7abd9eaab
+daf7abdb6b426c526d626e6c6f02e6ab
+cbe7abccf1abcd02ecabbff2abc0f4ab
+c102e6abc3f8abc4f9abc501e8abc6f9
+abc710e8abc96546655e667467786888
+6906eb0cebabbaedabbbefabbcf6abbd
+e2a3b3e6abb8e7abb903e4aba9edabaa
+efababf4abac10e9abad02e3abb0efab
+b1f5abb202ecabb4f1abb5f2abb66144
+625a63866403e4aba4e7aba5e8aba6f5
+aba703eaab97ecab98eeab99f1ab9a06
+e70ce7ab9eefab9ff7aba0faaba1e3ab
+9be4ab9ce6ab9d01e9aba2f9aba30f73
+62e72ce742ebabf8f2ad57fa012a8641
+127261e2ade9012a2e43127972ecabf5
+022aabf44b2a4d10ceabf610daabf573
+607464766e7a10ee012a2e41127261e2
+ade9022aad03412a4310ceadea10c6ad
+e910e1ade501e8a54cf2ade601e8ade7
+ecade86d326d3e6e426f707202e9ade2
+f4ade3f7ade410e2abfa01f226f8ade0
+012a2e44126576e1addf012aadde4e10
+d0addf10ebade16232643667406c10e9
+abf910f5abf101e9abf2edabf310e1ab
+f770c3a470a60171a6e672a6f3730029
+7985ec39f229f509f5ab85f6ab8bf7ab
+8cf22cf3ab7ef4ab8222032aab384da4
+c7522a5410d2ab3c01cfab3bd5ab39ec
+ab60edab65eeab6cefab72f16de50fe5
+ab47e7ab4ce8ab51e9ab56ebab5c7978
+7a82e1ab2ce3ab37e4032a3644444b4c
+5312696ee4ab44012aab414910ceab42
+126576e1ab4212686feaab4301ecab94
+f2a50f10ecab956cb772597531753477
+507801eeab92f7ab9304e1ab86e5ab87
+ebab88f2ab89f3ab8a05e809e8ab8cf0
+ab90f6ab91e2ab8de3ab8ee7ab8f7234
+73507401ebab83f1ab8404e2ab7be3ab
+37eeab7cf2ab7df8a5f502e4ab7fe7ab
+80f9ab816c4a6d666e8c6fa2437003e4
+ab78ecab79f3ab7af9a77804e4ab61e9
+ab62ecab63efab5cf9ab6405f009f0ab
+69f1ab6af3ab6be1ab66eaab67eeab68
+04e3ab6debab6ef0ab6ff8ab70f9ab71
+04e7ab73ebab74f1ab75f5ab76f9ab77
+673e67426858696e6a846b02e3ab5df2
+ab5ef3ab5f03e1ab4df3ab4ef7ab4ffa
+ab5003e9ab52ebab53eeab54f5ab5503
+e4ab57e7ab58ecab59edab5a10f2ab5b
+614a6276638664a2686503e6ab48e8ab
+49e9ab4af3ab4b06f30cf3ab30f4ab31
+f6ab32faab33e6ab2de8ab2ef1ab2f02
+e1ab34e5ab35f0ab3605ee09eeab3fef
+ab40f2a703e32cebab3decab3e220552
+11522e53325410d2ab3c10cfab3b10d5
+ab392aab38312a4d10c5ab3a1137b2ab
+3901e3ab45e8ab4600176f5a752bec09
+eca9f6f3a9e7f4ab04754c7750e1012a
+2e41127261e2a9df012aa9de5010cba9
+df10f5ab0610e1ab077217722e733e74
+10f0ab0502e1ab00e4ab01e7ab0210f3
+ab036f2e70327110eda9ff10eea9fc01
+e1a9fdefa9fe68396c1d6c406d4a6e03
+e2a7d2e7a9f9eea9faf4a9fb01e1a9f7
+f4a93510f3a9f86834693e6b01e1a9f4
+efa9f501eca9f0eea9f101eca9f2f0a9
+f36420642e65386610eca9ef01e3a9ea
+f4a9eb04e4a9ecefa9edf2a573f3a573
+f8a9ee613462646301e4a9e8eda9e904
+e7a9e0ec32eda9e3f0a9e4f5a9e5012a
+a9e15012686cf0a9e201e9a9e6f5a9e7
+017526f5ab0802e3ab09e7ab0afaab08
+00146f457917ef09efa951f5ab25f7ab
+28792cedab18eeab1d10f5ab2b6f3c72
+4c745075547701ebab29efab2a02e2ab
+20e6ab21efab2210efab2310edab2402
+e5ab26e7ab27eda9516934693c6a566b
+5a6d5e6e01e1ab1ee7ab1f01e1ab13e6
+22012aab144e10ccab1510f3ab1610f4
+ab1703e6ab19efab1af4ab1bf5ab1c61
+366346654a675a6810e7ab1202e9ab0b
+eaa966efab0c10e6ab0d02eaab0eecab
+0ff3ab1010eeab116da26c6ea6496f0e
+7426ea0ceaa9cceda5a4f2a9d5f3a9d8
+742e75387a3ce3a9ca01e1a9daeba9db
+10e9a9dc10eda9dd6e236e3270427246
+7310e1a9d902e7a9d1eea9d2f3a9d310
+eda9d402efa9d6f5a9d7f9a9d5673a6a
+3e6b02e1a9cef2a9cff6a9d010e3a9cb
+01e7a9ccf3a9cd0022749fe926ef0fef
+a951f2a95cf3a488f4a960f9a3d0e9a9
+12eba90ceca946ee012abad94d126f6e
+e7a542783d7834793e7a64e7a935e8a9
+3b01e3a96feda97005f709f7a974f8a9
+75faa976eba971eda972f6a97305f009
+f0a97af7a97bfaa97ceba977eda978ee
+a9797444755a76707703eba96cf2a539
+f6a96df7a96e03e3a961e6a962e9a963
+f2a96403e1a965f0a966f2a967f3a968
+02e1a969eea96af9a96b697b6e446e42
+6f5e707a71907202e4a95deaa95eefa9
+5f04e1a94de6a94ee9a94febb62ff7a9
+5004e1a952e5a953e8a954f3a955f8a9
+5603f0a957f3a958f4a959f8a95a10ec
+a95b693e6b546c6a6d02efa94af5a94b
+f8a94c03e3a93ee6a93feea940f7a941
+03e9a942eca943f0a944f7a94502e5a9
+47f0a948f3a9496549653e666a678668
+02e9a93ceca93df2a50106ee0ceea92c
+f2a92df4a92ef5a92fe4a929e5a92aeb
+a92b04e1a930e5a931eea932efa933f1
+a93404e8a936eca937efa938f0a939f9
+a93a615e62a25063a25d6406e80ce8a9
+25eaa926f2a927f8a928e1a922e5a923
+e6a9240bee1df712f7a914f926faa917
+22012aa9154310c3a916eeb450efa912
+f3a913e709e7a90fe9a910eba911e3a9
+0ce4a90de6a90e04e8a918efa919f1a9
+1af5a91bf7a91c04e9a91df0a91ef1a9
+1ff2a920f5a9210021745fe41dee0fee
+a9a7efa9adf2a9b4f6a9c2f9a9c6e4a9
+8ce5a98fe7a994eca54e791579307a3a
+e1a97de2a98501eda9c7eea9c810e9a9
+c974387542775e7801f1a9c4f2a9c501
+eda9bbf2a9bc04e9a9bdf0a9bef3a9bf
+f6a9c0f8a9c110e2a9c36a606f356f4e
+706a716e72727304eba9b6eea9b7efa9
+b8f3a9b9f4a9ba04e4a9aee5a9afeea9
+b0f0a9b1f5a9b210e9a98f10efa9b310
+e2a9b56a4a6b4e6d586e04e6a9a8e8a9
+a9eba9aaeda9abf0a9ac10efa9a201e7
+a9a3efa9a401e7a9a5faa9a66637665a
+675e686e6906ee0ceea99ef5a99ff9a9
+a0faa9a1e6a99be9a99ceaa99d10f2a9
+9302e1a995e2a996eca99702e2a998e5
+a999f7a99a613e636a64906502e2a990
+f7a991f8a99206ee0ceea981f0a982f1
+a983f3a984e3a97ee6a97feba98005e8
+09e8a989efa98af5a98be1a986e5a987
+e6a98801e3a98df3a98e66c76f69c4a5
+69a41b6aa4c66ba6136c001b744ae717
+ef0cefa7faf4a902f5a904f6a908e7a7
+e3e9a7e5eea7f7771577307a34e1a7ce
+e2a7d510eca90901e8a90afaa90b742e
+75327610f3a90810e7a90303e1a905ef
+a906f9a3d7faa9076a4a6d316d326e42
+6f4c7210e3a90102eea7f4efa7f5f0a7
+f601f3a7f8f5a7f905f209f2a7fef3a7
+fffaa900eaa7fbeba7fceca7fd6a346b
+386c01e5a7f2eea7f310f0a7ef01e9a7
+f0f4a7f1644d6476657a67a2426907e8
+0ce8a7ebeaa7ececa7edf3a7eee1a7e6
+e4a7e7e626e7a7ea012aa7e84c12696d
+e2a7e910e2a7db06f00cf0a7dff1a7e0
+f5a7e1faa7e2e4a7dce5a7ddeda7de10
+e7a7e46134625a6301eda7d9f0a7da05
+e809e8a7d2eaa7d3f3a7d4e2a7cfe4a7
+d0e7a7d102e5a7d6f5a7d7f7a7d80019
+7739eb17f30cf3a711f4a728f5a71df7
+a729eba56aeea723efa725e409e4a713
+e7a718e9a71b772a7a34e1a70b01eda7
+2af3a72b01e8a72ce9a72d6a336d176d
+326e366f3a7210e9a72710efa72210e8
+a72410f5a7266a2e6b326c10efa72110
+eaa71c03e5a71deba71ef7a71ff8a720
+641a643466446701e2a719e5a71a02e4
+a714e9a715f5a71610e5a717613a6244
+6302e1a710e5a711e8a71201eea70cf2
+a70d02e1a3a8e2a70ef9a70f0b721ae9
+09e9a736f6a73cf7a73d722a752ee1a7
+2e10e1a73a10f4a73b67176734693e6d
+01e3a738eca73901eba731efa73510e2
+a737612e623e6510eea73402e2a72fed
+a730f2a73101efa732f5a733002875c0
+f0eb74f23ff628f6a796f7a7b8f9022a
+32414c4c126174eea7c7022aa7c5432a
+5410d2a7c710cea7c6127261e2a7c6f2
+a789f3a7a2f5022aa46741a473591265
+7ae9a784eb38eca777eda77ceea788ef
+a78d012a2e41127261e2a772042aa770
+41324336493a4d10cea77410c6a77110
+cea77210d2a7737a1b7a38e1a5b3e7a7
+5be9a767eaa76b03e8a7caeaa7cbf2a7
+ccf4a7cd753c766e777e78947901e5a7
+c8f8a7c907ed0ceda7b1eea7b2f0a7b3
+f3a7b4e2a7ade4a7aee5a7afeaa7b002
+e7a7b5f2a7b6f8a7b703eaa7b9eba7ba
+efa7bbf1a7bc07ed0ceda7c1f0a7c2f7
+a7c3faa7c4e1a7bde3a7bee5a7bfeca7
+c06bc0db7063704a7170728673a24574
+03e2a7a9eda7aaefa7abf2a7ac05f209
+f2a795f6a796f8a797e5a792e6a793ef
+a79403e2a798e6a799f3a79af9a79b05
+ec09eca79ff3a7a0f5a7a1e3a79ce9a7
+9deaa79e05e809e8a7a6eaa7a7f2a7a8
+e2a7a3e4a7a4e6a7a56b506c5a6d706e
+a25d6f04e9a78eeba78beca78ff3a790
+faa79101e3a775eaa77603eea778f1a7
+79f4a77af8a77b06f22cf232f3a785f5
+a786f7a787022a32414c5912657ae9a7
+84022aa780492a4c10c2a78210d2a781
+127261e2a783e2a77de8a77eefa77f04
+e3a789e6a78ae7a75beea78bf0a78c66
+5266486758686869a06a03e4a76ce7a7
+6df3a76ef9a76f02efa758f2a759f9a7
+5a02e5a75ce6a75df0a75e08f10ff1a7
+62f3a763f4a764f7a765faa766e1a75f
+e2a760ebac95eea76102eaa768f5a769
+f7a76a6146627e63a24164a24b6502e1
+a755eea756faa75708e90fe9a742eaa7
+43eda744efa745f7a746e1a73ee2a73f
+e3a740e4a74105f109f1a74af8a74bf9
+a74ce4a747eda748f0a74903e7a74deb
+a74eeca74ff4a75003e5a751e8a752ec
+a753f4a75466a2c267a4776800137546
+f20ff2a703f4a706f5a707f9a342faa7
+0a7534e13ee5a5ece962efa5ff01e9a7
+08f2a70922032aa5e2372e43345310c4
+a5e31133b6a5e310cda5e4012aa5ee4c
+126174eea5ef6c386c3c6d466e506f6c
+7301e2a704eea70501e1a5f6f5a5f701
+e4a5f8f4a5f904e4a5fae5a5fbeaa5fc
+eea5fdefa5fe02e3a700eaa701f4a702
+615862746478687c6905e809e8a5f3ec
+a5f4eda5f5e1a5f0e6a5f1e7a5f204e7
+a5e5eba5e6eda5e7f7a5e8faa5e910e2
+a5ea10f9a5eb10f9a5ed00117553e90f
+e9a57deaa581efa584f2a58af9a59975
+427694e1a573e6012aa5794112646ced
+a57a09e80fe8a593f1a594f2a595f6a5
+96f9a597e2a58fe332e4a590e5a591e6
+a592012aa5794112646ceda57a10f2a5
+986d2f6d4e6f52706271667204e3a58b
+e5a58af0a58cf2a58df3a58e10f0a583
+02e4a585eea586f2a58710e5a58810f3
+a5896132665669606c10f2a58205e908
+e9a577eea578f467e1a574e2a575e7a5
+7601e9a57beda57c02e1a57eeca57ff4
+a580001a6e9f791dec0ceca5bfeea5c3
+f5a5d3f6a5db792ce1a59ae4a5ac01e1
+a5a5e9a5e1733a733e754276747702e3
+a5dee9a5dff4a5e010f7a5d207f20cf2
+a5d7f7a5d8f8a5d9faa5dae2a5d4e3a5
+d5e4a5d6e7a5c302e6a5dcf2a5b6f3a5
+dd6e5a6f6a7204e2a5a8e332e5a55df4
+a5d0f7a5d1012aa5ce4c12696ee2a5cf
+02e4a5c4e7a5c5efa5c607ee0ceea5c6
+f2a5cbf3a5ccf4a5cde4a5c7e6a5c8e9
+a5c9eda5ca673c6a236a386b486c526d
+01eda5c1f6a5c202eba5baeea5bbf5a5
+bc01eea5bdf0a5be10eba5c06734683e
+6901eca5b8eda5b901eea5b6efa56910
+f3a5b76428642e653e6610eba5b502e5
+a5adeea5aef2a5af05ef09efa5b3f2a5
+2ffaa5b4e2a5b0eaa5b1eca5b2612e62
+6c6310f2a5ab09ed0feda5a0eea5a1f7
+a5a2f9a5a3faa5a4e1a59be6a59ce7a5
+9de8a59eeaa59f05ef09efa5a8f9a5a9
+faa5aae1a5a5e6a5a6eda5a763c2f463
+a2a364a4fa6500127733ee19ee38efa5
+66f3a568f4a55bf5a366012aa5625312
+6861f7a563773478387a3ce5a556eca5
+5d10efa57010f4a57110e1a5726d466d
+486e7a728473887403f2a56cf4a56df5
+a56ef8a56f02e1a55ee9a55feb012a2e
+4e126b6fefa561012aa5604710cea561
+01eea564f1a56510e9a56702e7a569eb
+a56af5a56b623e664267466b02e1a55a
+eba55bf9a55c10f5a55510e9a55701ec
+a558f9a559001b7257e821f316f3a51b
+f52cf6a521f9a522012aa51f47126c61
+e7a520e8a3edefa512f2a51577127730
+7a34e1a3e3e5a3e910e4a51510e5a51b
+722e734a7410e4a51e04e7a516e8a517
+eba518eca519f3a51a01e2a51cf7a51d
+69556c336c326d426f727010f3a51402
+e1a50de3a50ee4a50f02e5a510e7a511
+ee022aa26342a2ae4811616e01e2a3ff
+f4a3fa10f0a51369406a446b03e2a509
+eca50aefa50bf9a50c10e3a50502e1a5
+06eda507f6a508658f65a28066a28167
+a2826805ef09efa502f0a503f2a504e9
+2ceba500eda501022a3c42a259481161
+6e01e2a3fff4a3fa0b4d2d5417542e55
+385610c4a3fd01c8a3f9d7a3fa01cba3
+fbd3a3fc4db4c0502a5310d2a3f802c6
+a3f5c8a3f6daa3f7470e473048b4a449
+10c4a3f310c6a3f12aa3ee412a4210ce
+a3f010d5a3ef126f70efa3fe10e2a3ea
+10e1a3eb10e7a3ec6134623e6301e8a3
+e7f0a3e801e4a3e4eea3e510eaa3e600
+17726f791ce508e5a52ff6a54ffa4579
+2a7a34e1a52301efa552f5a55310e7a5
+54751d752e764a7710f7a55104e1a54a
+e3a54be4a54ce7a54df4a54e10e1a550
+724073747403eda546f0a547f3a548f9
+a54902e82ce9a543f3a544012a2e4d12
+6f6ee7a542012aa5414310cea54210e2
+a545682d6d176daacf6e3c6f03e2a53e
+e9a536f0a53ff7a54010eaa525682e69
+326a10e5a53c10e4a53901e1a53af1a5
+3b64286456655a6706ec0ceca535efa5
+36f2a537faa538e1a532e8a533e9a534
+10eea52e01e4a530eea531612e625a63
+10e3a52d06e80ce8a527eba528f2a529
+f6a52ae4a524e6a525e7a52601e4a52b
+f1a52c2aa60061bed462002373a5e51d
+ed0feda3aaeea3afefa3b3f2a3bcf3a3
+c1e5a37ce7a389e8a38de9a393774177
+32783c794c7a72e1a36201e4a3d4f2a3
+d502e8a3d6eba3d7f2a3c905f309f3a3
+dbf6a3dcf8a3dde5a3d8eea3d9f2a3da
+04e1a3dee5a3dfe6a3e0e8a3e1f7a3e2
+7332744875587610e2a3d303eaa3c2f1
+a3c3f3a3c4f4a3c502efa3c6f4a3c7f6
+a3c809ed0feda3ceefa3cff2a3d0f3a3
+d1f5a3d2e1a3c9e3a3cae4a3cbe7a3cc
+eba3cd6a866e3b6e486f587068716c72
+03e1a3bde8a3bef8a3bffaa3c002e7a3
+b0eda3b1f0a3b202eaa3b4eda3b5eea3
+b610f9a3b703e3a3b8e9a3b9f0a3baf6
+a3bb6a446b766c926d03e8a3abeba3ac
+f1a3adf5a3ae07ef0cefa39ef2a39ff4
+a3a0faa3a1e8a39ae9a39beaa39ceea3
+9d04e3a3a2eda3a3f1a3a4f5a3a5f6a3
+a602e1a3a7e7a3a8f4a3a9656a656266
+9467a24468a24b6906ed0ceda396eea3
+97efa398f1a399e2a394e7a395eba375
+07f40cf4a381f7a382f8a383faa384e6
+a37de8a37eeaa37feda38003e4a385f1
+a386f4a387f9a38802e3a38aeea38bf8
+a38c05ec09eca391efa38df9a392e2a3
+8ee7a38fe9a3906132626463906410e4
+a37b07f20cf2a367f3a368f6a369f8a3
+6aeca363eea364f0a365f1a36606e40c
+e4a36eeaa36ff0a370f2a371e1a36be2
+a36ce3a36d09ed0feda376eea377efa3
+78f1a379f5a37ae3a363e6a372e8a373
+e9a374eca37500184dc28954c0e15736
+5736584e59645a12616ee2addd01612c
+631168efa9ac1172e1addc01702a7311
+75f8691165efa9ed01652c691169e9a7
+1b117ae9a784544455a29e5601612c69
+1174e8addb1169e9adda07684e683669
+866ea2426f1174efabec106101e158e9
+042aabb343324b364c3a5410c8abb310
+cea7da10c8add710c1add8012aa54f4d
+10d6a54f01622a7210e8add910f4012a
+a3b34210d4451173e1a9ba6134658066
+8667116ce7add6056d116d2e6e327610
+f4a3a910ecab9610e7abeb67346b386c
+01e5aba4f5a76010e2add310f2add411
+6cf5aba8116ee7add5126761f2abf750
+c0c350a27252a2a85306694369426f6a
+759079016c2a7210e3a50f10efadd201
+643e6e01e4ab44e8012aab564c10cbab
+5610e4adcf02672e72387910efa51101
+e4ab73efadd010e1ab7b116ee4add161
+3e675e6801612a7210e4adce10f7a563
+026d2e72327510f2ab3310f2ab6910e2
+adcd116ef7a34b046138654a68506c76
+721174e9adcb016c2a7510e3a51e10ed
+a11172edadc902612e6c326e10f8a9f1
+10e7adca01e9a9e1f0a9e21172e4a5f8
+026a306f3675116ef2a9b0116ee7adcc
+1168e7ab124d8a4ea2ab4f0467386c3e
+72447358751167f2a9dc1161edab4d11
+63ebab31016b2a7910e1a9d510e8a9db
+01672a6d10e1adc810e5a9d907722e72
+5a7460756679116df2032aa3d0492e4d
+325410c8adc210cea76410cda3d0116f
+efa95f1165e9adc0116cf4adc1614265
+746c9a6f01642a6e10e7a54210e9adbf
+0368326b366e3a7210e3adbb10eaadb8
+10e1adb901e4a976e9adba0264346e38
+7201e3adbdefadbe10e6a53d10e4adbc
+1179eda9460461386258655c6b627311
+68f5adc702672e6e327210e2adc510ed
+adc310e4adc41161f49f1177e1adc611
+6fefa56147c4114ac3354aa6c04ba6d9
+4c03614665a69c69a69e7901632a6410
+e9adb710e9adb6026ea6796fa67a7410
+ee001a4bc139545b571457ac7358ac77
+59305a01c1abffd7ab6c10d4ad735440
+55825603c1ad6ec5ad70cead6fd5a393
+0bce14d609d6abe7d7abd4daab8ccead
+b4cfabcad2abd2cbc5d7cbabbfccad6a
+cdabbe04c1adb5c7ad6cd3a562d9ad6d
+daad034e824e8a50a24a52a26d530cce
+17d40cd4ad64d5a79fd6ad65d9adb3ce
+ad62cfab72d2ad63ca09caad60cbab5c
+cdad61c3ad5fc5ab8bc9ab6006c70cc7
+abfbc9ad52cca54ecfa985c1ad4fc3ad
+50c5ad510acc14d409d4ad5bd7a9e5d9
+a5c3cca9f6cdad58d2ad59c1ad54c5ad
+55c6ad56c7abcec8a57f03c5ad5ecfa9
+51d5a79fd7ab284b9e4ca2434d0010cd
+1dd40fd4a960d5a931d8abfdd9a915da
+ad4ecda740cfadb1d1ad4cd2adb2c60c
+c6ad4bc7a935cbadb0cca3aac1adafc3
+ad49c4ad4ac5ab3a01c5ad3ecdadae04
+c9ad44d3ad45d4a902d5ad46d6a90843
+c0c246644656476648a24d4905d209d2
+adadd3a711d4a728c3ad3bc4a713c5ad
+2f02c9a57dcfa584d2a58a0cce17d30c
+d3ad36d4ad37d5ad02d7ad38cead33d0
+ad34d1ad35c608c6ad32c867cca777c1
+ad31c2ad05c5adac04cdad39cead3ad2
+a703d4a706d5a707435244a2424505d3
+09d3a568d4ada6daad30c1ad2bc3ad2c
+c5a55b0fcf1ad60cd6ad26d7ad07d9ad
+aadaa51bcfad23d0ad24d2ad25d5ad00
+c9c68fc9ad20ccad21cdad22ceada905
+cb09cba523cfad29daadabc5a52fc7ad
+5dcaad28345e34ae8a4178420bce14d2
+09d2ab04d5a740d6ad1ccead19cfad1a
+d1ad1bc909c9ab1dcaad17ccad18c1a3
+c1c5ad14c6ad150cd217d50cd5abfcd7
+ad12d8ad13daa35ed2ad0fd3ad10d4ad
+11cd09cdada8cfad0dd1ad0ec4ad0ac6
+ada7cc6d2aa562312c321133b0ada611
+37b2a79f10e1a9ae10ef012aa7fa4c10
+c1a7fa1170e3a7df026d2e6e327310f5
+a7ee10e2a7e901e1a7cfe2a5cf01613a
+701161ee012aa72e4a10d0a72e016d2a
+7610e1ada210efada1056e1e6e306f36
+741168e9ada51164e1a7881172e5012a
+a78d4b01d0ad40d2a78d613068506911
+74f3ada4026c2e6e327710e9a74610e9
+a55c10e1ada302612e6d326f10eaab43
+10f2ab0010f2012aa77c4b10c8a77c47
+3448a25c49127461eca56d0465466c5a
+6f60727a75016a2a7210f5a9de10f2a5
+d3116ff2012aa5b34710c5a5b31161e7
+a520016e2a7410e8a5cd01e7ad95eda5
+690161506510eb032aa55d432e473254
+10d2a38c10d9ad2710d2a55d10eead96
+056c186c306d3675116ee7ada01175f7
+a5f7106e01e7ad9ff0a5fc6130659c69
+1172e1ad9e106e05ef2aefad99f358f4
+042aa3fa433248364d3a5410d7a3fa10
+c1ad9a10cba3f210cfa3f4012aa3ee43
+10cea3eee2a3ffe7ad97e9ad981162f2
+032aa5ec493453385501c1ad9cd3ad9d
+10cca5ec10c5ad9b43c114437044a2cd
+450267406c46741168e9012a754501d2
+ad2ed4751179f0a55901622a7910edad
+9410e1ad930461a26868a2776fa28670
+a288791172ec0a4d335414542e553858
+10cbad8c01caabaed2ad8b10c1abf84d
+2e523e5310cbad8a02c4ad88cba90cce
+a54102cfad89d3ab38d5ab252aab2541
+38423c474c4b01c7a7c5daad4210ccad
+8502c1ad86c7a389d9a37c01c52dd2ad
+87026b2e6e327210e9ad8210eda3e810
+f3a71d02612e65327210f3ad8310eda5
+0710f2a5041170f4a513016d2a7210f4
+a5ce10ee012aad844310d9ad84036534
+69866f8c751170ecad921176e1064917
+49324d364e3a5010cba3c810cea5ee10
+d5ad8f10d0a98f2aa5ee422a4610caad
+8e10d4ad8d1161ebad901167f2ad912a
+a25441aa3142056f1f6f3e7244750167
+2a6810e4ad8110e9ad801170efa3fe10
+6101e8a9f4e9ad7f6130655c68116bf3
+ad7e036c326d36733a7410ebad7d10e9
+ad7c10f5a36a10f3a3c3116ee7012aa3
+af4210c4a3af00214ac1c052c0cc5638
+563c5758586259665a01d2abfed7ab6c
+04c1ad6ec4ad6fc5ad70cead6fd5a393
+01c6ad71d3ab6510cbad7203c4ad09c5
+ad09d4ad73d5ab385246536c54a25755
+03c1abf8c7ad6cd9ad6ddaad0305d309
+d3ab38d5ab25d7ab28c5ad5ec8ab6ccf
+a9510ecd1ad40cd4ad64d5ab25d6ad65
+d9ad66cdad61cead62cfab72d2ad63c5
+0cc5ab8bc9ab60caad60cbab5cc1ad04
+c3ad5fc4ad080ecd1ad20cd2abd2d6ab
+e7d7a3fadaab8ccdabbecead6bcfabca
+d0ad6ac80cc8abb3caabaecbabbfccad
+6ac4ad67c6ad68c7ad694e644e404fa8
+9650785102c1ad5ccfad5dd5ad2f09cc
+0fcca54ecfa985d0a98fd1ad0ed4ad04
+c1ad4fc3ad50c5ad51c8a393c9ad520d
+cd17d40cd4ad5bd7a9e5d9a5c3daad54
+cdad58d2ad59d3ad5ac70cc7abcec8a5
+7fcbad57cca9f6c1ad54c5ad55c6ad56
+4aa2484ba24c4ca2644d0012ce20d50f
+d5a931d6a54fd8abfdd9a915daad4ece
+a541cfa3f4d1ad4cd2ad4dd4a960c60f
+c6ad4bc7a935cba90ccca3aacda3d0c1
+ad48c3ad49c4ad4ac5ab3a01cfad3dd0
+a72e07d00cd0ad40d2a78dd7ad41daad
+42c5ad3ec7a7c5c8a77ccdad3f08d30f
+d3ad45d4a902d5ad46d6a908d9ad47c1
+a7fac2ad43c9ad44cbab5641c1604598
+456a46a24147a24e48a2754907d10cd1
+ad3cd2a573d3a711d4a728c3ad3bc4a7
+13cca5eccea5ee09d20ed2ad2ed3a568
+d475d5ad2fdaad30c1ad2bc3ad2cc5a5
+5bc79bc8ad2d04c9a57dcfa584d1ad0e
+d2a58ad8a58a0bd014d309d3ad36d4ad
+37d7ad38d0ad34d1ad35d2a55dc808c8
+67cca777cead33c1ad31c5a5b3c6ad32
+06d20cd2a703d4a706d5a707d6ad15cb
+a3f2cdad39cead3a415e42a24c43a283
+4406cb0ccba523cfad29d9ad17daad2a
+c4a52fc5a52fcaad280dd117d40cd4ad
+11d7ad12d8ad13daa35ed1ad0ed2ad0f
+d3ad10cc0bcc6dcda342cead07cfad0d
+c4ad0ac5ad0bc6ad0c0010cc1cd20ed2
+ab04d445d5a3d0d6ad1cd9a37cccad18
+cead19cfad1ad1ad1bc70cc7a389c8ad
+16c9ab1dcaad17c1a3c1c4a3afc5ad14
+c6ad150010cf1dd50fd5ad00d6ad26d7
+ad07d9ad27daa51bcfad23d0ad24d2ad
+25d3ab38c90cc9ad20ccad21cdad22ce
+a3eec4abfec6ad1dc7ad1ec8ad1f3422
+34423548374e3801382a3910b0ab3810
+b6ad091131b9ad061133b2ad071133b6
+ad082aa562305031a26b3202302e3338
+3810b0a52f01b0a51bb2abfb10b07505
+33233334354a3601b1ab65b2a5ee03b0
+a3eeb4a5eeb5a713b9a72802b3abfcb4
+ad01b7ad023034314a3201b1a562b9ad
+0003b2abfbb3a562b5ab04b9abfc06b5
+0bb59bb7abfeb8abffb9a562b1abfbb3
+abfdb4ab8c02342e353e3710b2ab2502
+b2a3eeb3ad03b5ad0403b0ab25b1ab25
+b4ad05b5a52f046436673c6842724676
+1173f44b116ceda57a1168e2abf2116f
+ed6301613c6d01e99dee012aa3424110
+cda34210e200134c625131513c534054
+50556a5901c5ad09d4ab8d10c1ad5c02
+c1ad04c4ad08d9ad6604c791c8a930ca
+ad7acead6bd2ad7b10cbad754c3c4d46
+4e624f665001cbad57d3ad5a01c2ad43
+d9ad4704c1ad48cdad74cea774d2ad4d
+d5ad7810c7ad7910cdad53452e454247
+4a494e4a644b02c8a506cdad3fd7ad41
+01c79bc8ad2d10c2ad7503c4ad76cead
+77d1ad3cd2a57310cfad3d2a9b413242
+3c43464410daad2a01c5ad0bc6ad0c01
+c8ad16d5ad7401c3a916ceabf4002175
+88e62bf221f29bf3a349f6a353f9a35c
+fa012a2e41127261e2a360022aa35e49
+8a5210d5a361e651eb67ed75ee7f7a2d
+7a2ce125e22de54b10ea012a2e411272
+61e2a360032aa35e312e49345310d5a3
+611137b2a36101d1a35fd2a360753876
+3c77527901e2a35df2a35c10f9a35203
+eca354eea355f4a356f5a35703e1a358
+e2a359efa35af8a35b6b966f696f4470
+4e726873a2507402e1a34fe7a350eaa3
+5102ea89ed8bfa8d05f206f295f397fa
+99e38fe491e59309ef0fefa344f1a345
+f3a346f9a347faa348e29be332e8a341
+eda342eea343022a9d4e2c5012616ced
+a1126261f49f04e1a34ae5a34be7a34c
+efa34df4a34e6b3c6c3e6d586e03e381
+eb83ee85f98710eb6905ee06ee71f36d
+f473e16be26de96f03ed77ee79ef7bf0
+7d65256530673668506a10e76501e24d
+f94f05ed06ed59ef5bf15de353e455e7
+5702e15fec61ef636148625263646405
+f006f045f947fa49e13fe541ea4302e9
+27eb29f52b04e92ff131f233f435f937
+02e439e53be83d
+        }
+    }
+    match{
+        distances:intvector{
+            80,
+            50,
+            4,
+            3,
+        }
+        paradigms{
+            "en","Latn","US",
+            "en","Latn","GB",
+            "es","Latn","ES",
+            "es","Latn","419",
+            "pt","Latn","BR",
+            "pt","Latn","PT",
+        }
+        partitions{
+            ".",
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "0123456",
+            "04",
+            "13",
+            "02",
+            "06",
+            "026",
+            "05",
+            "012345",
+        }
+        regionToPartitions:bin{
+000008090a00020000000b0009000201
+090001010a000a000000000000000a0c
+000000010b0000000100000000000000
+000000000000010100000b0000000b00
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+0000000000000000000000000000000d
+010001000000000e0100000e01000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000900000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+000000000a0000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000101010102
+00020000010102010001020301010002
+01000101020001010101010101000202
+01020002020201010201000102040001
+01000101010100010201010201000201
+00020102010101000000010100010000
+01010002000200000000000000000000
+05010002000100010500000000000000
+00000101010100000000010000000000
+00000001010200010001000001000000
+00000100000106000201020101010000
+02010100020101020203000100020000
+00000000000000000007000102000000
+01000201000000000000000101010000
+00000000010101010001010101000000
+00000000000000010000000000000002
+00010100000000000000000000000000
+00010001010100000001020001000100
+00000001000201010102000000000001
+00010000000000000101010101000005
+00050001010102010300000101010107
+03020502010101010201010100010001
+01010002000001000001010001000101
+00000000010000000000000000000000
+00010000000000000000000000000002
+00000002010103000001010201000000
+04010100000100020001000000000000
+00000000000000010000000000010000
+00000000000000010000000000000000
+00010000000100010001000000010101
+01010001010101010101010100000201
+01010200020101010002010001010100
+01010101050101000100020001010000
+01010000000000010000000000030f00
+00000004000000000002010100020002
+00020004000000000100000000000001
+00000000000000000000010000000000
+00000000000000010000000000000000
+00000000000000000001000000000000
+00000000000000000000000001010000
+00000000000000000000000001010000
+00000001000000000000000000000001
+00000000010000000001000000
+        }
+        trie:bin{
+00196ec42b74c1b177c0c777a27d78a2
+8779a2977a046c386daa9be138e856f5
+1165ee5d12ed6df335117ae848012a85
+4c166174ee48616ef335117ae820022a
+8548344c166174ee48616ef34911616e
+01e97ef41348616ef42007b30ab33eb4
+3ab536b610b6292a2bb026b122b205b3
+c8b8b329b429b52905b3c8aeb329b429
+b5291248616e01f349f44901752aef11
+66f25d12f57ae835016d2ae81165ee5d
+02eda241f622f7116de7350369327538
+e93eef1165ee5d12e879e93512e57ae8
+351165ee5c012a8548166562f24c6174
+ee35744a75a2b476016b2c7212ef65f4
+3501eb22f4116df3350ee171eb0eeba2
+a4eea2dfefa2dcf41172f55de14ee592
+e7aa57e91165ee5c012a8545167468e9
+4c6174ee350165427410e120012a854c
+166174ee54616dec4910ee5c012a8554
+16616dec4c6174ee350165427410e520
+012a854c166174ee54656cf54910ee5c
+012a855416656cf54c6174ee356c1c6c
+366dac1c75367812f96de73512e865ee
+5d01eda25ef9126b6cee35643265a2e6
+6b12e76de73512f86de73505eb18ebb2
+cdf2a29afa1172f55c012a854c166174
+ee437972ec35722e7a34e7117ae84912
+eb6df33512f375fa3571c16771a2b272
+a44f730012e85bf12df130f234f428f5
+a829f71165ee5d107301e829f220022a
+8543344c166174ee437972ec2b167972
+ec4c6174ee2be836e946eb64ee22ef11
+65ee5d0262ac3868227310f2291165ee
+5c012a855316696ee84c6174ee351163
+f349702e70527258735ee1b220e41165
+ee5c012a8541167261e24c6174ee3512
+f66ff23512ef73e33501e8b025f91161
+e1296434674068486b12e76de73501e3
+22ee1173e33513e36b6cee3512f561f2
+3504753a769077a26478a26df51165f3
+5d0cec16f30bf32af726f822f91171f5
+35ec26f022f21171f535e709e726e822
+eb1171f535e226e422e61171f5350ded
+16f00bf02af326f722fa1171f535ed26
+ee22ef1171f535e80be82ae926ea22ec
+1171f535e126e322e51171f53503e12a
+e326e822f31171f5350aef14f409f426
+f522f71171f535ef26f022f21171f535
+e12ee32ae826ec22ee1171f5351171f5
+350361a817ed30eea289f71166f25d11
+64e5496ea2736fa2d970086b516bac1d
+7362e170f38ef41170f4a28007b3c4dc
+b3aaf6b426b522b604b029b229b429b5
+29b62901e5a2d5f41170f3351165ee5c
+012a8547167572f54c6174ee351165ee
+5c012a8541167261e24c6174ee356234
+633a65406712e161f23512f470f33512
+ed65ee4912ec6df3350a7946ee19ee2e
+ef38f91165ee5d106e01e249ef490164
+7c6e01e223ee497948e256e51165ee5c
+012a8544166576e14c6174ee3501e4a6
+75ee1165ee5d01642c6e01ee49ef2310
+e13161a87c6834693a6c427312ef65ee
+5d12e467ee3513f16b6cee3513e56c75
+f935046b54725ce3ae38eda2e4f21165
+ee5c012a854f167279e14c6174ee3513
+e96b6cee3502e3a6cdee22f3116df335
+67c3336ac24f6aa2bc6ba4146ca4b76d
+00107669ee35eea411f24ef374f4a2a1
+f91165ee5c012a854d16796df24c6174
+ee350168a6566d10f220012a854c1661
+74ee446576e1491169e45d7676e7a44f
+e9a611ec0165426d10ec20012a854c16
+6174ee4d6c79ed4910ee5c012a854d16
+6c79ed4c6174ee3512e66dee356e1f6e
+34713a73407512e96df33512f07ae835
+12e76df33501e8acb0e9116df3356134
+6548664e6912ee6df33501e92af8116d
+f3351168e94912ef6df33502e14ae246
+e51165ee5d02612ee13af61169e44901
+eb22f8116df335116ae120032a854838
+4b784c166174ee4a7061ee2b02613669
+4272156bf44a7061ee2b156ee94a7061
+ee2b1172e10148464a127061ee2b1261
+6ee101482c4a127061ee2b12726bf42b
+0aeb73ef36ef2ef57cf91172f55d116b
+ef20022a8548464a12616def01482c4b
+126f72e52b12616ee72b11616e01e722
+e9134b6f72e52b1174f25deba8c8ed6a
+ee0165426b10ee20012a854c166174ee
+4b6e64e14910ee5c012a854b166e64e1
+4c6174ee351165ee5c012a854b16686d
+f24c6174ee357236763c7848e14ee711
+66f25d12e965ee5d01e222f2116df335
+12e46df3351165ee5c012a854716656f
+f24c6174ee350e753ee221e24ee7a29d
+ee4cef1165ee5c012a854c16616fef4c
+6174ee351164e5291166f25d75327738
+7a40e11169f44912e166f25d13e76c75
+f93512e87ae8356f2a6f48724e735c74
+02e730ef22f3126c75f935116cf63512
+fa65ee5d01e922ed126c75f93513ed6c
+75f935634669526b02e226ef22f3126c
+75f935126c75f93501e522e6116df335
+12f76df335676a68a2816905e40ae4a8
+c4e734f31165ee49642e6b36e11165ee
+5d13e16c75f93512f469f5350a7531ec
+1eeca40eeea40bf50167286810e95d10
+f520012a854c166174ee47756af24975
+2ee122e41165ee4901e922ee1167ee35
+61386b4c6e546f5a7312f764e52902e1
+a257eea484f8116fed3513f06b70e535
+12f767ee3513ed6b6feb3507e934e94e
+f26cf4a82df91172f55c012a85411672
+6dee437972ec351168e920012a854c16
+6174ee446576e1490162287310e82910
+f32961326a4c7352e11165ee5d02e530
+eba426f71165ee49116fed3512e96df3
+3512ee7ae83564c0ea648865a2486603
+66327538ef6af9116eec4912ed66e635
+06e80be82ae926f122f61166e635e226
+e522e61166e6351166e6351164e14902
+7434753ae1106e01e231ef3112f96ee5
+3512f06df33506ee85ee36efa285f3a2
+41f51165f3491165eea28007b31db364
+b426b538b604b029b129b429b527b629
+04b027b127b427b527b6272a2bb030b1
+2cb201b229b32904b029b129b429b527
+b6291165f3a28007b312b37ab426b522
+b604b029b229b429b529b6292a2bb026
+b14eb204b029b229b429b529b62904b0
+29b229b429b529b62901b129b3296e2e
+7936e51165ee5d13e26b6cee3513ef6b
+6cee3561a26062a49e630c702ee111e1
+a2ceefa4ddf32af91165ee491173eb49
+703e72447a01e822ef117ae835117ae8
+3512f87ae83512f366f2496a146a306b
+366f12e16df33512f97ae83512e261f2
+5d643065366812f265ee4912ef7ae835
+13e26669ec5d001675c0c0e692f275f2
+4af9a26cfa1172f55c012a854c166174
+ee437972ec351161f220012a5a4c1661
+74ee417261e24807b327b32ab460b522
+b605b336b329b529b6298407b313b32a
+b438b522b605b322b329b529b62910b4
+292a2bb026b122b205b30fb329b529b6
+2905b306b329b529b629b029b129b229
+1165f349e64aeba2b1ed1165ee5c012a
+8545167468e94c6174ee35116eec497a
+137a2ee134e21172f55d12e261fa3512
+7373f92975a42e763a7903e82aec26ee
+22f01161f23512ec61f23566356c1e6c
+3e70447203f12af326f922fa1161f235
+12ee73f13501e322e41161f235663069
+366a12f061f23512e261f23513e97379
+f235613e624e635a64906501e222e311
+61f23502e526ef32f41173f13501e822
+f61161f23505f709f726f822f91161f2
+35e82eed22f11161f2351165ee5d1161
+f23512e661f2350e7668ee4aee3eef82
+f2a0f30168287310e82910f229016242
+6510ee5c012a854216656ee74c6174ee
+3510ee20012a854c166174ee42656ee7
+49117ae848012a8554166962f448616e
+f3351166f24976327a3ee544e81168e9
+5d01e522f5116df33512e36de7351172
+f549682268346a3a6d4e7412ea6df335
+12f26de73501ee2af1116de735116df3
+3512ed6de735613062366512ed65ee5d
+12ec75f24912fa61f235
+        }
+    }
+}

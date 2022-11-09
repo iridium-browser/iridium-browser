@@ -1,0 +1,96 @@
+# Python Application Configuration
+# https://developers.google.com/appengine/docs/python/config/appconfig
+
+runtime: python27
+api_version: 1
+threadsafe: false
+instance_class: F4
+automatic_scaling:
+  max_concurrent_requests: 80
+  max_instances: 150
+  max_pending_latency: automatic
+  min_instances: 1
+  target_cpu_utilization: 0.8
+
+libraries:
+- name: jinja2
+  version: "2.6"
+- name: pycrypto
+  version: "2.6"
+- name: webapp2
+  version: "2.5.2"
+- name: ssl
+  version: latest
+- name: protobuf
+  version: "3.0.0"
+
+env_variables:
+  GAE_USE_SOCKETS_HTTPLIB: 'true'
+
+builtins:
+- remote_api: on
+- appstats: on
+- deferred: on
+
+inbound_services:
+- warmup
+
+handlers:
+- url: /favicon.ico
+  static_files: dashboard/static/favicon.ico
+  upload: dashboard/static/favicon.ico
+  secure: always
+
+- url: /dashboard/static/
+  static_dir: dashboard/static/
+  secure: always
+  application_readable: true
+
+- url: /dashboard/elements/(.*\.html)$
+  static_files: dashboard/elements/\1
+  upload: dashboard/elements/.*\.html$
+  secure: always
+
+- url: /components/(.*)/(.*\.(html|js|css))$
+  static_files: polymer/components/\1/\2
+  upload: polymer/components/.*/.*\.(html|js|css)$
+  secure: always
+
+- url: /tracing/(.*)/(.*\.(html|js|css))$
+  static_files: tracing/\1/\2
+  upload: tracing/.*/.*\.(html|js|css)$
+  secure: always
+
+- url: /flot/(.*\.js)$
+  static_files: flot/\1
+  upload: flot/.*\.js$
+  secure: always
+
+- url: /jquery/(.*\.js)$
+  static_files: jquery/\1
+  upload: jquery/.*\.js$
+  secure: always
+
+- url: /gl-matrix-min.js
+  static_files: gl-matrix-min.js
+  upload: gl-matrix-min.js
+  secure: always
+
+- url: /tsmon-client.js
+  static_files: tsmon-client.js
+  upload: tsmon-client.js
+  secure: always
+
+# We need admin so only cron can trigger it.
+- url: /alert_groups_update
+  script: dashboard.dispatcher.APP
+  secure: always
+  login: admin
+
+- url: /.*
+  script: dashboard.dispatcher.APP
+  secure: always
+
+includes:
+- scripts.yaml
+- gae_ts_mon/gae_ts_mon  # handles /internal/cron/ts_mon/send

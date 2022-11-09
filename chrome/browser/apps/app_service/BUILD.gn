@@ -1,0 +1,22 @@
+# Copyright 2020 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+source_set("test_support") {
+  testonly = true
+
+  sources = [
+    "app_service_test.cc",
+    "app_service_test.h",
+  ]
+
+  deps = [
+    "//build:chromeos_buildflags",
+    "//chrome/test:test_support",
+    "//components/services/app_service/public/cpp:app_types",
+    "//components/services/app_service/public/cpp:icon_types",
+    "//components/services/app_service/public/cpp:run_on_os_login",
+    "//components/services/app_service/public/mojom",
+    "//skia",
+  ]
+}

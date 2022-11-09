@@ -1,0 +1,13 @@
+/*
+ * Copyright 2020 The Chromium Authors
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+/* TODO(aee): this file should probably be turned into a module that imports
+ * 'ui/webui/resources/shared_vars_css.m.js'.
+ */
+html {
+  --ntp-focus-shadow: 0 0 0 2px var(--color-new-tab-page-focus-shadow);
+  --ntp-module-text-size: 13px;
+}

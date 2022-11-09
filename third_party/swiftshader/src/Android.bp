@@ -1,0 +1,244 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+package {
+    // http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // the below license kinds from "external_swiftshader_license":
+    //   SPDX-license-identifier-Apache-2.0
+    //   SPDX-license-identifier-BSD
+    default_applicable_licenses: ["external_swiftshader_license"],
+}
+
+cc_defaults {
+    name: "libswiftshadervk_llvm_defaults",
+
+    header_libs: [
+        "swiftshader_platform_headers",
+    ],
+
+    srcs: [
+        "Reactor/Assert.cpp",
+        "Reactor/CPUID.cpp",
+        "Reactor/Debug.cpp",
+        "Reactor/ExecutableMemory.cpp",
+        "Reactor/LLVMJIT.cpp",
+        "Reactor/LLVMReactor.cpp",
+        "Reactor/Pragma.cpp",
+        "Reactor/Reactor.cpp",
+        "Reactor/SIMD.cpp",
+    ],
+
+    cflags: [
+        "-DREACTOR_ANONYMOUS_MMAP_NAME=swiftshader_jit",
+        "-Wno-unused-parameter",
+        "-Wno-implicit-fallthrough",
+    ],
+
+    static_libs: [
+        "libLLVM10_swiftshader",
+    ],
+
+    shared_libs: [
+        "libcutils",
+        "liblog",
+    ],
+}
+
+cc_library_static {
+    name: "libswiftshadervk_llvm",
+    vendor: true,
+    defaults: [ "libswiftshadervk_llvm_defaults" ],
+}
+
+cc_library_static {
+    name: "libswiftshadervk_llvm_debug",
+    vendor: true,
+    defaults: [ "libswiftshadervk_llvm_defaults" ],
+}
+
+genrule {
+    name: "commit_header",
+    out: ["commit.h"],
+    tool_files: ["commit_id.py"],
+    cmd: "$(location commit_id.py) gen $(genDir)/commit.h",
+}
+
+cc_defaults {
+    name: "libvk_swiftshader_defaults",
+    vendor: true,
+
+    defaults: [ "swiftshader_common" ],
+
+    cflags: [
+        "-D_GNU_SOURCE",
+        "-D__STDC_LIMIT_MACROS",
+        "-D__STDC_CONSTANT_MACROS",
+        "-D__STDC_FORMAT_MACROS",
+        "-DHAVE_GRALLOC1",
+        "-DHAVE_GRALLOC3",
+        "-DHAVE_GRALLOC4",
+        // FIXME: Use <android/api-level.h> instead?
+        "-DANDROID_PLATFORM_SDK_VERSION=10000",
+        "-Wno-implicit-fallthrough",
+        "-Wno-unused-parameter",
+        "-Wno-unused-local-typedef",
+        "-Wno-missing-field-initializers",
+        // Enable to output commit hash when SwiftShader is initialized
+        //"-DENABLE_BUILD_VERSION_OUTPUT",
+    ],
+
+    cppflags: [
+        "-Wno-sign-promo",
+        "-Wno-non-virtual-dtor",
+    ],
+
+    ldflags: [
+        // -Bsymbolic binds symbol references to their global definitions within
+        // a shared object, thereby preventing symbol preemption.
+        "-Wl,-Bsymbolic",
+    ],
+
+    local_include_dirs: [ "Vulkan" ],
+
+    version_script: "Vulkan/android_vk_swiftshader.lds",
+
+    generated_headers: [ "commit_header" ],
+
+    target: {
+        android: {
+            relative_install_path: "hw",
+            header_libs: [
+                "swiftshader_platform_headers",
+                "vulkan_headers",
+                "hwvulkan_headers",
+            ],
+            shared_libs: [
+                "android.hardware.graphics.mapper@3.0",
+                "android.hardware.graphics.mapper@4.0",
+                "libnativewindow",
+                "libhardware",
+                "libhidlbase",
+                "libcutils",
+                "libsync",
+                "liblog",
+                "libutils",
+            ],
+            static_libs: [
+                "libarect",
+            ],
+        },
+    },
+}
+
+cc_library_static {
+    name: "swiftshader_debug",
+
+    vendor_available: true,
+
+    cflags: [
+        "-DLOG_TAG=\"swiftshader\"",
+    ],
+
+    srcs: [
+        "System/Debug.cpp",
+    ],
+
+    export_include_dirs: [
+        ".",
+    ],
+
+    shared_libs: [
+        "liblog",
+    ],
+}
+
+cc_defaults {
+    name: "libvk_swiftshader_common_defaults",
+
+    cflags: [
+        "-DLOG_TAG=\"swiftshader\"",
+        "-DSWIFTSHADER_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER",
+        "-DSWIFTSHADER_ENABLE_ASTC",  // TODO(b/150130101)
+        //"-DSWIFTSHADER_DEVICE_MEMORY_REPORT",
+    ],
+
+    srcs: [
+        "System/Build.cpp",
+        "System/Configurator.cpp",
+        "System/CPUID.cpp",
+        "System/GrallocAndroid.cpp",
+        "System/Half.cpp",
+        "System/Linux/MemFd.cpp",
+        "System/Math.cpp",
+        "System/Memory.cpp",
+        "System/Socket.cpp",
+        "System/SwiftConfig.cpp",
+        "System/Timer.cpp",
+        "Device/*.cpp",
+        "Pipeline/*.cpp",
+        "Vulkan/*.cpp",
+        "WSI/HeadlessSurfaceKHR.cpp",
+        "WSI/VkSurfaceKHR.cpp",
+    ],
+
+    static_libs: [
+        "swiftshader_astc",
+        "swiftshader_debug",
+        "swiftshader_marl",
+        "swiftshader_spirv-tools",
+    ],
+
+    include_dirs: [
+        "external/swiftshader/third_party/SPIRV-Headers/include",
+        "external/swiftshader/include",
+    ],
+}
+
+cc_library_shared {
+    name: "vulkan.pastel",
+
+    static_libs: [
+        "libswiftshadervk_llvm_debug",
+        "libLLVM10_swiftshader",
+    ],
+
+    defaults: [
+        "libvk_swiftshader_common_defaults",
+        "libvk_swiftshader_defaults"
+    ],
+}
+
+cc_library_shared {
+    name: "vulkan.pastel.debug",
+
+    static_libs: [
+        "libswiftshadervk_llvm_debug",
+        "libLLVM10_swiftshader_debug",
+    ],
+
+    cflags: [
+        "-UNDEBUG",
+        "-g",
+        "-O0",
+        "-DDEFAULT_THREAD_COUNT=1",
+    ],
+
+    defaults: [
+        "libvk_swiftshader_common_defaults",
+        "libvk_swiftshader_defaults",
+    ],
+}

@@ -1,0 +1,21 @@
+[
+  {
+    "cmd": [],
+    "name": "platform things",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@name@fuchsia@@@",
+      "@@@STEP_LOG_END@name@@@",
+      "@@@STEP_LOG_LINE@arch@arm64@@@",
+      "@@@STEP_LOG_END@arch@@@",
+      "@@@STEP_LOG_LINE@platform@fuchsia-arm64@@@",
+      "@@@STEP_LOG_END@platform@@@",
+      "@@@STEP_LOG_LINE@triple@aarch64-fuchsia@@@",
+      "@@@STEP_LOG_END@triple@@@",
+      "@@@STEP_LOG_LINE@string@fuchsia-arm64@@@",
+      "@@@STEP_LOG_END@string@@@"
+    ]
+  },
+  {
+    "name": "$result"
+  }
+]

@@ -1,0 +1,47 @@
+#include <metal_stdlib>
+
+using namespace metal;
+kernel void tint_symbol() {
+  thread bool tint_symbol_1 = true;
+  thread bool tint_symbol_2 = true;
+  thread bool tint_symbol_3 = true;
+  thread int tint_symbol_4 = 1;
+  thread int tint_symbol_5 = 1;
+  thread int tint_symbol_6 = 1;
+  thread uint tint_symbol_7 = 1u;
+  thread uint tint_symbol_8 = 1u;
+  thread uint tint_symbol_9 = 1u;
+  thread bool3 tint_symbol_10 = bool3(true);
+  thread bool3 tint_symbol_11 = bool3(true);
+  thread bool3 tint_symbol_12 = bool3(true);
+  thread bool3 tint_symbol_13 = bool3(true);
+  thread bool4 tint_symbol_14 = bool4(true, false, true, false);
+  thread int3 tint_symbol_15 = int3(1);
+  thread int3 tint_symbol_16 = int3(1);
+  thread int3 tint_symbol_17 = int3(1);
+  thread uint3 tint_symbol_18 = uint3(1u);
+  thread uint3 tint_symbol_19 = uint3(1u);
+  thread uint3 tint_symbol_20 = uint3(1u);
+  tint_symbol_1 = false;
+  tint_symbol_2 = false;
+  tint_symbol_3 = false;
+  tint_symbol_4 = 0;
+  tint_symbol_5 = 0;
+  tint_symbol_6 = 0;
+  tint_symbol_7 = 0u;
+  tint_symbol_8 = 0u;
+  tint_symbol_9 = 0u;
+  tint_symbol_10 = bool3(false);
+  tint_symbol_11 = bool3(false);
+  tint_symbol_12 = bool3(false);
+  tint_symbol_13 = bool3(false);
+  tint_symbol_14 = bool4(false);
+  tint_symbol_15 = int3(0);
+  tint_symbol_16 = int3(0);
+  tint_symbol_17 = int3(0);
+  tint_symbol_18 = uint3(0u);
+  tint_symbol_19 = uint3(0u);
+  tint_symbol_20 = uint3(0u);
+  return;
+}
+

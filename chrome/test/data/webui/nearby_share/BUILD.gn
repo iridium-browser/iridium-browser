@@ -1,0 +1,67 @@
+# Copyright 2020 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//third_party/closure_compiler/compile_js.gni")
+
+assert(is_chromeos, "Nearby Share is CrOS only")
+
+js_type_check("closure_compile") {
+  is_polymer3 = true
+  closure_flags =
+      default_closure_args + [
+        "browser_resolver_prefix_replacements=\"chrome://nearby/=" +
+            rebase_path("//chrome/browser/resources/nearby_share/",
+                        root_build_dir) + "\"",
+        "js_module_root=" +
+            rebase_path("//chrome/test/data/webui/", root_build_dir),
+        "js_module_root=./gen/chrome/test/data/webui/",
+        "js_module_root=" +
+            rebase_path("//chrome/browser/resources/nearby_share/",
+                        root_build_dir),
+        "js_module_root=./gen/chrome/browser/resources/nearby_share/",
+      ]
+  deps = [
+    ":fake_mojo_interfaces",
+    ":nearby_confirmation_page_test",
+    ":nearby_discovery_page_test",
+    ":nearby_share_app_test",
+  ]
+}
+
+js_library("fake_mojo_interfaces") {
+  deps = [
+    "..:test_browser_proxy",
+    "//chrome/browser/ui/webui/nearby_share:mojom_js_library_for_compile",
+  ]
+}
+
+js_library("nearby_confirmation_page_test") {
+  deps = [
+    ":fake_mojo_interfaces",
+    "..:chai_assert",
+    "//chrome/browser/resources/nearby_share:nearby_confirmation_page",
+  ]
+  externs_list = [ "$externs_path/mocha-2.5.js" ]
+}
+
+js_library("nearby_discovery_page_test") {
+  deps = [
+    ":fake_mojo_interfaces",
+    "..:chai_assert",
+    "//chrome/browser/resources/nearby_share:nearby_discovery_page",
+  ]
+  externs_list = [ "$externs_path/mocha-2.5.js" ]
+}
+
+js_library("nearby_share_app_test") {
+  deps = [
+    "..:chai_assert",
+    "..:test_util",
+    "shared:fake_nearby_contact_manager",
+    "shared:fake_nearby_share_settings",
+    "//chrome/browser/resources/nearby_share:app",
+    "//chrome/browser/resources/nearby_share/shared:nearby_share_settings",
+  ]
+  externs_list = [ "$externs_path/mocha-2.5.js" ]
+}

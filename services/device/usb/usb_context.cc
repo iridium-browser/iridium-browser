@@ -64,7 +64,11 @@ void UsbContext::UsbEventHandler::Run() {
 
 void UsbContext::UsbEventHandler::Stop() {
   base::subtle::Release_Store(&running_, 0);
+#ifdef LIBUSB_API_VERSION >= 0x01000105
+  libusb_interrupt_event_handler(context_);
+#else
   libusb_interrupt_handle_event(context_);
+#endif
 }
 
 UsbContext::UsbContext(PlatformUsbContext context) : context_(context) {

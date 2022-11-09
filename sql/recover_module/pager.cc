@@ -23,8 +23,7 @@ static_assert(DatabasePageReader::kMaxPageId <= std::numeric_limits<int>::max(),
               "ints are not appropriate for representing page IDs");
 
 DatabasePageReader::DatabasePageReader(VirtualTable* table)
-    : page_data_(std::make_unique<uint8_t[]>(table->page_size())),
-      table_(table) {
+    : page_data_(table->page_size()), table_(table) {
   DCHECK(table != nullptr);
   DCHECK(IsValidPageSize(table->page_size()));
 }
@@ -58,7 +57,7 @@ int DatabasePageReader::ReadPage(int page_id) {
                 "The |read_offset| computation above may overflow");
 
   int sqlite_status =
-      RawRead(sqlite_file, read_size, read_offset, page_data_.get());
+      RawRead(sqlite_file, read_size, read_offset, page_data_.data());
 
   // |page_id_| needs to be set to kInvalidPageId if the read failed.
   // Otherwise, future ReadPage() calls with the previous |page_id_| value

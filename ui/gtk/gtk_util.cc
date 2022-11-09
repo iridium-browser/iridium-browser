@@ -685,7 +685,7 @@ GdkTexture* GetTextureFromRenderNode(GskRenderNode* node) {
   DCHECK(GtkCheckVersion(4));
   struct {
     GskRenderNodeType node_type;
-    GskRenderNode* (*get_child)(GskRenderNode*);
+    GskRenderNode* (*get_child)(const GskRenderNode*);
   } constexpr simple_getters[] = {
       {GSK_TRANSFORM_NODE, gsk_transform_node_get_child},
       {GSK_OPACITY_NODE, gsk_opacity_node_get_child},
@@ -699,8 +699,8 @@ GdkTexture* GetTextureFromRenderNode(GskRenderNode* node) {
   };
   struct {
     GskRenderNodeType node_type;
-    guint (*get_n_children)(GskRenderNode*);
-    GskRenderNode* (*get_child)(GskRenderNode*, guint);
+    guint (*get_n_children)(const GskRenderNode*);
+    GskRenderNode* (*get_child)(const GskRenderNode*, guint);
   } constexpr container_getters[] = {
       {GSK_CONTAINER_NODE, gsk_container_node_get_n_children,
        gsk_container_node_get_child},

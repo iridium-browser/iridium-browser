@@ -12,7 +12,6 @@ pkg_config("system_ffmpeg") {
     "libavformat",
     "libavutil",
   ]
-  defines = [ "av_stream_get_first_dts(stream)=stream->first_dts" ]
 }
 
 buildflag_header("ffmpeg_features") {

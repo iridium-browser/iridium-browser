@@ -1,0 +1,75 @@
+// Copyright 2018 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package dlcservice;
+option go_package = "chromiumos/system_api/dlcservice_proto";
+
+// This is the message that is passed into installation
+message InstallRequest {
+  // The unique ID of the DLC.
+  string id = 1;
+  // The omaha URL to download from.
+  // This field is optional.
+  string omaha_url = 2;
+  // The DLC will reserve space on installation success/failure.
+  // This field is optional.
+  bool reserve = 3;
+}
+
+// This message is used to query the DLCs that have data on disk. This allows
+// Chrome UI to show this list to the users and users can decide whether to
+// delete unused DLCs or not.
+message DlcsWithContent {
+  message DlcInfo {
+    // The unique ID of the DLC.
+    string id = 1;
+    // The human readable name of the DLC.
+    string name = 2;
+    // The human readable description of the DLC.
+    string description = 3;
+    // The amount of disk space used by this DLC (bytes).
+    uint64 used_bytes_on_disk = 4;
+    // True if the DLC can be purged by anyone other than its users.
+    bool is_removable = 5;
+  }
+  // The list of DLCs that have used disk space.
+  repeated DlcInfo dlc_infos = 1;
+}
+
+// This is the message that is returned from DLC Service via |GetState| method
+// and indicates what state a DLC is in.
+// TODO(crbug.com/1056269): Propagate error code as well to know reason for
+// failure when state is |NOT_INSTALLED|.
+message DlcState {
+  // Indicates what state a DLC is in.
+  enum State {
+    NOT_INSTALLED = 0;
+    INSTALLING = 1;
+    INSTALLED = 2;
+  }
+  State state = 1;
+
+  // The unique identifier of a DLC.
+  string id = 2;
+
+  // The path that DLC user can access their content. This path is available
+  // only when the state is INSTALLED.
+  string root_path = 3;
+
+  // The progress of installation. The value is between 0.0 and 1.0.
+  double progress = 4;
+
+  // The last error code happened on for this DLC.
+  // Should only be dlcservice error codes from
+  // system_api/dbus/dlcservice/dbus-constants.h file.
+  string last_error_code = 5;
+
+  // Indicates whether DLC is marked verified. Can be used to determine
+  // whether DLC is available on disk and can be mounted immediately.
+  bool is_verified = 6;
+}

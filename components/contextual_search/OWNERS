@@ -1,0 +1,9 @@
+gangwu@chromium.org
+
+# Secondary
+bttk@chromium.org
+donnd@chromium.org
+twellington@chromium.org
+
+per-file *.mojom=set noparent
+per-file *.mojom=file://ipc/SECURITY_OWNERS

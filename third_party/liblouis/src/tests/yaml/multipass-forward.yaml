@@ -1,0 +1,207 @@
+table: |
+  include tables/spaces.uti
+  include tables/unicode-without-blank.dis
+  include tables/en-us-comp8.ctb
+  noback correct $d "d" # digit
+  noback correct $m "m" # math
+  noback correct $p "p" # punctuation
+  noback correct $s "s" # space
+  noback correct $S "S" # sign
+  noback correct $u "u" # lowercase
+  noback correct $U "U" # uppercase
+flags: {testmode: forward}
+tests:
+- # specific attributes
+  - '5+: _xY'
+  - ⠙⠍⠏⠎⡎⠥⡥
+
+table: |
+  include tables/unicode.dis
+  include tables/en-ueb-g1.ctb
+  noback correct $D "D" # literary digit
+  noback correct $l "l" # letter
+  noback correct $a "a" # any
+flags: {testmode: forward}
+tests:
+- # general attributes
+  - '5x-Y'
+  - ⠠⠙⠇⠁⠇
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback context $p @1234 # punctuation
+flags: {testmode: forward}
+tests:
+- # context attributes
+  - =.+
+  - ⠿⠏⠬
+
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/en-us-comp8.ctb
+  attribute one abcde
+  attribute two fghij
+  attribute three klmno
+  attribute four pqrst
+  attribute five uvwxyz
+  noback correct $w. "w"
+  noback correct $x. "x"
+  noback correct $y. "y"
+  noback correct $z. "z"
+  noback correct %five. "5"
+  swapcc nestcc ([{< )]}>
+  noback correct %nestcc. %nestcc
+  swapcd nestcd )]}> 1234-1,234-12345,14-136,1-1345
+  noback context %nestcd %nestcd
+  grouping brackets \x0001\x0002 123478,145678
+  noback correct {brackets}brackets }brackets{brackets
+flags: {testmode: forward}
+tests:
+- # classes
+  - letters wxyz equate to the 1st four user classes
+  - ⠽⠺⠵⠺⠵ ⠢ ⠺⠵⠢⠺⠵⠺ ⠵⠽ ⠵⠭⠺ ⠂⠵ ⠭⠽⠢⠵ ⠢⠵⠺⠵ ⠺⠽⠺⠵⠺⠵
+- # swap
+  - '[(<{'
+  - ⠎⠟⠏⠁⠁⠝⠉⠥
+- # grouping
+  - \x0001\x0002
+  - ⣹⣏
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback correct $l4-5 "z"
+  noback correct $l2 "y"
+  noback correct $l "x"
+flags: {testmode: forward}
+tests:
+- # one letter
+  - a
+  - ⠭
+- # two letters
+  - ab
+  - ⠽
+- # three letters
+  - abc
+  - ⠽⠭
+- # four letters
+  - abcd
+  - ⠵
+- # five letters
+  - abcde
+  - ⠵
+- # six letters
+  - abcdef
+  - ⠵⠭
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback correct [$d5]_6 "f" # fail
+  noback correct [$d5]_5 "s" # succeed
+  noback correct `$d "f" # first
+  noback correct $d~ "l" # last
+  noback correct $d "m" # middle
+flags: {testmode: forward}
+tests:
+- # lookback count
+  - 12345
+  - ⠎
+- # first/last
+  - 123
+  - ⠋⠍⠇
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback correct `$l9~ *
+  noback correct `$l3[$d.]$l3~ *
+  noback correct `$l2[$d.]$l2~ "("*"|"*")"
+  noback correct `$d3[$l.]$d3~ ?
+flags: {testmode: forward}
+tests:
+- # copy no brackets
+  - abcdefghi
+  - ⠁⠃⠉⠙⠑⠋⠛⠓⠊
+- # copy once
+  - abc456ghi
+  - ⠲⠢⠖
+- # copy twice
+  - ab34567hi
+  - ⠷⠒⠲⠢⠖⠶⠳⠒⠲⠢⠖⠶⠾
+- # omit
+  - 123def789
+  - ⠂⠆⠒⠶⠦⠔
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback correct #1=0"0" *
+  noback correct "+" #1+?
+  noback correct "-" #1-?
+  noback correct #1=3"e" *
+  noback correct !#1=3"E" *
+  noback correct #1<3"l" *
+  noback correct !#1<3"L" *
+  noback correct #1>3"g" *
+  noback correct !#1>3"G" *
+  noback correct #1<=3"x" *
+  noback correct !#1<=3"X" *
+  noback correct #1>=3"y" *
+  noback correct !#1>=3"Y" *
+  noback correct "=" #1=15?
+  noback correct #1=15"z" *
+  noback correct $a ?
+flags: {testmode: forward}
+tests:
+- # variables
+  - 0-+++++--eElLgGxXyY-eElLgGxXyY++eElLgGxXyY=z
+  - ⠴⠑⡇⡛⠭⠽⡑⠇⡛⠭⡽⡑⡇⠛⡭⠽⠵
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  noback correct #1=0"0" #1=1"1"
+  noback context #1=0"1" #1=2@23
+  noback pass2 #1=0@23 #1=3@25
+  noback pass3 #1=0@25 #1=4@256
+  noback pass4 #1=0@256 #1=5@26
+flags: {testmode: forward}
+tests:
+- # pass order
+  - 0
+  - ⠢
+
+# Multipass rules should not go in endless loop when startMatch == endReplace
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/en-us-comp8.ctb
+  noback correct []"bar0" "foo"
+  noback context `[]"bar1" @124-135-135
+  noback pass2 []@12-1-1235-23 @124-135-135
+tests:
+  - - bar0
+    - ⠋⠕⠕⠃⠁⠗⠴
+  - - bar1
+    - ⠋⠕⠕⠃⠁⠗⠂
+  - - bar2
+    - ⠋⠕⠕⠃⠁⠗⠆
+
+table: |
+  include tables/unicode.dis
+  include tables/loweredDigits6Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  noback context `[]$l @124-135-135
+tests:
+  - - bar1
+    - ⠋⠕⠕⠃⠁⠗⠂
+
+table: |
+  include tables/unicode.dis
+  include tables/loweredDigits6Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  noback pass2 `[]$l @124-135-135
+tests:
+  - - bar2
+    - ⠋⠕⠕⠃⠁⠗⠆

@@ -1,0 +1,140 @@
+# Copyright 2019 The Dawn Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build_overrides/build.gni")
+import("dawn_features.gni")
+import("dawn_overrides_with_defaults.gni")
+
+###############################################################################
+# Template to produce a component for one of Dawn's libraries.
+###############################################################################
+
+# Template that produces static and shared versions of the same library as well
+# as a target similar to Chromium's component targets.
+#  - The shared version exports symbols and has dependent import the symbols
+#    as libdawn_${name}.so. If the target name matches the package directory
+#    name, then the shared library target will be named 'shared', otherwise
+#    '${target_name}_shared'.
+#  - The static library doesn't export symbols nor make dependents import them.
+#    If the target name matches the package directory name, then the static
+#    library target will be named 'static', otherwise '${target_name}_static'.
+#  - The libname target is similar to a Chromium component and is an alias for
+#    either the static or the shared library.
+#
+# The DEFINE_PREFIX must be provided and must match the respective "_export.h"
+# file.
+#
+# Example usage:
+#
+#   dawn_component("my_library") {
+#     // my_library_export.h must use the MY_LIBRARY_IMPLEMENTATION and
+#     // MY_LIBRARY_SHARED_LIBRARY macros.
+#     DEFINE_PREFIX = "MY_LIBRARY"
+#
+#     sources = [...]
+#     deps = [...]
+#     configs = [...]
+#   }
+#
+#   executable("foo") {
+#     deps = [ ":my_library_shared" ] // or :my_library for the same effect
+#   }
+template("dawn_component") {
+  # Copy the target_name in the local scope so it doesn't get shadowed in the
+  # definition of targets.
+  name = target_name
+
+  prefix = "${name}_"
+
+  # Remove prefix if the target name matches directory
+  if (get_label_info(get_label_info(":$target_name", "dir"), "name") == name) {
+    prefix = ""
+  }
+
+  # The config that will apply to dependents of the shared library so they know
+  # they should "import" the symbols
+  config("${prefix}shared_public_config") {
+    defines = [ "${invoker.DEFINE_PREFIX}_SHARED_LIBRARY" ]
+
+    # Executable needs an rpath to find our shared libraries on OSX and Linux
+    if (is_mac) {
+      ldflags = [
+        "-rpath",
+        "@executable_path/",
+      ]
+    }
+    if ((is_linux || is_chromeos) && dawn_has_build) {
+      configs = [ "//build/config/gcc:rpath_for_built_shared_libraries" ]
+    }
+  }
+
+  shared_library("${prefix}shared") {
+    # The "tool" for creating shared libraries will automatically add the "lib" prefix
+    output_name = "dawn_${name}"
+
+    # Copy all variables except "configs", which has a default value
+    forward_variables_from(invoker, "*", [ "configs" ])
+    if (defined(invoker.configs)) {
+      configs += invoker.configs
+    }
+
+    # Tell dependents where to find this shared library
+    if (is_mac) {
+      ldflags = [
+        "-install_name",
+        "@rpath/lib${name}.dylib",
+      ]
+    }
+
+    # Use the config that makes the ${DEFINE_PREFIX}_EXPORT macro do something
+    if (!defined(public_configs)) {
+      public_configs = []
+    }
+    public_configs += [ ":${prefix}shared_public_config" ]
+
+    # Tell sources of this library to export the symbols (and not import)
+    if (!defined(defines)) {
+      defines = []
+    }
+    defines += [ "${invoker.DEFINE_PREFIX}_IMPLEMENTATION" ]
+
+    # Chromium adds a config that uses a special linker script that removes
+    # all symbols except JNI ones. Remove this config so that our
+    # shared_library symbols are visible. This matches what Chromium's
+    # component template does.
+    if (build_with_chromium && is_android) {
+      configs -= [ "//build/config/android:hide_all_but_jni_onload" ]
+    }
+  }
+
+  static_library("${prefix}static") {
+    output_name = "dawn_${name}_static"
+
+    complete_static_lib = dawn_complete_static_libs
+
+    # Copy all variables except "configs", which has a default value
+    forward_variables_from(invoker, "*", [ "configs" ])
+    if (defined(invoker.configs)) {
+      configs += invoker.configs
+    }
+  }
+
+  group(name) {
+    if (is_component_build) {
+      public_deps = [ ":${prefix}shared" ]
+    } else {
+      public_deps = [ ":${prefix}static" ]
+    }
+  }
+}

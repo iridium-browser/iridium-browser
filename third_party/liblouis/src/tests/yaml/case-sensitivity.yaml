@@ -1,0 +1,63 @@
+# when a table does not define any capital marks, rules should be case sensitive
+# see second part of issue #498: https://github.com/liblouis/liblouis/issues/498#issuecomment-498358354
+display: tables/unicode.dis
+table: |
+  space \s 0
+  uppercase A 17
+  uppercase C 147
+  uppercase G 12457
+  uppercase L 1237
+  uppercase O 1357
+  uppercase R 12357
+  uppercase Y 134567
+  uppercase Z 13567
+  lowercase a 1
+  lowercase c 14
+  lowercase g 1245
+  lowercase l 123
+  lowercase o 135
+  lowercase r 1235
+  lowercase y 13456
+  lowercase z 1356
+  noback context "goal"$s"crazy" @2347-1367-147-147-2
+  noback context "goal"$s"Crazy" @2347-1367-147-147-23
+  noback context "Goal"$s"crazy" @2347-1367-147-147-25
+  noback context "Goal"$s"Crazy" @2347-1367-147-147-256
+tests:
+  - [goal crazy, ⡎⡥⡉⡉⠂] # first context rule matches
+  - [goal Crazy, ⡎⡥⡉⡉⠆] # second context rule matches
+  - [Goal crazy, ⡎⡥⡉⡉⠒] # third context rule matches
+  - [Goal Crazy, ⡎⡥⡉⡉⠲] # fourth context rule matches
+
+# when a table uses "base uppercase" but does not define any capital
+# marks, the behavior is not really consistent when it comes to case
+# sensitivity: context rules are case sensitive with regard to
+# uppercase letters within the rule, but when the rule starts with an
+# uppercase letter, it never matches at all.
+table: |
+  space \s 0
+  lowercase a 1
+  lowercase c 14
+  lowercase g 1245
+  lowercase l 123
+  lowercase o 135
+  lowercase r 1235
+  lowercase y 13456
+  lowercase z 1356
+  base uppercase A a
+  base uppercase C c
+  base uppercase G g
+  base uppercase L l
+  base uppercase O o
+  base uppercase R r
+  base uppercase Y y
+  base uppercase Z z
+  noback context "goal"$s"crazy" @2347-1367-147-147-2
+  noback context "goal"$s"Crazy" @2347-1367-147-147-23
+  noback context "Goal"$s"crazy" @2347-1367-147-147-25
+  noback context "Goal"$s"Crazy" @2347-1367-147-147-256
+tests:
+  - [goal crazy, ⡎⡥⡉⡉⠂] # first context rule matches
+  - [goal Crazy, ⡎⡥⡉⡉⠆] # second context rule matches
+  - [Goal crazy, ⠛⠕⠁⠇⠀⠉⠗⠁⠵⠽] # no context rule matches
+  - [Goal Crazy, ⠛⠕⠁⠇⠀⠉⠗⠁⠵⠽] # no context rule matches

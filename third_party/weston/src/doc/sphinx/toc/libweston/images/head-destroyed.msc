@@ -1,0 +1,26 @@
+#!/usr/bin/mscgen -Tpng
+
+msc {
+	hscale="1.5";
+
+	c [label = "compositor"], w [label = "libweston core"],
+	b [label = "backend"];
+
+	|||;
+
+	--- [label = "Head is destroyed for an enabled output"];
+
+	b box b [label = "A head disappears, e.g. MST connector is removed, not just disconnected"];
+
+	w <= b [label = "weston_head_release()"];
+	c x- w [label = "head->destroy_signal"];
+	w => w [label = "weston_head_detach()"];
+	w :> b [label = "weston_output::detach_head()"];
+	w note w [label = "No heads left in the output."];
+	w => w [label = "weston_output_disable()"];
+	w :> b [label = "weston_output::disable()"];
+	w >> b [label = "release return"];
+	b box b [label = "free(head)"];
+
+	--- [label = "The output is left disabled."];
+}

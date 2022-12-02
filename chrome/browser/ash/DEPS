@@ -1,0 +1,22 @@
+include_rules = [
+  # See README.md.
+  "+ash",
+
+  # TODO(ananta): Remove this when we move files which display UI in
+  # chrome/browser/chromeos to chrome/browser/ui/views/chromeos
+  # crbug.com/728877
+  "+chrome/browser/ui/views",
+
+  "+components/guest_os",
+  "+dbus",
+]
+
+specific_include_rules = {
+  "external_protocol_dialog\.cc": [
+    "+chrome/browser/ui/views/external_protocol_dialog.h",
+  ],
+  "file_manager_browsertest_base.cc": [
+    "+chrome/browser/ui/views/extensions/extension_dialog.h",
+    "+chrome/browser/ui/views/select_file_dialog_extension.h",
+  ],
+}

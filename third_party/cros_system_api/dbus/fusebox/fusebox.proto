@@ -1,0 +1,52 @@
+// Copyright 2021 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package fusebox;
+
+message DirEntryProto {
+  // Deprecated: use (mode_bits & S_IFDIR) instead.
+  optional bool is_directory = 1;
+  // Entry name.
+  optional string name = 2;
+  // POSIX style (S_IFREG | rwxr-x---) bits.
+  optional uint32 mode_bits = 3;
+}
+
+// Deprecated: use ReadDir2ResponseProto instead.
+message DirEntryListProto {
+  // List of DirEntry.
+  repeated DirEntryProto entries = 1;
+}
+
+message ListStoragesRequestProto {}
+
+message ListStoragesResponseProto {
+  optional int32 posix_error_code = 1;
+  repeated string storages = 2;
+}
+
+// ReadDir2 lists the directory's children. The results will be sent back in
+// the responses of one or more request-response RPC pairs. The first request
+// and last response have a zero cookie value. The remaining RPCs will have the
+// same server-chosen, non-zero cookie value.
+//
+// The request's cancel_error_code is typically zero but if not, it is echoed
+// in the response (which becomes the final response) and indicates that the
+// D-Bus client is cancelling the overall "read a directory" operation.
+
+message ReadDir2RequestProto {
+  optional int32 cancel_error_code = 1;
+  optional uint64 cookie = 2;
+  optional string file_system_url = 3;
+}
+
+message ReadDir2ResponseProto {
+  optional int32 posix_error_code = 1;
+  optional uint64 cookie = 2;
+  repeated DirEntryProto entries = 3;
+}

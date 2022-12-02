@@ -1,0 +1,76 @@
+{{header}}
+{{include ../../xfa_catalog_1_0.fragment}}
+{{include ../../xfa_object_2_0.fragment}}
+{{include ../../xfa_preamble_3_0.fragment}}
+{{include ../../xfa_config_4_0.fragment}}
+{{object 5 0}} <<
+  {{streamlen}}
+>>
+stream
+<template>
+  <subform layout="tb" name="my_doc">
+    <variables>
+      <text name="xx01">123</text>
+      <text name="xx02">456</text>
+      <integer name="xx03">123</integer>
+      <integer name="xx04">456</integer>
+    </variables>
+    <pageSet id="page" relation="orderedOccurrence">
+      <occur initial="1" max="1" min="1"/>
+      <pageArea id="Page1" name="Page1">
+        <occur max="1" min="1"/>
+        <contentArea h="100mm" w="200mm" x="0.25in" y="0.25in"/>
+      </pageArea>
+      <pageArea id="Page2" name="Page2">
+        <occur max="1" min="1"/>
+        <contentArea h="100mm" w="200mm" x="0.25in" y="0.25in"/>
+      </pageArea>
+    </pageSet>
+    <event activity="docReady" ref="$host">
+      <script name="my_script" contentType="application/x-javascript"><![CDATA[
+        {{include ../expect.js}}
+        try {
+          var script1 = xfa.resolveNode('template..my_script');
+          var script2 = xfa.resolveNode('template..their_script');
+          var script3 = xfa.resolveNode('template..other_script');
+          app.alert('First, poke at a script node itsef');
+          expect('script1.stateless', '0');
+          expectError('script1.stateless = 42');
+          app.alert('We search variables context ' + (xx01.value + xx02.value));
+          app.alert('We search variables context ' + (xx03.value + xx04.value));
+          app.alert('We resolve off of script1 ' + (script1.xx01.value + script1.xx02.value));
+          app.alert('We resolve off of script2 ' + (script2.xx01.value + script2.xx02.value));
+          app.alert('We resolve off of script3 ' + (script3.xx01.value + script3.xx02.value));
+          app.alert('We resolve off of script1 ' + script1.nonesuch);
+          app.alert('We resolve off of script2 ' + script2.nonesuch);
+          app.alert('We resolve off of script3 ' + script3.nonesuch);
+        } catch (e) {
+          app.alert('Error: ' + e);
+        }
+      ]]></script>
+    </event>
+  </subform>
+  <subform layout="tb" name="their_doc">
+    <variables>
+      <text name="xx01">78</text>
+      <text name="xx02">90</text>
+      <integer name="xx03">78</integer>
+      <integer name="xx04">90</integer>
+      <script name="other_script">
+        var xx01 = "chips";
+      </script>
+    </variables>
+    <script name="their_script">
+      var xx01 = "clams";
+    </script>
+  </subform>
+</template>
+endstream
+endobj
+{{include ../../xfa_locale_6_0.fragment}}
+{{include ../../xfa_postamble_7_0.fragment}}
+{{include ../../xfa_pages_8_0.fragment}}
+{{xref}}
+{{trailer}}
+{{startxref}}
+%%EOF

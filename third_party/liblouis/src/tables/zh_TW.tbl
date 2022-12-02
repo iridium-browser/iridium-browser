@@ -1,0 +1,16 @@
+#-index-name: Mandarin, Taiwan
+#-display-name: Taiwanese braille
+
+#+language:cmn
+#+region:cmn-TW
+#+type:literary
+# Marked as "direction:forward" by Bue Vester-Andersen
+# as there are only very few backward tests.
+#+direction:forward
+
+# TODO: Please add a reference to official documentation about
+# the implemented braille code. Preferably submit the documents
+# to https://github.com/liblouis/braille-specs.
+
+include zh-tw.ctb
+include braille-patterns.cti

@@ -1,0 +1,109 @@
+name: Build using CMake
+on: [push]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+jobs:
+  cmake-linux-local:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update apt
+        run: sudo apt update
+      - name: Install ninja
+        run: sudo apt install ninja-build
+      - name: Configure and build
+        run: scripts/build-local.sh
+        working-directory: ${{ github.workspace }}
+  cmake-linux-aarch64:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update apt
+        run: sudo apt update
+      - name: Install ninja
+        run: sudo apt install ninja-build
+      - name: Install aarch64 cross-toolchain
+        run: sudo apt install crossbuild-essential-arm64
+      - name: Install qemu-aarch64
+        run: sudo apt install qemu-user
+      - name: Configure and build
+        run: scripts/build-linux-aarch64.sh -DCMAKE_BUILD_TYPE=Release
+        working-directory: ${{ github.workspace }}
+      - name: Run tests
+        run: ctest --output-on-failure --parallel $(nproc)
+        working-directory: ${{ github.workspace }}/build/linux/aarch64
+  cmake-linux-armhf:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update apt
+        run: sudo apt update
+      - name: Install ninja
+        run: sudo apt install ninja-build
+      - name: Install armhf cross-toolchain
+        run: sudo apt install crossbuild-essential-armhf
+      - name: Install qemu-arm
+        run: sudo apt install qemu-user
+      - name: Configure and build
+        run: scripts/build-linux-armhf.sh -DCMAKE_BUILD_TYPE=Release
+        working-directory: ${{ github.workspace }}
+      - name: Run tests
+        run: ctest --output-on-failure --parallel $(nproc)
+        working-directory: ${{ github.workspace }}/build/linux/armhf
+  cmake-linux-riscv64:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update apt
+        run: sudo apt update
+      - name: Install ninja
+        run: sudo apt install ninja-build
+      - name: Install riscv64 cross-toolchain
+        run: sudo apt install crossbuild-essential-riscv64
+      - name: Install qemu-riscv64
+        run: sudo apt install qemu-user
+      - name: Configure and build
+        run: scripts/build-linux-riscv64.sh -DCMAKE_BUILD_TYPE=Release
+        working-directory: ${{ github.workspace }}
+      - name: Run tests
+        run: ctest --output-on-failure --parallel $(nproc)
+        working-directory: ${{ github.workspace }}/build/linux/riscv64
+  cmake-windows:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install ninja
+        run: choco install ninja
+      - name: Configure and build
+        run: scripts/build-windows.sh
+        shell: bash  # Specify bash so we can reuse the build script on Windows (runs on Git bash)
+        working-directory: ${{ github.workspace }}
+  cmake-android:
+    strategy:
+      matrix:
+        script: [build-android-arm64.sh, build-android-armv7.sh, build-android-x86.sh]
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update apt
+        run: sudo apt update
+      - name: Install ninja
+        run: sudo apt install ninja-build
+      - name: Setup Android NDK
+        id: setup-ndk
+        uses: nttld/setup-ndk@v1.0.6
+        with:
+          ndk-version: r23b
+          add-to-path: false
+      - name: Configure and build
+        run: scripts/${{ matrix.script }}
+        working-directory: ${{ github.workspace }}
+        env:
+          ANDROID_NDK: ${{ steps.setup-ndk.outputs.ndk-path }}

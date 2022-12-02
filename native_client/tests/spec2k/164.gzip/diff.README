@@ -1,0 +1,1 @@
+Add conditional ifdef to check for "compat/string.h" from emscripten to prevent multiple defines of "strlwr"

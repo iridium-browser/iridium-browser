@@ -1,0 +1,322 @@
+// Copyright 2019 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// The messages in this file comprise the messages to communicate to FIDO
+// security keys. This file translates
+// <chrome/src>/third_party/blink/public/mojom/webauthn/authenticator.mojom
+// to protobuf.
+// The protobuf requests are translated to /device/fido requests in the key
+// challenge service in Chrome.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+package cryptohome.fido;
+option go_package = "chromiumos/system_api/cryptohome_proto";
+
+message Url {
+  string url = 1;
+}
+
+// Fido authenticator status.
+enum AuthenticatorStatus {
+  SUCCESS = 0;
+  PENDING_REQUEST = 1;
+  NOT_ALLOWED_ERROR = 2;
+  INVALID_DOMAIN = 3;
+  INVALID_ICON_URL = 4;
+  CREDENTIAL_EXCLUDED = 5;
+
+  // TODO(crbug/964439): Unused in Desktop, but kept around for Android. Delete
+  // once it's fully obsolete.
+  CREDENTIAL_NOT_RECOGNIZED = 6;
+
+  NOT_IMPLEMENTED = 7;
+  NOT_FOCUSED = 8;
+  RESIDENT_CREDENTIALS_UNSUPPORTED = 9;
+  USER_VERIFICATION_UNSUPPORTED = 10;
+  ALGORITHM_UNSUPPORTED = 11;
+  EMPTY_ALLOW_CREDENTIALS = 12;
+  ANDROID_NOT_SUPPORTED_ERROR = 13;
+  PROTECTION_POLICY_INCONSISTENT = 14;
+  ABORT_ERROR = 15;
+  OPAQUE_DOMAIN = 16;
+  INVALID_PROTOCOL = 17;
+  BAD_RELYING_PARTY_ID = 18;
+  UNKNOWN_ERROR = 19;
+}
+
+enum AuthenticatorTransport {
+  USB = 0;
+  NFC = 1;
+  BLE = 2;
+  CABLE = 3;
+  INTERNAL = 4;
+}
+
+// Credential information returned by both Authenticator::MakeCredential
+// and Authenticator::GetAssertion.
+message CommonCredentialInfo {
+  // The base64url encoding of |raw_id|.
+  string id = 1;
+
+  // An identifier for the credential.
+  bytes raw_id = 2;
+
+  // A blob of data containing the JSON serialization of client data passed
+  // to the authenticator.
+  bytes client_data_json = 3;
+}
+
+// The public key and attestation returned by Authenticator::MakeCredential.
+message MakeCredentialAuthenticatorResponse {
+  CommonCredentialInfo info = 1;
+
+  // A blob of data returned by the authenticator after creating a credential.
+  bytes attestation_object = 2;
+
+  // A list of transports that the authenticator supports, with the transport
+  // used for the registration as the first element.
+  repeated AuthenticatorTransport transports = 3;
+
+  // True if getClientExtensionResults() called on the returned
+  // PublicKeyCredential instance should contain an `hmacCreateSecret`
+  // extension output. If so, |hmac_create_secret| contains the actual value.
+  bool echo_hmac_create_secret = 4;
+  bool hmac_create_secret = 5;
+}
+
+message GetAssertionAuthenticatorResponse {
+  CommonCredentialInfo info = 1;
+
+  // A blob of data returned by the authenticator after generating an assertion.
+  bytes authenticator_data = 2;
+
+  // Cryptographic signature proving possession of the credential private key.
+  bytes signature = 3;
+
+  // Only supported by CTAP devices, not by U2F devices.
+  // Equivalent of the `user.id` passed into create().
+  // Maximum 64 bytes.
+  bytes user_handle = 4;
+
+  // True if getClientExtensionResults() called on the returned
+  // PublicKeyCredential instance should contain an `appid` extension output.
+  // If so, |appid_extension| contains the actual value.
+  bool echo_appid_extension = 5;
+  bool appid_extension = 6;
+}
+
+// Information about the relying party. These fields take arbitrary input.
+message PublicKeyCredentialRpEntity {
+  // An ASCII serialization of an origin.
+  string id = 1;
+
+  // Friendly name associated with the relying party intended for display.
+  // e.g. "Acme Corporation".
+  string name = 2;
+
+  // Image associated with the entity. e.g. a relying party's logo.
+  Url icon = 3;
+}
+
+// Information about the account held by the user. These fields take
+// arbitrary input.
+message PublicKeyCredentialUserEntity {
+  // Unique identifier for a user account An opaque byte sequence with a
+  // maximum size of 64 bytes.
+  bytes id = 1;
+
+  // Friendly name associated with the entity intended for display.
+  // e.g."john.p.smith@example.com" or "+14255551234" for a user.
+  string name = 2;
+
+  // Image associated with the entity. For example, a user's avatar.
+  Url icon = 3;
+
+  // Contains a friendly name for the user account (e.g., "John P. Smith").
+  string display_name = 4;
+}
+
+// Parameters that are used to generate an appropriate public key credential.
+message PublicKeyCredentialParameters {
+  PublicKeyCredentialType type = 1;
+  int32 algorithm_identifier = 2;
+}
+
+enum UserVerificationRequirement {
+  REQUIRED = 0;
+  PREFERRED = 1;
+  DISCOURAGED = 2;
+}
+
+// Cloud-assisted BLE extension data for getAssertion.
+message CableAuthentication {
+  // The caBLE version requested.
+  uint32 version = 1;
+
+  // A 16-byte ephemeral identifier that the browser will advertise.
+  bytes client_eid = 2;
+
+  // A 16-byte ephemeral identifier that the browser expects to receive from a
+  // responding authenticator.
+  bytes authenticator_eid = 3;
+
+  // A 32-byte pre-key used to compute a session key to encrypt messages between
+  // a paired client and authenticator following a successful discovery.
+  bytes session_pre_key = 4;
+}
+
+// Cloud-assisted BLE extension data for makeCredential.
+message CableRegistration {
+  // The caBLE versions supported by the relying party.
+  bytes versions = 1;
+
+  // The 65-byte ECDSA ephemeral public key belonging to the relying party
+  // for use in establishing an encrypted caBLE channel with an authenticator.
+  bytes relying_party_public_key = 2;
+}
+
+// Parameters passed into calls to GetAssertion.
+message PublicKeyCredentialRequestOptions {
+  // An indefinite-length blob passed from the the relying party server,
+  // to be sent to an authenticator for signing
+  bytes challenge = 1;
+
+  // Time to wait for an authenticator to complete an operation.
+  // Adjusted to fall within a client-defined range.
+  int64 adjusted_timeout = 2;
+
+  // An ASCII serialization of the origin claimed by the relying party.
+  string relying_party_id = 3;
+
+  // A list of credentials the relying party knows about and would
+  // accept as the signing credential.
+  repeated PublicKeyCredentialDescriptor allow_credentials = 4;
+  // Indicates the relying party's need for a user-verifying authenticator.
+  UserVerificationRequirement user_verification = 5;
+
+  // The contents of the appid extension, if any. See
+  // https://w3c.github.io/webauthn/#sctn-appid-extension
+  string appid = 6;
+
+  // The contents of the cloud assisted BLE extension for getAssertion
+  // requests, if any. This extension permits browsers and authenticator
+  // devices to establish a pairingless BLE connection.
+  // TODO(crbug.com/842371): Add link to spec when available.
+  // There may be multiple sets if multiple caBLE credentials have been
+  // registered with the relying party.
+  repeated CableAuthentication cable_authentication_data = 7;
+}
+
+// See https://w3c.github.io/webauthn/#enumdef-attestationconveyancepreference
+enum AttestationConveyancePreference {
+  NONE_ATTESTATION_PREFERENCE = 0;
+  INDIRECT = 1;
+  DIRECT = 2;
+  // A non-standard addition that we hope will become standard. This indicates
+  // that the RP desires individual attestaion from the device.
+  ENTERPRISE = 3;
+}
+
+// https://w3c.github.io/webauthn/#enumdef-authenticatorattachment.
+enum AuthenticatorAttachment {
+  NO_PREFERENCE = 0;
+  PLATFORM = 1;
+  CROSS_PLATFORM = 2;
+}
+
+enum ProtectionPolicy {
+  // UNSPECIFIED means that no value was given at the Javascript level.
+  UNSPECIFIED = 0;
+  NONE_PROTECTION_POLICY = 1;
+  UV_OR_CRED_ID_REQUIRED = 2;
+  UV_REQUIRED = 3;
+}
+
+// See https://w3c.github.io/webauthn/#dictdef-authenticatorselectioncriteria.
+message AuthenticatorSelectionCriteria {
+  // Filter authenticators by attachment type.
+  AuthenticatorAttachment authenticator_attachment = 1;
+
+  // Whether the authenticator should store the created key so that the key
+  // can later be selected given only an RP ID (e.g. when |allow_credentials|
+  // is empty).
+  bool require_resident_key = 2;
+
+  // Indicates the relying party's need for a user-verifying authenticator.
+  UserVerificationRequirement user_verification = 3;
+}
+
+
+// Parameters passed into calls to MakeCredential.
+message PublicKeyCredentialCreationOptions {
+  // Information about the relying party and user entities, respectively.
+  // Used by the authenticator to create or retrieve an appropriate public key
+  // credential for the requested account.
+  PublicKeyCredentialRpEntity relying_party = 1;
+  PublicKeyCredentialUserEntity user = 2;
+
+  // An indefinite-length blob passed from the the relying party server,
+  // to be sent to an authenticator to make a credential.
+  bytes challenge = 3;
+
+  // Parameters defining the type of created credential that the relying
+  // party would accept.
+  repeated PublicKeyCredentialParameters public_key_parameters = 4;
+
+  // Time in ms to wait for an authenticator to complete an operation.
+  // Adjusted to fall within a client-defined range.
+  int64 adjusted_timeout = 5;
+
+  // A list of credentials the relying party knows about. If an
+  // authenticator has one of these credentials, it should not
+  // create a new one
+  repeated PublicKeyCredentialDescriptor exclude_credentials = 6;
+
+  // Specify the relying party's authenticator attribute requirements.
+  AuthenticatorSelectionCriteria authenticator_selection = 7;
+
+  // Specifies whether the RP wants attestation information for the created
+  // credential.
+  AttestationConveyancePreference attestation = 8;
+
+  // The contents of the cloud assisted BLE extension for makeCredential
+  // requests, if any. This extension permits browsers and authenticator
+  // devices to establish a pairingless BLE connection.
+  // TODO(crbug.com/842371): Add link to spec when available.
+  CableRegistration cable_registration_data = 9;
+
+  // The contents of the hmacCreateSecret extension, if any. See
+  // https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-client-to-authenticator-protocol-v2.0-rd-20180702.html#sctn-hmac-secret-extension
+  bool hmac_create_secret = 10;
+
+  // The value of the `credentialProtectionPolicy` extension, or UNSPECIFIED if
+  // none was provided
+  ProtectionPolicy protection_policy = 11;
+
+  // The value of the `enforceCredentialProtectionPolicy`, or false if none was
+  // provided
+  bool enforce_protection_policy = 12;
+
+  // The contents of the appidExclude extension, if any. See
+  // https://w3c.github.io/webauthn/#sctn-appid-exclude-extension
+
+  string appid_exclude = 13;
+}
+
+enum PublicKeyCredentialType {
+  PUBLIC_KEY = 0;
+}
+
+// Describes the credentials that the relying party already knows about for
+// the given account. If any of these are known to the authenticator,
+// it should not create a new credential.
+message PublicKeyCredentialDescriptor {
+  PublicKeyCredentialType type = 1;
+  // Blob representing a credential key handle. Up to 255 bytes for
+  // U2F authenticators.
+  bytes id = 2;
+  repeated AuthenticatorTransport transports = 3;
+}

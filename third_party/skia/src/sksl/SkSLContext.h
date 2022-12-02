@@ -1,0 +1,49 @@
+/*
+ * Copyright 2016 Google Inc.
+ *
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+#ifndef SKSL_CONTEXT
+#define SKSL_CONTEXT
+
+namespace SkSL {
+
+class BuiltinMap;
+class BuiltinTypes;
+class ErrorReporter;
+class ModifiersPool;
+struct ProgramConfig;
+struct ShaderCaps;
+
+/**
+ * Contains compiler-wide objects, which currently means the core types.
+ */
+class Context {
+public:
+    Context(const BuiltinTypes& types, const ShaderCaps* caps, ErrorReporter& errors);
+    ~Context();
+
+    // The Context holds a reference to all of the built-in types.
+    const BuiltinTypes& fTypes;
+
+    // The Context holds a reference to our shader caps bits.
+    const ShaderCaps* fCaps;
+
+    // The Context holds a pointer to our pool of modifiers.
+    ModifiersPool* fModifiersPool = nullptr;
+
+    // The Context holds a pointer to the configuration of the program being compiled.
+    ProgramConfig* fConfig = nullptr;
+
+    // The Context holds a pointer to our error reporter.
+    ErrorReporter* fErrors;
+
+    // Symbols which have definitions in the include files.
+    const BuiltinMap* fBuiltins = nullptr;
+};
+
+}  // namespace SkSL
+
+#endif

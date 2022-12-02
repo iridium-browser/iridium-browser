@@ -1,0 +1,46 @@
+#!/bin/bash
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+#
+# This file is a simple wrapper around whatever machine-specific version
+# of `npm` we downloaded (as part of Node).
+
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+if [ $(uname -s) = "Darwin" -a $(uname -m) = "x86_64" ]
+then
+  node_dir="${SCRIPT_DIR}/third_party/node/mac/node-darwin-x64"
+elif [ $(uname -s) = "Linux" -a $(uname -m) = "x86_64" ]
+then
+  node_dir="${SCRIPT_DIR}/third_party/node/linux/node-linux-x64"
+else
+  echo "unsupported system"
+  exit 1
+fi
+
+# $npm third_party/node/mac/node-darwin-x64/lib/npm/lib/npm.js run "$@"
+script=$1
+shift
+if [ "$1" = "install" ]
+then
+  $node_dir/bin/node $node_dir/lib/node_modules/npm \
+    --scripts-prepend-node-path=true \
+    $script "$@"
+else
+  $node_dir/bin/node $node_dir/lib/node_modules/npm \
+    --scripts-prepend-node-path=true \
+    run-script $script $@
+fi
+

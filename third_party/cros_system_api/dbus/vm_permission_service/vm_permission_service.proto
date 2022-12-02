@@ -1,0 +1,83 @@
+// Copyright 2020 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package vm_permission_service;
+
+// Request to register VM with given name.
+message RegisterVmRequest {
+  enum VmType {
+    CROSTINI_VM = 0;
+    PLUGIN_VM = 1;
+    BOREALIS = 2;
+  };
+
+  // Name of the VM being registered with permission service.
+  string name = 1;
+
+  // The owner of the VM.
+  string owner_id = 2;
+
+  // Type of the VM being registered.
+  VmType type = 3;
+};
+
+// Response to RegisterVmRequest.
+message RegisterVmResponse {
+  // Token assigned to the VM if it was successfully registered.
+  // The token is used when retrieving permission data for the VM.
+  string token = 1;
+};
+
+// Request to unregister VM with given name.
+message UnregisterVmRequest {
+  // Name of the VM being unregistered.
+  string name = 1;
+
+  // The owner of the VM.
+  string owner_id = 2;
+};
+
+// Describes a single VM permission.
+message Permission {
+  enum Kind {
+    // Indicates whether a VM is allowed to access camera.
+    CAMERA = 0;
+
+    // Indicates whether a VM is allowed to access microphone.
+    MICROPHONE = 1;
+  };
+
+  Kind kind = 1;
+
+  // Value of permission setting.
+  bool allowed = 2;
+};
+
+// Request to set permissions for VM with given name.
+message SetPermissionsRequest {
+  // Name of the VM for which permissions are being adjusted.
+  string name = 1;
+
+  // The owner of the VM.
+  string owner_id = 2;
+
+  // Set of new permissions for the VM.
+  repeated Permission permissions = 3;
+};
+
+// Request to get permissions for VM with given token.
+message GetPermissionsRequest {
+  // Token assigned to the VM upon registration with the service.
+  string token = 1;
+};
+
+// Response to GetPermissionsRequest.
+message GetPermissionsResponse {
+  // Current set of permissions for the VM.
+  repeated Permission permissions = 1;
+};

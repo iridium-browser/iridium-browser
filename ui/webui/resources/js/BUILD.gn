@@ -1,0 +1,188 @@
+# Copyright 2018 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/ui_mode.gni")
+import("//third_party/closure_compiler/compile_js.gni")
+import("//tools/grit/preprocess_if_expr.gni")
+import("//ui/webui/resources/tools/generate_grd.gni")
+
+preprocess_folder = "$root_gen_dir/ui/webui/resources/preprocessed/js"
+preprocess_src_manifest = "preprocessed_src_manifest.json"
+
+include_polymer = !is_android && !is_ios
+
+generate_grd("build_grdp") {
+  grd_prefix = "webui_js"
+  out_grd = "$target_gen_dir/resources.grdp"
+  public_deps = [ ":preprocess" ]
+  manifest_files = [ "$target_gen_dir/$preprocess_src_manifest" ]
+  if (include_polymer) {
+    manifest_files += [ "$target_gen_dir/browser_command/build_ts.manifest" ]
+  }
+  resource_path_prefix = "js"
+}
+
+group("preprocess") {
+  public_deps = [
+    ":preprocess_src",
+    ":preprocess_src_ts",
+  ]
+  if (include_polymer) {
+    public_deps += [ "browser_command:build_ts" ]
+  }
+}
+
+# TS files are passed to a separate target so that they are not listed in the
+# |out_manifest|.
+preprocess_if_expr("preprocess_src_ts") {
+  in_folder = "./"
+  out_folder = "$preprocess_folder"
+  in_files = [
+    "action_link.ts",
+    "assert_ts.ts",
+    "color_utils.ts",
+    "custom_element.ts",
+    "drag_wrapper.ts",
+    "event_tracker.ts",
+    "focus_grid.ts",
+    "focus_outline_manager.ts",
+    "focus_row.ts",
+    "keyboard_shortcut_list.ts",
+    "plural_string_proxy.ts",
+    "search_highlight_utils.ts",
+    "static_types.ts",
+    "store_ts.ts",
+    "test_loader.ts",
+    "test_loader_util.ts",
+  ]
+
+  if (is_chromeos) {
+    in_files += [ "os_about.ts" ]
+  }
+
+  if (include_polymer) {
+    in_files += [
+      "focus_row_mixin.ts",
+      "focus_without_ink.ts",
+    ]
+  }
+}
+
+preprocess_if_expr("preprocess_src") {
+  in_folder = "./"
+  out_folder = "$preprocess_folder"
+  out_manifest = "$target_gen_dir/$preprocess_src_manifest"
+  in_files = [
+    "assert.js",
+    "cr.m.js",
+    "cr/event_target.js",
+    "cr/ui.js",
+    "icon.js",
+    "load_time_data.m.js",
+    "load_time_data_deprecated.js",
+    "parse_html_subset.js",
+    "promise_resolver.js",
+    "util.js",
+    "webui_resource_test.js",
+  ]
+
+  if (is_chromeos_ash || is_ios) {
+    # Used by ChromeOS UIs and ios inspect and omaha UIs
+    in_files += [ "util_deprecated.js" ]
+  }
+
+  if (is_ios) {
+    in_files += [
+      "ios/mojo_api.js",
+      "ios/web_ui.js",
+    ]
+  }
+}
+
+group("closure_compile") {
+  deps = [ ":js_resources" ]
+}
+
+js_type_check("js_resources") {
+  uses_legacy_modules = true
+  deps = [
+    ":load_time_data_deprecated",
+    ":webui_resource_test",
+  ]
+
+  if (is_ios) {
+    deps += [ "ios:web_ui" ]
+  }
+
+  if (is_chromeos_ash) {
+    deps += [ ":util_deprecated" ]
+  }
+}
+
+js_library("load_time_data_deprecated") {
+}
+
+if (is_chromeos_ash) {
+  js_library("util_deprecated") {
+  }
+}
+
+js_library("webui_resource_test") {
+  externs_list = [ "dom_automation_controller.js" ]
+}
+
+# Targets for type-checking JS Modules
+
+group("closure_compile_modules") {
+  deps = [
+    ":js_resources_modules",
+    "cr:closure_compile_modules",
+  ]
+}
+
+js_type_check("js_resources_modules") {
+  is_polymer3 = true
+  deps = [
+    ":assert",
+    ":cr.m",
+    ":icon",
+    ":load_time_data.m",
+    ":parse_html_subset",
+    ":promise_resolver",
+    ":util",
+  ]
+}
+
+js_library("assert") {
+}
+
+js_library("cr.m") {
+  deps = [
+    ":assert",
+    ":promise_resolver",
+  ]
+  externs_list = [ "$externs_path/chrome_send.js" ]
+}
+
+js_library("icon") {
+  deps = [ ":cr.m" ]
+}
+
+js_library("load_time_data.m") {
+}
+
+js_library("parse_html_subset") {
+}
+
+js_library("promise_resolver") {
+  deps = [ ":assert" ]
+}
+
+js_library("util") {
+  deps = [
+    ":assert",
+    ":cr.m",
+  ]
+  externs_list = [ "$externs_path/chrome_send.js" ]
+}

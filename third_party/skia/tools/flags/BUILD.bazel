@@ -1,0 +1,19 @@
+load("//bazel:macros.bzl", "exports_files_legacy")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+filegroup(
+    name = "flags",
+    testonly = True,
+    srcs = [
+        "CommandLineFlags.cpp",
+        "CommandLineFlags.h",
+    ],
+    visibility = [
+        "//modules/skottie:__pkg__",
+        "//tests:__subpackages__",
+        "//tools:__subpackages__",
+    ],
+)

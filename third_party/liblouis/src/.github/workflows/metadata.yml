@@ -1,0 +1,35 @@
+name: Run the metadata test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths:
+      - 'tables/*'
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  metadata-test:
+    name: Build and check the metadta
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev texinfo texlive golang
+    - name: autogen && configure
+      run: |
+        ./autogen.sh
+        ./configure --enable-ucs4
+    - name: Build
+      run: make
+    - name: Run the metadata test
+      run: make -C extra/generate-display-names
+    - name: Store the log
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: generate-display-names.log
+        path: extra/generate-display-names/generate.log

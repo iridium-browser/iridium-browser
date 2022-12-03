@@ -1,0 +1,58 @@
+# Copyright 2017 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+if (is_android) {
+  import("//build/config/android/config.gni")
+  import("//build/config/android/rules.gni")
+}
+
+source_set("public") {
+  sources = [
+    "background_download_service.cc",
+    "background_download_service.h",
+    "client.cc",
+    "client.h",
+    "clients.cc",
+    "clients.h",
+    "download_metadata.cc",
+    "download_metadata.h",
+    "download_params.cc",
+    "download_params.h",
+    "features.cc",
+    "features.h",
+    "service_config.h",
+  ]
+
+  if (!is_ios) {
+    sources += [
+      "basic_task_scheduler.cc",
+      "basic_task_scheduler.h",
+      "blob_context_getter_factory.h",
+      "logger.h",
+      "navigation_monitor.h",
+    ]
+  }
+
+  deps = [
+    "//components/keyed_service/core",
+    "//services/network/public/mojom:url_loader_base",
+  ]
+
+  # Blob storage is not supported on iOS.
+  if (!is_ios) {
+    deps += [ "//storage/browser" ]
+  }
+
+  public_deps = [
+    "//base",
+    "//net",
+    "//url",
+  ]
+
+  if (is_ios) {
+    public_deps += [ "//components/download/public/task:task_type" ]
+  } else {
+    public_deps += [ "//components/download/public/task:public" ]
+  }
+}

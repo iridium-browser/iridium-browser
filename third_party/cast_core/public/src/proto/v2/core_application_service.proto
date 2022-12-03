@@ -1,0 +1,96 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package cast.v2;
+
+import "proto/common/application_state.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// This service is implemented by the CastCore and used by Cast application in
+// Runtime to report status and request additional application information. This
+// service is scoped per application.
+service CoreApplicationService {
+  // GetWebUIResource request
+  rpc GetWebUIResource(GetWebUIResourceRequest)
+      returns (GetWebUIResourceResponse);
+
+  // Notifies that application has been started.
+  rpc ApplicationStarted(ApplicationStartedRequest)
+      returns (ApplicationStartedResponse);
+
+  // Notifies that application has been stopped.
+  rpc ApplicationStopped(ApplicationStoppedRequest)
+      returns (ApplicationStoppedResponse);
+
+  // Notifies application media playback state changed.
+  rpc MediaPlaybackChanged(MediaPlaybackChangedRequest)
+      returns (MediaPlaybackChangedResponse);
+
+  // Notifies application visibility changed.
+  rpc VisibilityChanged(VisibilityChangedRequest)
+      returns (VisibilityChangedResponse);
+}
+
+message GetWebUIResourceRequest {
+  // Resource identifier. It can either be name of the resource or a url.
+  string resource_id = 1;
+}
+
+message GetWebUIResourceResponse {
+  // Path to the resource file on device.
+  string resource_path = 1;
+}
+
+message ApplicationStartedRequest {
+  // The Cast session ID whose application status changed.
+  string cast_session_id = 1;
+}
+
+message ApplicationStartedResponse {}
+
+message ApplicationStoppedRequest {
+  // The Cast session ID whose application status changed.
+  string cast_session_id = 1;
+
+  // Stop reason.
+  common.StopReason.Type stop_reason = 2;
+
+  // Runtime specific error code.
+  int32 error_code = 3;
+}
+
+message ApplicationStoppedResponse {}
+
+message MediaPlaybackChangedRequest {
+  // The Cast session ID whose application status changed.
+  string cast_session_id = 1;
+
+  // The media playback state.
+  common.MediaPlaybackState.Type media_playback_state = 2;
+}
+
+message MediaPlaybackChangedResponse {}
+
+message VisibilityChangedRequest {
+  // The Cast session ID whose application status changed.
+  string cast_session_id = 1;
+
+  // Visibility of the application.
+  common.Visibility.Type visibility = 2;
+}
+
+message VisibilityChangedResponse {}

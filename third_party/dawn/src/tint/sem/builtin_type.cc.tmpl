@@ -1,0 +1,46 @@
+{{- /*
+--------------------------------------------------------------------------------
+Template file for use with tools/src/cmd/gen to generate builtin_type.cc
+
+To update the generated file, run:
+    ./tools/run gen
+
+See:
+* tools/src/cmd/gen for structures used by this template
+* https://golang.org/pkg/text/template/ for documentation on the template syntax
+--------------------------------------------------------------------------------
+*/ -}}
+
+#include "src/tint/sem/builtin_type.h"
+
+#include <sstream>
+
+namespace tint::sem {
+
+BuiltinType ParseBuiltinType(const std::string& name) {
+{{- range Sem.Builtins  }}
+    if (name == "{{.Name}}") {
+        return BuiltinType::k{{PascalCase .Name}};
+    }
+{{- end  }}
+    return BuiltinType::kNone;
+}
+
+const char* str(BuiltinType i) {
+    switch (i) {
+        case BuiltinType::kNone:
+            return "<none>";
+{{- range Sem.Builtins  }}
+        case BuiltinType::k{{PascalCase .Name}}:
+            return "{{.Name}}";
+{{- end  }}
+    }
+    return "<unknown>";
+}
+
+std::ostream& operator<<(std::ostream& out, BuiltinType i) {
+    out << str(i);
+    return out;
+}
+
+}  // namespace tint::sem

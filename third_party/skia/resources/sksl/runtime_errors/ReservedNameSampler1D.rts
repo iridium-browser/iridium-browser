@@ -1,0 +1,5 @@
+int sampler1D;
+
+/*%%*
+'sampler1D' is a reserved word
+*%%*/

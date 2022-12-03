@@ -1,0 +1,94 @@
+diff -NaurbB src/iperlsys.h src.patched/iperlsys.h
+--- src/iperlsys.h	2010-06-02 16:09:05.000000000 -0400
++++ src.patched/iperlsys.h	2010-06-02 16:09:05.000000000 -0400
+@@ -675,11 +675,18 @@
+ #define PerlProc_crypt(c,s)	PL_piProc->Crypt((c), (s))
+ #define PerlProc_exit(s)	PL_piProc->Exit((s))
+ #define PerlProc__exit(s)	PL_piProc->_Exit((s))
++/* @LOCALMOD */
++#if 1
++#define PerlProc_execl(c, w, x, y, z) 	PL_piProc->Abort()
++#define PerlProc_execv(c, a)		PL_piProc->Abort()
++#define PerlProc_execvp(c, a)		PL_piProc->Abort()
++#else
+ #define PerlProc_execl(c, w, x, y, z)					\
+ 	PL_piProc->Execl((c), (w), (x), (y), (z))
+ 
+ #define PerlProc_execv(c, a)	PL_piProc->Execv((c), (a))
+ #define PerlProc_execvp(c, a)	PL_piProc->Execvp((c), (a))
++#endif
+ #define PerlProc_getuid()	PL_piProc->Getuid()
+ #define PerlProc_geteuid()	PL_piProc->Geteuid()
+ #define PerlProc_getgid()	PL_piProc->Getgid()
+@@ -718,10 +725,17 @@
+ #define PerlProc_crypt(c,s)	crypt((c), (s))
+ #define PerlProc_exit(s)	exit((s))
+ #define PerlProc__exit(s)	_exit((s))
++/* @LOCALMOD */
++#if 1
++#define PerlProc_execl(c,w,x,y,z)      abort()        
++#define PerlProc_execv(c, a)	abort()
++#define PerlProc_execvp(c, a)	abort()
++#else
+ #define PerlProc_execl(c,w,x,y,z)					\
+ 	execl((c), (w), (x), (y), (z))
+ #define PerlProc_execv(c, a)	execv((c), (a))
+ #define PerlProc_execvp(c, a)	execvp((c), (a))
++#endif
+ #define PerlProc_getuid()	getuid()
+ #define PerlProc_geteuid()	geteuid()
+ #define PerlProc_getgid()	getgid()
+diff -NaurbB src/pp_sys.c src.patched/pp_sys.c
+--- src/pp_sys.c	2010-06-02 16:09:05.000000000 -0400
++++ src.patched/pp_sys.c	2010-06-02 16:09:05.000000000 -0400
+@@ -4549,6 +4550,8 @@
+ static int
+ fcntl_emulate_flock(int fd, int operation)
+ {
++  /* @LOCALMOD */
++#if 0
+     struct flock flock;
+  
+     switch (operation & ~LOCK_NB) {
+@@ -4569,6 +4572,7 @@
+     flock.l_start = flock.l_len = 0L;
+  
+     return fcntl(fd, (operation & LOCK_NB) ? F_SETLK : F_SETLKW, &flock);
++#endif
+ }
+ 
+ #endif /* FCNTL_EMULATE_FLOCK */
+diff -NaurbB src/spec_config.h src.patched/spec_config.h
+--- src/spec_config.h	2010-06-02 16:09:05.000000000 -0400
++++ src.patched/spec_config.h	2010-06-02 16:09:05.000000000 -0400
+@@ -1,5 +1,11 @@
+ #ifndef _config_h_
+ #define _config_h_
++
++/*@LOCALMOD */
++#if !defined(__native_client__)
++#define SPEC_CPU2000_NEED_BOOL
++#endif
++
+ /*
+ ****************************************************************************
+ * spec_config.h - Attempt to produce a common perl config.h that will 
+@@ -1050,7 +1056,7 @@
+  *	available to select active file descriptors. If the timeout field
+  *	is used, <sys/time.h> may need to be included.
+  */
+-#define HAS_SELECT
++/*#define HAS_SELECT*/
+ 
+ /* HAS_SEM:
+  *	This symbol, if defined, indicates that the entire sem*(2) library is
+@@ -1759,7 +1765,8 @@
+ #ifdef SPEC_CPU2000_NTOS
+ /*#undef	I_SYS_IOCTL*/
+ #else
+-#define	I_SYS_IOCTL
++/* @LOCALMOD */
++/* #define	I_SYS_IOCTL */
+ #endif
+ 
+ /* I_SYS_NDIR:

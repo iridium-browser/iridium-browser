@@ -1,0 +1,7 @@
+include_rules = [
+  '+core',
+  '+fxbarcode',
+  '+fxjs/gc',
+  '+v8/include/cppgc',
+  '-xfa/fwl',
+]

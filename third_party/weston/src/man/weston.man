@@ -1,0 +1,377 @@
+.TH WESTON 1 "2019-03-23" "Weston @version@"
+.SH NAME
+weston \- the reference Wayland server
+.SH SYNOPSIS
+.B weston
+.
+.\" ***************************************************************
+.SH DESCRIPTION
+.B weston
+is the reference implementation of a Wayland server. A Wayland server is a
+display server, a window manager, and a compositor all in one. Weston has
+several backends as loadable modules: it can run on Linux KMS (kernel
+modesetting via DRM), as an X client, or inside another Wayland server
+instance.
+
+Weston supports fundamentally different graphical user interface paradigms via
+shell plugins. Two plugins are provided: the desktop shell, and the tablet
+shell.
+
+When weston is started as the first windowing system (i.e. not under X nor
+under another Wayland server), it should be done with the command
+.B weston-launch
+to set up proper privileged access to devices. If your system supports
+the logind D-Bus API and the support has been built into weston as well,
+it is possible to start weston with just
+.BR weston .
+
+Weston also supports X clients via
+.BR XWayland ", see below."
+.
+.\" ***************************************************************
+.SH BACKENDS
+.TP
+.I drm-backend.so
+The DRM backend uses Linux KMS for output and evdev devices for input.
+It supports multiple monitors in a unified desktop with DPMS. See
+.BR weston-drm (7),
+if installed.
+.TP
+.I wayland-backend.so
+The Wayland backend runs on another Wayland server, a different Weston
+instance, for example. Weston shows up as a single desktop window on
+the parent server.
+.TP
+.I x11-backend.so
+The X11 backend runs on an X server. Each Weston output becomes an
+X window. This is a cheap way to test multi-monitor support of a
+Wayland shell, desktop, or applications.
+.TP
+.I rdp-backend.so
+The RDP backend runs in memory without the need of graphical hardware. Access
+to the desktop is done by using the RDP protocol. Each connecting
+client has its own seat making it a cheap way to test multi-seat support. See
+.BR weston-rdp (7),
+if installed.
+.
+.\" ***************************************************************
+.SH SHELLS
+Each of these shells have its own public protocol interface for clients.
+This means that a client must be specifically written for a shell protocol,
+otherwise it will not work.
+.TP
+Desktop shell
+Desktop shell is like a modern X desktop environment, concentrating
+on traditional keyboard and mouse user interfaces and the familiar
+desktop-like window management. Desktop shell consists of the
+shell plugin
+.I desktop-shell.so
+and the special client
+.B weston-desktop-shell
+which provides the wallpaper, panel, and screen locking dialog.
+.TP
+Fullscreen shell
+Fullscreen shell is intended for a client that needs to take over
+whole outputs, often all outputs. This is primarily intended for
+running another compositor on Weston. The other compositor does not
+need to handle any platform-specifics like DRM/KMS or evdev/libinput.
+The shell consists only of the shell plugin
+.IR fullscreen-shell.so .
+.TP
+IVI-shell
+In-vehicle infotainment shell is a special purpose shell that exposes
+a GENIVI Layer Manager compatible API to controller modules, and a very
+simple shell protocol towards clients. IVI-shell starts with loading
+.IR ivi-shell.so ,
+and then a controller module which may launch helper clients.
+.
+.\" ***************************************************************
+.SH XWAYLAND
+XWayland requires a special X.org server to be installed. This X server will
+connect to a Wayland server as a Wayland client, and X clients will connect to
+the X server. XWayland provides backwards compatibility to X applications in a
+Wayland stack.
+
+XWayland is activated by instructing
+.BR weston " to load the XWayland module, see " EXAMPLES .
+Weston starts listening on a new X display socket, and exports it in the
+environment variable
+.BR DISPLAY .
+When the first X client connects, Weston launches a special X server as a
+Wayland client to handle the X client and all future X clients.
+
+It has also its own X window manager where cursor themes and sizes can be
+chosen using
+.BR XCURSOR_PATH
+and
+.BR XCURSOR_SIZE " environment variables. See " ENVIRONMENT .
+.
+.\" ***************************************************************
+.SH OPTIONS
+.
+.SS Weston core options:
+.TP
+\fB\-\^B\fR\fIbackend.so\fR, \fB\-\-backend\fR=\fIbackend.so\fR
+Load
+.I backend.so
+instead of the default backend. The file is searched for in
+.IR "@weston_modules_dir@" ,
+or you can pass an absolute path. The default backend is
+.I @weston_native_backend@
+unless the environment suggests otherwise, see
+.IR DISPLAY " and " WAYLAND_DISPLAY .
+.TP
+\fB\-\^c\fR\fIconfig.ini\fR, \fB\-\-config\fR=\fIconfig.ini\fR
+Load
+.IR config.ini " instead of " weston.ini .
+The argument can also be an absolute path starting with a
+.IR / .
+If the path is not absolute, it will be searched in the normal config
+paths, see
+.BR weston.ini (5).
+If also
+.B --no-config
+is given, no configuration file will be read.
+.TP
+.BR \-\-debug
+Enable debug protocol extension
+.I weston_debug_v1
+which any client can use to receive debugging messages from the compositor.
+
+.B WARNING:
+This is risky for two reasons. First, a client may cause a denial-of-service
+blocking the compositor by providing an unsuitable file descriptor, and
+second, the debug messages may expose sensitive information.
+Additionally this will expose weston-screenshooter interface allowing the user
+to take screenshots of the outputs using weston-screenshooter application,
+which can lead to silently leaking the output contents.  This option should
+not be used in production.
+.TP
+\fB\-\^l\fIscope1,scope2\fR, \fB\-\-logger-scopes\fR=\fIscope1,scope2\fR
+Specify to which log scopes should subscribe to. When no scopes are supplied,
+the log "log" scope will be subscribed by default. Useful to control which
+streams to write data into the logger and can be helpful in diagnosing early
+start-up code.
+.TP
+\fB\-\^f\fIscope1,scope2\fR, \fB\-\-flight-rec-scopes\fR=\fIscope1,scope2\fR
+Specify to which scopes should subscribe to. Useful to control which streams to
+write data into the flight recorder. Flight recorder has limited space, once
+the flight recorder is full new data will overwrite the old data. Without any
+scopes specified, it subscribes to 'log' and 'drm-backend' scopes.
+.TP
+.BR \-\-version
+Print the program version.
+.TP
+.BR \-\^h ", " \-\-help
+Print a summary of command line options, and quit.
+.TP
+\fB\-\^i\fR\fIN\fR, \fB\-\-idle\-time\fR=\fIN\fR
+Set the idle timeout to
+.I N
+seconds. The default timeout is 300 seconds. When there has not been any
+user input for the idle timeout, Weston enters an inactive mode. The
+screen fades to black, monitors may switch off, and the shell may lock
+the session.
+A value of 0 effectively disables the timeout.
+.TP
+\fB\-\-log\fR=\fIfile.log\fR
+Append log messages to the file
+.I file.log
+instead of writing them to stderr.
+.TP
+\fB\-\-xwayland\fR
+Ask Weston to load the XWayland module.
+.TP
+\fB\-\-modules\fR=\fImodule1.so,module2.so\fR
+Load the comma-separated list of modules. Only used by the test
+suite. The file is searched for in
+.IR "@weston_modules_dir@" ,
+or you can pass an absolute path.
+.TP
+.BR \-\-no-config
+Do not read
+.I weston.ini
+for the compositor. Avoids e.g. loading compositor modules via the
+configuration file, which is useful for unit tests.
+.TP
+\fB\-\^S\fR\fIname\fR, \fB\-\-socket\fR=\fIname\fR
+Weston will listen in the Wayland socket called
+.IR name .
+Weston will export
+.B WAYLAND_DISPLAY
+with this value in the environment for all child processes to allow them to
+connect to the right server automatically.
+.TP
+\fB\-\-wait-for-debugger\fR
+Raises SIGSTOP before initializing the compositor. This allows the user to
+attach with a debugger and continue execution by sending SIGCONT. This is
+useful for debugging a crash on start-up when it would be inconvenient to
+launch weston directly from a debugger. There is also a
+.IR weston.ini " option to do the same."
+.
+.SS DRM backend options:
+See
+.BR weston-drm (7).
+.
+.SS Wayland backend options:
+.TP
+\fB\-\-display\fR=\fIdisplay\fR
+Name of the Wayland display to connect to, see also
+.I WAYLAND_DISPLAY
+of the environment.
+.TP
+.B \-\-fullscreen
+Create a single fullscreen output
+.TP
+\fB\-\-output\-count\fR=\fIN\fR
+Create
+.I N
+Wayland windows to emulate the same number of outputs.
+.TP
+\fB\-\-width\fR=\fIW\fR, \fB\-\-height\fR=\fIH\fR
+Make all outputs have a size of
+.IR W x H " pixels."
+.TP
+.B \-\-scale\fR=\fIN\fR
+Give all outputs a scale factor of
+.I N.
+.TP
+.B \-\-use\-pixman
+Use the pixman renderer.  By default, weston will try to use EGL and
+GLES2 for rendering and will fall back to the pixman-based renderer for
+software compositing if EGL cannot be used.  Passing this option will force
+weston to use the pixman renderer.
+.
+.SS X11 backend options:
+.TP
+.B \-\-fullscreen
+.TP
+.B \-\-no\-input
+Do not provide any input devices. Used for testing input-less Weston.
+.TP
+\fB\-\-output\-count\fR=\fIN\fR
+Create
+.I N
+X windows to emulate the same number of outputs.
+.TP
+\fB\-\-width\fR=\fIW\fR, \fB\-\-height\fR=\fIH\fR
+Make the default size of each X window
+.IR W x H " pixels."
+.TP
+.B \-\-scale\fR=\fIN\fR
+Give all outputs a scale factor of
+.I N.
+.TP
+.B \-\-use\-pixman
+Use the pixman renderer.  By default weston will try to use EGL and
+GLES2 for rendering.  Passing this option will make weston use the
+pixman library for software compsiting.
+.
+.SS RDP backend options:
+See
+.BR weston-rdp (7).
+.
+.
+.\" ***************************************************************
+.SH FILES
+.
+If the environment variable is set, the configuration file is read
+from the respective path.
+.PP
+.BI $XDG_CONFIG_HOME /weston.ini
+.br
+.BI $HOME /.config/weston.ini
+.br
+.
+.\" ***************************************************************
+.SH ENVIRONMENT
+.
+.TP
+.B DISPLAY
+The X display. If
+.B DISPLAY
+is set, and
+.B WAYLAND_DISPLAY
+is not set, the default backend becomes
+.IR x11-backend.so .
+.TP
+.B WAYLAND_DEBUG
+If set to any value, causes libwayland to print the live protocol
+to stderr.
+.TP
+.B WAYLAND_DISPLAY
+The name of the display (socket) of an already running Wayland server, without
+the path. The directory path is always taken from
+.BR XDG_RUNTIME_DIR .
+If
+.B WAYLAND_DISPLAY
+is not set, the socket name is "wayland-0".
+
+If
+.B WAYLAND_DISPLAY
+is already set, the default backend becomes
+.IR wayland-backend.so .
+This allows launching Weston as a nested server.
+.TP
+.B WAYLAND_SOCKET
+For Wayland clients, holds the file descriptor of an open local socket
+to a Wayland server.
+.TP
+.B WESTON_CONFIG_FILE
+Weston sets this variable to the absolute path of the configuration file
+it loads, or to the empty string if no file is used. Programs that use
+.I weston.ini
+will read the file specified by this variable instead, or do not read any
+file if it is empty. Unset variable causes falling back to the default
+name
+.IR weston.ini .
+.TP
+.B XCURSOR_PATH
+Set the list of paths to look for cursors in. It changes both
+libwayland-cursor and libXcursor, so it affects both Wayland and X11 based
+clients. See
+.B xcursor
+(3).
+.TP
+.B XCURSOR_SIZE
+This variable can be set for choosing an specific size of cursor. Affect
+Wayland and X11 clients. See
+.B xcursor
+(3).
+.TP
+.B XDG_CONFIG_HOME
+If set, specifies the directory where to look for
+.BR weston.ini .
+.TP
+.B XDG_RUNTIME_DIR
+The directory for Weston's socket and lock files.
+Wayland clients will automatically use this.
+.
+.\" ***************************************************************
+.SH BUGS
+Bugs should be reported to the freedesktop.org bugzilla at
+https://bugs.freedesktop.org with product "Wayland" and
+component "weston".
+.
+.\" ***************************************************************
+.SH WWW
+http://wayland.freedesktop.org/
+.
+.\" ***************************************************************
+.SH EXAMPLES
+.IP "Launch Weston with the DRM backend on a VT"
+weston-launch
+.IP "Launch Weston with the DRM backend and XWayland support"
+weston-launch -- --xwayland
+.IP "Launch Weston (wayland-1) nested in another Weston instance (wayland-0)"
+WAYLAND_DISPLAY=wayland-0 weston -Swayland-1
+.IP "From an X terminal, launch Weston with the x11 backend"
+weston
+.
+.\" ***************************************************************
+.SH "SEE ALSO"
+.BR weston-bindings (7),
+.BR weston-debug (1),
+.BR weston-drm (7),
+.BR weston-rdp (7),
+.BR weston.ini (5)

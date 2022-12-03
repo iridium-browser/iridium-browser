@@ -1,0 +1,221 @@
+// Copyright 2017 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+// This file defines messages for starting, stopping, and managing 9p servers
+// with access to the user's home directory.
+package vm_tools.seneschal;
+option go_package = "chromiumos/system_api/seneschal_proto";
+
+// Defines a path to be shared with a 9p server.
+message SharedPath {
+  // Path to be shared.  Must be relative, must not have any ".." elements, and
+  // must not end with ".".  The destination path is constructed by appending
+  // the name of the storage location and this path to the root of the server.
+  // So if |path| is "foo/bar" and the |storage_location| field of the
+  // SharePathRequest is "DOWNLOADS", then the destination path will be
+  // "/Downloads/foo/bar".  Any ancestor directories will be automatically
+  // created but will not be writable unless they have been shared via a
+  // SharePathRequest.
+  string path = 1;
+
+  // Whether the path should be writable by the server.  Due to limitations in
+  // the way bind mounts interact with user namespaces, setting this to false
+  // will not currently do anything.  All shared paths are writable.  Maybe
+  // one day if the linux developers decide that dropping privileges should
+  // not require having additional privileges that you wouldn't otherwise need
+  // we can maybe do something useful with this.
+  bool writable = 2;
+}
+
+// Defines the vsock address on which a server should listen for requests.
+// The server will always use context id 2 (VM host) as its address.
+message VsockAddress {
+  // The port number on which the server should listen for requests.
+  uint32 port = 1;
+
+  // The context id from which this server should accept connections.
+  uint32 accept_cid = 2;
+}
+
+// Defines the unix address on which a server should listen for requests.
+message UnixAddress {
+  // The path on the system where the server should listen for requests.
+  string path = 1;
+}
+
+// Defines the network address on which a server should listen for requests.
+// The server will always use localhost as its address.
+message NetworkAddress {
+  // The port on which the server should listen for requests.
+  uint32 port = 1;
+}
+
+// Indicates that the message includes a file descriptor on which the server
+// should listen for requests.
+message FileDescriptor {}
+
+// An id mapping that the server should use when reporting ids to its clients.
+message IdMap {
+  // The id value on the server.
+  uint32 server = 1;
+  // The value that should be reported to the client instead of the value in
+  // `server`.
+  uint32 client = 2;
+}
+
+// Information that must be included with every StartServer dbus request.
+message StartServerRequest {
+  // The address on which the server should listen for requests.
+  oneof listen_address {
+    VsockAddress vsock = 1;
+    UnixAddress unix_addr = 2;
+    NetworkAddress net = 3;
+    FileDescriptor fd = 4;
+  }
+
+  // Uid translations that should be performed by the server.
+  repeated IdMap uid_maps = 5;
+
+  // Gid translations to be performed by the server.
+  repeated IdMap gid_maps = 6;
+}
+
+// Information sent back by seneschal in response to a StartServer message.
+message StartServerResponse {
+  // Set to true if the server was started successfully.
+  bool success = 1;
+
+  // The handle with which to refer to this server in future requests.  Only
+  // valid if |success| is true.
+  uint32 handle = 2;
+
+  // The reason why the server failed to start, if any.  Only valid when
+  // |success| is false.
+  string failure_reason = 3;
+}
+
+// Information that must be included with every StopServer request.
+message StopServerRequest {
+  // The handle to the server that should be stopped.
+  uint32 handle = 1;
+}
+
+// Information sent back by seneschal when it receives a StopServer requests.
+message StopServerResponse {
+  // If true, then the server was successfully stopped.
+  bool success = 1;
+
+  // The reason why the server could not be stopped, if any.  Only valid when
+  // |success| is false.
+  string failure_reason = 2;
+}
+
+// Information that must be included with every SharePath request.
+message SharePathRequest {
+  // The handle to the server with whom the path should be shared.
+  uint32 handle = 1;
+
+  // The actual path to be shared.  Must be relative to |storage_location|
+  // and must not contain any "../" elements or end with ".".
+  SharedPath shared_path = 2;
+
+  // The location where the path to be shared lives.
+  enum StorageLocation {
+    // The user's Downloads/ directory /home/user/<owner_id>/Downloads.
+    // Note: This field is deprecated.  MY_FILES should be used.
+    DOWNLOADS = 0;
+    // DriveFS directory /media/fuse/<drivefs_mount_name>/root.
+    DRIVEFS_MY_DRIVE = 1;
+    // DriveFS directory /media/fuse/<drivefs_mount_name>/team_drives.
+    DRIVEFS_TEAM_DRIVES = 2;
+    // DriveFS directory /media/fuse/<drivefs_mount_name>/Computers.
+    DRIVEFS_COMPUTERS = 3;
+    // DriveFS directory /media/fuse/<drivefs_mount_name>/.files-by-id.
+    DRIVEFS_FILES_BY_ID = 11;
+    // DriveFS directory
+    // /media/fuse/<drivefs_mount_name>/.shortcut-targets-by-id.
+    DRIVEFS_SHORTCUT_TARGETS_BY_ID = 12;
+    // Note: DriveFs .Trash directory must not ever be shared since it would
+    // allow linux apps to make permanent deletes to Drive.
+
+    // Removable media mount directory /media/removable.
+    REMOVABLE = 4;
+    // The user's MyFiles/ directory /home/user/<owner_id>/MyFiles.
+    MY_FILES = 5;
+    // The user's PlayFiles/ directory /run/arc/sdcard/write/emulated/0.
+    PLAY_FILES = 6;
+    // The user's LinuxFiles/ directory /media/fuse/crostini_<owner_id>_termina_penguin.
+    LINUX_FILES = 7;
+    // The system fonts directory /usr/share/fonts.
+    FONTS = 8;
+    // Archive mount directory /media/archive.
+    ARCHIVE = 9;
+    // SmbFs mount.
+    SMBFS = 10;
+    // A GuestOS share from one of the user's VMs at
+    // /media/fuse/guestos+<owner_id>+<vm_name>+<container_name>
+    GUEST_OS_FILES = 13;
+    // The user's PlayFiles/ directory under virtio-blk
+    // /media/fuse/android_files.
+    PLAY_FILES_GUEST_OS = 14;
+  }
+  StorageLocation storage_location = 3;
+
+  // The user's cryptohome.  This is the <hash> part of /home/user/<hash>.
+  // This field is required when storage_location is DOWNLOADS, MY_FILES,
+  // LINUX_FILES or GUEST_OS_FILES.
+  string owner_id = 4;
+
+  // DriveFS mount name.  This is the directory name mounted at /media/fuse with
+  // format 'drivefs-<drivefs-hash>'.
+  // This field is required when storage_location=DRIVEFS_*.
+  string drivefs_mount_name = 5;
+
+  // SmbFs mount name. This is the directory name mounted at /media/fuse with
+  // format 'smbfs-<share-hash>'.
+  // This field is required when storage_location=SMBFS.
+  string smbfs_mount_name = 6;
+
+  // GuestOs mount name. This is the directory name mounted at /media/fuse with
+  // format guestos+<owner_id>+<vm_name>+<container_name>.
+  // This field is required when storage_location=GUEST_OS_FILES.
+  string guest_os_mount_name = 7;
+}
+
+// Information sent back by seneschal when it receives a SharePath request.
+message SharePathResponse {
+  // If true, then the path was shared successfully.
+  bool success = 1;
+
+  // The path relative to the server's root where the shared path can be
+  // accessed.  Only valid if |success| is true.
+  string path = 2;
+
+  // The reason why the path could not be shared, if any.  Only valid when
+  // |success| is false.
+  string failure_reason = 3;
+}
+
+// Information that must be included with every UnsharePath request.
+message UnsharePathRequest {
+  // The handle to the server with whom the path should be unshared.
+  uint32 handle = 1;
+
+  // The path to be unshared.  Must match a value returned from
+  // SharePathResponse.path.
+  string path = 2;
+}
+
+// Information sent back by seneschal when it receives an UnsharePath request.
+message UnsharePathResponse {
+  // If true, then the path was unshared successfully.
+  bool success = 1;
+
+  // The reason why the path could not be unshared, if any.  Only valid when
+  // |success| is false.
+  string failure_reason = 2;
+}

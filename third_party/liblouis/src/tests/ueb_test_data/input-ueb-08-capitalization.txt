@@ -1,0 +1,365 @@
+#   8.3.1 page 79
+
+20B
+#bj,b
+
+B.C.
+,b4,c4
+
+Hush. Keep Quiet!
+,hu%4 ,keep ,quiet6
+
+#~FAIL  en-ueb-g1.ctb:  noletsignafter .  en-ueb-g2.ctb:  noletsignafter .
+C. O. Linkletter
+;,c4 ,o4 ,l9klett}
+
+M MacPherson and O O'Hara
+;,m ,mac,ph}son & ,o ,o',h>a
+
+'Twas Dr. Hamilton-Hall.
+',twas ,dr4 ,hamilton-,hall4
+
+B-E-L-I-E-V-E
+;;,b-,e-,l-,i-,e-,v-,e
+
+#   8.3.2 page 80
+
+Father Edmond Anderson
+,"f ,$mond ,&}son
+
+Today, Mr Will Just visited us.
+,td1 ,mr ,w ,j visit$ u4
+
+His name is Thomas.
+,8 "n is ,?omas4
+
+#   8.3.3 page 80
+
+Étude
+,~/etude
+
+Voyage À Nice
+,voyage ,~*a ,nice
+
+#   8.4.2 page 80
+
+PARLIAMENT
+,,p>lia;t
+
+FRANÇOIS
+,,fran~&cois
+
+ΠΒΦ
+,,.p.b.f
+
+DipTP
+,dip,,tp
+
+NEW YORK
+,,new ,,york
+
+~word_reset
+  +
+TVOntario
+,,tv,ont>io
+
+"GO quickly and TAKE CARE!"
+8,,g qkly & ,,take ,,c>e60
+
+ANGLO-SAXON
+,,anglo-,,saxon
+
+McGRAW-HILL
+,mc,,graw-,,hill
+
+MERRY-GO-ROUND
+,,m}ry-,,g-,,r.d
+
+UPPERCASE-lowercase
+,,upp}case-l{}case
+
+LITTLE-RED-RIDING-HOOD-type tales
+,,ll-,,r$-,,rid+-,,hood-type tales
+
+The d'ARTAGNAN Romances
+,! d',,>tagnan ,rom.es
+
+O'SULLIVAN
+,o',,sullivan
+
+DON'T
+,,don',t
+
+THAT'S
+,,t',s
+
+SHE'LL
+,,%e',,ll
+
+JACK'S FO'C'S'LE
+,,jack',s ,,fo',c',s',,le
+
+WELCOME TO McDONALD'S
+,,welcome ,,to ,mc,,donald',s
+
+OK'd
+,,ok'd
+
+RSVP or R.S.V.P.
+,,rsvp or ,r4,s4,v4,p4
+
+HOTELS.COM
+,,hotels4,,com
+
+The N.A.S.D.A.Q. News
+,! ,n4,a4,s4,d4,a4,q4 ,news
+
+BA(Oxon)
+,,ba"<,oxon">
+
+(R)AC
+"<,r">,,ac
+
+WIND(ward)
+,,w9d"<w>d">
+
+I/O
+,i_/,o
+
+B&B
+,b`&,b
+
+AT&T
+,,at`&,t
+
+McDONALD@xyz.com
+,mc,,donald`axyz4com
+
+#~FAIL  FOR SALE: 1975 FIREBIRD works?
+#~~passage_break
+#~      +
+SWIFT & CO.
+,,swift `& ,,co4
+
+~word_reset
+    +
+~bold
+    ++++
+FREEform
+,,free~1=m
+
+~word_reset
+ +
+~italic
+ +
+EXAMINE
+,e.2,,xam9e
+
+#   8.5.3 page 83
+
+CAUTION: WET PAINT!
+,,,cau;n3 wet pa9t6,'
+
+Please KEEP OFF THE GRASS in this area.
+,pl1se ,,,keep (f ! grass,' 9 ? >ea4
+
+THE BBC AFRICA NEWS
+,,,! bbc africa news,'
+
+PROUD TO BE A ΦΒΚ
+,,,pr|d to 2 a .f.b.k,'
+
+FOR SALE: 1975 FIREBIRD
+,,,= sale3 #aige firebird,'
+
+A SELF-MADE MAN
+,,,a self-made man,'
+
+##FAILED  en-ueb-g1.ctb:  midnum / 456-34
+~italic
+    +++++++++++++++
+BUY FAHRENHEIT 9/11 ON E-BAY
+,,,buy .1fahr5heit .1#i_/#aa on ;e-bay,'
+
+A.A. (ALAN ALEXANDER) MILNE
+,,,a4a4 "<alan alex&}"> milne,'
+
+#   8.5.4 page 83
+
+#~passage_break
+#                  +
+#"... at 11:00 AM"–MARKHAM ECONOMIST AND SUN
+#8444 at #aa3#jj ,,am0,-,,,m>kham economi/ & sun,'
+
+##~passage_break
+##                  +
+STOP RUNNING NOW! It's dangerous.
+,,,/op runn+ n{6,' ,x's dang}|s4
+
+#~passage_break
+#                      +
+#… (See Attachment A). A CSP (Carriage Service Provider) has obligations to …
+#444 "<,see ,atta*;t ,a">4 ,a ,,csp "<,c>riage ,s}vice ,provid}"> has obliga;ns to 444
+
+#~passage_break
+#               +
+#Go to point A. BUT NOT YET!
+#,g to po9t ,a4 ,,,b n yet6,'
+
+#~passage_break
+#                       +
+#He worked for the ABC. A BBC journalist reported ...
+#,he "w$ = ! ,,abc4 ,a ,,bbc j|rnali/ report$ 444
+
+#   8.6.2 page 86
+
+#~passage_break
+#            +          +
+#He shouted "I WILL NOT!"
+#,he %|t$ 8,,,i w n6,'0
+
+~italic
+++++++++++++++++
+ROMEO AND JULIET
+.7,,,romeo & juliet,'.'
+
+IT'S A HOAX! (APRIL FOOL!)
+,,,x's a hoax6 "<april fool6">,'
+
+#   8.6.3 page 86
+
+ABCs
+,,abc,'s
+
+WASPs
+,,wasp,'s
+
+WALKing
+,,walk,'+
+
+unSELFish
+un,,self,'i%
+
+XXIInd
+,,xxii,'nd
+
+VIIb
+,,vii,'b
+
+#~passage_break
+#                  +
+#INITIALS OF WRITER/initials of secretary
+#,,,9itials ( writ},'_/9itials ( secret>y
+
+The two CEOs met in our CEO's office.
+,! two ,,ceo,'s met 9 |r ,,ceo's (fice4
+
+#   8.7.1 page 87
+
+"So?"
+8,s80
+
+(July)
+"<,july">
+
+B-U-S
+;;,b-,u-,s
+
+[Σ]
+.<,.s.>
+
+~italic
++++++++++++++
+Voyage À Nice
+.7,voyage ,~*a ,nice.'
+
+'TIS
+',,tis
+
+CD
+;,,cd
+
+"SHHHH!"
+8,,%hhh60
+
+Hippity-HOP
+,hipp;y-,,hop
+
+~bold
+++++++++
+RESOLVED
+~1,,resolv$
+
+ÉTUDE
+,,~/etude
+
+Unified English Braille (UEB)
+,unifi$ ,5gli% ,brl "<,,ueb">
+
+AC SMITH
+;,,ac ,,smi?
+
+V-NECK SWEATERS FOR SALE!
+;,,,v-neck sw1t}s = sale6,'
+
+#   8.8.1 page 87
+
+XI XIth
+,,xi ,,xi,'?
+
+XXXI XXXIst
+,,xxxi ,,xxxi,'/
+
+OK OKd
+,,ok ,,ok,'d
+
+CD CDs
+;,,cd ,,cd,'s
+
+RV: Recreational Vehicle–Let's go RVing.
+,,rv3 ,recr1;nal ,vehicle,-,let's g ,,rv,'+4
+
+~word_reset
+         +
+www.BLASTSoundMachine.com
+www4,,bla/,s.d,ma*9e4com
+
+www.BLASTsoundmachine.com
+www4,,bla/,'s.dma*9e4com
+
+#   8.8.2 page 88
+
+~word_reset
+ +
+KBr (potassium bromide)
+,k,br "<potassium bromide">
+
+~word_reset
+ +
+BSc (Bachelor of Science)
+,b,sc "<,ba*elor ( ,sci;e">
+
+~word_reset
+  +
+TVOntario
+,,tv,ont>io
+
+preSENT
+pre,,s5t
+
+PRESent
+,,pres,'5t
+
+WoooooooOOOOOOOOooooooo (a ghostly sound)
+,wooooooo,,oooooooo,'ooooooo "<a <o/ly s.d">
+
+~word_reset
+ +
+MHz
+,m,hz
+
+~word_reset
+ +
+ATandT
+,a,t&,t
+

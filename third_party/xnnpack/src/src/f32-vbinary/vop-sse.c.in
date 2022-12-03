@@ -1,0 +1,117 @@
+// Copyright 2019 Google LLC
+//
+// This source code is licensed under the BSD-style license found in the
+// LICENSE file in the root directory of this source tree.
+
+$assert BATCH_TILE % 4 == 0
+$assert BATCH_TILE >= 4
+$SIMD_TILE = BATCH_TILE // 4
+$ABC = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+$assert OP in ["ADD", "DIV", "MAX", "MIN", "MUL", "SUB", "SQRDIFF"]
+$assert ACTIVATION in ["LINEAR", "MINMAX"]
+#include <assert.h>
+
+#include <xmmintrin.h>
+
+#include <xnnpack/common.h>
+#include <xnnpack/intrinsics-polyfill.h>
+#include <xnnpack/vbinary.h>
+
+
+$_MM_OP_PS = {
+$  "ADD": "_mm_add_ps",
+$  "DIV": "_mm_div_ps",
+$  "MAX": "_mm_max_ps",
+$  "MIN": "_mm_min_ps",
+$  "MUL": "_mm_mul_ps",
+$  "SUB": "_mm_sub_ps",
+$  "SQRDIFF": "_mm_sub_ps",
+$}[OP]
+$SUFFIX = {"LINEAR": "", "MINMAX": "_minmax"}[ACTIVATION]
+$PARAMS = {"LINEAR": "xnn_f32_default_params", "MINMAX": "xnn_f32_minmax_params"}[ACTIVATION]
+void xnn_f32_v${OP.lower()}${SUFFIX}_ukernel__sse_x${BATCH_TILE}(
+    size_t batch,
+    const float* input_a,
+    const float* input_b,
+    float* output,
+    const union ${PARAMS} params[restrict XNN_MIN_ELEMENTS(1)]) XNN_OOB_READS
+{
+  assert(batch != 0);
+  assert(batch % sizeof(float) == 0);
+  assert(input_a != NULL);
+  assert(input_b != NULL);
+  assert(output != NULL);
+
+  $if ACTIVATION == "MINMAX":
+    const __m128 voutput_min = _mm_load_ps(params->sse.min);
+    const __m128 voutput_max = _mm_load_ps(params->sse.max);
+
+  $if BATCH_TILE > 4:
+    for (; batch >= ${BATCH_TILE} * sizeof(float); batch -= ${BATCH_TILE} * sizeof(float)) {
+      const __m128 va${ABC[0]} = _mm_loadu_ps(input_a);
+      $for N in range(1, SIMD_TILE):
+        const __m128 va${ABC[N]} = _mm_loadu_ps(input_a + ${N * 4});
+      input_a += ${BATCH_TILE};
+
+      const __m128 vb${ABC[0]} = _mm_loadu_ps(input_b);
+      $for N in range(1, SIMD_TILE):
+        const __m128 vb${ABC[N]} = _mm_loadu_ps(input_b + ${N * 4});
+      input_b += ${BATCH_TILE};
+
+      $for N in range(SIMD_TILE):
+        __m128 vacc${ABC[N]} = ${_MM_OP_PS}(va${ABC[N]}, vb${ABC[N]});
+
+      $if OP == "SQRDIFF":
+        $for N in range(SIMD_TILE):
+          vacc${ABC[N]} = _mm_mul_ps(vacc${ABC[N]}, vacc${ABC[N]});
+
+      $if ACTIVATION == "MINMAX":
+        $for N in range(SIMD_TILE):
+          vacc${ABC[N]} = _mm_max_ps(vacc${ABC[N]}, voutput_min);
+
+        $for N in range(SIMD_TILE):
+          vacc${ABC[N]} = _mm_min_ps(vacc${ABC[N]}, voutput_max);
+
+      _mm_storeu_ps(output, vacc${ABC[0]});
+      $for N in range(1, SIMD_TILE):
+        _mm_storeu_ps(output + ${N * 4}, vacc${ABC[N]});
+      output += ${BATCH_TILE};
+    }
+  for (; batch >= 4 * sizeof(float); batch -= 4 * sizeof(float)) {
+    const __m128 va = _mm_loadu_ps(input_a);
+    input_a += 4;
+
+    const __m128 vb = _mm_loadu_ps(input_b);
+    input_b += 4;
+
+    __m128 vacc = ${_MM_OP_PS}(va, vb);
+    $if OP == "SQRDIFF":
+      vacc = _mm_mul_ps(vacc, vacc);
+    $if ACTIVATION == "MINMAX":
+      vacc = _mm_max_ps(vacc, voutput_min);
+      vacc = _mm_min_ps(vacc, voutput_max);
+
+    _mm_storeu_ps(output, vacc);
+    output += 4;
+  }
+  if XNN_UNLIKELY(batch != 0) {
+    const __m128 va = _mm_loadu_ps(input_a);
+    const __m128 vb = _mm_loadu_ps(input_b);
+
+    __m128 vacc = ${_MM_OP_PS}(va, vb);
+    $if OP == "SQRDIFF":
+      vacc = _mm_mul_ps(vacc, vacc);
+    $if ACTIVATION == "MINMAX":
+      vacc = _mm_max_ps(vacc, voutput_min);
+      vacc = _mm_min_ps(vacc, voutput_max);
+
+    if (batch & (2 * sizeof(float))) {
+      _mm_storel_pi((__m64*) output, vacc);
+      vacc = _mm_movehl_ps(vacc, vacc);
+      output += 2;
+    }
+    if (batch & (1 * sizeof(float))) {
+      _mm_store_ss(output, vacc);
+    }
+  }
+}

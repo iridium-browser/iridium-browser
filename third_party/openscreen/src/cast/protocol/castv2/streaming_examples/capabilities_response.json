@@ -1,0 +1,9 @@
+{
+  "capabilities": {
+    "keySystems": [],
+    "mediaCaps": ["video", "h264", "vp8", "hevc", "vp9", "audio", "aac", "opus"]
+  },
+  "result": "ok",
+  "seqNum": 820263770,
+  "type": "CAPABILITIES_RESPONSE"
+}

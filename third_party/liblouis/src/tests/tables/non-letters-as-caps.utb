@@ -1,0 +1,23 @@
+# Too many words are being marked as capitalized.
+#
+# Translate:
+# TEST TEST TEST    correct
+# TEST 123 123    correct
+# TEST 123 TEST    correct
+# TEST TEST TEST TEST    correct
+# TEST 123 123 123    wrong, should be 1 word caps then regular numbers
+# TEST 123 TEST TEST    correct, it's OK to count '123' as caps word
+#                       if more caps words follow
+# TEST TEST tEST TEST...    correct
+# TEST TEST ...    correct
+# TEST TEST TEST ...    wrong, '...' is not a word
+
+include tables/braille-patterns.cti
+include tables/nl-chardefs.uti
+
+numsign 3456
+lencapsphrase 4
+capsword 45
+capswordstop 6
+firstwordcaps 45-45
+lastwordcapsbefore 45

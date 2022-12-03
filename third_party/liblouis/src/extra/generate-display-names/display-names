@@ -1,0 +1,183 @@
+* ../../tables/afr-za-g1.ctb                     Afrikaans, uncontracted                            Afrikaans uncontracted braille
+* ../../tables/afr-za-g2.ctb                     Afrikaans, contracted                              Afrikaans contracted braille
+* ../../tables/ar.tbl                            Arabic, uncontracted                               Arabic uncontracted braille
+* ../../tables/ar-ar-g2.ctb                      Arabic, contracted                                 Arabic contracted braille
+* ../../tables/ar-ar-comp8.utb                   Arabic, computer                                   Arabic computer braille
+* ../../tables/as.tbl                            Assamese                                           Assamese braille
+* ../../tables/awa.tbl                           Awadhi                                             Awadhi braille
+* ../../tables/ba.utb                            Bashkir                                            Bashkir braille
+* ../../tables/bel.utb                           Belarusian                                         Belarusian braille
+* ../../tables/bel-comp.utb                      Belarusian, computer                               Belarusian computer braille
+* ../../tables/bg.tbl                            Bulgarian, computer                                Bulgarian computer braille
+* ../../tables/bg.utb                            Bulgarian                                          Bulgarian braille
+* ../../tables/bh.tbl                            Bihari                                             Bihari braille
+* ../../tables/bn.tbl                            Bengali                                            Bengali braille
+* ../../tables/bo.tbl                            Tibetan, computer                                  Tibetan computer braille
+* ../../tables/bra.tbl                           Braj                                               Braj braille
+* ../../tables/ca.tbl                            Catalan                                            Catalan braille
+* ../../tables/chr-us-g1.ctb                     Cherokee                                           Cherokee braille
+* ../../tables/cop-eg-comp8.utb                  Coptic, computer                                   Coptic computer braille
+* ../../tables/ckb.tbl                           Kurdish                                            Kurdish braille
+* ../../tables/cs.tbl                            Czech                                              Czech braille
+* ../../tables/cs-comp8.utb                      Czech, computer                                    Czech computer braille
+* ../../tables/cy-cy-g1.utb                      Welsh, uncontracted                                Welsh uncontracted braille
+* ../../tables/cy.tbl                            Welsh, contracted                                  Welsh contracted braille
+* ../../tables/da-dk-g08.ctb                     Danish, computer                                   Danish computer braille
+* ../../tables/da-dk-g16-lit.ctb                 Danish, uncontracted, 6-dot                        Danish 6-dot uncontracted braille
+* ../../tables/da-dk-g16.ctb                     Danish, uncontracted, 6-dot                        Danish 6-dot uncontracted braille
+* ../../tables/da-dk-g18.ctb                     Danish, uncontracted, 8-dot                        Danish 8-dot uncontracted braille
+* ../../tables/da-dk-g26-lit.ctb                 Danish, contracted, 6-dot                          Danish 6-dot contracted braille
+* ../../tables/da-dk-g26.ctb                     Danish, contracted, 6-dot                          Danish 6-dot contracted braille
+* ../../tables/da-dk-g26l-lit.ctb                Danish, partially contracted, 6-dot                Danish 6-dot partially contracted braille
+* ../../tables/da-dk-g26l.ctb                    Danish, partially contracted, 6-dot                Danish 6-dot partially contracted braille
+* ../../tables/da-dk-g28.ctb                     Danish, contracted, 8-dot                          Danish 8-dot contracted braille
+* ../../tables/da-dk-g28l.ctb                    Danish, partially contracted, 8-dot                Danish 8-dot partially contracted braille
+* ../../tables/de-de-comp8.ctb                   German, computer, 8-dot                            German 8-dot computer braille
+* ../../tables/de-comp6.utb                      German, computer, 6-dot                            German 6-dot computer braille
+* ../../tables/de-g0.utb                         German, uncontracted                               German uncontracted braille
+  ../../tables/de-g0-detailed.utb                German, uncontracted, with capitals                German uncontracted braille with indication of capitals
+* ../../tables/de-g1.ctb                         German, partially contracted                       German partially contracted braille
+  ../../tables/de-g1-detailed.ctb                German, partially contracted, with capitals        German partially contracted braille with indication of capitals
+* ../../tables/de-g2.ctb                         German, contracted                                 German contracted braille
+  ../../tables/de-g2-detailed.ctb                German, contracted, with capitals                  German contracted braille with indication of capitals
+* ../../tables/dra.tbl                           Dravidian, computer                                Dravidian computer braille
+* ../../tables/el.ctb                            Greek                                              Greek braille
+  ../../tables/grc-international-en.utb          Greek, international, English                      Greek internationalized braille as used by English speakers
+* ../../tables/fa-ir-comp8.ctb                   Persian, computer                                  Persian computer braille
+* ../../tables/fa-ir-g1.utb                      Persian                                            Persian braille
+  ../../tables/en-ueb-g1.ctb                     English, unified, uncontracted                     Unified English uncontracted braille
+  ../../tables/en-ueb-g2.ctb                     English, unified, contracted                       Unified English contracted braille
+* ../../tables/en_CA.tbl                         English, Canada, computer                          English computer braille as used in Canada
+* ../../tables/en-gb-g1.utb                      English, U.K., uncontracted                        English uncontracted braille as used in the U.K.
+* ../../tables/en_GB.tbl                         English, U.K., contracted                          English contracted braille as used in the U.K.
+* ../../tables/en-gb-comp8.ctb                   English, U.K., computer                            English computer braille as used in the U.K.
+  ../../tables/en-nabcc.utb                      English, U.S., computer, NABCC                     North American Braille Computer Code
+* ../../tables/en-us-g1.ctb                      English, U.S., uncontracted                        English uncontracted braille as used in the U.S.
+* ../../tables/en-us-comp6.ctb                   English, U.S., computer, 6-dot                     English 6-dot computer braille as used in the U.S.
+* ../../tables/en_US-comp8-ext.tbl               English, U.S., computer, 8-dot                     English 8-dot computer braille as used in the U.S.
+* ../../tables/en_US.tbl                         English, U.S., contracted                          English contracted braille as used in the U.S.
+* ../../tables/eo.tbl                            Esperanto                                          Esperanto braille
+* ../../tables/eo-g1-x-system.ctb                Esperanto x-system                                 Esperanto x-system braille
+* ../../tables/es.tbl                            Spanish, uncontracted                              Spanish uncontracted braille
+* ../../tables/es-g2.ctb                         Spanish, contracted                                Spanish contracted braille
+* ../../tables/Es-Es-G0.utb                      Spanish, computer                                  Spanish computer braille
+* ../../tables/et.tbl                            Estonian, computer                                 Estonian computer braille
+* ../../tables/fi.utb                            Finnish                                            Finnish braille
+* ../../tables/fi-fi-8dot.ctb                    Finnish, computer                                  Finnish computer braille
+* ../../tables/fr-bfu-comp6.utb                  French, uncontracted                               French uncontracted braille
+* ../../tables/fr-bfu-comp8.utb                  French, computer                                   French computer braille
+* ../../tables/fr-bfu-g2.ctb                     French, contracted                                 French contracted braille
+* ../../tables/ga-g1.utb                         Irish, uncontracted                                Irish uncontracted braille
+* ../../tables/ga-g2.ctb                         Irish, contracted                                  Irish contracted braille
+* ../../tables/gd.tbl                            Scottish Gaelic, computer                          Scottish Gaelic computer braille
+* ../../tables/gez.tbl                           Ethiopic                                           Ethiopic braille
+* ../../tables/gon.tbl                           Gondi                                              Gondi braille
+* ../../tables/gu.tbl                            Gujarati                                           Gujarati braille
+* ../../tables/haw-us-g1.ctb                     Hawaiian                                           Hawaiian braille
+* ../../tables/he-IL-comp8.utb                   Hebrew, computer                                   Hebrew computer braille
+  ../../tables/he-IL.utb                         Hebrew, Israel                                     Israeli braille
+* ../../tables/hi.tbl                            Hindi                                              Hindi braille
+* ../../tables/hr-g1.tbl                         Croatian                                           Croatian braille
+* ../../tables/hr-comp8.tbl                      Croatian, computer                                 Croatian computer braille
+* ../../tables/hu-hu-comp8.ctb                   Hungarian, computer                                Hungarian computer braille
+* ../../tables/hu.tbl                            Hungarian, partially contracted                    Hungarian partially contracted braille
+* ../../tables/hu-hu-g2.ctb                      Hungarian, contracted                              Hungarian contracted braille
+* ../../tables/hy.tbl                            Armenian, computer                                 Armenian computer braille
+* ../../tables/is.tbl                            Icelandic                                          Icelandic braille
+* ../../tables/it.tbl                            Italian                                            Italian braille
+* ../../tables/it-it-comp8.utb                   Italian, computer                                  Italian computer braille
+* ../../tables/iu-ca-g1.ctb                      Inuktitut                                          Inuktitut braille
+  ../../tables/ja-kantenji.utb                   Japanese, Kantenji                                 Kantenji
+* ../../tables/kha.tbl                           Khasi                                              Khasi braille
+* ../../tables/kk.utb                            Kazakh                                             Kazakh braille
+* ../../tables/km-g1.utb                         Khmer                                              Khmer braille
+* ../../tables/kmr.tbl                           Northern Kurdish                                   Northern Kurdish braille
+* ../../tables/kn.tbl                            Kannada                                            Kannada braille
+* ../../tables/ko-2006-g2.ctb                    Korean, contracted, 2006                           Korean contracted braille (2006 standard)
+* ../../tables/ko-2006-g1.ctb                    Korean, uncontracted, 2006                         Korean uncontracted braille (2006 standard)
+* ../../tables/ko-g2.ctb                         Korean, contracted                                 Korean contracted braille
+* ../../tables/ko-g1.ctb                         Korean, uncontracted                               Korean uncontracted braille
+* ../../tables/kok.tbl                           Konkani                                            Konkani braille
+* ../../tables/kru.tbl                           Kurukh                                             Kurukh braille
+* ../../tables/lt.tbl                            Lithuanian, 8-dot                                  Lithuanian 8-dot braille
+* ../../tables/lt-6dot.tbl                       Lithuanian, 6-dot                                  Lithuanian 6-dot braille
+* ../../tables/lv.tbl                            Latvian                                            Latvian braille
+* ../../tables/mao-nz-g1.ctb                     Maori                                              Maori braille
+* ../../tables/ml.tbl                            Malayalam                                          Malayalam braille
+* ../../tables/mn-MN-g1.utb                      Mongolian, uncontracted                            Mongolian uncontracted braille
+* ../../tables/mn-MN-g2.ctb                      Mongolian, contracted                              Mongolian contracted braille
+* ../../tables/mni.tbl                           Manipuri                                           Manipuri braille
+* ../../tables/mr.tbl                            Marathi                                            Marathi braille
+* ../../tables/ms-my-g2.ctb                      Malay                                              Malay braille
+* ../../tables/mt.tbl                            Maltese, computer                                  Maltese computer braille
+* ../../tables/mun.tbl                           Munda                                              Munda braille
+* ../../tables/mwr.tbl                           Marwari                                            Marwari braille
+* ../../tables/my-g1.utb                         Burmese, uncontracted                              Burmese uncontracted braille
+* ../../tables/my-g2.ctb                         Burmese, contracted                                Burmese contracted braille
+* ../../tables/no-no-comp8.ctb                   Norwegian, computer                                Norwegian computer braille
+* ../../tables/no-no-g0.utb                      Norwegian, uncontracted, 6-dot                     Norwegian 6-dot uncontracted braille
+* ../../tables/no-no-8dot.utb                    Norwegian, uncontracted, 8-dot                     Norwegian 8-dot uncontracted braille
+  ../../tables/no-no-8dot-fallback-6dot-g0.utb   Norwegian, uncontracted, 8-dot, 6-dot fallback     Norwegian 8-dot uncontracted braille with 6-dot fallback
+* ../../tables/no-no-g1.ctb                      Norwegian, contracted, grade 1                     Norwegian grade 1 contracted braille
+* ../../tables/no-no-g2.ctb                      Norwegian, contracted, grade 2                     Norwegian grade 2 contracted braille
+* ../../tables/no-no-g3.ctb                      Norwegian, contracted, grade 3                     Norwegian grade 3 contracted braille
+* ../../tables/ne.tbl                            Nepali                                             Nepali braille
+* ../../tables/nl.tbl                            Dutch                                              Dutch braille
+* ../../tables/nl-comp8.utb                      Dutch, computer                                    Dutch computer braille
+  ../../tables/nso-za-g1.utb                     Sepedi, uncontracted                               Sepedi uncontracted braille
+  ../../tables/nso-za-g2.ctb                     Sepedi, contracted                                 Sepedi contracted braille
+* ../../tables/or.tbl                            Oriya                                              Oriya braille
+* ../../tables/pa.tbl                            Punjabi                                            Punjabi braille
+* ../../tables/pi.tbl                            Pali                                               Pali braille
+* ../../tables/pl-pl-comp8.ctb                   Polish, computer                                   Polish computer braille
+* ../../tables/pl.tbl                            Polish                                             Polish braille
+* ../../tables/pt.tbl                            Portuguese, contracted                             Portuguese contracted braille
+* ../../tables/pt-pt-g1.utb                      Portuguese, uncontracted                           Portuguese uncontracted braille
+* ../../tables/pt-pt-comp8.ctb                   Portuguese, computer                               Portuguese computer braille
+* ../../tables/ro.tbl                            Romanian, computer                                 Romanian computer braille
+* ../../tables/ru.ctb                            Russian, computer                                  Russian computer braille
+  ../../tables/ru-litbrl.ctb                     Russian                                            Russian braille
+  ../../tables/ru-litbrl-detailed.utb            Russian, with capitals                             Russian braille with indication of capitals
+  ../../tables/ru-compbrl.ctb                    Russian, for program sources                       Russian braille for program sources
+  ../../tables/ru-ru-g1.ctb                      Russian, contracted                                Russian contracted braille
+* ../../tables/sa.tbl                            Sanskrit                                           Sanskrit braille
+* ../../tables/sah.utb                           Yakut                                              Yakut braille
+* ../../tables/sd.tbl                            Sindhi                                             Sindhi braille
+* ../../tables/sv.tbl                            Swedish                                            Swedish braille
+* ../../tables/sv-1996.ctb                       Swedish, computer, 1996                            Swedish computer braille (1996 standard)
+* ../../tables/sv-1989.ctb                       Swedish, computer, 1989                            Swedish computer braille (1989 standard)
+* ../../tables/sk-g1.ctb                         Slovak                                             Slovak braille
+* ../../tables/sl.tbl                            Slovenian                                          Slovenian braille
+* ../../tables/sl-si-comp8.ctb                   Slovenian, computer                                Slovenian computer braille
+* ../../tables/sot-za-g1.ctb                     Sesotho, uncontracted                              Sesotho uncontracted braille
+* ../../tables/sot-za-g2.ctb                     Sesotho, contracted                                Sesotho contracted braille
+* ../../tables/sr.tbl                            Serbian                                            Serbian braille
+* ../../tables/ta-ta-g1.ctb                      Tamil                                              Tamil braille
+* ../../tables/ta.tbl                            Tamil, computer                                    Tamil computer braille
+* ../../tables/te.tbl                            Telugu                                             Telugu braille
+* ../../tables/tr.tbl                            Turkish, computer                                  Turkish computer braille
+* ../../tables/tr-g2.tbl                         Turkish                                            Turkish braille
+* ../../tables/tsn-za-g1.ctb                     Setswana, uncontracted                             Setswana uncontracted braille
+* ../../tables/tsn-za-g2.ctb                     Setswana, contracted                               Setswana contracted braille
+* ../../tables/tt.utb                            Tatar                                              Tatar braille
+* ../../tables/uk.utb                            Ukrainian                                          Ukrainian braille
+* ../../tables/uk-comp.utb                       Ukrainian, computer                                Ukrainian computer braille
+* ../../tables/uz-g1.utb                         Uzbek                                              Uzbek braille
+* ../../tables/ur-pk-g1.utb                      Urdu, uncontracted                                 Urdu uncontracted braille
+* ../../tables/ur-pk-g2.ctb                      Urdu, contracted                                   Urdu contracted braille
+* ../../tables/ve-za-g1.utb                      Tshivenda, uncontracted                            Tshivenda uncontracted braille
+* ../../tables/ve-za-g2.ctb                      Tshivenda, contracted                              Tshivenda contracted braille
+* ../../tables/vi.ctb                            Vietnamese, computer                               Vietnamese computer braille
+* ../../tables/vi-vn-g0.utb                      Vietnamese, uncontracted                           Vietnamese uncontracted braille
+* ../../tables/vi-vn-g1.ctb                      Vietnamese, partially contracted                   Vietnamese partially contracted braille
+* ../../tables/vi-vn-g2.ctb                      Vietnamese, contracted                             Vietnamese contracted braille
+  ../../tables/vi-saigon-g1.ctb                  Vietnamese, Saigon, contracted                     Southern Vietnamese braille
+* ../../tables/xh-za-g1.utb                      isiXhosa, uncontracted                             isiXhosa uncontracted braille
+* ../../tables/xh-za-g2.ctb                      isiXhosa, contracted                               isiXhosa contracted braille
+  ../../tables/zh_CHN.tbl                        Mandarin, mainland China, without tones            Chinese braille without tones, for simplified Chinese characters
+* ../../tables/zh_HK.tbl                         Cantonese                                          Cantonese braille
+  ../../tables/zh_TW.tbl                         Mandarin, Taiwan                                   Taiwanese braille
+  ../../tables/zhcn-g1.ctb                       Mandarin, mainland China, with tones               Chinese braille with tones
+  ../../tables/zhcn-g2.ctb                       Mandarin, mainland China, 2-cell                   Two-cell Chinese braille
+* ../../tables/zu-za-g1.utb                      isiZulu, uncontracted                              isiZulu uncontracted braille
+* ../../tables/zu-za-g2.ctb                      isiZulu, contracted                                isiZulu contracted braille

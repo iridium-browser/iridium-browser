@@ -1,0 +1,63 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package cast.core;
+
+import "proto/common/runtime_metadata.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// CastCore service.
+service CastCoreService {
+  // Registers a Cast Runtime. Usually called by platform.
+  rpc RegisterRuntime(RegisterRuntimeRequest) returns (RegisterRuntimeResponse);
+
+  // Unregisters a Cast Runtime. Usually called by platform.
+  rpc UnregisterRuntime(UnregisterRuntimeRequest)
+      returns (UnregisterRuntimeResponse);
+
+  // Updates the PrelaunchType of runtime.
+  rpc UpdatePrelaunchType(UpdatePrelaunchTypeRequest)
+      returns (UpdatePrelaunchTypeResponse);
+}
+
+message RegisterRuntimeRequest {
+  // Metadata about the runtime.
+  cast.common.RuntimeMetadata runtime_metadata = 2;
+}
+
+message RegisterRuntimeResponse {
+  // A randomly generated runtime ID. Cast Core will use this ID to reference a
+  // particular Runtime.
+  string runtime_id = 1;
+}
+
+message UnregisterRuntimeRequest {
+  // Runtime ID.
+  string runtime_id = 1;
+}
+
+message UnregisterRuntimeResponse {}
+
+// Request to update the PrelaunchType of the runtime.
+message UpdatePrelaunchTypeRequest {
+  // Runtime id.
+  string runtime_id = 1;
+  // Prelaunch type.
+  cast.common.PrelaunchType.Type prelaunch_type = 2;
+}
+
+message UpdatePrelaunchTypeResponse {}

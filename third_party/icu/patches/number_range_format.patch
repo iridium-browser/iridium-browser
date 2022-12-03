@@ -1,0 +1,101 @@
+diff --git a/source/i18n/numrange_fluent.cpp b/source/i18n/numrange_fluent.cpp
+index f1060b3c..c36defa3 100644
+--- a/source/i18n/numrange_fluent.cpp
++++ b/source/i18n/numrange_fluent.cpp
+@@ -354,6 +354,7 @@ LocalizedNumberRangeFormatter::getFormatter(UErrorCode& status) const {
+     // Try computing the formatter on our own
+     auto* temp = new NumberRangeFormatterImpl(fMacros, status);
+     if (U_FAILURE(status)) {
++        delete temp;
+         return nullptr;
+     }
+     if (temp == nullptr) {
+diff --git a/source/i18n/numrange_impl.cpp b/source/i18n/numrange_impl.cpp
+index 3c440c19..06efc7b2 100644
+--- a/source/i18n/numrange_impl.cpp
++++ b/source/i18n/numrange_impl.cpp
+@@ -130,7 +130,7 @@ NumberRangeFormatterImpl::NumberRangeFormatterImpl(const RangeMacroProps& macros
+       fApproximatelyFormatter(status) {
+ 
+     const char* nsName = formatterImpl1.getRawMicroProps().nsName;
+-    if (uprv_strcmp(nsName, formatterImpl2.getRawMicroProps().nsName) != 0) {
++    if (!fSameFormatters && uprv_strcmp(nsName, formatterImpl2.getRawMicroProps().nsName) != 0) {
+         status = U_ILLEGAL_ARGUMENT_ERROR;
+         return;
+     }
+diff --git a/source/test/intltest/numbertest.h b/source/test/intltest/numbertest.h
+index c0f2e6fd..25af549e 100644
+--- a/source/test/intltest/numbertest.h
++++ b/source/test/intltest/numbertest.h
+@@ -326,6 +326,7 @@ class NumberRangeFormatterTest : public IntlTestWithFieldPosition {
+     void test21684_Performance();
+     void test21358_SignPosition();
+     void test21683_StateLeak();
++    void testCreateLNRFFromNumberingSystemInSkeleton();
+ 
+     void runIndexedTest(int32_t index, UBool exec, const char *&name, char *par = 0) override;
+ 
+diff --git a/source/test/intltest/numbertest_range.cpp b/source/test/intltest/numbertest_range.cpp
+index a47c675c..1364c860 100644
+--- a/source/test/intltest/numbertest_range.cpp
++++ b/source/test/intltest/numbertest_range.cpp
+@@ -57,6 +57,7 @@ void NumberRangeFormatterTest::runIndexedTest(int32_t index, UBool exec, const c
+         TESTCASE_AUTO(test21684_Performance);
+         TESTCASE_AUTO(test21358_SignPosition);
+         TESTCASE_AUTO(test21683_StateLeak);
++        TESTCASE_AUTO(testCreateLNRFFromNumberingSystemInSkeleton);
+     TESTCASE_AUTO_END;
+ }
+ 
+@@ -1031,6 +1032,51 @@ void NumberRangeFormatterTest::test21358_SignPosition() {
+     }
+ }
+ 
++void NumberRangeFormatterTest::testCreateLNRFFromNumberingSystemInSkeleton() {
++    IcuTestErrorCode status(*this, "testCreateLNRFFromNumberingSystemInSkeleton");
++    {
++        LocalizedNumberRangeFormatter lnrf = NumberRangeFormatter::withLocale("en")
++            .numberFormatterBoth(NumberFormatter::forSkeleton(
++                u".### rounding-mode-half-up", status));
++        UnicodeString actual = lnrf.formatFormattableRange(1, 234, status).toString(status);
++        assertEquals("default numbering system", u"1–234", actual);
++        status.errIfFailureAndReset("default numbering system");
++    }
++    {
++        LocalizedNumberRangeFormatter lnrf = NumberRangeFormatter::withLocale("th")
++            .numberFormatterBoth(NumberFormatter::forSkeleton(
++                u".### rounding-mode-half-up numbering-system/thai", status));
++        UnicodeString actual = lnrf.formatFormattableRange(1, 234, status).toString(status);
++        assertEquals("Thai numbering system", u"๑-๒๓๔", actual);
++        status.errIfFailureAndReset("thai numbering system");
++    }
++    {
++        LocalizedNumberRangeFormatter lnrf = NumberRangeFormatter::withLocale("en")
++            .numberFormatterBoth(NumberFormatter::forSkeleton(
++                u".### rounding-mode-half-up numbering-system/arab", status));
++        UnicodeString actual = lnrf.formatFormattableRange(1, 234, status).toString(status);
++        assertEquals("Arabic numbering system", u"١–٢٣٤", actual);
++        status.errIfFailureAndReset("arab numbering system");
++    }
++    {
++        LocalizedNumberRangeFormatter lnrf = NumberRangeFormatter::withLocale("en")
++            .numberFormatterFirst(NumberFormatter::forSkeleton(u"numbering-system/arab", status))
++            .numberFormatterSecond(NumberFormatter::forSkeleton(u"numbering-system/arab", status));
++        UnicodeString actual = lnrf.formatFormattableRange(1, 234, status).toString(status);
++        assertEquals("Double Arabic numbering system", u"١–٢٣٤", actual);
++        status.errIfFailureAndReset("double arab numbering system");
++    }
++    {
++        LocalizedNumberRangeFormatter lnrf = NumberRangeFormatter::withLocale("en")
++            .numberFormatterFirst(NumberFormatter::forSkeleton(u"numbering-system/arab", status))
++            .numberFormatterSecond(NumberFormatter::forSkeleton(u"numbering-system/latn", status));
++        // Note: The error is not set until `formatFormattableRange` because this is where the
++        // formatter object gets built.
++        lnrf.formatFormattableRange(1, 234, status);
++        status.expectErrorAndReset(U_ILLEGAL_ARGUMENT_ERROR);
++    }
++}
++
+ void NumberRangeFormatterTest::test21683_StateLeak() {
+     IcuTestErrorCode status(*this, "test21683_StateLeak");
+     UNumberRangeFormatter* nrf = nullptr;

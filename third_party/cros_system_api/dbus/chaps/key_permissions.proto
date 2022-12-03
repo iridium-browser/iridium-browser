@@ -1,0 +1,23 @@
+// Copyright 2020 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package chaps;
+
+// A KeyPermissions message encodes contexts in which a key can be used. For
+// keys managed by chaps, kCkaChromeOsKeyPermissions attribute key (see
+// system_api/constants/pkcs11_custom_attributes.h for more details) can be used
+// to save the corresponding KeyPermissions value.
+message KeyPermissions {
+  message KeyUsages {
+    // The key is marked for corporate usage.
+    bool corporate = 1;
+    // The key can be used by ARC.
+    bool arc = 2;
+  }
+  KeyUsages key_usages = 1;
+}

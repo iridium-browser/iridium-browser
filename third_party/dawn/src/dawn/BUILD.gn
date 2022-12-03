@@ -1,0 +1,79 @@
+# Copyright 2019 The Dawn Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../scripts/dawn_overrides_with_defaults.gni")
+
+import("${dawn_root}/generator/dawn_generator.gni")
+import("${dawn_root}/scripts/dawn_component.gni")
+
+###############################################################################
+# Dawn C++ wrapper
+###############################################################################
+
+dawn_json_generator("cpp_gen") {
+  target = "cpp"
+  outputs = [ "src/dawn/webgpu_cpp.cpp" ]
+}
+
+source_set("cpp") {
+  deps = [
+    ":cpp_gen",
+    "${dawn_root}/include/dawn:cpp_headers",
+  ]
+  sources = get_target_outputs(":cpp_gen")
+}
+
+###############################################################################
+# Dawn proc
+###############################################################################
+
+dawn_json_generator("proc_gen") {
+  target = "proc"
+  outputs = [
+    "src/dawn/dawn_proc.c",
+    "src/dawn/dawn_thread_dispatch_proc.cpp",
+  ]
+}
+
+dawn_component("proc") {
+  DEFINE_PREFIX = "WGPU"
+
+  public_deps = [ "${dawn_root}/include/dawn:headers" ]
+  deps = [ ":proc_gen" ]
+  sources = get_target_outputs(":proc_gen")
+  sources += [
+    "${dawn_root}/include/dawn/dawn_proc.h",
+    "${dawn_root}/include/dawn/dawn_thread_dispatch_proc.h",
+  ]
+}
+
+###############################################################################
+# Other generated files (upstream header, emscripten header, emscripten bits)
+###############################################################################
+
+dawn_json_generator("webgpu_headers_gen") {
+  target = "webgpu_headers"
+  outputs = [ "webgpu-headers/webgpu.h" ]
+}
+
+dawn_json_generator("emscripten_bits_gen") {
+  target = "emscripten_bits"
+  outputs = [
+    "emscripten-bits/webgpu.h",
+    "emscripten-bits/webgpu_cpp.h",
+    "emscripten-bits/webgpu_cpp.cpp",
+    "emscripten-bits/webgpu_struct_info.json",
+    "emscripten-bits/library_webgpu_enum_tables.js",
+  ]
+}

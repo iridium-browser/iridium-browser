@@ -1,0 +1,8 @@
+# This is copied from //components/sync/OWNERS (which can't be referenced here
+# because it's in a different Git repo).
+
+mastiz@chromium.org
+mmoskvitin@google.com
+rushans@google.com
+treib@chromium.org
+victorvianna@google.com

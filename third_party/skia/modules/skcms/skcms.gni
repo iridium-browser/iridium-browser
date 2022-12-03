@@ -1,0 +1,12 @@
+# DO NOT EDIT: This is a generated file.
+# See //bazel/exporter_tool/README.md for more information.
+
+_modules = get_path_info("../../modules", "abspath")
+
+skcms_public_headers = [ "$_modules/skcms/skcms.h" ]
+
+skcms_sources = [
+  "$_modules/skcms/skcms.cc",
+  "$_modules/skcms/skcms_internal.h",
+  "$_modules/skcms/src/Transform_inl.h",
+]

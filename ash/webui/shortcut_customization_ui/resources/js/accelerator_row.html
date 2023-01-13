@@ -1,0 +1,39 @@
+<style include="shortcut-customization-shared">
+  #container {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 286px 1fr;
+    grid-template-rows: repeat(var(--accelerator-row-num-accels), 52px);
+  }
+
+  accelerator-view,
+  text-accelerator {
+    grid-column-start: 2;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  accelerator-view:not(:first-of-type) {
+    border-top: var(--cr-separator-line);
+  }
+
+  #descriptionText {
+    align-items: center;
+    display: flex;
+  }
+</style>
+
+<div id="container">
+  <div id="descriptionText">[[description]]</div>
+  <template is="dom-if" if="[[isDefaultLayout(layoutStyle)]]">
+    <template is="dom-repeat" items="[[acceleratorInfos]]">
+      <accelerator-view class="accelerator-item" accelerator-info="[[item]]"
+          action="[[action]]" source="[[source]]" source-is-locked="[[isLocked]]">
+      </accelerator-view>
+    </template>
+  </template>
+  <template is="dom-if" if="[[isTextLayout(layoutStyle)]]">
+    <text-accelerator parts="[[getTextAcceleratorParts(acceleratorInfos)]]">
+    </text-accelerator>
+  </template>
+</div>

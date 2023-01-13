@@ -1,0 +1,337 @@
+// Copyright 2018 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package vm_tools.plugin_dispatcher;
+option go_package = "chromiumos/system_api/vm_plugin_dispatcher_proto";
+
+// Request to shut down the dispatcher service.
+message ShutdownDispatcherRequest {
+  // Instructs to suspend all running VMs before shutting down the service.
+  // If not forced and there are VMs that are not stopped the request will
+  // fail.
+  bool force = 1;
+}
+
+// Error codes for operations involving dispatcher.
+enum SrvErrorCode {
+  // Success.
+  SRV_SUCCESS = 0;
+  // Native Parallels error code is returned.
+  SRV_ERR_NATIVE_RESULT_CODE = 0x7FFFFFFF;
+}
+
+// Response to ShutdownDispatcherRequest.
+message ShutdownDispatcherResponse {
+  SrvErrorCode error = 1;
+
+  // Native Parallels error code.
+  sint32 result_code = 2;
+}
+
+// Request to generate and send problem report to Parallels.
+message SendProblemReportRequest {
+  // The cryptohome id of the session owner.
+  string owner_id = 1;
+
+  // Optional VM identifier. May be omitted (empty) when requesting
+  // a non-VM-specific report.
+  string vm_name_uuid = 2;
+
+  // Optional flag indicating that report should include extended info.
+  bool detailed = 3;
+
+  // Optional user name to be added to the problem report (may be empty).
+  string name = 4;
+
+  // Optional email to be added to the problem report (may be empty).
+  string email = 5;
+
+  // Optional problem description text to be attached to the problem
+  // report (may be empty).
+  string description = 6;
+}
+
+// Response to an SendProblemReportRequest.
+message SendProblemReportResponse {
+  // If true, the report was sent.
+  bool success = 1;
+
+  // If the attempt to submit report was successful, the ID of the generated
+  // report.
+  string report_id = 2;
+
+  // If the attempt to submit report failed, the reason for the failure,
+  // as native Parallels error code.
+  sint32 result_code = 3;
+
+  // Error message corresponding to the result code (non-localized).
+  string error_message = 4;
+}
+
+// Error codes for operations involving VMs.
+enum VmErrorCode {
+  // Success.
+  VM_SUCCESS = 0;
+  // Native Parallels error code is returned.
+  VM_ERR_NATIVE_RESULT_CODE = 0x7FFFFFFF;
+}
+
+// Request to register VM residing at given path.
+message RegisterVmRequest {
+  // The owner of the VM.
+  string owner_id = 1;
+
+  // Path to VM configuration file.
+  string path = 2;
+
+  // New uuid for VM, can be empty when requesting to preserve
+  // existing UUID.
+  string new_uuid = 3;
+
+  // Keep existing uuid for the VM, 'new_uuid' must be empty.
+  bool preserve_uuid = 4;
+
+  // Generate new 'source uuid' (SMBUS UUID) for the VM.
+  bool regenerate_src_uuid = 5;
+
+  // New name to assign to the VM. Can be empty.
+  string new_name = 6;
+}
+
+// Response to RegisterVmRequest.
+message RegisterVmResponse {
+  // Result of the operation.
+  VmErrorCode error = 1;
+
+  // Native Parallels error code.
+  sint32 result_code = 2;
+}
+
+// Request to unregister previously registered VM.
+message UnregisterVmRequest {
+  // The owner of the VM.
+  string owner_id = 1;
+
+  // VM uuid or name.
+  string vm_name_uuid = 2;
+}
+
+// Response to UnregisterVmRequest.
+message UnregisterVmResponse {
+  // Result of the operation.
+  VmErrorCode error = 1;
+
+  // Native Parallels error code.
+  sint32 result_code = 2;
+}
+
+// Request to provide information about VMs known to the dispatcher.
+message ListVmRequest {
+  // The owner of the VM.
+  string owner_id = 1;
+
+  // VM uuid or name. May be blank.
+  string vm_name_uuid = 2;
+}
+
+enum VmState {
+  VM_STATE_UNKNOWN = 0;
+
+  VM_STATE_STOPPED = 1;
+  VM_STATE_STARTING = 2;
+  VM_STATE_RUNNING = 3;
+  VM_STATE_PAUSED = 4;
+  VM_STATE_SUSPENDING = 5;
+  VM_STATE_STOPPING = 6;
+  VM_STATE_SUSPENDED = 7;
+  VM_STATE_RESETTING = 8;
+  VM_STATE_PAUSING = 9;
+  VM_STATE_CONTINUING = 10;
+  VM_STATE_RESUMING = 11;
+}
+
+// Conveys information about a VM.
+message VmInfo {
+  // VM uuid.
+  string uuid = 1;
+
+  // VM name.
+  string name = 2;
+
+  // VM state.
+  VmState state = 3;
+
+  // Vm description.
+  string description = 4;
+
+  // VM configuration file path.
+  string path = 5;
+}
+
+// Response to ListVmRequest.
+message ListVmResponse {
+  // Result of the operation.
+  VmErrorCode error = 1;
+
+  // VM(s) info.
+  repeated VmInfo vm_info = 2;
+
+  // Native Parallels error code.
+  sint32 result_code = 3;
+}
+
+// Request to start given VM.
+message StartVmRequest {
+  // The owner of the VM.
+  string owner_id = 1;
+
+  // VM uuid or name.
+  string vm_name_uuid = 2;
+}
+
+// Response to StartVmRequest.
+message StartVmResponse {
+  // Result of the operation.
+  VmErrorCode error = 1;
+
+  // Native Parallels error code.
+  sint32 result_code = 2;
+}
+
+// Request to stop given VM.
+enum VmStopMode {
+  // Attempt to gracefully shut down the guest OS. If agent is installed,
+  // then it is used to initiate shutdown, other wise ACPI is used.
+  VM_STOP_MODE_SHUTDOWN = 0;
+  // Stops VCPU and devices processes.
+  VM_STOP_MODE_KILL = 1;
+  // Uses ACPI to transition VM to S5.
+  VM_STOP_MODE_ACPI = 2;
+}
+
+message StopVmRequest {
+  // The owner of the VM.
+  string owner_id = 1;
+
+  // VM uuid or name.
+  string vm_name_uuid = 2;
+
+  // VM stop mode.
+  VmStopMode stop_mode = 3;
+
+  // Do not stop VM forcibly on timeout.
+  bool noforce = 4;
+}
+
+// Response to StopVmRequest.
+message StopVmResponse {
+  // Result of the operation.
+  VmErrorCode error = 1;
+
+  // Native Parallels error code.
+  sint32 result_code = 2;
+}
+
+// Request to suspend given VM.
+message SuspendVmRequest {
+  // The owner of the VM.
+  string owner_id = 1;
+
+  // VM uuid or name.
+  string vm_name_uuid = 2;
+}
+
+// Response to SuspendVmRequest.
+message SuspendVmResponse {
+  // Result of the operation.
+  VmErrorCode error = 1;
+
+  // Native Parallels error code.
+  sint32 result_code = 2;
+}
+
+// Request to perform reset for given VM.
+message ResetVmRequest {
+  // The owner of the VM.
+  string owner_id = 1;
+
+  // VM uuid or name.
+  string vm_name_uuid = 2;
+}
+
+// Response to ResetVmRequest.
+message ResetVmResponse {
+  // Result of the operation.
+  VmErrorCode error = 1;
+
+  // Native Parallels error code.
+  sint32 result_code = 2;
+}
+
+// Start UI component responsible for rendering VM display.
+message ShowVmRequest {
+  // The owner of the VM.
+  string owner_id = 1;
+
+  // VM uuid or name.
+  string vm_name_uuid = 2;
+}
+
+// Response to ShowVmRequest.
+message ShowVmResponse {
+  // Result of the operation.
+  VmErrorCode error = 1;
+
+  // Native Parallels error code.
+  sint32 result_code = 2;
+}
+
+// Signals change of state for a VM.
+message VmStateChangedSignal {
+  // The owner of the VM.
+  string owner_id = 1;
+
+  // VM name.
+  string vm_name = 2;
+
+  // VM uuid.
+  string vm_uuid = 3;
+
+  // Current VM state.
+  VmState vm_state = 4;
+
+  // Previous VM state.
+  VmState vm_state_prev = 5;
+}
+
+// State of hypervisor agent in a VM.
+enum VmToolsState {
+    VM_TOOLS_STATE_UNKNOWN = 0;
+
+    VM_TOOLS_STATE_POSSIBLY_INSTALLED = 1;
+    VM_TOOLS_STATE_NOT_INSTALLED = 2;
+    VM_TOOLS_STATE_INSTALLED = 3;
+    VM_TOOLS_STATE_OUTDATED = 4;
+};
+
+// Signals change of state of hypervisor agent in a VM.
+message VmToolsStateChangedSignal {
+  // The owner of the VM.
+  string owner_id = 1;
+
+  // VM name.
+  string vm_name = 2;
+
+  // VM uuid.
+  string vm_uuid = 3;
+
+  // Current state.
+  VmToolsState vm_tools_state = 4;
+
+  // Version of the agent software.
+  string vm_tools_version = 5;
+}

@@ -1,0 +1,36 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//third_party/cast_core/public/src/proto/proto.gni")
+cast_core_proto_library("api_bindings_proto") {
+    sources = [
+        "api_bindings.proto",
+    ]
+    deps = [
+        "//third_party/cast_core/public/src/proto/web:message_channel_proto",
+    ]
+    proto_in_dir = "//third_party/cast_core/public/src"
+}
+
+cast_core_proto_library("cast_channel_proto") {
+    sources = ["cast_channel.proto"]
+    generate_javascript = true
+    proto_in_dir = "//third_party/cast_core/public/src"
+}
+
+cast_core_proto_library("media_capabilities_proto") {
+    sources = ["media_capabilities.proto"]
+    generate_javascript = true
+    proto_in_dir = "//third_party/cast_core/public/src"
+}

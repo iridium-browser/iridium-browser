@@ -1,0 +1,54 @@
+// Copyright 2018 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// The messages in this file comprise the DBus/Proto interface for bootlockboxd.
+
+// Run "roll-dep src/third_party/cros_system_api" in chromium source tree to
+// update chromium DEPS file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package bootlockbox;
+option go_package = "chromiumos/system_api/bootlockbox_proto";
+
+enum BootLockboxErrorCode {
+  BOOTLOCKBOX_ERROR_NOT_SET = 0;
+  BOOTLOCKBOX_ERROR_WRITE_LOCKED = 1;
+  BOOTLOCKBOX_ERROR_WRITE_FAILED = 2;
+  BOOTLOCKBOX_ERROR_MISSING_KEY = 3;
+  BOOTLOCKBOX_ERROR_NVSPACE_UNDEFINED = 4;
+  BOOTLOCKBOX_ERROR_NVSPACE_UNINITIALIZED = 5;
+  BOOTLOCKBOX_ERROR_NVSPACE_OTHER = 6;
+  BOOTLOCKBOX_ERROR_NEED_POWERWASH = 7;
+}
+
+message StoreBootLockboxRequest {
+  // The key for the data.
+  optional bytes key = 1;
+  // The data to be stored.
+  optional bytes data = 2;
+}
+
+message StoreBootLockboxReply {
+  optional BootLockboxErrorCode error = 1;
+}
+
+message ReadBootLockboxRequest {
+  // The key for the data to read.
+  optional bytes key = 1;
+}
+
+message ReadBootLockboxReply {
+  optional BootLockboxErrorCode error = 1;
+  optional bytes data = 2;
+}
+
+message FinalizeNVRamBootLockboxRequest {
+}
+
+message FinalizeBootLockboxReply {
+  optional BootLockboxErrorCode error = 1;
+}

@@ -1,0 +1,60 @@
+# Copyright 2018 The PDFium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("../../../pdfium.gni")
+import("../../../testing/test.gni")
+
+assert(pdf_enable_xfa)
+
+source_set("layout") {
+  sources = [
+    "cfgas_break.cpp",
+    "cfgas_break.h",
+    "cfgas_breakline.cpp",
+    "cfgas_breakline.h",
+    "cfgas_breakpiece.cpp",
+    "cfgas_breakpiece.h",
+    "cfgas_char.cpp",
+    "cfgas_char.h",
+    "cfgas_linkuserdata.cpp",
+    "cfgas_linkuserdata.h",
+    "cfgas_rtfbreak.cpp",
+    "cfgas_rtfbreak.h",
+    "cfgas_textpiece.cpp",
+    "cfgas_textpiece.h",
+    "cfgas_textuserdata.cpp",
+    "cfgas_textuserdata.h",
+    "cfgas_txtbreak.cpp",
+    "cfgas_txtbreak.h",
+    "fgas_arabic.cpp",
+    "fgas_arabic.h",
+    "fgas_linebreak.cpp",
+    "fgas_linebreak.h",
+  ]
+  deps = [
+    "../../../core/fxcrt",
+    "../../../core/fxcrt/css",
+    "../../../core/fxge",
+    "../font",
+  ]
+  configs += [
+    "../../../:pdfium_strict_config",
+    "../../../:pdfium_noshorten_config",
+    "../../:xfa_warnings",
+  ]
+  visibility = [ "../../../*" ]
+}
+
+pdfium_unittest_source_set("unittests") {
+  sources = [
+    "cfgas_rtfbreak_unittest.cpp",
+    "cfgas_txtbreak_unittest.cpp",
+  ]
+  deps = [
+    ":layout",
+    "../../../core/fxge",
+    "../font",
+  ]
+  pdfium_root_dir = "../../../"
+}

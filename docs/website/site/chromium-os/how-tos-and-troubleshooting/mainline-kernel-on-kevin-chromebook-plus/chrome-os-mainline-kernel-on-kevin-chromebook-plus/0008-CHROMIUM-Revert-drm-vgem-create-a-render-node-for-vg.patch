@@ -1,0 +1,35 @@
+From 6a5708be93b048479414abdfd8b0d05cd3cb8300 Mon Sep 17 00:00:00 2001
+From: Tomasz Figa <tfiga@chromium.org>
+Date: Wed, 21 Nov 2018 20:16:05 +0900
+Subject: [PATCH 8/8] CHROMIUM: Revert "drm/vgem: create a render node for
+ vgem"
+
+This reverts commit 3a6eb795641c0e140424a3e4f301188eb2fd6d63.
+
+Somehow kms_swrast fails to allocate (or import) buffers using the
+render node exposed by vgem after this patch, so revert it until the
+root cause is found.
+
+Change-Id: Ie6d42f042b71f2775426a5e56edd524f9c7793d4
+Signed-off-by: Tomasz Figa <tfiga@chromium.org>
+---
+ drivers/gpu/drm/vgem/vgem_drv.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/vgem/vgem_drv.c b/drivers/gpu/drm/vgem/vgem_drv.c
+index 5930facd6d2d85..f1f7ab9dcdbfc0 100644
+--- a/drivers/gpu/drm/vgem/vgem_drv.c
++++ b/drivers/gpu/drm/vgem/vgem_drv.c
+@@ -431,8 +431,7 @@ static void vgem_release(struct drm_device *dev)
+ }
+ 
+ static struct drm_driver vgem_driver = {
+-	.driver_features		= DRIVER_GEM | DRIVER_PRIME |
+-					  DRIVER_RENDER,
++	.driver_features		= DRIVER_GEM | DRIVER_PRIME,
+ 	.release			= vgem_release,
+ 	.open				= vgem_open,
+ 	.postclose			= vgem_postclose,
+-- 
+2.20.0.rc2.403.gdbc3b29805-goog
+

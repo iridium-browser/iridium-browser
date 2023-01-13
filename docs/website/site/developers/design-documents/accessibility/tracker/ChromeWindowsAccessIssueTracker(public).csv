@@ -1,0 +1,89 @@
+Task,Type,Bug URL/ID,Owner,Priority,Status,Changelist
+
+Area: MSAA & IA2 (UI)
+
+Infobar container and extensions bar visibility,Bug,crbug.com/36224,ctguil,,"Ready to submit
+http://codereview.chromium.org/669275"
+Bookmarks bar is partially missing MSAA info,Bug,crbug.com/36281,ctguil,,"Ready to submit
+http://codereview.chromium.org/652156"
+Web content nodes are missing MSAA information,Bug,crbug.com/36286,ctguil,,"Ready to submit
+http://codereview.chromium.org/652199"
+AccExplorer freezes when pointed at Chrome,Bug,crbug.com/36162,ctguil,P0,Fixed & submitted,http://src.chromium.org/viewvc/chrome?view=rev&revision=39828
+Extension toolbar buttons and menus need MSAA information,Bug,crbug.com/36289,ctguil
+Resolve stability issues and remove --enable-renderer-accessibility flag,Bug,crbug.com/25564,ctguil,P1,"In progress, Chris writing proof-of-concept app"
+"""Options"" dialog needs MSAA",Bug,crbug.com/9621
+"""Bookmarks manager"" dialog needs MSAA",Bug,crbug.com/9619
+"""Import bookmarks and settings"" dialog needs MSAA",Bug,crbug.com/9617
+"""Clear browsing data"" dialog needs MSAA",Bug,crbug.com/9616,thiago.farina@gmail.com,,In progress
+"""Report bug or broken website"" dialog needs MSAA",Bug,crbug.com/9614
+"""Find in page"" dialog needs MSAA",Bug,crbug.com/9606
+No keyboard focus tracking in omnibox dropdown,Bug,crbug.com/9605
+"""Edit bookmark"" dialog needs MSAA",Bug,crbug.com/9604
+Bookmark dialog/bubble needs MSAA,Bug,crbug.com/9601
+[Accessibility] Connect renderer accessibility notifications to the browser,Bug,crbug.com/36505,ctguil
+[Accessibility] Chrome's main window is missing an accessible name,Bug,crbug.com/36732,ctguil@chromium.org,,"Ready to submit
+http://codereview.chromium.org/661054"
+[accessibility] Extension toolbar and infobar container views should not have state visible if they are not rendered on screen.,Bug,crbug.com/36224,ctguil@chromium.org,,"In code review (jcampan)
+http://codereview.chromium.org/669275"
+[Accessibility] Bookmarks menu doesn't have an accessible name,Bug,crbug.com/36191,thiago.farina@gmail.com,,Fixed & submitted,http://src.chromium.org/viewvc/chrome?view=rev&revision=41466
+[accessibility] JAWS isn't notified when a checkbox is toggled,Bug,crbug.com/36165,ctguil@chromium.org,,Fixed & submitted,http://src.chromium.org/viewvc/chrome?view=rev&revision=40998
+"[Accessibility] Submenus of ""page button"" and ""Chromium button"" are read as ""context menu"" by JAWS",Bug,crbug.com/36088
+"[Accessibility] Annoying to hear ""insert+F1 help"" for almost every link.",Bug,crbug.com/36858
+[Accessibility] Opening in new window (control+n) is read differently by screenreader,Bug,crbug.com/37235
+[Accessibility] No way to identify if in incognito mode when using screenreader,Bug,crbug.com/37357
+[Accessibility] Links to listen to videos in same window do not play for screenreader users.,Bug,crbug.com/37724
+"[Accessibility] Items in the toolbar are read as ""partially checked""",Bug,crbug.com/36086,dmazzoni
+"[Accessibility] In Google search, pressing ""insert+f1"" for help reads off JAWS commands.",Bug,crbug.com/36090
+"[Accessibility] ""insert F1 help"" is not read.",Bug,crbug.com/36744
+
+Area: Keyboard Access
+
+Extensions on the toolbar have no keyboard navigation,Bug,crbug.com/36222,mhm,,mhm working on design proposal
+Extensions container is in toolbar arrowing order even when not rendered,Bug,crbug.com/36087,ctguil@chromium.org,Will not fix,Duplicate of issue 36224
+Omnibox dropdown does not track keyboard focus as you move from item to item,Bug,crbug.com/9605
+"Menu Bar: Alt/F10 should focus ""menu bar"", drop-down menu role should not be ""pop-up""",Bug,< no bug yet >,dmazzoni,,CL in progress; doing GTK / Chronos in parallel
+"Toolbar child focus should be ""remembered"" when tabbing between toolbars.",Bug,< no bug yet >,dmazzoni,,CL in progress
+"BMB right click context menu displays farwary, with keyboard navigation",Bug,crbug.com/30365,sky
+Want a way to click links with the keyboard (after finding the link through Find in Page),Bug,crbug.com/29500,estade,,In progress - works for gtk (windows and mac to come)
+"[Accessibility] When in Chrome toolbar, navigating out of Chrome and back to Chrome resets location of cursor to default location",,crbug.com/36070
+[Accessibility] Navigating back using back option in toolbar announces wrong cursor location,Bug,crbug.com/36721
+[Accessibility] Cursor focus should be placed in the webpage after selecting an option from toolbar.,Bug,crbug.com/36728
+[Accessibility] options> offer to save password does not interupt user,Bug,crbug.com/37360
+
+"Area: Font, color, layout and style customization"
+
+Windows Accessibility compatibility issues (High Contrast support),Bug,crbug.com/92,pkasting
+"Provide a way to set ""minimum font size""",Feature Request,crbug.com/7417
+Bookmark star color is hard to distinguish.,Feature Request,crbug.com/20501,alcor
+Tab title font size cannot be changed with the desktop settings,Bug,crbug.com/17866
+
+Area: WebKit and WebKit / Chromium infrastructure
+
+WebKit document root node should display MSAA name (page title) and value (URL),Bug,crbug.com/36169,ctguil@chromium.org,P1,"CL prepared, needs tests & WebKit upstreaming"
+WebKit table cell role should be overridden by ARIA role on cell,Bug,https://bugs.webkit.org/show_bug.cgi?id=28923,ctguil@chromium.org,P1,"CL prepared, needs tests & WebKit upstreaming"
+Complete the WAI-ARIA role support (the ones not needing IA2),Bug,crbug.com/19982,ctguil@chromium.org,,In progress - role support listed at: http://www.chromium.org/developers/design-documents/accessibility#TOC-WAI-ARIA-Roles
+[Accessibility] No notification for page refresh,Bug,crbug.com/36093,ctguil@chromium.org
+Screen reader support for web content is needed (includes IA2 - bug will be broken into smaller ones as we spec out more details of what's needed),Bug,crbug.com/13291,"ctguil@chromium.org
+klink@chromium.org"
+Implement accessibilityController in test shell,Bug,crbug.com/10322,dglazkov,,In progress - several CLs submitted already on this
+[Accessibility] JAWS navigation cannot be used in Chrome,Bug,crbug.com/36092
+[Accessibility] deleted characters in an edit box are not read,Bug,crbug.com/36217
+[Accessibility] Labels for Combo boxes are not read properly by JAWS.,Bug,crbug.com/36477,,P1
+[Accessibility] Options in combo box are not read as they are selected,Bug,crbug.com/36478,,P1
+[Accessibility] Name of sender(s) is not read in Gmail,Bug,crbug.com/36515
+[Accessibility] Text for graphics which are also links are not being read by JAWS.,Bug,crbug.com/36581,,P1
+[Accessibility] edit box and button is being identified as list box,Bug,crbug.com/36622
+[Accessibility] Skip links do not work when using screenreader.,Bug,crbug.com/37721
+[Accessibility] Chromium needs to expose aria-activedescendant focus changes,Bug,crbug.com/38106,ctguil@chromium.org,P1,"CL prepared, needs tests & WebKit upstreaming"
+"[Accessibility] Support WAI-ARIA roles alert and alertdialog, as well as associated focus changes",Bug,crbug.com/38108,ctguil@chromium.org,P1,"CL prepared for the roles, needs associated focus events"
+[Accessibility] Most of the text for links and labels for form fields is not read by screenreader,Bug,crbug.com/37234
+
+Area: Documentation
+
+Add documentation for keyboard navigation of bookmarks bar and Alt+E/Alt+F to the Chrome design document,Doc,,klink,,"Done - live at: http://www.chromium.org/developers/design-documents/accessibility, and also listed in the general Chrome Keyboard Shortcuts document: http://www.google.com/support/chrome/bin/answer.py?answer=95743"
+File bugs on WAI-ARIA states and properties,Doc,,klink
+File bugs on live region support,Doc,,klink
+Move issue tracker to public place,Doc,,klink,,Done - live at: http://www.chromium.org/developers/design-documents/accessibility/tracker
+Compose Accessibility User Guidelines for Google Chrome,Doc,,klink,,Done - live at: http://www.chromium.org/developers/design-documents/accessibility
+Create changelog page,Doc,,klink,,Done - live at: http://www.chromium.org/developers/design-documents/accessibility/tracker
+Add all outstanding bugs to this spreadsheet,Doc,,klink,,Done - live at: http://www.chromium.org/developers/design-documents/accessibility/tracker

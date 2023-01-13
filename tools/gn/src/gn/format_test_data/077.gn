@@ -1,0 +1,6 @@
+# Regression test for https://crbug.com/gn/138. 80 col -------------------------
+foo("bar") {
+  blah = [
+    "$target_gen_dir/run-lit",  # Non-existing, so that ninja runs it each time.
+  ]
+}

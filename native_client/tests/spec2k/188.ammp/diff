@@ -1,0 +1,199 @@
+diff -Naurb src2/analyze.c src/analyze.c
+--- src2/analyze.c 2016-08-12 23:25:14.297791577 -0700
++++ src/analyze.c 2016-08-12 23:33:39.069342515 -0700
+@@ -31,7 +31,7 @@
+ */
+
+ void analyze( vfs,nfs,ilow,ihigh,op )
+-int  (*vfs[])();
++int  (*vfs[])(float*, float);
+ int nfs;
+ FILE *op;
+ int ilow,ihigh;
+diff -Naurb src2/animate.c src/animate.c
+--- src2/animate.c 2016-08-12 23:25:14.297791577 -0700
++++ src/animate.c 2016-08-12 23:36:18.867733418 -0700
+@@ -153,7 +153,7 @@
+ * perform nstep leapfrogging dynamics with dtime
+ */
+ int verlet(forces,nforces, nstep,dtime)
+-int (*forces[])(),nforces;
++int (*forces[])(float),nforces;
+ int nstep;
+ float dtime;
+ {
+@@ -219,7 +219,7 @@
+ *  ideally several cycles are good
+ */
+ int pac(forces,nforces, nstep,dtime)
+-int (*forces[])(),nforces;
++int (*forces[])(float),nforces;
+ int nstep;
+ float dtime;
+ {
+@@ -317,7 +317,7 @@
+ *
+ */
+ int tpac(forces,nforces, nstep,dtime_real,T)
+-int (*forces[])(),nforces;
++int (*forces[])(float),nforces;
+ int nstep;
+ float dtime_real,T;
+ {
+@@ -437,7 +437,7 @@
+ *  ideally several cycles are good
+ */
+ int pacpac(forces,nforces, nstep,dtime)
+-int (*forces[])(),nforces;
++int (*forces[])(float),nforces;
+ int nstep;
+ float dtime;
+ {
+@@ -586,7 +586,7 @@
+ *  ideally several cycles are good
+ */
+ int hpac(forces,poten,nforces,nstep,dtime_real,H)
+-int (*forces[])(),(*poten[])(),nforces;
++int (*forces[])(float),(*poten[])(float*, float),nforces;
+ int nstep;
+ float dtime_real,H;
+ {
+@@ -724,7 +724,7 @@
+ *  ideally several cycles are good
+ */
+ int ppac(forces,nforces, nstep,dtime_real,P)
+-int (*forces[])(),nforces;
++int (*forces[])(float),nforces;
+ int nstep;
+ float dtime_real,P;
+ {
+@@ -878,7 +878,7 @@
+ *  ideally several cycles are good
+ */
+ int ptpac(forces,nforces, nstep,dtime_real,P,T)
+-int (*forces[])(),nforces;
++int (*forces[])(float),nforces;
+ int nstep;
+ float dtime_real,P,T;
+ {
+diff -Naurb src2/eval.c src/eval.c
+--- src2/eval.c 2016-08-12 23:25:14.297791577 -0700
++++ src/eval.c 2016-08-12 23:28:59.113153303 -0700
+@@ -264,7 +264,7 @@
+ *  current version lexes tokens and if numeric
+ *  converts them to integer and floating point versions
+ */
+-  int  (*potentials[10])(),(*forces[10])(),nused=(-1);
++  int  (*potentials[10])(float*, float),(*forces[10])(float),nused=(-1);
+ int eval( ip,op,line )
+ FILE *ip,*op;
+ char *line;
+diff -Naurb src2/gsdg.c src/gsdg.c
+--- src2/gsdg.c 2016-08-12 23:25:14.297791577 -0700
++++ src/gsdg.c 2016-08-12 23:35:06.370648743 -0700
+@@ -29,7 +29,7 @@
+ #include "ammp.h"
+
+ void gsdg( vfs,nfs,niter,low_serial,high_serial )
+-int (*vfs[])(),nfs;
++int (*vfs[])(float*, float),nfs;
+ int niter;
+ int low_serial,high_serial;
+ {
+diff -Naurb src2/math.c src/math.c
+--- src2/math.c 2016-08-12 23:25:14.297791577 -0700
++++ src/math.c 2016-08-12 23:25:27.997996449 -0700
+@@ -298,7 +298,7 @@
+        if( strcmp( &tokens[0][0], "randf" ) == 0 )
+        {
+        atype = FLOAT;
+-       fa = randf( -1 );
++       fa = randf();
+        goto GOOD_OP;
+        }
+        if( strcmp( &tokens[0][0], "serial" ) == 0 )
+diff -Naurb src2/monitor.c src/monitor.c
+--- src2/monitor.c 2016-08-12 23:25:14.297791577 -0700
++++ src/monitor.c 2016-08-12 23:33:09.940906673 -0700
+@@ -33,7 +33,7 @@
+ * but otherwise is self-contained. Note the hooks for Non-bonded potentials
+ */
+ void AMMPmonitor( vfs,ffs,nfs,op )
+-int  (*vfs[])(),(*ffs[])();
++int  (*vfs[])(float*, float),(*ffs[])(float);
+ int nfs;
+ FILE *op;
+ {
+@@ -143,7 +143,7 @@
+ }
+
+ void AMMPmonitor_mute( vfs,ffs,nfs,op )
+-int  (*vfs[])(),(*ffs[])();
++int  (*vfs[])(float*, float),(*ffs[])(float);
+ int nfs;
+ FILE *op;
+ {
+diff -Naurb src2/optimist.c src/optimist.c
+--- src2/optimist.c 2016-08-12 23:25:14.297791577 -0700
++++ src/optimist.c 2016-08-12 23:36:54.856271851 -0700
+@@ -42,7 +42,7 @@
+ *  when to stop
+ */
+ int steep( vfs,ffs,nfs, nstep,toler )
+-int nfs,(*vfs[])(),(*ffs[])();
++int nfs,(*vfs[])(float*, float),(*ffs[])(float);
+ int nstep;
+ float toler;
+ {
+@@ -97,7 +97,7 @@
+ *  when to stop
+ */
+ int cngdel( vfs,ffs,nfs, nstep,nreset,toler,echo )
+-int nfs,(*vfs[])(),(*ffs[])();
++int nfs,(*vfs[])(float*, float),(*ffs[])(float);
+ int nstep,nreset;
+ float toler;
+ {
+@@ -164,7 +164,7 @@
+ *  recursive line minimizer
+ */
+ float linmin(ffs,nfs ,damp )
+-int (*ffs[])();
++int (*ffs[])(float*, float);
+ int nfs;
+ float damp;
+
+diff -Naurb src2/tset.c src/tset.c
+--- src2/tset.c 2016-08-12 23:25:14.297791577 -0700
++++ src/tset.c 2016-08-12 23:35:38.003122023 -0700
+@@ -107,11 +107,11 @@
+       return 0;
+ }/* end of tset */
+ #ifdef NEWCCALL
+-int tmin( FILE *op, int echo ,int i1,int i2,int i3,int i4,int nstep, int (*vfs[])(),int nfs )
++int tmin( FILE *op, int echo ,int i1,int i2,int i3,int i4,int nstep, int (*vfs[])(float*, float),int nfs )
+ #else
+ int tmin(op,echo, i1,i2,i3,i4,nstep, vfs,nfs )
+ int i1,i2,i3,i4,nstep;
+-int (*vfs[])();
++int (*vfs[])(float*, float);
+ FILE *op;
+ int echo,nfs;
+ #endif
+@@ -352,14 +352,14 @@
+         return 1;
+ }/* end of set_torsion */
+ #ifdef NEWCCALL
+-int tmap( FILE *op, int echo, int (*vfs[])(),int nfs,int i1,int i2,int i3,int i4,
++int tmap( FILE *op, int echo, int (*vfs[])(float*, float),int nfs,int i1,int i2,int i3,int i4,
+ int j1 , int j2 ,int j3, int j4 , int nistep, int njstep)
+ #else
+ int tmap(op,echo,vfs,nfs,i1,i2,i3,i4,j1,j2,j3,j4,nistep,njstep )
+ int i1,i2,i3,i4;
+ int j1,j2,j3,j4;
+ int nistep,njstep;
+-int (*vfs[])(),nfs;
++int (*vfs[])(float*, float),nfs;
+ FILE *op;
+ int echo;
+ #endif

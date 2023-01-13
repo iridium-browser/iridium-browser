@@ -1,0 +1,142 @@
+# Copyright 2020 The Dawn Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../../scripts/dawn_overrides_with_defaults.gni")
+
+import("${dawn_root}/scripts/dawn_features.gni")
+
+###############################################################################
+# Utils for tests and samples
+###############################################################################
+
+static_library("utils") {
+  configs += [
+    "${dawn_root}/src/dawn/common:internal_config",
+    "${dawn_root}/src/tint:tint_public_config",
+  ]
+
+  sources = [
+    "ComboRenderBundleEncoderDescriptor.cpp",
+    "ComboRenderBundleEncoderDescriptor.h",
+    "ComboRenderPipelineDescriptor.cpp",
+    "ComboRenderPipelineDescriptor.h",
+    "PlatformDebugLogger.h",
+    "ScopedAutoreleasePool.h",
+    "SystemUtils.cpp",
+    "SystemUtils.h",
+    "TerribleCommandBuffer.cpp",
+    "TerribleCommandBuffer.h",
+    "TestUtils.cpp",
+    "TestUtils.h",
+    "TextureUtils.cpp",
+    "TextureUtils.h",
+    "Timer.h",
+    "WGPUHelpers.cpp",
+    "WGPUHelpers.h",
+    "WireHelper.cpp",
+    "WireHelper.h",
+  ]
+  deps = [
+    "${dawn_root}/src/dawn:proc",
+    "${dawn_root}/src/dawn/common",
+    "${dawn_root}/src/dawn/native:headers",
+    "${dawn_root}/src/dawn/wire",
+    "${dawn_spirv_tools_dir}:spvtools_opt",
+  ]
+
+  libs = []
+  frameworks = []
+
+  if (is_win && !dawn_is_winuwp) {
+    sources += [ "WindowsDebugLogger.cpp" ]
+  } else {
+    sources += [ "EmptyDebugLogger.cpp" ]
+  }
+
+  if (is_win) {
+    sources += [ "WindowsTimer.cpp" ]
+  } else if (is_mac) {
+    sources += [
+      "OSXTimer.cpp",
+      "ObjCUtils.h",
+      "ObjCUtils.mm",
+    ]
+    frameworks += [ "QuartzCore.framework" ]
+  } else {
+    sources += [ "PosixTimer.cpp" ]
+  }
+
+  if (is_mac) {
+    sources += [ "ScopedAutoreleasePool.mm" ]
+  } else {
+    sources += [ "ScopedAutoreleasePool.cpp" ]
+  }
+
+  public_deps = [ "${dawn_root}/include/dawn:cpp_headers" ]
+}
+
+###############################################################################
+# Dawn samples, only in standalone builds
+###############################################################################
+
+if (dawn_standalone) {
+  # Library to handle the interaction of Dawn with GLFW windows in samples
+  static_library("bindings") {
+    configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
+
+    sources = [
+      "BackendBinding.cpp",
+      "BackendBinding.h",
+    ]
+
+    public_deps = [ "${dawn_root}/include/dawn:headers" ]
+
+    deps = [
+      "${dawn_root}/src/dawn/common",
+      "${dawn_root}/src/dawn/glfw",
+      "${dawn_root}/src/dawn/native",
+    ]
+    libs = []
+    frameworks = []
+
+    if (dawn_enable_d3d12) {
+      sources += [ "D3D12Binding.cpp" ]
+    }
+
+    if (dawn_enable_metal) {
+      sources += [ "MetalBinding.mm" ]
+      frameworks += [
+        "Metal.framework",
+        "QuartzCore.framework",
+      ]
+
+      # Suppress warnings that Metal isn't in the deployment target of Chrome
+      if (is_mac) {
+        cflags_objcc = [ "-Wno-unguarded-availability" ]
+      }
+    }
+
+    if (dawn_enable_null) {
+      sources += [ "NullBinding.cpp" ]
+    }
+
+    if (dawn_enable_opengl) {
+      sources += [ "OpenGLBinding.cpp" ]
+    }
+
+    if (dawn_enable_vulkan) {
+      sources += [ "VulkanBinding.cpp" ]
+    }
+  }
+}

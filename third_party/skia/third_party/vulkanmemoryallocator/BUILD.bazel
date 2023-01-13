@@ -1,0 +1,23 @@
+load("//bazel:macros.bzl", "exports_files_legacy", "skia_cc_library")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+skia_cc_library(
+    name = "vulkanmemoryallocator",
+    srcs = [
+        "GrVulkanMemoryAllocator.cpp",
+    ],
+    includes = [
+        ".",
+    ],
+    textual_hdrs = [
+        "GrVulkanMemoryAllocator.h",
+    ],
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//include/third_party/vulkan",
+        "@vulkanmemoryallocator//:hdrs",
+    ],
+)

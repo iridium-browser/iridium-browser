@@ -1,0 +1,252 @@
+{
+    "_comment": [
+        "Copyright 2019 The Dawn Authors",
+        "",
+        "Licensed under the Apache License, Version 2.0 (the \"License\");",
+        "you may not use this file except in compliance with the License.",
+        "You may obtain a copy of the License at",
+        "",
+        "    http://www.apache.org/licenses/LICENSE-2.0",
+        "",
+        "Unless required by applicable law or agreed to in writing, software",
+        "distributed under the License is distributed on an \"AS IS\" BASIS,",
+        "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+        "See the License for the specific language governing permissions and",
+        "limitations under the License."
+    ],
+
+    "_doc": "See docs/dawn/codegen.md",
+
+    "commands": {
+        "buffer map async": [
+            { "name": "buffer id", "type": "ObjectId" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "mode", "type": "map mode" },
+            { "name": "offset", "type": "uint64_t"},
+            { "name": "size", "type": "uint64_t"}
+        ],
+        "buffer update mapped data": [
+            { "name": "buffer id", "type": "ObjectId" },
+            { "name": "write data update info length", "type": "uint64_t" },
+            { "name": "write data update info", "type": "uint8_t", "annotation": "const*", "length": "write data update info length", "skip_serialize": true},
+            { "name": "offset", "type": "uint64_t"},
+            { "name": "size", "type": "uint64_t"}
+        ],
+        "device create buffer": [
+            { "name": "device id", "type": "ObjectId" },
+            { "name": "descriptor", "type": "buffer descriptor", "annotation": "const*" },
+            { "name": "result", "type": "ObjectHandle", "handle_type": "buffer" },
+            { "name": "read handle create info length", "type": "uint64_t" },
+            { "name": "read handle create info", "type": "uint8_t", "annotation": "const*", "length": "read handle create info length", "skip_serialize": true},
+            { "name": "write handle create info length", "type": "uint64_t" },
+            { "name": "write handle create info", "type": "uint8_t", "annotation": "const*", "length": "write handle create info length", "skip_serialize": true}
+        ],
+        "device create compute pipeline async": [
+            { "name": "device id", "type": "ObjectId" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "pipeline object handle", "type": "ObjectHandle", "handle_type": "compute pipeline"},
+            { "name": "descriptor", "type": "compute pipeline descriptor", "annotation": "const*"}
+        ],
+        "device create render pipeline async": [
+            { "name": "device id", "type": "ObjectId" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "pipeline object handle", "type": "ObjectHandle", "handle_type": "render pipeline"},
+            { "name": "descriptor", "type": "render pipeline descriptor", "annotation": "const*"}
+        ],
+        "device pop error scope": [
+            { "name": "device id", "type": "ObjectId" },
+            { "name": "request serial", "type": "uint64_t" }
+        ],
+        "destroy object": [
+            { "name": "object type", "type": "ObjectType" },
+            { "name": "object id", "type": "ObjectId" }
+        ],
+        "queue on submitted work done": [
+            { "name": "queue id", "type": "ObjectId" },
+            { "name": "signal value", "type": "uint64_t" },
+            { "name": "request serial", "type": "uint64_t" }
+        ],
+        "queue write buffer": [
+            {"name": "queue id", "type": "ObjectId" },
+            {"name": "buffer id", "type": "ObjectId" },
+            {"name": "buffer offset", "type": "uint64_t"},
+            {"name": "data", "type": "uint8_t", "annotation": "const*", "length": "size", "wire_is_data_only": true},
+            {"name": "size", "type": "uint64_t"}
+        ],
+        "queue write texture": [
+            {"name": "queue id", "type": "ObjectId" },
+            {"name": "destination", "type": "image copy texture", "annotation": "const*"},
+            {"name": "data", "type": "uint8_t", "annotation": "const*", "length": "data size", "wire_is_data_only": true},
+            {"name": "data size", "type": "uint64_t"},
+            {"name": "data layout", "type": "texture data layout", "annotation": "const*"},
+            {"name": "writeSize", "type": "extent 3D", "annotation": "const*"}
+        ],
+        "shader module get compilation info": [
+            { "name": "shader module id", "type": "ObjectId" },
+            { "name": "request serial", "type": "uint64_t" }
+        ],
+        "instance request adapter": [
+            { "name": "instance id", "type": "ObjectId" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "adapter object handle", "type": "ObjectHandle", "handle_type": "adapter"},
+            { "name": "options", "type": "request adapter options", "annotation": "const*" }
+        ],
+        "adapter request device": [
+            { "name": "adapter id", "type": "ObjectId" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "device object handle", "type": "ObjectHandle", "handle_type": "device"},
+            { "name": "descriptor", "type": "device descriptor", "annotation": "const*" }
+        ]
+    },
+    "return commands": {
+        "buffer map async callback": [
+            { "name": "buffer", "type": "ObjectHandle", "handle_type": "buffer" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "status", "type": "uint32_t" },
+            { "name": "read data update info length", "type": "uint64_t" },
+            { "name": "read data update info", "type": "uint8_t", "annotation": "const*", "length": "read data update info length", "skip_serialize": true }
+        ],
+        "device create compute pipeline async callback": [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "status", "type": "create pipeline async status" },
+            { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
+        ],
+        "device create render pipeline async callback": [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "status", "type": "create pipeline async status" },
+            { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
+        ],
+        "device uncaptured error callback": [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
+            { "name": "type", "type": "error type"},
+            { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
+        ],
+        "device logging callback": [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
+            { "name": "type", "type": "logging type"},
+            { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
+        ],
+        "device lost callback" : [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
+            { "name": "reason", "type": "device lost reason" },
+            { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
+        ],
+        "device pop error scope callback": [
+            { "name": "device", "type": "ObjectHandle", "handle_type": "device" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "type", "type": "error type" },
+            { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" }
+        ],
+        "queue work done callback": [
+            { "name": "queue", "type": "ObjectHandle", "handle_type": "queue" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "status", "type": "queue work done status" }
+        ],
+        "shader module get compilation info callback": [
+            { "name": "shader module", "type": "ObjectHandle", "handle_type": "shader module" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "status", "type": "compilation info request status" },
+            { "name": "info", "type": "compilation info", "annotation": "const*", "optional": true }
+        ],
+        "instance request adapter callback": [
+            { "name": "instance", "type": "ObjectHandle", "handle_type": "instance" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "status", "type": "request adapter status" },
+            { "name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true },
+            { "name": "properties", "type": "adapter properties", "annotation": "const*", "optional": "true" },
+            { "name": "limits", "type": "supported limits", "annotation": "const*", "optional": "true" },
+            { "name": "features count", "type": "uint32_t"},
+            { "name": "features", "type": "feature name", "annotation": "const*", "length": "features count"}
+        ],
+        "adapter request device callback": [
+            { "name": "adapter", "type": "ObjectHandle", "handle_type": "adapter" },
+            { "name": "request serial", "type": "uint64_t" },
+            { "name": "status", "type": "request device status" },
+            { "name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true },
+            { "name": "limits", "type": "supported limits", "annotation": "const*", "optional": "true" },
+            { "name": "features count", "type": "uint32_t"},
+            { "name": "features", "type": "feature name", "annotation": "const*", "length": "features count"}
+        ]
+    },
+    "special items": {
+        "client_side_structures": [
+            "SurfaceDescriptorFromMetalLayer",
+            "SurfaceDescriptorFromWindowsHWND",
+            "SurfaceDescriptorFromXlibWindow",
+            "SurfaceDescriptorFromWindowsCoreWindow",
+            "SurfaceDescriptorFromWindowsSwapChainPanel",
+            "SurfaceDescriptorFromAndroidNativeWindow"
+        ],
+        "client_side_commands": [
+            "AdapterCreateDevice",
+            "AdapterGetProperties",
+            "AdapterGetLimits",
+            "AdapterHasFeature",
+            "AdapterEnumerateFeatures",
+            "AdapterRequestDevice",
+            "BufferMapAsync",
+            "BufferGetConstMappedRange",
+            "BufferGetMappedRange",
+            "BufferGetMapState",
+            "BufferGetSize",
+            "BufferGetUsage",
+            "DeviceCreateBuffer",
+            "DeviceCreateComputePipelineAsync",
+            "DeviceCreateRenderPipelineAsync",
+            "DeviceGetLimits",
+            "DeviceHasFeature",
+            "DeviceEnumerateFeatures",
+            "DevicePopErrorScope",
+            "DeviceSetDeviceLostCallback",
+            "DeviceSetUncapturedErrorCallback",
+            "DeviceSetLoggingCallback",
+            "InstanceRequestAdapter",
+            "ShaderModuleGetCompilationInfo",
+            "QuerySetGetType",
+            "QuerySetGetCount",
+            "QueueOnSubmittedWorkDone",
+            "QueueWriteBuffer",
+            "QueueWriteTexture",
+            "TextureGetWidth",
+            "TextureGetHeight",
+            "TextureGetDepthOrArrayLayers",
+            "TextureGetMipLevelCount",
+            "TextureGetSampleCount",
+            "TextureGetDimension",
+            "TextureGetFormat",
+            "TextureGetUsage"
+        ],
+        "client_handwritten_commands": [
+            "BufferDestroy",
+            "BufferUnmap",
+            "DeviceCreateErrorBuffer",
+            "DeviceCreateQuerySet",
+            "DeviceCreateTexture",
+            "DeviceCreateErrorTexture",
+            "DeviceGetAdapter",
+            "DeviceGetQueue",
+            "DeviceInjectError"
+        ],
+        "client_special_objects": [
+            "Adapter",
+            "Buffer",
+            "Device",
+            "Instance",
+            "QuerySet",
+            "Queue",
+            "ShaderModule",
+            "Texture"
+        ],
+        "server_custom_pre_handler_commands": [
+            "BufferDestroy",
+            "BufferUnmap"
+        ],
+        "server_handwritten_commands": [
+            "QueueSignal"
+        ],
+        "server_reverse_lookup_objects": [
+        ]
+    }
+}

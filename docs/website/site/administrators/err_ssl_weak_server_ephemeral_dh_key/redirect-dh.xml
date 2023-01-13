@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Page Redirect"/>
+  <Content type="html">
+  <![CDATA[
+		<div>
+		</div>
+		<script>top.location = "https://support.google.com/chrome?p=dh_error"</script>
+		<script>window.location = "https://support.google.com/chrome?p=dh_error"</script>
+  ]]>
+  </Content>
+</Module>

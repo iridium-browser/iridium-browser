@@ -1,0 +1,26 @@
+# Copyright 2022 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/buildflag_header.gni")
+import("//build/config/chrome_build.gni")
+
+buildflag_header("buildflags") {
+  header = "buildflags.h"
+
+  if (is_chrome_for_testing) {
+    flags = [ "CHROME_FOR_TESTING=1" ]
+  } else {
+    flags = [ "CHROME_FOR_TESTING=0" ]
+  }
+
+  # Note:
+  # - `GOOGLE_CHROME_FOR_TESTING_BRANDING` and `GOOGLE_CHROME_BRANDING` are
+  #   mutually exclusive.
+  # - `GOOGLE_CHROME_FOR_TESTING_BRANDING` and `CHROMIUM_BRANDING` are not.
+  if (is_chrome_for_testing_branded) {
+    flags += [ "GOOGLE_CHROME_FOR_TESTING_BRANDING=1" ]
+  } else {
+    flags += [ "GOOGLE_CHROME_FOR_TESTING_BRANDING=0" ]
+  }
+}

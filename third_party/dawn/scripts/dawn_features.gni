@@ -1,0 +1,110 @@
+# Copyright 2018 The Dawn Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build_overrides/build.gni")
+
+if (build_with_chromium) {
+  import("//build/config/ozone.gni")
+  import("//build/config/sanitizers/sanitizers.gni")
+
+  dawn_use_x11 = ozone_platform_x11
+  dawn_use_wayland = false
+} else {
+  declare_args() {
+    # Whether Dawn should enable X11 support.
+    dawn_use_x11 = is_linux && !is_chromeos
+    dawn_use_wayland = false
+  }
+}
+
+# Enable the compilation for UWP
+dawn_is_winuwp = is_win && target_os == "winuwp"
+
+declare_args() {
+  # TODO(dawn:1545): Re-enable dawn_use_angle on Android. In non-component
+  # builds, this is adding a dependency on ANGLE's libEGL.so and
+  # libGLESv2.so, apparently without regard for the use_static_angle=true
+  # GN variable. Chromium's linker on Android disallows production of more
+  # than one shared object per target (?).
+  dawn_use_angle = !is_android
+
+  # Enables SwiftShader as the fallback adapter. Requires dawn_swiftshader_dir
+  # to be set to take effect.
+  # TODO(dawn:1536): Enable SwiftShader for Android.
+  dawn_use_swiftshader = !is_android
+}
+
+declare_args() {
+  # Enable Dawn's ASSERTs even in release builds
+  dawn_always_assert = false
+
+  # Should the Dawn static libraries be fully linked vs. GN's default of
+  # treating them as source sets. This is useful for people using Dawn
+  # standalone to produce static libraries to use in their projects.
+  dawn_complete_static_libs = false
+
+  # Enables the compilation of Dawn's D3D12 backend
+  dawn_enable_d3d12 = is_win
+
+  # Enables the compilation of Dawn's Metal backend
+  dawn_enable_metal = is_mac
+
+  # Enables the compilation of Dawn's Null backend
+  # (required for unittests, obviously non-conformant)
+  dawn_enable_null = true
+
+  # Enables the compilation of Dawn's OpenGL backend
+  # (best effort, non-conformant)
+  dawn_enable_desktop_gl = is_linux && !is_chromeos
+
+  # Enables the compilation of Dawn's OpenGLES backend
+  # (WebGPU/Compat subset)
+  # Disables OpenGLES when compiling for UWP, since UWP only supports d3d
+  dawn_enable_opengles =
+      (is_linux && !is_chromeos) || (is_win && !dawn_is_winuwp)
+
+  # Enables the compilation of Dawn's Vulkan backend
+  # Disables vulkan when compiling for UWP, since UWP only supports d3d
+  dawn_enable_vulkan = is_linux || is_chromeos || (is_win && !dawn_is_winuwp) ||
+                       is_fuchsia || is_android || dawn_use_swiftshader
+
+  # Enables error injection for faking failures to native API calls
+  dawn_enable_error_injection =
+      is_debug || (build_with_chromium && use_fuzzing_engine)
+}
+
+# GN does not allow reading a variable defined in the same declare_args().
+# Put them in two separate declare_args() when setting the value of one
+# argument based on another.
+declare_args() {
+  # Uses our built version of the Vulkan validation layers
+  dawn_enable_vulkan_validation_layers =
+      dawn_enable_vulkan && ((is_linux && !is_chromeos) || is_win || is_mac)
+
+  # Uses our built version of the Vulkan loader on platforms where we can't
+  # assume to have one present at the system level.
+  dawn_enable_vulkan_loader =
+      dawn_enable_vulkan && (is_mac || (is_linux && !is_android))
+
+  # Disable SPIR-V validation on Android because it adds a significant amount
+  # to the binary size, and Tint's output should be well-formed.
+  dawn_enable_spirv_validation = dawn_enable_vulkan && !is_android
+}
+
+# UWP only supports CoreWindow for windowing
+dawn_supports_glfw_for_windowing =
+    (is_win && !dawn_is_winuwp) || (is_linux && !is_chromeos) || is_mac
+
+# Much of the GL backend code is shared, so define a convenience var.
+dawn_enable_opengl = dawn_enable_opengles || dawn_enable_desktop_gl

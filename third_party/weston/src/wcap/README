@@ -1,0 +1,99 @@
+WCAP Tools
+
+WCAP is the video capture format used by Weston (Weston CAPture).
+It's a simple, lossless format, that encodes the difference between
+frames as run-length encoded rectangles.  It's a variable framerate
+format, that only records new frames along with a timestamp when
+something actually changes.
+
+Recording in Weston is started by pressing MOD+R and stopped by
+pressing MOD+R again.  Currently this leaves a capture.wcap file in
+the cwd of the weston process.  The file format is documented below
+and Weston comes with the wcap-decode tool to convert the wcap file
+into something more usable:
+
+ - Extract single or all frames as individual png files.  This will
+   produce a lossless screenshot, which is useful if you're trying to
+   screenshot a brief glitch or something like that that's hard to
+   capture with the screenshot tool.
+
+   wcap-decode takes a number of options and a wcap file as its
+   arguments.  Without anything else, it will show the screen size and
+   number of frames in the file.  Pass --frame=<frame> to extract a
+   single frame or pass --all to extract all frames as png files:
+
+	[krh@minato weston]$ wcap-snapshot capture.wcap 
+	wcap file: size 1024x640, 176 frames
+	[krh@minato weston]$ wcap-snapshot capture.wcap 20
+	wrote wcap-frame-20.png
+	wcap file: size 1024x640, 176 frames
+
+ - Decode and the wcap file and dump it as a YUV4MPEG2 stream on
+   stdout.  This format is compatible with most video encoders and can
+   be piped directly into a command line encoder such as vpxenc (part
+   of libvpx, encodes to a webm file) or theora_encode (part of
+   libtheora, encodes to a ogg theora file).
+
+   Using vpxenc to encode a webm file would look something like this:
+
+	[krh@minato weston]$ wcap-decode  --yuv4mpeg2 ../capture.wcap |
+		vpxenc --target-bitrate=1024 --best -t 4 -o foo.webm  -
+
+   where we select target bitrate, pass -t 4 to let vpxenc use
+   multiple threads.  To encode to Ogg Theora a command line like this
+   works:
+
+	[krh@minato weston]$ wcap-decode ../capture.wcap  --yuv4mpeg2 |
+		theora_encode - -o cap.ogv
+
+
+WCAP File format
+
+The file format has a small header and then just consists of the
+individual frames.  The header is
+
+	uint32_t	magic
+	uint32_t	format
+	uint32_t	width
+	uint32_t	height
+
+all CPU endian 32 bit words.  The magic number is
+
+	#define WCAP_HEADER_MAGIC	0x57434150
+
+and makes it easy to recognize a wcap file and verify that it's the
+right endian.  There are four supported pixel formats:
+
+	#define WCAP_FORMAT_XRGB8888	0x34325258
+	#define WCAP_FORMAT_XBGR8888	0x34324258
+	#define WCAP_FORMAT_RGBX8888	0x34325852
+	#define WCAP_FORMAT_BGRX8888	0x34325842
+
+Each frame has a header:
+
+	uint32_t	msecs
+	uint32_t	nrects
+
+which specifies a timestamp in ms and the number of rectangles that
+changed since previous frame.  The timestamps are typically just a raw
+system timestamp and the first frame doesn't start from 0ms.
+
+A frame consists of a list of rectangles, each of which represents the
+component-wise difference between the previous frame and the current
+using a run-length encoding.  The initial frame is decoded against a
+previous frame of all 0x00000000 pixels.  Each rectangle starts out
+with
+
+	int32_t		x1
+	int32_t		y1
+	int32_t		x2
+	int32_t		y2
+
+followed by (x2 - x1) * (y2 - y1) pixels, run-length encoded.  The
+run-length encoding uses the 'X' channel in the pixel format to encode
+the length of the run.  That is for WCAP_FORMAT_XRGB8888, for example,
+the length of the run is in the upper 8 bits.  For X values 0-0xdf,
+the length is X + 1, for X above or equal to 0xe0, the run length is 1
+<< (X - 0xe0 + 7).  That is, a pixel value of 0xe3000100, means that
+the next 1024 pixels differ by RGB(0x00, 0x01, 0x00) from the previous
+pixels.

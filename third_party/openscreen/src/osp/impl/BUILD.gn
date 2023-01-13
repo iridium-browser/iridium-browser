@@ -1,0 +1,45 @@
+# Copyright 2018 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+visibility = [ "./*" ]
+
+source_set("impl") {
+  visibility += [ "..:*" ]
+  public = []
+  sources = [
+    "dns_sd_publisher_client.cc",
+    "dns_sd_publisher_client.h",
+    "dns_sd_service_publisher_factory.cc",
+    "message_demuxer.cc",
+    "network_service_manager.cc",
+    "presentation/presentation_common.cc",
+    "presentation/presentation_common.h",
+    "presentation/presentation_connection.cc",
+    "presentation/presentation_controller.cc",
+    "presentation/presentation_receiver.cc",
+    "presentation/url_availability_requester.cc",
+    "presentation/url_availability_requester.h",
+    "receiver_list.cc",
+    "receiver_list.h",
+    "service_listener_impl.cc",
+    "service_listener_impl.h",
+    "service_publisher_impl.cc",
+    "service_publisher_impl.h",
+    "with_destruction_callback.cc",
+    "with_destruction_callback.h",
+  ]
+  public_deps = [
+    "../msgs",
+    "../public",
+  ]
+  deps = [
+    "../../discovery:dnssd",
+    "../../discovery:public",
+    "../../platform",
+    "../../third_party/abseil",
+    "../../util",
+    "quic",
+  ]
+  friend = [ "..:unittests" ]
+}

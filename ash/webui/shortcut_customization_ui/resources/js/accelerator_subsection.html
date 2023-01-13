@@ -1,0 +1,32 @@
+<style>
+  #title {
+    align-items: center;
+    display: flex;
+    font-weight: bold;
+    height: 48px;
+  }
+
+  accelerator-row:not(:last-of-type) {
+    border-bottom: var(--cr-separator-line);
+  }
+
+  #rowList {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+
+<div id="container" part="container">
+  <div id="title">[[title]]</div>
+  <div id="rowList">
+    <template id="list" is="dom-repeat" items="[[accelRowDataArray]]">
+      <accelerator-row
+          accelerator-infos="[[item.acceleratorInfos]]"
+          action="[[item.layoutInfo.action]]"
+          description="[[item.layoutInfo.description]]"
+          layout-style="[[item.layoutInfo.style]]"
+          source="[[item.layoutInfo.source]]">
+      </accelerator-row>
+    </template>
+  </div>
+</div>

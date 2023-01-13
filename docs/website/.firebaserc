@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "chromium-website-staging-d9f4a",
+    "prod": "chromium-website",
+    "staging": "chromium-website-staging-d9f4a"
+  }
+}

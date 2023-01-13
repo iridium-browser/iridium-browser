@@ -1,0 +1,478 @@
+{
+  "package_name": "saigo_newlib",
+  "package_targets": {
+    "linux_x86": {
+      "archives": [
+        {
+          "extract_dir": "",
+          "hash": "c4444cca29712e165a24f71c39f73bf108f8fc50",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/binutils_x86_64_linux_21fb83960ec07f8fa35cfb810ff690a2682b4ffa.log",
+          "name": "binutils_x86_64_linux.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/binutils_x86_64_linux_21fb83960ec07f8fa35cfb810ff690a2682b4ffa.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "e55bd4d0496ed6023f17243751f314111624bf53",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/binutils_x86_x86_64_linux_42a61cb3e6f326d7bfb5fd12980fc8cf1419cfd5.log",
+          "name": "binutils_x86_x86_64_linux.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/binutils_x86_x86_64_linux_42a61cb3e6f326d7bfb5fd12980fc8cf1419cfd5.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "3d1ae5b91e953bd802799260d80f013d802a7ac3",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/core_sdk_libs_saigo_arm_0cf1ce4cf579ca590b307afc8695e0545108ea0b.log",
+          "name": "core_sdk_libs_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/core_sdk_libs_saigo_arm_0cf1ce4cf579ca590b307afc8695e0545108ea0b.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "a731aca8cc562b302b1473055f9b78cd7879ca6f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/core_sdk_libs_saigo_i686_f773cd25a9896120765b78ad76b9efd510a04421.log",
+          "name": "core_sdk_libs_saigo_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/core_sdk_libs_saigo_i686_f773cd25a9896120765b78ad76b9efd510a04421.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "01002a6e13c5802f05b3d4696a62e1436d27d3eb",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/core_sdk_libs_saigo_x86_64_72a1f4a44ff01c3bf9b62fe92b4881393f59a873.log",
+          "name": "core_sdk_libs_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/core_sdk_libs_saigo_x86_64_72a1f4a44ff01c3bf9b62fe92b4881393f59a873.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "d00073efc8608380fd3618f290fa91803b99a818",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_saigo_arm_c26636ca6594b871af45fcf086ca87626ac753dc.log",
+          "name": "libcxx_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_saigo_arm_c26636ca6594b871af45fcf086ca87626ac753dc.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "bd5d4ae6241b89d4dce8825d922fd67b6c0afb47",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_saigo_i686_bc86823c2e698e9f3c0c7a5aedfbcc474f283f6d.log",
+          "name": "libcxx_saigo_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_saigo_i686_bc86823c2e698e9f3c0c7a5aedfbcc474f283f6d.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5af53a23e288244ea812c7862031e47cc999d609",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_saigo_x86_64_56c900c366f24910e0f4cd64986a8552e2ca5238.log",
+          "name": "libcxx_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_saigo_x86_64_56c900c366f24910e0f4cd64986a8552e2ca5238.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "7983cc77bb2899c44a399350d43ae2d32edd5c1a",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_saigo_arm_b107da9f997ae743ea23a1050eb586ebe0ad22d9.log",
+          "name": "libgcc_eh_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_saigo_arm_b107da9f997ae743ea23a1050eb586ebe0ad22d9.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "436f04f2d23cd7cc0f6a5c049b41c0511271c84c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_saigo_x86_32_6aa528d6be4ded45ed725cc0045a9d1a86e9c63b.log",
+          "name": "libgcc_eh_saigo_x86_32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_saigo_x86_32_6aa528d6be4ded45ed725cc0045a9d1a86e9c63b.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "93732224f77845104f74b2ac19e1e35e019ac011",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_saigo_x86_64_073a79dc11c7b53c6878da1ff06270e60cbbef5c.log",
+          "name": "libgcc_eh_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_saigo_x86_64_073a79dc11c7b53c6878da1ff06270e60cbbef5c.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5d21f4a3b110fa39d68204eeb1130875114f4862",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_saigo_arm_a77d309f3a606a3d63b1ebf50d098c77080bd34a.log",
+          "name": "libs_support_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_saigo_arm_a77d309f3a606a3d63b1ebf50d098c77080bd34a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "742c646b67d6f308a05d2da0ebd725e7d12a1b92",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_saigo_i686_f4b97eb9253bf403c16ec16c663b1d86026abac2.log",
+          "name": "libs_support_saigo_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_saigo_i686_f4b97eb9253bf403c16ec16c663b1d86026abac2.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "e3873e9a7e8479cc50dc7a71013b37ad5ff473c9",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_saigo_x86_64_d1cd5767ff080acb24082c2e464a0b18812a6df2.log",
+          "name": "libs_support_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_saigo_x86_64_d1cd5767ff080acb24082c2e464a0b18812a6df2.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "a48e42c584980aed9dbf836dd8a4d2fc17b827ce",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/llvm_saigo_x86_64_linux_cdea54c4466c0314a876ec3e851c8cd1df94508e.log",
+          "name": "llvm_saigo_x86_64_linux.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/llvm_saigo_x86_64_linux_cdea54c4466c0314a876ec3e851c8cd1df94508e.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "be7ba4a6a3a841f9129c8c1d6e632e2f18f8ebb1",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_saigo_arm_5989d9c4690de5217f947d3182e16d6743e8bb90.log",
+          "name": "newlib_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_saigo_arm_5989d9c4690de5217f947d3182e16d6743e8bb90.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "b2e02507b9fad8ea3bf73e2fcdc5d9aac8cadfb1",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_saigo_i686_e485a73d105c6930afa3e5ab4cdf5830a25914c5.log",
+          "name": "newlib_saigo_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_saigo_i686_e485a73d105c6930afa3e5ab4cdf5830a25914c5.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "9b0070f1170f28cb652d8cc668a321d583e09086",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_saigo_x86_64_f532f455fc371eec6f6e3e083ad8d1ec4e986529.log",
+          "name": "newlib_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_saigo_x86_64_f532f455fc371eec6f6e3e083ad8d1ec4e986529.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "94d918162a3c5022eaa1c39a6aa8b86eccaadfa7",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/remote_toolchain_inputs_saigo_x86_64_linux_b737b6ee9ce75108346013ed372a36563081f384.log",
+          "name": "remote_toolchain_inputs_saigo_x86_64_linux.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/remote_toolchain_inputs_saigo_x86_64_linux_b737b6ee9ce75108346013ed372a36563081f384.tgz"
+        }
+      ],
+      "version": 1
+    },
+    "mac_x86": {
+      "archives": [
+        {
+          "extract_dir": "",
+          "hash": "1d988d42280d9386008ba2a23c8cd4c61f907026",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/binutils_x86_64_apple_darwin_7310e8666750b56869768fafd44eb571fc8a2cc1.log",
+          "name": "binutils_x86_64_apple_darwin.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/binutils_x86_64_apple_darwin_7310e8666750b56869768fafd44eb571fc8a2cc1.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "c9ffb2c259ea11d750e2ea7fb4cac49c9f709604",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/binutils_x86_x86_64_apple_darwin_2c3adb640af1e98370c8c1c6ce457ed36ed629dd.log",
+          "name": "binutils_x86_x86_64_apple_darwin.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/binutils_x86_x86_64_apple_darwin_2c3adb640af1e98370c8c1c6ce457ed36ed629dd.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "3d1ae5b91e953bd802799260d80f013d802a7ac3",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/core_sdk_libs_saigo_arm_0cf1ce4cf579ca590b307afc8695e0545108ea0b.log",
+          "name": "core_sdk_libs_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/core_sdk_libs_saigo_arm_0cf1ce4cf579ca590b307afc8695e0545108ea0b.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "a731aca8cc562b302b1473055f9b78cd7879ca6f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/core_sdk_libs_saigo_i686_f773cd25a9896120765b78ad76b9efd510a04421.log",
+          "name": "core_sdk_libs_saigo_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/core_sdk_libs_saigo_i686_f773cd25a9896120765b78ad76b9efd510a04421.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "01002a6e13c5802f05b3d4696a62e1436d27d3eb",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/core_sdk_libs_saigo_x86_64_72a1f4a44ff01c3bf9b62fe92b4881393f59a873.log",
+          "name": "core_sdk_libs_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/core_sdk_libs_saigo_x86_64_72a1f4a44ff01c3bf9b62fe92b4881393f59a873.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "d00073efc8608380fd3618f290fa91803b99a818",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_saigo_arm_c26636ca6594b871af45fcf086ca87626ac753dc.log",
+          "name": "libcxx_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_saigo_arm_c26636ca6594b871af45fcf086ca87626ac753dc.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "bd5d4ae6241b89d4dce8825d922fd67b6c0afb47",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_saigo_i686_bc86823c2e698e9f3c0c7a5aedfbcc474f283f6d.log",
+          "name": "libcxx_saigo_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_saigo_i686_bc86823c2e698e9f3c0c7a5aedfbcc474f283f6d.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5af53a23e288244ea812c7862031e47cc999d609",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_saigo_x86_64_56c900c366f24910e0f4cd64986a8552e2ca5238.log",
+          "name": "libcxx_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_saigo_x86_64_56c900c366f24910e0f4cd64986a8552e2ca5238.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "7983cc77bb2899c44a399350d43ae2d32edd5c1a",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_saigo_arm_b107da9f997ae743ea23a1050eb586ebe0ad22d9.log",
+          "name": "libgcc_eh_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_saigo_arm_b107da9f997ae743ea23a1050eb586ebe0ad22d9.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "436f04f2d23cd7cc0f6a5c049b41c0511271c84c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_saigo_x86_32_6aa528d6be4ded45ed725cc0045a9d1a86e9c63b.log",
+          "name": "libgcc_eh_saigo_x86_32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_saigo_x86_32_6aa528d6be4ded45ed725cc0045a9d1a86e9c63b.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "93732224f77845104f74b2ac19e1e35e019ac011",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_saigo_x86_64_073a79dc11c7b53c6878da1ff06270e60cbbef5c.log",
+          "name": "libgcc_eh_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_saigo_x86_64_073a79dc11c7b53c6878da1ff06270e60cbbef5c.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5d21f4a3b110fa39d68204eeb1130875114f4862",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_saigo_arm_a77d309f3a606a3d63b1ebf50d098c77080bd34a.log",
+          "name": "libs_support_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_saigo_arm_a77d309f3a606a3d63b1ebf50d098c77080bd34a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "742c646b67d6f308a05d2da0ebd725e7d12a1b92",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_saigo_i686_f4b97eb9253bf403c16ec16c663b1d86026abac2.log",
+          "name": "libs_support_saigo_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_saigo_i686_f4b97eb9253bf403c16ec16c663b1d86026abac2.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "e3873e9a7e8479cc50dc7a71013b37ad5ff473c9",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_saigo_x86_64_d1cd5767ff080acb24082c2e464a0b18812a6df2.log",
+          "name": "libs_support_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_saigo_x86_64_d1cd5767ff080acb24082c2e464a0b18812a6df2.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5c024fe7344f403b096163f3fa34db134237be65",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/llvm_saigo_x86_64_apple_darwin_4969560834a910de143e565bcbe34871ee66f328.log",
+          "name": "llvm_saigo_x86_64_apple_darwin.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/llvm_saigo_x86_64_apple_darwin_4969560834a910de143e565bcbe34871ee66f328.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "be7ba4a6a3a841f9129c8c1d6e632e2f18f8ebb1",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_saigo_arm_5989d9c4690de5217f947d3182e16d6743e8bb90.log",
+          "name": "newlib_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_saigo_arm_5989d9c4690de5217f947d3182e16d6743e8bb90.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "b2e02507b9fad8ea3bf73e2fcdc5d9aac8cadfb1",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_saigo_i686_e485a73d105c6930afa3e5ab4cdf5830a25914c5.log",
+          "name": "newlib_saigo_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_saigo_i686_e485a73d105c6930afa3e5ab4cdf5830a25914c5.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "9b0070f1170f28cb652d8cc668a321d583e09086",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_saigo_x86_64_f532f455fc371eec6f6e3e083ad8d1ec4e986529.log",
+          "name": "newlib_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_saigo_x86_64_f532f455fc371eec6f6e3e083ad8d1ec4e986529.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "3d1dee798847787b06960abb1fdb1afb46f7b957",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/remote_toolchain_inputs_saigo_x86_64_apple_darwin_b737b6ee9ce75108346013ed372a36563081f384.log",
+          "name": "remote_toolchain_inputs_saigo_x86_64_apple_darwin.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/remote_toolchain_inputs_saigo_x86_64_apple_darwin_b737b6ee9ce75108346013ed372a36563081f384.tgz"
+        }
+      ],
+      "version": 1
+    },
+    "win_x86": {
+      "archives": [
+        {
+          "extract_dir": "",
+          "hash": "580513d6cb45811ffec17b73eb1257287857f8ef",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/binutils_i686_w64_mingw32_e76ca4923fcb14459fbe91d4666f0442c4980e27.log",
+          "name": "binutils_i686_w64_mingw32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/binutils_i686_w64_mingw32_e76ca4923fcb14459fbe91d4666f0442c4980e27.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "84147744cb8a991424379716bdbdbc2946857f5b",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/binutils_x86_i686_w64_mingw32_401db680235d6a57870b1b65b3f623e6d8d1bbcd.log",
+          "name": "binutils_x86_i686_w64_mingw32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/binutils_x86_i686_w64_mingw32_401db680235d6a57870b1b65b3f623e6d8d1bbcd.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "3d1ae5b91e953bd802799260d80f013d802a7ac3",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/core_sdk_libs_saigo_arm_0cf1ce4cf579ca590b307afc8695e0545108ea0b.log",
+          "name": "core_sdk_libs_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/core_sdk_libs_saigo_arm_0cf1ce4cf579ca590b307afc8695e0545108ea0b.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "a731aca8cc562b302b1473055f9b78cd7879ca6f",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/core_sdk_libs_saigo_i686_f773cd25a9896120765b78ad76b9efd510a04421.log",
+          "name": "core_sdk_libs_saigo_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/core_sdk_libs_saigo_i686_f773cd25a9896120765b78ad76b9efd510a04421.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "01002a6e13c5802f05b3d4696a62e1436d27d3eb",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/core_sdk_libs_saigo_x86_64_72a1f4a44ff01c3bf9b62fe92b4881393f59a873.log",
+          "name": "core_sdk_libs_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/core_sdk_libs_saigo_x86_64_72a1f4a44ff01c3bf9b62fe92b4881393f59a873.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "d00073efc8608380fd3618f290fa91803b99a818",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_saigo_arm_c26636ca6594b871af45fcf086ca87626ac753dc.log",
+          "name": "libcxx_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_saigo_arm_c26636ca6594b871af45fcf086ca87626ac753dc.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "bd5d4ae6241b89d4dce8825d922fd67b6c0afb47",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_saigo_i686_bc86823c2e698e9f3c0c7a5aedfbcc474f283f6d.log",
+          "name": "libcxx_saigo_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_saigo_i686_bc86823c2e698e9f3c0c7a5aedfbcc474f283f6d.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5af53a23e288244ea812c7862031e47cc999d609",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libcxx_saigo_x86_64_56c900c366f24910e0f4cd64986a8552e2ca5238.log",
+          "name": "libcxx_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libcxx_saigo_x86_64_56c900c366f24910e0f4cd64986a8552e2ca5238.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "7983cc77bb2899c44a399350d43ae2d32edd5c1a",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_saigo_arm_b107da9f997ae743ea23a1050eb586ebe0ad22d9.log",
+          "name": "libgcc_eh_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_saigo_arm_b107da9f997ae743ea23a1050eb586ebe0ad22d9.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "436f04f2d23cd7cc0f6a5c049b41c0511271c84c",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_saigo_x86_32_6aa528d6be4ded45ed725cc0045a9d1a86e9c63b.log",
+          "name": "libgcc_eh_saigo_x86_32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_saigo_x86_32_6aa528d6be4ded45ed725cc0045a9d1a86e9c63b.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "93732224f77845104f74b2ac19e1e35e019ac011",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libgcc_eh_saigo_x86_64_073a79dc11c7b53c6878da1ff06270e60cbbef5c.log",
+          "name": "libgcc_eh_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libgcc_eh_saigo_x86_64_073a79dc11c7b53c6878da1ff06270e60cbbef5c.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "5d21f4a3b110fa39d68204eeb1130875114f4862",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_saigo_arm_a77d309f3a606a3d63b1ebf50d098c77080bd34a.log",
+          "name": "libs_support_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_saigo_arm_a77d309f3a606a3d63b1ebf50d098c77080bd34a.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "742c646b67d6f308a05d2da0ebd725e7d12a1b92",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_saigo_i686_f4b97eb9253bf403c16ec16c663b1d86026abac2.log",
+          "name": "libs_support_saigo_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_saigo_i686_f4b97eb9253bf403c16ec16c663b1d86026abac2.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "e3873e9a7e8479cc50dc7a71013b37ad5ff473c9",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/libs_support_saigo_x86_64_d1cd5767ff080acb24082c2e464a0b18812a6df2.log",
+          "name": "libs_support_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/libs_support_saigo_x86_64_d1cd5767ff080acb24082c2e464a0b18812a6df2.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "a734131e08a585c9f9ec6731715ab1e573b871a3",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/llvm_saigo_x86_64_win32_afbdb972b09b76e867fb551d9659ea1287b363e1.log",
+          "name": "llvm_saigo_x86_64_win32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/llvm_saigo_x86_64_win32_afbdb972b09b76e867fb551d9659ea1287b363e1.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "be7ba4a6a3a841f9129c8c1d6e632e2f18f8ebb1",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_saigo_arm_5989d9c4690de5217f947d3182e16d6743e8bb90.log",
+          "name": "newlib_saigo_arm.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_saigo_arm_5989d9c4690de5217f947d3182e16d6743e8bb90.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "b2e02507b9fad8ea3bf73e2fcdc5d9aac8cadfb1",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_saigo_i686_e485a73d105c6930afa3e5ab4cdf5830a25914c5.log",
+          "name": "newlib_saigo_i686.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_saigo_i686_e485a73d105c6930afa3e5ab4cdf5830a25914c5.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "9b0070f1170f28cb652d8cc668a321d583e09086",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/newlib_saigo_x86_64_f532f455fc371eec6f6e3e083ad8d1ec4e986529.log",
+          "name": "newlib_saigo_x86_64.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/newlib_saigo_x86_64_f532f455fc371eec6f6e3e083ad8d1ec4e986529.tgz"
+        },
+        {
+          "extract_dir": "",
+          "hash": "06b5541cb4a959f173239c4158cf2f31a03154f6",
+          "log_url": "https://storage.googleapis.com/nativeclient-once/log/remote_toolchain_inputs_saigo_x86_64_win32_b737b6ee9ce75108346013ed372a36563081f384.log",
+          "name": "remote_toolchain_inputs_saigo_x86_64_win32.tgz",
+          "tar_src_dir": "",
+          "url": "https://storage.googleapis.com/nativeclient-once/object/remote_toolchain_inputs_saigo_x86_64_win32_b737b6ee9ce75108346013ed372a36563081f384.tgz"
+        }
+      ],
+      "version": 1
+    }
+  },
+  "revision": "397f1ecac4eb0d6810d6ef9ebf66f6540587deae",
+  "revision_hash": "9070c2c697286f6cc8dcac47d0ac8cde5ae6b69a"
+}

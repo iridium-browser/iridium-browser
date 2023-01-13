@@ -1,0 +1,37 @@
+# Test for issue #615: The always opcode unworking after the numeral (https://github.com/liblouis/liblouis/issues/615)
+
+table: |
+  letter x 1
+  letter y 2
+  letter z 3
+  always xy 3
+  digit 4 4
+  letter a 5
+  sign . 6
+  numsign 6
+tests:
+  - - 4xy
+    - .4z
+
+# The presence of the "numericnocontchars" rule enables numeric mode
+# processing. If the nocontractsign is defined then contractions are
+# disabled upon entering numeric mode and only enabled again upon
+# reaching the next space. In this test the nocontractsign is not
+# defined so the "xy" should be contracted because there is no space
+# after the "4"
+table: |
+  letter x 1
+  letter y 2
+  letter z 3
+  always xy 3
+  digit 4 4
+  letter a 5
+  numericnocontchars a
+  sign . 6
+  numsign 6
+  include tables/spaces.uti
+tests:
+  - - 4 xy
+    - .4 z
+  - - 4xy
+    - .4z

@@ -1,0 +1,75 @@
+// Copyright 2022 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+// This file defines messages necessary for early boot experimentation
+package featured;
+
+option go_package = "chromiumos/system_api/featured_proto";
+
+import "google/protobuf/timestamp.proto";
+
+// Defines the key and value of a feature's parameter.
+message Param {
+  // Key of an experiment's parameter.
+  string key = 1;
+  // Value of an experiment's parameter.
+  string value = 2;
+}
+
+// Defines a chrome://flags entry that can override a feature's state determined
+// by the evaluate_seed binary.
+message FeatureOverride {
+  // Name of the feature, always starting with "CrOSEarlyBoot"
+  string name = 1;
+  // True if the feature is enabled, and false otherwise.
+  bool enabled = 2;
+  // If the feature is enabled AND has parameters associated with it,
+  // they'll appear here.
+  repeated Param params = 3;
+}
+
+// Information about the last known "safe" seed.
+message SeedDetails {
+  // Last known "safe" seed represented as the base64-encoded gzip-compressed
+  // serialized form of the variations seed protobuf.
+  string compressed_data = 1;
+  // Timestamp when the last known "safe" seed was received. However, it could
+  // be a build timestamp if the received date is unknown or an empty
+  // (default-constructed) base::Time if there is no known "safe" seed. This is
+  // a server-provided timestamp.
+  google.protobuf.Timestamp date = 2;
+  // Timestamp of the fetch corresponding to the last known "safe" seed. This is
+  // a client timestamp.
+  google.protobuf.Timestamp fetch_time = 3;
+  // The active client locale that was successfully used in association with the
+  // last known "safe" seed.
+  string locale = 4;
+  // Milestone with which the last known "safe" seed was fetched.
+  int32 milestone = 5;
+  // String form of pair <Chrome version string, country code string> (eg.
+  // "106.0.5249.119,us") representing the country used for filtering permanent
+  // consistency studies until the next time Chrome is updated.
+  string permanent_consistency_country = 6;
+  // A country code string representing the country used for evaluating session
+  // consistency studies.
+  string session_consistency_country = 7;
+  // Digital signature of the last known "safe" seed's binary data. Empty if
+  // there is no known "safe" seed.
+  string signature = 8;
+}
+
+// Encapsulates information necessary for platform disaster recovery.
+message Store {
+  // Number of platform reboots since receiving a Chrome dbus call indicating
+  // successful seed fetch.
+  uint32 boot_attempts_since_last_seed_update = 1;
+  // Data associated with the last known "safe" seed.
+  SeedDetails last_good_seed = 2;
+  // chrome://flags overrides.
+  repeated FeatureOverride overrides = 3;
+}

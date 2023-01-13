@@ -1,0 +1,43 @@
+// Copyright 2022 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+{
+    include: [
+        "syslog/client.shard.cml",
+    ],
+    program: {
+        runner: "elf",
+        binary: "web_engine_exe",
+        args: [
+            "--context-provider",
+            "--enable-cfv2",
+        ],
+    },
+    capabilities: [
+        {
+            protocol: [
+                "fuchsia.web.ContextProvider",
+                "fuchsia.web.Debug",
+            ],
+        },
+    ],
+    use: [
+        {
+            protocol: [
+                "fuchsia.feedback.ComponentDataRegister",
+                "fuchsia.feedback.CrashReportingProductRegister",
+                "fuchsia.sys.Environment",
+                "fuchsia.sys.Loader",
+            ],
+        },
+    ],
+    expose: [
+        {
+            protocol: [
+                "fuchsia.web.ContextProvider",
+                "fuchsia.web.Debug",
+            ],
+            from: "self",
+        },
+    ],
+}

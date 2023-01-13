@@ -1,0 +1,29 @@
+table: |
+  include tables/en-ueb-g1.ctb
+  noback correct "\xd83d\xde02" "(face\swith\stears\sof\sjoy)"
+  noback correct "\xd83e\xdd23" "(rolling\son\sthe\sfloor\slaughing)"
+  noback correct "\xd83d\xde03" "(grinning\sface\swith\sbig\seyes)"
+flags: {testmode: forward}
+tests:
+  - - "\\xd83d\\xde02"
+    - '"<face with tears of joy">'
+  - - "a \\xd83d\\xde02"
+    - 'a "<face with tears of joy">'
+  - - "\\xd83d\\xde02 b"
+    - '"<face with tears of joy"> b'
+  - - "a \\xd83d\\xde02 b"
+    - 'a "<face with tears of joy"> b'
+  - - "before \\xd83d\\xde02"
+    - 'before "<face with tears of joy">'
+  - - "\\xd83d\\xde02 after"
+    - '"<face with tears of joy"> after'
+  - - "before \\xd83d\\xde02 after"
+    - 'before "<face with tears of joy"> after'
+  - - "\\xd83e\\xdd23"
+    - '"<rolling on the floor laughing">'
+  - - "a \\xd83e\\xdd23"
+    - 'a "<rolling on the floor laughing">'
+  - - "\\xd83e\\xdd23 b"
+    - '"<rolling on the floor laughing"> b'
+  - - "a \\xd83e\\xdd23 b"
+    - 'a "<rolling on the floor laughing"> b'

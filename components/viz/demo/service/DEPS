@@ -1,0 +1,6 @@
+include_rules = [
+  "+components/viz/common",
+  "+components/viz/service",
+  "+services/viz/privileged",
+  "+services/viz/public",
+]

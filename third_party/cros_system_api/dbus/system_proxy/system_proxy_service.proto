@@ -1,0 +1,134 @@
+// Copyright 2020 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package system_proxy;
+
+// TODO(acostinas, crbug.com/1076377) Deprecated, to be removed. Please use
+// SetAuthenticationDetailsRequest.
+message SetSystemTrafficCredentialsRequest {
+  // The username for authenticating system services to the remote web proxy.
+  optional string system_services_username = 1;
+
+  // The password for authenticating system services to the remote web proxy.
+  optional string system_services_password = 2;
+}
+
+// TODO(acostinas, crbug.com/1076377) Deprecated, to be removed. Please use
+// SetAuthenticationDetailsResponse.
+message SetSystemTrafficCredentialsResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+}
+
+// Both |username| and |password| use UTF-8 as character encoding and are not
+// percent-escaped (i.e. not URL encoded).
+message Credentials {
+  // The username for authenticating to the remote web proxy.
+  optional string username = 1;
+  // The password for authenticating to the remote web proxy.
+  optional string password = 2;
+  // Authentication schemes for which policy set credentials can be
+  // automatically applied. Valid values are 'basic', 'digest' and 'ntlm'.
+  repeated string policy_credentials_auth_schemes = 3;
+}
+
+// The protection space determines the domain over which credentials can
+// be automatically applied (defined in RFC7235 , section 2.2).
+message ProtectionSpace {
+  // The origin of the URL of the web proxy server issuing
+  // the challenge, formatted as scheme://url:port.
+  optional string origin = 1;
+  // The case-sensitive realm string of the challenge.
+  optional string realm = 2;
+  // The authentication scheme that can be basic, digest or NTLM.
+  optional string scheme = 3;
+}
+
+// A System-proxy worker instance forwards traffic originating from either
+// system services only, or user only via ARC and Crostini connections.
+enum TrafficOrigin {
+  // Should not be used.
+  UNSPECIFIED = 0;
+
+  SYSTEM = 1;
+
+  USER = 2;
+
+  ALL = 3;
+}
+
+// Message request to remove the user credentials from the System-proxy service.
+message ClearUserCredentialsRequest {}
+
+message ClearUserCredentialsResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+}
+
+message SetAuthenticationDetailsRequest {
+  // Indicates if the credentials should be used for system or user traffic.
+  optional TrafficOrigin traffic_type = 1;
+  // Indicates if Kerberos authentication is allowed on Chrome OS. If yes and
+  // the proxy server supports Kerberos, this is the first method tried by
+  // libcurl when authenticating, with fallback on less secure methods in case
+  // of failure.
+  optional bool kerberos_enabled = 2;
+  // The credentials to authenticate with the remote proxy server.
+  optional Credentials credentials = 3;
+  // The domain for which the credentials can be applied without asking again
+  // for authentication.
+  optional ProtectionSpace protection_space = 4;
+  // Used by System-proxy to request the ticket cache and configuration files
+  // with kerberosd.
+  optional string active_principal_name = 5;
+}
+
+message SetAuthenticationDetailsResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+}
+
+message ShutDownRequest {
+  // Indicates which worker process should be shut down. If |ALL| are selected,
+  // it will shut down the service.
+  optional TrafficOrigin traffic_type = 1;
+}
+
+message ShutDownResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+}
+
+// Connection details sent along with the WorkerActiveSignal which indicates
+// what type of traffic is being forwarded and the proxy url to connect to.
+// Chrome will use this information to forward the local proxy address either to
+// system services (through the proxy resolution service) or to ARC.
+message WorkerActiveSignalDetails {
+  // Indicates if the worker is authenticathing system or user traffic.
+  optional TrafficOrigin traffic_origin = 1;
+  // The local proxy address formatted as host:port. The proxy will be forwarded
+  // to system services as a PAC-style string and to ARC++ in scheme://host:port
+  // format.
+  optional string local_proxy_url = 2;
+}
+
+// Message sent with the AuthenticationRequiredSignal. Contains information to
+// search credentials in Chrome's http auth credential cache. After receiving
+// this signal, Chrome is expected to call |SetAuthenticationDetails| with the
+// missing credentials.
+message AuthenticationRequiredDetails {
+  optional ProtectionSpace proxy_protection_space = 1;
+  // If true, it means that the credentials previously acquired for proxy
+  // authentication are incorrect and the user will be prompted to introduce new
+  // proxy credentials. If new credentials are set in the authentication
+  // dialogue, they are forwarded to System-proxy via the
+  // |SetAuthenticationDetails| D-Bus call and will overwrite the existing
+  // cached credentials associated with |proxy_protection_space|, otherwise the
+  // existing incorrect credentials are not cleared from the cache.
+  optional bool bad_cached_credentials = 2;
+}

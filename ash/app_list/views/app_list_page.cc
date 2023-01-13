@@ -1,0 +1,71 @@
+// Copyright 2015 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#include "ash/app_list/views/app_list_page.h"
+
+#include "ash/app_list/views/contents_view.h"
+#include "ui/compositor/scoped_layer_animation_settings.h"
+#include "ui/views/focus/focus_manager.h"
+
+namespace ash {
+
+AppListPage::AppListPage() : contents_view_(nullptr) {}
+
+AppListPage::~AppListPage() {}
+
+void AppListPage::OnShown() {}
+
+void AppListPage::OnWillBeShown() {}
+
+void AppListPage::OnHidden() {}
+
+void AppListPage::OnWillBeHidden() {}
+
+void AppListPage::OnAnimationUpdated(double progress,
+                                     AppListState from_state,
+                                     AppListState to_state) {}
+
+gfx::Size AppListPage::GetPreferredSearchBoxSize() const {
+  return gfx::Size();
+}
+
+void AppListPage::UpdatePageBoundsForState(AppListState state,
+                                           const gfx::Rect& contents_bounds,
+                                           const gfx::Rect& search_box_bounds) {
+  SetBoundsRect(
+      GetPageBoundsForState(state, contents_bounds, search_box_bounds));
+}
+
+views::View* AppListPage::GetFirstFocusableView() {
+  return GetFocusManager()->GetNextFocusableView(
+      this, GetWidget(), false /* reverse */, false /* dont_loop */);
+}
+
+views::View* AppListPage::GetLastFocusableView() {
+  return GetFocusManager()->GetNextFocusableView(
+      this, GetWidget(), true /* reverse */, false /* dont_loop */);
+}
+
+void AppListPage::AnimateOpacity(AppListViewState current_view_state,
+                                 AppListViewState target_view_state,
+                                 const OpacityAnimator& animator) {
+  animator.Run(this, target_view_state != AppListViewState::kClosed);
+}
+
+void AppListPage::AnimateYPosition(AppListViewState target_view_state,
+                                   const TransformAnimator& animator,
+                                   float default_offset) {
+  animator.Run(default_offset, layer());
+}
+
+gfx::Rect AppListPage::GetDefaultContentsBounds() const {
+  DCHECK(contents_view_);
+  return contents_view_->GetContentsBounds();
+}
+
+const char* AppListPage::GetClassName() const {
+  return "AppListPage";
+}
+
+}  // namespace ash

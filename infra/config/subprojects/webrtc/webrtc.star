@@ -1,0 +1,89 @@
+# Copyright 2020 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+load("//lib/builders.star", "builder", "cpu", "defaults", "goma", "os", "xcode")
+
+luci.bucket(
+    name = "webrtc",
+    acls = [
+        acl.entry(
+            roles = acl.BUILDBUCKET_READER,
+            groups = "all",
+        ),
+        acl.entry(
+            roles = acl.BUILDBUCKET_TRIGGERER,
+            groups = "project-chromium-ci-schedulers",
+        ),
+        acl.entry(
+            roles = acl.BUILDBUCKET_OWNER,
+            groups = "project-chromium-admins",
+        ),
+        acl.entry(
+            roles = acl.SCHEDULER_OWNER,
+            groups = "project-webrtc-admins",
+        ),
+    ],
+)
+
+defaults.bucket.set("webrtc")
+defaults.builder_group.set("chromium.webrtc")
+defaults.builderless.set(None)
+defaults.build_numbers.set(True)
+defaults.cpu.set(cpu.X86_64)
+defaults.executable.set("recipe:chromium")
+defaults.execution_timeout.set(2 * time.hour)
+defaults.os.set(os.LINUX_DEFAULT)
+defaults.service_account.set("chromium-ci-builder@chops-service-accounts.iam.gserviceaccount.com")
+defaults.triggered_by.set(["chromium-gitiles-trigger"])
+
+defaults.properties.set({
+    "perf_dashboard_machine_group": "ChromiumWebRTC",
+})
+
+# Builders are defined in lexicographic order by name
+
+builder(
+    name = "WebRTC Chromium Android Builder",
+    goma_backend = goma.backend.RBE_PROD,
+)
+
+builder(
+    name = "WebRTC Chromium Android Tester",
+    triggered_by = ["WebRTC Chromium Android Builder"],
+)
+
+builder(
+    name = "WebRTC Chromium Linux Builder",
+    goma_backend = goma.backend.RBE_PROD,
+)
+
+builder(
+    name = "WebRTC Chromium Linux Tester",
+    triggered_by = ["WebRTC Chromium Linux Builder"],
+)
+
+builder(
+    name = "WebRTC Chromium Mac Builder",
+    goma_backend = goma.backend.RBE_PROD,
+    os = os.MAC_ANY,
+    xcode = xcode.x14main,
+)
+
+builder(
+    name = "WebRTC Chromium Mac Tester",
+    triggered_by = ["WebRTC Chromium Mac Builder"],
+    xcode = xcode.x14main,
+)
+
+builder(
+    name = "WebRTC Chromium Win Builder",
+    goma_backend = goma.backend.RBE_PROD,
+    goma_enable_ats = True,
+    os = os.WINDOWS_ANY,
+)
+
+builder(
+    name = "WebRTC Chromium Win10 Tester",
+    triggered_by = ["WebRTC Chromium Win Builder"],
+)

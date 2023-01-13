@@ -1,0 +1,451 @@
+Overview of Changes in 4.3.0
+============================
+
+* GtkVideo:
+ - Detect stream metadata when using gstreamer
+
+* GtkFileChooser:
+ - Fix a crash
+
+* GtkButton:
+ - Add back visual feedback for keynav activation
+
+* GtkFontChooser:
+ - Fix initial font selection
+
+* Text widgets:
+ - Replace squiggly error underlines by dotted lines
+ - Support translucent selections
+
+* GtkTextView:
+ - Various improvements to rendering performance
+
+* GtkScrolledWindow:
+ - Stop using scroll cursors
+
+* GtkMenuButton:
+ - Make focus-on-click work
+
+* GtkToggleButton:
+ - Make grouped buttons mutually exclusive
+
+* GtkPasswordEntry:
+ - Use MADV_DONTDUMP for secure memory
+
+* GtkListBox:
+ - Allow repeated selection extension for MULTIPLE
+
+* Themes:
+ - Reorganize and rename included themes. The theme is now
+   called Default, with dark, hc and hc-dark variants.
+   Visually, the themes are unchanged.
+ - The theme variants are also available as standalone
+   themes called Default-dark, etc.
+ - The theme named Adwaita is moving to libadwaita
+ - Fix resize border sizing
+ - Fix solid-csd window decorations
+
+* Input:
+ - Revert some Compose sequence changes (mainly around dead
+   acute and apostrophe)
+ - Consume all key events during preedit, to avoid unexpected
+   interactions
+ - Ignore more modifiers during preedit, to allow using 3rd and
+   5th level choosers
+ - Fix handling of cursor positions in non-ASCII preedit text
+ - Fix a problem with deferred focus setting
+
+* GdkClipboard:
+ - Ensure strings are nul-terminated
+
+* GSK:
+ - Improvements to the ngl renderer
+   - Fix offscreen rendering with transforms
+   - Fix downscaled textures
+   - Avoid huge intermediate textures
+   - Use fp16 for colors
+   - Optimize handling of underlines in text
+   - Fix corner cases of shadow rendering
+ - Reorganize shader resources
+ - Make shadow rendering match across renderers
+
+* Accessibility:
+ - Various fixes to get Orca to speak (still a work in progress)
+
+* Wayland:
+ - Improve font settings fallback
+ - Avoid unintentional rendering freezes with popovers
+ - Support the xdg_activation_v1 protocol
+
+* X11:
+ - Don't beep on untrusted displays
+ - Don't crash when popovers are outside the workarea
+
+* Windows:
+ - Fix using GL rendering with Mesa drivers
+
+* Tools:
+ - Add support for copy/paste in gtk4-node-editor
+ - Make syntax highlighting work in the gtk4-demo flatpak
+
+* Inspector:
+ - Enable the inspector by default, in all cases
+ - Show keyboard layouts
+ - Improve monitor information
+
+* Translation updates:
+ Catalan
+ Chinese (Taiwan)
+ Dutch
+ Nepali
+ Polish
+ Swedish
+ Ukrainian
+
+
+Overview of Changes in 4.2.0
+============================
+
+* GtkFileChooser: Make the location entry work again
+
+* GtlLabel: Fix tooltips on links
+
+* GtkTextView: Make scrolling work better with renderers
+
+* X11:
+ - Fix damage handling
+ - Trap errors from the COW
+
+* Windows:
+ - Use a visible scroll cursor
+ - Include more icons for icon-theme-less situations
+
+* Wayland: Fix key event matching with mismatched layouts.
+  This was causing keyboard accelerators to trigger unexpectedly
+
+* Inspector: Allow inspecting Unicode
+
+* Input:
+ - Improve dead key handling
+ - Regenerate compose sequence table
+
+* gsk:
+ - Fix a crash in the ngl renderer
+ - Fix a rounding error in subpixel glyph positioning
+ - ngl: Implement glyph cache eviction
+ - ngl: Improve the glyph cache effectiveness
+ - ngl: Fix uniform key mapping on Windows
+ - Make the ngl renderer the default
+
+* build:
+ - Fix build with cairo as subproject
+ - Disable g_assert in release builds
+ - Include gi-docgen as subproject
+ - Include generated docs
+
+* Translation updates:
+ Hebrew
+ Hungarian
+ Italian
+ Polish
+ Portuguese
+ Swedish
+ Ukrainian
+
+
+Overview of Changes in 4.1.2
+============================
+
+* Input:
+ - Ensure preedit-start and preedit-end
+   are emitted properly
+ - Support the Wayland text protocol better
+ - Delete the selection when preedit starts
+
+* Label: Fix a small issue with markup parsing
+  and mnemonics
+
+* Spinbutton: Interpret localized digits
+
+* Textview: Fix blinking block cursors
+
+* Tooltips: Don't pop up erroneous on popovers
+
+* Window: Add a way to disable F10 handling
+
+* Theme:
+ - Use a regular focus ring for sidebar rows
+
+* GSK
+ - ngl: Performance improvements
+ - vulkan: Add visible fallback rendering
+ - vukan: Handle simple transforms when clipping
+
+* Wayland:
+ - Don't force a full redraw for every frame
+ - Don't leak buffers when rendering with cairo
+
+* Demos:
+ - iconbrowser: Make search more useful
+
+* Documentation:
+ - Switch to building docs from gir files with gi-docgen
+
+* build:
+ - Allow GTK to be used as meson subproject
+
+* Translation updates
+ Catalan
+ Czech
+ Finnish
+ French
+ Indonesian
+ Kazakh
+ Latvian
+ Norwegian Bokmål
+ Polish
+ Serbian
+ Turkish
+
+
+Overview of Changes in 4.1.1
+============================
+
+* Popover:
+ - Support shadows on popover > contents
+
+* Input:
+ - Show preedit for compose sequences
+ - Support long compose sequences
+ - Support compose sequences producing multiple characters
+
+* Themes:
+ - Allow suggested and destructive actions in lists
+ - Disable shadows on maximized, fullscreen and tiled windows
+ - Fine-tune scrollbar transitions and size
+
+* CSS:
+ - Support drop-shadow filters
+ - Correct blur filter spread interpretation
+
+* Documentation:
+ - Improvements and updates for dialogs and native dialog
+
+* Printing:
+ - Support Avahi-discovered printers better
+
+* GSK:
+ - Add another OpenGL render. It is not the default yet.
+   To try it, use GSK_RENDERER=ngl
+
+* Build:
+ - Lots of static analysis fixes found by pvs
+ - Add a -Dprofile=devel option for devel styling and
+   use it for nightly flatpaks
+
+* X11:
+ - Fix DND of X11-specific types
+
+* Wayland:
+ - Fix lookup of font settings in flatpaks
+
+* Windows:
+ - Fix window resizing
+ - Avoid UAC for gtk-update-icon-cache
+
+* MacOs:
+ - Use correct module file extension
+ - Make OpenGL context opaque when possible
+ - Fix window resizing
+
+* Translation updates:
+ British English
+ Czech
+ Danish
+ Galician
+ Hungarian
+ Turkish
+
+
+Overview of Changes in 4.1.0
+============================
+
+* GtkCheckButton:
+ - Add back an activate signal
+
+* GtkSearchBar, GtkSearchEntry:
+ - Capture events in the bubble phase
+
+* GtkEmojiChooser:
+ - Adapt to small screen sizes
+
+* GtkVideo:
+ - Fix issues with GL support
+
+* Themes:
+ - Set sort arrows in CSS
+ - Set menu button arrows in CSS
+ - Make scrollbars larger
+ - Supprt circular menubuttons
+
+* CSS:
+ - Implement transform-origin
+ - Support overlines on text
+ - Support colors in cross-fade()
+ - More complete text-decoration-line support
+
+* Text layout:
+ - Use subpixel positioning with new enough cairo
+
+* Inspector:
+ - Fix slowness in navigation
+ - Redo the controllers and shortcuts pages
+
+* Accessibility:
+ - Create AT context objects lazily
+
+* Wayland:
+ - Fix decoration negotiation under kwin
+
+* GSK:
+ - Optimize gradient shaders
+ - Implement repeating gradients in shaders
+
+* Translation updates
+ - Czech
+ - Greek
+ - Hungarian
+ - Persian
+ - Punjabi
+ - Romanian
+ - Swedish
+ - Ukrainian
+
+
+Overview of Changes in 4.0.2
+============================
+
+* GtkAboutDialog:
+ - Set icon size for the logo
+ - Fix initial focus to be the same as in GTK 3
+
+* GtkImage:
+ - Update icons on scale change
+
+* Wayland: Fix crashes with touch and tablet events
+
+* Windows:
+ - Fix surface and geometry computation
+ - Remove layered window usage
+
+* MacOS: Support stylus devices
+
+* Themes:
+ - Adwaita: Remove edge highlights
+ - Adwaita: Update image assets
+ - Make Adwaita-dark available as standalone theme
+ - Make HighContrastInverse the dark variant of HighContrast
+
+* Docs:
+ - Complete GtkAspectFrame docs
+ - Clarify migration docs for widget signals
+
+* Inspector:
+ - Fix a critical with the recorder
+ - Fix a crash with treeviews
+ - Show overlay layout properties
+ - Add a legend for the layout overlay
+
+* Build:
+ - Fix build with gcc 11
+ - Support building without sassc
+
+* Translation updates:
+ Basque
+ Czech
+ Friulian
+ Polish
+ Romanian
+ Spanish
+ Swedish
+ Ukrainian
+
+
+Overview of Changes in 4.0.1
+============================
+
+* GtkPopover
+ - Center titles
+ - Fix menu item alignment with submenus
+
+* GtkVideo
+ - Fix up autoplay semantics
+ - Respect pixel aspect ratio
+ - Get GL textures from gstreamer
+
+* GtkCenterLayout
+ - Fix handling of expanding center child
+
+* GtkSettings
+ - Change gtk-cursor-aspect-ratio to double
+ - Fix the default value of gtk-print-backends
+
+* GtkGestureStylus
+ - Convert motion history to surface coordinates
+
+* GL renderer
+ - Various optimizations
+ - Avoid leaking shader objects
+
+* Adwaita
+ - Fine-tune flat buttons
+ - Improve contrast of dim-label
+ - Improve contrast of controls in headers
+
+* Docs
+ - Add various missing types
+ - Add DND examples
+ - Correct css docs for several widgets
+ - Improve GtkVideo docs
+ - Update migration docs for GtkClipboard
+ - Improve migration docs for event controllers
+ - Add migration docs for GtkBuilder
+
+* gtk4-builder-tool
+ - Remove GtkCheckButton::draw-indicator
+ - Fix a buffer overrun
+ - Remove GtkToolbar::toolbar-style
+
+* Demos
+ - Don't put the search bar in the scroll area
+ - Make the OpenGL demos work with OpenGL ES
+
+* X11
+ - Fix a possible crash
+
+* Build
+ - Fix vulkan reference in pc file
+ - Fix build with certain Vulkan versions
+
+* Windows:
+ - Fix build with Visual Studio 2013
+
+* OS X:
+ - Fix build on OS X
+ - Fix crash on Mojave
+ - Fix a window sizing issue
+ - Fix build on OS X 10.12
+ - Add a CI build
+
+* Translation updates:
+ Basque
+ Brazilian Portuguese
+ Catalan
+ Galician
+ German
+ Japanese
+ Lithuanian
+ Persian
+ Punjabi
+ Romanian
+ Ukrainian

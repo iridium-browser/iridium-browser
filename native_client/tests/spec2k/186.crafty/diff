@@ -1,0 +1,13 @@
+diff -Naurb src/utility.c src.patched/utility.c
+--- src/utility.c	2010-06-02 16:09:05.000000000 -0400
++++ src.patched/utility.c	2010-06-02 16:09:05.000000000 -0400
+@@ -37,7 +37,8 @@
+ #    endif
+ #    include <sys/conf.h>
+ #  else
+-#    include <sys/ioctl.h>
++/* @LOCALMOD */
++/* #    include <sys/ioctl.h> */
+ #  endif
+ #endif
+ #if defined(UNIX)

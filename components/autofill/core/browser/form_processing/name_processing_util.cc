@@ -1,0 +1,73 @@
+// Copyright 2021 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#include "components/autofill/core/browser/form_processing/name_processing_util.h"
+
+#include "base/check.h"
+#include "base/ranges/algorithm.h"
+#include "components/autofill/core/common/autofill_regexes.h"
+
+namespace autofill {
+
+namespace {
+
+// Common prefixes are only removed if a minimum number of fields are present
+// and a sufficiently long prefix is found. These values are chosen to be
+// effective against web frameworks which prepend prefixes such as
+// "ctl01$ctl00$MainContentRegion$" on all fields.
+constexpr int kCommonNamePrefixRemovalFieldThreshold = 3;
+// Minimum required length for prefixes to be removed.
+constexpr int kMinCommonNamePrefixLength = 16;
+
+// Returns true if `parseable_name` is a valid parseable_name. To be considered
+// valid, the string cannot be empty or consist of digits only.
+// This condition prevents the logic from simplifying strings like
+// "address-line-1", "address-line-2" to "1", "2".
+bool IsValidParseableName(base::StringPiece16 parseable_name) {
+  static constexpr char16_t kRegex[] = u"\\D";
+  return MatchesRegex<kRegex>(parseable_name);
+}
+
+// Tries to remove a prefix of length `len` from all `strings`. The removal
+// fails if one of the resulting strings is not `IsValidParseableName()`.
+// Assumes that all strings are at least `len` long.
+void MaybeRemovePrefix(base::span<base::StringPiece16> strings, size_t len) {
+  DCHECK(base::ranges::all_of(
+      strings, [&](base::StringPiece16 s) { return s.size() >= len; }));
+  if (!base::ranges::all_of(strings, [&](base::StringPiece16 s) {
+        return IsValidParseableName(s.substr(len));
+      })) {
+    return;
+  }
+  for (base::StringPiece16& s : strings)
+    s.remove_prefix(len);
+}
+
+}  // namespace
+
+size_t FindLongestCommonPrefixLength(
+    base::span<const base::StringPiece16> strings) {
+  if (strings.empty())
+    return 0;
+
+  size_t prefix_len = 0;
+  auto AgreeOnNextChar = [&](base::StringPiece16 other) {
+    return prefix_len < other.size() &&
+           strings[0][prefix_len] == other[prefix_len];
+  };
+  while (base::ranges::all_of(strings, AgreeOnNextChar))
+    ++prefix_len;
+  return prefix_len;
+}
+
+void ComputeParseableNames(base::span<base::StringPiece16> field_names) {
+  if (field_names.size() < kCommonNamePrefixRemovalFieldThreshold)
+    return;
+  size_t lcp = FindLongestCommonPrefixLength(field_names);
+  if (lcp >= kMinCommonNamePrefixLength)
+    MaybeRemovePrefix(field_names, lcp);
+  // TODO(crbug.com/1355264): Revise the `AutofillLabelAffixRemoval` feature.
+}
+
+}  // namespace autofill

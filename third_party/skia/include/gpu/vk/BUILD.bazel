@@ -1,0 +1,29 @@
+load("//bazel:macros.bzl", "exports_files_legacy")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+# Group is exported to //gn/gpu.gni:skia_shared_vk_sources.
+filegroup(
+    name = "shared_public_hdrs",
+    srcs = [
+        "VulkanBackendContext.h",
+        "VulkanExtensions.h",
+        "VulkanMemoryAllocator.h",
+        "VulkanTypes.h",
+    ],
+)
+
+# Group is exported to //gn/gpu.gni:skia_vk_sources.
+filegroup(
+    name = "public_hdrs",
+    srcs = [
+        "GrVkBackendContext.h",
+        "GrVkExtensions.h",
+        "GrVkMemoryAllocator.h",
+        "GrVkTypes.h",
+        ":shared_public_hdrs",
+    ],
+    visibility = ["//include/gpu:__pkg__"],
+)

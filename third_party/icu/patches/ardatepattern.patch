@@ -1,0 +1,13 @@
+diff --git a/source/data/locales/ar.txt b/source/data/locales/ar.txt
+index 642c7c4f..a12eac22 100644
+--- a/source/data/locales/ar.txt
++++ b/source/data/locales/ar.txt
+@@ -755,7 +755,7 @@ ar{
+                 "{1} في {0}",
+                 "{1} في {0}",
+                 "{1}, {0}",
+-                "{1}, {0}",
++                "{1} {0}",
+             }
+             DateTimeSkeletons{
+                 "ahmmsszzzz",

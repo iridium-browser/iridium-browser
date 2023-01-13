@@ -1,0 +1,22 @@
+// Copyright 2022 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package imageloader;
+option go_package = "chromiumos/system_api/imageloader_proto";
+
+// This is the message that is passed into load a DLC.
+message LoadDlcRequest {
+  // The unique ID of the DLC.
+  string id = 1;
+
+  // The path of the DLC image.
+  string path = 2;
+
+  // The package of the DLC. Empty will default to `package`.
+  string package = 3;
+}

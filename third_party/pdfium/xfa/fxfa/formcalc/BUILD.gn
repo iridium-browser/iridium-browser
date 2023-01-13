@@ -1,0 +1,44 @@
+# Copyright 2018 The PDFium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("../../../pdfium.gni")
+import("../../../testing/test.gni")
+
+assert(pdf_enable_xfa)
+
+source_set("formcalc") {
+  sources = [
+    "cxfa_fmexpression.cpp",
+    "cxfa_fmexpression.h",
+    "cxfa_fmlexer.cpp",
+    "cxfa_fmlexer.h",
+    "cxfa_fmparser.cpp",
+    "cxfa_fmparser.h",
+    "cxfa_fmtojavascriptdepth.cpp",
+    "cxfa_fmtojavascriptdepth.h",
+  ]
+  configs += [
+    "../../../:pdfium_strict_config",
+    "../../../:pdfium_noshorten_config",
+    "../../:xfa_warnings",
+  ]
+  deps = [
+    "../../../core/fxcrt",
+    "../../../fxjs:gc",
+  ]
+  visibility = [ "../../../*" ]
+}
+
+pdfium_unittest_source_set("unittests") {
+  sources = [
+    "cxfa_fmexpression_unittest.cpp",
+    "cxfa_fmlexer_unittest.cpp",
+    "cxfa_fmparser_unittest.cpp",
+  ]
+  deps = [
+    ":formcalc",
+    "../../../fxjs:gc",
+  ]
+  pdfium_root_dir = "../../../"
+}

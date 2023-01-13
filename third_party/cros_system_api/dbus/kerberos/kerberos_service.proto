@@ -1,0 +1,242 @@
+// Copyright 2019 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package kerberos;
+option go_package = "chromiumos/system_api/kerberos_proto";
+
+// D-Bus call error codes. These values are written to logs. New enum values can
+// be added, but existing enums must never be renumbered or deleted and reused.
+enum ErrorType {
+  // Everything is A-OK!
+  ERROR_NONE = 0;
+  // Unspecified error.
+  ERROR_UNKNOWN = 1;
+  // Unspecified D-Bus error.
+  ERROR_DBUS_FAILURE = 2;
+  // General network problem.
+  ERROR_NETWORK_PROBLEM = 3;
+  // KRB5 error that has no equivalent in this enum. See logs for original code.
+  ERROR_UNKNOWN_KRB5_ERROR = 4;
+  // Auth failed, bad principal while getting Kerberos credentials.
+  ERROR_BAD_PRINCIPAL = 5;
+  // Auth failed, bad password while getting Kerberos credentials.
+  ERROR_BAD_PASSWORD = 6;
+  // Auth failed, password expired while getting Kerberos credentials.
+  ERROR_PASSWORD_EXPIRED = 7;
+  // Auth failed to change password, password was rejected.
+  ERROR_PASSWORD_REJECTED = 8;
+  // Kerberos credentials cache not found.
+  ERROR_NO_CREDENTIALS_CACHE_FOUND = 9;
+  // Kerberos ticket expired while renewing credentials.
+  ERROR_KERBEROS_TICKET_EXPIRED = 10;
+  // KDC does not support the encryption enforced in krb5.conf.
+  ERROR_KDC_DOES_NOT_SUPPORT_ENCRYPTION_TYPE = 11;
+  // Failed to contact Key Distribution Center.
+  ERROR_CONTACTING_KDC_FAILED = 12;
+  // Parsing a request message failed.
+  ERROR_PARSE_REQUEST_FAILED = 13;
+  // Some local IO operation failed.
+  ERROR_LOCAL_IO = 14;
+  // Requested principal name not known to the account manager.
+  ERROR_UNKNOWN_PRINCIPAL_NAME = 15;
+  // Adding account failed since the principal name is already known.
+  ERROR_DUPLICATE_PRINCIPAL_NAME = 16;
+  // Some asynchronous operation is still in progress. Should call later.
+  ERROR_IN_PROGRESS = 17;
+  // Badly formatted principal name.
+  ERROR_PARSE_PRINCIPAL_FAILED = 18;
+  // Badly formatted Kerberos configuration.
+  ERROR_BAD_CONFIG = 19;
+  // Failed to run untrusted code in container.
+  ERROR_JAIL_FAILURE = 20;
+  // Kerberos feature disabled.
+  ERROR_KERBEROS_DISABLED = 21;
+  // Should be the last. Increase when adding new enum values.
+  ERROR_COUNT = 22;
+}
+
+// Error codes returned from ValidateConfig. These values are written to logs.
+// New enum values can be added, but existing enums must never be renumbered or
+// deleted and reused.
+enum ConfigErrorCode {
+  // Configuration is valid.
+  CONFIG_ERROR_NONE = 0;
+  // e.g. realm = { ... [somesection] ... }.
+  CONFIG_ERROR_SECTION_NESTED_IN_GROUP = 1;
+  // Expected "[section]".
+  CONFIG_ERROR_SECTION_SYNTAX = 2;
+  // Expected '{' on new line after "key = "
+  CONFIG_ERROR_EXPECTED_OPENING_CURLY_BRACE = 3;
+  // Too many closing curly braces '}'.
+  CONFIG_ERROR_EXTRA_CURLY_BRACE = 4;
+  // Expected "key = ...".
+  CONFIG_ERROR_RELATION_SYNTAX = 5;
+  // Non-allowlisted key used.
+  CONFIG_ERROR_KEY_NOT_SUPPORTED = 6;
+  // Non-allowlisted section used.
+  CONFIG_ERROR_SECTION_NOT_SUPPORTED = 7;
+  // The Kerberos library failed to parse the configuration.
+  CONFIG_ERROR_KRB5_FAILED_TO_PARSE = 8;
+  // Too many nested '{'.
+  CONFIG_ERROR_TOO_MANY_NESTED_GROUPS = 9;
+  // Should be the last. Increase when adding new enum values.
+  CONFIG_ERROR_COUNT = 10;
+}
+
+enum ClearMode {
+  // Remove all accounts.
+  CLEAR_ALL = 0;
+  // Remove all unmanaged accounts, leave managed accounts untouched.
+  CLEAR_ONLY_UNMANAGED_ACCOUNTS = 1;
+  // Remove previously remembered passwords for unmanaged accounts.
+  CLEAR_ONLY_UNMANAGED_REMEMBERED_PASSWORDS = 2;
+  // Remove all managed accounts, leave unmanaged accounts untouched.
+  CLEAR_ONLY_MANAGED_ACCOUNTS = 3;
+}
+
+// Message sent to Chrome by authpolicyd as a response to a successful
+// GetUserKerberosFiles call.
+message KerberosFiles {
+  // Kerberos credential cache.
+  optional bytes krb5cc = 1;
+  // Kerberos configuration data.
+  optional bytes krb5conf = 2;
+}
+
+message Account {
+  // Principal name (user@REALM.COM). Accounts are keyed by principal name.
+  optional string principal_name = 1;
+  // Kerberos configuration data. Not set if the configuration file does not
+  // exist or some error occurred trying to read it.
+  optional bytes krb5conf = 2;
+  // For how many seconds the TGT is still valid. A value of zero means that the
+  // ticket has expired. Not set if the ticket does not exist or some error
+  // occurred trying to read it.
+  optional int64 tgt_validity_seconds = 3;
+  // For how many seconds the TGT is still renewable. A value of zero means that
+  // the ticket cannot be renewed anymore. Not set if the ticket does not exist
+  // or some error occurred trying to read it.
+  optional int64 tgt_renewal_seconds = 4;
+  // Whether the account is managed by policy.
+  optional bool is_managed = 5;
+  // Whether there's a password stored on disk for this account.
+  optional bool password_was_remembered = 6;
+  // Whether the account uses the Chrome OS login password for authentication.
+  optional bool use_login_password = 7;
+
+  // TODO(https://crbug.com/952239): Set additional properties.
+}
+
+// Contains error information from config validation.
+message ConfigErrorInfo {
+  // Error code. Set to CONFIG_ERROR_NONE if there was no error.
+  optional ConfigErrorCode code = 1;
+  // Line index (0-based) where the error occurred.
+  optional int32 line_index = 2;
+}
+
+message AddAccountRequest {
+  // Principal name of the account to add (user@REALM.COM).
+  optional string principal_name = 1;
+  // Whether the account is managed by policy.
+  optional bool is_managed = 2;
+}
+
+message AddAccountResponse {
+  // Response status.
+  optional ErrorType error = 1;
+}
+
+message RemoveAccountRequest {
+  // Principal name of the account to remove (user@REALM.COM).
+  optional string principal_name = 1;
+}
+
+message RemoveAccountResponse {
+  // Response status.
+  optional ErrorType error = 1;
+  // List of remaining accounts.
+  repeated Account accounts = 2;
+}
+
+message ClearAccountsRequest {
+  // What kind of data to clear.
+  optional ClearMode mode = 1 [default = CLEAR_ALL];
+  // Do not touch the accounts of the principals listed here.
+  repeated string principal_names_to_ignore = 2;
+}
+
+message ClearAccountsResponse {
+  // Response status.
+  optional ErrorType error = 1;
+  // List of remaining accounts.
+  repeated Account accounts = 2;
+}
+
+message ListAccountsRequest {
+  // Reserved for future use.
+}
+
+message ListAccountsResponse {
+  // Response status.
+  optional ErrorType error = 1;
+  // List of accounts.
+  repeated Account accounts = 2;
+}
+
+message SetConfigRequest {
+  // Principal name of the account to be updated (user@REALM.COM).
+  optional string principal_name = 1;
+  // Kerberos configuration data to set.
+  optional string krb5conf = 2;
+}
+
+message SetConfigResponse {
+  // Response status.
+  optional ErrorType error = 1;
+}
+
+message ValidateConfigRequest {
+  // Kerberos configuration data to validate.
+  optional string krb5conf = 1;
+}
+
+message ValidateConfigResponse {
+  // Response status. Equals ERROR_BAD_CONFIG if validation failed.
+  optional ErrorType error = 1;
+  // More specific information descripting the kind of error.
+  optional ConfigErrorInfo error_info = 2;
+}
+
+message AcquireKerberosTgtRequest {
+  // Principal name of the account to acquire a ticket for (user@REALM.COM).
+  optional string principal_name = 1;
+  // Whether the daemon should remember the password (passed separately in a
+  // file descriptor).
+  optional bool remember_password = 2;
+  // Whether to use the Chrome OS login password for authentication. The
+  // password file descriptor (passed as D-Bus param) is ignored in this case.
+  optional bool use_login_password = 3;
+}
+
+message AcquireKerberosTgtResponse {
+  // Response status.
+  optional ErrorType error = 1;
+}
+
+message GetKerberosFilesRequest {
+  // Principal name of the account to get files from (user@REALM.COM).
+  optional string principal_name = 1;
+}
+
+message GetKerberosFilesResponse {
+  // Response status.
+  optional ErrorType error = 1;
+  // Retrieved Kerberos files.
+  optional KerberosFiles files = 2;
+}

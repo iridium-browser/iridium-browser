@@ -1,0 +1,22 @@
+{
+    "stretch_arm": {
+        "Sha1Sum": "407ba17bd8a686d1c82dadb593579325e4b9cd61",
+        "SysrootDir": "debian_stretch_arm-sysroot",
+        "Tarball": "debian_stretch_arm_sysroot.tar.xz"
+    },
+    "stretch_arm64": {
+        "Sha1Sum": "5523478d833a735643c0a36feed5d89a1f70846b",
+        "SysrootDir": "debian_stretch_arm64-sysroot",
+        "Tarball": "debian_stretch_arm64_sysroot.tar.xz"
+    },
+    "sid_arm": {
+        "Sha1Sum": "07ef353ec66ca510a9b24a927db823e44435c764",
+        "SysrootDir": "debian_sid_arm-sysroot",
+        "Tarball": "debian_sid_arm-sysroot-demo-libs.tar.xz"
+    },
+    "sid_arm64": {
+        "Sha1Sum": "2ee3fb715f031df95b079ce6d2c8f5e8ba2cc6e4",
+        "SysrootDir": "debian_sid_arm64-sysroot",
+        "Tarball": "debian_sid_arm64_sysroot.tar.xz"
+    }
+}

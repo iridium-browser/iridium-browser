@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+<ShortName>Google SSL</ShortName> 
+<Description>Search Google over SSL</Description>
+<InputEncoding>UTF-8</InputEncoding>
+<Url type="text/html" method="get" template="https://www.google.com/search?{google:RLZ}{google:acceptedSuggestion}{google:originalQueryForSuggestion}sourceid=chrome&amp;ie={inputEncoding}&amp;q={searchTerms}" />
+<Url type="application/x-suggestions+json" method="get" template="https://clients1.google.com/complete/search?client=chrome&amp;hl={language}&amp;q={searchTerms}" />
+<Image height="16" width="16" type="image/x-icon">https://www.google.com/favicon.ico</Image>
+</OpenSearchDescription>

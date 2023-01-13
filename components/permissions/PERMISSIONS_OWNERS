@@ -1,0 +1,11 @@
+# Prefer permissions-reviews@chromium.org to help distribute review load.
+# Assign to individual owners only if there is a reason to pick a specific person.
+
+# permissions-reviews@chromium.org
+
+andypaicu@chromium.org
+dominickn@chromium.org
+elklm@chromium.org
+engedy@chromium.org
+hkamila@chromium.org
+ravjit@chromium.org

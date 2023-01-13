@@ -1,0 +1,39 @@
+From f5159ca4c55f1071fccc97fbdaa7561be5315b2f Mon Sep 17 00:00:00 2001
+From: Ben Wagner <bungeman@chromium.org>
+Date: Fri, 7 Jan 2022 12:15:51 -0500
+Subject: [PATCH] Don't override CC, CFLAGS, and LDFLAGS.
+
+The bzip2 build is quite simple and does not use autotools for
+configuration. The simple Makefile provided overrides CC, CFLAGS, and
+LDFLAGS which means it cannot be cross compiled or fuzzed. Use the user
+supplied flags to allow build modification.
+---
+ Makefile | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index b0fef95..8d64b20 100644
+--- a/Makefile
++++ b/Makefile
+@@ -14,14 +14,10 @@
+ 
+ SHELL=/bin/sh
+ 
+-# To assist in cross-compiling
+-CC=gcc
+-AR=ar
+-RANLIB=ranlib
+-LDFLAGS=
+-
+-BIGFILES=-D_FILE_OFFSET_BITS=64
+-CFLAGS=-Wall -Winline -O2 -g $(BIGFILES)
++RANLIB ?= ranlib
++
++BIGFILES = -D_FILE_OFFSET_BITS=64
++CFLAGS := ${CFLAGS} $(BIGFILES)
+ 
+ # Where you want it installed when you do 'make install'
+ PREFIX=/usr/local
+-- 
+2.34.1.575.g55b058a8bb-goog
+

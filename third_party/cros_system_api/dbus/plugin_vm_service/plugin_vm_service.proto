@@ -1,0 +1,33 @@
+// Copyright 2018 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package plugin_vm_service;
+option go_package = "chromiumos/system_api/plugin_vm_service_proto";
+
+// Content of licensing data emitted by Chrome as a response to the
+// GetLicenseData call in org.chromium.PluginVmService.
+message GetLicenseDataResponse {
+  string license_key = 1; // The PluginVm license key for the OU.
+  string device_id = 2; // The current directory API ID.
+}
+
+// Show the specified PluginVm settings subpage.
+message ShowSettingsPageRequest {
+  string subpage_path = 1; // The subpage path.
+}
+
+// Permissions emitted by Chrome as a response to the GetPermissions call in
+// org.chromium.PluginVmService.
+message GetPermissionsResponse {
+  bool data_collection_enabled = 1;  // Data collection enablement status.
+}
+
+// User ID for the Plugin VM user.
+message GetAppLicenseUserIdResponse {
+  string user_id = 1; // The PluginVm user id for the OU.
+}

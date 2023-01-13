@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension href="EXT_texture_norm16/">
+  <name>EXT_texture_norm16</name>
+
+  <contact> <a href="https://www.khronos.org/webgl/public-mailing-list/">WebGL
+  working group</a> (public_webgl 'at' khronos.org) </contact>
+
+  <contributors>
+  <contributor>Rijubrata Bhaumik (rijubrata.bhaumik 'at' intel.com)</contributor>
+    <contributor>Members of the WebGL working group</contributor>
+  </contributors>
+
+  <number>44</number>
+
+  <depends>
+    <api version="2.0"/>
+  </depends>
+
+  <overview>
+
+    <mirrors href="https://www.khronos.org/registry/OpenGL/extensions/EXT/EXT_texture_norm16.txt"
+             name="EXT_texture_norm16">
+    </mirrors>
+
+    <features>
+      <feature>This extension provides a set of new 16-bit signed normalized
+      and unsigned normalized fixed point texture, renderbuffer and texture
+      buffer formats. The 16-bit normalized fixed point types
+      <code>R16_EXT</code>, <code>RG16_EXT</code> and <code>RGBA16_EXT</code>
+      become available as color-renderable formats. Renderbuffers can be
+      created in these formats.
+      </feature>
+
+      <feature> The <code>texImage</code> and <code>texSubImage</code>
+      entrypoints taking <code>ArrayBufferView</code> are extended to accept
+      <code>Uint16Array</code> with the pixel type <code>UNSIGNED_SHORT</code>
+      and <code>Int16Array</code> with the pixel type <code>SHORT</code>.
+      </feature>
+    </features>
+  </overview>
+
+  <idl xml:space="preserve">
+[Exposed=(Window,Worker), LegacyNoInterfaceObject]
+interface EXT_texture_norm16 {
+  const GLenum R16_EXT = 0x822A;
+  const GLenum RG16_EXT = 0x822C;
+  const GLenum RGB16_EXT = 0x8054;
+  const GLenum RGBA16_EXT = 0x805B;
+  const GLenum R16_SNORM_EXT = 0x8F98;
+  const GLenum RG16_SNORM_EXT = 0x8F99;
+  const GLenum RGB16_SNORM_EXT = 0x8F9A;
+  const GLenum RGBA16_SNORM_EXT = 0x8F9B;
+};
+  </idl>
+
+  <history>
+    <revision date="2019/03/27">
+      <change>Initial Draft.</change>
+    </revision>
+    <revision date="2019/09/25">
+      <change>Promoted to Draft.</change>
+    </revision>
+    <revision date="2020/08/10">
+      <change>Specialized to WebGL 2.0 after WG agreement, since this
+      extension refers to sized internal formats unavailable in WebGL
+      1.0.</change>
+    </revision>
+    <revision date="2020/08/13">
+      <change>Promoted to Community Approved.</change>
+    </revision>
+    <revision date="2020/12/03">
+      <change>Constrain the scope to only support ArrayBufferView.</change>
+    </revision>
+    <revision date="2022/06/08">
+      <change>Drop ambiguous wording regarding texImage with UNSIGNED_SHORT.</change>
+    </revision>
+  </history>
+</extension>

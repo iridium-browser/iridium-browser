@@ -1,0 +1,21 @@
+<style>
+  :host {
+    color: var(--cr-primary-text-color);
+  }
+
+  cr-view-manager {
+    display: flex;
+    font-size: 100%;
+    margin: 0;
+  }
+</style>
+
+<cr-view-manager id="viewManager">
+  <!-- TODO(crbug.com/1347507): On load, transition to "splash" and trigger the
+       animation -->
+  <div id="splash" slot="view">
+    <!-- TODO(crbug.com/1347507): Use <cr_lottie> -->
+    🏐 Faster. Safer. Yours.
+  </div>
+  <sign-in-promo id="signInPromo" slot="view"></sign-in-promo>
+</cr-view-manager>

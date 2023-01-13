@@ -1,0 +1,16 @@
+include_rules = [
+  # See README.md.
+  "+ash",
+
+  "+components/guest_os",
+  "+dbus",
+]
+
+specific_include_rules = {
+  ".*test\.cc": [
+    "+chrome/browser/ui/views/chrome_layout_provider.h",
+  ],
+  "external_protocol_dialog\.cc": [
+    "+chrome/browser/ui/views/external_protocol_dialog.h",
+  ],
+}

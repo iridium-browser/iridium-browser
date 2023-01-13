@@ -1,0 +1,10 @@
+Name: Vulkan Deps
+Short Name: Vulkan Deps
+URL: https://chromium.googlesource.com/vulkan-deps/
+Version: N/A
+Security Critical: yes
+License: BSD
+License File: LICENSE
+
+Description:
+Meta-repo for Vulkan dependencies. See README.md.

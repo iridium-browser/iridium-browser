@@ -1,0 +1,261 @@
+// Copyright 2020 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+// This file defines messages used for interacting with the document scanner
+// utility, lorgnette.
+package lorgnette;
+option go_package = "chromiumos/system_api/lorgnette_proto";
+
+// Describes possible types of sources that can be supported by a scanner.
+enum SourceType {
+  SOURCE_UNSPECIFIED = 0;
+  SOURCE_PLATEN = 1;
+  SOURCE_ADF_SIMPLEX = 2;
+  SOURCE_ADF_DUPLEX = 3;
+
+  // SourceType used for the implicit default source on devices that do not
+  // expose a source option.
+  SOURCE_DEFAULT = 4;
+}
+
+// Dimensions of the scannable area, in mm.
+message ScannableArea {
+  double width = 1;
+  double height = 2;
+}
+
+// A source that can be scanned from for a scanner.
+message DocumentSource {
+  // The type of this source.
+  SourceType type = 1;
+
+  // The name for this source used by the scanner backend.
+  string name = 2;
+
+  // The dimensions of the scannable area for this source.
+  ScannableArea area = 3;
+
+  // Discrete scanning resolutions.
+  repeated uint32 resolutions = 4;
+
+  // Color modes to use for a document.
+  repeated ColorMode color_modes = 5;
+}
+
+// The color modes that may be supported for a particular scanner.
+enum ColorMode {
+  MODE_UNSPECIFIED = 0;
+  MODE_LINEART = 1;
+  MODE_GRAYSCALE = 2;
+  MODE_COLOR = 3;
+}
+
+// An object representing one scanner.
+message ScannerInfo {
+  // The name of the scanner, as reported by SANE.
+  string name = 1;
+
+  // The manufacturer of the scanner.
+  string manufacturer = 2;
+
+  // The particular model of scanner.
+  string model = 3;
+
+  // The type of the scanner, e.g. "video camera", "flatbed scanner".
+  string type = 4;
+}
+
+// Information returned from a ListScanners dbus request.
+message ListScannersResponse {
+  repeated ScannerInfo scanners = 1;
+}
+
+// Information returned from a GetScannerCapabilities dbus request.
+message ScannerCapabilities {
+  // Discrete scanning resolutions.
+  repeated uint32 resolutions = 1;
+
+  // Sources to scan a document from.
+  repeated DocumentSource sources = 2;
+
+  // Color modes to use for a document.
+  repeated ColorMode color_modes = 3;
+}
+
+// Specifies a region to be scanned.
+message ScanRegion {
+  // The coordinates of the top-left corner of the scan region, in mm.
+  double top_left_x = 1;
+  double top_left_y = 2;
+
+  // The coordinates of the bottom-right corner of the scan region, in mm.
+  double bottom_right_x = 3;
+  double bottom_right_y = 4;
+}
+
+// The image formats that scanned images can be returned as.
+enum ImageFormat {
+  // PNG. To preserve backwards-compatibility, unset ImageFormat fields will
+  // return PNGs.
+  IMAGE_FORMAT_PNG = 0;
+  // JPEG.
+  IMAGE_FORMAT_JPEG = 1;
+}
+
+// Settings for how lorgnette should perform a scan.
+message ScanSettings {
+  // The resolution, in DPI, to use for the scan.
+  uint32 resolution = 1;
+
+  reserved "source";
+  reserved 2;
+
+  // The color mode to use for the scan.
+  ColorMode color_mode = 3;
+
+  // The name of the source to scan the document from.
+  string source_name = 4;
+  //
+  // The region to be scanned.
+  ScanRegion scan_region = 5;
+
+  // The image format scanned images will be returned as.
+  ImageFormat image_format = 6;
+}
+
+// The status of a scan job.
+enum ScanState {
+  // Unknown state.
+  SCAN_STATE_UNSPECIFIED = 0;
+
+  // The scan job is currently running.
+  SCAN_STATE_IN_PROGRESS = 1;
+
+  // The scan job has completed successfully.
+  SCAN_STATE_COMPLETED = 2;
+
+  // The scan job failed.
+  SCAN_STATE_FAILED = 3;
+
+  // Scanning of the current page completed successfully.
+  SCAN_STATE_PAGE_COMPLETED = 4;
+
+  // The scan job was cancelled via a call to CancelScan.
+  SCAN_STATE_CANCELLED = 5;
+}
+
+// The failure mode of a scan job.
+enum ScanFailureMode {
+  // No failure occurred.
+  SCAN_FAILURE_MODE_NO_FAILURE = 0;
+
+  // An unknown or generic failure occurred.
+  SCAN_FAILURE_MODE_UNKNOWN = 1;
+
+  // The device is busy.
+  SCAN_FAILURE_MODE_DEVICE_BUSY = 2;
+
+  // The document feeder is jammed.
+  SCAN_FAILURE_MODE_ADF_JAMMED = 3;
+
+  // The document feeder is empty.
+  SCAN_FAILURE_MODE_ADF_EMPTY = 4;
+
+  // The flatbed cover is open.
+  SCAN_FAILURE_MODE_FLATBED_OPEN = 5;
+
+  // An error occurred while communicating with the device.
+  SCAN_FAILURE_MODE_IO_ERROR = 6;
+}
+
+// Information passed to a StartScan D-Bus request.
+// Used by lorgnette to initialize a new scan job.
+message StartScanRequest {
+  // The name of the device to scan from.
+  string device_name = 1;
+
+  // The settings to use for this scan.
+  ScanSettings settings = 2;
+}
+
+// Information returned from a StartScan D-Bus request.
+message StartScanResponse {
+  // The status of the scan.
+  ScanState state = 1;
+
+  // The failure reason if state is SCAN_STATE_FAILED.
+  string failure_reason = 2;
+
+  // A UUID identifying the scan job.
+  string scan_uuid = 3;
+
+  // The failure mode of the scan job.
+  ScanFailureMode scan_failure_mode = 4;
+}
+
+// Information passed to a GetNextImage D-Bus request.
+// Used by lorgnette to read image data for a scan job.
+message GetNextImageRequest {
+  // A UUID identifying the scan job.
+  string scan_uuid = 1;
+}
+
+// Information returned from a GetNextImage D-Bus request;
+message GetNextImageResponse {
+  // True if initiating this image fetch was successful.
+  bool success = 1;
+
+  // The failure reason if success is false.
+  string failure_reason = 2;
+
+  // The failure mode of the scan job.
+  ScanFailureMode scan_failure_mode = 3;
+}
+
+// Information passed to a CancelScan D-Bus request.
+// Used by lorgnette to find the scan job to cancel.
+message CancelScanRequest {
+  // A UUID identifying the scan job.
+  string scan_uuid = 1;
+}
+
+// Information returned from a CancelScan D-Bus request;
+message CancelScanResponse {
+  // True if requesting scan cancellation was successful.
+  bool success = 1;
+
+  // The failure reason if success is false.
+  string failure_reason = 2;
+}
+
+// Information sent with ScanStatus D-Bus signal.
+message ScanStatusChangedSignal {
+  // A UUID identifying the scan job.
+  string scan_uuid = 1;
+
+  // The status of the scan.
+  ScanState state = 2;
+
+  // The failure reason if state is SCAN_STATE_FAILED.
+  string failure_reason = 3;
+
+  // Scan progress from 0 to 100%.
+  uint32 progress = 4;
+
+  // The page field will be set to the page currently being scanned for
+  // SCAN_STATE_IN_PROGRESS, or the page that has just been completed for
+  // SCAN_STATE_PAGE_COMPLETED.
+  // Pages are 1-indexed.
+  uint32 page = 5;
+
+  // If state is SCAN_STATE_PAGE_COMPLETED and more_pages is true, the client
+  // should send another GetNextImage request in order to fetch the next page.
+  bool more_pages = 6;
+
+  // The failure mode of the scan job.
+  ScanFailureMode scan_failure_mode = 7;
+}

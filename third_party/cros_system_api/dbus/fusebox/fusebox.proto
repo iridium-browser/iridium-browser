@@ -1,0 +1,80 @@
+// Copyright 2021 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package fusebox;
+
+message DirEntryProto {
+  // Deprecated: use (mode_bits & S_IFDIR) instead.
+  optional bool is_directory = 1;
+  // Entry name.
+  optional string name = 2;
+  // POSIX style (S_IFREG | rwxr-x---) bits.
+  optional uint32 mode_bits = 3;
+  // File size in bytes.
+  optional int64 size = 4;
+  // Modification time (microseconds since the Windows epoch, like base::Time).
+  optional int64 mtime = 5;
+  // Access time (microseconds since the Windows epoch, like base::Time).
+  optional int64 atime = 6;
+  // Creation time (microseconds since the Windows epoch, like base::Time).
+  optional int64 ctime = 7;
+}
+
+message ListStoragesRequestProto {}
+
+message ListStoragesResponseProto {
+  optional int32 posix_error_code = 1;
+  repeated string storages = 2;
+}
+
+// MkDir is exclusive (it fails if the name already exists) and non-recursive
+// (it's plain "mkdir", not "mkdir -p").
+//
+// There are no mode_bits in the request proto, as there's no mode_bits arg to
+// the storage::FileSystemOperationRunner::CreateDirectory method.
+
+message MkDirRequestProto {
+  optional string file_system_url = 3;
+}
+
+message MkDirResponseProto {
+  optional int32 posix_error_code = 1;
+  optional DirEntryProto stat = 3;
+}
+
+// ReadDir2 lists the directory's children. The results will be sent back in
+// the responses of one or more request-response RPC pairs. The first request
+// and last response have a zero cookie value. The remaining RPCs will have the
+// same server-chosen, non-zero cookie value.
+//
+// The request's cancel_error_code is typically zero but if not, it is echoed
+// in the response (which becomes the final response) and indicates that the
+// D-Bus client is cancelling the overall "read a directory" operation.
+
+message ReadDir2RequestProto {
+  optional int32 cancel_error_code = 1;
+  optional uint64 cookie = 2;
+  optional string file_system_url = 3;
+}
+
+message ReadDir2ResponseProto {
+  optional int32 posix_error_code = 1;
+  optional uint64 cookie = 2;
+  repeated DirEntryProto entries = 3;
+}
+
+// RmDir truly deletes (it does not "move to trash", an undo-able operation)
+// and it is non-recursive (it's plain "rmdir", not "rmdir -p" or "rm -r").
+
+message RmDirRequestProto {
+  optional string file_system_url = 3;
+}
+
+message RmDirResponseProto {
+  optional int32 posix_error_code = 1;
+}

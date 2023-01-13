@@ -1,0 +1,21 @@
+load("//bazel:macros.bzl", "exports_files_legacy")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+# Not yet referenced by Bazel build.
+# In separate group for exporting to xps.gni:skia_xps_public.
+filegroup(
+    name = "xps_hdrs",
+    srcs = ["SkXPSDocument.h"],
+)
+
+filegroup(
+    name = "public_hdrs",
+    srcs = select({
+        "//src/pdf:enable_pdf_backend_true": ["SkPDFDocument.h"],
+        "//conditions:default": [],
+    }),  # TODO(kjlubick) XPSDocument
+    visibility = ["//include:__pkg__"],
+)

@@ -1,0 +1,57 @@
+#!/usr/bin/expect
+#
+# Copyright (c) 2011 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+#
+
+set prompt "CrOS>"
+set device "/dev/ttyUSB1"
+set timeout -1
+
+proc do_line { text } {
+  global prompt
+  set chars [split $text ""]
+
+  if { [lindex $chars 0] == "#" } { return }
+
+  for {set index 0} {$index < [llength $chars]} {incr index 1} {
+    set char [lindex $chars $index]
+    send -- $char
+    expect {
+      -ex $char {}
+      timeout { abort }
+    }
+  }
+  send "\r"
+    expect {
+      "$prompt" {}
+      timeout { abort }
+    }
+}
+
+send_user "SPAWNING /dev/ttyUSB CONSOLE SESSION....\n"
+set port [open $device "r+"]
+spawn -open $port
+fconfigure $port -mode 115200,n,8,1
+send "\r"
+
+expect {
+   "Hit any key to stop autoboot:" {
+     send "\r"
+     expect "$prompt" {}
+   }
+   "$prompt" {}
+}
+set text_file [lindex $argv 0]
+set data_source [open $text_file "r"]
+
+set timeout 1
+while {[gets $data_source line] != -1} {
+  do_line $line
+}
+
+interact {
+  \001 exit
+}
+send_user "\r"

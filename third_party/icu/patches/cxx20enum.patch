@@ -1,0 +1,464 @@
+diff --git a/source/common/characterproperties.cpp b/source/common/characterproperties.cpp
+index a84996b4..a2e051a4 100644
+--- a/source/common/characterproperties.cpp
++++ b/source/common/characterproperties.cpp
+@@ -36,7 +36,7 @@ namespace {
+ 
+ UBool U_CALLCONV characterproperties_cleanup();
+ 
+-constexpr int32_t NUM_INCLUSIONS = UPROPS_SRC_COUNT + UCHAR_INT_LIMIT - UCHAR_INT_START;
++constexpr int32_t NUM_INCLUSIONS = UPROPS_SRC_COUNT + (UCHAR_INT_LIMIT - UCHAR_INT_START);
+ 
+ struct Inclusion {
+     UnicodeSet  *fSet = nullptr;
+@@ -210,7 +210,7 @@ const UnicodeSet *getInclusionsForSource(UPropertySource src, UErrorCode &errorC
+ void U_CALLCONV initIntPropInclusion(UProperty prop, UErrorCode &errorCode) {
+     // This function is invoked only via umtx_initOnce().
+     U_ASSERT(UCHAR_INT_START <= prop && prop < UCHAR_INT_LIMIT);
+-    int32_t inclIndex = UPROPS_SRC_COUNT + prop - UCHAR_INT_START;
++    int32_t inclIndex = UPROPS_SRC_COUNT + (prop - UCHAR_INT_START);
+     U_ASSERT(gInclusions[inclIndex].fSet == nullptr);
+     UPropertySource src = uprops_getSource(prop);
+     const UnicodeSet *incl = getInclusionsForSource(src, errorCode);
+@@ -255,7 +255,7 @@ const UnicodeSet *CharacterProperties::getInclusionsForProperty(
+         UProperty prop, UErrorCode &errorCode) {
+     if (U_FAILURE(errorCode)) { return nullptr; }
+     if (UCHAR_INT_START <= prop && prop < UCHAR_INT_LIMIT) {
+-        int32_t inclIndex = UPROPS_SRC_COUNT + prop - UCHAR_INT_START;
++        int32_t inclIndex = UPROPS_SRC_COUNT + (prop - UCHAR_INT_START);
+         Inclusion &i = gInclusions[inclIndex];
+         umtx_initOnce(i.fInitOnce, &initIntPropInclusion, prop, errorCode);
+         return i.fSet;
+diff --git a/source/common/ruleiter.h b/source/common/ruleiter.h
+index 09af1297..41731407 100644
+--- a/source/common/ruleiter.h
++++ b/source/common/ruleiter.h
+@@ -66,28 +66,28 @@ public:
+     /**
+      * Value returned when there are no more characters to iterate.
+      */
+-    enum { DONE = -1 };
++    static constexpr int32_t DONE = -1;
+ 
+     /**
+      * Bitmask option to enable parsing of variable names.  If (options &
+      * PARSE_VARIABLES) != 0, then an embedded variable will be expanded to
+      * its value.  Variables are parsed using the SymbolTable API.
+      */
+-    enum { PARSE_VARIABLES = 1 };
++    static constexpr int32_t PARSE_VARIABLES = 1;
+ 
+     /**
+      * Bitmask option to enable parsing of escape sequences.  If (options &
+      * PARSE_ESCAPES) != 0, then an embedded escape sequence will be expanded
+      * to its value.  Escapes are parsed using Utility.unescapeAt().
+      */
+-    enum { PARSE_ESCAPES   = 2 };
++    static constexpr int32_t PARSE_ESCAPES   = 2;
+ 
+     /**
+      * Bitmask option to enable skipping of whitespace.  If (options &
+      * SKIP_WHITESPACE) != 0, then Pattern_White_Space characters will be silently
+      * skipped, as if they were not present in the input.
+      */
+-    enum { SKIP_WHITESPACE = 4 };
++    static constexpr int32_t SKIP_WHITESPACE = 4;
+ 
+     /**
+      * Constructs an iterator over the given text, starting at the given
+diff --git a/source/common/ucptrie_impl.h b/source/common/ucptrie_impl.h
+index 048353c8..a7a80a8f 100644
+--- a/source/common/ucptrie_impl.h
++++ b/source/common/ucptrie_impl.h
+@@ -54,80 +54,76 @@ struct UCPTrieHeader {
+     uint16_t shiftedHighStart;
+ };
+ 
++// Constants for use with UCPTrieHeader.options.
++constexpr uint16_t UCPTRIE_OPTIONS_DATA_LENGTH_MASK = 0xf000;
++constexpr uint16_t UCPTRIE_OPTIONS_DATA_NULL_OFFSET_MASK = 0xf00;
++constexpr uint16_t UCPTRIE_OPTIONS_RESERVED_MASK = 0x38;
++constexpr uint16_t UCPTRIE_OPTIONS_VALUE_BITS_MASK = 7;
++
+ /**
+- * Constants for use with UCPTrieHeader.options.
+- * @internal
++ * Value for index3NullOffset which indicates that there is no index-3 null block.
++ * Bit 15 is unused for this value because this bit is used if the index-3 contains
++ * 18-bit indexes.
+  */
+-enum {
+-    UCPTRIE_OPTIONS_DATA_LENGTH_MASK = 0xf000,
+-    UCPTRIE_OPTIONS_DATA_NULL_OFFSET_MASK = 0xf00,
+-    UCPTRIE_OPTIONS_RESERVED_MASK = 0x38,
+-    UCPTRIE_OPTIONS_VALUE_BITS_MASK = 7,
+-    /**
+-     * Value for index3NullOffset which indicates that there is no index-3 null block.
+-     * Bit 15 is unused for this value because this bit is used if the index-3 contains
+-     * 18-bit indexes.
+-     */
+-    UCPTRIE_NO_INDEX3_NULL_OFFSET = 0x7fff,
+-    UCPTRIE_NO_DATA_NULL_OFFSET = 0xfffff
+-};
++constexpr int32_t UCPTRIE_NO_INDEX3_NULL_OFFSET = 0x7fff;
++constexpr int32_t UCPTRIE_NO_DATA_NULL_OFFSET = 0xfffff;
+ 
+ // Internal constants.
+-enum {
+-    /** The length of the BMP index table. 1024=0x400 */
+-    UCPTRIE_BMP_INDEX_LENGTH = 0x10000 >> UCPTRIE_FAST_SHIFT,
+ 
+-    UCPTRIE_SMALL_LIMIT = 0x1000,
+-    UCPTRIE_SMALL_INDEX_LENGTH = UCPTRIE_SMALL_LIMIT >> UCPTRIE_FAST_SHIFT,
++/** The length of the BMP index table. 1024=0x400 */
++constexpr int32_t UCPTRIE_BMP_INDEX_LENGTH = 0x10000 >> UCPTRIE_FAST_SHIFT;
+ 
+-    /** Shift size for getting the index-3 table offset. */
+-    UCPTRIE_SHIFT_3 = 4,
++constexpr int32_t UCPTRIE_SMALL_LIMIT = 0x1000;
++constexpr int32_t UCPTRIE_SMALL_INDEX_LENGTH = UCPTRIE_SMALL_LIMIT >> UCPTRIE_FAST_SHIFT;
+ 
+-    /** Shift size for getting the index-2 table offset. */
+-    UCPTRIE_SHIFT_2 = 5 + UCPTRIE_SHIFT_3,
++/** Shift size for getting the index-3 table offset. */
++constexpr int32_t UCPTRIE_SHIFT_3 = 4;
+ 
+-    /** Shift size for getting the index-1 table offset. */
+-    UCPTRIE_SHIFT_1 = 5 + UCPTRIE_SHIFT_2,
++/** Shift size for getting the index-2 table offset. */
++constexpr int32_t UCPTRIE_SHIFT_2 = 5 + UCPTRIE_SHIFT_3;
+ 
+-    /**
+-     * Difference between two shift sizes,
+-     * for getting an index-2 offset from an index-3 offset. 5=9-4
+-     */
+-    UCPTRIE_SHIFT_2_3 = UCPTRIE_SHIFT_2 - UCPTRIE_SHIFT_3,
++/** Shift size for getting the index-1 table offset. */
++constexpr int32_t UCPTRIE_SHIFT_1 = 5 + UCPTRIE_SHIFT_2;
+ 
+-    /**
+-     * Difference between two shift sizes,
+-     * for getting an index-1 offset from an index-2 offset. 5=14-9
+-     */
+-    UCPTRIE_SHIFT_1_2 = UCPTRIE_SHIFT_1 - UCPTRIE_SHIFT_2,
++/**
++ * Difference between two shift sizes,
++ * for getting an index-2 offset from an index-3 offset. 5=9-4
++ */
++constexpr int32_t UCPTRIE_SHIFT_2_3 = UCPTRIE_SHIFT_2 - UCPTRIE_SHIFT_3;
+ 
+-    /**
+-     * Number of index-1 entries for the BMP. (4)
+-     * This part of the index-1 table is omitted from the serialized form.
+-     */
+-    UCPTRIE_OMITTED_BMP_INDEX_1_LENGTH = 0x10000 >> UCPTRIE_SHIFT_1,
++/**
++ * Difference between two shift sizes,
++ * for getting an index-1 offset from an index-2 offset. 5=14-9
++ */
++constexpr int32_t UCPTRIE_SHIFT_1_2 = UCPTRIE_SHIFT_1 - UCPTRIE_SHIFT_2;
+ 
+-    /** Number of entries in an index-2 block. 32=0x20 */
+-    UCPTRIE_INDEX_2_BLOCK_LENGTH = 1 << UCPTRIE_SHIFT_1_2,
++/**
++ * Number of index-1 entries for the BMP. (4)
++ * This part of the index-1 table is omitted from the serialized form.
++ */
++constexpr int32_t UCPTRIE_OMITTED_BMP_INDEX_1_LENGTH = 0x10000 >> UCPTRIE_SHIFT_1;
+ 
+-    /** Mask for getting the lower bits for the in-index-2-block offset. */
+-    UCPTRIE_INDEX_2_MASK = UCPTRIE_INDEX_2_BLOCK_LENGTH - 1,
++/** Number of entries in an index-2 block. 32=0x20 */
++constexpr int32_t UCPTRIE_INDEX_2_BLOCK_LENGTH = 1 << UCPTRIE_SHIFT_1_2;
+ 
+-    /** Number of code points per index-2 table entry. 512=0x200 */
+-    UCPTRIE_CP_PER_INDEX_2_ENTRY = 1 << UCPTRIE_SHIFT_2,
++/** Mask for getting the lower bits for the in-index-2-block offset. */
++constexpr int32_t UCPTRIE_INDEX_2_MASK = UCPTRIE_INDEX_2_BLOCK_LENGTH - 1;
+ 
+-    /** Number of entries in an index-3 block. 32=0x20 */
+-    UCPTRIE_INDEX_3_BLOCK_LENGTH = 1 << UCPTRIE_SHIFT_2_3,
++/** Number of code points per index-2 table entry. 512=0x200 */
++constexpr int32_t UCPTRIE_CP_PER_INDEX_2_ENTRY = 1 << UCPTRIE_SHIFT_2;
+ 
+-    /** Mask for getting the lower bits for the in-index-3-block offset. */
+-    UCPTRIE_INDEX_3_MASK = UCPTRIE_INDEX_3_BLOCK_LENGTH - 1,
++/** Number of entries in an index-3 block. 32=0x20 */
++constexpr int32_t UCPTRIE_INDEX_3_BLOCK_LENGTH = 1 << UCPTRIE_SHIFT_2_3;
+ 
+-    /** Number of entries in a small data block. 16=0x10 */
+-    UCPTRIE_SMALL_DATA_BLOCK_LENGTH = 1 << UCPTRIE_SHIFT_3,
++/** Mask for getting the lower bits for the in-index-3-block offset. */
++constexpr int32_t UCPTRIE_INDEX_3_MASK = UCPTRIE_INDEX_3_BLOCK_LENGTH - 1;
++
++/** Number of entries in a small data block. 16=0x10 */
++constexpr int32_t UCPTRIE_SMALL_DATA_BLOCK_LENGTH = 1 << UCPTRIE_SHIFT_3;
++
++/** Mask for getting the lower bits for the in-small-data-block offset. */
++constexpr int32_t UCPTRIE_SMALL_DATA_MASK = UCPTRIE_SMALL_DATA_BLOCK_LENGTH - 1;
+ 
+-    /** Mask for getting the lower bits for the in-small-data-block offset. */
+-    UCPTRIE_SMALL_DATA_MASK = UCPTRIE_SMALL_DATA_BLOCK_LENGTH - 1
+-};
+ 
+ typedef UChar32
+ UCPTrieGetRange(const void *trie, UChar32 start,
+diff --git a/source/i18n/coll.cpp b/source/i18n/coll.cpp
+index fe73118d..7bdd80f3 100644
+--- a/source/i18n/coll.cpp
++++ b/source/i18n/coll.cpp
+@@ -372,7 +372,7 @@ void setAttributesFromKeywords(const Locale &loc, Collator &coll, UErrorCode &er
+         return;
+     }
+     if (length != 0) {
+-        int32_t codes[USCRIPT_CODE_LIMIT + UCOL_REORDER_CODE_LIMIT - UCOL_REORDER_CODE_FIRST];
++        int32_t codes[USCRIPT_CODE_LIMIT + (UCOL_REORDER_CODE_LIMIT - UCOL_REORDER_CODE_FIRST)];
+         int32_t codesLength = 0;
+         char *scriptName = value;
+         for (;;) {
+diff --git a/source/i18n/collationdata.h b/source/i18n/collationdata.h
+index ab9b4c47..71bf17ab 100644
+--- a/source/i18n/collationdata.h
++++ b/source/i18n/collationdata.h
+@@ -41,16 +41,12 @@ struct U_I18N_API CollationData : public UMemory {
+     // Note: The ucadata.icu loader could discover the reserved ranges by setting an array
+     // parallel with the ranges, and resetting ranges that are indexed.
+     // The reordering builder code could clone the resulting template array.
+-    enum {
+-        REORDER_RESERVED_BEFORE_LATIN = UCOL_REORDER_CODE_FIRST + 14,
+-        REORDER_RESERVED_AFTER_LATIN
+-    };
+-
+-    enum {
+-        MAX_NUM_SPECIAL_REORDER_CODES = 8,
+-        /** C++ only, data reader check scriptStartsLength. */
+-        MAX_NUM_SCRIPT_RANGES = 256
+-    };
++    static constexpr int32_t REORDER_RESERVED_BEFORE_LATIN = UCOL_REORDER_CODE_FIRST + 14;
++    static constexpr int32_t REORDER_RESERVED_AFTER_LATIN = REORDER_RESERVED_BEFORE_LATIN + 1;
++
++    static constexpr int32_t MAX_NUM_SPECIAL_REORDER_CODES = 8;
++    /** C++ only, data reader check scriptStartsLength. */
++    static constexpr int32_t MAX_NUM_SCRIPT_RANGES = 256;
+ 
+     CollationData(const Normalizer2Impl &nfc)
+             : trie(NULL),
+diff --git a/source/i18n/collationdatareader.cpp b/source/i18n/collationdatareader.cpp
+index 0eb18613..c7ab04cd 100644
+--- a/source/i18n/collationdatareader.cpp
++++ b/source/i18n/collationdatareader.cpp
+@@ -436,7 +436,7 @@ CollationDataReader::read(const CollationTailoring *base, const uint8_t *inBytes
+     settings->options = options;
+     // Set variableTop from options and scripts data.
+     settings->variableTop = tailoring.data->getLastPrimaryForGroup(
+-            UCOL_REORDER_CODE_FIRST + settings->getMaxVariable());
++            UCOL_REORDER_CODE_FIRST + int32_t{settings->getMaxVariable()});
+     if(settings->variableTop == 0) {
+         errorCode = U_INVALID_FORMAT_ERROR;
+         return;
+diff --git a/source/i18n/formatted_string_builder.h b/source/i18n/formatted_string_builder.h
+index 92bcf07d..32e0900a 100644
+--- a/source/i18n/formatted_string_builder.h
++++ b/source/i18n/formatted_string_builder.h
+@@ -218,7 +218,9 @@ class U_I18N_API FormattedStringBuilder : public UMemory {
+ };
+ 
+ static_assert(
+-    std::is_pod<FormattedStringBuilder::Field>::value,
++    // std::is_pod<> is deprecated.
++    std::is_standard_layout<FormattedStringBuilder::Field>::value &&
++        std::is_trivial<FormattedStringBuilder::Field>::value,
+     "Field should be a POD type for efficient initialization");
+ 
+ constexpr FormattedStringBuilder::Field::Field(uint8_t category, uint8_t field)
+diff --git a/source/i18n/gregoimp.cpp b/source/i18n/gregoimp.cpp
+index 537aa19d..101a8b8b 100644
+--- a/source/i18n/gregoimp.cpp
++++ b/source/i18n/gregoimp.cpp
+@@ -144,7 +144,7 @@ void Grego::timeToFields(UDate time, int32_t& year, int32_t& month,
+ 
+ int32_t Grego::dayOfWeek(double day) {
+     int32_t dow;
+-    ClockMath::floorDivide(day + UCAL_THURSDAY, 7, dow);
++    ClockMath::floorDivide(day + int{UCAL_THURSDAY}, 7, dow);
+     return (dow == 0) ? UCAL_SATURDAY : dow;
+ }
+ 
+diff --git a/source/i18n/rulebasedcollator.cpp b/source/i18n/rulebasedcollator.cpp
+index 5e5cc3db..5f771468 100644
+--- a/source/i18n/rulebasedcollator.cpp
++++ b/source/i18n/rulebasedcollator.cpp
+@@ -538,7 +538,8 @@ RuleBasedCollator::setMaxVariable(UColReorderCode group, UErrorCode &errorCode)
+     }
+ 
+     if(group == UCOL_REORDER_CODE_DEFAULT) {
+-        group = (UColReorderCode)(UCOL_REORDER_CODE_FIRST + defaultSettings.getMaxVariable());
++        group = (UColReorderCode)(
++            UCOL_REORDER_CODE_FIRST + int32_t{defaultSettings.getMaxVariable()});
+     }
+     uint32_t varTop = data->getLastPrimaryForGroup(group);
+     U_ASSERT(varTop != 0);
+@@ -556,7 +557,7 @@ RuleBasedCollator::setMaxVariable(UColReorderCode group, UErrorCode &errorCode)
+ 
+ UColReorderCode
+ RuleBasedCollator::getMaxVariable() const {
+-    return (UColReorderCode)(UCOL_REORDER_CODE_FIRST + settings->getMaxVariable());
++    return (UColReorderCode)(UCOL_REORDER_CODE_FIRST + int32_t{settings->getMaxVariable()});
+ }
+ 
+ uint32_t
+diff --git a/source/i18n/unicode/basictz.h b/source/i18n/unicode/basictz.h
+index d9f85e45..a1c94e52 100644
+--- a/source/i18n/unicode/basictz.h
++++ b/source/i18n/unicode/basictz.h
+@@ -186,13 +186,15 @@ protected:
+ 
+ #ifndef U_HIDE_INTERNAL_API
+     /**
+-     * The time type option bit masks used by getOffsetFromLocal
++     * A time type option bit mask used by getOffsetFromLocal.
+      * @internal
+      */
+-    enum {
+-        kStdDstMask = kDaylight,
+-        kFormerLatterMask = kLatter
+-    };
++    static constexpr int32_t kStdDstMask = kDaylight;
++    /**
++     * A time type option bit mask used by getOffsetFromLocal.
++     * @internal
++     */
++    static constexpr int32_t kFormerLatterMask = kLatter;
+ #endif  /* U_HIDE_INTERNAL_API */
+ 
+     /**
+diff --git a/source/i18n/unicode/calendar.h b/source/i18n/unicode/calendar.h
+index c1bdf928..ddffc7b9 100644
+--- a/source/i18n/unicode/calendar.h
++++ b/source/i18n/unicode/calendar.h
+@@ -1766,16 +1766,22 @@ protected:
+     int32_t newestStamp(UCalendarDateFields start, UCalendarDateFields end, int32_t bestSoFar) const;
+ 
+     /**
+-     * Values for field resolution tables
++     * Marker for end of resolve set (row or group). Value for field resolution tables.
++     *
+      * @see #resolveFields
+      * @internal
+      */
+-    enum {
+-      /** Marker for end of resolve set (row or group). */
+-      kResolveSTOP = -1,
+-      /** Value to be bitwised "ORed" against resolve table field values for remapping.  Example: (UCAL_DATE | kResolveRemap) in 1st column will cause 'UCAL_DATE' to be returned, but will not examine the value of UCAL_DATE.  */
+-      kResolveRemap = 32
+-    };
++    static constexpr int32_t kResolveSTOP = -1;
++    /**
++     * Value to be bitwised "ORed" against resolve table field values for remapping.
++     * Example: (UCAL_DATE | kResolveRemap) in 1st column will cause 'UCAL_DATE' to be returned,
++     * but will not examine the value of UCAL_DATE.
++     * Value for field resolution tables.
++     *
++     * @see #resolveFields
++     * @internal
++     */
++    static constexpr int32_t kResolveRemap = 32;
+ 
+     /**
+      * Precedence table for Dates
+diff --git a/source/test/cintltst/ucptrietest.c b/source/test/cintltst/ucptrietest.c
+index af578f7a..8b8e0fb5 100644
+--- a/source/test/cintltst/ucptrietest.c
++++ b/source/test/cintltst/ucptrietest.c
+@@ -12,7 +12,6 @@
+ #include "unicode/utf16.h"
+ #include "unicode/utf8.h"
+ #include "uassert.h"
+-#include "ucptrie_impl.h"
+ #include "utrie.h"
+ #include "cstring.h"
+ #include "cmemory.h"
+diff --git a/source/test/intltest/numrgts.cpp b/source/test/intltest/numrgts.cpp
+index c8d278e2..b7b89158 100644
+--- a/source/test/intltest/numrgts.cpp
++++ b/source/test/intltest/numrgts.cpp
+@@ -1474,7 +1474,7 @@ void NumberFormatRegressionTest::Test4106658(void)
+ #if U_PLATFORM == U_PF_HPUX
+     d1 = 0.0 * -1.0;    // old HPUX compiler ignores volatile keyword
+ #else
+-    d1 *= -1.0; // Some compilers have a problem with defining -0.0
++    d1 = d1 * -1.0; // Some compilers have a problem with defining -0.0
+ #endif
+     logln("pattern: \"" + df->toPattern(temp) + "\"");
+     df->format(d1, buffer, pos);
+@@ -1605,7 +1605,7 @@ void NumberFormatRegressionTest::Test4106667(void)
+ #if U_PLATFORM == U_PF_HPUX
+     d = 0.0 * -1.0;    // old HPUX compiler ignores volatile keyword
+ #else
+-    d *= -1.0; // Some compilers have a problem with defining -0.0
++    d = d * -1.0; // Some compilers have a problem with defining -0.0
+ #endif
+     df->setPositivePrefix(/*"+"*/bar);
+     df->format(d, buffer, pos);
+@@ -2056,7 +2056,7 @@ void NumberFormatRegressionTest::Test4147706(void)
+ #if U_PLATFORM == U_PF_HPUX
+         d1 = 0.0 * -1.0;    // old HPUX compiler ignores volatile keyword
+ #else
+-        d1 *= -1.0; // Some compilers have a problem with defining -0.0
++        d1 = d1 * -1.0; // Some compilers have a problem with defining -0.0
+ #endif
+         df->adoptDecimalFormatSymbols(syms);
+         f1 = df->format(d1, f1, pos);
+diff --git a/source/test/intltest/tsdate.cpp b/source/test/intltest/tsdate.cpp
+index 79e61e82..6f81f623 100644
+--- a/source/test/intltest/tsdate.cpp
++++ b/source/test/intltest/tsdate.cpp
+@@ -19,8 +19,6 @@
+ #include <stdlib.h>
+ #include <math.h>
+ 
+-const double IntlTestDateFormat::ONEYEAR = 365.25 * ONEDAY; // Approximate
+-
+ IntlTestDateFormat::~IntlTestDateFormat() {}
+ 
+ /**
+diff --git a/source/test/intltest/tsdate.h b/source/test/intltest/tsdate.h
+index 95b8dd69..350d1cd9 100644
+--- a/source/test/intltest/tsdate.h
++++ b/source/test/intltest/tsdate.h
+@@ -59,15 +59,13 @@ private:
+     UnicodeString fTestName;
+     int32_t fLimit; // How many iterations it should take to reach convergence
+ 
+-    enum
+-    {
+-        // Values in milliseconds (== Date)
+-        ONESECOND = 1000,
+-        ONEMINUTE = 60 * ONESECOND,
+-        ONEHOUR = 60 * ONEMINUTE,
+-        ONEDAY = 24 * ONEHOUR
+-    };
+-    static const double ONEYEAR;
++    // Values in milliseconds (== Date)
++    static constexpr int32_t ONESECOND = 1000;
++    static constexpr int32_t ONEMINUTE = 60 * ONESECOND;
++    static constexpr int32_t ONEHOUR = 60 * ONEMINUTE;
++    static constexpr int32_t ONEDAY = 24 * ONEHOUR;
++
++    static constexpr double ONEYEAR = 365.25 * ONEDAY; // Approximate
+     enum EMode
+     {
+         GENERIC,
+diff --git a/source/test/intltest/tsputil.cpp b/source/test/intltest/tsputil.cpp
+index 8a169ca8..a59d37bc 100644
+--- a/source/test/intltest/tsputil.cpp
++++ b/source/test/intltest/tsputil.cpp
+@@ -324,7 +324,7 @@ PUtilTest::testZero(void)
+     volatile double pzero   = 0.0;
+     volatile double nzero   = 0.0;
+ 
+-    nzero *= -1;
++    nzero = nzero * -1;
+ 
+     if((pzero == nzero) != TRUE) {
+         errln("FAIL: 0.0 == -0.0 returned FALSE, should be TRUE.");

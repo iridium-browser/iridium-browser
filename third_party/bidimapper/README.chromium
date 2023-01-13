@@ -1,0 +1,32 @@
+Name: Implementation of WebDriver BiDi standard
+Short Name: chromium-bidi
+URL: https://github.com/GoogleChromeLabs/chromium-bidi/archive/2a04a4c02abc7574e8187b619ccc217f32aa3dc5.zip
+Version: 0
+Date: 2022-11-07
+Revision: 2a04a4c02abc7574e8187b619ccc217f32aa3dc5
+SHA-512: b4e2202f8b8192b79fcd1a07a4fd44c8b774ec981a3754605fc521dbc38e5c5545ad0059b758bb4578a3813bcf10bba3fd3274e927f3629587cf8d8605256be9
+License: Apache 2.0
+License File: LICENSE
+Security Critical: no
+CPEPrefix: unknown
+
+Description:
+WebDriver BiDi implementation for ChromeDriver.
+The software is compiled into mapper.js script that is uploaded by ChromeDriver into the Chrome browser.
+
+Steps to build:
+Assume the git-revision-full-sha1 is the wanted revision.
+It can be found in the upstream repo: https://github.com/GoogleChromeLabs/chromium-bidi/commits/main.
+
+```bash
+cd directory-of-this-README.chromium
+./pull.sh git-revision-full-sha1
+./build.sh
+```
+
+The file README.chromium will be updated by build.sh
+
+Local Modifications:
+Local modifications are not allowed.
+The upstream is maintained by the Chromium developers.
+All the changes must be done there.

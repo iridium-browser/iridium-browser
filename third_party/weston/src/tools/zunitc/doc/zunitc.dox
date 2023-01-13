@@ -1,0 +1,220 @@
+/*
+ * Copyright © 2015 Samsung Electronics Co., Ltd
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice (including the
+ * next paragraph) shall be included in all copies or substantial
+ * portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT.  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+/**
+@page zunitc zunitc
+
+- @ref zunitc_overview
+  - @ref zunitc_overview_return
+- @ref zunitc_execution
+  - @ref zunitc_execution_commandline
+  - @ref zunitc_execution_matching
+  - @ref zunitc_execution_wildcards
+  - @ref zunitc_execution_repeat
+  - @ref zunitc_execution_randomize
+- @ref zunitc_fixtures
+- @ref zunitc_functions
+
+@section zunitc_overview Overview
+
+A simple test framework in plain C suitable for basic unit and integration
+testing.
+
+The main rationale for creating this framework was to have a simple to use
+testing framework with tests implemented in C using common patterns and under a
+compatible license. The structure of the test code and macro use is intended to
+follow common patterns established by frameworks such as Boost Test and Google
+Test.
+
+
+To get started, one or more tests should be defined via ZUC_TEST() and/or
+ZUC_TEST_F(), which set up automatic test registration via gcc extensions.
+To actually execute tests, ZUC_RUN_TESTS() should be called.
+
+
+Tests can use several ZUC_ASSERT_* or ZUC_ASSERTG_* checks to validate
+conditions. The ZUC_ASSERT_* ones upon failure will mark the current test
+as failing and immediately execute a return. On the other hand, the
+ZUC_ASSERTG_* tests will mark the current test as failed and then execute a
+'goto' targeting the specified label. See @ref zunitc_overview_return for more
+detail.
+
+The set of fatal test checks are
+
+- ZUC_ASSERT_TRUE()
+- ZUC_ASSERT_FALSE()
+- ZUC_ASSERT_NULL()
+- ZUC_ASSERT_NOT_NULL()
+- ZUC_ASSERT_EQ()
+- ZUC_ASSERT_NE()
+- ZUC_ASSERT_LT()
+- ZUC_ASSERT_LE()
+- ZUC_ASSERT_GT()
+- ZUC_ASSERT_GE()
+- ZUC_ASSERT_STREQ()
+- ZUC_ASSERT_STRNE()
+
+and
+
+- ZUC_ASSERTG_TRUE()
+- ZUC_ASSERTG_FALSE()
+- ZUC_ASSERTG_NULL()
+- ZUC_ASSERTG_NOT_NULL()
+- ZUC_ASSERTG_EQ()
+- ZUC_ASSERTG_NE()
+- ZUC_ASSERTG_LT()
+- ZUC_ASSERTG_LE()
+- ZUC_ASSERTG_GT()
+- ZUC_ASSERTG_GE()
+- ZUC_ASSERTG_STREQ()
+- ZUC_ASSERTG_STRNE()
+
+Unconditional test values for logging and termination are
+- ZUC_SKIP()
+- ZUC_FATAL()
+
+Unconditional message logging for failure cases only is
+- ZUC_TRACEPOINT()
+
+@subsection zunitc_overview_return Test Termination and Return
+
+One key point where this framework differs from some others (especially many
+common ad hoc test programs) is that it does not use assert() nor exceptions.
+
+- does not use assert()
+- can not use throw
+
+One main implication of this is that when a check fails the current function
+will be terminated via a 'return' statement and control passed back to the
+calling function. If the check fails in an individual ZUC_TEST() or ZUC_TEST_F()
+test function then control is returned to the framework and the current test is
+deemed completed (either successfully or with failure).
+
+On the other hand, if a check fails that is being executed in a function called
+by an individual test, then control will stay in the current test. In order to
+successfully exit the current test a follow-up check needs to be done after
+calling functions that might cause a failure.
+
+@code{.c}
+...
+
+    /* Call a function that might contain ZUC_ASSERT_* use. */
+    some_helper_function();
+
+    /* Stop the current test if something failed. */
+    ZUC_ASSERT_FALSE(zuc_has_failure());
+
+    /* execution will only reach this point if no failures occurred. */
+
+...
+@endcode
+
+Use of the ZUC_ASSERTG_*() variants can help in certain situations as check
+failure will trigger a 'goto' statement as opposed to a general 'return'.
+
+@code{.c}
+...
+
+    /* Call a function that might contain ZUC_ASSERT_* use. */
+    some_helper_function();
+
+    /* Stop the current test if something failed. */
+    ZUC_ASSERTG_FALSE(zuc_has_failure(), err);
+
+    /* execution will only reach this point if no failures occurred. */
+...
+
+err:
+    free(str_a);
+}
+...
+@endcode
+
+@section zunitc_execution Controlling Execution
+
+To control execution, the various zuc_set_* functions can be called
+before invoking ZUC_RUN_TESTS().
+
+@subsection zunitc_execution_commandline Command-line Parameters
+
+The current implementation defers processing of command-line parameters
+to the main application hosting the testing. It is possible that a
+helper function to process certain parameters may be added.
+
+@subsection zunitc_execution_matching Matching Patterns for Tests
+
+The function zuc_set_filter() can be used to specify a pattern for
+matching or excluding tests from a run. The general form is
+ match1[:match2[:match3..n]][:-exclude1[:exclude2[:exclude3..n]]]
+
+@subsection zunitc_execution_wildcards Matching Wildcards
+
+Wildcards can be used in the match/exclude patterns and recognize the
+following two special characters:
+- '*' matches any number of characters including zero.
+- '?' matches any single character.
+
+This pattern matching is consistent with other testing frameworks and
+has been chosen in order to make it easier for developers to move
+between different testing frameworks.
+
+Calling zuc_list_tests() after zuc_set_filter() can be done to show the
+effects of the matching without needing to actually run tests.
+
+@subsection zunitc_execution_repeat Repeating Tests
+
+Setting the repeat count higher than 1 ( via zuc_set_repeat() ) will
+cause the tests to be executed several times in a row. This can be
+useful for stress testing, checking for leaks, etc.
+
+@subsection zunitc_execution_randomize Randomizing Tests
+
+Test ordering can be randomized by setting a non-zero positive value to
+zuc_set_random(). Setting it to 1 will cause the framework to pick a
+random seed based on the time. A value greater than 1 will be taken as a
+random seed itself. And setting it to 0 will disable randomization and
+allow the tests to be executed in their natural ordering.
+
+@section zunitc_fixtures Fixtures
+
+Per-suite and per-test setup and teardown fixtures can be implemented by
+defining an instance of struct zuc_fixture and using it as the first
+parameter to ZUC_TEST_F().
+
+@section zunitc_functions Functions
+
+- ZUC_TEST()
+- ZUC_TEST_F()
+- ZUC_RUN_TESTS()
+- zuc_cleanup()
+- zuc_list_tests()
+- zuc_set_filter()
+- zuc_set_random()
+- zuc_set_spawn()
+- zuc_set_output_junit()
+- zuc_has_skip()
+- zuc_has_failure()
+
+*/

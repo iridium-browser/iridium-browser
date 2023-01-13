@@ -1,0 +1,48 @@
+// Copyright 2022 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package lvmd;
+option go_package = "chromiumos/system_api/lvmd_proto";
+
+// Encapsulates information about an LVM physical volume.
+message PhysicalVolume {
+  string device_path = 1;
+}
+
+// Encapsulates information about an LVM volume group.
+message VolumeGroup {
+  string name = 1;
+}
+
+// Encapsulates information about an LVM thinpool.
+message Thinpool {
+  VolumeGroup volume_group = 1;
+  string name = 2;
+  int64 total_bytes = 3;
+  int64 free_bytes = 4;
+}
+
+// Encapsulates logical volume configuration information.
+message LogicalVolumeConfiguration {
+  string name = 1;
+
+  // Size is in MiB.
+  int64 size = 2;
+}
+
+// Encapsulates information about an LVM logical volume.
+message LogicalVolume {
+  VolumeGroup volume_group = 1;
+  string name = 2;
+  string path = 3;
+}
+
+// Holds a list of LVM logical volumes.
+message LogicalVolumeList {
+  repeated LogicalVolume logical_volume = 1;
+}

@@ -1,0 +1,87 @@
+From 41c14057a8aa4918a5b5b1f5954544c9c9ac7c9d Mon Sep 17 00:00:00 2001
+From: Gurchetan Singh <gurchetansingh@chromium.org>
+Date: Tue, 1 Nov 2016 09:53:06 -0700
+Subject: [PATCH 4/8] CHROMIUM: drm: Allow render node access to KMS getters
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+We need to query the KMS API to present an accurate view of overlay
+formats in Android (see CL:405019).  With the exception of
+SET_CLIENT_CAP, these ioctls are getters.
+
+SET_CLIENT_CAP is allowable with render nodes since it only presents
+a different version of the drm core to userspace when modified.
+
+BUG=chromium:795946
+TEST=Get a little farther
+
+Conflicts:
+	drivers/gpu/drm/drm_ioctl.c
+...due to DRM_IOCTL_SET_CLIENT_CAP having DRM_UNLOCKED in 4.14.
+
+Change-Id: Id26e1b2b37dfa72f6ce55b524e849141750787c6
+Reviewed-on: https://chromium-review.googlesource.com/405758
+Commit-Ready: Gurchetan Singh <gurchetansingh@chromium.org>
+Tested-by: Gurchetan Singh <gurchetansingh@chromium.org>
+Reviewed-by: Stphane Marchesin <marcheu@chromium.org>
+Signed-off-by: Douglas Anderson <dianders@chromium.org>
+(cherry picked from commit a7c78515060be1214f098e39ad5e815a35d121e6)
+Reviewed-on: https://chromium-review.googlesource.com/896230
+Reviewed-by: Stéphane Marchesin <marcheu@chromium.org>
+
+[rebase419(groeck): Context conflicts]
+Signed-off-by: Guenter Roeck <groeck@chromium.org>
+[tfiga: Rebase onto Linux 4.20]
+Signed-off-by: Tomasz Figa <tfiga@chromium.org>
+---
+ drivers/gpu/drm/drm_ioctl.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/gpu/drm/drm_ioctl.c b/drivers/gpu/drm/drm_ioctl.c
+index f239fe5679bc31..4dcb63ad10ec7d 100644
+--- a/drivers/gpu/drm/drm_ioctl.c
++++ b/drivers/gpu/drm/drm_ioctl.c
+@@ -563,7 +563,7 @@ static const struct drm_ioctl_desc drm_ioctls[] = {
+ 	DRM_IOCTL_DEF(DRM_IOCTL_GET_CLIENT, drm_getclient, DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_GET_STATS, drm_getstats, DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_GET_CAP, drm_getcap, DRM_UNLOCKED|DRM_RENDER_ALLOW),
+-	DRM_IOCTL_DEF(DRM_IOCTL_SET_CLIENT_CAP, drm_setclientcap, DRM_UNLOCKED),
++	DRM_IOCTL_DEF(DRM_IOCTL_SET_CLIENT_CAP, drm_setclientcap, DRM_UNLOCKED | DRM_RENDER_ALLOW),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_SET_VERSION, drm_setversion, DRM_UNLOCKED | DRM_MASTER),
+ 
+ 	DRM_IOCTL_DEF(DRM_IOCTL_SET_UNIQUE, drm_invalid_op, DRM_AUTH|DRM_MASTER|DRM_ROOT_ONLY),
+@@ -634,10 +634,10 @@ static const struct drm_ioctl_desc drm_ioctls[] = {
+ 	DRM_IOCTL_DEF(DRM_IOCTL_PRIME_HANDLE_TO_FD, drm_prime_handle_to_fd_ioctl, DRM_AUTH|DRM_UNLOCKED|DRM_RENDER_ALLOW),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_PRIME_FD_TO_HANDLE, drm_prime_fd_to_handle_ioctl, DRM_AUTH|DRM_UNLOCKED|DRM_RENDER_ALLOW),
+ 
+-	DRM_IOCTL_DEF(DRM_IOCTL_MODE_GETPLANERESOURCES, drm_mode_getplane_res, DRM_UNLOCKED),
++	DRM_IOCTL_DEF(DRM_IOCTL_MODE_GETPLANERESOURCES, drm_mode_getplane_res, DRM_UNLOCKED|DRM_RENDER_ALLOW),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_GETCRTC, drm_mode_getcrtc, DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_SETCRTC, drm_mode_setcrtc, DRM_MASTER|DRM_UNLOCKED),
+-	DRM_IOCTL_DEF(DRM_IOCTL_MODE_GETPLANE, drm_mode_getplane, DRM_UNLOCKED),
++	DRM_IOCTL_DEF(DRM_IOCTL_MODE_GETPLANE, drm_mode_getplane, DRM_UNLOCKED|DRM_RENDER_ALLOW),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_SETPLANE, drm_mode_setplane, DRM_MASTER|DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_CURSOR, drm_mode_cursor_ioctl, DRM_MASTER|DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_GETGAMMA, drm_mode_gamma_get_ioctl, DRM_UNLOCKED),
+@@ -646,7 +646,7 @@ static const struct drm_ioctl_desc drm_ioctls[] = {
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_GETCONNECTOR, drm_mode_getconnector, DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_ATTACHMODE, drm_noop, DRM_MASTER|DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_DETACHMODE, drm_noop, DRM_MASTER|DRM_UNLOCKED),
+-	DRM_IOCTL_DEF(DRM_IOCTL_MODE_GETPROPERTY, drm_mode_getproperty_ioctl, DRM_UNLOCKED),
++	DRM_IOCTL_DEF(DRM_IOCTL_MODE_GETPROPERTY, drm_mode_getproperty_ioctl, DRM_UNLOCKED|DRM_RENDER_ALLOW),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_SETPROPERTY, drm_connector_property_set_ioctl, DRM_MASTER|DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_GETPROPBLOB, drm_mode_getblob_ioctl, DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_GETFB, drm_mode_getfb, DRM_UNLOCKED),
+@@ -658,7 +658,7 @@ static const struct drm_ioctl_desc drm_ioctls[] = {
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_CREATE_DUMB, drm_mode_create_dumb_ioctl, DRM_UNLOCKED|DRM_RENDER_ALLOW),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_MAP_DUMB, drm_mode_mmap_dumb_ioctl, DRM_UNLOCKED|DRM_RENDER_ALLOW),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_DESTROY_DUMB, drm_mode_destroy_dumb_ioctl, DRM_UNLOCKED),
+-	DRM_IOCTL_DEF(DRM_IOCTL_MODE_OBJ_GETPROPERTIES, drm_mode_obj_get_properties_ioctl, DRM_UNLOCKED),
++	DRM_IOCTL_DEF(DRM_IOCTL_MODE_OBJ_GETPROPERTIES, drm_mode_obj_get_properties_ioctl, DRM_UNLOCKED|DRM_RENDER_ALLOW),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_OBJ_SETPROPERTY, drm_mode_obj_set_property_ioctl, DRM_MASTER|DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_CURSOR2, drm_mode_cursor2_ioctl, DRM_MASTER|DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_ATOMIC, drm_mode_atomic_ioctl, DRM_MASTER|DRM_UNLOCKED),
+-- 
+2.20.0.rc2.403.gdbc3b29805-goog
+

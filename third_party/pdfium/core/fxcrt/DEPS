@@ -1,0 +1,4 @@
+include_rules = [
+  '+base/allocator',
+  '+third_party/icu',
+]

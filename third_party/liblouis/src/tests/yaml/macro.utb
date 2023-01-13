@@ -1,0 +1,9 @@
+macro att
+attribute $1 $2
+eom
+macro myletter
+letter $1 $2
+att myletter $1
+eom
+myletter a 1
+noback context []%myletter @123456

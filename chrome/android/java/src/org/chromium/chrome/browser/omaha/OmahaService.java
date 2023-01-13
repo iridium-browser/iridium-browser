@@ -1,0 +1,116 @@
+// Copyright 2017 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+package org.chromium.chrome.browser.omaha;
+
+import android.app.IntentService;
+import android.app.job.JobService;
+import android.content.Context;
+
+import androidx.annotation.Nullable;
+
+import org.chromium.base.ContextUtils;
+import org.chromium.base.Log;
+import org.chromium.base.task.AsyncTask;
+import org.chromium.base.task.PostTask;
+import org.chromium.components.background_task_scheduler.BackgroundTask;
+import org.chromium.components.background_task_scheduler.BackgroundTaskSchedulerFactory;
+import org.chromium.components.background_task_scheduler.TaskIds;
+import org.chromium.components.background_task_scheduler.TaskInfo;
+import org.chromium.components.background_task_scheduler.TaskParameters;
+import org.chromium.content_public.browser.UiThreadTaskTraits;
+
+/**
+ * Manages scheduling and running of the Omaha client code.
+ * Delegates out to either an {@link IntentService} or {@link JobService}, as necessary.
+ */
+public class OmahaService extends OmahaBase implements BackgroundTask {
+    private static class OmahaClientDelegate extends OmahaDelegateBase {
+        @Override
+        public void scheduleService(long currentTimestampMs, long nextTimestampMs) {
+            final long delay = nextTimestampMs - currentTimestampMs;
+            PostTask.runOrPostTask(UiThreadTaskTraits.DEFAULT, () -> {
+                if (scheduleJobService(delay)) {
+                    Log.i(OmahaBase.TAG, "Scheduled using JobService");
+                } else {
+                    Log.e(OmahaBase.TAG, "Failed to schedule job");
+                }
+            });
+        }
+    }
+
+    private static final Object DELEGATE_LOCK = new Object();
+    private static OmahaService sInstance;
+
+    @Nullable
+    public static OmahaService getInstance() {
+        synchronized (DELEGATE_LOCK) {
+            if (sInstance == null) sInstance = new OmahaService();
+            return sInstance;
+        }
+    }
+
+    private AsyncTask<Void> mJobServiceTask;
+
+    /** Used only by {@link BackgroundTaskScheduler}. */
+    public OmahaService() {
+        super(new OmahaClientDelegate());
+    }
+
+    /**
+     * Trigger the {@link BackgroundTaskScheduler} immediately.
+     * Must only be called by {@link OmahaBase#onForegroundSessionStart}.
+     */
+    static void startServiceImmediately() {
+        scheduleJobService(0);
+    }
+
+    // Incorrectly infers that this is called on a worker thread because of AsyncTask doInBackground
+    // overriding.
+    @SuppressWarnings("WrongThread")
+    @Override
+    public boolean onStartTask(
+            Context context, TaskParameters parameters, final TaskFinishedCallback callback) {
+        mJobServiceTask = new AsyncTask<Void>() {
+            @Override
+            public Void doInBackground() {
+                run();
+                return null;
+            }
+
+            @Override
+            public void onPostExecute(Void result) {
+                callback.taskFinished(false);
+            }
+        }.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+        return false;
+    }
+
+    @Override
+    public boolean onStopTask(Context context, TaskParameters taskParameters) {
+        if (mJobServiceTask != null) {
+            mJobServiceTask.cancel(false);
+            mJobServiceTask = null;
+        }
+        return false;
+    }
+
+    @Override
+    public void reschedule(Context context) {
+        // Needs appropriate implementation.
+    }
+
+    /**
+     * Schedules the Omaha code to run at the given time.
+     * @param delayMs How long to wait until the job should be triggered.
+     */
+    static boolean scheduleJobService(long delayMs) {
+        long latency = Math.max(0, delayMs);
+
+        TaskInfo taskInfo =
+                TaskInfo.createOneOffTask(TaskIds.OMAHA_JOB_ID, latency, latency).build();
+        return BackgroundTaskSchedulerFactory.getScheduler().schedule(
+                ContextUtils.getApplicationContext(), taskInfo);
+    }
+}

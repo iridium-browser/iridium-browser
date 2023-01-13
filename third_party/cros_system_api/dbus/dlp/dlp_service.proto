@@ -1,0 +1,207 @@
+// Copyright 2021 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package dlp;
+
+// Which restriction should be applied by the rule.
+enum DlpRuleLevel {
+  // Should not be used.
+  UNSPECIFIED = 0;
+
+  // The action will be allowed (overwrites BLOCK).
+  ALLOW = 1;
+
+  // The action won't be allowed.
+  BLOCK = 2;
+}
+
+// A representation of destinations to which transferring files can be
+// restricted.
+enum DlpComponent {
+  // Should not be used.
+  UNKOWN_COMPONENT = 0;
+
+  // To represent internal Chrome OS transfers.
+  SYSTEM = 1;
+
+  // ARC++ as a Guest OS.
+  ARC = 2;
+
+  // Crostini as a Guest OS.
+  CROSTINI = 3;
+
+  // Plugin VM (Parallels/Windows) as a Guest OS.
+  PLUGIN_VM = 4;
+
+  // Removable disk.
+  USB = 5;
+
+  // Google drive for file storage.
+  GOOGLE_DRIVE = 6;
+}
+
+// A representation of possible file actions.
+enum FileAction {
+  // File transfer (the default if none of the actions below is specified).
+  TRANSFER = 0;
+
+  // File upload.
+  UPLOAD = 1;
+
+  // File open.
+  OPEN = 2;
+
+  // File copy.
+  COPY = 3;
+
+  // File move.
+  MOVE = 4;
+
+  // File share.
+  SHARE = 5;
+}
+
+message DlpFilesRule {
+  // Defines where from the file was originated.
+  // URL patterns according to this format
+  // ( https://www.chromium.org/administrators/url-blacklist-filter-format )
+  repeated string source_urls = 1;
+
+  // Defines where to the file is targeted.
+  // URL patterns according to this format
+  // ( https://www.chromium.org/administrators/url-blacklist-filter-format )
+  repeated string destination_urls = 2;
+
+  // Restriction level applied to files satisfying the pattern above.
+  optional DlpRuleLevel level = 3;
+}
+
+message SetDlpFilesPolicyRequest {
+  // List of rules applied to FILES class in DataLeakPreventionRules policy.
+  repeated DlpFilesRule rules = 1;
+}
+
+message SetDlpFilesPolicyResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+}
+
+message AddFileRequest {
+  // Path to the downloaded file.
+  optional string file_path = 1;
+
+  // Downloaded file source URL (the URL it was downloaded from).
+  optional string source_url = 2;
+
+  // Downloaded file referrer URL (the URL the download process was initiated
+  // from).
+  optional string referrer_url = 3;
+}
+
+message AddFileResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+}
+
+message RequestFileAccessRequest {
+  // TODO(crbug.com/1352431): Remove when it's not used in Chrome.
+  repeated uint64 inodes = 1;
+
+  // Process id for which an access is requested.
+  optional int32 process_id = 2;
+
+  // Destination where the files will be targeted by the process.
+  optional string destination_url = 3;
+
+  // Files paths to be transferred.
+  repeated string files_paths = 4;
+
+  // Destination component where the file will be transferred.
+  optional DlpComponent destination_component = 5;
+}
+
+message RequestFileAccessResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+
+  // Whether file access for all requested files was approved.
+  optional bool allowed = 2;
+}
+
+message FileMetadata {
+  // File inode number.
+  optional uint64 inode = 1;
+  // URL from where the file was downloaded.
+  optional string source_url = 2;
+  // File path.
+  optional string path = 3;
+}
+
+message IsDlpPolicyMatchedRequest {
+  // TODO(crbug.com/1352431): Remove when it's not used in Chrome.
+  optional string source_url = 1;
+  // File metadata.
+  optional FileMetadata file_metadata = 2;
+}
+
+message IsDlpPolicyMatchedResponse {
+  // Whether a DLP rule exists that might prevent operation on the file.
+  optional bool restricted = 1;
+}
+
+message GetFilesSourcesRequest {
+  // A list of files inodes.
+  repeated uint64 files_inodes = 1;
+}
+
+message GetFilesSourcesResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+  // A list of files source urls.
+  repeated FileMetadata files_metadata = 2;
+}
+
+message CheckFilesTransferRequest {
+  // Files paths to be transferred.
+  repeated string files_paths = 1;
+  // Destination url where the file will be transferred.
+  optional string destination_url = 2;
+  // Destination component where the file will be transferred.
+  optional DlpComponent destination_component = 3;
+  // Requested file action.
+  optional FileAction file_action = 4;
+}
+
+message CheckFilesTransferResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+  // Files paths restricted to be transferred.
+  repeated string files_paths = 2;
+}
+
+message IsFilesTransferRestrictedRequest {
+  // TODO(crbug.com/1352431): Remove when it's not used in Chrome.
+  repeated string files_sources = 1;
+  // Destination url where the file will be transferred.
+  optional string destination_url = 2;
+  // Files to be transferred.
+  repeated FileMetadata transferred_files = 3;
+  // Destination component where the file will be transferred.
+  optional DlpComponent destination_component = 4;
+  // Requested file action.
+  optional FileAction file_action = 5;
+}
+
+message IsFilesTransferRestrictedResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+  // TODO(crbug.com/1352431): Remove when it's not used in Chrome.
+  repeated string files_sources = 2;
+  // Files restricted to be transferred.
+  repeated FileMetadata restricted_files = 3;
+}

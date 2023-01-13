@@ -1,0 +1,15 @@
+include_rules = [
+  "+ash/constants",
+  "+chromeos",
+  "+third_party/skia",
+  "+ui/base",
+  "+ui/events/devices",
+  "+ui/events/platform_event.h",
+  "+ui/strings",
+]
+
+specific_include_rules = {
+  "display_change_observer_unittest.cc": [
+    "+cc/base/math_util.h",
+  ]
+}

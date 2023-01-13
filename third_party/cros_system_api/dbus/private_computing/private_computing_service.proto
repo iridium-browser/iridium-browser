@@ -1,0 +1,78 @@
+// Copyright 2022 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+
+package private_computing;
+
+// Use-cases for ChromeOS Private Computing Device Active.
+enum PrivateComputingUseCase {
+  // Should not be used.
+  USE_CASE_UNSPECIFIED = 0;
+  CROS_FRESNEL_DAILY = 1;
+  CROS_FRESNEL_FIRST_ACTIVE = 2;
+  CROS_FRESNEL_28DAY_ACTIVE = 3;
+}
+
+// The preserved file will include the Daily, FirstActive, 28-Day
+message ActiveStatus {
+  // The use case of ChromeOS device active Private Computing device active.
+  optional PrivateComputingUseCase use_case = 1;
+
+  // This field is deprecated and for migration to PDT dates.
+  optional string last_ping_utc_date = 2 [deprecated = true];
+
+  // The last ping date for current use case.
+  // PDT date: YYYYMMDD
+  optional string last_ping_date = 3;
+}
+
+message SaveStatusRequest {
+  // The list of use case with last ping date.
+  repeated ActiveStatus active_status = 1;
+}
+
+message SaveStatusResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+}
+
+message GetStatusResponse {
+  // This field only has error message, the success value will be
+  // in active_status.
+  optional string error_message = 1;
+
+  // The list of use case with last ping date.
+  repeated ActiveStatus active_status = 2;
+}
+
+// The regression test data consists of multiple test cases.
+message PrivateComputingClientRegressionTestData {
+  enum TestName {
+    GET_SUCCESS_SAVE_SUCCESS = 0;
+    GET_SUCCESS_SAVE_FAIL = 1;
+    GET_FAIL_SAVE_SUCCESS = 2;
+    GET_FAIL_SAVE_FAIL = 3;
+    GET_SUCCESS_FUTURE_PING_DATE_SAVE_SUCCESS = 4;
+    GET_SUCCESS_SAME_PING_DATE_SAVE_SUCCESS = 5;
+    GET_SUCCESS_PAST_PING_DATE_SAVE_SUCCESS = 6;
+    GET_SUCCESS_UNIX_EPOCH_PING_DATE_SAVE_SUCCESS = 7;
+    GET_INVALID_PING_DATE_SAVE_SUCCESS = 8;
+  }
+
+  // Data stored for each test case.
+  message TestCase {
+    // Name of the test case
+    required TestName name = 1;
+
+    // Expected GetStatusResponse to be supplied by the client.
+    optional GetStatusResponse get_response = 2;
+
+    // Expected SaveStatusResponse to be supplied by the client.
+    optional SaveStatusResponse save_response = 4;
+  }
+
+  repeated TestCase test_cases = 1;
+}

@@ -1,0 +1,84 @@
+# Copyright 2020 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//third_party/closure_compiler/compile_js.gni")
+import("//ui/webui/resources/tools/generate_grd.gni")
+
+assert(is_chromeos, "Nearby Share is CrOS only")
+
+# Creates the necessary GRDP file with local test files for OS settings.
+generate_grd("build_grdp") {
+  grd_prefix = "nearby_share"
+  out_grd = "$target_gen_dir/resources.grdp"
+  resource_path_prefix = "nearby_share"
+
+  # Add local test files.
+  input_files_base_dir = rebase_path(".", "//")
+  input_files = [
+    "shared/fake_nearby_share_settings.js",
+    "shared/fake_nearby_contact_manager.js",
+  ]
+}
+
+js_type_check("closure_compile") {
+  is_polymer3 = true
+  closure_flags =
+      default_closure_args + [
+        "browser_resolver_prefix_replacements=\"chrome://nearby/=" +
+            rebase_path("//chrome/browser/resources/nearby_share/",
+                        root_build_dir) + "\"",
+        "browser_resolver_prefix_replacements=\"chrome://webui-test/=" +
+            "./gen/chrome/test/data/webui/\"",
+        "js_module_root=" +
+            rebase_path("//chrome/test/data/webui/", root_build_dir),
+        "js_module_root=./gen/chrome/test/data/webui/tsc",
+        "js_module_root=" +
+            rebase_path("//chrome/browser/resources/nearby_share/",
+                        root_build_dir),
+        "js_module_root=./gen/chrome/browser/resources/nearby_share/",
+      ]
+  deps = [
+    ":fake_mojo_interfaces",
+    ":nearby_confirmation_page_test",
+    ":nearby_discovery_page_test",
+    ":nearby_share_app_test",
+  ]
+}
+
+js_library("fake_mojo_interfaces") {
+  deps = [
+    "../chromeos:test_browser_proxy",
+    "//chrome/browser/ui/webui/nearby_share:mojom_js_library_for_compile",
+  ]
+}
+
+js_library("nearby_confirmation_page_test") {
+  deps = [
+    ":fake_mojo_interfaces",
+    "../chromeos:chai_assert",
+    "//chrome/browser/resources/nearby_share:nearby_confirmation_page",
+  ]
+  externs_list = [ "$externs_path/mocha-2.5.js" ]
+}
+
+js_library("nearby_discovery_page_test") {
+  deps = [
+    ":fake_mojo_interfaces",
+    "../chromeos:chai_assert",
+    "//chrome/browser/resources/nearby_share:nearby_discovery_page",
+  ]
+  externs_list = [ "$externs_path/mocha-2.5.js" ]
+}
+
+js_library("nearby_share_app_test") {
+  deps = [
+    "../chromeos:chai_assert",
+    "../chromeos:test_util",
+    "shared:fake_nearby_contact_manager",
+    "shared:fake_nearby_share_settings",
+    "//chrome/browser/resources/nearby_share:app",
+    "//chrome/browser/resources/nearby_share/shared:nearby_share_settings",
+  ]
+  externs_list = [ "$externs_path/mocha-2.5.js" ]
+}

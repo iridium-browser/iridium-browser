@@ -1,0 +1,5 @@
+if (is_win) {
+  sources = [ "win.cc" ]
+} else if (is_linux) {
+  sources = [ "linux.cc" ]
+}

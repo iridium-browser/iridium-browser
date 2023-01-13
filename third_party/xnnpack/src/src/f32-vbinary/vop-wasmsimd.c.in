@@ -1,0 +1,143 @@
+// Copyright 2020 Google LLC
+//
+// This source code is licensed under the BSD-style license found in the
+// LICENSE file in the root directory of this source tree.
+
+$assert BATCH_TILE % 4 == 0
+$assert BATCH_TILE >= 4
+$SIMD_TILE = BATCH_TILE // 4
+$ABC = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+$assert OP in ["ADD", "DIV", "MAX", "MIN", "MUL", "SUB", "SQRDIFF"]
+$assert ACTIVATION in ["LINEAR", "MINMAX", "RELU"]
+#include <assert.h>
+
+#include <wasm_simd128.h>
+
+#include <xnnpack/common.h>
+#include <xnnpack/vbinary.h>
+
+
+$WASM_F32X4_OP = {
+$  "ADD": "wasm_f32x4_add",
+$  "DIV": "wasm_f32x4_div",
+$  "MAX": "wasm_f32x4_pmax" if X86 else "wasm_f32x4_max",
+$  "MIN": "wasm_f32x4_pmin" if X86 else "wasm_f32x4_min",
+$  "MUL": "wasm_f32x4_mul",
+$  "SUB": "wasm_f32x4_sub",
+$  "SQRDIFF": "wasm_f32x4_sub",
+$}[OP]
+$ARCH_SUFFIX = "" if ACTIVATION in ["LINEAR", "RELU"] and OP not in ["MIN", "MAX"] else "_x86" if X86 else "_arm"
+$ACTIVATION_SUFFIX = {"LINEAR": ""}.get(ACTIVATION, "_" + ACTIVATION.lower())
+$PARAMS = {"LINEAR": "xnn_f32_default_params", "RELU": "xnn_f32_relu_params", "MINMAX": "xnn_f32_minmax_params"}[ACTIVATION]
+void xnn_f32_v${OP.lower()}${ACTIVATION_SUFFIX}_ukernel__wasmsimd${ARCH_SUFFIX}_x${BATCH_TILE}(
+    size_t batch,
+    const float* input_a,
+    const float* input_b,
+    float* output,
+    const union ${PARAMS} params[restrict XNN_MIN_ELEMENTS(1)]) XNN_OOB_READS
+{
+  assert(batch != 0);
+  assert(batch % sizeof(float) == 0);
+  assert(input_a != NULL);
+  assert(input_b != NULL);
+  assert(output != NULL);
+
+  $if ACTIVATION == "MINMAX":
+    const v128_t voutput_min = wasm_v128_load64_splat(params->wasmsimd.min);
+    const v128_t voutput_max = wasm_v128_load64_splat(params->wasmsimd.max);
+  $elif ACTIVATION == "RELU":
+    const v128_t vzero = wasm_i32x4_const_splat(0);
+
+  $if BATCH_TILE > 4:
+    for (; batch >= ${BATCH_TILE} * sizeof(float); batch -= ${BATCH_TILE} * sizeof(float)) {
+      const v128_t va${ABC[0]} = wasm_v128_load(input_a);
+      $for N in range(1, SIMD_TILE):
+        const v128_t va${ABC[N]} = wasm_v128_load(input_a + ${N * 4});
+      input_a += ${BATCH_TILE};
+
+      const v128_t vb${ABC[0]} = wasm_v128_load(input_b);
+      $for N in range(1, SIMD_TILE):
+        const v128_t vb${ABC[N]} = wasm_v128_load(input_b + ${N * 4});
+      input_b += ${BATCH_TILE};
+
+      $for N in range(SIMD_TILE):
+        v128_t vacc${ABC[N]} = ${WASM_F32X4_OP}(va${ABC[N]}, vb${ABC[N]});
+
+      $if OP == "SQRDIFF":
+        $for N in range(SIMD_TILE):
+          vacc${ABC[N]} = wasm_f32x4_mul(vacc${ABC[N]}, vacc${ABC[N]});
+
+      $if ACTIVATION == "MINMAX":
+        $if X86:
+          $for N in range(SIMD_TILE):
+            vacc${ABC[N]} = wasm_f32x4_pmax(voutput_min, vacc${ABC[N]});
+
+          $for N in range(SIMD_TILE):
+            vacc${ABC[N]} = wasm_f32x4_pmin(voutput_max, vacc${ABC[N]});
+        $else:
+          $for N in range(SIMD_TILE):
+            vacc${ABC[N]} = wasm_f32x4_max(vacc${ABC[N]}, voutput_min);
+
+          $for N in range(SIMD_TILE):
+            vacc${ABC[N]} = wasm_f32x4_min(vacc${ABC[N]}, voutput_max);
+      $elif ACTIVATION == "RELU":
+        $for N in range(SIMD_TILE):
+          vacc${ABC[N]} = wasm_i32x4_max(vacc${ABC[N]}, vzero);
+
+      wasm_v128_store(output, vacc${ABC[0]});
+      $for N in range(1, SIMD_TILE):
+        wasm_v128_store(output + ${N * 4}, vacc${ABC[N]});
+      output += ${BATCH_TILE};
+    }
+  for (; batch >= 4 * sizeof(float); batch -= 4 * sizeof(float)) {
+    const v128_t va = wasm_v128_load(input_a);
+    input_a += 4;
+
+    const v128_t vb = wasm_v128_load(input_b);
+    input_b += 4;
+
+    v128_t vacc = ${WASM_F32X4_OP}(va, vb);
+    $if OP == "SQRDIFF":
+      vacc = wasm_f32x4_mul(vacc, vacc);
+
+    $if ACTIVATION == "MINMAX":
+      $if X86:
+        vacc = wasm_f32x4_pmax(voutput_min, vacc);
+        vacc = wasm_f32x4_pmin(voutput_max, vacc);
+      $else:
+        vacc = wasm_f32x4_max(vacc, voutput_min);
+        vacc = wasm_f32x4_min(vacc, voutput_max);
+    $elif ACTIVATION == "RELU":
+      vacc = wasm_i32x4_max(vacc, vzero);
+
+    wasm_v128_store(output, vacc);
+    output += 4;
+  }
+  if XNN_UNLIKELY(batch != 0) {
+    const v128_t va = wasm_v128_load(input_a);
+    const v128_t vb = wasm_v128_load(input_b);
+
+    v128_t vacc = ${WASM_F32X4_OP}(va, vb);
+    $if OP == "SQRDIFF":
+      vacc = wasm_f32x4_mul(vacc, vacc);
+
+    $if ACTIVATION == "MINMAX":
+      $if X86:
+        vacc = wasm_f32x4_pmax(voutput_min, vacc);
+        vacc = wasm_f32x4_pmin(voutput_max, vacc);
+      $else:
+        vacc = wasm_f32x4_max(vacc, voutput_min);
+        vacc = wasm_f32x4_min(vacc, voutput_max);
+    $elif ACTIVATION == "RELU":
+      vacc = wasm_i32x4_max(vacc, vzero);
+
+    if (batch & (2 * sizeof(float))) {
+      wasm_v128_store64_lane(output, vacc, 0);
+      vacc = wasm_v64x2_shuffle(vacc, vacc, 1, 1);
+      output += 2;
+    }
+    if (batch & (1 * sizeof(float))) {
+      wasm_v128_store32_lane(output, vacc, 0);
+    }
+  }
+}

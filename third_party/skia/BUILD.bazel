@@ -1,0 +1,63 @@
+load("//:defines.bzl", "DEFAULT_DEFINES", "DEFAULT_LOCAL_DEFINES")
+load("//bazel:macros.bzl", "exports_files_legacy", "gazelle", "skia_cc_library")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+# This target exposes the Skia public API. It is what external clients should use.
+skia_cc_library(
+    name = "skia_public",
+    srcs = [
+        "//include:private_hdrs",
+        "//include:srcs",
+        "//src:private_hdrs",
+        "//src:srcs",
+    ],
+    hdrs = ["//include:public_hdrs"],
+    defines = DEFAULT_DEFINES,
+    local_defines = DEFAULT_LOCAL_DEFINES,
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src:deps",
+    ],
+)
+
+# This target exposes headers beyond the public, supported API. It is intended to be
+# used by Skia's tests and tooling.
+skia_cc_library(
+    name = "skia_internal",
+    srcs = [
+        "//include:srcs",
+        "//src:srcs",
+    ],
+    hdrs = [
+        "//include:private_hdrs",
+        "//include:public_hdrs",
+        "//src:private_hdrs",
+    ],
+    defines = DEFAULT_DEFINES,
+    local_defines = DEFAULT_LOCAL_DEFINES,
+    visibility = [
+        "//dm:__subpackages__",
+        "//modules:__subpackages__",
+        "//tests:__subpackages__",
+        "//tools:__subpackages__",
+    ],
+    deps = [
+        "//src:deps",
+    ],
+)
+
+# gazelle:prefix go.skia.org/skia
+gazelle(name = "gazelle")
+
+###########
+# Mockery #
+###########
+
+alias(
+    name = "mockery",
+    actual = "@com_github_vektra_mockery_v2//:v2",
+    visibility = ["//visibility:public"],
+)

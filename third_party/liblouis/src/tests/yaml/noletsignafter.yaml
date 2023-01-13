@@ -1,0 +1,15 @@
+# There seems to be an issue when using the noletsignafter opcode. For
+# grade 1 contraction in the Norwegian language, we are using it to
+# prevent single letters in lists to be preceded by the legsign, e.g. dot
+# 56.
+
+# The problem is that using 'noletsignafter .', the following string is
+# being misinterpreted:
+
+#   1,7f.15
+
+# the number 7 after the comma is omitted in the output result.
+
+table: [tables/unicode.dis, tables/no-no-g1.ctb]
+tests:
+- ['1,7f.15', '⠼⠁⠂⠛⠰⠋⠄⠼⠁⠑', {xfail: true}]

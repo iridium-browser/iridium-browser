@@ -1,0 +1,27 @@
+<style>
+  #title {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  #rowList {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+
+<div id="container" part="container">
+  <div id="title">[[title]]</div>
+  <div id="rowList">
+    <template id="list" is="dom-repeat" items="[[accelRowDataArray]]">
+      <accelerator-row
+          accelerator-infos="[[item.acceleratorInfos]]"
+          accelerator-text="TODO(cambickel) add text from mojo when implemented"
+          action="[[item.layoutInfo.action]]"
+          description="[[item.layoutInfo.description]]"
+          layout-style="[[item.layoutInfo.style]]"
+          source="[[item.layoutInfo.source]]">
+      </accelerator-row>
+    </template>
+  </div>
+</div>

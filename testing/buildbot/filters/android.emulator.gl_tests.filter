@@ -1,0 +1,8 @@
+# https://crbug.com/1039873
+-WithWorkarounds/GLVirtualContextsTest.*
+-SetAggressivelyFreeResourcesTest.*
+-GLBGRAMipMapTest.*
+-GpuFenceTest.*
+
+# BGRA_8888 support is poor in Android emulator.
+-GLTextureImageBackingFactoryWithReadbackTest.ReadbackToMemory/BGRA_8888

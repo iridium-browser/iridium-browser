@@ -1,0 +1,130 @@
+// Copyright 2022 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#include "chrome/browser/touch_to_fill/payments/android/touch_to_fill_credit_card_controller.h"
+#include <memory>
+
+#include "chrome/browser/touch_to_fill/payments/android/touch_to_fill_credit_card_controller.h"
+#include "chrome/browser/touch_to_fill/payments/android/touch_to_fill_credit_card_view.h"
+#include "chrome/browser/touch_to_fill/payments/android/touch_to_fill_credit_card_view_controller.h"
+#include "chrome/test/base/chrome_render_view_host_test_harness.h"
+#include "components/autofill/content/browser/content_autofill_driver.h"
+#include "components/autofill/core/browser/autofill_driver.h"
+#include "components/autofill/core/browser/autofill_test_utils.h"
+#include "components/autofill/core/browser/data_model/autofill_profile.h"
+#include "components/autofill/core/browser/ui/touch_to_fill_delegate.h"
+#include "components/autofill/core/common/form_data.h"
+#include "testing/gmock/include/gmock/gmock.h"
+#include "testing/gtest/include/gtest/gtest.h"
+
+namespace {
+using ::autofill::CreditCard;
+using ::testing::ElementsAreArray;
+using ::testing::Return;
+
+class MockTouchToFillCreditCardViewImpl
+    : public autofill::TouchToFillCreditCardView {
+ public:
+  MockTouchToFillCreditCardViewImpl() {
+    ON_CALL(*this, Show).WillByDefault(Return(true));
+  }
+  ~MockTouchToFillCreditCardViewImpl() override = default;
+
+  MOCK_METHOD(bool,
+              Show,
+              (autofill::TouchToFillCreditCardViewController * controller,
+               base::span<const autofill::CreditCard* const> cards_to_suggest,
+               bool should_show_scan_credit_card));
+  MOCK_METHOD(void, Hide, ());
+};
+
+class MockContentAutofillDriver : public autofill::ContentAutofillDriver {
+ public:
+  MockContentAutofillDriver()
+      : autofill::ContentAutofillDriver(nullptr, nullptr) {}
+  MockContentAutofillDriver(const MockContentAutofillDriver&) = delete;
+  MockContentAutofillDriver& operator=(const MockContentAutofillDriver&) =
+      delete;
+  ~MockContentAutofillDriver() override = default;
+
+  MOCK_METHOD(void, SetShouldSuppressKeyboard, (bool), (override));
+};
+
+class MockTouchToFillDelegateImpl : public autofill::TouchToFillDelegate {
+ public:
+  MockTouchToFillDelegateImpl() {
+    ON_CALL(*this, GetDriver).WillByDefault(Return(&driver_));
+    ON_CALL(*this, ShouldShowScanCreditCard).WillByDefault(Return(true));
+  }
+  ~MockTouchToFillDelegateImpl() override = default;
+
+  base::WeakPtr<MockTouchToFillDelegateImpl> GetWeakPointer() {
+    return weak_factory_.GetWeakPtr();
+  }
+
+  MOCK_METHOD(void,
+              TryToShowTouchToFill,
+              (int query_id,
+               const autofill::FormData& form,
+               const autofill::FormFieldData& field));
+  MOCK_METHOD(autofill::AutofillDriver*, GetDriver, (), (override));
+  MOCK_METHOD(bool, HideTouchToFill, (), ());
+  MOCK_METHOD(bool, ShouldShowScanCreditCard, (), (override));
+  MOCK_METHOD(void, ScanCreditCard, (), (override));
+  MOCK_METHOD(void, OnCreditCardScanned, (const CreditCard& card), (override));
+  MOCK_METHOD(void, ShowCreditCardSettings, (), (override));
+  MOCK_METHOD(void, SuggestionSelected, (std::string unique_id), (override));
+
+ private:
+  MockContentAutofillDriver driver_;
+  base::WeakPtrFactory<MockTouchToFillDelegateImpl> weak_factory_{this};
+};
+
+}  // namespace
+
+class TouchToFillCreditCardControllerTest
+    : public ChromeRenderViewHostTestHarness {
+ protected:
+  TouchToFillCreditCardControllerTest() = default;
+  ~TouchToFillCreditCardControllerTest() override = default;
+
+  void SetUp() override {
+    ChromeRenderViewHostTestHarness::SetUp();
+
+    mock_view_ = std::make_unique<MockTouchToFillCreditCardViewImpl>();
+  }
+
+  std::unique_ptr<MockTouchToFillCreditCardViewImpl> mock_view_;
+  MockTouchToFillDelegateImpl mock_delegate_;
+  const CreditCard credit_card1_ = autofill::test::GetCreditCard();
+  const CreditCard credit_card2_ = autofill::test::GetCreditCard2();
+  const std::vector<const autofill::CreditCard*> credit_cards_ = {
+      &credit_card1_, &credit_card2_};
+  // The object to be tested.
+  autofill::TouchToFillCreditCardController credit_card_controller_;
+};
+
+TEST_F(TouchToFillCreditCardControllerTest, ShowPassesCardsToTheView) {
+  // Test that the cards have ptopagated to the view.
+  EXPECT_CALL(*mock_view_,
+              Show(&credit_card_controller_, ElementsAreArray(credit_cards_),
+                   testing::Eq(true)));
+
+  credit_card_controller_.Show(std::move(mock_view_),
+                               mock_delegate_.GetWeakPointer(), credit_cards_);
+}
+
+TEST_F(TouchToFillCreditCardControllerTest, ScanCreditCardIsCalled) {
+  credit_card_controller_.Show(std::move(mock_view_),
+                               mock_delegate_.GetWeakPointer(), credit_cards_);
+  EXPECT_CALL(mock_delegate_, ScanCreditCard);
+  credit_card_controller_.ScanCreditCard(nullptr);
+}
+
+TEST_F(TouchToFillCreditCardControllerTest, ShowCreditCardSettingsIsCalled) {
+  credit_card_controller_.Show(std::move(mock_view_),
+                               mock_delegate_.GetWeakPointer(), credit_cards_);
+  EXPECT_CALL(mock_delegate_, ShowCreditCardSettings);
+  credit_card_controller_.ShowCreditCardSettings(nullptr);
+}

@@ -1,0 +1,16 @@
+../lib/libclang-cpp.so
+../lib/libclang-cpp.so.16git
+../lib/libclang.so
+../lib/libclang.so.16.0.0git
+../lib/libclang.so.16git
+../lib/libLLVM-16.0.0git.so
+../lib/libLLVM-16git.so
+../lib/libLLVM.so
+../lib/libLTO.so
+../lib/libLTO.so.16git
+../lib/libRemarks.so
+../lib/libRemarks.so.16git
+../lib/LLVM-C.lib
+../lib/LTO.lib
+../lib/Remarks.lib
+../lib/libclang.lib

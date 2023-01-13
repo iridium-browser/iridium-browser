@@ -1,0 +1,46 @@
+# Copyright 2022 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//chrome/browser/resources/tools/build_webui.gni")
+
+assert(!is_android)
+
+build_webui("build") {
+  grd_prefix = "side_panel_customize_chrome"
+
+  static_files = [ "customize_chrome.html" ]
+
+  extra_grdp_deps = [ "icons:build_grdp" ]
+  extra_grdp_files = [ "$target_gen_dir/icons/resources.grdp" ]
+
+  # Files holding a Polymer element definition and have an equivalent .html file.
+  web_component_files = [
+    "app.ts",
+    "shortcuts.ts",
+    "categories.ts",
+    "check_mark_wrapper.ts",
+    "color.ts",
+    "colors.ts",
+    "appearance.ts",
+    "themes.ts",
+    "theme_snapshot.ts",
+  ]
+
+  non_web_component_files = [ "customize_chrome_api_proxy.ts" ]
+
+  html_files = []
+  foreach(f, web_component_files) {
+    html_files += [ string_replace(f, ".ts", ".html") ]
+  }
+
+  mojo_files_deps = [ "//chrome/browser/ui/webui/side_panel/customize_chrome:mojo_bindings_js__generator" ]
+  mojo_files = [ "$root_gen_dir/mojom-webui/chrome/browser/ui/webui/side_panel/customize_chrome/customize_chrome.mojom-webui.js" ]
+
+  ts_composite = true
+  ts_deps = [
+    "//third_party/polymer/v3_0:library",
+    "//ui/webui/resources:library",
+    "//ui/webui/resources/mojo:library",
+  ]
+}

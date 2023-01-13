@@ -1,0 +1,15 @@
+include_rules = [
+  "+absl",
+  "+benchmark",
+  "+dpf",
+  "+google/protobuf",
+  "+hwy",
+]
+
+specific_include_rules = {
+  "logging\.h": [
+    "+base/check.h",
+    "+base/check_op.h",
+    "+base/logging.h",
+  ]
+}

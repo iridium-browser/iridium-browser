@@ -1,0 +1,68 @@
+# Copyright 2018 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/ui_mode.gni")
+import("//tools/grit/preprocess_if_expr.gni")
+import("//tools/polymer/css_to_wrapper.gni")
+import("//tools/polymer/html_to_wrapper.gni")
+import("//ui/webui/resources/include_polymer.gni")
+import("//ui/webui/webui_features.gni")
+import("./cr_elements.gni")
+
+preprocess_folder = "$root_gen_dir/ui/webui/resources/preprocessed/cr_elements"
+
+group("preprocess") {
+  public_deps = [
+    ":html_wrapper_files_native",
+    ":preprocess_ts",
+  ]
+
+  if (include_polymer) {
+    public_deps += [
+      ":css_wrapper_files",
+      ":html_wrapper_files",
+    ]
+  }
+}
+
+# TS files are passed to a separate target so that they are not listed in the
+# |out_manifest|.
+preprocess_if_expr("preprocess_ts") {
+  in_folder = "."
+  out_folder = preprocess_folder
+  in_files = web_component_files_native_ts + native_html_files +
+             non_web_component_files_ts
+  if (include_polymer) {
+    in_files += web_component_files_polymer_ts + polymer_html_files +
+                icons_html_files + css_files
+  }
+}
+
+html_to_wrapper("html_wrapper_files_native") {
+  deps = [ ":preprocess_ts" ]
+  in_folder = preprocess_folder
+  out_folder = preprocess_folder
+  in_files = native_html_files
+  minify = optimize_webui
+  template = "native"
+}
+
+if (include_polymer) {
+  html_to_wrapper("html_wrapper_files") {
+    deps = [ ":preprocess_ts" ]
+    in_folder = preprocess_folder
+    out_folder = preprocess_folder
+    in_files = polymer_html_files + icons_html_files
+    scheme = "relative"
+    minify = optimize_webui
+  }
+
+  css_to_wrapper("css_wrapper_files") {
+    deps = [ ":preprocess_ts" ]
+    in_folder = preprocess_folder
+    out_folder = preprocess_folder
+    in_files = css_files
+    minify = optimize_webui
+  }
+}

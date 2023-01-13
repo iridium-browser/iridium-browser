@@ -1,0 +1,8 @@
+# DO NOT EDIT: This is a generated file.
+# See //bazel/exporter_tool/README.md for more information.
+
+_modules = get_path_info("../../modules", "abspath")
+
+skia_skresources_public = [ "$_modules/skresources/include/SkResources.h" ]
+
+skia_skresources_sources = [ "$_modules/skresources/src/SkResources.cpp" ]

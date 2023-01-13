@@ -1,0 +1,38 @@
+# Copyright 2021 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//chrome/updater/zip.gni")
+
+# This target builds the updater executable and unittests.
+group("linux") {
+  deps = [
+    ":updater",
+    ":updater_zip",
+  ]
+}
+
+source_set("updater_executable") {
+  sources = [ "main.cc" ]
+  deps = [ "//chrome/updater:base" ]
+}
+
+executable("updater") {
+  deps = [
+    ":updater_executable",
+    "//chrome/updater:constants_prod",
+  ]
+}
+
+executable("updater_test") {
+  deps = [
+    ":updater_executable",
+    "//chrome/updater:constants_test",
+  ]
+}
+
+artifact_zip("updater_zip") {
+  output = "$root_build_dir/updater.zip"
+  inputs = [ "$root_build_dir/qualification_app" ]
+  deps = [ "//chrome/updater/test/qualification_app" ]
+}

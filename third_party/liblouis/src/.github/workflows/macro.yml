@@ -1,0 +1,36 @@
+name: Test macro feature
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - README
+      - NEWS
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Test macro feature
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev
+    - name: Autogen && configure
+      run: |
+        ./autogen.sh
+        ./configure --enable-macros
+    - name: Make
+      run: make
+    - name: Make check
+      run: make check
+    - name: Store the test log
+      if: ${{ always() }} # store the test log even if the tests failed
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-suite-macro.log
+        path: tests/test-suite.log

@@ -1,0 +1,34 @@
+# Checks that lists are also sorted if concatenated during an assignment
+other_sources = [
+  "f.cc",
+  "e.cc"
+] + [
+  "h.cc",
+  "g.cc"
+]
+
+other_sources = [
+  ":f",
+  ":e"
+] + [
+  ":h",
+  "g"
+]
+
+executable("foo") {
+  sources = [
+    "b.cc",
+    "a.cc"
+  ] + [
+    "d.cc",
+    "c.cc"
+  ] + other_sources
+
+  deps = [
+    ":b",
+    ":a"
+  ] + [
+    ":d",
+    ":c"
+  ] + other_sources
+}

@@ -1,0 +1,35 @@
+{
+  "seqNum": 820263768,
+  "type": "ANSWER",
+  "result": "ok",
+  "answer": {
+    "castMode": "mirroring",
+    "udpPort": 1234,
+    "sendIndexes": [1, 3],
+    "ssrcs": [1233324, 2234222],
+    "constraints": {
+      "audio": {
+        "maxSampleRate": 96000,
+        "maxChannels": 5,
+        "minBitRate": 32000,
+        "maxBitRate": 320000
+      },
+      "video": {
+        "maxPixelsPerSecond": 62208000,
+        "minResolution": {"width": 320, "height": 240},
+        "maxDimensions": {"width": 1920, "height": 1080, "frameRate": "60"},
+        "minBitRate": 300000,
+        "maxBitRate": 10000000,
+        "maxDelay": 4000
+      }
+    },
+    "display": {
+      "dimensions": {"width": 1920, "height": 1080, "frameRate": "60000/1001"},
+      "aspectRatio": "64:27",
+      "scaling": "sender"
+    },
+    "receiverRtcpEventLog": [0, 1],
+    "receiverRtcpDscp": [234, 567],
+    "rtpExtensions": ["adaptive_playout_delay"]
+  }
+}

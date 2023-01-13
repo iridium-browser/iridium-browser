@@ -1,0 +1,48 @@
+diff --git a/third_party/libtiff/tif_getimage.c b/third_party/libtiff/tif_getimage.c
+index 23cb40951..2153f1348 100644
+--- a/third_party/libtiff/tif_getimage.c
++++ b/third_party/libtiff/tif_getimage.c
+@@ -962,6 +962,9 @@ gtStripContig(TIFFRGBAImage* img, uint32* raster, uint32 w, uint32 h)
+ 	int ret = 1, flip;
+         tmsize_t maxstripsize;
+ 
++	if ((tmsize_t)img->row_offset > TIFF_SSIZE_T_MAX || (size_t)h > (size_t)TIFF_SSIZE_T_MAX)
++		return (0);
++
+ 	TIFFGetFieldDefaulted(tif, TIFFTAG_YCBCRSUBSAMPLING, &subsamplinghor, &subsamplingver);
+ 	if( subsamplingver == 0 ) {
+ 		TIFFErrorExt(tif->tif_clientdata, TIFFFileName(tif), "Invalid vertical YCbCr subsampling");
+diff --git a/third_party/libtiff/tif_read.c b/third_party/libtiff/tif_read.c
+index e63810cc7..dd3002669 100644
+--- a/third_party/libtiff/tif_read.c
++++ b/third_party/libtiff/tif_read.c
+@@ -558,6 +558,8 @@ _TIFFReadEncodedStripAndAllocBuffer(TIFF* tif, uint32 strip,
+                                     void **buf, tmsize_t bufsizetoalloc,
+                                     tmsize_t size_to_read)
+ {
++    assert(size_to_read > 0);
++
+     tmsize_t this_stripsize;
+     uint16 plane;
+ 
+diff --git a/third_party/libtiff/tiffconf.h b/third_party/libtiff/tiffconf.h
+index 6292cc5cd..f57f6f709 100644
+--- a/third_party/libtiff/tiffconf.h
++++ b/third_party/libtiff/tiffconf.h
+@@ -132,13 +132,16 @@
+ 
+ #if defined(_WIN64)
+ #define TIFF_SSIZE_T signed __int64
++#define TIFF_SSIZE_T_MAX INT64_MAX
+ #else
+ #define TIFF_SSIZE_T signed int
++#define TIFF_SSIZE_T_MAX INT_MAX
+ #endif
+ 
+ #else
+ 
+ #define TIFF_SSIZE_T signed long
++#define TIFF_SSIZE_T_MAX LONG_MAX
+ 
+ #endif
+ 

@@ -1,0 +1,175 @@
+// Copyright 2022 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#include "ash/system/notification_center/notification_center_tray.h"
+
+#include <string>
+
+#include "ash/constants/tray_background_view_catalog.h"
+#include "ash/public/cpp/ash_view_ids.h"
+#include "ash/public/cpp/shelf_config.h"
+#include "ash/shelf/shelf.h"
+#include "ash/system/notification_center/notification_center_bubble.h"
+#include "ash/system/tray/tray_background_view.h"
+#include "ash/system/tray/tray_bubble_view.h"
+#include "ash/system/tray/tray_container.h"
+#include "ui/base/metadata/metadata_header_macros.h"
+#include "ui/base/metadata/metadata_impl_macros.h"
+#include "ui/message_center/message_center.h"
+#include "ui/message_center/message_center_types.h"
+#include "ui/views/layout/flex_layout.h"
+
+namespace ash {
+
+NotificationCenterTray::NotificationCenterTray(Shelf* shelf)
+    : TrayBackgroundView(shelf,
+                         TrayBackgroundViewCatalogName::kNotificationCenter,
+                         RoundedCornerBehavior::kStartRounded),
+      notification_icons_controller_(
+          std::make_unique<NotificationIconsController>(shelf)) {
+  SetID(VIEW_ID_SA_NOTIFICATION_TRAY);
+  SetLayoutManager(std::make_unique<views::FlexLayout>());
+  set_use_bounce_in_animation(false);
+
+  message_center::MessageCenter::Get()->AddObserver(this);
+
+  tray_container()->SetMargin(
+      /*main_axis_margin=*/kUnifiedTrayContentPadding -
+          ShelfConfig::Get()->status_area_hit_region_padding(),
+      0);
+
+  // TODO(b/255986529): Rewrite the `NotificationIconsController` class so that
+  // we do not have to add icon views that are owned by the
+  // `NotificationCenterTray` from the controller. We should make sure views are
+  // only added by host views.
+  notification_icons_controller_->AddNotificationTrayItems(tray_container());
+}
+
+NotificationCenterTray::~NotificationCenterTray() {
+  message_center::MessageCenter::Get()->RemoveObserver(this);
+}
+
+void NotificationCenterTray::OnSystemTrayVisibilityChanged(
+    bool system_tray_visible) {
+  system_tray_visible_ = system_tray_visible;
+  UpdateVisibility();
+}
+
+bool NotificationCenterTray::IsBubbleShown() const {
+  return !!bubble_;
+}
+
+std::u16string NotificationCenterTray::GetAccessibleNameForTray() {
+  return std::u16string();
+}
+
+void NotificationCenterTray::HandleLocaleChange() {}
+
+void NotificationCenterTray::HideBubbleWithView(
+    const TrayBubbleView* bubble_view) {
+  if (bubble_->GetBubbleView() == bubble_view)
+    CloseBubble();
+}
+
+void NotificationCenterTray::ClickedOutsideBubble() {
+  CloseBubble();
+}
+
+void NotificationCenterTray::CloseBubble() {
+  if (!bubble_)
+    return;
+
+  bubble_.reset();
+  SetIsActive(false);
+
+  // Inform the message center that the bubble has closed so that popups are
+  // created for new notifications.
+  message_center::MessageCenter::Get()->SetVisibility(
+      message_center::VISIBILITY_TRANSIENT);
+}
+
+void NotificationCenterTray::ShowBubble() {
+  if (bubble_)
+    return;
+
+  bubble_ = std::make_unique<NotificationCenterBubble>(this);
+  SetIsActive(true);
+
+  // Inform the message center that the bubble is showing so that we do not
+  // create popups for incoming notifications and dismiss existing popups.
+  message_center::MessageCenter::Get()->SetVisibility(
+      message_center::VISIBILITY_MESSAGE_CENTER);
+}
+
+void NotificationCenterTray::UpdateAfterLoginStatusChange() {
+  UpdateVisibility();
+}
+
+TrayBubbleView* NotificationCenterTray::GetBubbleView() {
+  return bubble_ ? bubble_->GetBubbleView() : nullptr;
+}
+
+views::Widget* NotificationCenterTray::GetBubbleWidget() const {
+  return bubble_ ? bubble_->GetBubbleWidget() : nullptr;
+}
+
+void NotificationCenterTray::OnAnyBubbleVisibilityChanged(
+    views::Widget* bubble_widget,
+    bool visible) {
+  if (!IsBubbleShown())
+    return;
+
+  if (bubble_widget == GetBubbleWidget())
+    return;
+
+  if (visible) {
+    // Another bubble is becoming visible while this bubble is being shown, so
+    // hide this bubble.
+    CloseBubble();
+  }
+}
+
+void NotificationCenterTray::OnNotificationAdded(
+    const std::string& notification_id) {
+  UpdateVisibility();
+}
+
+void NotificationCenterTray::OnNotificationDisplayed(
+    const std::string& notification_id,
+    const message_center::DisplaySource source) {
+  UpdateVisibility();
+}
+
+void NotificationCenterTray::OnNotificationRemoved(
+    const std::string& notification_id,
+    bool by_user) {
+  UpdateVisibility();
+}
+
+void NotificationCenterTray::OnNotificationUpdated(
+    const std::string& notification_id) {
+  UpdateVisibility();
+}
+
+void NotificationCenterTray::UpdateVisibility() {
+  const bool new_visibility =
+      message_center::MessageCenter::Get()->NotificationCount() > 0 &&
+      system_tray_visible_;
+  if (new_visibility == visible_preferred())
+    return;
+
+  SetVisiblePreferred(new_visibility);
+
+  notification_icons_controller_->UpdateNotificationIcons();
+  notification_icons_controller_->UpdateNotificationIndicators();
+
+  // We should close the bubble if there are no more notifications to show.
+  if (!new_visibility && bubble_)
+    CloseBubble();
+}
+
+BEGIN_METADATA(NotificationCenterTray, TrayBackgroundView)
+END_METADATA
+
+}  // namespace ash

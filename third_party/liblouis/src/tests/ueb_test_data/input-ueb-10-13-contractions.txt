@@ -1,0 +1,1173 @@
+#   10.8.1 page 133
+
+amount
+am.t
+
+baroness
+b>o;s
+
+bastion
+bas;n
+
+blessing
+b.s+
+
+business
+busi;s
+
+cancel
+c.el
+
+carefully
+c>e;lly
+
+cement
+ce;t
+
+cheerful
+*e};l
+
+chockfull
+*ock;ll
+
+circuity
+circu;y
+
+commencement
+comm;e;t
+
+comment
+com;t
+
+confusion
+3fu.n
+
+country
+c.try
+
+county
+c.ty
+
+creation
+cr1;n
+
+dancer
+d.er
+
+deity
+de;y
+
+Du Plessis
+,du ,p.sis
+
+experienced
+exp}i;ed
+
+expressionless
+expres.n.s
+
+extramental
+extra;tal
+
+fences
+f;es
+
+finesse
+fi;se
+
+found
+f.d
+
+fractional
+frac;nal
+Frances
+,fr.es
+
+governess
+gov};s
+
+Guinness
+,gu9;s
+
+incongruous
+9c;gru|s
+
+influenceable
+9flu;eable
+
+lioness
+lio;s
+
+longevity
+l;gev;y
+
+memento
+me;to
+
+mongoose
+m;goose
+
+mountain
+m.ta9
+
+noblesse
+nob.se
+
+persuasion
+p}sua.n
+
+pity
+p;y
+
+pongee
+p;gee
+
+prong
+pr;g
+
+rationally
+ra;nally
+
+rotation
+rota;n
+
+Rountree
+,r.tree
+
+séance
+s~/e.e
+
+silenced
+sil;ed
+
+sinfulness
+s9;l;s
+
+Spencer
+,sp;er
+
+sponge
+sp;ge
+
+sound
+s.d
+
+sublessee
+sub.see
+
+Tennessee
+,t5;see
+
+thence
+?;e
+
+tongue
+t;gue
+
+unfulfilled
+un;lfill$
+
+unless
+un.s
+
+unlessoned
+un.son$
+
+Wenceslaus
+,w;eslaus
+
+wounded
+w.d$
+
+"alone"ness
+8al"o0ness
+
+ancestor
+ance/or
+
+channel-less
+*annel-less
+
+congruous
+3gru|s
+
+electroencephalogram
+electro5cephalogram
+
+encephalitis
+5cephalitis
+
+fiancé
+fianc~/e
+
+inessential
+9ess5tial
+
+lessee
+lessee
+
+moongod
+moongod
+
+nongaseous
+nongase|s
+
+one-ness
+"o-ness
+
+'ound
+'|nd
+
+pityard
+pity>d
+
+~under
+  ++++
+regardless
+re_1g>d_'less
+
+#   10.8.2 page 135
+
+AttenTION!
+,att5,,tion6
+
+AWful
+,,aw,'ful
+
+ELesson
+,e,lesson
+
+ExperiMental
+,exp}i,m5tal
+
+MyAncestor
+,my,ance/or
+
+#  10.8.4 page 135
+
+chieftainess
+*iefta9ess
+
+citizeness
+citiz5ess
+
+heatheness
+h1!ness
+
+#   10.9.1 page 136
+
+You should receive your letter tomorrow afternoon.
+,y %d rcv yr lr tm afn4
+
+an about-face from the quick-witted go-between
+an ab-face f ! qk-witt$ g-2t
+
+"Good-bye, Miss Little-Smythe!"
+8,gd-bye1 ,miss ,ll-,smy!60
+
+(braille–first writing system for blind people)
+"<brl,-f/ writ+ sy/em = bl p">
+
+~italic
+                  ++++++++++++++++++++++++++++++++++++++++++++++
+According to him, neither Little Rock, Much Hadham nor Port Said would be much fun.
+,ac to hm1 .7nei ,ll ,rock1 ,m* ,_hham nor ,port ,sd.' wd 2 m* fun4
+
+to-night
+to-ni<t
+
+above/below
+above_/bel{
+
+PRINT/BRAILLE
+,,pr9t_/,,braille
+
+friend@rogers.com
+fri5d`arog}s4com
+
+www.living.beyond.myself.org
+www4liv+4beyond4myself4org
+
+#   10.9.2 page 137
+
+aboveground
+abvgr.d
+
+belowdecks
+2ldecks
+
+Friendly Islands
+,frly ,isl&s
+
+godchildren
+god*n
+
+goodafternoon
+gdafn
+
+hereabouts
+"habs
+
+lettermen
+lrm5
+
+Quicker Delivery
+,qk} ,deliv}y
+
+repaid
+repd
+
+suchlike
+s*like
+
+Our boyfriends mustn't miss tomorrow's afterdinner speaker!
+,|r boyfrs m/n't miss tm's afd9n} sp1k}6
+
+Mr Letterman could've quickly rebrailled the Aftercare Newsletter.
+,mr ,lrman cd've qkly rebrld ! ,afc>e ,newslr4
+
+I am brailling the newsletters' headlines.
+,i am braill+ ! newslrs' h1dl9es4
+
+friend(s)
+fri5d"<s">
+
+~bold
+     ++
+littler
+littl~1}
+
+print/braille
+pr9t_/braille
+
+~italic
+++
+unnecessary
+.1un.'necess>y
+
+www.afterschool.gov
+www4aft}s*ool4gov
+
+aftereffect
+aft}e6ect
+
+afterimage
+aft}image
+
+blinded
+bl9d$
+
+blinding
+bl9d+
+
+befriended
+2fri5d$
+
+friendy
+fri5dy
+
+abouts
+ab|ts
+
+acrosses
+acrosses
+
+againe
+aga9e
+
+almosts
+almo/s
+
+hims
+hims
+
+hereinbefore
+"h9be=e
+
+hereinbelow
+"h9bel{
+
+inbetween
+9betwe5
+
+misconceived
+misconceiv$
+
+"couldx"
+8c|ldx0
+
+Himalayas
+,himalayas
+
+Suchet
+,su*et
+
+Yourcenar
+,y|rc5>
+
+#   10.9.3 page 139
+
+Braillette board
+,brltte bo>d
+
+Marcillat-en-Combraille, France
+,m>cillat-en-,combrl1 ,fr.e
+
+Greatford Hall
+,grt=d ,hall
+
+greatgreatgreatgrandchildren
+grtgrtgrtgr&*n
+
+Greatorex
+,grtorex
+
+Blindcraft
+,blcraft
+
+Blindheim
+,blheim
+
+Firstbank
+,f/bank
+
+Firstchoice
+,f/*oice
+
+"goodz"
+8gdz0
+
+Mr Feelgreat from Goodge Street
+
+,mr ,feelgrt f ,gdge ,/reet
+
+Ms Letterkenny's Littleport home.
+,ms ,lrk5ny's ,llport home4
+
+Quicksburg, Virginia
+,qksburg1 ,virg9ia
+
+Blindoc
+,bl9doc
+
+www.braillex.com
+www4braillex4com
+
+Firstamerica
+,fir/am}ica
+
+Goodacre
+,goodacre
+
+Littlearm
+,little>m
+
+Letterewe Estate
+,lett}ewe ,e/ate
+
+Mr Linkletter of Portlittle
+,mr ,l9klett} ( ,portlittle
+
+Bisquick Pancake Mix
+,bisquick ,pancake ,mix
+
+Ted Makegood of Goodena
+,t$ ,makegood ( ,good5a
+
+#   10.9.4 page 140
+
+Herf gun
+,herf gun
+
+"mst" files
+8mst0 files
+
+~italic
++++++++
+SOMESCH RIVER
+.1,,somesch ,,riv}
+
+www.sch.edu.au
+www4s*4$u4au
+
+#   10.9.5 page 141
+
+ab initio
+;ab 9itio
+
+et al–
+et ;al,-
+Al-Azar
+;,al-,az>
+Alt.: 3000 ft.
+;,alt43 #cjjj ft4
+
+"Hm, would Al like this CD?"
+8;,hm1 wd ;,al l ? ;,,cd80
+
+Grtsamada
+;,grtsamada
+
+BLCUP
+;,,blcup
+
+spelled "ei" or "ie"?
+spell$ 8;ei0 or 8ie08
+
+gd lnch. TM sd yu shd meet me b4 yr mtg 2 read lr. wl b qk. l8r.
+;gd ln*4 ;,,tm ;sd yu shd meet me b#d ;yr mtg #b r1d ;lr4 wl ;b ;qk4 l#hr4
+
+#   10.9.6 page 141
+
+Dobrljin
+;;,dobrljin
+
+ozbrl
+;;ozbrl
+
+#   Appendix 1.2
+
+ahimsa
+ahimsa
+
+braillist
+brailli/
+
+declaration
+decl>a;n
+
+drafter
+draft}
+
+lacrosse
+lacrosse
+
+marabout
+m>ab|t
+
+mustache
+mu/a*e
+
+mustang
+mu/ang
+
+muster
+mu/}
+
+necessarily
+necess>ily
+
+rafter
+raft}
+
+shoulder
+%|ld}
+
+#   Appendix 1.3
+
+abouts
+ab|ts
+
+acrosses
+acrosses
+
+againe
+aga9e
+
+almosts
+almo/s
+
+hims
+hims
+
+#   Appendix 1.4
+
+aftereffect
+aft}e6ect
+
+afterimage
+aft}image
+
+blinded
+bl9d$
+
+blinding
+bl9d+
+
+befriended
+2fri5d$
+
+#   Appendix 1.5
+
+hereinbefore
+"h9be=e
+
+inbetween
+9betwe5
+
+misconceived
+misconceiv$
+
+~end
+
+#   10.10.2 page 142
+advanced adv.ed aright a"r
+bastion bas;n coherence coh];e
+Congo ,3go congratulate 3gratulate
+congruity 3gru;y dancer d.er
+dispirited di_s$ distinct 4t9ct
+disturbed 4turb$ happiness happi;s
+meander me&] named "nd
+oneness "o;s thence ?;e
+timer "tr vengeance v5ge.e
+wither )]
+captainess capta9ess
+
+#   10.10.3 page 142
+afford af=d bathed ba!d
+calisthenics calis!nics coffee C(fee
+effort ef=t gathered ga!r$
+Leander ,le&] offer (f]
+office (fice other o!r
+Parthenon ,p>!non proffer pr(f]
+slithered sli!r$ theatre !atre
+then !n weathered w1!r$
+thence ?;e
+
+#   10.10.4 page 143
+beatitude 2atitude Beatrix ,2atrix
+bedraggled 2dra7l$ benevolence 2nevol;e
+benighted 2ni<t$ benign 2nign
+berated 2rat$
+congee 3gee congenial 3g5ial
+dishonesty 4h"o/y distance 4t.e
+
+beach b1* beautiful b1uti;l
+bed b$ benefit b5efit
+benzene b5z5e berth B]?
+dish di% dishevelled di%evell$
+
+#   10.10.5 page 143
+bacchanal bac*anal bear be>
+fear fe> heart he>t
+nearly ne>ly nuclear nucle>
+saccharine sac*>9e sting /+
+egghead e7h1d
+
+#   10.10.6 page 144
+Clemenceau ,clem;eau commenced comm;ed
+experienced exp]i;ed
+influenceable 9flu;eable
+silenceable sil;eable
+silencer sil;er Spencer ,sp;er
+
+#   10.10.7 page 144
+adhered adh]$ adherent adh]5t
+adherer adh]] cohered coh]$
+component compon5t effulgent e6ulg5t
+heredity h]$;y onerous on]\s
+opponent oppon5t Parthian ,p>?ian
+poisoned poison$ prisoner prison]
+shadow %ad[ sooner soon]
+stoned /on$ telephoned telephon$
+Thaddeus ,?addeus toner ton]
+advanced adv.ed
+
+#   10.10.8 page 145
+apartheid a"pheid asthma as?ma
+dishevelled di%evell$ gingham g+ham
+hypotheses hypo!ses isthmus is?mus
+posthumous po/hum\s stronghold /r;ghold
+towhee t[hee where'er :]e']
+whereas ":as wherever :]"e
+
+#   10.10.9 page 145
+chemotherapy *emo!rapy
+chlordane *lordane whaddaya :addaya
+
+#   10.10.10 page 145
+enough–bein' 5,-2in'
+in..... in44444
+Was that in?–in bounds? ,0 t 98,-in b.ds8
+"Enough!" ^8,5\<6^0
+IN MY HOUSE ,,,9 my h\se,'
+
+#   10.11.1 page 146
+Airedale ,airedale Bighorn ,bighorn
+blowhard bl[h>d bottleneck bottleneck
+carthorse c>thorse cowherd c[h]d
+dumbbell dumbbell egghead e7h1d
+fathead fath1d flearidden fl1ridd5
+grasshopper grasshopp]
+hideaway hideaway indiarubber 9diaru2]
+insofar 9sof> Jamestown ,jamest[n
+kettledrum kettledrum
+longhand l;gh& northeast nor?1/
+painstaking pa9stak+ photoflash photofla%
+pineapple p9eapple rawhide rawhide
+Southend ,s\?5d stateroom /ateroom
+storeroom /oreroom stronghold /r;ghold
+sweetheart sweethe>t tearoom t1room
+toenail toenail wiseacre wiseacre
+
+#   10.11.2 page 146
+Cunnyngham ,cunnyngham
+knighthood kni<thood mishandle mish&le
+mishap mishap mishear mishe>
+Newhaven ,newhav5 shanghaied %anghai$
+Sontheim ,sontheim stronghold /r;ghold
+Brigham ,bri<am Chatham ,*a?am
+Higham ,Hi<am
+
+#   10.11.3 page 147
+bedazzle 2dazzle bedevil 2devil
+benighted 2ni<t$ benumb 2numb
+berate 2rate bereave 2r1ve
+congeal 3g1l congruent 3gru5t
+disharmony 4h>mony dishonest 4h"o/
+
+#   10.11.4 page 147
+preamplifier preamplifi]
+readjust readju/ reappoint reappo9t
+reassure reassure
+
+#   10.11.5 page 147
+abbreviate a2reviate accent a35t
+affect a6ect aggressive a7ressive
+aqueduct aqu$uct arise >ise
+Benedict ,b5$ict deduce d$uce
+denominate d5om9ate denote d5ote
+denouement d5\e;t denounce d5\nce
+derail d]ail deregister d]egi/]
+derivable d]ivable derogatory d]ogatory
+edacious $aci\s edict $ict
+edition $i;n educe $uce
+effaceable e6ac1ble effect e6ect
+enormous 5orm\s enounce 5\nce
+enumerate 5um]ate erase ]ase
+erosion ]o.n froward fr[>d
+irredentist irr$5ti/ malediction mal$ic;n
+mistake mi/ake mistrust mi/ru/
+multinomial mult9omial
+pandemonium p&emonium
+perinatal p]9atal predate pr$ate
+predecease pr$ec1se predecessor pr$ecessor
+predestine pr$e/9e predicament pr$ica;t
+prediction pr$ic;n predominate pr$om9ate
+prerequisite pr]equisite
+prerogative pr]ogative
+profanity pr(an;y professor pr(essor
+profile pr(ile profoundly pr(.dly
+profusion pr(u.n redact r$act
+rededicate r$$icate redeemable r$eemable
+redouble r$\ble renege r5ege
+renegotiate r5egotiate
+renewable r5ewable renumber r5umb]
+reread r]1d sedate s$ate
+Vandyke ,v&yke
+But:
+aerofoil a]ofoil antitype antitype
+biofeedback biofe$back
+centimeter c5timet] cofounder cof.d]
+disulphide disulphide filofax filofax
+gasometer gasomet] inessential 9ess5tial
+infrared 9frar$ kilowatt kilowatt
+microfilm microfilm prounion prounion
+retroflex retroflex riboflavin riboflav9
+styrofoam /yrofoam subbasement subbase;t
+unamended unam5d$ underived und]iv$
+
+#  10.11.6 page 149
+anteater ant1t]
+contradistinction 3tradi/9c;n
+disease 41se extramental extra;tal
+heartsease he>ts1se incongruity 9c;gru;y
+incongruous 9c;gru\s indistinct 9di/9ct
+indistinguishable 9di/+ui%able
+motheaten mo?1t5 northeast nor?1/
+redistribution r$i/ribu;n
+speakeasy sp1k1sy spreadeagle spr1d1gle
+uncongenial unc;g5ial undisturbed undi/urb$
+unfulfilled un;lfill$ unlessoned un.son$
+
+disingenuous 49g5u\s
+electroencephalogram electro5cephalogram
+
+#   10.11.7 page 150
+acreage acr1ge agreeable agre1ble
+arboreal >bor1l baroness b>o;s
+boredom bor$om Brigham ,bri<am
+changeability *ang1bil;y
+chargeable *>g1ble Chatham ,*a?am
+delineate del91te dukedom duk$om
+effaceable e6ac1ble European ,europ1n
+finery f9]y foreseeably =ese1bly
+freedom fre$om genealogy g51logy
+governess gov];s Higham ,hi<am
+imagery imag]y laureate laur1te
+likeable lik1ble lineage l91ge
+lineal l91l lioness lio;s
+midwifery midwif]y mileage mil1ge
+noticeable notic1ble oleaginous ol1g9\s
+orangery orang]y peaceable p1c1ble
+permeable p]m1ble permeate p]m1te
+popedom pop$om rateable rat1ble
+savagery savag]y venereal v5]1l
+
+biscuity biscuity chieftainess *iefta9ess
+Chisholm ,*isholm citizeness citiz5ess
+fruity fruity orangeade orangeade
+rabbity ra2ity twofold twofold
+
+#   10.11.8 page 151
+areaway >1way ebbing e2+
+eggplant e7plant ideas id1s
+seaman s1man seashore s1%ore
+stiffly /i6ly teatime t1"t
+
+#   10.11.9 page 151
+aerial a]ial aerobic a]obic
+Baedeker ,ba$ek]
+Betws-y-Coed ,BEtws-;y-,co$
+Blaenau Ffestiniog ,bla5au ,ffe/9iog
+Caernarvon ,ca]n>von Daedalus ,da$alus
+diaeresis dia]esis
+encyclopaedia 5cyclopa$ia
+faerie fa]ie Goering ,go]+
+Gruenfeld ,gru5feld Judaean ,juda1n
+Liliaceae ,liliac1e maenad ma5ad
+Oedipus ,o$ipus orthopaedic or?opa$ic
+paean pa1n phoenix pho5ix
+Schoenberg ,s*o5b]g subpoena subpo5a
+
+færie fa^6erie
+
+#   10.12.1 page 152
+WHO ,,who [World Health Organisation]
+OED ,,oed [Oxford English Dictionary]
+kwh or kWh kwh or k,wh
+CH6-1234 ,,ch#f-#abcd
+W2N 6CH ,w#b,n #f,,ch
+US ,,us [United States]
+MSH ,,msh [Markham-Stouffville Hospital]
+DAR ,,dar [Daughters of the American Revolution]
+EST ,,est [Eastern Standard Time]
+TEN/gh ,,ten_/gh [initials at end of letter]
+ChE ,ch,e [Chemical Engineer]
+MCh ,m,ch [Master of Surgery, from "Chirurgiae"]
+POW ,,pow [prisoner of war]
+
+#   10.12.2 page 153
+S. Da. ;,s4 ,da4 N S ;,n ;,s
+Xft. ,xft4 G.B.S. ,g4,b4,s4
+C. P. E. Bach ;,c4 ;,p4 ;,e4 ,ba*
+J-P. Sartre ;;,j-,p4 ,s>tre
+V & A ;,v @& ,a p. 15 ;p4 #ae
+c 1600 ;c #afjj 7 L #g ;,l
+3 N m #c ;,n ;m [3 newton metres]
+Macbeth V i 8 or V.i.8
+,macbe? ;,v i #h or ,v4i4#h
+U. of K. ;,u4 ( ;,k4
+Can ,c [Canada] It. ,x4 [Italian]
+
+FORTRAN ,,=tran AFofL ,a,f(,l
+prof pr(
+
+CANDU reactor ,,c&u r1ctor
+ch. 7 ch4 #g ch.7 *4#g
+par3 p>#c 4-Hers #d-,h]s
+qwerty qw]ty radar rad>
+BEd ,b,$ ed. $4
+NOW ,,n[ Ariz ,>iz
+BCer ,b,c] St ,st
+St. ,st4
+CHUM Radio ,,*um ,radio
+START ,,/>t [Strategic Arms Reduction Treaty]
+Sh$40 ,%@s#dj [40 Shanghai dollars]
+1 in. #a in4 9-in dia. #i-9 dia4
+Belg. ,belg4 cont. 3t4
+Dist. ,4t4 nem. con. nem4 con4
+ASEAN ,,as1n SEATO ,,s1to
+7 ins #g 9s 7ins #g;ins
+Inc. ,9c4 Gov. Gen. ,gov4 ,g54
+Minn. ,m9n4 MiniPC ,m9i,,pc
+MInstP ,m,9/,p [Member, Institute of Physics]
+INXS ,,9xs [rock band "in excess"]
+1-800-INFO #a-#hjj-,,9fo
+
+CD ;,,cd FRS ;,,frs
+3 yrs 6 mths #c ;yrs #f m?s
+
+#   10.12.3 page 155
+braille_it_better@learn.org
+braille.-it.-bett]@ale>n4org
+children-do-great@teach.net
+*n-d-gr1t@at1*4net
+world@large.com _w@al>ge4com
+www.rubberchicken.com/menus
+www4ru2]*ick54com_/m5us
+www.one.in.a.hundred.org
+www4"o494a4hundr$4org
+http://www.99chances.com
+http3_/_/www4#ii;'*.es4com
+c:\brailledocuments\letters.txt
+C3_*brailledocu;ts_*lett]s4txt
+c:\contractions\wordsigns.doc
+c3_*contrac;ns_*^wsigns4doc
+c:\InfoForSteven\PhoneNumbers.xls
+c3_*,9fo,=,/ev5_*,ph"o,numb]s4xls
+c:\ideas\child-of-the-sea.doc
+c3_*id1s_**ild-(-!-sea4doc
+c:\poem ideas\my child's smile.doc
+c3_*poem id1s_*my *'s smile4doc
+c:\2010DIARY\March.txt
+c3_*#bjaj;',,di>y_*,m>*4txt
+
+#   10.12.4 page 156
+coulda cda [could have] mebbe me2e [maybe]
+th' th' [the] pinny p9ny [penny]
+depity dep;y [deputy] your yr [you're]
+wher :] [where] somers som]s [somewhere]
+theirselves _!selves [themselves]
+dint d9t [didn't] bofe b(e [both]
+'stracted '/ract$ [distracted]
+fayther fay!r [father]
+distruction 4truc;n [destruction]
+fer f] [for] musta m/a [must have]
+goodun gdun [good one] lyedee ly$ee [lady]
+com'ere com']e [come here]
+
+#   10.12.5 page 156
+th– th,- say pl... say pl444
+Tell me wh-. ,tell me wh-4
+-tion -tion -ccio -ccio
+-ean -ean -ence -5ce
+-ing -9g -ount -\nt
+-in -in -est -e/
+-ed -$ -ar ->
+ar- >- be- be-
+-es -es -s -;s
+~s @9s
+
+#   10.12.6 page 157
+Bighorn ,bighorn chemotherapy *emo!rapy
+Hades ,hades Hermione ,h]mione
+Mortimer ,mortim] Newhaven ,newhav5
+OED ,,oed [Oxford English Dictionary]
+Stalingrad ,/al9grad US ,,us [United States]
+Vietnamese ,vietnamese
+
+#   10.12.7 page 157
+Berea ,2rea [or] ,b]ea
+Ione ,ione [or] ,i"o
+Simone ,simone [or] ,sim"o
+Townshend ,t[nsh5d [or] ,t[n%5d
+Twillingate ,twill9gate [or] ,twill+ate
+
+#   10.12.11 page 158
+thecond thentury !cond !ntury [second century]
+thenotaph !notaph [cenotaph]
+sisther or thithter sis!r or ?i?t] [sister]
+thuthpenthe ?u?p5! [suspense]
+
+#   10.12.12 page 158
+knowledge ^1"k^'l$ge "just"ice 8ju/0ice
+rather ra.1?.'] verY v],y
+you'll y'll go'n go'n
+shall .1%.'all child(ish) *ild"<i%">
+this'll ?'ll out'a \t'a
+grandEST gr&,,e/ profit .1pro.'fit
+with(er) )"<]"> "the"s 8!0s
+THIRSTy ,,?ir/,'y ni(gh)t ni"<<">t
+touched t\^1*^'$ flowing fl[.1+
+mist-ing mi/-.19g thou're ?\'re
+enough 5\_1< wer(e) w]"<e">
+his'n his'n in't 9't
+invalid .19.'valid (be)long "<be">l;g
+dissent .1dis.'s5t O'Connor ,o',connor
+"en"gage 850gage uneaten un.1eat5
+CliffEdge ,cliff,$ge dragg(ing) dragg"<+">
+rubb'd rubb'd NorthEast ,nor?,ea/
+those ?_2ose there(upon) "!"<^u">
+HANDsome ,,h&,'"s WordPerfect ,^w,p]fect
+founDAtion f\n,d,a;n boundary b.d.1>y
+judg"mental" judg^8m5tal^0
+count(less) c.t"<less"> CarLess ,c>,less
+grey'ound grey'\nd
+togetherness toge!r.1ness
+"be"friend 8be0fri5d
+
+#   10.12.13 page 160
+t-n ;t-;n J----y ;,j----;y
+s– ;s,- S— ;,s",-
+n...ce n444ce [niece] fr...nd fr444nd [friend]
+w...ghed w444<$ [weighed]
+
+#   10.12.14 page 160
+we-e-ellll we-;e-ellll
+a-a-ah—ch-o-o-oh a-a-ah,-ch-o-o-oh
+mmm-more mmm-m shhhh %hhh
+errrr ]rrr pfft p6t
+doodle-e-do doodle-;e-d
+the-e-enk !-;e-5k so-o-o-o s-o-o-o
+as-s-s-s z-;;s-s-s aaarrrggghh aa>rr7<h
+hm ;hm br-r-r br-;r-;r
+cooooountry coooo.try ggggood g7good
+lllittle ;lllittle loooong looo;g
+sisterrr si/]rr
+
+#   10.12.15 page 160
+Take the dog for a w-a-l-k.
+,take ! dog = a ;;w-a-l-k4
+w-i-n-d-o-w ;;w-i-n-d-o-w
+M-a-c-L-e-a-n ;;,m-a-c-,l-e-a-n
+N O W! ;,n ,o ;,w6
+U-N-I-T-E-D ;;,u-,n-,i-,t-,e-,d
+
+#   10.12.16 page 161
+d-d-day ;d-;d-"d ch-child ch-*
+y-y-you ;y-;y-y b...but b444but
+c-c-c-conceive ;c-;c-;c-3cv
+st-st-stay st-st-/ay s-s-stutter ;s-;s-/utt]
+g-good ;g-gd qu-quick qu-qk
+m-m-m-mine ;m-;m-;m-m9e
+wh-where wh-": f-f-father ;f-;f-"f
+th-the th-! de-ce-ce-cease de-ce-ce-c1se
+s-s-s-s-super-st-stition
+;;s-s-s-s-;'sup]-st-/i;n
+th-these th-^! g-ghost ;g-<o/
+gr-ground gr-gr.d lea-leave lea-l1ve
+m-must ;m-m/ w-what ;w-:at
+c-can't ;c-c't w-was ;w-was
+ch-ch-children ch-ch-*n th-themselves th-!mvs
+b-b-below ;b-;b-2l
+
+#   10.12.17 page 162
+for-ev-er-more =-ev-]-more
+not-with-stand-ing not-)-/&-9g
+some-one "s-"o
+en-chant-ment en-*ant-m5t
+in-fea-si-ble 9-fea-si-ble
+child-ish-ly *-i%-ly
+dis-in-ter-est dis-9-t]-e/
+al-be-it ;al-be-it
+friend-li-ness fr-li-ness
+for-get-ting =-get-t+ bless-ed b.s-$
+out-side \-side be-low be-l[
+
+#   10.13.1 page 162
+anteroom ante- room
+bandanna ban- danna
+Catherine ,ca?- ]9e
+"Freedom!" 8,free- dom60
+history his- tory
+nightingale ni<t9- gale
+profound.) pro- f.d4">
+
+#   10.13.2 page 163
+about-face ab- face
+air-conditioned air- 3di;n$
+Aix-en-Provence ,aix-en- ,prov;e
+Al-Azar ;,al- ,az>
+channel-less *annel- less
+CHILD-LIKE ,,*- ,,l
+ebb-tide ebb- tide
+father-in-law "f- 9-law
+first-begotten f/- 2gott5
+for the teach-in. .7= ! t1*- 94.'
+go-between g- 2t
+had-enough mood _h- 5 mood
+his-and-hers his- &-h]s
+(in-depth) "<9- dep?">
+in-depth .19- dep?
+man-eater man- eat]
+mother-in-law "m-9- law
+out-of-the-way \-(- !-way
+part-time "p- "t
+self-control self- 3trol
+shut-ins %ut- 9s
+teach-in.) t1*- 94">
+"to-ing and fro-ing" 8to-9g & fro- 9g0
+word-for-word ^w- =-^w
+would-be wd- be
+
+"had-enough" mood 8_h- 5\<0 mood
+"In-depth 8,in- dep?
+teach-in. t1*- in4
+
+#   10.13.3 page 164
+childlike *ild- like
+everything "ey- ?+
+furthermore fur!r- more
+outcome \t- come
+standstill /&- /ill
+whichever :i*- "e
+
+#   10.13.4 page 165
+meningitis m5- 9gitis
+nightingale ni<t- 9gale
+showering.) %[]- 9g4">
+SmithInge ,smi?- ,9ge
+
+#   10.13.5 page 165
+"Comin'?" 8,com- in'80 and: ^8,com- in'8^0
+(Disentangle "<,45- tangle
+disinherit 4in- h]it
+enjoy en- joy
+linen... l9- en444
+shortenin' %ort- 5in'
+
+#   10.13.6 page 165
+always—except alw ,-except or: alw,- except
+
+#   10.13.7 page 166
+not his—my name n his ,-my "n or: n his,- my "n
+
+#   10.13.8 page 166
+Enough—in my case ,5 ,-in my case or: ,5\<,- in my case
+(enough—in my case) "<5,- 9 my case"> or: "<5 ,-in my case">
+
+#   10.13.9 page 166
+bacon ba- con
+"Disgusting!" 8,dis- gu/+60
+disobedient 4o- b$i5t
+howbeit h[- beit
+inconvenient in- conv5i5t
+indistinct 9dis- t9ct
+(redistribute "<re- di/ribute
+unbecoming un- becom+
+unconcerned uncon- c]n$
+
+#   10.13.10 page 167
+eggnog egg- nog motheaten mo?- eat5
+peanut pea- nut stiffly /iff- ly
+
+#   10.13.11 page 167
+carefully c>e- fully
+CEMENT.) ,,ce- m5t4">
+confusion? 3fu- sion8
+expressionless expres- sion.s
+fundamentally funda- m5tally
+reliance reli- ance
+rotations rota- tions
+vitality vital- ity
+
+#   10.13.12 page 167
+aboveground abv- gr.d
+afterimage aft]- image
+befriending." 2fri5d- 9g40
+blinded?) bl9d- $8">
+blindness bl- ness
+friendliness fr- li;s
+girlfriend girl- fr
+Goodall ,good- all
+Goodwood ,gd- wood
+grandchildren gr&- *n
+Hapgood ,hap- good
+hereinafter "h9- af
+hereinbelow "h9- bel[
+immediately imm- ly
+Letterman ,lr- man
+Linkletter ,l9k- lett]
+preconceived pre- conceiv$
+unnecessary un- nec

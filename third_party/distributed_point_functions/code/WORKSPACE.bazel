@@ -1,0 +1,155 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+# rules_proto defines abstract rules for building Protocol Buffers.
+# https://github.com/bazelbuild/rules_proto
+http_archive(
+    name = "rules_proto",
+    sha256 = "a4382f78723af788f0bc19fd4c8411f44ffe0a72723670a34692ffad56ada3ac",
+    strip_prefix = "rules_proto-f7a30f6f80006b591fa7c437fe5a951eb10bcbcf",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_proto/archive/f7a30f6f80006b591fa7c437fe5a951eb10bcbcf.zip",
+        "https://github.com/bazelbuild/rules_proto/archive/f7a30f6f80006b591fa7c437fe5a951eb10bcbcf.zip",
+    ],
+)
+
+load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
+
+rules_proto_dependencies()
+
+rules_proto_toolchains()
+
+# rules_cc defines rules for generating C++ code from Protocol Buffers.
+http_archive(
+    name = "rules_cc",
+    sha256 = "e0e0e15cd88a8cdc153268dddf698c921550c7a1819bba987b57d41b643d8e0a",
+    strip_prefix = "rules_cc-0a198b994a5d61412ea1622ce681d17dbdbdd027",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_cc/archive/0a198b994a5d61412ea1622ce681d17dbdbdd027.zip",
+        "https://github.com/bazelbuild/rules_cc/archive/0a198b994a5d61412ea1622ce681d17dbdbdd027.zip",
+    ],
+)
+
+load("@rules_cc//cc:repositories.bzl", "rules_cc_dependencies")
+
+rules_cc_dependencies()
+
+# io_bazel_rules_go defines rules for generating C++ code from Protocol Buffers.
+http_archive(
+    name = "io_bazel_rules_go",
+    sha256 = "c1a2f7457c060aaeab0ed9b711b14a75c758297062a7b20fefbecd3504427677",
+    strip_prefix = "rules_go-707c634bf8f7ca5b57c2a923bec16fa62ced1fc7",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/archive/707c634bf8f7ca5b57c2a923bec16fa62ced1fc7.zip",
+        "https://github.com/bazelbuild/rules_go/archive/707c634bf8f7ca5b57c2a923bec16fa62ced1fc7.zip",
+    ],
+)
+
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+
+go_rules_dependencies()
+
+go_register_toolchains(version = "1.15.5")
+
+# Install gtest.
+http_archive(
+    name = "com_github_google_googletest",
+    sha256 = "1315261a037d90405714830edf4243fccd89950556353aa3d21095b6a1430ead",
+    strip_prefix = "googletest-6a5eb807493214be733d4cbb9f07f22fde25284f",
+    urls = [
+        "https://mirror.bazel.build/github.com/google/googletest/archive/6a5eb807493214be733d4cbb9f07f22fde25284f.zip",
+        "https://github.com/google/googletest/archive/6a5eb807493214be733d4cbb9f07f22fde25284f.zip",
+    ],
+)
+
+# abseil-cpp
+http_archive(
+    name = "com_google_absl",
+    sha256 = "c3b9d19cd38cd475f60b5756db1bdc6d10ed43e5c7ce7374eae9a57d763d0597",
+    strip_prefix = "abseil-cpp-ebab79b5783b3298ee2f31251174c660c322d7ef",
+    urls = [
+        "https://github.com/abseil/abseil-cpp/archive/ebab79b5783b3298ee2f31251174c660c322d7ef.zip",
+    ],
+)
+
+# BoringSSL
+http_archive(
+    name = "boringssl",
+    sha256 = "0369cbbee0340c42576e760138e0e9a6a749fd570ad1f963ac764584893ca727",
+    strip_prefix = "boringssl-57e74c2c7f76111fda83f8f3955a82ec3a2bde44",
+    urls = [
+        "https://github.com/google/boringssl/archive/57e74c2c7f76111fda83f8f3955a82ec3a2bde44.zip",
+    ],
+)
+
+# Benchmarks
+http_archive(
+    name = "com_github_google_benchmark",
+    sha256 = "d37d3fb186bbcc30018962185606869c032e866bc9ad376a6112fbb64fe6935f",
+    strip_prefix = "benchmark-5e387e7d33a55b8d6b7c5025379b97cc9418fabf",
+    urls = [
+        "https://mirror.bazel.build/github.com/google/benchmark/archive/5e387e7d33a55b8d6b7c5025379b97cc9418fabf.zip",
+        "https://github.com/google/benchmark/archive/5e387e7d33a55b8d6b7c5025379b97cc9418fabf.zip",
+    ],
+)
+
+# gflags needed for glog.
+http_archive(
+    name = "com_github_gflags_gflags",
+    sha256 = "cfdba0f2f17e8b1ff75c98113d5080d8ec016148426abcc19130864e2952d7bd",
+    strip_prefix = "gflags-827c769e5fc98e0f2a34c47cef953cc6328abced",
+    urls = [
+        "https://mirror.bazel.build/github.com/gflags/gflags/archive/827c769e5fc98e0f2a34c47cef953cc6328abced.zip",
+        "https://github.com/gflags/gflags/archive/827c769e5fc98e0f2a34c47cef953cc6328abced.zip",
+    ],
+)
+
+# glog for logging
+http_archive(
+    name = "com_github_google_glog",
+    sha256 = "8476f6b3be29b3ebecc7de058183d510acec6e6dcef35d416cc3ac407a3a5645",
+    strip_prefix = "glog-a79416bab739907a31a1e139540921ff0492f010",
+    urls = [
+        "https://mirror.bazel.build/github.com/google/glog/archive/a79416bab739907a31a1e139540921ff0492f010.zip",
+        "https://github.com/google/glog/archive/a79416bab739907a31a1e139540921ff0492f010.zip",
+    ],
+)
+
+# IREE for cc_embed_data.
+http_archive(
+    name = "com_github_google_iree",
+    sha256 = "aa369b29a5c45ae9d7aa8bf49ea1308221d1711277222f0755df6e0a575f6879",
+    strip_prefix = "iree-7e6012468cbaafaaf30302748a2943771b40e2c3",
+    urls = [
+        "https://github.com/google/iree/archive/7e6012468cbaafaaf30302748a2943771b40e2c3.zip",
+    ],
+)
+
+# riegeli for file IO
+http_archive(
+    name = "com_github_google_riegeli",
+    sha256 = "63253b1e0550657f590e0ac827c5f88af1829100a84ce1c8cec3777c9a5647c7",
+    strip_prefix = "riegeli-13e762cbeac9e0060914e83c9f326c3b6763078b",
+    urls = [
+        "https://github.com/google/riegeli/archive/13e762cbeac9e0060914e83c9f326c3b6763078b.zip",
+    ],
+)
+
+# Highway for SIMD operations.
+http_archive(
+    name = "com_github_google_highway",
+    sha256 = "2b11bd6356a425015c8f524cb3b3804784c0dc895fb7f3f1c48460f0327b5b1e",
+    strip_prefix = "highway-1c3c2bc6417f69ccb598c440678048ac6a8a561e",
+    urls = [
+        "https://github.com/google/highway/archive/1c3c2bc6417f69ccb598c440678048ac6a8a561e.zip",
+    ],
+)
+
+# cppitertools for logging
+http_archive(
+    name = "com_github_ryanhaining_cppitertools",
+    sha256 = "83aedc4f593212d8112eac0b32b5f191219604f3db922cc218fd733ea448118c",
+    strip_prefix = "cppitertools-b2b98e60438f1ed6b04b77cdb6cc5d5516af301b",
+    urls = [
+        "https://github.com/ryanhaining/cppitertools/archive/b2b98e60438f1ed6b04b77cdb6cc5d5516af301b.zip",
+    ],
+)

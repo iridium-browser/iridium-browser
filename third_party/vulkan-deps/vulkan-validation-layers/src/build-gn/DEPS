@@ -1,0 +1,74 @@
+# This file is subset of DEPS file from https://chromium.googlesource.com/angle/angle
+# with the minimum toolchain necessary to build Vulkan-ValidationLayers
+
+gclient_gn_args_file = 'build/config/gclient_args.gni'
+
+vars = {
+  'chromium_git': 'https://chromium.googlesource.com',
+  'build_with_chromium': False,
+}
+
+deps = {
+
+  './build': {
+    'url': '{chromium_git}/chromium/src/build.git@17a38f4bb2c5375815a8c9e1dfb3a36658b29b8a',
+    'condition': 'not build_with_chromium',
+  },
+
+  './buildtools': {
+    'url': '{chromium_git}/chromium/src/buildtools.git@69cc9b8a3ae010e0721c4bea12de7a352d9a93f9',
+    'condition': 'not build_with_chromium',
+  },
+
+  'buildtools/linux64': {
+    'packages': [
+      {
+        'package': 'gn/gn/linux-amd64',
+        'version': 'git_revision:64b3b9401c1c3ed5f3c43c1cac00b91f83597ab8',
+      }
+    ],
+    'dep_type': 'cipd',
+    'condition': 'not build_with_chromium and host_os == "linux"',
+  },
+
+  './testing': {
+    'url': '{chromium_git}/chromium/src/testing@3b69bfd9403ab6b110a8a853da1e187b29d734f8',
+    'condition': 'not build_with_chromium',
+  },
+
+  './tools/clang': {
+    'url': '{chromium_git}/chromium/src/tools/clang.git@168ccba7af17161ebcf27f9f138f694fac630fd4',
+    'condition': 'not build_with_chromium',
+  },
+
+}
+
+hooks = [
+  # Pull clang-format binaries using checked-in hashes.
+  {
+    'name': 'clang_format_linux',
+    'pattern': '.',
+    'condition': 'host_os == "linux" and not build_with_chromium',
+    'action': [ 'download_from_google_storage',
+                '--no_resume',
+                '--platform=linux*',
+                '--no_auth',
+                '--bucket', 'chromium-clang-format',
+                '-s', './buildtools/linux64/clang-format.sha1',
+    ],
+  },
+  {
+    'name': 'sysroot_x64',
+    'pattern': '.',
+    'condition': 'checkout_linux and (checkout_x64 and not build_with_chromium)',
+    'action': ['python', './build/linux/sysroot_scripts/install-sysroot.py',
+               '--arch=x64'],
+  },
+  {
+    # Note: On Win, this should run after win_toolchain, as it may use it.
+    'name': 'clang',
+    'pattern': '.',
+    'action': ['python', './tools/clang/scripts/update.py'],
+    'condition': 'not build_with_chromium',
+  },
+]

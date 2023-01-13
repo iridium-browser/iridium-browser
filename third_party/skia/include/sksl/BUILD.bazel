@@ -1,0 +1,28 @@
+load("//bazel:macros.bzl", "exports_files_legacy", "skia_filegroup")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+skia_filegroup(
+    name = "public_hdrs",
+    srcs = [
+        "DSL.h",
+        "DSLBlock.h",
+        "DSLCase.h",
+        "DSLCore.h",
+        "DSLExpression.h",
+        "DSLFunction.h",
+        "DSLLayout.h",
+        "DSLModifiers.h",
+        "DSLStatement.h",
+        "DSLType.h",
+        "DSLVar.h",
+        "SkSLDebugTrace.h",
+        "SkSLErrorReporter.h",
+        "SkSLOperator.h",
+        "SkSLPosition.h",
+        "SkSLVersion.h",
+    ],
+    visibility = ["//include:__pkg__"],
+)

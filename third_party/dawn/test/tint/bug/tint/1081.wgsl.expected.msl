@@ -1,0 +1,40 @@
+#include <metal_stdlib>
+
+using namespace metal;
+int f(int x, thread bool* const tint_symbol_4) {
+  if ((x == 10)) {
+    *(tint_symbol_4) = true;
+  }
+  return x;
+}
+
+struct tint_symbol_2 {
+  int3 x [[user(locn1)]] [[flat]];
+};
+
+struct tint_symbol_3 {
+  int value [[color(2)]];
+};
+
+int tint_symbol_inner(int3 x, thread bool* const tint_symbol_5) {
+  int y = x[0];
+  while (true) {
+    int const r = f(y, tint_symbol_5);
+    if ((r == 0)) {
+      break;
+    }
+  }
+  return y;
+}
+
+fragment tint_symbol_3 tint_symbol(tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  thread bool tint_symbol_6 = false;
+  int const inner_result = tint_symbol_inner(tint_symbol_1.x, &(tint_symbol_6));
+  tint_symbol_3 wrapper_result = {};
+  wrapper_result.value = inner_result;
+  if (tint_symbol_6) {
+    discard_fragment();
+  }
+  return wrapper_result;
+}
+

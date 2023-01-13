@@ -1,0 +1,67 @@
+// Copyright 2020 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef CHROME_UPDATER_POLICY_DM_POLICY_MANAGER_H_
+#define CHROME_UPDATER_POLICY_DM_POLICY_MANAGER_H_
+
+#include <memory>
+#include <string>
+#include <vector>
+
+#include "chrome/updater/device_management/dm_storage.h"
+#include "chrome/updater/policy/manager.h"
+#include "chrome/updater/protos/omaha_settings.pb.h"
+
+namespace updater {
+
+// The DMPolicyManager returns device management policies for managed machines.
+class DMPolicyManager : public PolicyManagerInterface {
+ public:
+  explicit DMPolicyManager(
+      const ::wireless_android_enterprise_devicemanagement::
+          OmahaSettingsClientProto& omaha_settings);
+  DMPolicyManager(const DMPolicyManager&) = delete;
+  DMPolicyManager& operator=(const DMPolicyManager&) = delete;
+  ~DMPolicyManager() override;
+
+  // Overrides for PolicyManagerInterface.
+  std::string source() const override;
+
+  bool HasActiveDevicePolicies() const override;
+
+  absl::optional<base::TimeDelta> GetLastCheckPeriod() const override;
+  absl::optional<UpdatesSuppressedTimes> GetUpdatesSuppressedTimes()
+      const override;
+  absl::optional<std::string> GetDownloadPreferenceGroupPolicy() const override;
+  absl::optional<int> GetPackageCacheSizeLimitMBytes() const override;
+  absl::optional<int> GetPackageCacheExpirationTimeDays() const override;
+  absl::optional<int> GetEffectivePolicyForAppInstalls(
+      const std::string& app_id) const override;
+  absl::optional<int> GetEffectivePolicyForAppUpdates(
+      const std::string& app_id) const override;
+  absl::optional<std::string> GetTargetVersionPrefix(
+      const std::string& app_id) const override;
+  absl::optional<bool> IsRollbackToTargetVersionAllowed(
+      const std::string& app_id) const override;
+  absl::optional<std::string> GetProxyMode() const override;
+  absl::optional<std::string> GetProxyPacUrl() const override;
+  absl::optional<std::string> GetProxyServer() const override;
+  absl::optional<std::string> GetTargetChannel(
+      const std::string& app_id) const override;
+  absl::optional<std::vector<std::string>> GetForceInstallApps() const override;
+
+ private:
+  const ::wireless_android_enterprise_devicemanagement::ApplicationSettings*
+  GetAppSettings(const std::string& app_id) const;
+
+  const ::wireless_android_enterprise_devicemanagement::OmahaSettingsClientProto
+      omaha_settings_;
+};
+
+// A factory method to create a DM policy manager.
+std::unique_ptr<PolicyManagerInterface> CreateDMPolicyManager();
+
+}  // namespace updater
+
+#endif  // CHROME_UPDATER_POLICY_DM_POLICY_MANAGER_H_

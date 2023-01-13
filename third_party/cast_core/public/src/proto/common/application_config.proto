@@ -1,0 +1,85 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package cast.common;
+
+import "proto/common/value.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// Generic Cast application config.
+message ApplicationConfig {
+  // Cast application ID.
+  string app_id = 1;
+
+  // Cast application name.
+  string display_name = 2;
+
+  // Actual application config based on the type of runtime hosting it.
+  oneof config {
+    CastLiteApplicationConfig cast_lite_app_config = 3;
+    CastWebApplicationConfig cast_web_app_config = 4;
+    NativeApplicationConfig native_app_config = 5;
+  }
+
+  // Cast features. The keys in the dictionary must be well defined to allow
+  // easy data expantion.
+  cast.common.Dictionary extra_features = 7;
+}
+
+// Config for applications running in CastLite runtime.
+message CastLiteApplicationConfig {
+  // Cast application URL (https). Will be augumented with URL rewrite rules to
+  // add appropriate headers/parameters.
+  string url = 1;
+}
+
+// Config for applications running in Cast Web runtime.
+message CastWebApplicationConfig {
+  // Cast application URL (https). Will be augumented with URL rewrite rules to
+  // add appropriate headers/parameters.
+  string url = 1;
+
+  // Collection of requested settings for the application.
+  ApplicationSettings settings = 2;
+
+  message ApplicationSettings {
+    // Display settings requested by the application.
+    DisplaySettings display_settings = 1;
+  }
+
+  // Contains display settings for an application.
+  message DisplaySettings {
+    enum DisplayHeight {
+      HEIGHT_NATIVE = 0;  // The native resolution of the display.
+      HEIGHT_720P = 1;    // Enforce 720p resolution of the display.
+    }
+
+    // Indicates the resolution height that the application supports/prefers.
+    // The application may attempt to force 720p or render at the native
+    // resolution of the display.   If the value is omitted, the
+    // default is HEIGHT_NATIVE.
+    DisplayHeight display_height = 1;
+  }
+}
+
+// Config for applications running in native runtime.
+message NativeApplicationConfig {
+  // Cast application URL (https).
+  // NOTE: this field is added ONLY FOR TESTING purposes. Proper integration
+  // with native runtimes is still TBD.
+  string url = 1;
+}

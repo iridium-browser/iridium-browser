@@ -1,0 +1,86 @@
+<style>
+  :host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 532px;
+    padding: 32px;
+    width: 512px;
+  }
+
+  div#content {
+    flex-grow: 1;
+  }
+
+  div#header-image {
+    background-color: var(--cros-highlight-color);
+    border-radius: 12px;
+    height: 200px;
+    width: 448px;
+  }
+
+  ::slotted([slot=header-image]) {
+    /* As this surface is a dialog, replace the color palette with its elevated
+     * variant. */
+    --cros-illustration-color-1-shade-1: var(
+      --cros-illustration-elevation-color-1-shade-1);
+    --cros-illustration-color-1-shade-2: var(
+      --cros-illustration-elevation-color-1-shade-2);
+    --cros-illustration-base-color: var(
+      --cros-illustration-elevation-base-color);
+    --cros-illustration-secondary-color: var(
+      --cros-illustration-elevation-secondary-color);
+
+    height: 100%;
+    width: 100%;
+  }
+
+  ::slotted([slot=title]) {
+    color: var(--cros-text-color-primary);
+    font: var(--cros-display-6-font);
+    margin-block-start: 32px;
+  }
+
+  ::slotted([slot=body]) {
+    color: var(--cros-text-color-secondary);
+    font: var(--cros-body-2-font);
+    margin-block-end: 32px;
+    margin-block-start: 16px;
+  }
+
+  div#footer {
+    display: flex;
+  }
+
+  div#dots {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    gap: 12px;
+    /* TODO(petermarshall): Remove dots or make visible again. */
+    visibility: hidden;
+  }
+
+  div#dots > div {
+    background-color: var(--cros-button-stroke-color-secondary);
+    border-radius: 50%;
+    height: 8px;
+    width: 8px;
+  }
+
+  div#dots > div.active {
+    background-color: var(--cros-icon-color-prominent);
+  }
+</style>
+
+<div id="content">
+  <div id="header-image">
+    <slot name="header-image"></slot>
+  </div>
+  <slot name="title"></slot>
+  <slot name="body"></slot>
+</div>
+<div id="footer">
+  <div id="dots"></div>
+  <slot name="button-container"></slot>
+</div>

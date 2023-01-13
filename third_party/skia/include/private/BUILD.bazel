@@ -1,0 +1,85 @@
+load("//bazel:macros.bzl", "exports_files_legacy", "skia_filegroup")
+
+licenses(["notice"])
+
+exports_files_legacy(
+    label_list = ["SkBitmaskEnum.h"],
+    visibility = ["//tools/skui:__pkg__"],
+)
+
+# In own skia_filegroup for mapping to the //gn/sksl.gni file.
+skia_filegroup(
+    name = "sksl_private_hdrs",
+    srcs = [
+        "SkSLDefines.h",
+        "SkSLIRNode.h",
+        "SkSLLayout.h",
+        "SkSLModifiers.h",
+        "SkSLProgramElement.h",
+        "SkSLProgramKind.h",
+        "SkSLSampleUsage.h",
+        "SkSLStatement.h",
+        "SkSLString.h",
+        "SkSLSymbol.h",
+    ],
+)
+
+# In own skia_filegroup for mapping to //gn/gpu.gni:skia_shared_gpu_sources.
+skia_filegroup(
+    name = "shared_gpu_private_hdrs",
+    srcs = ["SingleOwner.h"],
+)
+
+skia_filegroup(
+    name = "private_hdrs",
+    srcs = [
+        "SkAlignedStorage.h",
+        "SkBitmaskEnum.h",
+        "SkChecksum.h",
+        "SkColorData.h",
+        "SkContainers.h",
+        "SkDeque.h",
+        "SkEncodedInfo.h",
+        "SkFixed.h",
+        "SkFloatBits.h",
+        "SkFloatingPoint.h",
+        "SkHalf.h",
+        "SkIDChangeListener.h",
+        "SkImageInfoPriv.h",
+        "SkMacros.h",
+        "SkMalloc.h",
+        "SkMutex.h",
+        "SkNoncopyable.h",
+        "SkOnce.h",
+        "SkOpts_spi.h",
+        "SkPathRef.h",
+        "SkSafe32.h",
+        "SkSafe_math.h",
+        "SkSemaphore.h",
+        "SkShadowFlags.h",
+        "SkSpinlock.h",
+        "SkStringView.h",
+        "SkTArray.h",
+        "SkTDArray.h",
+        "SkTFitsIn.h",
+        "SkTHash.h",
+        "SkTLogic.h",
+        "SkTPin.h",
+        "SkTemplates.h",
+        "SkThreadAnnotations.h",
+        "SkThreadID.h",
+        "SkTo.h",
+        "SkTypeTraits.h",
+        "SkVx.h",
+        "SkWeakRefCnt.h",
+        ":shared_gpu_private_hdrs",
+        ":sksl_private_hdrs",
+        "//include/private/chromium:private_hdrs",
+    ] + select({
+        "//src/gpu:has_gpu_backend": [
+            "//include/private/gpu:private_hdrs",
+        ],
+        "//conditions:default": [],
+    }),
+    visibility = ["//include:__pkg__"],
+)

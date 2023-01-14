@@ -107,7 +107,7 @@ Steps for tarball state
 
       export CFLAGS="-O2 -Wall $(pkg-config wayland-client xkbcommon --cflags)"
       export CXXFLAGS="$CFLAGS"
-      gn gen '--args= custom_toolchain="//build/toolchain/linux/unbundle:default" host_toolchain="//build/toolchain/linux/unbundle:default" use_custom_libcxx=false host_cpu="x64" host_os="linux" is_debug=false dcheck_always_on=false enable_nacl=false use_swiftshader_with_subzero=true is_component_ffmpeg=true use_cups=true use_aura=true symbol_level=1 blink_symbol_level=0 use_kerberos=true enable_vr=false optimize_webui=false enable_reading_list=false use_pulseaudio=true link_pulseaudio=true is_component_build=false use_sysroot=false fatal_linker_warnings=false use_allocator="partition" use_allocator_shim=true use_partition_alloc=true disable_fieldtrial_testing_config=true use_gnome_keyring=false use_unofficial_version_number=false use_vaapi=true use_sysroot=false treat_warnings_as_errors=false enable_widevine=false use_dbus=true media_use_openh264=false rtc_use_h264=false use_v8_context_snapshot=true v8_use_external_startup_data=true gtk_version=4 use_system_harfbuzz=true use_system_freetype=true use_system_libwayland=true use_system_libwayland_server=true use_system_wayland_scanner=true enable_hangout_services_extension=true enable_vulkan=true rtc_use_pipewire=true rtc_link_pipewire=true is_clang=true clang_base_path="/usr" clang_use_chrome_plugins=false use_thin_lto=true use_lld=true icu_use_data_file=false proprietary_codecs=true ffmpeg_branding="Chrome"' out
+      gn gen '--args= custom_toolchain="//build/toolchain/linux/unbundle:default" host_toolchain="//build/toolchain/linux/unbundle:default" use_custom_libcxx=false host_cpu="x64" host_os="linux" is_debug=false dcheck_always_on=false enable_nacl=false use_swiftshader_with_subzero=true is_component_ffmpeg=true use_cups=true use_aura=true symbol_level=1 blink_symbol_level=0 use_kerberos=true enable_vr=false optimize_webui=false enable_reading_list=false use_pulseaudio=true link_pulseaudio=true is_component_build=false use_sysroot=false fatal_linker_warnings=false use_allocator_shim=true use_partition_alloc=true disable_fieldtrial_testing_config=true use_gnome_keyring=false use_unofficial_version_number=false use_vaapi=true use_sysroot=false treat_warnings_as_errors=false enable_widevine=true  use_dbus=true media_use_openh264=false rtc_use_h264=false use_v8_context_snapshot=true v8_use_external_startup_data=true gtk_version=4 use_system_harfbuzz=true use_system_freetype=true use_system_libwayland=true use_system_wayland_scanner=true enable_hangout_services_extension=true enable_vulkan=true rtc_use_pipewire=true rtc_link_pipewire=true is_clang=true clang_base_path="/usr" clang_use_chrome_plugins=false use_thin_lto=true use_lld=true icu_use_data_file=false proprietary_codecs=true ffmpeg_branding="Chrome"' out
 
    Note that gn embodies the environment variables' values (CC, CFLAGS, etc.)
    into Makefiles, so upon change of any of those variables, gn needs to be
@@ -125,7 +125,7 @@ Steps for tarball state
    .. code-block:: sh
 
       export PATH="$PATH:/usr/lib64/qt5/bin"
-      LD_LIBRARY_PATH=$PWD/out ninja -C out chrome chromedriver
+      LD_LIBRARY_PATH=$PWD/out nice -n20 ninja -C out chrome chromedriver
 
    Because chromium is too ignorant to look for moc on its own,
    the patch to it needs to be manually specified.

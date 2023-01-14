@@ -55,7 +55,7 @@ BASE_FEATURE(kGlobalMediaControlsCastStartStop,
 #else
 BASE_FEATURE(kGlobalMediaControlsCastStartStop,
              "GlobalMediaControlsCastStartStop",
-             base::FEATURE_ENABLED_BY_DEFAULT);
+             base::FEATURE_DISABLED_BY_DEFAULT);
 #endif  // BUILDFLAG(IS_CHROMEOS)
 
 #endif  // BUILDFLAG(IS_ANDROID)

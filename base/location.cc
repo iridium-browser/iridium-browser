@@ -144,7 +144,7 @@ NOINLINE Location Location::Current(const char* file_name) {
 #else
 
 NOINLINE Location Location::Current() {
-  return Location(nullptr, RETURN_ADDRESS());
+  return Location("[unknown file]", RETURN_ADDRESS());
 }
 
 #endif

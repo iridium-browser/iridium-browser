@@ -1,0 +1,45 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "fpetrogalli",
+      "name": "Francesco Petrogalli",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25690309?v=4",
+      "profile": "http://tubafranz.me/",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    },
+    {
+      "login": "ktkachov-arm",
+      "name": "ktkachov-arm",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74917949?v=4",
+      "profile": "https://github.com/ktkachov-arm",
+      "contributions": [
+        "code",
+        "content",
+        "infra"
+      ]
+    },
+    {
+      "login": "sallyarmneale",
+      "name": "sallyarmneale",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56446080?v=4",
+      "profile": "https://github.com/sallyarmneale",
+      "contributions": [
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "acle",
+  "projectOwner": "ARM-software",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

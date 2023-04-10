@@ -1,0 +1,76 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package cast.platform;
+
+import "proto/common/duration.proto";
+import "proto/common/service_info.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// Platform service. Implemented and hosted by Platform.
+service PlatformService {
+  // Starts a runtime. Called by CastCoreService which endpoint is fetched from
+  // the ServerContext.
+  rpc StartRuntime(StartRuntimeRequest) returns (StartRuntimeResponse);
+
+  // Stops a runtime.
+  rpc StopRuntime(StopRuntimeRequest) returns (StopRuntimeResponse);
+
+  // A server-streaming RPC that requests repeated heartbeats from the Platform
+  // with a period defined in HeartbeatRequest. CastCore considers the Platform
+  // 'unavailable' if heartbeats time out or the streaming connection is
+  // terminated, and will unregister all the runtimes.
+  rpc Heartbeat(HeartbeatRequest) returns (stream HeartbeatResponse);
+
+  // Brings the runtime to the foreground on the screen. This method can be
+  // called for a runtime that is already in foreground in which case the OK
+  // status must be returned.
+  rpc BringToForeground(BringToForegroundRequest)
+      returns (BringToForegroundResponse);
+}
+
+message StartRuntimeRequest {
+  // Cast Runtime ID assigned in CastCoreService.RegisterRuntime.
+  string runtime_id = 1;
+  // gRPC endpoint Cast Runtime must run on.
+  cast.common.ServiceInfo runtime_service_info = 2;
+  // Flag to indicate that the request is for prelaunch.
+  bool prelaunch = 3;
+}
+
+message StartRuntimeResponse {}
+
+message StopRuntimeRequest {
+  string runtime_id = 1;
+}
+
+message StopRuntimeResponse {}
+
+message HeartbeatRequest {
+  // Period between two heartbeat responses. The Core will wait for double of
+  // this time to avoid network glitches. The minimum value is 5 seconds.
+  cast.common.Duration heartbeat_period = 1;
+}
+
+message HeartbeatResponse {}
+
+message BringToForegroundRequest {
+  // Cast Runtime ID assigned in CastCoreService.RegisterRuntime.
+  string runtime_id = 1;
+}
+
+message BringToForegroundResponse {}

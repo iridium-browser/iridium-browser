@@ -1,0 +1,126 @@
+{{header}}
+{{include field.fragment}}
+
+% JS program to execute
+{{object 16 0}} <<
+  {{streamlen}}
+>>
+stream
+{{include expect.js}}
+
+function testGetField() {
+  try {
+    var empty =  this.getField("");
+    app.alert("empty is " + empty.name);
+    var field = this.getField("MyField");
+    app.alert("field is " + field.name);
+    var button = this.getField("MyField.MyPushButton");
+    app.alert("button is " + button.name);
+    var nonesuch = this.getField("MyField.nonesuch");
+    app.alert("nonesuch is " + nonesuch);
+    var dotdot = this.getField("MyField..nonesuch");
+    app.alert("dotdot is " + dotdot.name);
+    var tripledot = this.getField("MyField...nonesuch");
+    app.alert("tripledot is " + tripledot.name);
+    var quaddot = this.getField("MyField....nonesuch");
+    app.alert("quaddot is " + quaddot.name);
+    var dotdot1 = this.getField("MyField..nonesuch      ");
+    app.alert("dotdot1 is " + dotdot1.name);
+    var dotdot2 = this.getField("MyField..MyPushButton");
+    app.alert("dotdot2 is " + dotdot2.name);
+    var dotdot3 = this.getField("MyField..3");
+    app.alert("dotdot3 is " + dotdot3.name);
+  } catch (e) {
+    app.alert("Unexpected error: " + e);
+  }
+}
+
+function testGetArray() {
+  try {
+    var subs = this.getField("MyField").getArray();
+    app.alert("found " + subs.length + " sub-fields:");
+    for (i = 0; i < subs.length; ++i) {
+      app.alert(subs[i].name);
+    }
+  } catch (e) {
+    app.alert("Unexpected error: " + e);
+  }
+}
+
+testGetField();
+testGetArray();
+
+expect("this.getField('MyField.MyPushButton').buttonGetCaption()", "");
+expect("this.getField('MyField.MyPushButton').buttonGetCaption(0)", "");
+expect("this.getField('MyField.MyPushButton').buttonGetCaption(1)", "");
+expect("this.getField('MyField.MyPushButton').buttonGetCaption(2)", "");
+expectError("this.getField('MyField.MyPushButton').buttonGetCaption(3)")
+expectError("this.getField('MyField.MyMultiSelect').buttonGetCaption()")
+
+expect("this.getField('MyField.MyPushButton').buttonGetIcon()", "[object Object]");
+expect("this.getField('MyField.MyPushButton').buttonGetIcon(0)", "[object Object]");
+expect("this.getField('MyField.MyPushButton').buttonGetIcon(1)", "[object Object]");
+expectError("this.getField('MyField.MyPushButton').buttonGetIcon(3)");
+expectError("this.getField('MyField.MyMultiSelect').buttonGetIcon()");
+
+expect("this.getField('MyField.MyPushButton').buttonImportIcon()", undefined);
+
+expect("this.getField('MyField.MyFile').browseForFileToSubmit()", undefined);
+
+expect("this.getField('MyField.MyMultiSelect').getItemAt(0)", "foo");
+expect("this.getField('MyField.MyMultiSelect').getItemAt(1, false)", "bar");
+expect("this.getField('MyField.MyMultiSelect').getItemAt(1, true)", "bar");
+expect("this.getField('MyField.MyMultiSelect').getItemAt(2, false)", "Qux");
+expect("this.getField('MyField.MyMultiSelect').getItemAt(2, true)", "qux");
+expect("this.getField('MyField.MyMultiSelect').getItemAt(3)", "");
+expect("this.getField('MyField.MyMultiSelect').getItemAt()", "qux");
+expect("this.getField('MyField.MyMultiSelect').getItemAt(172)", "qux");
+expect("this.getField('MyField.MyMultiSelect').getItemAt(-400)", "");
+expect("this.getField('MyField.MyMultiSelect').getItemAt('zzzz')", "foo");
+
+expectError("this.getField('MyField').checkThisBox()");
+expectError("this.getField('MyField').checkThisBox({})");
+
+expectError("this.getField('MyField').defaultIsChecked()");
+expect("this.getField('MyField').defaultIsChecked(0)", false);
+
+expectError("this.getField('MyField').isBoxChecked()");
+expectError("this.getField('MyField').isBoxChecked(20)");
+expect("this.getField('MyField').isBoxChecked(0)", false);
+
+expectError("this.getField('MyField').isDefaultChecked()", false);
+expectError("this.getField('MyField').isDefaultChecked(20)", false);
+expect("this.getField('MyField').isDefaultChecked(0)", false);
+
+expect("this.getField('MyField').setFocus()", undefined);
+
+app.alert("These mismatched cases always throw");
+expectError("this.getField('MyField.MyText').browseForFileToSubmit()");
+expectError("this.getField('MyField').checkThisBox(0, true)");
+expectError("this.getField('MyField').getItemAt(0)");
+
+app.alert("These always succeed without actually doing anything:");
+expect("this.getField('MyField').clearItems()", undefined);
+expect("this.getField('MyField').deleteItemAt()", undefined);
+expect("this.getField('MyField').insertItemAt()", undefined);
+expect("this.getField('MyField').setAction()", undefined);
+expect("this.getField('MyField').setItems()");
+
+app.alert("These always throw operation not supported errors:");
+expectError("this.getField('MyField').buttonSetCaption()");
+expectError("this.getField('MyField').buttonSetIcon()");
+expectError("this.getField('MyField').getLock()");
+expectError("this.getField('MyField').setLock()");
+expectError("this.getField('MyField').signatureGetModifications()");
+expectError("this.getField('MyField').signatureGetSeedValue()");
+expectError("this.getField('MyField').signatureInfo()");
+expectError("this.getField('MyField').signatureSetSeedValue()");
+expectError("this.getField('MyField').signatureSign()");
+expectError("this.getField('MyField').signatureValidate()");
+
+endstream
+endobj
+{{xref}}
+{{trailer}}
+{{startxref}}
+%%EOF

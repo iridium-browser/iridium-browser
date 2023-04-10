@@ -1,0 +1,214 @@
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor correct $d "d" # digit
+  nofor correct $m "m" # math
+  nofor correct $p "p" # punctuation
+  nofor correct $s "s" # space
+  nofor correct $S "S" # sign
+  nofor correct $u "u" # lowercase
+  nofor correct $U "U" # uppercase
+flags: {testmode: backward}
+tests:
+- # specific attributes
+  - ⠢⠬⠱⠀⠸⠭⡽
+  - dmpsSuU
+
+table: |
+  include tables/unicode.dis
+  include tables/en-ueb-g1.ctb
+  nofor correct $D "D" # literary digit
+  nofor correct $l "l" # letter
+  nofor correct $a "a" # any
+flags: {testmode: backward}
+tests:
+- # general attributes
+  - ⠼⠑⠭⠤⡽
+  - Dlal
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor context $p "p" # punctuation
+flags: {testmode: backward}
+tests:
+- # context attributes
+  - ⠿⠨⠬
+  - =p+
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  attribute one abcde
+  attribute two fghij
+  attribute three klmno
+  attribute four pqrst
+  attribute five uvwxyz
+  nofor correct $w. "w"
+  nofor correct $x. "x"
+  nofor correct $y. "y"
+  nofor correct $z. "z"
+  nofor correct %five. "5"
+  swapcc nestcc ([{< )]}>
+  nofor correct %nestcc. %nestcc
+  swapcd nestcd )]}> 1234-1,234-12345,14-136,1-1345
+  nofor context %nestcd %nestcd
+  grouping brackets \x0001\x0002 123478,145678
+  nofor correct {brackets}brackets }brackets{brackets
+flags: {testmode: backward}
+tests:
+- # classes
+  - ⠇⠑⠞⠞⠑⠗⠎ ⠺⠭⠽⠵ ⠑⠟⠥⠁⠞⠑ ⠞⠕ ⠞⠓⠑ ⠂⠎⠞ ⠋⠕⠥⠗ ⠥⠎⠑⠗ ⠉⠇⠁⠎⠎⠑⠎
+  - ywzwz 5 wz5wzw zy zxw 1z xy5z 5zwz wywzwz
+- # swap
+  - ⡪⠷⠣⠪
+  - sqpaancu
+  - xfail: not fixed
+- # grouping
+  - ⣹⣏
+  - \x0001\x0002
+  - xfail: not implemented
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor correct $l4-5 "z"
+  nofor correct $l2 "y"
+  nofor correct $l "x"
+flags: {testmode: backward}
+tests:
+- # one letter
+  - ⠁
+  - x
+- # two letters
+  - ⠁⠃
+  - y
+- # three letters
+  - ⠁⠃⠉
+  - yx
+- # four letters
+  - ⠁⠃⠉⠙
+  - z
+- # five letters
+  - ⠁⠃⠉⠙⠑
+  - z
+- # six letters
+  - ⠁⠃⠉⠙⠑⠋
+  - zx
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor correct [$d5]_6 "f" # fail
+  nofor correct [$d5]_5 "s" # succeed
+  nofor correct `$d "f" # first
+  nofor correct $d~ "l" # last
+  nofor correct $d "m" # middle
+flags: {testmode: backward}
+tests:
+- # lookback count
+  - ⠂⠆⠒⠲⠢
+  - s
+- # first/last
+  - ⠂⠆⠒
+  - fml
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor correct `$l9~ *
+  nofor correct `$l3[$d.]$l3~ *
+  nofor correct `$l2[$d.]$l2~ "("*"|"*")"
+  nofor correct `$d3[$l.]$d3~ ?
+flags: {testmode: backward}
+tests:
+- # copy no brackets
+  - ⠁⠃⠉⠙⠑⠋⠛⠓⠊
+  - abcdefghi
+- # copy once
+  - ⠁⠃⠉⠲⠢⠖⠛⠓⠊
+  - 456
+- # copy twice
+  - ⠁⠃⠒⠲⠢⠖⠶⠓⠊
+  - (34567|34567)
+- # omit
+  - ⠂⠆⠒⠙⠑⠋⠶⠦⠔
+  - 123789
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor correct #1=0"0" *
+  nofor correct "+" #1+?
+  nofor correct "-" #1-?
+  nofor correct #1=3"e" *
+  nofor correct !#1=3"E" *
+  nofor correct #1<3"l" *
+  nofor correct !#1<3"L" *
+  nofor correct #1>3"g" *
+  nofor correct !#1>3"G" *
+  nofor correct #1<=3"x" *
+  nofor correct !#1<=3"X" *
+  nofor correct #1>=3"y" *
+  nofor correct !#1>=3"Y" *
+  nofor correct "=" #1=15?
+  nofor correct #1=15"z" *
+  nofor correct $a ?
+flags: {testmode: backward}
+tests:
+- # variables
+  - ⠴⠤⠬⠬⠬⠬⠬⠤⠤⠑⡑⠇⡇⠛⡛⠭⡭⠽⡽⠤⠑⡑⠇⡇⠛⡛⠭⡭⠽⡽⠬⠬⠑⡑⠇⡇⠛⡛⠭⡭⠽⡽⠿⠵
+  - 0eLGxyElGxYELgXyz
+
+table: |
+  include tables/unicode.dis
+  include tables/en-us-comp8.ctb
+  nofor correct #1=0"4" #1=5"5"
+  nofor context #1=0@25 #1=4"4"
+  nofor pass2 #1=0@23 #1=3@25
+  nofor pass3 #1=0@2 #1=2@23
+  nofor pass4 #1=0@356 #1=1@2
+flags: {testmode: backward}
+tests:
+- # pass order
+  - ⠴
+  - 5
+
+# Multipass rules should not go in endless loop when startMatch == endReplace
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/en-us-comp8.ctb
+  nofor correct []"bar0" "foo"
+  nofor context []@12-1-1235-2 "foo"
+  nofor pass2 []@12-1-1235-23 @124-135-135
+flags: {testmode: backward}
+tests:
+  - - ⠃⠁⠗⠴
+    - foobar0
+  - - ⠃⠁⠗⠂
+    - foobar1
+    - xfail: context rule can still cause endless loop
+  - - ⠃⠁⠗⠆
+    - foobar2
+
+table: |
+  include tables/unicode.dis
+  include tables/loweredDigits6Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  nofor context `[]$l "foo"
+flags: {testmode: backward}
+tests:
+  - - ⠃⠁⠗⠂
+    - foobar1
+    - xfail: context rule can still cause endless loop
+
+table: |
+  include tables/unicode.dis
+  include tables/loweredDigits6Dots.uti
+  include tables/latinLetterDef6Dots.uti
+  nofor pass2 `[]$l @124-135-135
+flags: {testmode: backward}
+tests:
+  - - ⠃⠁⠗⠆
+    - foobar2
+

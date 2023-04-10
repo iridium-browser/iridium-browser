@@ -1,0 +1,640 @@
+; SPIR-V
+; Version: 1.3
+; Generator: Google Tint Compiler; 0
+; Bound: 393
+; Schema: 0
+               OpCapability Shader
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Vertex %main "main" %a_Position_1 %a_UV_1 %a_Color_1 %a_Normal_1 %a_PosMtxIdx_1 %v_Color_1 %v_TexCoord_1 %member_1 %vertex_point_size
+               OpName %a_Position_1 "a_Position_1"
+               OpName %a_UV_1 "a_UV_1"
+               OpName %a_Color_1 "a_Color_1"
+               OpName %a_Normal_1 "a_Normal_1"
+               OpName %a_PosMtxIdx_1 "a_PosMtxIdx_1"
+               OpName %v_Color_1 "v_Color_1"
+               OpName %v_TexCoord_1 "v_TexCoord_1"
+               OpName %member_1 "member_1"
+               OpName %vertex_point_size "vertex_point_size"
+               OpName %global_block "global_block"
+               OpMemberName %global_block 0 "inner"
+               OpName %ub_SceneParams "ub_SceneParams"
+               OpMemberName %ub_SceneParams 0 "u_Projection"
+               OpName %Mat4x4_ "Mat4x4_"
+               OpMemberName %Mat4x4_ 0 "mx"
+               OpMemberName %Mat4x4_ 1 "my"
+               OpMemberName %Mat4x4_ 2 "mz"
+               OpMemberName %Mat4x4_ 3 "mw"
+               OpName %global "global"
+               OpName %global1_block "global1_block"
+               OpMemberName %global1_block 0 "inner"
+               OpName %ub_MaterialParams "ub_MaterialParams"
+               OpMemberName %ub_MaterialParams 0 "u_TexMtx"
+               OpName %Mat4x2_ "Mat4x2_"
+               OpMemberName %Mat4x2_ 0 "mx"
+               OpMemberName %Mat4x2_ 1 "my"
+               OpMemberName %ub_MaterialParams 1 "u_Misc0_"
+               OpName %global1 "global1"
+               OpName %global2_block "global2_block"
+               OpMemberName %global2_block 0 "inner"
+               OpName %ub_PacketParams "ub_PacketParams"
+               OpMemberName %ub_PacketParams 0 "u_PosMtx"
+               OpName %Mat4x3_ "Mat4x3_"
+               OpMemberName %Mat4x3_ 0 "mx"
+               OpMemberName %Mat4x3_ 1 "my"
+               OpMemberName %Mat4x3_ 2 "mz"
+               OpName %global2 "global2"
+               OpName %a_Position1 "a_Position1"
+               OpName %a_UV1 "a_UV1"
+               OpName %a_Color1 "a_Color1"
+               OpName %a_Normal1 "a_Normal1"
+               OpName %a_PosMtxIdx1 "a_PosMtxIdx1"
+               OpName %v_Color "v_Color"
+               OpName %v_TexCoord "v_TexCoord"
+               OpName %gl_Position "gl_Position"
+               OpName %Mat4x3GetCol0_ "Mat4x3GetCol0_"
+               OpName %m "m"
+               OpName %m1 "m1"
+               OpName %Mat4x3GetCol1_ "Mat4x3GetCol1_"
+               OpName %m2 "m2"
+               OpName %m3 "m3"
+               OpName %Mat4x3GetCol2_ "Mat4x3GetCol2_"
+               OpName %m4 "m4"
+               OpName %m5 "m5"
+               OpName %Mat4x3GetCol3_ "Mat4x3GetCol3_"
+               OpName %m6 "m6"
+               OpName %m7 "m7"
+               OpName %Mul "Mul"
+               OpName %m8 "m8"
+               OpName %v "v"
+               OpName %m9 "m9"
+               OpName %v1 "v1"
+               OpName %Mul1 "Mul1"
+               OpName %m10 "m10"
+               OpName %v2 "v2"
+               OpName %m11 "m11"
+               OpName %v3 "v3"
+               OpName %Mul2 "Mul2"
+               OpName %m12 "m12"
+               OpName %v4 "v4"
+               OpName %m13 "m13"
+               OpName %v5 "v5"
+               OpName %Mul3 "Mul3"
+               OpName %v6 "v6"
+               OpName %m14 "m14"
+               OpName %v7 "v7"
+               OpName %m15 "m15"
+               OpName %x_Mat4x4_ "x_Mat4x4_"
+               OpName %n "n"
+               OpName %n1 "n1"
+               OpName %o "o"
+               OpName %x_Mat4x4_1 "x_Mat4x4_1"
+               OpName %m16 "m16"
+               OpName %m17 "m17"
+               OpName %o1 "o1"
+               OpName %x_Mat4x4_2 "x_Mat4x4_2"
+               OpName %m18 "m18"
+               OpName %m19 "m19"
+               OpName %o2 "o2"
+               OpName %x_Mat4x3_ "x_Mat4x3_"
+               OpName %n2 "n2"
+               OpName %n3 "n3"
+               OpName %o3 "o3"
+               OpName %x_Mat4x3_1 "x_Mat4x3_1"
+               OpName %m20 "m20"
+               OpName %m21 "m21"
+               OpName %o4 "o4"
+               OpName %main1 "main1"
+               OpName %tint_return_flag "tint_return_flag"
+               OpName %t_PosMtx "t_PosMtx"
+               OpName %t_TexSpaceCoord "t_TexSpaceCoord"
+               OpName %VertexOutput "VertexOutput"
+               OpMemberName %VertexOutput 0 "v_Color"
+               OpMemberName %VertexOutput 1 "v_TexCoord"
+               OpMemberName %VertexOutput 2 "member"
+               OpName %main_inner "main_inner"
+               OpName %a_Position "a_Position"
+               OpName %a_UV "a_UV"
+               OpName %a_Color "a_Color"
+               OpName %a_Normal "a_Normal"
+               OpName %a_PosMtxIdx "a_PosMtxIdx"
+               OpName %main "main"
+               OpDecorate %a_Position_1 Location 0
+               OpDecorate %a_UV_1 Location 1
+               OpDecorate %a_Color_1 Location 2
+               OpDecorate %a_Normal_1 Location 3
+               OpDecorate %a_PosMtxIdx_1 Location 4
+               OpDecorate %v_Color_1 Location 0
+               OpDecorate %v_TexCoord_1 Location 1
+               OpDecorate %member_1 BuiltIn Position
+               OpDecorate %vertex_point_size BuiltIn PointSize
+               OpDecorate %global_block Block
+               OpMemberDecorate %global_block 0 Offset 0
+               OpMemberDecorate %ub_SceneParams 0 Offset 0
+               OpMemberDecorate %Mat4x4_ 0 Offset 0
+               OpMemberDecorate %Mat4x4_ 1 Offset 16
+               OpMemberDecorate %Mat4x4_ 2 Offset 32
+               OpMemberDecorate %Mat4x4_ 3 Offset 48
+               OpDecorate %global NonWritable
+               OpDecorate %global DescriptorSet 0
+               OpDecorate %global Binding 0
+               OpDecorate %global1_block Block
+               OpMemberDecorate %global1_block 0 Offset 0
+               OpMemberDecorate %ub_MaterialParams 0 Offset 0
+               OpMemberDecorate %Mat4x2_ 0 Offset 0
+               OpMemberDecorate %Mat4x2_ 1 Offset 16
+               OpDecorate %_arr_Mat4x2__uint_1 ArrayStride 32
+               OpMemberDecorate %ub_MaterialParams 1 Offset 32
+               OpDecorate %global1 NonWritable
+               OpDecorate %global1 DescriptorSet 0
+               OpDecorate %global1 Binding 1
+               OpDecorate %global2_block Block
+               OpMemberDecorate %global2_block 0 Offset 0
+               OpMemberDecorate %ub_PacketParams 0 Offset 0
+               OpMemberDecorate %Mat4x3_ 0 Offset 0
+               OpMemberDecorate %Mat4x3_ 1 Offset 16
+               OpMemberDecorate %Mat4x3_ 2 Offset 32
+               OpDecorate %_arr_Mat4x3__uint_32 ArrayStride 48
+               OpDecorate %global2 NonWritable
+               OpDecorate %global2 DescriptorSet 0
+               OpDecorate %global2 Binding 2
+               OpMemberDecorate %VertexOutput 0 Offset 0
+               OpMemberDecorate %VertexOutput 1 Offset 16
+               OpMemberDecorate %VertexOutput 2 Offset 32
+      %float = OpTypeFloat 32
+    %v3float = OpTypeVector %float 3
+%_ptr_Input_v3float = OpTypePointer Input %v3float
+%a_Position_1 = OpVariable %_ptr_Input_v3float Input
+    %v2float = OpTypeVector %float 2
+%_ptr_Input_v2float = OpTypePointer Input %v2float
+     %a_UV_1 = OpVariable %_ptr_Input_v2float Input
+    %v4float = OpTypeVector %float 4
+%_ptr_Input_v4float = OpTypePointer Input %v4float
+  %a_Color_1 = OpVariable %_ptr_Input_v4float Input
+ %a_Normal_1 = OpVariable %_ptr_Input_v3float Input
+%_ptr_Input_float = OpTypePointer Input %float
+%a_PosMtxIdx_1 = OpVariable %_ptr_Input_float Input
+%_ptr_Output_v4float = OpTypePointer Output %v4float
+         %16 = OpConstantNull %v4float
+  %v_Color_1 = OpVariable %_ptr_Output_v4float Output %16
+%_ptr_Output_v2float = OpTypePointer Output %v2float
+         %19 = OpConstantNull %v2float
+%v_TexCoord_1 = OpVariable %_ptr_Output_v2float Output %19
+   %member_1 = OpVariable %_ptr_Output_v4float Output %16
+%_ptr_Output_float = OpTypePointer Output %float
+         %23 = OpConstantNull %float
+%vertex_point_size = OpVariable %_ptr_Output_float Output %23
+    %Mat4x4_ = OpTypeStruct %v4float %v4float %v4float %v4float
+%ub_SceneParams = OpTypeStruct %Mat4x4_
+%global_block = OpTypeStruct %ub_SceneParams
+%_ptr_Uniform_global_block = OpTypePointer Uniform %global_block
+     %global = OpVariable %_ptr_Uniform_global_block Uniform
+    %Mat4x2_ = OpTypeStruct %v4float %v4float
+       %uint = OpTypeInt 32 0
+     %uint_1 = OpConstant %uint 1
+%_arr_Mat4x2__uint_1 = OpTypeArray %Mat4x2_ %uint_1
+%ub_MaterialParams = OpTypeStruct %_arr_Mat4x2__uint_1 %v4float
+%global1_block = OpTypeStruct %ub_MaterialParams
+%_ptr_Uniform_global1_block = OpTypePointer Uniform %global1_block
+    %global1 = OpVariable %_ptr_Uniform_global1_block Uniform
+    %Mat4x3_ = OpTypeStruct %v4float %v4float %v4float
+    %uint_32 = OpConstant %uint 32
+%_arr_Mat4x3__uint_32 = OpTypeArray %Mat4x3_ %uint_32
+%ub_PacketParams = OpTypeStruct %_arr_Mat4x3__uint_32
+%global2_block = OpTypeStruct %ub_PacketParams
+%_ptr_Uniform_global2_block = OpTypePointer Uniform %global2_block
+    %global2 = OpVariable %_ptr_Uniform_global2_block Uniform
+%_ptr_Private_v3float = OpTypePointer Private %v3float
+         %46 = OpConstantNull %v3float
+%a_Position1 = OpVariable %_ptr_Private_v3float Private %46
+%_ptr_Private_v2float = OpTypePointer Private %v2float
+      %a_UV1 = OpVariable %_ptr_Private_v2float Private %19
+%_ptr_Private_v4float = OpTypePointer Private %v4float
+   %a_Color1 = OpVariable %_ptr_Private_v4float Private %16
+  %a_Normal1 = OpVariable %_ptr_Private_v3float Private %46
+%_ptr_Private_float = OpTypePointer Private %float
+%a_PosMtxIdx1 = OpVariable %_ptr_Private_float Private %23
+    %v_Color = OpVariable %_ptr_Private_v4float Private %16
+ %v_TexCoord = OpVariable %_ptr_Private_v2float Private %19
+%gl_Position = OpVariable %_ptr_Private_v4float Private %16
+         %57 = OpTypeFunction %v3float %Mat4x3_
+%_ptr_Function_Mat4x3_ = OpTypePointer Function %Mat4x3_
+         %63 = OpConstantNull %Mat4x3_
+        %116 = OpTypeFunction %v4float %Mat4x4_ %v4float
+%_ptr_Function_Mat4x4_ = OpTypePointer Function %Mat4x4_
+        %123 = OpConstantNull %Mat4x4_
+%_ptr_Function_v4float = OpTypePointer Function %v4float
+        %143 = OpTypeFunction %v3float %Mat4x3_ %v4float
+        %163 = OpTypeFunction %v2float %Mat4x2_ %v4float
+%_ptr_Function_Mat4x2_ = OpTypePointer Function %Mat4x2_
+        %170 = OpConstantNull %Mat4x2_
+        %181 = OpTypeFunction %v4float %v3float %Mat4x3_
+%_ptr_Function_v3float = OpTypePointer Function %v3float
+        %206 = OpTypeFunction %Mat4x4_ %float
+%_ptr_Function_float = OpTypePointer Function %float
+     %uint_0 = OpConstant %uint 0
+     %uint_2 = OpConstant %uint 2
+     %uint_3 = OpConstant %uint 3
+        %229 = OpTypeFunction %Mat4x4_ %Mat4x3_
+    %float_1 = OpConstant %float 1
+        %247 = OpTypeFunction %Mat4x4_ %Mat4x2_
+        %261 = OpTypeFunction %Mat4x3_ %float
+        %277 = OpTypeFunction %Mat4x3_ %Mat4x4_
+       %void = OpTypeVoid
+        %293 = OpTypeFunction %void
+       %bool = OpTypeBool
+%_ptr_Function_bool = OpTypePointer Function %bool
+        %300 = OpConstantNull %bool
+%_ptr_Function_v2float = OpTypePointer Function %v2float
+        %int = OpTypeInt 32 1
+%_ptr_Uniform_Mat4x3_ = OpTypePointer Uniform %Mat4x3_
+%_ptr_Uniform_Mat4x4_ = OpTypePointer Uniform %Mat4x4_
+%_ptr_Uniform_v4float = OpTypePointer Uniform %v4float
+    %float_2 = OpConstant %float 2
+        %347 = OpConstantNull %int
+%_ptr_Uniform_Mat4x2_ = OpTypePointer Uniform %Mat4x2_
+       %true = OpConstantTrue %bool
+%VertexOutput = OpTypeStruct %v4float %v2float %v4float
+        %368 = OpTypeFunction %VertexOutput %v3float %v2float %v4float %v3float %float
+%Mat4x3GetCol0_ = OpFunction %v3float None %57
+          %m = OpFunctionParameter %Mat4x3_
+         %60 = OpLabel
+         %m1 = OpVariable %_ptr_Function_Mat4x3_ Function %63
+               OpStore %m1 %m
+         %64 = OpLoad %Mat4x3_ %m1
+         %65 = OpLoad %Mat4x3_ %m1
+         %66 = OpLoad %Mat4x3_ %m1
+         %67 = OpCompositeExtract %v4float %64 0
+         %68 = OpCompositeExtract %float %67 0
+         %69 = OpCompositeExtract %v4float %65 1
+         %70 = OpCompositeExtract %float %69 0
+         %71 = OpCompositeExtract %v4float %66 2
+         %72 = OpCompositeExtract %float %71 0
+         %73 = OpCompositeConstruct %v3float %68 %70 %72
+               OpReturnValue %73
+               OpFunctionEnd
+%Mat4x3GetCol1_ = OpFunction %v3float None %57
+         %m2 = OpFunctionParameter %Mat4x3_
+         %76 = OpLabel
+         %m3 = OpVariable %_ptr_Function_Mat4x3_ Function %63
+               OpStore %m3 %m2
+         %78 = OpLoad %Mat4x3_ %m3
+         %79 = OpLoad %Mat4x3_ %m3
+         %80 = OpLoad %Mat4x3_ %m3
+         %81 = OpCompositeExtract %v4float %78 0
+         %82 = OpCompositeExtract %float %81 1
+         %83 = OpCompositeExtract %v4float %79 1
+         %84 = OpCompositeExtract %float %83 1
+         %85 = OpCompositeExtract %v4float %80 2
+         %86 = OpCompositeExtract %float %85 1
+         %87 = OpCompositeConstruct %v3float %82 %84 %86
+               OpReturnValue %87
+               OpFunctionEnd
+%Mat4x3GetCol2_ = OpFunction %v3float None %57
+         %m4 = OpFunctionParameter %Mat4x3_
+         %90 = OpLabel
+         %m5 = OpVariable %_ptr_Function_Mat4x3_ Function %63
+               OpStore %m5 %m4
+         %92 = OpLoad %Mat4x3_ %m5
+         %93 = OpLoad %Mat4x3_ %m5
+         %94 = OpLoad %Mat4x3_ %m5
+         %95 = OpCompositeExtract %v4float %92 0
+         %96 = OpCompositeExtract %float %95 2
+         %97 = OpCompositeExtract %v4float %93 1
+         %98 = OpCompositeExtract %float %97 2
+         %99 = OpCompositeExtract %v4float %94 2
+        %100 = OpCompositeExtract %float %99 2
+        %101 = OpCompositeConstruct %v3float %96 %98 %100
+               OpReturnValue %101
+               OpFunctionEnd
+%Mat4x3GetCol3_ = OpFunction %v3float None %57
+         %m6 = OpFunctionParameter %Mat4x3_
+        %104 = OpLabel
+         %m7 = OpVariable %_ptr_Function_Mat4x3_ Function %63
+               OpStore %m7 %m6
+        %106 = OpLoad %Mat4x3_ %m7
+        %107 = OpLoad %Mat4x3_ %m7
+        %108 = OpLoad %Mat4x3_ %m7
+        %109 = OpCompositeExtract %v4float %106 0
+        %110 = OpCompositeExtract %float %109 3
+        %111 = OpCompositeExtract %v4float %107 1
+        %112 = OpCompositeExtract %float %111 3
+        %113 = OpCompositeExtract %v4float %108 2
+        %114 = OpCompositeExtract %float %113 3
+        %115 = OpCompositeConstruct %v3float %110 %112 %114
+               OpReturnValue %115
+               OpFunctionEnd
+        %Mul = OpFunction %v4float None %116
+         %m8 = OpFunctionParameter %Mat4x4_
+          %v = OpFunctionParameter %v4float
+        %120 = OpLabel
+         %m9 = OpVariable %_ptr_Function_Mat4x4_ Function %123
+         %v1 = OpVariable %_ptr_Function_v4float Function %16
+               OpStore %m9 %m8
+               OpStore %v1 %v
+        %126 = OpLoad %Mat4x4_ %m9
+        %127 = OpLoad %v4float %v1
+        %128 = OpLoad %Mat4x4_ %m9
+        %129 = OpLoad %v4float %v1
+        %130 = OpLoad %Mat4x4_ %m9
+        %131 = OpLoad %v4float %v1
+        %132 = OpLoad %Mat4x4_ %m9
+        %133 = OpLoad %v4float %v1
+        %135 = OpCompositeExtract %v4float %126 0
+        %134 = OpDot %float %135 %127
+        %137 = OpCompositeExtract %v4float %128 1
+        %136 = OpDot %float %137 %129
+        %139 = OpCompositeExtract %v4float %130 2
+        %138 = OpDot %float %139 %131
+        %141 = OpCompositeExtract %v4float %132 3
+        %140 = OpDot %float %141 %133
+        %142 = OpCompositeConstruct %v4float %134 %136 %138 %140
+               OpReturnValue %142
+               OpFunctionEnd
+       %Mul1 = OpFunction %v3float None %143
+        %m10 = OpFunctionParameter %Mat4x3_
+         %v2 = OpFunctionParameter %v4float
+        %147 = OpLabel
+        %m11 = OpVariable %_ptr_Function_Mat4x3_ Function %63
+         %v3 = OpVariable %_ptr_Function_v4float Function %16
+               OpStore %m11 %m10
+               OpStore %v3 %v2
+        %150 = OpLoad %Mat4x3_ %m11
+        %151 = OpLoad %v4float %v3
+        %152 = OpLoad %Mat4x3_ %m11
+        %153 = OpLoad %v4float %v3
+        %154 = OpLoad %Mat4x3_ %m11
+        %155 = OpLoad %v4float %v3
+        %157 = OpCompositeExtract %v4float %150 0
+        %156 = OpDot %float %157 %151
+        %159 = OpCompositeExtract %v4float %152 1
+        %158 = OpDot %float %159 %153
+        %161 = OpCompositeExtract %v4float %154 2
+        %160 = OpDot %float %161 %155
+        %162 = OpCompositeConstruct %v3float %156 %158 %160
+               OpReturnValue %162
+               OpFunctionEnd
+       %Mul2 = OpFunction %v2float None %163
+        %m12 = OpFunctionParameter %Mat4x2_
+         %v4 = OpFunctionParameter %v4float
+        %167 = OpLabel
+        %m13 = OpVariable %_ptr_Function_Mat4x2_ Function %170
+         %v5 = OpVariable %_ptr_Function_v4float Function %16
+               OpStore %m13 %m12
+               OpStore %v5 %v4
+        %172 = OpLoad %Mat4x2_ %m13
+        %173 = OpLoad %v4float %v5
+        %174 = OpLoad %Mat4x2_ %m13
+        %175 = OpLoad %v4float %v5
+        %177 = OpCompositeExtract %v4float %172 0
+        %176 = OpDot %float %177 %173
+        %179 = OpCompositeExtract %v4float %174 1
+        %178 = OpDot %float %179 %175
+        %180 = OpCompositeConstruct %v2float %176 %178
+               OpReturnValue %180
+               OpFunctionEnd
+       %Mul3 = OpFunction %v4float None %181
+         %v6 = OpFunctionParameter %v3float
+        %m14 = OpFunctionParameter %Mat4x3_
+        %185 = OpLabel
+         %v7 = OpVariable %_ptr_Function_v3float Function %46
+        %m15 = OpVariable %_ptr_Function_Mat4x3_ Function %63
+               OpStore %v7 %v6
+               OpStore %m15 %m14
+        %189 = OpLoad %Mat4x3_ %m15
+        %190 = OpFunctionCall %v3float %Mat4x3GetCol0_ %189
+        %191 = OpLoad %v3float %v7
+        %192 = OpLoad %Mat4x3_ %m15
+        %193 = OpFunctionCall %v3float %Mat4x3GetCol1_ %192
+        %194 = OpLoad %v3float %v7
+        %195 = OpLoad %Mat4x3_ %m15
+        %196 = OpFunctionCall %v3float %Mat4x3GetCol2_ %195
+        %197 = OpLoad %v3float %v7
+        %198 = OpLoad %Mat4x3_ %m15
+        %199 = OpFunctionCall %v3float %Mat4x3GetCol3_ %198
+        %200 = OpLoad %v3float %v7
+        %201 = OpDot %float %190 %191
+        %202 = OpDot %float %193 %194
+        %203 = OpDot %float %196 %197
+        %204 = OpDot %float %199 %200
+        %205 = OpCompositeConstruct %v4float %201 %202 %203 %204
+               OpReturnValue %205
+               OpFunctionEnd
+  %x_Mat4x4_ = OpFunction %Mat4x4_ None %206
+          %n = OpFunctionParameter %float
+        %209 = OpLabel
+         %n1 = OpVariable %_ptr_Function_float Function %23
+          %o = OpVariable %_ptr_Function_Mat4x4_ Function %123
+               OpStore %n1 %n
+        %213 = OpLoad %float %n1
+        %215 = OpAccessChain %_ptr_Function_v4float %o %uint_0
+        %216 = OpCompositeConstruct %v4float %213 %23 %23 %23
+               OpStore %215 %216
+        %217 = OpLoad %float %n1
+        %218 = OpAccessChain %_ptr_Function_v4float %o %uint_1
+        %219 = OpCompositeConstruct %v4float %23 %217 %23 %23
+               OpStore %218 %219
+        %220 = OpLoad %float %n1
+        %222 = OpAccessChain %_ptr_Function_v4float %o %uint_2
+        %223 = OpCompositeConstruct %v4float %23 %23 %220 %23
+               OpStore %222 %223
+        %224 = OpLoad %float %n1
+        %226 = OpAccessChain %_ptr_Function_v4float %o %uint_3
+        %227 = OpCompositeConstruct %v4float %23 %23 %23 %224
+               OpStore %226 %227
+        %228 = OpLoad %Mat4x4_ %o
+               OpReturnValue %228
+               OpFunctionEnd
+ %x_Mat4x4_1 = OpFunction %Mat4x4_ None %229
+        %m16 = OpFunctionParameter %Mat4x3_
+        %232 = OpLabel
+        %m17 = OpVariable %_ptr_Function_Mat4x3_ Function %63
+         %o1 = OpVariable %_ptr_Function_Mat4x4_ Function %123
+               OpStore %m17 %m16
+        %235 = OpFunctionCall %Mat4x4_ %x_Mat4x4_ %float_1
+               OpStore %o1 %235
+        %237 = OpLoad %Mat4x3_ %m17
+        %238 = OpAccessChain %_ptr_Function_v4float %o1 %uint_0
+        %239 = OpCompositeExtract %v4float %237 0
+               OpStore %238 %239
+        %240 = OpLoad %Mat4x3_ %m17
+        %241 = OpAccessChain %_ptr_Function_v4float %o1 %uint_1
+        %242 = OpCompositeExtract %v4float %240 1
+               OpStore %241 %242
+        %243 = OpLoad %Mat4x3_ %m17
+        %244 = OpAccessChain %_ptr_Function_v4float %o1 %uint_2
+        %245 = OpCompositeExtract %v4float %243 2
+               OpStore %244 %245
+        %246 = OpLoad %Mat4x4_ %o1
+               OpReturnValue %246
+               OpFunctionEnd
+ %x_Mat4x4_2 = OpFunction %Mat4x4_ None %247
+        %m18 = OpFunctionParameter %Mat4x2_
+        %250 = OpLabel
+        %m19 = OpVariable %_ptr_Function_Mat4x2_ Function %170
+         %o2 = OpVariable %_ptr_Function_Mat4x4_ Function %123
+               OpStore %m19 %m18
+        %253 = OpFunctionCall %Mat4x4_ %x_Mat4x4_ %float_1
+               OpStore %o2 %253
+        %254 = OpLoad %Mat4x2_ %m19
+        %255 = OpAccessChain %_ptr_Function_v4float %o2 %uint_0
+        %256 = OpCompositeExtract %v4float %254 0
+               OpStore %255 %256
+        %257 = OpLoad %Mat4x2_ %m19
+        %258 = OpAccessChain %_ptr_Function_v4float %o2 %uint_1
+        %259 = OpCompositeExtract %v4float %257 1
+               OpStore %258 %259
+        %260 = OpLoad %Mat4x4_ %o2
+               OpReturnValue %260
+               OpFunctionEnd
+  %x_Mat4x3_ = OpFunction %Mat4x3_ None %261
+         %n2 = OpFunctionParameter %float
+        %264 = OpLabel
+         %n3 = OpVariable %_ptr_Function_float Function %23
+         %o3 = OpVariable %_ptr_Function_Mat4x3_ Function %63
+               OpStore %n3 %n2
+        %267 = OpLoad %float %n3
+        %268 = OpAccessChain %_ptr_Function_v4float %o3 %uint_0
+        %269 = OpCompositeConstruct %v4float %267 %23 %23 %23
+               OpStore %268 %269
+        %270 = OpLoad %float %n3
+        %271 = OpAccessChain %_ptr_Function_v4float %o3 %uint_1
+        %272 = OpCompositeConstruct %v4float %23 %270 %23 %23
+               OpStore %271 %272
+        %273 = OpLoad %float %n3
+        %274 = OpAccessChain %_ptr_Function_v4float %o3 %uint_2
+        %275 = OpCompositeConstruct %v4float %23 %23 %273 %23
+               OpStore %274 %275
+        %276 = OpLoad %Mat4x3_ %o3
+               OpReturnValue %276
+               OpFunctionEnd
+ %x_Mat4x3_1 = OpFunction %Mat4x3_ None %277
+        %m20 = OpFunctionParameter %Mat4x4_
+        %280 = OpLabel
+        %m21 = OpVariable %_ptr_Function_Mat4x4_ Function %123
+         %o4 = OpVariable %_ptr_Function_Mat4x3_ Function %63
+               OpStore %m21 %m20
+        %283 = OpLoad %Mat4x4_ %m21
+        %284 = OpAccessChain %_ptr_Function_v4float %o4 %uint_0
+        %285 = OpCompositeExtract %v4float %283 0
+               OpStore %284 %285
+        %286 = OpLoad %Mat4x4_ %m21
+        %287 = OpAccessChain %_ptr_Function_v4float %o4 %uint_1
+        %288 = OpCompositeExtract %v4float %286 1
+               OpStore %287 %288
+        %289 = OpLoad %Mat4x4_ %m21
+        %290 = OpAccessChain %_ptr_Function_v4float %o4 %uint_2
+        %291 = OpCompositeExtract %v4float %289 2
+               OpStore %290 %291
+        %292 = OpLoad %Mat4x3_ %o4
+               OpReturnValue %292
+               OpFunctionEnd
+      %main1 = OpFunction %void None %293
+        %296 = OpLabel
+%tint_return_flag = OpVariable %_ptr_Function_bool Function %300
+   %t_PosMtx = OpVariable %_ptr_Function_Mat4x3_ Function %63
+%t_TexSpaceCoord = OpVariable %_ptr_Function_v2float Function %19
+        %304 = OpLoad %float %a_PosMtxIdx1
+        %305 = OpConvertFToS %int %304
+        %308 = OpAccessChain %_ptr_Uniform_Mat4x3_ %global2 %uint_0 %uint_0 %305
+        %309 = OpLoad %Mat4x3_ %308
+               OpStore %t_PosMtx %309
+        %310 = OpLoad %Mat4x3_ %t_PosMtx
+        %311 = OpFunctionCall %Mat4x4_ %x_Mat4x4_1 %310
+        %312 = OpLoad %v3float %a_Position1
+        %313 = OpLoad %Mat4x3_ %t_PosMtx
+        %314 = OpFunctionCall %Mat4x4_ %x_Mat4x4_1 %313
+        %315 = OpLoad %v3float %a_Position1
+        %317 = OpCompositeExtract %float %315 0
+        %318 = OpCompositeExtract %float %315 1
+        %319 = OpCompositeExtract %float %315 2
+        %320 = OpCompositeConstruct %v4float %317 %318 %319 %float_1
+        %316 = OpFunctionCall %v4float %Mul %314 %320
+        %322 = OpAccessChain %_ptr_Uniform_Mat4x4_ %global %uint_0 %uint_0
+        %323 = OpLoad %Mat4x4_ %322
+        %324 = OpLoad %Mat4x3_ %t_PosMtx
+        %325 = OpFunctionCall %Mat4x4_ %x_Mat4x4_1 %324
+        %326 = OpLoad %v3float %a_Position1
+        %327 = OpLoad %Mat4x3_ %t_PosMtx
+        %328 = OpFunctionCall %Mat4x4_ %x_Mat4x4_1 %327
+        %329 = OpLoad %v3float %a_Position1
+        %331 = OpCompositeExtract %float %329 0
+        %332 = OpCompositeExtract %float %329 1
+        %333 = OpCompositeExtract %float %329 2
+        %334 = OpCompositeConstruct %v4float %331 %332 %333 %float_1
+        %330 = OpFunctionCall %v4float %Mul %328 %334
+        %335 = OpFunctionCall %v4float %Mul %323 %330
+               OpStore %gl_Position %335
+        %336 = OpLoad %v4float %a_Color1
+               OpStore %v_Color %336
+        %338 = OpAccessChain %_ptr_Uniform_v4float %global1 %uint_0 %uint_1
+        %339 = OpLoad %v4float %338
+        %340 = OpCompositeExtract %float %339 0
+        %342 = OpFOrdEqual %bool %340 %float_2
+               OpSelectionMerge %343 None
+               OpBranchConditional %342 %344 %345
+        %344 = OpLabel
+        %346 = OpLoad %v3float %a_Normal1
+        %349 = OpAccessChain %_ptr_Uniform_Mat4x2_ %global1 %uint_0 %uint_0 %347
+        %350 = OpLoad %Mat4x2_ %349
+        %351 = OpLoad %v3float %a_Normal1
+        %353 = OpCompositeExtract %float %351 0
+        %354 = OpCompositeExtract %float %351 1
+        %355 = OpCompositeExtract %float %351 2
+        %356 = OpCompositeConstruct %v4float %353 %354 %355 %float_1
+        %352 = OpFunctionCall %v2float %Mul2 %350 %356
+        %357 = OpVectorShuffle %v2float %352 %352 0 1
+               OpStore %v_TexCoord %357
+               OpStore %tint_return_flag %true
+               OpBranch %343
+        %345 = OpLabel
+        %359 = OpLoad %v2float %a_UV1
+        %360 = OpAccessChain %_ptr_Uniform_Mat4x2_ %global1 %uint_0 %uint_0 %347
+        %361 = OpLoad %Mat4x2_ %360
+        %362 = OpLoad %v2float %a_UV1
+        %364 = OpCompositeExtract %float %362 0
+        %365 = OpCompositeExtract %float %362 1
+        %366 = OpCompositeConstruct %v4float %364 %365 %float_1 %float_1
+        %363 = OpFunctionCall %v2float %Mul2 %361 %366
+        %367 = OpVectorShuffle %v2float %363 %363 0 1
+               OpStore %v_TexCoord %367
+               OpStore %tint_return_flag %true
+               OpBranch %343
+        %343 = OpLabel
+               OpReturn
+               OpFunctionEnd
+ %main_inner = OpFunction %VertexOutput None %368
+ %a_Position = OpFunctionParameter %v3float
+       %a_UV = OpFunctionParameter %v2float
+    %a_Color = OpFunctionParameter %v4float
+   %a_Normal = OpFunctionParameter %v3float
+%a_PosMtxIdx = OpFunctionParameter %float
+        %376 = OpLabel
+               OpStore %a_Position1 %a_Position
+               OpStore %a_UV1 %a_UV
+               OpStore %a_Color1 %a_Color
+               OpStore %a_Normal1 %a_Normal
+               OpStore %a_PosMtxIdx1 %a_PosMtxIdx
+        %377 = OpFunctionCall %void %main1
+        %378 = OpLoad %v4float %v_Color
+        %379 = OpLoad %v2float %v_TexCoord
+        %380 = OpLoad %v4float %gl_Position
+        %381 = OpCompositeConstruct %VertexOutput %378 %379 %380
+               OpReturnValue %381
+               OpFunctionEnd
+       %main = OpFunction %void None %293
+        %383 = OpLabel
+        %385 = OpLoad %v3float %a_Position_1
+        %386 = OpLoad %v2float %a_UV_1
+        %387 = OpLoad %v4float %a_Color_1
+        %388 = OpLoad %v3float %a_Normal_1
+        %389 = OpLoad %float %a_PosMtxIdx_1
+        %384 = OpFunctionCall %VertexOutput %main_inner %385 %386 %387 %388 %389
+        %390 = OpCompositeExtract %v4float %384 0
+               OpStore %v_Color_1 %390
+        %391 = OpCompositeExtract %v2float %384 1
+               OpStore %v_TexCoord_1 %391
+        %392 = OpCompositeExtract %v4float %384 2
+               OpStore %member_1 %392
+               OpStore %vertex_point_size %float_1
+               OpReturn
+               OpFunctionEnd

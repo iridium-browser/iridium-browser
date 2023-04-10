@@ -1,0 +1,12 @@
+{
+    "bullseye_arm": {
+        "Sha1Sum": "419126e552dfebd914f908eea4a1b6dba9c1e9f7",
+        "SysrootDir": "debian_bullseye_arm-sysroot",
+        "Tarball": "debian_bullseye_arm_sysroot.tar.xz"
+    },
+    "bullseye_arm64": {
+        "Sha1Sum": "37e80379a489ca74f6ed04e22bebdb64bf6bde01",
+        "SysrootDir": "debian_bullseye_arm64-sysroot",
+        "Tarball": "debian_bullseye_arm64_sysroot.tar.xz"
+    }
+}

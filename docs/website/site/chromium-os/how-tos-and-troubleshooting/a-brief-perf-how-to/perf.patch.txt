@@ -1,0 +1,24 @@
+diff --git a/boot-complete.conf b/boot-complete.conf
+index 77712e4..a368469 100644
+--- a/boot-complete.conf
++++ b/boot-complete.conf
+@@ -84,4 +84,5 @@ script
+   # Checks if the device shut down while in suspend and sends metrics
+   # as if coming out of suspend.
+   send_metrics_on_resume -b &
++  pkill -2 '^perf$' || true
+ end script
+diff --git a/chromeos_startup b/chromeos_startup
+index da54833..9d52108 100755
+--- a/chromeos_startup
++++ b/chromeos_startup
+@@ -157,6 +157,9 @@ if [ "$ROOTDEV_RET_CODE" = "0" ] ; then
+   fi
+ fi
+ 
++( cd /tmp ; exec perf timechart record sleep 20 >perf.out 2>&1 ) &
++sleep .2
++
+ #
+ # Note that ureadahead depends on some of the operations above.
+ # Notably, the command requires /var to be mounted, because the pack

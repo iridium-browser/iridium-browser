@@ -1,0 +1,12 @@
+# Copyright 2022 Google LLC
+#
+# This source code is licensed under the BSD-style license found in the
+# LICENSE file in the root directory of this source tree.
+
+# Wasm SIMD
+- name: xnn_f32_dwconv_ukernel_5f5m5l4c4s4r__wasmsimd
+- name: xnn_f32_dwconv_ukernel_5f5m5l4c4s4r__wasmsimd_acc2
+
+# Wasm Relaxed SIMD
+- name: xnn_f32_dwconv_ukernel_5f5m5l4c4s4r__wasmrelaxedsimd_fma
+- name: xnn_f32_dwconv_ukernel_5f5m5l4c4s4r__wasmrelaxedsimd_fma_acc2

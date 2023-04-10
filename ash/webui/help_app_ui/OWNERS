@@ -1,0 +1,9 @@
+dstockwell@google.com
+callistus@google.com
+chrishall@chromium.org
+zufeng@google.com
+
+per-file *.mojom=set noparent
+per-file *.mojom=file://ipc/SECURITY_OWNERS
+
+# Internal Component: b/components/690873

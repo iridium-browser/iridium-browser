@@ -1,0 +1,24 @@
+# Copyright information
+
+AUTHOR = "your name, and at least one person ([ldap]@chromium.org) or a mailing list"
+NAME = "power_MyBacklightTest" # test name
+TIME = "SHORT"              # can be MEDIUM, LONG
+TEST_CATEGORY = "Benchmark"    # can be General, Stress
+TEST_CLASS = "power"    # testing area, e.g., platform, network etc
+# indicating it's a server side test
+TEST_TYPE = "server"
+SUITE = "bvt"                 # if the test should be a part of the BVT
+
+
+DOC = """
+This test measures the backlight level before and after certain system events
+and verifies that the backlight level has not changed.
+"""
+
+
+def run_system_power_MyBacklightTest(machine):
+    job.run_test('power_MyBacklightTest', client_ip=machine)
+
+# run the test in multiple machines
+
+job.parallel_simple(run_system_power_MyBacklightTest, machines)

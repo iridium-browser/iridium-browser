@@ -1,0 +1,134 @@
+load("//bazel:macros.bzl", "bool_flag", "exports_files_legacy", "select_multi", "selects", "skia_cc_deps", "skia_filegroup", "split_srcs_and_hdrs", "string_flag_with_values")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+# In own group for exporting to //gn/gpu.gni:skia_shared_gpu_sources.
+SHARED_FILES = [
+    "AsyncReadTypes.h",
+    "AtlasTypes.cpp",
+    "AtlasTypes.h",
+    "Blend.cpp",
+    "Blend.h",
+    "BufferWriter.h",
+    "KeyBuilder.h",
+    "MutableTextureStateRef.h",
+    "Rectanizer.h",
+    "RectanizerPow2.cpp",
+    "RectanizerPow2.h",
+    "RectanizerSkyline.cpp",
+    "RectanizerSkyline.h",
+    "RefCntedCallback.h",
+    "ResourceKey.cpp",
+    "ResourceKey.h",
+    "SkBackingFit.h",
+    "Swizzle.cpp",
+    "Swizzle.h",
+]
+
+split_srcs_and_hdrs(
+    name = "shared",
+    files = SHARED_FILES,
+)
+
+CORE_FILES = [
+    "GrAHardwareBufferUtils.h",
+    "GrRectanizer.h",
+    "ShaderErrorHandler.cpp",
+    "SkRenderEngineAbortf.h",
+]
+
+split_srcs_and_hdrs(
+    name = "core",
+    files = CORE_FILES,
+)
+
+string_flag_with_values(
+    name = "gpu_backend",
+    multiple = True,
+    values = [
+        "gl_backend",
+        "vulkan_backend",
+        "dawn_backend",
+    ],
+)
+
+string_flag_with_values(
+    name = "with_gl_standard",
+    values = [
+        "gles_standard",
+        "gl_standard",
+        "webgl_standard",
+    ],
+)
+
+selects.config_setting_group(
+    name = "has_gpu_backend",
+    match_any = [
+        ":gl_backend",
+        ":dawn_backend",
+        ":vulkan_backend",
+    ],
+    visibility = ["//:__subpackages__"],
+)
+
+selects.config_setting_group(
+    name = "vulkan_with_vma",
+    match_all = [
+        ":vulkan_backend",
+        ":use_vulkan_memory_allocator_true",
+    ],
+    visibility = ["//:__subpackages__"],
+)
+
+bool_flag(
+    name = "use_vulkan_memory_allocator",
+    default = True,
+    public = False,  # Users should use :vulkan_with_vma
+)
+
+bool_flag(
+    name = "enable_gpu_test_utils",
+    default = False,
+)
+
+skia_filegroup(
+    name = "srcs",
+    srcs = [
+        ":core_srcs",
+        ":shared_srcs",
+        "//src/gpu/ganesh:srcs",
+        "//src/gpu/tessellate:srcs",
+    ] + select({
+        "//src/gpu:vulkan_backend": ["//src/gpu/vk:srcs"],
+        "//conditions:default": [],
+    }),
+    visibility = ["//src:__pkg__"],
+)
+
+skia_filegroup(
+    name = "private_hdrs",
+    srcs = [
+        ":core_hdrs",
+        ":shared_hdrs",
+        "//src/gpu/ganesh:private_hdrs",
+        "//src/gpu/tessellate:private_hdrs",
+    ] + select({
+        "//src/gpu:vulkan_backend": ["//src/gpu/vk:private_hdrs"],
+        "//conditions:default": [],
+    }),
+    visibility = ["//src:__pkg__"],
+)
+
+skia_cc_deps(
+    name = "deps",
+    visibility = ["//src:__pkg__"],
+    deps = [
+        "//src/gpu/ganesh:deps",
+    ] + select_multi(
+        {
+            "//src/gpu:vulkan_backend": ["//src/gpu/vk:deps"],
+        },
+    ),
+)

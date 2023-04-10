@@ -1,0 +1,184 @@
+// Copyright 2017 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package arc;
+option go_package = "chromiumos/system_api/arc_proto";
+
+// ARC start options sent from Chrome to session manager. This message is used
+// in the SessionManagerInterface.StartArcMiniContainer method for ARC
+// container. It is also being used by concierge when the device is running on
+// ARCVM.
+message StartArcMiniInstanceRequest {
+  enum PlayStoreAutoUpdate {
+    // Play Store auto-update is left unchanged.
+    AUTO_UPDATE_DEFAULT = 0;
+    // Play Store auto-update is forced to on.
+    AUTO_UPDATE_ON = 1;
+    // Play Store auto-update is forced to off.
+    AUTO_UPDATE_OFF = 2;
+  }
+
+  enum DalvikMemoryProfile {
+    // Default dalvik memory profile suitable for all devices.
+    MEMORY_PROFILE_DEFAULT = 0;
+    // Dalvik memory profile suitable for 4G devices.
+    MEMORY_PROFILE_4G = 1;
+    // Dalvik memory profile suitable for 8G devices.
+    MEMORY_PROFILE_8G = 2;
+    // Dalvik memory profile suitable for 16G devices.
+    MEMORY_PROFILE_16G = 3;
+  }
+
+  optional bool native_bridge_experiment = 1 [default = false];
+
+  // The density value passed to "ro.sf.lcd_density" property.
+  optional int32 lcd_density = 2 [default = -1];
+
+  // Experiment flag for go/arc-file-picker.
+  optional bool arc_file_picker_experiment = 3 [default = false];
+
+  // Optional mode for play store auto-update.
+  optional PlayStoreAutoUpdate play_store_auto_update = 4
+      [default = AUTO_UPDATE_DEFAULT];
+
+  // Experiment flag for ARC Custom Tabs.
+  optional bool arc_custom_tabs_experiment = 5 [default = false];
+
+  // Experiment flag for ARC Print Spooler.
+  optional bool arc_print_spooler_experiment = 6
+      [default = false, deprecated = true];
+
+  // Option to disable ureadahead, Used in specialized tests.
+  // TODO(b/264585671): Refactore this and host_ureadahead_generation to
+  // mode enum.
+  optional bool disable_ureadahead = 7 [default = false];
+
+  // Option to disable by hiding default apps shipped on the system image.
+  // To be used locally in development that involves overriding these apps.
+  optional bool disable_system_default_app = 8
+      [default = false, deprecated = true];
+
+  // Optional mode for dalvik memory profile.
+  optional DalvikMemoryProfile dalvik_memory_profile = 9
+      [default = MEMORY_PROFILE_DEFAULT];
+
+  // Option to disable download provider for tests that are sensetive to the
+  // external components installaton. Last causes the flakiness in tests like
+  // arc.CacheValidation.
+  optional bool disable_download_provider = 12 [default = false];
+
+  // Option to disable media store maintenance task scheduling. Used in tests
+  // to prevent unreliable performance measurements and CPU not idle failures.
+  optional bool disable_media_store_maintenance = 10 [default = false];
+
+  // Enables additional debug settings used when generating Play Auto Install
+  // rosters.
+  optional bool arc_generate_pai = 11 [default = false];
+
+  // Enables use of new notifications ui.
+  optional bool enable_notifications_refresh = 13 [default = false];
+
+  // Option to enable TTS caching
+  optional bool enable_tts_caching = 14 [default = false];
+
+  // Option to enable disable consumer auto update toggle.
+  optional bool enable_consumer_auto_update_toggle = 15 [default = false];
+
+  // Flag to indicate mode with active host ureadahead generation.
+  // TODO(b/264585671): Refactore this and disable_ureadahead to mode enum.
+  optional bool host_ureadahead_generation = 16 [default = false];
+
+  // Option to enable privacy hub for chrome in android settings.
+  optional bool enable_privacy_hub_for_chrome = 17 [default = false];
+
+  // Next ID to use: 18
+}
+
+// ARC upgrade options sent from Chrome to session manager. This message is used
+// in the SessionManagerInterface.UpgradeArcContainer method.
+message UpgradeArcContainerRequest {
+  enum PackageCacheMode {
+    // Performs packages cache setup if the pre-generated cache exists.
+    DEFAULT = 0;
+    // Performs packages cache setup if the pre-generated cache exists and
+    // copies resulting packages.xml to the temporary location after
+    // SystemServer initialized the package manager.
+    COPY_ON_INIT = 1;
+    // Skips packages cache setup and copies resulting packages.xml to the
+    // temporary location after SystemServer initialized the package manager.
+    SKIP_SETUP_COPY_ON_INIT = 2;
+  }
+
+  enum ManagementTransition {
+    // No transition necessary.
+    NONE = 0;
+    // Child user is transitioning to regular account, need to lift supervision.
+    CHILD_TO_REGULAR = 1;
+    // Regular user is transitioning to child account, need to enable
+    // supervision.
+    REGULAR_TO_CHILD = 2;
+    // Unmanaged user is transitioning to managed state, need to enable
+    // management.
+    UNMANAGED_TO_MANAGED = 3;
+  }
+
+  // Account ID of the user to start ARC for. This must be the same as the
+  // one given in StartSession.
+  required string account_id = 1;
+
+  // Whether the account is managed.
+  optional bool is_account_managed = 14;
+
+  // Whether adb sideloading is allowed when the account and/or the device is
+  // managed.
+  optional bool is_managed_adb_sideloading_allowed = 16;
+
+  // See description in StartArcMiniContainerRequest.
+  // TODO(b/264585671): Remove, this is never used for upgrade.
+  optional bool disable_ureadahead = 15 [default = false];
+
+  // Option to disable ACTION_BOOT_COMPLETED broadcast for 3rd party apps.
+  optional bool skip_boot_completed_broadcast = 2 [default = false];
+
+  // Optional mode for packages cache tests.
+  optional PackageCacheMode packages_cache_mode = 4 [default = DEFAULT];
+
+  // Option to disable GMS CORE cache.
+  optional bool skip_gms_core_cache = 13 [default = false];
+
+  // Option to notify ARC if the account is a child, allowing us to provide
+  // special behavior for child account on ARC.
+  optional bool OBSOLETE_is_child = 9 [deprecated = true];
+
+  // Whether the container is being upgraded for a Chrome OS demo session.
+  optional bool is_demo_session = 10;
+
+  // Non-empty only if the ARC container is being upgraded for a Chrome OS demo
+  // session. The absolute path to the squashfs image that contains the set of
+  // Android apps to be pre-installed into demo sessions. Note that arc-setup
+  // expects this to be a path loaded by the imageloader service.
+  optional string demo_session_apps_path = 6;
+
+  // Locale to set in Android container during the boot.
+  optional string locale = 7;
+
+  // Preferred languages to set in Android container during the boot.
+  repeated string preferred_languages = 8;
+
+  // Option to notify ARC that it should transition from a managed state to an
+  // unmanaged state, and vice-versa.
+  optional ManagementTransition management_transition = 11;
+
+  // Option to enable Arc Nearby Share.
+  optional bool enable_arc_nearby_share = 17 [default = false];
+
+  // Option to skip pregenerated TTS cache setup.
+  optional bool skip_tts_cache = 18 [default = false];
+
+  // Next ID to use: 19
+}

@@ -1,0 +1,107 @@
+// Copyright 2022 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+
+package private_computing;
+
+// Use-cases for ChromeOS Private Computing Device Active.
+enum PrivateComputingUseCase {
+  // Should not be used.
+  USE_CASE_UNSPECIFIED = 0;
+  CROS_FRESNEL_DAILY = 1;
+  CROS_FRESNEL_FIRST_ACTIVE = 2;
+  CROS_FRESNEL_28DAY_ACTIVE = 3;
+  CROS_FRESNEL_CHURN_MONTHLY_COHORT = 4;
+  CROS_FRESNEL_CHURN_MONTHLY_OBSERVATION = 5;
+}
+
+// The observation statuses for the past three period and it will have
+// three observation periods will be overlapped.
+// Because the observation period has three months, the current period
+// means when the current month is the first month of this observation
+// period. For example, if current month is Jan., the current observation
+// period is Jan - Mar. And the current period minus 1 is Dec - Feb, the
+// current period minus 2 is Nov - Jan.
+message ChurnObservationStatus {
+  // The period status of current month is the first month of the period.
+  optional bool is_active_current_period_minus_0 = 1;
+  // The period status of current month is the second month of the period.
+  optional bool is_active_current_period_minus_1 = 2;
+  // The period  status of current month is the third month of the period.
+  optional bool is_active_current_period_minus_2 = 3;
+}
+
+// The preserved file will include the Daily, FirstActive, 28-Day
+message ActiveStatus {
+  // The use case of ChromeOS device active Private Computing device active.
+  optional PrivateComputingUseCase use_case = 1;
+
+  // This field is deprecated and for migration to PDT dates.
+  optional string last_ping_utc_date = 2 [deprecated = true];
+
+  oneof ping_date_or_status {
+    // The last ping date for current use case.
+    // PDT date: YYYYMMDD
+    string last_ping_date = 3;
+    // This field is only used for Observation Use Case which represents
+    // the statuses of the last three observation periods.
+    ChurnObservationStatus period_status = 4;
+  }
+
+  // The 28 bits value of churn active status for past 18 months.
+  // The left 10 bits represent the number of months since Jan. 2020.
+  // The right 18 bits represet the device churn cohort active status
+  // for the past 18 months (1 is active, 0 is not active).
+  optional int32 churn_active_status = 5;
+}
+
+message SaveStatusRequest {
+  // The list of use case with last ping date.
+  repeated ActiveStatus active_status = 1;
+}
+
+message SaveStatusResponse {
+  // Error message, empty if no error occurred.
+  optional string error_message = 1;
+}
+
+message GetStatusResponse {
+  // This field only has error message, the success value will be
+  // in active_status.
+  optional string error_message = 1;
+
+  // The list of use case with last ping date.
+  repeated ActiveStatus active_status = 2;
+}
+
+// The regression test data consists of multiple test cases.
+message PrivateComputingClientRegressionTestData {
+  enum TestName {
+    GET_SUCCESS_SAVE_SUCCESS = 0;
+    GET_SUCCESS_SAVE_FAIL = 1;
+    GET_FAIL_SAVE_SUCCESS = 2;
+    GET_FAIL_SAVE_FAIL = 3;
+    GET_SUCCESS_FUTURE_PING_DATE_SAVE_SUCCESS = 4;
+    GET_SUCCESS_SAME_PING_DATE_SAVE_SUCCESS = 5;
+    GET_SUCCESS_PAST_PING_DATE_SAVE_SUCCESS = 6;
+    GET_SUCCESS_UNIX_EPOCH_PING_DATE_SAVE_SUCCESS = 7;
+    GET_INVALID_PING_DATE_SAVE_SUCCESS = 8;
+  }
+
+  // Data stored for each test case.
+  message TestCase {
+    // Name of the test case
+    required TestName name = 1;
+
+    // Expected GetStatusResponse to be supplied by the client.
+    optional GetStatusResponse get_response = 2;
+
+    // Expected SaveStatusResponse to be supplied by the client.
+    optional SaveStatusResponse save_response = 4;
+  }
+
+  repeated TestCase test_cases = 1;
+}

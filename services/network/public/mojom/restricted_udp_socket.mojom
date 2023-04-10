@@ -1,0 +1,50 @@
+// Copyright 2022 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+module network.mojom;
+
+import "mojo/public/mojom/base/read_only_buffer.mojom";
+import "services/network/public/mojom/network_param.mojom";
+
+// The mode that RestrictedUDPSocket is operating in.
+// See Connect() and Bind() methods of network.mojom.UDPSocket for more details.
+enum RestrictedUDPSocketMode {
+  CONNECTED,
+  BOUND,
+};
+
+// This wraps network.mojom.UDPSocket, exposing only the functionality needed
+// for the Direct Sockets API.
+//
+// The original network.mojom.UDPSocket allows the caller to perform a second
+// round of Bind() or Connect() calls after Close() which is highly undesirable
+// in an untrusted process like the renderer. This restricted version implements
+// a different model where the socket is bound or connected right upon creation
+// and can't change its state afterwards.
+//
+// Caller can close the socket by destroying the interface pointer.
+interface RestrictedUDPSocket {
+  // Notifies that the listener is ready to accept datagrams. OnReceived() of
+  // the UDPSocketListener interface will be called |num_additional_datagrams|
+  // times (errors also count), unless the connection is closed before that.
+  ReceiveMore(uint32 num_additional_datagrams);
+
+  // Sends a UDP datagram |data|.
+  // Upon successfully handing the data to the OS, |result| is net::OK.
+  // On failure, |result| is a network error code.
+  // Note that this call is only valid in CONNECTED mode, otherwise it will
+  // immediately fail with an error.
+  Send(mojo_base.mojom.ReadOnlyBuffer data)
+      => (int32 result);
+
+  // Sends a UDP datagram to a particular destination |dest_addr|.
+  // Possible hosts are currently limited to raw IPv4/IPv6 addresses, i.e.
+  // no DNS resolution takes place on the receiving side.
+  // Upon successfully handing the data to the OS, |result| is net::OK.
+  // On failure, |result| is a network error code.
+  // Note that this call is only valid in BOUND mode, otherwise it will
+  // immediately fail with an error.
+  SendTo(mojo_base.mojom.ReadOnlyBuffer data, HostPortPair dest_addr)
+      => (int32 result);
+};

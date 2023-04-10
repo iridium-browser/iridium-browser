@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export PATH="/home/fischman/src/goma:$PATH"
+# AMI: per http://go/g-d/msg/goma-users/iqAEq3IBLk8/K0gOhNxLxVoJ
+if [ -n "$GOMA_IMPLICIT_INPUT_FILES" ]; then
+  GOMA_IMPLICIT_INPUT_FILES="$GOMA_IMPLICIT_INPUT_FILES,"
+fi
+export GOMA_IMPLICIT_INPUT_FILES="${GOMA_IMPLICIT_INPUT_FILES}$(dirname $(realpath $0))/src/build/common.gypi"
+
+{ ~/src/goma/goma_ctl.sh status || ~/src/goma/goma_ctl.sh start; } && $(dirname $0)/ninja -j5000 "$@"

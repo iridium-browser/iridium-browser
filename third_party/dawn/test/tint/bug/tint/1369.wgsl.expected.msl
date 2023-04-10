@@ -1,0 +1,18 @@
+#include <metal_stdlib>
+
+using namespace metal;
+bool call_discard(thread bool* const tint_symbol) {
+  *(tint_symbol) = true;
+  return true;
+}
+
+fragment void f() {
+  thread bool tint_symbol_1 = false;
+  bool v = call_discard(&(tint_symbol_1));
+  bool also_unreachable = false;
+  if (tint_symbol_1) {
+    discard_fragment();
+  }
+  return;
+}
+

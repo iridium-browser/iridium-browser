@@ -1,0 +1,9 @@
+display A 17
+sign a 1
+sign b 12
+
+attribute foobar b
+attribute fooBAR b
+
+noback context _%foobar["a"] @17
+noback context _%fooBAR["a"] @17

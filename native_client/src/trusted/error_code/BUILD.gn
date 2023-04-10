@@ -1,0 +1,11 @@
+# Copyright (c) 2022 The Native Client Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+source_set("error_code") {
+  sources = [
+    "//native_client/src/trusted/service_runtime/nacl_error_code.c",
+    "//native_client/src/trusted/service_runtime/nacl_error_code.h",
+  ]
+  deps = [ "//build/config/nacl:nacl_base" ]
+}

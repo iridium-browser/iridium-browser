@@ -1,0 +1,30 @@
+# Tests for #360: contractions followed by punctuation.
+table: |
+  include tables/unicode.dis
+  letter a 1
+  letter b 12
+  letter d 145
+  letter e 15
+  letter i 24
+  letter s 234
+  letter t 2345
+  letter u 136
+  punctuation , 2
+  punctuation . 256
+  word but 12
+  begword dis 256
+  midword ea 2
+  
+flags: {testmode: backward}
+tests:
+  # Words followed by punctuation. Begword/midword should not apply.
+  # Punctuation which also has begword rule:
+  - [⠃⠲, "but."]
+  # Punctuation which also has midword rule:
+  - [⠃⠂, "but,"]
+
+  # Make sure begword and midword apply as and when they should.
+  # Begword:
+  - [⠲⠁, "disa"]
+  # Midword:
+  - [⠃⠂⠙, "bead"]

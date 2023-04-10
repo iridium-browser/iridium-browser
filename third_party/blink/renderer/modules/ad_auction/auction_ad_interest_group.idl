@@ -1,0 +1,47 @@
+// Copyright 2021 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// Name, origin owner, and metadata for ad interest groups.
+// https://github.com/WICG/turtledove/blob/main/FLEDGE.md#11-joining-interest-groups
+// sellerCapabilities:
+// https://github.com/WICG/turtledove/blob/main/FLEDGE_extended_PA_reporting.md
+
+// TODO(caraitto): Consider switching to a string type for better forward
+// compatibility. Also, support proper naming ("group-by-origin").
+enum WorkletExecutionMode {
+  "compatibility",
+  "groupByOrigin",
+  // "frozenContext",
+};
+
+dictionary AuctionAdInterestGroupSize {
+  required USVString width;
+  required USVString height;
+};
+
+dictionary AuctionAdInterestGroup {
+  required USVString owner;
+  required USVString name;
+
+  double priority;
+  boolean enableBiddingSignalsPrioritization;
+  record<USVString, double> priorityVector;
+  record<USVString, double> prioritySignalsOverrides;
+
+  // Do not use the "enum" type for `sellerCapabilities`, since it throws on
+  // unsupported enum values, making forward compatibility more difficult for
+  // API users.
+  record<USVString, sequence<USVString>> sellerCapabilities;
+  WorkletExecutionMode executionMode;
+  USVString biddingLogicUrl;
+  USVString biddingWasmHelperUrl;
+  USVString dailyUpdateUrl;
+  USVString trustedBiddingSignalsUrl;
+  sequence<USVString> trustedBiddingSignalsKeys;
+  any userBiddingSignals;
+  sequence<AuctionAd> ads;
+  sequence<AuctionAd> adComponents;
+  record<USVString, AuctionAdInterestGroupSize> adSizes;
+  record<USVString, sequence<USVString>> sizeGroups;
+};

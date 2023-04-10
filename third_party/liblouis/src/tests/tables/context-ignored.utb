@@ -1,0 +1,14 @@
+# context-ignored.utb
+# Test with input: Eén
+# Expected: 123456-123456-1345
+# Actual: 15-123456-1345
+# Reason: context rule seems to be ignored.
+
+include tables/braille-patterns.cti
+include tables/nl-chardefs.uti
+
+capsword 45
+capswordstop 6
+singlelettercaps 46
+
+context ["E"]"\x00E9" @123456

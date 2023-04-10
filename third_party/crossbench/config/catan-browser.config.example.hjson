@@ -1,0 +1,20 @@
+{
+  // This file will NOT be submited in final version. Used to test
+  // flags/config/parsing. The idea is this file can be share to quickly set up
+  // and recreate config to benchmark
+  browsers: {
+    "chrome-stable": {
+      path: "chrome-stable",
+      flags: [
+        // You can pass a user-data-dir path to the --user-data-dir flag.
+        // Usefull in scenarios where the users wants to use an existent
+        // user-data-dir instead of creating a new temporary directory.
+        --user-data-dir="PATH/SOMETHING/SOMETHING",
+        --fullscreen=true,
+        --center-mouse=true
+      ]
+    }
+  },
+  // env: "catan",
+  // probes: {}
+}

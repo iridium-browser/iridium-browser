@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2021 The Chromium Authors
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file.
+-->
+
+<resources>
+  <dimen name="privacy_guide_illustration_height">120dp</dimen>
+  <dimen name="privacy_guide_illustration_width">215dp</dimen>
+  <dimen name="done_step_explanation_marginHorizontal">16dp</dimen>
+  <dimen name="done_step_explanation_marginBottom">8dp</dimen>
+  <dimen name="done_step_link_button_size">20dp</dimen>
+  <dimen name="done_step_link_button_marginHorizontal">4dp</dimen>
+</resources>

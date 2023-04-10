@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocol name="weston_touch_calibration">
+
+  <copyright>
+    Copyright 2017-2018 Collabora, Ltd.
+    Copyright 2017-2018 General Electric Company
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the "Software"),
+    to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+    and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice (including the next
+    paragraph) shall be included in all copies or substantial portions of the
+    Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE SOFTWARE.
+  </copyright>
+
+  <interface name="weston_touch_calibration" version="1">
+    <description summary="weston touchscreen calibration interface">
+      This is the global interface for calibrating a touchscreen input
+      coordinate transformation. It is recommended to make this interface
+      privileged.
+
+      This interface can be used by a client to show a calibration pattern and
+      receive uncalibrated touch coordinates, facilitating the computation of
+      a calibration transformation that will align actual touch positions
+      on screen with their expected coordinates.
+
+      Immediately after being bound by a client, the compositor sends the
+      touch_device events.
+
+      The client chooses a touch device from the touch_device events, creates a
+      wl_surface and then a weston_touch_calibrator for the wl_surface and the
+      chosen touch device. The client waits for the compositor to send a
+      configure event before it starts drawing the first calibration pattern.
+      After receiving the configure event, the client will iterate drawing a
+      pattern, getting touch input via weston_touch_calibrator, and converting
+      pixel coordinates to expected touch coordinates with
+      weston_touch_calibrator.convert until it has enough correspondences to
+      compute the calibration transformation or the compositor cancels the
+      calibration.
+
+      Once the client has successfully computed a new calibration, it can use
+      weston_touch_calibration.save request to load the new calibration into
+      the compositor. The compositor may take this new calibration into use and
+      may write it into persistent storage.
+    </description>
+
+    <enum name="error">
+      <description summary="global interface errors"/>
+      <entry name="invalid_surface" value="0"
+             summary="the given wl_surface already has a role"/>
+      <entry name="invalid_device" value="1"
+             summary="the given device is not valid"/>
+      <entry name="already_exists" value="2"
+             summary="a calibrator has already been created"/>
+    </enum>
+
+    <request name="destroy" type="destructor">
+      <description summary="unbind">
+	Destroy the binding to the global interface, does not affect any
+	objects already created through this interface.
+      </description>
+    </request>
+
+    <request name="create_calibrator">
+      <description summary="give the calibrator role to a surface">
+	This gives the calibrator role to the surface and ties it with the
+	given touch input device.
+
+	If the surface already has a role, then invalid_surface error is raised.
+
+	If the device string is not one advertised with touch_device event's
+	device argument, then invalid_device error is raised.
+
+	If a weston_touch_calibrator protocol object exists in the compositor
+	already, then already_exists error is raised. This limitation is
+	compositor-wide and not specific to any particular client.
+      </description>
+      <arg name="surface" type="object" interface="wl_surface"
+           summary="the surface to give the role to"/>
+      <arg name="device" type="string" summary="the touch device to calibrate"/>
+      <arg name="cal" type="new_id" interface="weston_touch_calibrator"
+           summary="a new calibrator object"/>
+    </request>
+
+    <request name="save">
+      <description summary="save calibration for a touch device">
+	This request asks the compositor to save the calibration data for the
+	given touch input device. The compositor may ignore this request.
+
+	If the device string is not one advertised with touch_device event's
+	device argument, then invalid_device error is raised.
+
+	The array must contain exactly six 'float' (the 32-bit floating
+	point format used by the C language on the system) numbers. For a 3x3
+	calibration matrix in the form
+	@code
+		( a b c )
+		( d e f )
+		( 0 0 1 )
+	@endcode
+	the array must contain the values { a, b, c, d, e, f }. For the
+	definition of the coordinate spaces, see
+	libinput_device_config_calibration_set_matrix().
+      </description>
+      <arg name="device" type="string" summary="the target touch device"/>
+      <arg name="matrix" type="array" summary="the new calibration matrix"/>
+    </request>
+
+    <event name="touch_device">
+      <description summary="advertise a touchscreen input device">
+	When a client binds to weston_touch_calibration, one touch_device event
+	is sent for each touchscreen that is available to be calibrated. This
+	is the only time the event is sent. Touch devices added in the
+	compositor will not generate events for existing
+	weston_touch_calibration objects.
+
+	An event carries the touch device identification and the associated
+	output or head (display connector) name.
+
+	On platforms using udev, the device identification is the udev sys
+	path. It is an absolute path and starts with the sys mount point.
+      </description>
+      <arg name="device" type="string"
+           summary="the touch device identification"/>
+      <arg name="head" type="string"
+           summary="name of the head or display connector"/>
+    </event>
+  </interface>
+
+  <interface name="weston_touch_calibrator" version="1">
+    <description summary="calibrator surface for a specific touch device">
+      On creation, this object is tied to a specific touch device. The
+      compositor sends a configure event which the client must obey with the
+      associated wl_surface.
+
+      Once the client has committed content to the surface, the compositor can
+      grab the touch input device, prevent it from emitting normal touch
+      events, show the surface on the correct output, and relay input events
+      from the touch device via this protocol object.
+
+      Touch events from other touch devices than the one tied to this object
+      must generate wrong_touch events on at least touch-down and must not
+      generate normal or calibration touch events.
+
+      At any time, the compositor can choose to cancel the calibration
+      procedure by sending the cancel_calibration event. This should also be
+      used if the touch device disappears or anything else prevents the
+      calibration from continuing on the compositor side.
+
+      If the wl_surface is destroyed, the compositor must cancel the
+      calibration.
+
+      The touch event coordinates and conversion results are delivered in
+      calibration units. The calibration units cover the device coordinate
+      range exactly. Calibration units are in the closed interval [0.0, 1.0]
+      mapped into 32-bit unsigned integers. An integer can be converted into a
+      real value by dividing by 2^32-1. A calibration matrix must be computed
+      from the [0.0, 1.0] real values, but the matrix elements do not need to
+      fall into that range.
+    </description>
+
+    <enum name="error">
+      <description summary="calibrator object errors"/>
+      <entry name="bad_size" value="0"
+             summary="surface size does not match"/>
+      <entry name="not_mapped" value="1"
+             summary="requested operation is not possible without mapping the surface"/>
+      <entry name="bad_coordinates" value="2"
+             summary="surface-local coordinates are out of bounds"/>
+    </enum>
+
+    <request name="destroy" type="destructor">
+      <description summary="destroy the calibrator">
+	This unmaps the surface if it was mapped. The input device grab
+	is dropped, if it was present. The surface loses its role as a
+	calibrator.
+      </description>
+    </request>
+
+    <request name="convert">
+      <description summary="convert from surface to raw coordinates">
+	This request asks the compositor to convert the surface-local
+	coordinates into the expected touch input coordinates appropriate for
+	the associated touch device. The intention is that a client uses this
+	request to convert marker positions that the user is supposed to touch
+	during calibration.
+
+	If the compositor has cancelled the calibration, the conversion result
+	shall be zeroes and no errors will be raised.
+
+	The coordinates given as arguments to this request are relative to
+	the associated wl_surface.
+
+	If a client asks for conversion before it has committed valid
+	content to the wl_surface, the not_mapped error is raised.
+
+	If the coordinates x, y are outside of the wl_surface content, the
+	bad_coordinates error is raised.
+      </description>
+      <arg name="x" type="int" summary="surface-local X coordinate"/>
+      <arg name="y" type="int" summary="surface-local Y coordinate"/>
+      <arg name="reply" type="new_id" interface="weston_touch_coordinate"
+           summary="object delivering the result"/>
+    </request>
+
+    <event name="configure">
+      <description summary="surface size">
+	This event tells the client what size to make the surface. The client
+	must obey the size exactly on the next commit with a wl_buffer.
+
+	This event shall be sent once as a response to creating a
+	weston_touch_calibrator object.
+      </description>
+      <arg name="width" type="int" summary="surface width"/>
+      <arg name="height" type="int" summary="surface height"/>
+    </event>
+
+    <event name="cancel_calibration">
+      <description summary="cancel the calibration procedure">
+	This is sent when the compositor wants to cancel the calibration and
+	drop the touch device grab. The compositor unmaps the surface, if it
+	was mapped.
+
+	The weston_touch_calibrator object will not send any more events. The
+	client should destroy it.
+      </description>
+    </event>
+
+    <event name="invalid_touch">
+      <description summary="a user touch that cannot be used for calibration">
+	For whatever reason, a touch event resulting from a user action cannot
+	be used for calibration. The client should show feedback to the user
+	that the touch was rejected.
+
+	Possible causes for this event include the user touching a wrong
+	touchscreen when there are multiple ones present. This is particularly
+	useful when the touchscreens are cloned and there is no other way to
+	identify which screen the user should be touching.
+
+	Another cause could be a touch device that sends coordinates beyond its
+	declared range. If motion takes a touch point outside the range, the
+	compositor should also send 'cancel' event to undo the touch-down.
+      </description>
+    </event>
+
+    <!-- touch events copied from wl_touch interface -->
+    <event name="down">
+      <description summary="touch down event and beginning of a touch sequence">
+	A new touch point has appeared on the surface. This touch point is
+	assigned a unique ID. Future events from this touch point reference
+	this ID. The ID ceases to be valid after a touch up event and may be
+	reused in the future.
+
+	For the coordinate units, see weston_touch_calibrator.
+      </description>
+      <arg name="time" type="uint" summary="timestamp with millisecond granularity"/>
+      <arg name="id" type="int" summary="the unique ID of this touch point"/>
+      <arg name="x" type="uint" summary="x coordinate in calibration units"/>
+      <arg name="y" type="uint" summary="y coordinate in calibration units"/>
+    </event>
+
+    <event name="up">
+      <description summary="end of a touch event sequence">
+	The touch point has disappeared. No further events will be sent for
+	this touch point and the touch point's ID is released and may be
+	reused in a future touch down event.
+      </description>
+      <arg name="time" type="uint" summary="timestamp with millisecond granularity"/>
+      <arg name="id" type="int" summary="the unique ID of this touch point"/>
+    </event>
+
+    <event name="motion">
+      <description summary="update of touch point coordinates">
+	A touch point has changed coordinates.
+
+	For the coordinate units, see weston_touch_calibrator.
+      </description>
+      <arg name="time" type="uint" summary="timestamp with millisecond granularity"/>
+      <arg name="id" type="int" summary="the unique ID of this touch point"/>
+      <arg name="x" type="uint" summary="x coordinate in calibration units"/>
+      <arg name="y" type="uint" summary="y coordinate in calibration units"/>
+    </event>
+
+    <event name="frame">
+      <description summary="end of touch frame event">
+	Indicates the end of a set of events that logically belong together.
+	A client is expected to accumulate the data in all events within the
+	frame before proceeding.
+
+	A wl_touch.frame terminates at least one event but otherwise no
+	guarantee is provided about the set of events within a frame. A client
+	must assume that any state not updated in a frame is unchanged from the
+	previously known state.
+      </description>
+    </event>
+
+    <event name="cancel">
+      <description summary="touch session cancelled">
+	Sent if the compositor decides the touch stream is a global
+	gesture. No further events are sent to the clients from that
+	particular gesture. Touch cancellation applies to all touch points
+	currently active on this client's surface. The client is
+	responsible for finalizing the touch points, future touch points on
+	this surface may reuse the touch point ID.
+      </description>
+    </event>
+    <!-- END of touch events copied from wl_touch interface -->
+
+  </interface>
+
+  <interface name="weston_touch_coordinate" version="1">
+    <description summary="coordinate conversion reply"/>
+
+    <!-- no destructor request defined, no requests possible -->
+
+    <event name="result">
+      <description summary="coordinates in raw touch space">
+	This event returns the conversion result from surface coordinates to
+	the expected touch device coordinates.
+
+	For details, see weston_touch_calibrator.convert. For the coordinate
+	units, see weston_touch_calibrator.
+
+	This event destroys the weston_touch_coordinate object.
+      </description>
+      <arg name="x" type="uint" summary="x coordinate in calibration units"/>
+      <arg name="y" type="uint" summary="y coordinate in calibration units"/>
+    </event>
+  </interface>
+</protocol>

@@ -1,0 +1,67 @@
+// Copyright 2022 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef THIRD_PARTY_BLINK_RENDERER_CORE_CSS_STYLE_SCOPE_H_
+#define THIRD_PARTY_BLINK_RENDERER_CORE_CSS_STYLE_SCOPE_H_
+
+#include "third_party/abseil-cpp/absl/types/optional.h"
+#include "third_party/blink/renderer/core/core_export.h"
+#include "third_party/blink/renderer/core/css/css_selector_list.h"
+#include "third_party/blink/renderer/core/css/parser/css_parser_token_range.h"
+#include "third_party/blink/renderer/platform/heap/garbage_collected.h"
+#include "third_party/blink/renderer/platform/heap/member.h"
+#include "third_party/blink/renderer/platform/heap/visitor.h"
+
+namespace blink {
+class StyleSheetContents;
+class Element;
+
+class CORE_EXPORT StyleScope final : public GarbageCollected<StyleScope> {
+ public:
+  // Construct a StyleScope with explicit roots specified by elements matching
+  // the `from` selector list. The (optional) `to` parameter selects the the
+  // limit elements, i.e. the extent of the scope.
+  StyleScope(CSSSelectorList* from, CSSSelectorList* to);
+  // Construct a StyleScope with implicit roots at the parent nodes of the
+  // stylesheet's owner nodes.
+  explicit StyleScope(StyleSheetContents* contents);
+  StyleScope(const StyleScope&);
+  static StyleScope* Parse(CSSParserTokenRange prelude,
+                           const CSSParserContext* context,
+                           StyleSheetContents* style_sheet);
+
+  void Trace(blink::Visitor*) const;
+
+  StyleScope* CopyWithParent(const StyleScope*) const;
+
+  // From() and To() both return the first CSSSelector in a list, or nullptr
+  // if there is no list.
+  const CSSSelector* From() const;
+  const CSSSelector* To() const;
+  const StyleScope* Parent() const { return parent_; }
+
+  // https://drafts.csswg.org/css-cascade-6/#implicit-scope
+  bool IsImplicit() const { return contents_; }
+
+  // True if this StyleScope has an implicit root at the specified element.
+  // This is used to find the roots for prelude-less @scope rules.
+  bool HasImplicitRoot(Element*) const;
+
+  // Specificity of the <scope-start> selector (::From()), plus the
+  // specificity of the parent scope (if any).
+  unsigned Specificity() const;
+
+ private:
+  // If `contents_` is not nullptr, then this is a prelude-less @scope rule
+  // which is implicitly scoped to the owner node's parent.
+  Member<StyleSheetContents> contents_;
+  Member<CSSSelectorList> from_;  // May be nullptr.
+  Member<CSSSelectorList> to_;    // May be nullptr.
+  Member<const StyleScope> parent_;
+  mutable absl::optional<unsigned> specificity_;
+};
+
+}  // namespace blink
+
+#endif  // THIRD_PARTY_BLINK_RENDERER_CORE_CSS_STYLE_SCOPE_H_

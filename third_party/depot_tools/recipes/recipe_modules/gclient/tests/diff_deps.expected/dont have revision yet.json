@@ -1,0 +1,114 @@
+[
+  {
+    "cmd": [
+      "git",
+      "-c",
+      "core.quotePath=false",
+      "checkout",
+      "HEAD~",
+      "--",
+      "DEPS"
+    ],
+    "cwd": "[CACHE]",
+    "infra_step": true,
+    "luci_context": {
+      "realm": {
+        "name": "project:try"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "checkout the previous DEPS"
+  },
+  {
+    "cmd": [
+      "vpython3",
+      "-u",
+      "RECIPE_REPO[depot_tools]/gclient.py",
+      "recurse",
+      "python3",
+      "RECIPE_MODULE[depot_tools::gclient]/resources/diff_deps.py"
+    ],
+    "cwd": "[CACHE]",
+    "env": {
+      "DEPOT_TOOLS_REPORT_BUILD": "project/try/builder/8945511751514863184"
+    },
+    "env_suffixes": {
+      "PATH": [
+        "RECIPE_REPO[depot_tools]"
+      ]
+    },
+    "infra_step": true,
+    "luci_context": {
+      "realm": {
+        "name": "project:try"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "gclient recursively git diff all DEPS",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@raw_io.output_text@fatal: bad object abcdef1234567890@@@",
+      "@@@STEP_LOG_END@raw_io.output_text@@@",
+      "@@@STEP_LOG_LINE@DepsDiffException@Couldn't checkout previous ref: fatal: bad object abcdef1234567890@@@",
+      "@@@STEP_LOG_END@DepsDiffException@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "-c",
+      "core.quotePath=false",
+      "checkout",
+      "HEAD",
+      "--",
+      "DEPS"
+    ],
+    "cwd": "[CACHE]",
+    "infra_step": true,
+    "luci_context": {
+      "realm": {
+        "name": "project:try"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "checkout the original DEPS"
+  },
+  {
+    "cmd": [],
+    "name": "RECIPE CRASH (Uncaught exception)",
+    "~followup_annotations": [
+      "@@@STEP_EXCEPTION@@@",
+      "The recipe has crashed at point 'Uncaught exception'!",
+      "",
+      "Traceback (most recent call last):",
+      "  File \"RECIPE_REPO[depot_tools]/recipes/recipe_modules/gclient/tests/diff_deps.py\", line 35, in RunSteps",
+      "    affected_files = api.gclient.diff_deps(api.path['cache'])",
+      "  File \"RECIPE_REPO[depot_tools]/recipes/recipe_modules/gclient/api.py\", line 396, in diff_deps",
+      "    raise self.DepsDiffException(msg)",
+      "DepsDiffException('Couldn't checkout previous ref: fatal: bad object abcdef1234567890')"
+    ]
+  },
+  {
+    "failure": {
+      "humanReason": "Uncaught Exception: DepsDiffException('Couldn't checkout previous ref: fatal: bad object abcdef1234567890')"
+    },
+    "name": "$result"
+  }
+]

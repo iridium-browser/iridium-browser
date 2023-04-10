@@ -1,0 +1,7 @@
+#!/bin/bash -e
+
+OUTPUT_DIR="$(echo $GYP_GENERATOR_FLAGS |sed -n -e 's/.*output_dir=\([^ ]*\).*/\1/p')" #
+FLAVOR="$OUTPUT_DIR/$(echo $GYP_GENERATOR_FLAGS |sed -n -e 's/.*config=\([^ ]*\).*/\1/p')" #
+if [ ! -d $FLAVOR ]; then mkdir -p $FLAVOR; fi
+
+ninja -C $FLAVOR -j32 "$@"

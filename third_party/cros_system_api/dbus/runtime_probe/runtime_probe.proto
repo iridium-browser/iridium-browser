@@ -1,0 +1,623 @@
+// Copyright 2018 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+//
+// The messages in this file comprise the DBus/Protobuf interface for
+// Runtime Probe.
+syntax = "proto3";
+
+package runtime_probe;
+
+option go_package = "chromiumos/system_api/runtime_probe_proto";
+
+// Defined error code.
+enum ErrorCode {
+  // 0 is the default value of ProbeResult::error. It should never be used.
+  RUNTIME_PROBE_ERROR_NOT_SET = 0;
+
+  // Not able to read the ProbeRequest as DBus signature indicated.
+  RUNTIME_PROBE_ERROR_PROBE_REQUEST_INVALID = 1;
+  reserved 2, 3;
+  // Assigned probe config contains functions not able to be constructed.
+  RUNTIME_PROBE_ERROR_PROBE_CONFIG_INCOMPLETE_PROBE_FUNCTION = 4;
+  // Not able to parse the ProbeResult JSON string as protobuf message.
+  RUNTIME_PROBE_ERROR_PROBE_RESULT_INVALID = 5;
+  // Assigned probe config doesn't exist or is not holding a correct JSON
+  // format.
+  RUNTIME_PROBE_ERROR_PROBE_CONFIG_INVALID = 6;
+}
+
+// Request from client that indicates what categories to probe. Category must
+// be existed on the per-board probe statement in rootfs.
+message ProbeRequest {
+  // The name style here is on purposely align with factory probe output.
+  enum SupportCategory {
+    UNKNOWN = 0;
+    reserved 1;
+    battery = 2;
+    storage = 3;
+    vpd_cached = 4;
+    // Obsolete in M91.
+    network = 5;
+    camera = 6;
+    stylus = 7;
+    touchpad = 8;
+    touchscreen = 9;
+    dram = 10;
+    display_panel = 11;
+    cellular = 12;
+    ethernet = 13;
+    wireless = 14;
+  }
+  reserved 1;
+  repeated SupportCategory categories = 4;
+  // This option allows clients to retrieve data with privacy implication from
+  // D-Bus call to runtime_probe. Default to false and please use with caution.
+  bool include_privacy_fields = 2;
+  // If probe_default_category is True, the supplied categories above will be
+  // ignored.
+  bool probe_default_category = 3;
+}
+
+// Extra information for each probe result.
+message Information {
+  // comp_group, used for grouping different probed components.
+  string comp_group = 1;
+}
+
+// TODO(b/158765173): Collect the possible HW interface types into an enum.
+
+// Things about audio_codec.
+message AudioCodec {
+  message Fields {
+    // The name of the codec presents in sysfs.
+    string name = 1;
+  }
+  // Component alias.
+  string name = 1;
+  // Component's details.
+  Fields values = 2;
+  // Component probe info.
+  Information information = 3;
+}
+
+// Things about battery.
+message Battery {
+  // TODO(itspeter): Add more fileds for battery.
+  message Fields {
+    // (1) Most fields are following the naming of exposed ACPI interface.
+    // (2) Most units is in µ because of this unexplained kernel patch:
+    // https://chromium.git.corp.google.com/chromiumos/third_party/kernel/+/d7380965752505951668e85de59c128d1d6fd21f%5E%21/#F1
+
+    // Index number of this battery, starts from 1.
+    int32 index = 1 [deprecated = true];
+    // Manufacturer for length not exceeding EC_COMM_TEXT_MAX.
+    string manufacturer = 2;
+    // Model name for length not exceeding EC_COMM_TEXT_MAX.
+    string model_name = 3;
+    // Serial number for length not exceeding EC_COMM_TEXT_MAX.
+    string serial_number = 4;
+    // Design Capacity (µAh).
+    int32 charge_full_design = 5;
+    // Full Capacity (µAh, might change occasionally).
+    int32 charge_full = 6;
+    // Remaining capacity (µAh)
+    int32 charge_now = 7;
+    // Current Battery voltage (µV)
+    int32 voltage_now = 8;
+    // Designed minimum output voltage (µV)
+    int32 voltage_min_design = 9;
+    // Smart Battery Cycle Count in http://sbs-forum.org/specs/sbdat110.pdf
+    int32 cycle_count_smart = 10;
+    // Smart Battery Status defined in http://sbs-forum.org/specs/sbdat110.pdf
+    int32 status_smart = 11;
+    // Temperature in 0.1°K as Smart Battery Temperature defined in
+    // http://sbs-forum.org/specs/sbdat110.pdf
+    int32 temperature_smart = 12;
+    // The path of this battery in system. It is useful if caller needs to
+    // correlate with other information
+    string path = 13;
+    // Smart Manufacture Date is defined in
+    // http://sbs-forum.org/specs/sbdat110.pdf.
+    // The value is calculated by ((year-1980) * 512 + month * 32 + day).
+    int32 manufacture_date_smart = 14;
+    // Technology is defined in
+    // /sys/class/power_supply/<supply_name>/technology section in
+    // https://www.kernel.org/doc/Documentation/ABI/testing/sysfs-class-power.
+    string technology = 15;
+    // DeviceChemistry (0x22) in Smart Battery Data Specification.
+    string chemistry = 16;
+  }
+  // Component alias.
+  string name = 1;
+  // Component's details.
+  Fields values = 2;
+  // Component probe info.
+  Information information = 3;
+}
+
+// Things about storage.
+message Storage {
+  message Fields {
+    // The path of this storage in system. It is useful if caller needs to
+    // correlate with other information.
+    string path = 1;
+    // Number of sectors of this storage, traditionally 1 sector = 512 Bytes.
+    int64 sectors = 2;
+    // Exact size of this storage, reported in bytes
+    int64 size = 3;
+    // Storage type, could be MMC / NVMe / ATA
+    string type = 4;
+
+    // Below are based on JEDEC Standard No. 84-B51, and kernel MMC driver
+    // exposed in sysfs:
+    //   https://chromium.googlesource.com/chromiumos/third_party/kernel/+/v3.18/drivers/mmc/core/mmc.c#71
+    //   https://chromium.googlesource.com/chromiumos/third_party/kernel/+/v3.18/include/linux/mmc/card.h#17
+    //   https://chromium.googlesource.com/chromiumos/third_party/kernel/+/v3.18/Documentation/mmc/mmc-dev-attrs.txt
+
+    // MID: Manufacturer ID, 8 bits.
+    uint32 mmc_manfid = 5;
+    // PNM: Product name, ASCII characters for 6 bytes.
+    string mmc_name = 6;
+    // Hardware/Product Revision, 4 bits. (SD and MMCv1 only)
+    uint32 mmc_hwrev = 15;
+    // PRV: Product revision, 8 bits. (SD and MMCv4 only)
+    uint32 mmc_prv = 7;
+    // PSN: Product serial number, 32 bits.
+    uint32 mmc_serial = 8;
+    // OID: OEM/Application ID, 8 bits.
+    uint32 mmc_oemid = 9;
+
+    // The following are fields for NVMe. Every field name comes with
+    // prefix "pci_" as NVMe is a PCI device.
+    // These fields are based on what kernel pci driver exposes in sysfs:
+    //   https://chromium.googlesource.com/chromiumos/third_party/kernel/+/v4.4/include/linux/pci.h#267
+
+    // Vendor ID, 16 bits
+    uint32 pci_vendor = 10;
+    // Device ID, 16 bits
+    uint32 pci_device = 11;
+    // Device class indicator, 32 bits
+    uint32 pci_class = 12;
+
+    // The following are fields for SATA. Every field name comes with
+    // prefix "ata_".
+    // These fields based on what kernel pci driver exposes in sysfs:
+    //   https://chromium.googlesource.com/chromiumos/third_party/kernel/+/v4.4/drivers/scsi/scsi_devinfo.c#22
+
+    // Vendor name, 8 bytes
+    string ata_vendor = 13;
+    // Model name, 16 bytes
+    string ata_model = 14;
+
+    // The following are fields for UFS. Every field name comes with prefix
+    // "ufs_".
+    // Vendor name.
+    string ufs_vendor = 16;
+    // Model name.
+    string ufs_model = 17;
+  }
+  // Component alias.
+  string name = 1;
+  // Component's details.
+  Fields values = 2;
+  // Component probe info.
+  Information information = 3;
+}
+
+// Things about VPD (Vital Product Data) , cached version.
+message VpdCached {
+  // TODO(itspeter): Add more fileds for Vpd.
+  message Fields {
+    // Allowed VPD fileds are reviewed on https://b/131849646
+    // Up to date documentation on VPD fields for each Chromebook is on
+    //   https://www.google.com/chromeos/partner/fe/docs/factory/vpd.html
+
+    // SKU number of the unit
+    string vpd_sku_number = 1;
+  }
+  // Component alias.
+  string name = 1;
+  // Component's details.
+  Fields values = 2;
+  // Component probe info.
+  Information information = 3;
+}
+
+// Things about network.
+message Network {
+  message Fields {
+    // The path of this network in system. It is useful if caller needs to
+    // correlate with other information.
+    string path = 1;
+    // Network type, could be wireless / ethernet / cellular
+    string type = 2;
+    // Network bus, could be pci / usb / sdio
+    string bus_type = 3;
+
+    // The following are fields for PCI. Every field name comes with
+    // prefix "pci_".
+    // These fields are based on what kernel pci driver exposes in sysfs:
+    //   https://chromium.googlesource.com/chromiumos/third_party/kernel/+/v4.4/include/linux/pci.h#267
+
+    // Vendor ID, 16 bits
+    uint32 pci_vendor_id = 4;
+    // Device ID, 16 bits
+    uint32 pci_device_id = 5;
+    // Device revision, 8 bits
+    uint32 pci_revision = 6;
+    // Subsystem ID, 16 bits
+    uint32 pci_subsystem = 12;
+
+    // The following are fields for USB. Every field name comes with
+    // prefix "usb_".
+
+    // Vendor ID, 16 bits
+    uint32 usb_vendor_id = 7;
+    // Product ID, 16 bits
+    uint32 usb_product_id = 8;
+    // Device Release Number, 16 bits.
+    uint32 usb_bcd_device = 9;
+
+    // The following are fields for SDIO. Every field name comes with
+    // prefix "sdio_".
+
+    // Vendor ID, 16 bits
+    uint32 sdio_vendor_id = 10;
+    // Product ID, 16 bits
+    uint32 sdio_device_id = 11;
+  }
+  // Component alias.
+  string name = 1;
+  // Component's details.
+  Fields values = 2;
+  // Component probe info.
+  Information information = 3;
+}
+
+enum UsbRemovable {
+  UNKNOWN = 0;
+  REMOVABLE = 1;
+  FIXED = 2;
+}
+
+// Things about cameras.
+message Camera {
+  message Fields {
+    // The device path of this camera (e.g. "/dev/video0").  It is useful
+    // if the caller needs to correlate with other information.
+    string path = 1;
+
+    // HW interface type, currently must be "usb" or "mipi".
+    string bus_type = 2;
+
+    // The following are fields for USB.  Every field name must start with
+    // prefix "usb_".
+
+    // Vendor ID, 16 bits.
+    uint32 usb_vendor_id = 3;
+    // Product ID, 16 bits.
+    uint32 usb_product_id = 4;
+    // Device Release Number, 16 bits.
+    uint32 usb_bcd_device = 5;
+
+    // Whether this USB device is removable or not.
+    UsbRemovable usb_removable = 6;
+
+    // The following are fields for MIPI.  Every field name must start with
+    // prefix "mipi_".
+
+    // Entity name from V4L2.
+    string mipi_name = 7;
+    // Camera module vendor ID and product ID read from camera EEPROM.
+    string mipi_module_id = 8;
+    // Image sensor vendor ID and product ID read from camera EEPROM.
+    string mipi_sensor_id = 9;
+    // Image sensor vendor ID queried via V4L2.
+    string mipi_vendor = 10;
+  }
+  // Component alias.
+  string name = 1;
+  // Component's details.
+  Fields values = 2;
+  // Component probe info.
+  Information information = 3;
+}
+
+// Things about input_device.
+message InputDevice {
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    TYPE_UNKNOWN = 1;
+    TYPE_STYLUS = 2;
+    TYPE_TOUCHPAD = 3;
+    TYPE_TOUCHSCREEN = 4;
+  }
+  message Fields {
+    // The name of the device.
+    string name = 1;
+    // The pathname of the sysfs entry of that device.
+    string path = 2;
+    // The event of the device.
+    string event = 3;
+    // The bus number, 16 bits.
+    uint32 bus = 4;
+    // The vendor code, 16 bits.
+    uint32 vendor = 5;
+    // The product code, 16 bits.
+    uint32 product = 6;
+    // The version number, 16 bits.
+    uint32 version = 7;
+    // The firmware version.
+    string fw_version = 8;
+    // The type of the device.
+    Type device_type = 9;
+  }
+  // Component alias.
+  string name = 1;
+  // Component's details.
+  Fields values = 2;
+  // Component probe info.
+  Information information = 3;
+}
+
+// Things about memory.
+message Memory {
+  message Fields {
+    // Part number.
+    string part = 1;
+    // Memory size in MiB.
+    uint32 size = 2;
+    // Memory slot index, 0-based
+    uint32 slot = 3;
+  }
+  // Component alias.
+  string name = 1;
+  // Component's details.
+  Fields values = 2;
+  // Component probe info.
+  Information information = 3;
+}
+
+message Edid {
+  enum Vendor {
+    VENDOR_UNKNOWN = 0;
+    VENDOR_AAA = 1;
+    VENDOR_ACI = 61;
+    VENDOR_ACR = 70;
+    VENDOR_ACT = 72;
+    VENDOR_ADA = 79;
+    VENDOR_AGO = 171;
+    VENDOR_AOP = 380;
+    VENDOR_API = 399;
+    VENDOR_APP = 406;
+    VENDOR_ARD = 446;
+    VENDOR_ART = 462;
+    VENDOR_ASK = 479;
+    VENDOR_ATO = 509;
+    VENDOR_AUO = 535;
+    VENDOR_AUS = 539;
+    VENDOR_AVT = 566;
+    VENDOR_BEL = 792;
+    VENDOR_BMD = 992;
+    VENDOR_BNO = 1029;
+    VENDOR_BOE = 1045;
+    VENDOR_BPS = 1085;
+    VENDOR_CAT = 1372;
+    VENDOR_CHR = 1552;
+    VENDOR_CIN = 1574;
+    VENDOR_CMN = 1678;
+    VENDOR_CMO = 1679;
+    VENDOR_CNC = 1693;
+    VENDOR_CPL = 1754;
+    VENDOR_CPT = 1762;
+    VENDOR_CRO = 1809;
+    VENDOR_CSO = 1835;
+    VENDOR_CTO = 1861;
+    VENDOR_CTX = 1870;
+    VENDOR_CUK = 1883;
+    VENDOR_DEL = 2144;
+    VENDOR_DGC = 2187;
+    VENDOR_DMO = 2355;
+    VENDOR_DON = 2406;
+    VENDOR_DPL = 2430;
+    VENDOR_EGA = 2861;
+    VENDOR_ENC = 3045;
+    VENDOR_EPH = 3102;
+    VENDOR_EXN = 3316;
+    VENDOR_EXP = 3318;
+    VENDOR_FNI = 3727;
+    VENDOR_FUS = 3919;
+    VENDOR_GBT = 4102;
+    VENDOR_GFN = 4200;
+    VENDOR_GGL = 4224;
+    VENDOR_GSM = 4537;
+    VENDOR_HIQ = 4957;
+    VENDOR_HKC = 4995;
+    VENDOR_HOL = 5108;
+    VENDOR_HPN = 5136;
+    VENDOR_HSD = 5204;
+    VENDOR_HTC = 5229;
+    VENDOR_HWP = 5320;
+    VENDOR_HYT = 5376;
+    VENDOR_INO = 5761;
+    VENDOR_INT = 5766;
+    VENDOR_INX = 5770;
+    VENDOR_ITE = 5907;
+    VENDOR_IVM = 5967;
+    VENDOR_IVO = 5969;
+    VENDOR_JVC = 6633;
+    VENDOR_KDB = 6840;
+    VENDOR_KDC = 6841;
+    VENDOR_KTC = 7257;
+    VENDOR_LEN = 7554;
+    VENDOR_LGD = 7596;
+    VENDOR_LNX = 7798;
+    VENDOR_LPL = 7838;
+    VENDOR_LWR = 8026;
+    VENDOR_MAX = 8136;
+    VENDOR_MEG = 8223;
+    VENDOR_MEI = 8225;
+    VENDOR_MEL = 8228;
+    VENDOR_MJI = 8355;
+    VENDOR_MOM = 8489;
+    VENDOR_MST = 8600;
+    VENDOR_MSX = 8604;
+    VENDOR_MTC = 8609;
+    VENDOR_MTX = 8630;
+    VENDOR_NCP = 8856;
+    VENDOR_NCR = 8858;
+    VENDOR_NEC = 8895;
+    VENDOR_NEX = 8916;
+    VENDOR_NVD = 9338;
+    VENDOR_ONK = 9813;
+    VENDOR_ORN = 9920;
+    VENDOR_OTM = 9971;
+    VENDOR_OVR = 10028;
+    VENDOR_PAR = 10158;
+    VENDOR_PCC = 10195;
+    VENDOR_PHL = 10334;
+    VENDOR_PIO = 10363;
+    VENDOR_PLY = 10451;
+    VENDOR_PNR = 10496;
+    VENDOR_QDS = 10913;
+    VENDOR_QNT = 11174;
+    VENDOR_RAT = 11512;
+    VENDOR_REN = 11610;
+    VENDOR_RTK = 11997;
+    VENDOR_SAM = 12181;
+    VENDOR_SAN = 12182;
+    VENDOR_SDC = 12249;
+    VENDOR_SEC = 12275;
+    VENDOR_SGT = 12344;
+    VENDOR_SHP = 12366;
+    VENDOR_SII = 12385;
+    VENDOR_SIS = 12395;
+    VENDOR_SLA = 12455;
+    VENDOR_SMC = 12483;
+    VENDOR_SNY = 12531;
+    VENDOR_STA = 12663;
+    VENDOR_STD = 12666;
+    VENDOR_STN = 12676;
+    VENDOR_SVS = 12733;
+    VENDOR_SYN = 12806;
+    VENDOR_TAI = 12853;
+    VENDOR_TCL = 12908;
+    VENDOR_TDC = 12925;
+    VENDOR_TOP = 13224;
+    VENDOR_TOS = 13227;
+    VENDOR_TSB = 13314;
+    VENDOR_TST = 13332;
+    VENDOR_UNK = 13869;
+    VENDOR_VES = 14319;
+    VENDOR_VID = 14408;
+    VENDOR_VIT = 14424;
+    VENDOR_VIZ = 14430;
+    VENDOR_VSC = 14667;
+    VENDOR_VTK = 14701;
+    VENDOR_WDE = 14955;
+    VENDOR_WST = 15360;
+    VENDOR_WYS = 15515;
+    VENDOR_XLX = 15858;
+    VENDOR_YMH = 16544;
+  }
+  message Fields {
+    // The absolute path to the Edid file of the device.
+    string path = 1;
+    // The vendor code, 3 capital letters.
+    string vendor = 2;
+    // The product ID, 16 bits.
+    uint32 product_id = 3;
+    // The height of the device.
+    uint32 height = 4;
+    // The width of the device.
+    uint32 width = 5;
+  }
+  // Component alias.
+  string name = 1;
+  // Component's details.
+  Fields values = 2;
+  // Component probe info.
+  Information information = 3;
+}
+
+message ApI2c {
+  message Fields {
+    uint32 data = 1;
+  }
+  string name = 1;
+  Fields values = 2;
+}
+
+message EcI2c {
+  message Fields {
+    uint32 data = 1;
+  }
+  string name = 1;
+  Fields values = 2;
+}
+
+// A ProbeResult contains all potential probe results. For category not
+// existed or not requested for probing, field is expected to be empty.
+message ProbeResult {
+  // If a call was successful, error will not be defined.
+  // If a call failed, it must set an error code.
+  ErrorCode error = 1;
+  // The checksum of probe config content calculated using SHA1 hash.
+  string probe_config_checksum = 6;
+  // The following are the fields for different component categories.
+  repeated AudioCodec audio_codec = 2;
+  repeated Battery battery = 3;
+  repeated Storage storage = 4;
+  repeated VpdCached vpd_cached = 5;
+  // Obsolete in M91.
+  repeated Network network = 7;
+  repeated Camera camera = 8;
+  repeated InputDevice stylus = 9;
+  repeated InputDevice touchpad = 10;
+  repeated InputDevice touchscreen = 11;
+  repeated Memory dram = 12;
+  repeated Edid display_panel = 13;
+  repeated Network cellular = 14;
+  repeated Network ethernet = 15;
+  repeated Network wireless = 16;
+}
+
+// Holds componenet fields for any component categories.
+message ComponentFields {
+  oneof component_fields {
+    AudioCodec.Fields audio_codec = 1;
+    Battery.Fields battery = 2;
+    Storage.Fields storage = 3;
+    VpdCached.Fields vpd_cached = 4;
+    Camera.Fields camera = 5;
+    InputDevice.Fields stylus = 6;
+    InputDevice.Fields touchpad = 7;
+    InputDevice.Fields touchscreen = 8;
+    Memory.Fields dram = 9;
+    Edid.Fields display_panel = 10;
+    Network.Fields cellular = 11;
+    Network.Fields ethernet = 12;
+    Network.Fields wireless = 13;
+  }
+}
+
+message GetKnownComponentsRequest {
+  ProbeRequest.SupportCategory category = 1;
+}
+
+message GetKnownComponentsResult {
+  ErrorCode error = 1;
+  repeated string component_names = 2;
+}
+
+message ProbeSsfcComponentsRequest {}
+
+message ProbeSsfcComponentsResponse {
+  ErrorCode error = 1;
+  string probe_config_checksum = 2;
+
+  // Components
+  repeated ApI2c ap_i2c = 11;
+  repeated EcI2c ec_i2c = 12;
+}

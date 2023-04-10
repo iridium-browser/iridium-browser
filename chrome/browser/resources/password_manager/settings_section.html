@@ -1,0 +1,93 @@
+<style include="shared-style cr-shared-style">
+  #blockedSitesTitle {
+    margin-top: 28px;
+  }
+
+  .blocked-site-content {
+    border-top: var(--cr-separator-line);
+    flex: 1;
+    min-height: var(--section-min-height);
+  }
+
+  .blocked-site-content[first] {
+    border-top: none;
+  }
+
+  .favicon,
+  #blockedSitesHeader {
+    margin-inline-end: 20px;
+    margin-inline-start: 20px;
+  }
+
+  .site-url {
+    flex: 1;
+  }
+
+  cr-icon-button {
+    --cr-icon-button-icon-size: 16px;
+    --cr-icon-button-margin-start: 0px;
+    --cr-icon-button-margin-end: 10px;
+  }
+
+</style>
+<h3 class="page-title">$i18n{settings}</h3>
+<div class="card">
+  <pref-toggle-button id="passwordToggle"
+      label="$i18n{savePasswordsLabel}"
+      pref-key="credentials_enable_service">
+  </pref-toggle-button>
+  <pref-toggle-button id="autosigninToggle" class="hr"
+      label="$i18n{autosigninLabel}"
+      sub-label="$i18n{autosigninDescription}"
+      pref-key="credentials_enable_autosignin">
+  </pref-toggle-button>
+  <if expr="is_win or is_macosx">
+    <template is="dom-if"
+        if="[[isBiometricAuthenticationForFillingToggleVisible_]]">
+      <pref-toggle-button id="biometricAuthenticationToggle" class="hr"
+          label="$i18n{biometricAuthenticaionForFillingLabel}"
+          pref-key="password_manager.biometric_authentication_filling"
+          change-requires-validation
+          on-validate-and-change-pref="switchBiometricAuthBeforeFillingState_">
+      </pref-toggle-button>
+    </template>
+  </if>
+  <cr-link-row id="trustedVaultBanner" class="cr-row settings-cr-link-row"
+      label="$i18n{trustedVaultBannerLabelOfferOptIn}"
+      sub-label="$i18n{trustedVaultBannerSubLabelOfferOptIn}" external>
+  </cr-link-row>
+  <cr-link-row id="importPasswords" class="cr-row settings-cr-link-row"
+      label="$i18n{importPasswords}"
+      sub-label="$i18n{importPasswordsDescription}" hide-icon>
+  </cr-link-row>
+  <template is="dom-if" if="[[hasPasswordsToExport_]]" restamp>
+      <passwords-exporter></passwords-exporter>
+  </template>
+  <template is="dom-if" if="[[!isPasswordManagerShortcutInstalled_]]" restamp>
+    <cr-link-row id="addShortcutBanner" class="cr-row settings-cr-link-row"
+        on-click="onAddShortcutClick_" label="$i18n{addShortcut}"
+        sub-label="[[getShortcutBannerDescription_()]]" hide-icon>
+    </cr-link-row>
+  </template>
+</div>
+<h3 id="blockedSitesTitle" class="page-title">$i18n{blockedSitesTitle}</h3>
+<div class="card" id="blockedSites">
+  <div class="flex-centered single-line-label">
+    <div id="blockedSitesHeader" class="cr-secondary-text label">
+      [[getBlockedSitesDescription_(blockedSites_)]]
+    </div>
+  </div>
+  <div id="blockedSitesList" class="hr" hidden="[[!blockedSites_.length]]">
+    <template is="dom-repeat" items="[[blockedSites_]]">
+      <div class="flex-centered">
+        <site-favicon class="favicon" domain="[[item.urls.link]]">
+        </site-favicon>
+        <div class="blocked-site-content flex-centered" first$="[[!index]]">
+          <div class="label site-url">[[item.urls.shown]]</div>
+          <cr-icon-button class="icon-clear" id="removeBlockedValueButton"
+              on-click="onRemoveBlockedSiteClick_"></cr-icon-button>
+        </div>
+      </div>
+    </template>
+  </div>
+</div>

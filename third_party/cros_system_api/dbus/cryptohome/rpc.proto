@@ -1,0 +1,181 @@
+// Copyright 2014 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+//
+// The messages in this file comprise the DBus/Proto interface for
+// Cryptohome where there is an AccountIdentifier argument, an
+// AuthorizationRequest (if needed for the call), and the call's
+// parameters as <Call>Request.
+//
+// 'optional' annotations are used heavily in the RPC definition
+// because the RPC endpoints most properly sanity check the contents
+// for application-specific logic, and the more optional-with-default
+// parameters exist, the less data is actually transferred on the wire
+// in "default" situations.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package cryptohome;
+option go_package = "chromiumos/system_api/cryptohome_proto";
+
+import "key.proto";
+
+// Error codes do not need to be sequential per-call.
+// Prefixes by Request/Reply type should be used to help
+// callers know if specialized errors apply.
+enum CryptohomeErrorCode {
+  // No error: the operation succeeded.
+  CRYPTOHOME_ERROR_NOT_SET = 0;
+
+  CRYPTOHOME_ERROR_ACCOUNT_NOT_FOUND = 1;
+  CRYPTOHOME_ERROR_AUTHORIZATION_KEY_NOT_FOUND = 2;
+  CRYPTOHOME_ERROR_AUTHORIZATION_KEY_FAILED = 3;
+  CRYPTOHOME_ERROR_NOT_IMPLEMENTED = 4;
+  CRYPTOHOME_ERROR_MOUNT_FATAL = 5;
+  CRYPTOHOME_ERROR_MOUNT_MOUNT_POINT_BUSY = 6;
+  CRYPTOHOME_ERROR_TPM_COMM_ERROR = 7;
+  CRYPTOHOME_ERROR_TPM_DEFEND_LOCK = 8;
+  CRYPTOHOME_ERROR_TPM_NEEDS_REBOOT = 9;
+  CRYPTOHOME_ERROR_AUTHORIZATION_KEY_DENIED = 10;
+  CRYPTOHOME_ERROR_KEY_QUOTA_EXCEEDED = 11;
+  CRYPTOHOME_ERROR_KEY_LABEL_EXISTS = 12;
+  CRYPTOHOME_ERROR_BACKING_STORE_FAILURE = 13;
+  CRYPTOHOME_ERROR_UPDATE_SIGNATURE_INVALID = 14;
+  CRYPTOHOME_ERROR_KEY_NOT_FOUND = 15;
+  CRYPTOHOME_ERROR_LOCKBOX_SIGNATURE_INVALID = 16;
+  CRYPTOHOME_ERROR_LOCKBOX_CANNOT_SIGN = 17;
+  CRYPTOHOME_ERROR_BOOT_ATTRIBUTE_NOT_FOUND = 18;
+  CRYPTOHOME_ERROR_BOOT_ATTRIBUTES_CANNOT_SIGN = 19;
+  CRYPTOHOME_ERROR_TPM_EK_NOT_AVAILABLE = 20;
+  CRYPTOHOME_ERROR_ATTESTATION_NOT_READY = 21;
+  CRYPTOHOME_ERROR_CANNOT_CONNECT_TO_CA = 22;
+  CRYPTOHOME_ERROR_CA_REFUSED_ENROLLMENT = 23;
+  CRYPTOHOME_ERROR_CA_REFUSED_CERTIFICATE = 24;
+  CRYPTOHOME_ERROR_INTERNAL_ATTESTATION_ERROR = 25;
+  CRYPTOHOME_ERROR_FIRMWARE_MANAGEMENT_PARAMETERS_INVALID = 26;
+  CRYPTOHOME_ERROR_FIRMWARE_MANAGEMENT_PARAMETERS_CANNOT_STORE = 27;
+  CRYPTOHOME_ERROR_FIRMWARE_MANAGEMENT_PARAMETERS_CANNOT_REMOVE = 28;
+  CRYPTOHOME_ERROR_MOUNT_OLD_ENCRYPTION = 29;
+  CRYPTOHOME_ERROR_MOUNT_PREVIOUS_MIGRATION_INCOMPLETE = 30;
+  CRYPTOHOME_ERROR_MIGRATE_KEY_FAILED = 31;
+  CRYPTOHOME_ERROR_REMOVE_FAILED = 32;
+  CRYPTOHOME_ERROR_INVALID_ARGUMENT = 33;
+  CRYPTOHOME_ERROR_INSTALL_ATTRIBUTES_GET_FAILED = 34;
+  CRYPTOHOME_ERROR_INSTALL_ATTRIBUTES_SET_FAILED = 35;
+  CRYPTOHOME_ERROR_INSTALL_ATTRIBUTES_FINALIZE_FAILED = 36;
+  CRYPTOHOME_ERROR_UPDATE_USER_ACTIVITY_TIMESTAMP_FAILED = 37;
+  CRYPTOHOME_ERROR_FAILED_TO_READ_PCR = 38;
+  CRYPTOHOME_ERROR_PCR_ALREADY_EXTENDED = 39;
+  CRYPTOHOME_ERROR_FAILED_TO_EXTEND_PCR = 40;
+  CRYPTOHOME_ERROR_TPM_UPDATE_REQUIRED = 41;
+  CRYPTOHOME_ERROR_FINGERPRINT_ERROR_INTERNAL = 42;
+  // Fingerprint match failed but at least one retry count left.
+  CRYPTOHOME_ERROR_FINGERPRINT_RETRY_REQUIRED = 43;
+  // Fingerprint match failed and maximum retry count reached.
+  CRYPTOHOME_ERROR_FINGERPRINT_DENIED = 44;
+  CRYPTOHOME_ERROR_VAULT_UNRECOVERABLE = 45;
+  CRYPTOHOME_ERROR_FIDO_MAKE_CREDENTIAL_FAILED = 46;
+  CRYPTOHOME_ERROR_FIDO_GET_ASSERTION_FAILED = 47;
+  CRYPTOHOME_TOKEN_SERIALIZATION_FAILED = 48;
+  CRYPTOHOME_INVALID_AUTH_SESSION_TOKEN = 49;
+  CRYPTOHOME_ADD_CREDENTIALS_FAILED = 50;
+  CRYPTOHOME_ERROR_UNAUTHENTICATED_AUTH_SESSION = 51;
+  CRYPTOHOME_ERROR_UNKNOWN_LEGACY = 52;
+  CRYPTOHOME_ERROR_UNUSABLE_VAULT = 53;
+  CRYPTOHOME_REMOVE_CREDENTIALS_FAILED = 54;
+  CRYPTOHOME_UPDATE_CREDENTIALS_FAILED = 55;
+  CRYPTOHOME_ERROR_RECOVERY_TRANSIENT = 56;
+  CRYPTOHOME_ERROR_RECOVERY_FATAL = 57;
+  CRYPTOHOME_ERROR_BIOMETRICS_BUSY = 58;
+}
+
+message AccountIdentifier {
+  // |email| is deprecated. Don't use it.
+  optional string email = 1;
+
+  optional string account_id = 2;
+}
+
+// Parameters for connecting and making requests to a key delegate service.
+// This is currently used for making challenge requests for keys of the
+// |KEY_TYPE_CHALLENGE_RESPONSE| type.
+message KeyDelegate {
+  // D-Bus service name of the key delegate service that exports the key
+  // delegate object.
+  optional string dbus_service_name = 1;
+  // D-Bus object path of the key delegate object that implements the
+  // org.chromium.CryptohomeKeyDelegateInterface interface.
+  optional string dbus_object_path = 2;
+}
+
+message AuthorizationRequest {
+  // |key| must supply at least a |key.secret()|.  If no |key.data()| or
+  // |key.data().label()| is supplied, the |key.secret()| will be tested
+  // against all compatible |key.data().type()| keys, where
+  // KEY_TYPE_PASSWORD is the default type.  If
+  // |key.data().label()| is supplied, then the |key.secret()| will only be
+  // tested against the matching VaultKeyset.
+  optional Key key = 1;
+  // Describes delegate service that should be used for operations with the
+  // |key| key.
+  // Should be set only for keys with the |KEY_TYPE_CHALLENGE_RESPONSE| type.
+  optional KeyDelegate key_delegate = 2;
+}
+
+// Flags for GetFirmwareManagementParametersReply and
+// SetFirmwareManagementParametersRequest
+enum FirmwareManagementParametersFlags {
+  NONE = 0;
+  DEVELOPER_DISABLE_BOOT = 1;
+  DEVELOPER_DISABLE_RECOVERY_INSTALL = 2;
+  DEVELOPER_DISABLE_RECOVERY_ROOTFS = 4;
+  DEVELOPER_ENABLE_USB = 8;
+  DEVELOPER_ENABLE_LEGACY = 16;
+  DEVELOPER_USE_KEY_HASH = 32;
+  DEVELOPER_DISABLE_CASE_CLOSED_DEBUGGING_UNLOCK = 64;
+}
+
+// Request parameters for challenge requests for keys of the
+// |KEY_TYPE_CHALLENGE_RESPONSE| type.
+message KeyChallengeRequest {
+  // Specifies challenge types.
+  enum ChallengeType {
+    // Challenge is a request of a cryptographic signature of the specified data
+    // using the specified key.
+    CHALLENGE_TYPE_SIGNATURE = 1;
+  }
+  // Type of the requested challenge.
+  optional ChallengeType challenge_type = 1;
+  // Is set when |challenge_type| is |CHALLENGE_TYPE_SIGNATURE|. Contains the
+  // challenge request data.
+  optional SignatureKeyChallengeRequestData signature_request_data = 2;
+}
+
+// Request data for challenge requests of the |CHALLENGE_TYPE_SIGNATURE| request
+// type.
+message SignatureKeyChallengeRequestData {
+  // The blob of data for which the signature is asked.
+  optional bytes data_to_sign = 1;
+  // Specifies the key which is asked to sign the data. Contains the DER-encoded
+  // blob of the X.509 Subject Public Key Info.
+  optional bytes public_key_spki_der = 2;
+  // Specifies the signature algorithm that has to be used.
+  optional ChallengeSignatureAlgorithm signature_algorithm = 3;
+}
+
+// Response for challenge requests.
+message KeyChallengeResponse {
+  // Is set for responses to challenge requests of the
+  // |CHALLENGE_TYPE_SIGNATURE| challenge type. Contains the challenge response
+  // data.
+  optional SignatureKeyChallengeResponseData signature_response_data = 1;
+}
+
+// Response data for challenge requests of the |CHALLENGE_TYPE_SIGNATURE|
+// challenge type.
+message SignatureKeyChallengeResponseData {
+  // The signature blob of the requested data.
+  optional bytes signature = 1;
+}

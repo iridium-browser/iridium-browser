@@ -1,0 +1,164 @@
+# Copyright 2019 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build_overrides/build.gni")
+
+visibility = [ "../*" ]
+
+declare_args() {
+  # Enables trace logging in build. This is true by default, but may be disabled
+  # for a slight performance increase.
+  enable_trace_logging = true
+}
+
+config("trace_logging_config") {
+  if (enable_trace_logging) {
+    defines = [ "ENABLE_TRACE_LOGGING" ]
+  }
+}
+
+# The set of util classes which have no dependency on platform:api.
+source_set("base") {
+  visibility += [ "../*" ]
+
+  public = [
+    "base64.h",
+    "big_endian.h",
+    "chrono_helpers.h",
+    "enum_name_table.h",
+    "flat_map.h",
+    "hashing.h",
+    "integer_division.h",
+    "json/json_helpers.h",
+    "json/json_serialization.h",
+    "json/json_value.h",
+    "osp_logging.h",
+    "saturate_cast.h",
+    "simple_fraction.h",
+    "std_util.h",
+    "stringprintf.h",
+    "url.h",
+    "weak_ptr.h",
+    "yet_another_bit_vector.h",
+  ]
+
+  sources = [
+    "base64.cc",
+    "big_endian.cc",
+    "json/json_serialization.cc",
+    "json/json_value.cc",
+    "simple_fraction.cc",
+    "stringprintf.cc",
+    "url.cc",
+    "yet_another_bit_vector.cc",
+  ]
+
+  public_deps = [
+    "../platform:base",
+    "../platform:logging",
+    "../third_party/abseil",
+    "../third_party/jsoncpp",
+  ]
+
+  deps = [
+    "../third_party/mozilla",
+
+    # We do a clone of Chrome's modp_b64 in order to share their BUILD.gn
+    # and license files, so this should always be an absolute reference.
+    "//third_party/modp_b64",
+  ]
+
+  public_configs = [ "../build:openscreen_include_dirs" ]
+}
+
+source_set("util") {
+  public = [
+    "alarm.h",
+    "crypto/certificate_utils.h",
+    "crypto/digest_sign.h",
+    "crypto/openssl_util.h",
+    "crypto/pem_helpers.h",
+    "crypto/random_bytes.h",
+    "crypto/rsa_private_key.h",
+    "crypto/secure_hash.h",
+    "crypto/sha2.h",
+    "trace_logging.h",
+  ]
+
+  sources = [
+    "alarm.cc",
+    "crypto/certificate_utils.cc",
+    "crypto/digest_sign.cc",
+    "crypto/openssl_util.cc",
+    "crypto/pem_helpers.cc",
+    "crypto/random_bytes.cc",
+    "crypto/rsa_private_key.cc",
+    "crypto/secure_hash.cc",
+    "crypto/sha2.cc",
+    "trace_logging/macro_support.h",
+    "trace_logging/scoped_trace_operations.cc",
+    "trace_logging/scoped_trace_operations.h",
+  ]
+
+  public_deps = [
+    ":base",
+    "../platform:api",
+    "../platform:base",
+    "../third_party/abseil",
+    "../third_party/boringssl",
+    "../third_party/jsoncpp",
+  ]
+
+  deps = [ "../third_party/boringssl" ]
+
+  public_configs = [
+    "../build:openscreen_include_dirs",
+    ":trace_logging_config",
+  ]
+}
+
+source_set("unittests") {
+  testonly = true
+
+  sources = [
+    "alarm_unittest.cc",
+    "base64_unittest.cc",
+    "big_endian_unittest.cc",
+    "crypto/certificate_utils_unittest.cc",
+    "crypto/random_bytes_unittest.cc",
+    "crypto/rsa_private_key_unittest.cc",
+    "crypto/secure_hash_unittest.cc",
+    "crypto/sha2_unittest.cc",
+    "enum_name_table_unittest.cc",
+    "flat_map_unittest.cc",
+    "integer_division_unittest.cc",
+    "json/json_helpers_unittest.cc",
+    "json/json_serialization_unittest.cc",
+    "json/json_value_unittest.cc",
+    "saturate_cast_unittest.cc",
+    "simple_fraction_unittest.cc",
+    "std_util_unittest.cc",
+    "stringprintf_unittest.cc",
+    "trace_logging/scoped_trace_operations_unittest.cc",
+    "url_unittest.cc",
+    "weak_ptr_unittest.cc",
+    "yet_another_bit_vector_unittest.cc",
+  ]
+
+  # The trace logging unittests depend on macros only defined
+  # when trace logging is enabled.
+  if (enable_trace_logging) {
+    sources += [ "trace_logging_unittest.cc" ]
+  }
+
+  deps = [
+    ":util",
+    "../platform:test",
+    "../third_party/abseil",
+    "../third_party/boringssl",
+    "../third_party/googletest:gmock",
+    "../third_party/googletest:gtest",
+    "../third_party/jsoncpp",
+  ]
+}

@@ -1,0 +1,229 @@
+// Copyright 2021 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+//
+// Provides wire-type for cryptohome Key objects.  It does not
+// represent the entirety of the bookkeeping data needed by Cryptohome.
+//
+// Anything in this file may be persisted on disk.  Update carefully!
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package user_data_auth;
+option go_package = "chromiumos/system_api/user_data_auth_proto";
+
+// Enum to define all the available types of AuthFactor. This would be used for
+// identification of a given AuthFactor.
+enum AuthFactorType {
+  AUTH_FACTOR_TYPE_UNSPECIFIED = 0;
+  AUTH_FACTOR_TYPE_PASSWORD = 1;
+  AUTH_FACTOR_TYPE_PIN = 2;
+  AUTH_FACTOR_TYPE_CRYPTOHOME_RECOVERY = 3;
+  AUTH_FACTOR_TYPE_KIOSK = 4;
+  AUTH_FACTOR_TYPE_SMART_CARD = 5;
+  AUTH_FACTOR_TYPE_LEGACY_FINGERPRINT = 6;
+  AUTH_FACTOR_TYPE_FINGERPRINT = 7;
+}
+
+// Enum to define the purpose of AuthFactor preparation. This would be used
+// in PrepareAsyncAuthFactorRequest.
+enum AuthFactorPreparePurpose {
+  PURPOSE_UNSPECIFIED = 0;
+  // For adding a new auth factor. Usually it indicates PrepareAsynAuthFactor()
+  // runs an auth factor enrollment process (based on user input collection).
+  PURPOSE_ADD_AUTH_FACTOR = 1;
+  // For authenticating an existing async auth factor. Usually this indicates
+  // PrepareAsyncAuthFactor() runs an user input collection process.
+  PURPOSE_AUTHENTICATE_AUTH_FACTOR = 2;
+}
+
+// Cryptographic signature algorithm type for smart card requests. Used with
+// SmartCardAuthInput.
+enum SmartCardSignatureAlgorithm {
+  CHALLENGE_NOT_SPECIFIED = 0;
+  CHALLENGE_RSASSA_PKCS1_V1_5_SHA1 = 1;
+  CHALLENGE_RSASSA_PKCS1_V1_5_SHA256 = 2;
+  CHALLENGE_RSASSA_PKCS1_V1_5_SHA384 = 3;
+  CHALLENGE_RSASSA_PKCS1_V1_5_SHA512 = 4;
+}
+
+// An intent specifies the set of operations that can be performed after
+// successfully authenticating an Auth Session.
+enum AuthIntent {
+  // Default value.
+  AUTH_INTENT_UNSPECIFIED = 0;
+  // Intent to decrypt the user's file system keys. Authorizing for this intent
+  // allows all privileged operations, e.g., preparing user's vault,
+  // adding/updating/removing factors.
+  AUTH_INTENT_DECRYPT = 1;
+  // Intent to simply check whether the authentication succeeds. Authorizing for
+  // this intent doesn't allow any privileged operation.
+  AUTH_INTENT_VERIFY_ONLY = 2;
+  // Intent to specify the WebAuthn secret should be populated after authorizing
+  // when applicable, i.e., when the AuthFactor type isn't kLegacyFingerprint.
+  AUTH_INTENT_WEBAUTHN = 3;
+}
+
+// Password AuthFactor requires a secret to be passed for derivation and
+// creation of key.
+message PasswordAuthInput {
+  bytes secret = 1;
+}
+
+// Pin AuthFactor requires a secret to be passed for derivation and
+// creation of key.
+message PinAuthInput {
+  bytes secret = 1;
+}
+
+message CryptohomeRecoveryAuthInput {
+  // These fields are used for `AddAuthFactor`:
+  // Public key of the mediator for Cryptohome recovery flow.
+  bytes mediator_pub_key = 1;
+  // Gaia_id of the user executing the recovery flow.
+  string user_gaia_id = 2;
+  // Unique id of the user's vault on the device.
+  string device_user_id = 3;
+
+  // These fields are used for `AuthenticateAuthFactor`:
+  // Serialized cryptohome.cryptorecovery.CryptoRecoveryEpochResponse.
+  // An epoch response received from Recovery Mediator service containing epoch
+  // beacon value for Cryptohome recovery flow.
+  bytes epoch_response = 4;
+  // Serialized cryptohome.cryptorecovery.CryptoRecoveryRpcResponse.
+  // A response received from Recovery Mediator service and used by Cryptohome
+  // recovery flow to derive the wrapping keys.
+  bytes recovery_response = 5;
+  // The ledger info from the chrome side and used by Cryptohome
+  // recovery flow to determine which ledger is used.
+  message LedgerInfo {
+    // Ledger's name.
+    string name = 1;
+    // Ledger's public key hash.
+    // TODO(b/268054784): Remove this field if hash can be calculated.
+    uint32 key_hash = 2;
+    // Ledger's public key.
+    bytes public_key = 3;
+  }
+  LedgerInfo ledger_info = 6;
+}
+
+// Kiosk AuthFactor requires no secret to be passed for derivation and
+// creation of key.
+message KioskAuthInput {}
+
+// Smartcard AuthFactor requires no secret to be passed for derivation
+// and creation of key.
+message SmartCardAuthInput {
+  // Specifies the signature algorithms that are supported by an individual
+  // smart card.
+  repeated SmartCardSignatureAlgorithm signature_algorithms = 1;
+  // Parameters for connecting and making requests to a key delegate service:
+  // |dbus_service_name|, the D-Bus service name of the key delegate service
+  // that exports the key delegate object.
+  string key_delegate_dbus_service_name = 2;
+}
+
+// LegacyFingerprintAuthInput serves as an auth factor type indicator in
+// AuthenticateAuthFactorRequest.
+message LegacyFingerprintAuthInput {}
+
+// FingerprintAuthInput is empty. FingerprintAuthFactor does not require
+// user input any secret.
+message FingerprintAuthInput {}
+
+// AuthInput is a wrapper around any secret or input data that is required to
+// authenticate or create an AuthFactor on disk.
+message AuthInput {
+  // An AuthFactor could also carry with itself some input in some cases,
+  // such as password, the secret would be user supplied. In those cases the
+  // secret can be passed here.
+  oneof input {
+    PasswordAuthInput password_input = 1;
+    PinAuthInput pin_input = 2;
+    CryptohomeRecoveryAuthInput cryptohome_recovery_input = 3;
+    KioskAuthInput kiosk_input = 4;
+    SmartCardAuthInput smart_card_input = 5;
+    LegacyFingerprintAuthInput legacy_fingerprint_input = 6;
+    FingerprintAuthInput fingerprint_input = 7;
+  }
+}
+
+// Password AuthFactor does not store any special metadata. Although this could
+// change in the future and keeping that in mind, an empty proto is defined.
+message PasswordMetadata {}
+
+message PinMetadata {
+  // If true, the key is "locked" after too many unsuccessful authorization
+  // attempts. Future authentication attempts against a locked key fail with
+  // CRYPTOHOME_ERROR_TPM_DEFEND_LOCK error.
+  // Currently, such locking is supported only for keys with
+  // |low_entropy_credential| policy set to true,
+  // This field is ignored when registering a new key.
+  bool auth_locked = 1;
+}
+
+message CryptohomeRecoveryMetadata {}
+
+message KioskMetadata {}
+
+message SmartCardMetadata {
+  // Specifies the key which is asked to sign the data. Contains the DER-encoded
+  // blob of the X.509 Subject Public Key Info.
+  bytes public_key_spki_der = 1;
+}
+
+message CommonMetadata {
+  // Specifies the version AuthFactor was last updated.
+  // The version number is read from CHROMEOS_RELEASE_VERSION field in
+  // /etc/lsb-release whenever AuthFactor is updated or first persisted.
+  // See:https://chromium.googlesource.com/chromiumos/docs/+/HEAD/os_config.md
+  // For example: "11012.0.2018_08_28_1422" could be returned as part of this.
+  string chromeos_version_last_updated = 1;
+  // This version number will be supplied by chrome when it calls AddAuthFactor
+  // or UpdateAuthFactor.
+  // Note: The format of this version will be maintained by chrome.
+  string chrome_version_last_updated = 2;
+}
+
+message LegacyFingerprintMetadata {}
+
+message FingerprintMetadata {}
+
+// AuthFactor is a backing store for any secret stored on Chrome OS in the USS
+// World. This proto definition is used to communicate with the client side.
+// Once it is received on cryptohome side, this proto definition is converted to
+// a flatbuffer for usage and storage.
+// A note: The intention is for client side to not know about the type of
+// backing store. So when any AuthFactor API is called, it is cryptohome that
+// decides what backing store would be used -- either VaultKeyset or AuthFactor.
+// This decion making does not have any effect on how the client uses the API.
+message AuthFactor {
+  // AuthFactorType will help us determine the type and subsequently help us
+  // create the right AuthBlock for derivation or authentication.
+  AuthFactorType type = 1;
+  // AuthFactor would be identified by its label which would be unique across
+  // all the AuthFactors for a given user. The label must be a non-empty string,
+  // only consisting of characters from the set {a-z, A-Z, 0-9, _, -}, and whose
+  // length doesn't exceed 1000.
+  string label = 2;
+  // Common metadata that is shared across all types.
+  CommonMetadata common_metadata = 9;
+
+  // An AuthFactor could also carry with itself some metadata. Since an
+  // AuthFactor could only be one type, oneof is used to define the usage of
+  // metadata.
+  oneof metadata {
+    PasswordMetadata password_metadata = 4;
+    PinMetadata pin_metadata = 5;
+    CryptohomeRecoveryMetadata cryptohome_recovery_metadata = 6;
+    KioskMetadata kiosk_metadata = 7;
+    SmartCardMetadata smart_card_metadata = 8;
+    LegacyFingerprintMetadata legacy_fingerprint_metadata = 11;
+    FingerprintMetadata fingerprint_metadata = 12;
+  }
+
+  reserved 3, 10;
+}

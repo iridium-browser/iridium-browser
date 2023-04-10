@@ -1,0 +1,24 @@
+# Mouse in, mouse out.
+mousemove,125,225
+mousemove,125,100
+# Mouse in, click in right field - no effect.
+mousemove,125,225
+mousedown,right,125,225
+mouseup,right,125,225
+# click left in field - has effect.
+mousedown,left,125,225
+mouseup,left,125,225
+# Double-click in field - no effect.
+mousedoubleclick,left,125,225
+# Mouse out, click elsewhere.
+# This should trigger an On Blur event. (Bug 881)
+mousemove,125,100
+mousedown,left,125,100
+mouseup,left,125,100
+# Mouse in, focus.
+mousemove,125,225
+focus,125,225
+# Mouse out, unfocus.
+# This should trigger an On Blur event. (Bug 881)
+mousemove,125,100
+focus,125,100

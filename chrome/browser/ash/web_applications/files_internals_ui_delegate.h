@@ -1,0 +1,40 @@
+// Copyright 2022 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef CHROME_BROWSER_ASH_WEB_APPLICATIONS_FILES_INTERNALS_UI_DELEGATE_H_
+#define CHROME_BROWSER_ASH_WEB_APPLICATIONS_FILES_INTERNALS_UI_DELEGATE_H_
+
+#include "ash/webui/files_internals/files_internals_ui_delegate.h"
+#include "base/memory/raw_ptr.h"
+
+namespace content {
+class WebUI;
+}  // namespace content
+
+// Chrome browser FilesInternalsUIDelegate implementation.
+class ChromeFilesInternalsUIDelegate : public ash::FilesInternalsUIDelegate {
+ public:
+  explicit ChromeFilesInternalsUIDelegate(content::WebUI* web_ui);
+  ChromeFilesInternalsUIDelegate(const ChromeFilesInternalsUIDelegate&) =
+      delete;
+  ChromeFilesInternalsUIDelegate& operator=(
+      const ChromeFilesInternalsUIDelegate&) = delete;
+  ~ChromeFilesInternalsUIDelegate() override;
+
+  base::Value GetDebugJSON() const override;
+
+  bool GetSmbfsEnableVerboseLogging() const override;
+  void SetSmbfsEnableVerboseLogging(bool enabled) override;
+
+  bool GetOfficeSetupComplete() const override;
+  void SetOfficeSetupComplete(bool complete) override;
+
+  bool GetAlwaysMoveOfficeFiles() const override;
+  void SetAlwaysMoveOfficeFiles(bool always_move) override;
+
+ private:
+  raw_ptr<content::WebUI> web_ui_;  // Owns |this|.
+};
+
+#endif  // CHROME_BROWSER_ASH_WEB_APPLICATIONS_FILES_INTERNALS_UI_DELEGATE_H_

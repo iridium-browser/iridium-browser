@@ -1,0 +1,70 @@
+# Test various methods of triggering computer braille
+
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/spaces.uti
+  punctuation . 3
+  include tables/latinLetterDef6Dots.uti
+  include tables/braille-patterns.cti
+  compbrl www.
+  comp6 a 2
+  comp6 b 23
+  comp6 c 25
+  begcomp 456-346
+  endcomp 456-156
+flags: {testmode: forward}
+tests:
+  # no computer braille
+  - - abc
+    - ⠁⠃⠉
+  # computer braille triggered by compbrl
+  - - www.abc
+    - ⠸⠬⠺⠺⠺⠄⠂⠆⠒⠸⠱
+  # computer braille triggered by typeform
+  # currently fails: see issue https://github.com/liblouis/liblouis/issues/622
+  - - abc abc abc
+    - ⠁⠃⠉ ⠸⠬⠂⠆⠒⠸⠱ ⠁⠃⠉
+    - typeform:
+        computer_braille: '    +++    '
+      xfail: true
+  # computer braille triggered by compbrlatcursor (apparently no begcompbrl or endcompbrl)
+  - - abc abc abc
+    - ⠁⠃⠉ ⠂⠆⠒ ⠁⠃⠉
+    - mode: [compbrlAtCursor]
+      cursorPos: 4
+
+# Test comp6 in back-translation
+# see issue https://github.com/liblouis/liblouis/issues/715
+flags: {testmode: backward}
+tests:
+  - - ⠁⠃⠉ ⠸⠬⠂⠆⠒⠸⠱ ⠁⠃⠉
+    - abc abc abc
+    - xfail: begcompbrl and endcompbrl are apparently consumed but not processed
+
+# no_translate typeform can not be used instead of computer_braille:
+# - it ignores comp6 rules
+# - it does not insert begcomp and endcomp
+# - it ignores character definition rules that map to more than one cell
+# - it takes the first character definition rule rather than the last
+# - it fails on characters outside of the range \x0020-\x007E
+table: |
+  include tables/unicode-without-blank.dis
+  space \s 0
+  letter a 1-1
+  letter a 1
+  letter a 2
+  letter b 12
+  letter c 14
+  comp6 a 2
+  comp6 b 23
+  comp6 c 25
+  begcomp 456-346
+  endcomp 456-156
+  always abc 123456
+  include tables/braille-patterns.cti
+flags: {testmode: forward}
+tests:
+  - - abc abc abc
+    - ⠿ ⠁⠃⠉ ⠿
+    - typeform:
+        no_translate: '    +++    '

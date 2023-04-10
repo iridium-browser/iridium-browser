@@ -1,0 +1,201 @@
+// Copyright 2022 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+{
+  include: [
+    // CML shards intended for tests are used here because this component is
+    // launched as a test. While it doesn't fit the typical use-case for a test
+    // component, it's a useful way to be able to launch the component from a
+    // host tool and have it run somewhere it can get the capabilities it needs
+    // to function correctly.
+    // TODO(crbug.com/1410937: Run as a non-test component.
+    "//build/config/fuchsia/test/chromium_system_test_facet.shard.test-cml",
+    "//build/config/fuchsia/test/elf_test_ambient_exec_runner.shard.test-cml",
+
+    "sys/component/realm_builder_absolute.shard.cml",
+    "syslog/client.shard.cml",
+  ],
+  program: {
+    binary: "web_engine_shell_exec",
+  },
+  use: [
+    // Used conditionally based on the absence of `--use-web-instance` on the
+    // command line at runtime.
+    {
+      protocol: "fuchsia.web.ContextProvider",
+      availability: "optional",
+    },
+
+    // Used to hold the cdm_data directory passed to web_instance.
+    {
+      storage: "data",
+      path: "/data",
+    },
+
+    // Needed when launched with --enable-web-instance-tmp.
+    {
+      storage: "tmp",
+      path: "/tmp",
+      availability: "optional",
+    },
+
+    // Uses below this line are for web_instance.cmx.
+    // TODO(crbug.com/1280703): Revise as needed when context_provider is
+    // migrated to launch web_instance.cm.
+    {
+      protocol: [
+        "fuchsia.buildinfo.Provider",
+        "fuchsia.device.NameProvider",
+        "fuchsia.fonts.Provider",
+        "fuchsia.hwinfo.Product",
+        "fuchsia.input.virtualkeyboard.ControllerCreator",
+        "fuchsia.intl.PropertyProvider",
+        "fuchsia.kernel.VmexResource",
+        "fuchsia.media.Audio",
+        "fuchsia.media.AudioDeviceEnumerator",
+        "fuchsia.media.ProfileProvider",
+        "fuchsia.media.SessionAudioConsumerFactory",
+        "fuchsia.mediacodec.CodecFactory",
+        "fuchsia.memorypressure.Provider",
+        "fuchsia.net.interfaces.State",
+        "fuchsia.net.name.Lookup",
+        "fuchsia.posix.socket.Provider",
+        "fuchsia.process.Launcher",
+        "fuchsia.sysmem.Allocator",
+        "fuchsia.ui.input3.Keyboard",
+      ],
+    },
+
+    // Used conditionally based on the value of `enable_widevine` at build time.
+    // TODO(crbug.com/1379411): Use a shard to conditionally use based on
+    // build-time config.
+    {
+      protocol: "fuchsia.media.drm.Widevine",
+      availability: "optional",
+    },
+
+    // Used conditionally based on the absence of `--headless` on the command
+    // line at runtime.
+    {
+      protocol: [
+        "fuchsia.accessibility.semantics.SemanticsManager",
+        "fuchsia.element.GraphicalPresenter",
+        "fuchsia.tracing.provider.Registry",
+        "fuchsia.ui.composition.Allocator",
+        "fuchsia.ui.composition.Flatland",
+
+        // TODO(crbug.com/1402457): Remove fuchsia.ui.policy.Presenter.
+        "fuchsia.ui.policy.Presenter",
+        "fuchsia.ui.scenic.Scenic",
+        "fuchsia.vulkan.loader.Loader",
+      ],
+      availability: "optional",
+    },
+    {
+      protocol: "fuchsia.tracing.perfetto.ProducerConnector",
+      availability: "optional",
+    },
+  ],
+  offer: [
+    {
+      storage: [
+        "data",
+        "tmp",
+      ],
+      from: "parent",
+      to: "#realm_builder",
+    },
+    {
+      directory: "root-ssl-certificates",
+      from: "parent",
+      to: "#realm_builder",
+    },
+
+    // Offers for web_instance.cm.
+    // The chromium test realm offers the system-wide config-data dir to test
+    // components. Route the web_engine sub-directory of this as required by
+    // WebInstanceHost.
+    {
+      directory: "config-data",
+      from: "parent",
+      as: "config-data-for-web-instance",
+      to: "#realm_builder",
+      subdir: "web_engine",
+      availability: "optional",
+    },
+    {
+      protocol: [
+        "fuchsia.buildinfo.Provider",
+        "fuchsia.device.NameProvider",
+        "fuchsia.feedback.ComponentDataRegister",
+        "fuchsia.feedback.CrashReportingProductRegister",
+        "fuchsia.fonts.Provider",
+        "fuchsia.hwinfo.Product",
+        "fuchsia.input.virtualkeyboard.ControllerCreator",
+        "fuchsia.intl.PropertyProvider",
+        "fuchsia.kernel.VmexResource",
+        "fuchsia.media.Audio",
+        "fuchsia.media.AudioDeviceEnumerator",
+        "fuchsia.media.ProfileProvider",
+        "fuchsia.media.SessionAudioConsumerFactory",
+        "fuchsia.mediacodec.CodecFactory",
+        "fuchsia.memorypressure.Provider",
+        "fuchsia.net.interfaces.State",
+        "fuchsia.net.name.Lookup",
+        "fuchsia.posix.socket.Provider",
+        "fuchsia.process.Launcher",
+        "fuchsia.sysmem.Allocator",
+        "fuchsia.ui.input3.Keyboard",
+      ],
+      from: "parent",
+      to: "#realm_builder",
+    },
+
+    // Used conditionally based on the value of `enable_widevine` at build time.
+    // TODO(crbug.com/1379411): Use a shard to conditionally use based on
+    // build-time config.
+    {
+      protocol: "fuchsia.media.drm.Widevine",
+      from: "parent",
+      to: "#realm_builder",
+      availability: "optional",
+    },
+
+    // Used conditionally based on the absence of `--headless` on the command
+    // line at runtime.
+    {
+      protocol: [
+        "fuchsia.accessibility.semantics.SemanticsManager",
+        "fuchsia.element.GraphicalPresenter",
+        "fuchsia.tracing.provider.Registry",
+        "fuchsia.ui.composition.Allocator",
+        "fuchsia.ui.composition.Flatland",
+
+        // TODO(crbug.com/1402457): Remove fuchsia.ui.policy.Presenter.
+        "fuchsia.ui.policy.Presenter",
+        "fuchsia.ui.scenic.Scenic",
+        "fuchsia.vulkan.loader.Loader",
+      ],
+      from: "parent",
+      to: "#realm_builder",
+      availability: "optional",
+    },
+
+    // Optional capabilities, dependent on availability of tracing services.
+    {
+      protocol: "fuchsia.tracing.perfetto.ProducerConnector",
+      from: "parent",
+      to: "#realm_builder",
+      availability: "optional",
+    },
+  ],
+  facets: {
+    "fuchsia.test": {
+      "deprecated-allowed-packages": [
+        "test_manager",
+        "web_engine",
+        "web_engine_with_webui",
+      ],
+    },
+  },
+}

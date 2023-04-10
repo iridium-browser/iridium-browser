@@ -1,0 +1,23 @@
+# Copyright 2019 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+source_set("cells") {
+  sources = [
+    "autofill_address_profile_source.h",
+    "autofill_card_item.h",
+    "autofill_card_item.mm",
+    "autofill_profile_item.h",
+    "autofill_profile_item.mm",
+    "country_item.h",
+    "country_item.mm",
+  ]
+
+  deps = [
+    "//ios/chrome/browser/ui/autofill:autofill_ui_type",
+    "//ios/chrome/browser/ui/table_view/cells",
+    "//ios/chrome/common/ui/table_view:cells_constants",
+  ]
+
+  configs += [ "//build/config/compiler:enable_arc" ]
+}

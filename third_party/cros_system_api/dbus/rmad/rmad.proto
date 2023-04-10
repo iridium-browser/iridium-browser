@@ -1,0 +1,655 @@
+// Copyright 2021 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+//
+// The messages in this file comprise the DBus/Protobuf interface for
+// rmad.
+syntax = "proto3";
+
+package rmad;
+option optimize_for = LITE_RUNTIME;
+
+// Defined error codes.
+enum RmadErrorCode {
+  // 0 is the default value. It should never be used.
+  RMAD_ERROR_NOT_SET = 0;
+
+  // No error.
+  RMAD_ERROR_OK = 1;
+
+  // No error, and wait for a signal.
+  RMAD_ERROR_WAIT = 2;
+
+  // Expect a reboot soon.
+  RMAD_ERROR_EXPECT_REBOOT = 3;
+
+  // Expect a shutdown soon.
+  RMAD_ERROR_EXPECT_SHUTDOWN = 4;
+
+  // The device is not in RMA mode.
+  RMAD_ERROR_RMA_NOT_REQUIRED = 5;
+
+  // No corresponding state handler for a state.
+  RMAD_ERROR_STATE_HANDLER_MISSING = 6;
+
+  // State handler initialization failed.
+  RMAD_ERROR_STATE_HANDLER_INITIALIZATION_FAILED = 7;
+
+  // The request could not be processed (e.g. bad proto).
+  RMAD_ERROR_REQUEST_INVALID = 8;
+
+  // The request is missing mandatory arguments.
+  RMAD_ERROR_REQUEST_ARGS_MISSING = 9;
+
+  // The request arguments are violating some rules of the state.
+  RMAD_ERROR_REQUEST_ARGS_VIOLATION = 10;
+
+  // It is not possible to transition state at this point.
+  RMAD_ERROR_TRANSITION_FAILED = 11;
+
+  // Failed to abort the RMA process.
+  RMAD_ERROR_ABORT_FAILED = 12;
+
+  // An expected component was not found.
+  RMAD_ERROR_MISSING_COMPONENT = 13;
+
+  // Cannot get the RSU challenge code.
+  RMAD_ERROR_WRITE_PROTECT_DISABLE_RSU_NO_CHALLENGE = 14;
+
+  // The RSU code was incorrect.
+  RMAD_ERROR_WRITE_PROTECT_DISABLE_RSU_CODE_INVALID = 15;
+
+  // The battery was not disconnected when WP disable was required.
+  RMAD_ERROR_WRITE_PROTECT_DISABLE_BATTERY_NOT_DISCONNECTED = 16;
+
+  // WP was not disabled when required.
+  RMAD_ERROR_WRITE_PROTECT_DISABLE_SIGNAL_NOT_DETECTED = 17;
+
+  // File could not be downloaded because a network connection was unavailable.
+  RMAD_ERROR_REIMAGING_DOWNLOAD_NO_NETWORK = 18;
+
+  // File download did not complete because of a network error.
+  RMAD_ERROR_REIMAGING_DOWNLOAD_NETWORK_ERROR = 19;
+
+  // The user cancelled the file download.
+  RMAD_ERROR_REIMAGING_DOWNLOAD_CANCELLED = 20;
+
+  // No valid USB device with a Chrome OS image was found.
+  RMAD_ERROR_REIMAGING_USB_NOT_FOUND = 21;
+
+  // More than one USB device with a Chrome OS image was found.
+  RMAD_ERROR_REIMAGING_USB_TOO_MANY_FOUND = 22;
+
+  // The Chrome OS image found was corrupt.
+  RMAD_ERROR_REIMAGING_USB_INVALID_IMAGE = 23;
+
+  // The image could not be written.
+  RMAD_ERROR_REIMAGING_IMAGING_FAILED = 24;
+
+  // An unexpected failure prevented imaging from completing.
+  RMAD_ERROR_REIMAGING_UNKNOWN_FAILURE = 25;
+
+  // The device info is incorrect.
+  RMAD_ERROR_DEVICE_INFO_INVALID = 26;
+
+  // Calibration component is missing.
+  RMAD_ERROR_CALIBRATION_COMPONENT_MISSING = 27;
+
+  // Calibration status is missing.
+  RMAD_ERROR_CALIBRATION_STATUS_MISSING = 28;
+
+  // Calibration component cannot be calibrated.
+  RMAD_ERROR_CALIBRATION_COMPONENT_INVALID = 29;
+
+  // Calibration failed for a component.
+  RMAD_ERROR_CALIBRATION_FAILED = 30;
+
+  // Provisioning failed for the device.
+  RMAD_ERROR_PROVISIONING_FAILED = 31;
+
+  // Device could not be powerwashed.
+  RMAD_ERROR_POWERWASH_FAILED = 32;
+
+  // Device finalization failed.
+  RMAD_ERROR_FINALIZATION_FAILED = 33;
+
+  // Logs failed to upload because the server could not be reached.
+  RMAD_ERROR_LOG_UPLOAD_FTP_SERVER_CANNOT_CONNECT = 34;
+
+  // Logs failed to upload because the server refused the connection.
+  RMAD_ERROR_LOG_UPLOAD_FTP_SERVER_CONNECTION_REJECTED = 35;
+
+  // Logs failed to upload because the connection was interrupted.
+  RMAD_ERROR_LOG_UPLOAD_FTP_SERVER_TRANSFER_FAILED = 36;
+
+  // It is not possible to cancel RMA finalization process at this point.
+  RMAD_ERROR_CANNOT_CANCEL_RMA = 37;
+
+  // Failed to get logs.
+  RMAD_ERROR_CANNOT_GET_LOG = 38;
+
+  // RMA daemon initialization failed.
+  RMAD_ERROR_DAEMON_INITIALIZATION_FAILED = 39;
+
+  // Update RO firmware failed.
+  RMAD_ERROR_UPDATE_RO_FIRMWARE_FAILED = 40;
+
+  // WP is expected to be disabled, but it is enabled.
+  RMAD_ERROR_WP_ENABLED = 41;
+
+  // Unable to write data.
+  RMAD_ERROR_CANNOT_WRITE = 42;
+
+  // Failed to save logs.
+  RMAD_ERROR_CANNOT_SAVE_LOG = 43;
+
+  // Failed to record browser actions.
+  RMAD_ERROR_CANNOT_RECORD_BROWSER_ACTION = 44;
+
+  // No USB found when performing a task that requires a USB.
+  RMAD_ERROR_USB_NOT_FOUND = 45;
+}
+
+// Defined Rmad components.
+enum RmadComponent {
+  RMAD_COMPONENT_UNKNOWN = 0;
+  // runtime_probe supported components.
+  RMAD_COMPONENT_AUDIO_CODEC = 1;  // Deprecated by runtime probe.
+  RMAD_COMPONENT_BATTERY = 2;
+  RMAD_COMPONENT_STORAGE = 3;
+  RMAD_COMPONENT_VPD_CACHED = 4;
+  RMAD_COMPONENT_NETWORK = 5;  // Obsolete in M91.
+  RMAD_COMPONENT_CAMERA = 6;
+  RMAD_COMPONENT_STYLUS = 7;
+  RMAD_COMPONENT_TOUCHPAD = 8;
+  RMAD_COMPONENT_TOUCHSCREEN = 9;
+  RMAD_COMPONENT_DRAM = 10;
+  RMAD_COMPONENT_DISPLAY_PANEL = 11;
+  RMAD_COMPONENT_CELLULAR = 12;
+  RMAD_COMPONENT_ETHERNET = 13;
+  RMAD_COMPONENT_WIRELESS = 14;
+  // Additional rmad components.
+  RMAD_COMPONENT_SCREEN = 15;
+  RMAD_COMPONENT_BASE_ACCELEROMETER = 16;
+  RMAD_COMPONENT_LID_ACCELEROMETER = 17;
+  RMAD_COMPONENT_BASE_GYROSCOPE = 18;
+  RMAD_COMPONENT_LID_GYROSCOPE = 19;
+  // Reserved for additional runtime_probe supported components.
+  reserved 20 to 32;
+  // Irrelevant components.
+  // TODO(chenghan): Do we really need these?
+  RMAD_COMPONENT_KEYBOARD = 33;
+  RMAD_COMPONENT_POWER_BUTTON = 34;
+}
+
+// Defined hardware verification result.
+message HardwareVerificationResult {
+  bool is_compliant = 1;
+  string error_str = 2;
+}
+
+// Defined update RO firmware status.
+enum UpdateRoFirmwareStatus {
+  RMAD_UPDATE_RO_FIRMWARE_UNKNOWN = 0;
+  RMAD_UPDATE_RO_FIRMWARE_WAIT_USB = 1;
+  RMAD_UPDATE_RO_FIRMWARE_FILE_NOT_FOUND = 2;
+  RMAD_UPDATE_RO_FIRMWARE_DOWNLOADING = 3;
+  RMAD_UPDATE_RO_FIRMWARE_UPDATING = 4;
+  RMAD_UPDATE_RO_FIRMWARE_REBOOTING = 5;
+  RMAD_UPDATE_RO_FIRMWARE_COMPLETE = 6;
+}
+
+// Defined setup instructions for Calibration.
+// This is used in SetupCalibration.
+enum CalibrationSetupInstruction {
+  RMAD_CALIBRATION_INSTRUCTION_UNKNOWN = 0;
+  RMAD_CALIBRATION_INSTRUCTION_PLACE_BASE_ON_FLAT_SURFACE = 1;
+  RMAD_CALIBRATION_INSTRUCTION_PLACE_LID_ON_FLAT_SURFACE = 2;
+  // Reserved for additional setup instructions.
+  reserved 3 to 9;
+  RMAD_CALIBRATION_INSTRUCTION_NO_NEED_CALIBRATION = 10;
+  RMAD_CALIBRATION_INSTRUCTION_NEED_TO_CHECK = 11;
+}
+
+// Defined overall status for Calibration.
+// This is used in calibration related states.
+enum CalibrationOverallStatus {
+  RMAD_CALIBRATION_OVERALL_UNKNOWN = 0;
+  RMAD_CALIBRATION_OVERALL_COMPLETE = 1;
+  RMAD_CALIBRATION_OVERALL_CURRENT_ROUND_COMPLETE = 2;
+  RMAD_CALIBRATION_OVERALL_CURRENT_ROUND_FAILED = 3;
+  RMAD_CALIBRATION_OVERALL_INITIALIZATION_FAILED = 4;
+}
+
+// Defined provision status.
+message ProvisionStatus {
+  enum Status {
+    RMAD_PROVISION_STATUS_UNKNOWN = 0;
+    RMAD_PROVISION_STATUS_IN_PROGRESS = 1;
+    RMAD_PROVISION_STATUS_COMPLETE = 2;
+    RMAD_PROVISION_STATUS_FAILED_BLOCKING = 3;
+    RMAD_PROVISION_STATUS_FAILED_NON_BLOCKING = 4;
+  }
+  enum Error {
+    RMAD_PROVISION_ERROR_UNKNOWN = 0;
+    RMAD_PROVISION_ERROR_INTERNAL = 1;
+    RMAD_PROVISION_ERROR_WP_ENABLED = 2;
+    RMAD_PROVISION_ERROR_CANNOT_READ = 3;
+    RMAD_PROVISION_ERROR_CANNOT_WRITE = 4;
+    RMAD_PROVISION_ERROR_GENERATE_SECRET = 5;
+    RMAD_PROVISION_ERROR_MISSING_BASE_ACCELEROMETER = 6;
+    RMAD_PROVISION_ERROR_MISSING_LID_ACCELEROMETER = 7;
+    RMAD_PROVISION_ERROR_MISSING_BASE_GYROSCOPE = 8;
+    RMAD_PROVISION_ERROR_MISSING_LID_GYROSCOPE = 9;
+    RMAD_PROVISION_ERROR_CR50 = 10;
+    RMAD_PROVISION_ERROR_GBB = 11;
+  }
+  Status status = 1;
+  double progress = 2;
+  Error error = 3;
+}
+
+// Defined Finalize progress.
+message FinalizeStatus {
+  enum Status {
+    RMAD_FINALIZE_STATUS_UNKNOWN = 0;
+    RMAD_FINALIZE_STATUS_IN_PROGRESS = 1;
+    RMAD_FINALIZE_STATUS_COMPLETE = 2;
+    RMAD_FINALIZE_STATUS_FAILED_BLOCKING = 3;
+    RMAD_FINALIZE_STATUS_FAILED_NON_BLOCKING = 4;
+  }
+  enum Error {
+    RMAD_FINALIZE_ERROR_UNKNOWN = 0;
+    RMAD_FINALIZE_ERROR_INTERNAL = 1;
+    RMAD_FINALIZE_ERROR_CANNOT_ENABLE_HWWP = 2;
+    RMAD_FINALIZE_ERROR_CANNOT_ENABLE_SWWP = 3;
+    RMAD_FINALIZE_ERROR_CR50 = 4;
+    RMAD_FINALIZE_ERROR_GBB = 5;
+  }
+  Status status = 1;
+  double progress = 2;
+  Error error = 3;
+}
+
+// Defined Rmad states.
+
+// Confirm RMA is required.
+message WelcomeState {
+  // This enum is not really necessary. This acts as a confirmation that the
+  // client wants to start RMA, To cancel RMA, the client should call |AbortRma|
+  // method instead.
+  enum FinalizeChoice {
+    RMAD_CHOICE_UNKNOWN = 0;
+    RMAD_CHOICE_FINALIZE_REPAIR = 1;
+  }
+  FinalizeChoice choice = 1;
+}
+
+// Select components that have been repaired.
+message ComponentsRepairState {
+  message ComponentRepairStatus {
+    enum RepairStatus {
+      RMAD_REPAIR_STATUS_UNKNOWN = 0;
+      RMAD_REPAIR_STATUS_ORIGINAL = 1;
+      RMAD_REPAIR_STATUS_REPLACED = 2;
+      RMAD_REPAIR_STATUS_MISSING = 3;
+    }
+    RmadComponent component = 1;
+    RepairStatus repair_status = 2;
+    string identifier = 3;
+  }
+  repeated ComponentRepairStatus components = 1;
+  bool mainboard_rework = 2;
+}
+
+// Select whether the device is returning to original owner or being wiped for
+// a new owner.
+message DeviceDestinationState {
+  enum Destination {
+    RMAD_DESTINATION_UNKNOWN = 0;
+    RMAD_DESTINATION_SAME = 1;
+    RMAD_DESTINATION_DIFFERENT = 2;
+  }
+  Destination destination = 1;
+}
+
+// Select whether we want to wipe the device at the end of the RMA process.
+message WipeSelectionState {
+  bool wipe_device = 1;
+}
+
+// Select the method to use to disable hardware write protection (HWWP).
+// TODO(gavindodd): Implement signal that updates Chrome on the HWWP state.
+message WriteProtectDisableMethodState {
+  enum DisableMethod {
+    RMAD_WP_DISABLE_UNKNOWN = 0;
+    RMAD_WP_DISABLE_RSU = 1;
+    RMAD_WP_DISABLE_PHYSICAL = 2;
+  }
+  DisableMethod disable_method = 1;
+}
+
+// Disable HWWP with an RSU unlock code.
+message WriteProtectDisableRsuState {
+  // Provided by daemon.
+  bool rsu_done = 1;
+  string challenge_code = 2;
+  string hwid = 3;
+  string challenge_url = 4;
+  // Provided by client.
+  string unlock_code = 5;
+}
+
+// Wait for tech to physically disable HWWP.
+message WriteProtectDisablePhysicalState {
+  // Provided by daemon.
+  // Inform the repair tech whether they need to keep the device open after
+  // disabling write protection.
+  bool keep_device_open = 1;
+}
+
+// Display confirmation that HWWP has been disabled.
+message WriteProtectDisableCompleteState {
+  enum Action {
+    RMAD_WP_DISABLE_UNKNOWN = 0;
+    RMAD_WP_DISABLE_SKIPPED_ASSEMBLE_DEVICE = 1;  // Deprecated.
+    RMAD_WP_DISABLE_COMPLETE_ASSEMBLE_DEVICE = 2;
+    RMAD_WP_DISABLE_COMPLETE_KEEP_DEVICE_OPEN = 3;
+    RMAD_WP_DISABLE_COMPLETE_NO_OP = 4;
+  }
+  // Provided by daemon.
+  // Deprecated.
+  bool keep_device_open = 1;
+  // Deprecated
+  bool wp_disable_skipped = 2;
+
+  Action action = 3;
+}
+
+// Select method to update firmware.
+message UpdateRoFirmwareState {
+  // TODO(chenghan): Deprecated. Remove it in the future.
+  enum UpdateFirmware {
+    RMAD_UPDATE_FIRMWARE_UNKNOWN = 0;
+    RMAD_UPDATE_FIRMWARE_DOWNLOAD = 1;
+    RMAD_UPDATE_FIRMWARE_RECOVERY_UTILITY = 2;
+    RMAD_UPDATE_SKIP = 3;
+  }
+  enum UpdateChoice {
+    RMAD_UPDATE_CHOICE_UNKNOWN = 0;
+    RMAD_UPDATE_CHOICE_CONTINUE = 1;
+    RMAD_UPDATE_CHOICE_SKIP = 2;
+  }
+
+  bool optional = 1;  // If optional is set true by rmad then skip is allowed.
+  UpdateFirmware update = 2;
+  UpdateChoice choice = 3;
+}
+
+// Pause RMA for restock.
+// This state pauses the RMA flow and asks if the device is ready to complete
+// RMA.
+// When the main board is used in another device RMA can be completed.
+message RestockState {
+  enum RestockChoice {
+    RMAD_RESTOCK_UNKNOWN = 0;
+    RMAD_RESTOCK_SHUTDOWN_AND_RESTOCK = 1;
+    RMAD_RESTOCK_CONTINUE_RMA = 2;
+  }
+  RestockChoice choice = 1;
+}
+
+// Allow device info to be updated if necessary.
+message UpdateDeviceInfoState {
+  // User provided serial number of device.
+  string serial_number = 1;
+  // Chosen region index for the current choice. See |region_list| below.
+  int32 region_index = 2;
+  // Chosen SKU index of device. See |sku_list| below.
+  int32 sku_index = 3;
+  // TODO(genechang): Deprecated due to go/coil, remove it in the future.
+  // Chosen whitelabel index of device. See |whitelabel_list| below.
+  int32 whitelabel_index = 4;
+  // User provided dram part number of device.
+  string dram_part_number = 5;
+  // Chosen custom-label index of device. See |custom_label_list| below.
+  int32 custom_label_index = 6;
+
+  // Read only data.
+  // List of all valid regions for this device.
+  repeated string region_list = 102;
+  // List of all valid skus for this device.
+  repeated uint64 sku_list = 103;
+  // TODO(genechang): Deprecated due to go/coil, remove it in the future.
+  // List of all valid whitelabel-tags for this device.
+  repeated string whitelabel_list = 104;
+  // List of all valid custom-label-tags for this device.
+  repeated string custom_label_list = 106;
+
+  // Serial number of device at beginning of RMA finalization.
+  string original_serial_number = 201;
+  // Region index of device at beginning of RMA finalization.
+  int32 original_region_index = 202;
+  // SKU index of device at beginning of RMA finalization.
+  int32 original_sku_index = 203;
+  // TODO(genechang): Deprecated due to go/coil, remove it in the future.
+  // WL index of device at beginning of RMA finalization.
+  int32 original_whitelabel_index = 204;
+  // DRAM part number of device at beginning of RMA finalization.
+  string original_dram_part_number = 205;
+  // Custom-label index of device at beginning of RMA finalization.
+  int32 original_custom_label_index = 206;
+
+  // MLB repair mode.
+  bool mlb_repair = 301;
+}
+
+// Calibration Component and status used in all calibration-related
+// states (CheckCalibration, SetupCalibration, RunCalibration).
+message CalibrationComponentStatus {
+  enum CalibrationStatus {
+    RMAD_CALIBRATION_UNKNOWN = 0;
+    RMAD_CALIBRATION_WAITING = 1;
+    RMAD_CALIBRATION_IN_PROGRESS = 2;
+    RMAD_CALIBRATION_COMPLETE = 3;
+    RMAD_CALIBRATION_FAILED = 4;
+    RMAD_CALIBRATION_SKIP = 5;
+    RMAD_CALIBRATION_GET_ORIGINAL_CALIBBIAS = 6;
+    RMAD_CALIBRATION_SENSOR_DATA_RECEIVED = 7;
+    RMAD_CALIBRATION_CALIBBIAS_CALCULATED = 8;
+    RMAD_CALIBRATION_CALIBBIAS_CACHED = 9;
+  }
+
+  RmadComponent component = 1;
+  CalibrationStatus status = 2;
+
+  // The progress of calibration.
+  // Waitting: 0.0, In progress: [0.0, 1.0),
+  // Complete: 1.0, Failed: -1.0, Skip: 1.0
+  double progress = 3;
+}
+
+message CheckCalibrationState {
+  repeated CalibrationComponentStatus components = 1;
+}
+
+// Wait for technician to setup device to be ready for calibration.
+message SetupCalibrationState {
+  CalibrationSetupInstruction instruction = 1;
+}
+
+// Wait for calibration.
+message RunCalibrationState {
+  CalibrationOverallStatus status = 1;
+}
+
+// Provision the device.
+message ProvisionDeviceState {
+  // TODO(chenghan): Deprecated, remove it in the future.
+  // Enum for ProvisioningProgress signal.
+  enum ProvisioningStep {
+    // TODO(gavindodd): Update with real provisioning steps.
+    RMAD_PROVISIONING_STEP_UNKNOWN = 0;
+    RMAD_PROVISIONING_STEP_IN_PROGRESS = 1;
+    RMAD_PROVISIONING_STEP_COMPLETE = 2;
+  }
+
+  enum ProvisionChoice {
+    RMAD_PROVISION_CHOICE_UNKNOWN = 0;
+    RMAD_PROVISION_CHOICE_CONTINUE = 1;
+    RMAD_PROVISION_CHOICE_RETRY = 2;
+  }
+  ProvisionChoice choice = 1;
+}
+
+// Allow the tech to re-enable HWWP after it was physically disabled.
+message WriteProtectEnablePhysicalState {
+  // No state. Waits for signal that write protection is re-enabled.
+}
+
+// Finalize the device into a shipping-ready state.
+message FinalizeState {
+  // TODO(chenghan): Deprecated. Remove it in the future.
+  enum ShutdownMethod {
+    RMAD_FINALIZE_UNKNOWN = 0;
+    RMAD_FINALIZE_REBOOT = 1;
+    RMAD_FINALIZE_SHUTDOWN = 2;
+    RMAD_FINALIZE_BATERY_CUTOFF = 3;
+  }
+  ShutdownMethod shutdown = 1;
+
+  enum FinalizeChoice {
+    RMAD_FINALIZE_CHOICE_UNKNOWN = 0;
+    RMAD_FINALIZE_CHOICE_CONTINUE = 1;
+    RMAD_FINALIZE_CHOICE_RETRY = 2;
+  }
+  FinalizeChoice choice = 2;
+}
+
+// RMA complete. Allow tech to choose how to shut down.
+message RepairCompleteState {
+  enum ShutdownMethod {
+    RMAD_REPAIR_COMPLETE_UNKNOWN = 0;
+    RMAD_REPAIR_COMPLETE_REBOOT = 1;
+    RMAD_REPAIR_COMPLETE_SHUTDOWN = 2;
+    RMAD_REPAIR_COMPLETE_BATTERY_CUTOFF = 3;
+  }
+  // Provided by client.
+  ShutdownMethod shutdown = 1;
+  // Provided by daemon.
+  bool powerwash_required = 2;
+}
+
+message RmadState {
+  oneof state {
+    WelcomeState welcome = 1;
+    ComponentsRepairState components_repair = 2;
+    DeviceDestinationState device_destination = 3;
+    WriteProtectDisableMethodState wp_disable_method = 4;
+    WriteProtectDisableRsuState wp_disable_rsu = 5;
+    // Deleted |VerifyRsuState|.
+    WriteProtectDisablePhysicalState wp_disable_physical = 7;
+    WriteProtectDisableCompleteState wp_disable_complete = 8;
+    UpdateRoFirmwareState update_ro_firmware = 9;
+    RestockState restock = 10;
+    UpdateDeviceInfoState update_device_info = 11;
+    CheckCalibrationState check_calibration = 12;
+    SetupCalibrationState setup_calibration = 13;
+    RunCalibrationState run_calibration = 14;
+    ProvisionDeviceState provision_device = 15;
+    WriteProtectEnablePhysicalState wp_enable_physical = 16;
+    FinalizeState finalize = 17;
+    RepairCompleteState repair_complete = 18;
+    WipeSelectionState wipe_selection = 19;
+  }
+}
+
+// Request from client to get next state.
+message TransitionNextStateRequest {
+  RmadState state = 1;
+}
+
+// Reply for GetCurrentState, GetNextState, GetPreviousState.
+message GetStateReply {
+  RmadErrorCode error = 1;
+  RmadState state = 2;
+  bool can_go_back = 3;
+  bool can_abort = 4;
+}
+
+// Reply for AbortRma.
+message AbortRmaReply {
+  RmadErrorCode error = 1;
+}
+
+// Reply for GetLog.
+message GetLogReply {
+  RmadErrorCode error = 1;
+  string log = 2;
+}
+
+// Reply for SaveLog
+message SaveLogReply {
+  RmadErrorCode error = 1;
+  string save_path = 2;
+}
+
+// Request from browser to record actions into metric.
+message RecordBrowserActionMetricRequest {
+  bool diagnostics = 1;
+  bool os_update = 2;
+}
+
+// Reply for BrowserActionMetric.
+message RecordBrowserActionMetricReply {
+  RmadErrorCode error = 1;
+}
+
+// Defined RO verification status for showing in metrics.
+// Keep this in sync with metrics/structured/structured.xml.
+enum RoVerificationStatus {
+  RMAD_RO_VERIFICATION_UNKNOWN = 0;
+  RMAD_RO_VERIFICATION_PASS = 1;
+  RMAD_RO_VERIFICATION_UNSUPPORTED = 2;
+  RMAD_RO_VERIFICATION_NOT_TRIGGERED = 3;
+  RMAD_RO_VERIFICATION_FAIL = 4;
+  RMAD_RO_VERIFICATION_UNSUPPORTED_NOT_TRIGGERED = 5;
+  RMAD_RO_VERIFICATION_UNSUPPORTED_TRIGGERED = 6;
+}
+
+// Defined returning owner for showing in metrics.
+// Keep this in sync with metrics/structured/structured.xml.
+enum ReturningOwner {
+  RMAD_RETURNING_OWNER_UNKNOWN = 0;
+  RMAD_RETURNING_OWNER_SAME_OWNER = 1;
+  RMAD_RETURNING_OWNER_DIFFERENT_OWNER = 2;
+}
+
+// Defined mainboard replacement status for showing in metrics.
+// Keep this in sync with metrics/structured/structured.xml.
+enum MainboardReplacement {
+  RMAD_MLB_REPLACEMENT_UNKNOWN = 0;
+  RMAD_MLB_REPLACEMENT_REPLACED = 1;
+  RMAD_MLB_REPLACEMENT_ORIGINAL = 2;
+}
+
+// Defined additional activities for showing in metrics.
+// Keep this in sync with metrics/structured/structured.xml.
+enum AdditionalActivity {
+  RMAD_ADDITIONAL_ACTIVITY_NOTHING = 0;
+  RMAD_ADDITIONAL_ACTIVITY_SHUTDOWN = 1;
+  RMAD_ADDITIONAL_ACTIVITY_REBOOT = 2;
+  RMAD_ADDITIONAL_ACTIVITY_BATTERY_CUTOFF = 3;
+  RMAD_ADDITIONAL_ACTIVITY_DIAGNOSTICS = 4;
+  RMAD_ADDITIONAL_ACTIVITY_OS_UPDATE = 5;
+}
+
+// Defined write protection methods for showing in metrics.
+// Keep this in sync with metrics/structured/structured.xml.
+enum WpDisableMethod {
+  RMAD_WP_DISABLE_METHOD_UNKNOWN = 0;
+  RMAD_WP_DISABLE_METHOD_SKIPPED = 1;
+  RMAD_WP_DISABLE_METHOD_RSU = 2;
+  RMAD_WP_DISABLE_METHOD_PHYSICAL_ASSEMBLE_DEVICE = 3;
+  RMAD_WP_DISABLE_METHOD_PHYSICAL_KEEP_DEVICE_OPEN = 4;
+}

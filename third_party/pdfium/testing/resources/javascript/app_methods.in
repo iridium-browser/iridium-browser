@@ -1,0 +1,99 @@
+{{header}}
+{{object 1 0}} <<
+  /Type /Catalog
+  /Pages 2 0 R
+  /OpenAction 10 0 R
+>>
+endobj
+{{object 2 0}} <<
+  /Type /Pages
+  /Count 1
+  /Kids [
+    3 0 R
+  ]
+>>
+endobj
+% Page number 0.
+{{object 3 0}} <<
+  /Type /Page
+  /Parent 2 0 R
+  /MediaBox [0 0 612 792]
+>>
+endobj
+% OpenAction action
+{{object 10 0}} <<
+  /Type /Action
+  /S /JavaScript
+  /JS 11 0 R
+>>
+endobj
+% JS program to execute
+{{object 11 0}} <<
+  {{streamlen}}
+>>
+stream
+{{include expect.js}}
+
+try {
+  // Test unicode support, no particular reason for these CJK characters.
+  expect("app.alert('message \u4023', 1, 2, 'title \u4024')", 0);
+  expect("app.alert({'cMsg': 'message', 'cTitle': 'title'})", 0);
+  expect("app.alert({'cMsg': 'message', 'cTitle': 'title', 'nIcon': 3, 'nType': 4})", 0);
+  expect("app.alert(undefined)", 0);
+  expect("app.alert(null)", 0);
+  expect("app.alert(true)", 0);
+  expect("app.alert(false)", 0);
+  expect("app.alert(42)", 0);
+  expect("app.alert([1, 2, 3])", 0);
+  expect("app.alert([1, 2, {'color': 'red'}])", 0);
+  expect("app.alert({'color': 'red'}, 5, 6, 'title')", 0);
+  expectError("app.alert()");
+  expectError("app.alert({})");
+  expectError("app.alert({'color': 'red', 'size': 42})");
+
+  expect("app.beep(1)", undefined);
+
+  expectError("app.browseForDoc()");
+  expect("app.execDialog()", undefined);
+  expectError("app.execMenuItem()");
+  expect("app.findComponent()", undefined);
+  expect("app.goBack()", undefined);
+  expect("app.goForward()", undefined);
+  expect("app.launchURL()", undefined);
+  expectError("app.newDoc()");
+  expect("app.newFDF()", undefined);
+  expectError("app.openDoc()");
+  expect("app.openFDF()", undefined);
+  expectError("app.popUpMenuEx()");
+  expectError("app.popUpMenu()");
+
+  expect("app.mailMsg(true)", undefined);
+  expect("app.mailMsg(false, 'user@example.com')", undefined);
+  expect("app.mailMsg(false, 'user@example.com', 'cc@example.com', " +
+         "'bcc@example.com', 'subject', 'body')", undefined);
+  expect("app.mailMsg({'bUI': true})", undefined);
+  expect("app.mailMsg({'bUI': false, 'cTo': 'user@example.com'})", undefined);
+  expect("app.mailMsg({'bUI': false, 'cTo': 'user@example.com', " +
+         "'cCc': 'cc@example.com', 'cBcc': 'bcc@example.com', " +
+         "'cSubject': 'subject', 'cMsg': 'body'})", undefined);
+  expectError("app.mailMsg()");
+  expectError("app.mailMsg(false)");
+  expectError("app.mailMsg({'color': 'red', 'size': 42})");
+
+  expect("app.response('question')", 'No');
+  expect("app.response('question', 'title', 'default', true, 'label')", 'No');
+  expect("app.response({'cQuestion': 'question'})", 'No');
+  expect("app.response({'cQuestion': 'question', 'cTitle': 'title', " +
+         "'cDefault': 'default', 'bPassword': true, 'cLabel': 'label'})", 'No');
+  expectError("app.response()");
+  expectError("app.response({})");
+
+} catch (e) {
+  app.alert('Truly unexpected error: ' + e);
+}
+endstream
+endobj
+{{xref}}
+{{trailer}}
+{{startxref}}
+%%EOF

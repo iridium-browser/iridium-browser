@@ -1,0 +1,18 @@
+# 80 ---------------------------------------------------------------------------
+# Somewhat more intelligent suffix comments.
+
+core_generated_interface_idl_files =
+    generated_webcore_testing_idl_files  # interfaces
+
+core_generated_interface_idl_files =
+    generated_webcore_testing_idl_files_and_some_more_longer  # stuff
+
+if (true) {
+  if (true) {
+    if (true) {
+      dllname =
+          "{{output_dir}}/{{target_output_name}}{{output_extension}}"  # e.g.
+                                                                       # foo.dll
+    }
+  }
+}

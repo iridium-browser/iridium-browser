@@ -1,0 +1,45 @@
+// Copyright 2023 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package power_manager;
+option go_package = "chromiumos/system_api/power_manager_proto";
+
+// Request to manually set the state of Battery Saver Mode.
+//
+// Sent from clients (such as Ash) to `powerd` in the `SetBatterySaverModeState`
+// D-Bus method call.
+message SetBatterySaverModeStateRequest {
+  // Desired state of battery saver mode.
+  optional bool enabled = 1;
+}
+
+// Details about the current state of battery saver mode.
+//
+// Returned by the `GetBatterySaverModeState` D-Bus method and the
+// `BatterySaverModeStateChanged` D-Bus signal.
+message BatterySaverModeState {
+  // The overall state of battery saver mode.
+  optional bool enabled = 1 [default = false];
+
+  // The cause of the change.
+  //
+  // This field is populated on signals when the state of BSM has changed. It is
+  // not populated for calls to the GetBatterySaverModeState method.
+  enum Cause {
+    // The cause is unspecified or unknown.
+    CAUSE_UNSPECIFIED = 0;
+
+    // BSM was manually enabled or disabled by the user.
+    CAUSE_USER_ENABLED = 1;
+    CAUSE_USER_DISABLED = 2;
+
+    // BSM state has been restored from a previous session/boot.
+    CAUSE_STATE_RESTORED = 3;
+  };
+  optional Cause cause = 2;
+}

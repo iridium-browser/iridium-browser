@@ -1,0 +1,51 @@
+# Names should be added to this file with this pattern:
+#
+# For individuals:
+#   Name <email address>
+#
+# For organizations:
+#   Organization <fnmatch pattern>
+#
+# See python fnmatch module documentation for more information.
+#
+# Please keep the list sorted.
+
+# BEGIN individuals section.
+Abdelkarim Sellamna <abdelkarim.se@gmail.com>
+Aleksei Skotnikov <fineaskotnikov@gmail.com>
+Antonio Gomes <tonikitoo@igalia.com>
+Chery Cherian <cherycherian@gmail.com>
+Claudio DeSouza <claudiomdsjr@gmail.com>
+Felix Kauselmann <licorn@gmail.com>
+GiWan Go <gogil@stealien.com>
+Huy Ngo <huyna89@gmail.com>
+Jiang Jiang <jiangj@opera.com>
+Ke Liu <stackexploit@gmail.com>
+Luật Nguyễn <manhluat93.php@gmail.com>
+Manuel Geißer <geisserml@gmail.com>
+Michael Doppler <m.doppler@gmail.com>
+Miklos Vajna <vmiklos@vmiklos.hu>
+Minh Trần <myoki.crystal@gmail.com>
+Peter Varga <pvarga@inf.u-szeged.hu>
+Ralf Sippl <ralf.sippl@gmail.com>
+Robert Collyer <rcollyer99@gmail.com>
+Ryan Wiley <wileyrr@gmail.com>
+Stephan Hartmann <stha09@googlemail.com>
+Tibor Dusnoki <tdusnoki@inf.u-szeged.hu>
+Wang Qing <wangqing-hf@loongson.cn>
+Zhuo Qingliang <zhuo.dev@gmail.com>
+# END individuals section.
+
+# BEGIN organizations section.
+Ada Logics Ltd. <*@adalogics.com>
+Collabora Ltd. <*@collabora.com>
+DocsCorp Pty Ltd. <*@docscorp.com>
+Dropbox <*@dropbox.com>
+Foxit Software Inc <*@foxitsoftware.com>
+Google Inc. <*@google.com>
+LG Electronics, Inc. <*@lge.com>
+Loongson Technology Corporation Limited. <*@loongson.cn>
+Microsoft <*@microsoft.com>
+PSPDFKit GmbH <*@pspdfkit.com>
+The Chromium Authors <*@chromium.org>
+# END organizations section.

@@ -1,0 +1,40 @@
+/*
+ * Copyright 2022 The Chromium Authors
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ *
+ * The default style sheet used for view transitions.
+ * See third_party/blink/renderer/core/view_transition/README.md for details
+ */
+
+@namespace "http://www.w3.org/1999/xhtml";
+
+html::view-transition {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  /* TODO(crbug.com/1417609): ::view-transition is not rendered in the top layer
+     per spec, but our implementation currently does. */
+  top-layer: browser !important;
+}
+
+html::view-transition-group(*) {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  pointer-events: auto;
+}
+
+::view-transition-image-pair(*) {
+  position: absolute;
+  inset: 0;
+}
+
+::view-transition-new(*),
+::view-transition-old(*) {
+  position: absolute;
+  inset-block-start: 0;
+  inline-size: 100%;
+  block-size: auto;
+}

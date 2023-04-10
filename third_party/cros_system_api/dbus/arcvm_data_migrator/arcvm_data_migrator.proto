@@ -1,0 +1,56 @@
+// Copyright 2022 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+// This file defines messages used by arc::data_migrator.
+package arc.data_migrator;
+
+// The message that is sent from Chrome with HasDataToMigrate call.
+message HasDataToMigrateRequest {
+  // Username of the login user.
+  string username = 1;
+}
+
+// The type of the migration destination.
+enum DataMigrationDestinationType {
+  // A disk image created by concierge (/home/root/<hash>/crosvm/YXJjdm0=.img).
+  CROSVM_DISK = 0;
+  // An LVM block device (/dev/mapper/vm/dmcrypt-<hash>-arcvm).
+  LVM_DEVICE = 1;
+}
+
+// The message that is sent from Chrome with StartMigration call.
+message StartMigrationRequest {
+  // Username of the login user.
+  string username = 1;
+
+  DataMigrationDestinationType destination_type = 2;
+}
+
+// Status code for the message DataMigrationProgress below.
+enum DataMigrationStatus {
+  // The migration completed successfully.
+  DATA_MIGRATION_SUCCESS = 0;
+  // The migration was terminated with a failure.
+  DATA_MIGRATION_FAILED = 1;
+  // The migration is in progress.
+  DATA_MIGRATION_IN_PROGRESS = 2;
+}
+
+// The message that comes with DataMigrationProgress signal.
+message DataMigrationProgress {
+  // The status of the migration.
+  DataMigrationStatus status = 1;
+
+  // The amount of bytes that we've migrated over. This field is
+  // undefined when |status| is not DATA_MIGRATION_IN_PROGRESS.
+  uint64 current_bytes = 2;
+
+  // The total amount of bytes that need to be migrated, including what
+  // has been migrated. This field is undefined when |status| is not
+  // DATA_MIGRATION_IN_PROGRESS.
+  uint64 total_bytes = 3;
+}

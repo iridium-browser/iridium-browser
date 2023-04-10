@@ -1,0 +1,189 @@
+# Copyright 2018 The Dawn Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../../scripts/dawn_overrides_with_defaults.gni")
+
+import("//build_overrides/build.gni")
+import("${dawn_root}/scripts/dawn_features.gni")
+import("${dawn_root}/src/dawn/fuzzers/dawn_fuzzers.gni")
+
+# We only have libfuzzer in Chromium builds but if we build fuzzer targets only
+# there, we would risk breaking fuzzer targets all the time when making changes
+# to Dawn. To avoid that, we make fuzzer targets compile in standalone builds
+# as well with a dawn_fuzzer_test target that acts like Chromium's fuzzer_test.
+#
+# The standalone fuzzer targets are able to run a single fuzzer input which
+# could help reproduce fuzzer crashes more easily because you don't need a
+# whole Chromium checkout.
+
+if (build_with_chromium) {
+  import("//testing/libfuzzer/fuzzer_test.gni")
+
+  # In Chromium build we just proxy everything to the real fuzzer_test
+  template("dawn_fuzzer_test") {
+    fuzzer_test(target_name) {
+      forward_variables_from(invoker, "*")
+    }
+  }
+} else {
+  import("//testing/test.gni")
+
+  # In standalone build we do something similar to fuzzer_test.
+  template("dawn_fuzzer_test") {
+    test(target_name) {
+      forward_variables_from(invoker,
+                             [
+                               "asan_options",
+                               "cflags",
+                               "cflags_cc",
+                               "check_includes",
+                               "defines",
+                               "deps",
+                               "include_dirs",
+                               "sources",
+                             ])
+
+      if (defined(asan_options)) {
+        not_needed([ "asan_options" ])
+      }
+
+      if (!defined(configs)) {
+        configs = []
+      }
+
+      # Weirdly fuzzer_test uses a special variable for additional configs.
+      if (defined(invoker.additional_configs)) {
+        configs += invoker.additional_configs
+      }
+
+      sources += [ "StandaloneFuzzerMain.cpp" ]
+    }
+  }
+}
+
+static_library("dawn_wire_server_fuzzer_common") {
+  sources = [
+    "DawnWireServerFuzzer.cpp",
+    "DawnWireServerFuzzer.h",
+  ]
+  public_deps = [
+    "${dawn_root}/src/dawn:cpp",
+    "${dawn_root}/src/dawn:proc",
+    "${dawn_root}/src/dawn/common",
+    "${dawn_root}/src/dawn/native:static",
+    "${dawn_root}/src/dawn/utils",
+    "${dawn_root}/src/dawn/wire:static",
+  ]
+}
+
+dawn_fuzzer_test("dawn_wire_server_and_frontend_fuzzer") {
+  sources = [ "DawnWireServerAndFrontendFuzzer.cpp" ]
+
+  deps = [ ":dawn_wire_server_fuzzer_common" ]
+
+  additional_configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
+}
+
+if (is_win) {
+  dawn_fuzzer_test("dawn_wire_server_and_d3d12_backend_fuzzer") {
+    sources = [ "DawnWireServerAndD3D12BackendFuzzer.cpp" ]
+
+    deps = [ ":dawn_wire_server_fuzzer_common" ]
+
+    additional_configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
+  }
+}
+
+dawn_fuzzer_test("dawn_wire_server_and_vulkan_backend_fuzzer") {
+  sources = [ "DawnWireServerAndVulkanBackendFuzzer.cpp" ]
+
+  deps = [ ":dawn_wire_server_fuzzer_common" ]
+
+  additional_configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
+}
+
+if (is_dawn_lpm_fuzzer && build_with_chromium && dawn_use_swiftshader) {
+  import("//third_party/protobuf/proto_library.gni")
+  import("${dawn_root}/generator/dawn_generator.gni")
+
+  dawn_json_lpm_generator("dawn_lpmfuzz_cpp") {
+    target = "dawn_lpmfuzz_cpp"
+    outputs = [
+      "src/dawn/fuzzers/lpmfuzz/DawnLPMSerializer_autogen.cpp",
+      "src/dawn/fuzzers/lpmfuzz/DawnLPMSerializer_autogen.h",
+    ]
+  }
+
+  dawn_json_lpm_generator("dawn_lpmfuzz_proto") {
+    target = "dawn_lpmfuzz_proto"
+    outputs = [ "src/dawn/fuzzers/lpmfuzz/dawn_lpm_autogen.proto" ]
+  }
+
+  proto_library("dawn_lpm_proto") {
+    proto_in_dir = "//"
+    sources = get_target_outputs(":dawn_lpmfuzz_proto")
+
+    use_protobuf_full = true
+    deps = [
+      ":dawn_lpmfuzz_proto",
+      "//third_party/protobuf:protobuf_full",
+    ]
+  }
+
+  copy("copy_dawn_lpm_proto_outputs") {
+    # Hardcoded filenames because we can't get_target_outputs from a proto_library
+    # TODO(tiszka): crbug.com/1410213
+    sources = [
+      "$root_out_dir/gen/$root_out_dir/gen/third_party/dawn/src/dawn/fuzzers/lpmfuzz/dawn_lpm_autogen.pb.cc",
+      "$root_out_dir/gen/$root_out_dir/gen/third_party/dawn/src/dawn/fuzzers/lpmfuzz/dawn_lpm_autogen.pb.h",
+    ]
+    outputs = [ "$root_out_dir/gen/third_party/dawn/src/dawn/fuzzers/lpmfuzz/{{source_file_part}}" ]
+    deps = [ ":dawn_lpm_proto" ]
+  }
+
+  dawn_fuzzer_test("dawn_lpm_fuzzer_and_vulkan_backend") {
+    sources = get_target_outputs(":dawn_lpmfuzz_cpp")
+    sources += [
+      "lpmfuzz/DawnLPMFuzzer.cpp",
+      "lpmfuzz/DawnLPMFuzzer.h",
+      "lpmfuzz/DawnLPMFuzzerAndVulkanBackend.cpp",
+    ]
+
+    deps = [
+      ":copy_dawn_lpm_proto_outputs",
+      ":dawn_lpmfuzz_cpp",
+      "${dawn_root}/src/dawn:cpp",
+      "${dawn_root}/src/dawn:proc",
+      "${dawn_root}/src/dawn/common",
+      "${dawn_root}/src/dawn/native:static",
+      "${dawn_root}/src/dawn/utils",
+      "${dawn_root}/src/dawn/wire:static",
+      "//third_party/dawn/src/dawn/fuzzers:dawn_lpm_proto",
+      "//third_party/libprotobuf-mutator",
+    ]
+  }
+}
+
+# A group target to build all the fuzzers
+group("fuzzers") {
+  testonly = true
+  deps = [
+    ":dawn_wire_server_and_frontend_fuzzer",
+    ":dawn_wire_server_and_vulkan_backend_fuzzer",
+  ]
+
+  if (is_win) {
+    deps += [ ":dawn_wire_server_and_d3d12_backend_fuzzer" ]
+  }
+}

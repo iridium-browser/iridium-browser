@@ -1,0 +1,41 @@
+{
+    "repos": [
+        {
+            "name": "shaderc",
+            "url": "https://github.com/google/shaderc.git",
+            "sub_dir": "shaderc",
+            "commit": "69aead488f9761c3bf478deda5999549ffec2c28"
+        },
+        {
+            "name": "glslang",
+            "url": "https://github.com/KhronosGroup/glslang.git",
+            "sub_dir": "shaderc/third_party/glslang",
+            "commit": "ca8d07d0bc1c6390b83915700439fa7719de6a2a"
+        },
+        {
+            "name": "Vulkan-Headers",
+            "url": "https://github.com/KhronosGroup/Vulkan-Headers.git",
+            "sub_dir": "Vulkan-Headers",
+            "commit": "v1.3.240"
+        },
+        {
+            "name": "SPIRV-Tools",
+            "url": "https://github.com/KhronosGroup/SPIRV-Tools.git",
+            "sub_dir": "shaderc/third_party/spirv-tools",
+            "commit": "63de608daeb7e91fbea6d7477a50debe7cac57ce"
+        },
+        {
+            "name": "SPIRV-Headers",
+            "url": "https://github.com/KhronosGroup/SPIRV-Headers.git",
+            "sub_dir": "shaderc/third_party/spirv-tools/external/spirv-headers",
+            "commit": "d13b52222c39a7e9a401b44646f0ca3a640fbd47"
+        },
+        {
+            "name": "robin-hood-hashing",
+            "url": "https://github.com/martinus/robin-hood-hashing.git",
+            "sub_dir": "robin-hood-hashing",
+            "build_step": "skip",
+            "commit": "3.11.5"
+        }
+    ]
+}

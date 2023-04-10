@@ -1,0 +1,11 @@
+// Copyright 2017 The PDFium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#include "xfa/fxfa/formcalc/cxfa_fmtojavascriptdepth.h"
+
+unsigned long CXFA_FMToJavaScriptDepth::depth_ = 0;
+
+void CXFA_FMToJavaScriptDepth::Reset() {
+  depth_ = 0;
+}

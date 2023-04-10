@@ -1,0 +1,208 @@
+# Copyright (c) 2021-2023 Valve Corporation
+# Copyright (c) 2021-2023 LunarG, Inc.
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Author: Lenny Komow <lenny@lunarg.com>
+
+name: CI Build
+
+on:
+    push:
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    linux:
+        runs-on: ${{matrix.os}}
+
+        strategy:
+            matrix:
+                cc: [ gcc, clang ]
+                cxx: [ g++, clang++ ]
+                config: [ Debug, Release ]
+                os: [ ubuntu-18.04, ubuntu-20.04 ]
+                exclude:
+                    - cc: gcc
+                      cxx: clang++
+                    - cc: clang
+                      cxx: g++
+
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-python@v3
+              with:
+                python-version: '3.7'
+            - uses: lukka/get-cmake@latest
+              with:
+                cmakeVersion: 3.17.2
+            - run: sudo apt update
+            - name: Install Dependencies
+              run: sudo apt install --yes --no-install-recommends libwayland-dev libxrandr-dev
+
+            - name: Generate build files
+              run: cmake -S. -B build -D CMAKE_BUILD_TYPE=${{matrix.config}} -D BUILD_TESTS=ON -D UPDATE_DEPS=ON -D TEST_USE_ADDRESS_SANITIZER=ON
+              env:
+                CC: ${{matrix.cc}}
+                CXX: ${{matrix.cxx}}
+
+            - name: Build the loader
+              run: cmake --build build
+
+            - name: Run regression tests
+              working-directory: ./build
+              run: ctest --output-on-failure
+
+            - name: Verify generated source files
+              run: python scripts/generate_source.py --verify external/Vulkan-Headers/registry
+
+            - name: Verify code formatting with clang-format
+              run: ./scripts/check_code_format.sh
+
+            - name: Verify commit message formatting
+              run: ./scripts/check_commit_message_format.sh
+
+    linux-32:
+        runs-on: ${{matrix.os}}
+
+        strategy:
+            matrix:
+                cc: [ gcc, clang ]
+                cxx: [ g++, clang++ ]
+                config: [ Debug, Release ]
+                os: [ ubuntu-18.04, ubuntu-20.04 ]
+                exclude:
+                    - cc: gcc
+                      cxx: clang++
+                    - cc: clang
+                      cxx: g++
+
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-python@v3
+              with:
+                python-version: '3.7'
+            - uses: lukka/get-cmake@latest
+              with:
+                cmakeVersion: 3.17.2
+            - name: Install Dependencies
+              run: |-
+                sudo dpkg --add-architecture i386
+                sudo apt-get update
+                sudo apt install --yes --no-install-recommends gcc-multilib g++-multilib libc6-dev-i386 pkg-config-i686-linux-gnu libwayland-dev:i386 libxrandr-dev:i386
+            - name: Generate build files
+              run: cmake -S. -B build -D CMAKE_BUILD_TYPE=${{matrix.config}} -D BUILD_TESTS=ON -D UPDATE_DEPS=ON
+              env:
+                CFLAGS: -m32
+                CXXFLAGS: -m32
+                LDFLAGS: -m32
+                ASFLAGS: --32
+
+            - name: Build the loader
+              run: cmake --build build
+
+            - name: Run regression tests
+              working-directory: ./build
+              run: ctest --output-on-failure
+
+    windows:
+        runs-on: ${{matrix.os}}
+
+        strategy:
+            matrix:
+                arch: [ Win32, x64 ]
+                config: [ Debug, Release ]
+                os: [ windows-latest ]
+
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-python@v3
+              with:
+                python-version: '3.7'
+
+            - name: Generate build files
+              run: cmake -S. -Bbuild -A${{matrix.arch}} -DBUILD_TESTS=ON -DUPDATE_DEPS=ON
+
+            - name: Build the loader
+              run: cmake --build ./build --config ${{matrix.config}}
+
+            - name: Run regression tests
+              working-directory: ./build
+              run: ctest --output-on-failure
+
+            - name: Verify generated source files
+              run: python scripts/generate_source.py --verify external/Vulkan-Headers/registry
+
+    mac:
+        runs-on: ${{matrix.os}}
+
+        strategy:
+            matrix:
+                config: [ Debug, Release ]
+                os: [ macos-11, macos-latest ]
+                static_build: [ BUILD_STATIC_LOADER=ON, BUILD_STATIC_LOADER=OFF ]
+                exclude:
+                  - os: macos-latest
+                    static_build: BUILD_STATIC_LOADER=ON
+                  - config: Debug
+                    os: macos-11
+                    static_build: BUILD_STATIC_LOADER=ON
+
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-python@v3
+              with:
+                python-version: '3.7'
+            - uses: lukka/get-cmake@latest
+            - name: Generate build files
+              run: cmake -S. -B build -DCMAKE_BUILD_TYPE=${{matrix.config}} -D${{matrix.static_build}} -DBUILD_TESTS=ON -DUPDATE_DEPS=ON -DTEST_USE_ADDRESS_SANITIZER=ON -G "Ninja"
+              env:
+                # Specify the minimum version of macOS on which the target binaries are to be deployed.
+                # https://cmake.org/cmake/help/latest/envvar/MACOSX_DEPLOYMENT_TARGET.html
+                MACOSX_DEPLOYMENT_TARGET: 10.12
+
+            - name: Build the loader
+              run: cmake --build build
+
+            - name: Run regression tests
+              working-directory: ./build
+              run: ctest --output-on-failure
+
+    gn:
+        runs-on: ubuntu-20.04
+
+        strategy:
+            matrix:
+                config: [ Debug, Release ]
+
+        steps:
+            - uses: actions/checkout@v3
+            - name: Get depot tools
+              run: |
+                git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git depot_tools
+                echo "$GITHUB_WORKSPACE/depot_tools" >> $GITHUB_PATH
+
+            - name: Fetch and install headers
+              run: ./build-gn/update_deps.sh
+
+            - name: Generate build files
+              run: gn gen out/${{matrix.config}} --args="is_debug=true"
+              if: matrix.config != 'Release'
+
+            - name: Generate build files
+              run: gn gen out/${{matrix.config}} --args="is_debug=false"
+              if: matrix.config == 'Release'
+
+            - name: Build the loader
+              run: ninja -C out/${{matrix.config}}

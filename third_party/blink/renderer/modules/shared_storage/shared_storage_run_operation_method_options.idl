@@ -1,0 +1,4 @@
+dictionary SharedStorageRunOperationMethodOptions {
+  object data;
+  boolean resolveToConfig = false;
+};

@@ -1,0 +1,32 @@
+<style>
+  .spacing {
+    margin-inline-end: 8px;
+  }
+
+  #text-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .parts-container {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  iron-icon {
+    --iron-icon-width: 16px;
+  }
+</style>
+
+<div class="container">
+  <!-- This element's innerHTML is dynamically set based on its text
+  accelerator parts. -->
+  <div id="text-wrapper">
+    <div class="parts-container"></div>
+    <div hidden="[[!shouldShowLockIcon()]]">
+      <iron-icon id="lock" icon="shortcut-customization:lock"></iron-icon>
+    </div>
+  </div>
+</div>

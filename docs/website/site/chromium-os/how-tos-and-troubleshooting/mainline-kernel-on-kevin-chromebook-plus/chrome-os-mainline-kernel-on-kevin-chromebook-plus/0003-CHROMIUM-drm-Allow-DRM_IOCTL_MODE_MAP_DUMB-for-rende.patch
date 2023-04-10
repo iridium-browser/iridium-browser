@@ -1,0 +1,58 @@
+From 141a15fc03d2beb803d581d55dad38570d38512a Mon Sep 17 00:00:00 2001
+From: Tomasz Figa <tfiga@chromium.org>
+Date: Tue, 28 Jun 2016 19:54:24 +0900
+Subject: [PATCH 3/8] CHROMIUM: drm: Allow DRM_IOCTL_MODE_MAP_DUMB for render
+ nodes
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+There is no particular reason to prevent userspace for using this IOCTL,
+considering that it already has access to other, platform-specific
+IOCTLs. This patch makes is possible to have the same userspace code
+work regardless on the underlying platform, which significantly
+simplifies the stack.
+
+BUG=chromium:795946
+TEST=Get a little farther
+
+Signed-off-by: Tomasz Figa <tfiga@chromium.org>
+Reviewed-on: https://chromium-review.googlesource.com/356621
+Reviewed-by: Zach Reizner <zachr@chromium.org>
+(cherry picked from commit fbc6b01ff8377e566db1ed8f61487d7ec48f5ce3)
+
+Change-Id: If0c6ef066d3828830c4db4fd42e2a6beb8948a6c
+Signed-off-by: Nicolas Norvez <norvez@chromium.org>
+Reviewed-on: https://chromium-review.googlesource.com/378956
+Reviewed-by: Tomasz Figa <tfiga@chromium.org>
+Signed-off-by: Douglas Anderson <dianders@chromium.org>
+(cherry picked from commit 44237f0ce2a56e955e342a725793105027dbee49)
+Reviewed-on: https://chromium-review.googlesource.com/896229
+Reviewed-by: Stéphane Marchesin <marcheu@chromium.org>
+
+[rebase419(groeck): Context conflicts]
+Signed-off-by: Guenter Roeck <linux@roeck-us.net>
+[tfiga: Rebase onto Linux 4.20]
+Signed-off-by: Tomasz Figa <tfiga@chromium.org>
+---
+ drivers/gpu/drm/drm_ioctl.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/drm_ioctl.c b/drivers/gpu/drm/drm_ioctl.c
+index 22a6c32e4039a8..f239fe5679bc31 100644
+--- a/drivers/gpu/drm/drm_ioctl.c
++++ b/drivers/gpu/drm/drm_ioctl.c
+@@ -655,8 +655,8 @@ static const struct drm_ioctl_desc drm_ioctls[] = {
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_RMFB, drm_mode_rmfb_ioctl, DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_PAGE_FLIP, drm_mode_page_flip_ioctl, DRM_MASTER|DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_DIRTYFB, drm_mode_dirtyfb_ioctl, DRM_MASTER|DRM_UNLOCKED),
+-	DRM_IOCTL_DEF(DRM_IOCTL_MODE_CREATE_DUMB, drm_mode_create_dumb_ioctl, DRM_UNLOCKED),
+-	DRM_IOCTL_DEF(DRM_IOCTL_MODE_MAP_DUMB, drm_mode_mmap_dumb_ioctl, DRM_UNLOCKED),
++	DRM_IOCTL_DEF(DRM_IOCTL_MODE_CREATE_DUMB, drm_mode_create_dumb_ioctl, DRM_UNLOCKED|DRM_RENDER_ALLOW),
++	DRM_IOCTL_DEF(DRM_IOCTL_MODE_MAP_DUMB, drm_mode_mmap_dumb_ioctl, DRM_UNLOCKED|DRM_RENDER_ALLOW),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_DESTROY_DUMB, drm_mode_destroy_dumb_ioctl, DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_OBJ_GETPROPERTIES, drm_mode_obj_get_properties_ioctl, DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_OBJ_SETPROPERTY, drm_mode_obj_set_property_ioctl, DRM_MASTER|DRM_UNLOCKED),
+-- 
+2.20.0.rc2.403.gdbc3b29805-goog
+

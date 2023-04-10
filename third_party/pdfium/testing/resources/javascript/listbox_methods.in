@@ -1,0 +1,172 @@
+{{header}}
+{{include field.fragment}}
+{{object 16 0}} <<
+  {{streamlen}}
+>>
+stream
+
+function getFieldValue(name) {
+  try {
+    var field = this.getField(name);
+    var v = field.value;
+    app.alert('Value is: ' + typeof(v) + ' ' + v);
+  } catch (e) {
+    app.alert('For getField(' + name + ') ERROR: ' + e);
+  }
+}
+
+function testField(name, x) {
+  try {
+    var field = this.getField(name);
+    field.value = x;
+    var y = field.value;
+    app.alert('Answer for "' + x + '" is: ' + typeof(y) + ' ' + y);
+  } catch (e) {
+    app.alert('For testField(' + x + ') ERROR: ' + e);
+  }
+}
+
+getFieldValue('MyField.MySingleSelect');
+
+// Valid cases
+testField('MyField.MySingleSelect', 'foo');
+testField('MyField.MySingleSelect', 'bar');
+testField('MyField.MySingleSelect', 'qux');
+testField('MyField.MySingleSelect', ['bar']);
+testField('MyField.MySingleSelect', ['qux']);
+
+getFieldValue('MyField.MySingleSelect');
+
+// Invalid cases
+testField('MyField.MySingleSelect', '');
+testField('MyField.MySingleSelect', 'goats');
+testField('MyField.MySingleSelect', 'b4');
+testField('MyField.MySingleSelect', 'b4.5');
+testField('MyField.MySingleSelect', '4x');
+testField('MyField.MySingleSelect', '4.5x');
+testField('MyField.MySingleSelect', 4);
+testField('MyField.MySingleSelect', '4');
+testField('MyField.MySingleSelect', ' 4');
+testField('MyField.MySingleSelect', '4 ');
+testField('MyField.MySingleSelect', '                          4                                      ');
+testField('MyField.MySingleSelect', '4 3 2 1');
+testField('MyField.MySingleSelect', '-4');
+testField('MyField.MySingleSelect', '23.00000001');
+testField('MyField.MySingleSelect', '23.00000000000000001');
+testField('MyField.MySingleSelect', 40000000000000000000000000);
+testField('MyField.MySingleSelect', '40000000000000000000000000');
+testField('MyField.MySingleSelect', '25,5');
+testField('MyField.MySingleSelect', '1e+5');
+testField('MyField.MySingleSelect', '1e5');
+testField('MyField.MySingleSelect', '1e-5');
+testField('MyField.MySingleSelect', '-1e-5');
+testField('MyField.MySingleSelect', '1.2e5');
+testField('MyField.MySingleSelect', Infinity);
+testField('MyField.MySingleSelect', 'Infinity');
+testField('MyField.MySingleSelect', 'INFINITY');
+testField('MyField.MySingleSelect', 'INF');
+testField('MyField.MySingleSelect', NaN);
+testField('MyField.MySingleSelect', 'NaN');
+testField('MyField.MySingleSelect', 'NAN');
+testField('MyField.MySingleSelect', '0x100');
+testField('MyField.MySingleSelect', '0x100.1');
+testField('MyField.MySingleSelect', '0x100,1');
+testField('MyField.MySingleSelect', '0x100x1');
+testField('MyField.MySingleSelect', '123x6');
+testField('MyField.MySingleSelect', '123xy6');
+testField('MyField.MySingleSelect', '123.y6');
+testField('MyField.MySingleSelect', '1,000,000');
+testField('MyField.MySingleSelect', '1.2.3');
+testField('MyField.MySingleSelect', '1-3');
+testField('MyField.MySingleSelect', '1+3');
+testField('MyField.MySingleSelect', '1.-3');
+testField('MyField.MySingleSelect', '1.+3');
+testField('MyField.MySingleSelect', [1, 2, 3, 4]);
+testField('MyField.MySingleSelect', '[1, 2, 3, 4]');
+testField('MyField.MySingleSelect', {a: 1, b: 2});
+testField('MyField.MySingleSelect', '{a: 1, b: 2}');
+testField('MyField.MySingleSelect', function(x) { return x+1; });
+testField('MyField.MySingleSelect', 'function(x) { return x+1; }');
+testField('MyField.MySingleSelect', 'Foo');
+testField('MyField.MySingleSelect', 'Bar');
+testField('MyField.MySingleSelect', 'Qux');
+testField('MyField.MySingleSelect', ['bar', 'qux']);
+testField('MyField.MySingleSelect', ['foo', 1]);
+
+getFieldValue('MyField.MySingleSelect');
+
+getFieldValue('MyField.MyMultiSelect');
+
+// Valid cases
+testField('MyField.MyMultiSelect', 'foo');
+testField('MyField.MyMultiSelect', 'bar');
+testField('MyField.MyMultiSelect', 'qux');
+testField('MyField.MyMultiSelect', ['bar']);
+testField('MyField.MyMultiSelect', ['bar', 'qux']);
+testField('MyField.MyMultiSelect', [1, 2, 3, 4]);
+testField('MyField.MyMultiSelect', ['foo', 1]);
+testField('MyField.MyMultiSelect', ['qux']);
+
+getFieldValue('MyField.MyMultiSelect');
+
+// Invalid cases
+testField('MyField.MyMultiSelect', '');
+testField('MyField.MyMultiSelect', 'goats');
+testField('MyField.MyMultiSelect', 'b4');
+testField('MyField.MyMultiSelect', 'b4.5');
+testField('MyField.MyMultiSelect', '4x');
+testField('MyField.MyMultiSelect', '4.5x');
+testField('MyField.MyMultiSelect', 4);
+testField('MyField.MyMultiSelect', '4');
+testField('MyField.MyMultiSelect', ' 4');
+testField('MyField.MyMultiSelect', '4 ');
+testField('MyField.MyMultiSelect', '                          4                                      ');
+testField('MyField.MyMultiSelect', '4 3 2 1');
+testField('MyField.MyMultiSelect', '-4');
+testField('MyField.MyMultiSelect', '23.00000001');
+testField('MyField.MyMultiSelect', '23.00000000000000001');
+testField('MyField.MyMultiSelect', 40000000000000000000000000);
+testField('MyField.MyMultiSelect', '40000000000000000000000000');
+testField('MyField.MyMultiSelect', '25,5');
+testField('MyField.MyMultiSelect', '1e+5');
+testField('MyField.MyMultiSelect', '1e5');
+testField('MyField.MyMultiSelect', '1e-5');
+testField('MyField.MyMultiSelect', '-1e-5');
+testField('MyField.MyMultiSelect', '1.2e5');
+testField('MyField.MyMultiSelect', Infinity);
+testField('MyField.MyMultiSelect', 'Infinity');
+testField('MyField.MyMultiSelect', 'INFINITY');
+testField('MyField.MyMultiSelect', 'INF');
+testField('MyField.MyMultiSelect', NaN);
+testField('MyField.MyMultiSelect', 'NaN');
+testField('MyField.MyMultiSelect', 'NAN');
+testField('MyField.MyMultiSelect', '0x100');
+testField('MyField.MyMultiSelect', '0x100.1');
+testField('MyField.MyMultiSelect', '0x100,1');
+testField('MyField.MyMultiSelect', '0x100x1');
+testField('MyField.MyMultiSelect', '123x6');
+testField('MyField.MyMultiSelect', '123xy6');
+testField('MyField.MyMultiSelect', '123.y6');
+testField('MyField.MyMultiSelect', '1,000,000');
+testField('MyField.MyMultiSelect', '1.2.3');
+testField('MyField.MyMultiSelect', '1-3');
+testField('MyField.MyMultiSelect', '1+3');
+testField('MyField.MyMultiSelect', '1.-3');
+testField('MyField.MyMultiSelect', '1.+3');
+testField('MyField.MyMultiSelect', '[1, 2, 3, 4]');
+testField('MyField.MyMultiSelect', {a: 1, b: 2});
+testField('MyField.MyMultiSelect', '{a: 1, b: 2}');
+testField('MyField.MyMultiSelect', function(x) { return x+1; });
+testField('MyField.MyMultiSelect', 'function(x) { return x+1; }');
+testField('MyField.MyMultiSelect', 'Foo');
+testField('MyField.MyMultiSelect', 'Bar');
+testField('MyField.MyMultiSelect', 'Qux');
+
+getFieldValue('MyField.MyMultiSelect');
+
+endstream
+endobj
+{{xref}}
+{{trailer}}
+{{startxref}}
+%%EOF

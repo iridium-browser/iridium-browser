@@ -1,0 +1,28 @@
+<style include="cr-icons cr-hidden-style">
+  iron-icon {
+    --icon-size: 16px;
+    height: var(--icon-size);
+    width: var(--icon-size);
+  }
+
+  .dropdown-item {
+    justify-content: space-between;
+  }
+</style>
+
+<cr-action-menu id="menu">
+  <template is="dom-repeat"
+      items="[[getMenuItemsForBookmarks_(
+                   bookmarks_, priceTracked_, priceTrackingEligible_)]]">
+    <template is="dom-if" if="[[!showDivider_(item)]]" restamp>
+      <button class="dropdown-item" on-click="onMenuItemClicked_">
+        [[item.label]]
+        <iron-icon icon="[[item.trailingIcon]]"
+            hidden="[[!item.trailingIcon]]"></iron-icon>
+      </button>
+    </template>
+    <template is="dom-if" if="[[showDivider_(item)]]" restamp>
+      <hr>
+    </template>
+  </template>
+</cr-action-menu>

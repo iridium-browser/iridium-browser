@@ -1,0 +1,48 @@
+name: Run sanitizer checks
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths:
+      - '**.h'
+      - '**.c'
+
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build with ${{ matrix.sanitizer }} sanitizer for ${{ matrix.ucs }}
+    strategy:
+      matrix:
+        ucs: [ucs2, ucs4]
+        sanitizer: [address, leak, undefined]
+        include:
+          - sanitizer: "address"
+            options: "ASAN_OPTIONS=detect_leaks=0"
+          - sanitizer: "leak"
+            options: "LSAN_OPTIONS=fast_unwind_on_malloc=0"
+          - sanitizer: "undefined"
+            options: "UBSAN_OPTIONS=halt_on_error=1"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev
+      - name: Autogen
+        run: ./autogen.sh
+      - name: Configure
+        run: CFLAGS="-fsanitize=${{ matrix.sanitizer }} -g" ./configure
+        if: matrix.ucs == 'ucs2'
+      - name: Configure with ucs4
+        run: CFLAGS="-fsanitize=${{ matrix.sanitizer }} -g" ./configure --enable-ucs4
+        if: matrix.ucs == 'ucs4'
+      - name: Make check
+        run: ${{ matrix.options }} make check
+      - name: Store the test suite log
+        if: ${{ always() }} # store the test suite log even if the tests failed
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-suite-${{ matrix.ucs }}-${{ matrix.sanitizer }}.log
+          path: tests/test-suite.log

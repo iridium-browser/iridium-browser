@@ -1,0 +1,56 @@
+// Copyright 2017 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package biod;
+
+// Included in FingerprintMessage.
+// Android codes end at 1000. Everything above is intended to be used for
+// returning vendor specific codes. Chrome OS specific codes start from
+// 10000.
+enum FingerprintError {
+  // Android API:
+  // https://cs.android.com/android/platform/superproject/+/master:hardware/libhardware/include/hardware/fingerprint.h;l=48;drc=1ae7379baab4b2941ad1701190718cf53a051b48
+  ERROR_HW_UNAVAILABLE =
+      1;  // The hardware has an error that can't be resolved.
+  ERROR_UNABLE_TO_PROCESS = 2;  // Bad data; operation can't continue.
+  ERROR_TIMEOUT = 3;   // The operation has timed out waiting for user input.
+  ERROR_NO_SPACE = 4;  // No space available to store a template.
+  ERROR_CANCELED = 5;  // The current operation can't proceed.
+  ERROR_UNABLE_TO_REMOVE = 6;  // Fingerprint with given id can't be removed.
+  ERROR_LOCKOUT =
+      7;  // Fingerprint hardware is locked due to too many attempts.
+
+  // Chrome OS specific error codes.
+  ERROR_NO_TEMPLATES = 10000;  // Fingerprint hardware contains no templates.
+}
+
+// Included in biod's EnrollScanDone signal and FingerprintMessage.
+// Android codes end at 1000. Everything above is intended to be used for
+// returning vendor specific codes. Chrome OS specific codes start from
+// 10000.
+enum ScanResult {
+  // Android API:
+  // https://cs.android.com/android/platform/superproject/+/master:hardware/libhardware/include/hardware/fingerprint.h;l=67;drc=1ae7379baab4b2941ad1701190718cf53a051b48
+  SCAN_RESULT_SUCCESS = 0;
+  SCAN_RESULT_PARTIAL = 1;       // Sensor needs more data.
+  SCAN_RESULT_INSUFFICIENT = 2;  // Image doesn't contain enough details.
+  SCAN_RESULT_SENSOR_DIRTY = 3;  // Sensor needs to be cleaned.
+  SCAN_RESULT_TOO_SLOW = 4;  // Not enough data collected (swipe type sensor).
+  SCAN_RESULT_TOO_FAST = 5;  // User removed finger too fast.
+  SCAN_RESULT_IMMOBILE = 6;  // User didn't move finger during enrollment.
+
+  // Chrome OS specific error codes.
+  SCAN_RESULT_NO_MATCH = 10000;  // Scan was success, but no template matched.
+  SCAN_RESULT_MAX = 10001;
+}
+
+// Included in biod's BiometricsManagerStatusChanged.
+enum BiometricsManagerStatus {
+  INITIALIZED = 1;
+  // In the future, other values such as ERROR and UNINITIALIZED may be added.
+}

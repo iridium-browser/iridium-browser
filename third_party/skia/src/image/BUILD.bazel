@@ -1,0 +1,64 @@
+load("//bazel:macros.bzl", "exports_files_legacy", "skia_filegroup", "split_srcs_and_hdrs")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+CORE_FILES = [
+    "SkImage.cpp",
+    "SkImage_Base.h",
+    "SkImage_Lazy.cpp",
+    "SkImage_Lazy.h",
+    "SkImage_Raster.cpp",
+    "SkRescaleAndReadPixels.cpp",
+    "SkRescaleAndReadPixels.h",
+    "SkSurface.cpp",
+    "SkSurface_Base.h",
+    "SkSurface_Raster.cpp",
+]
+
+split_srcs_and_hdrs(
+    name = "core",
+    files = CORE_FILES,
+)
+
+GPU_FILES = [
+    "SkImage_Gpu.cpp",
+    "SkImage_Gpu.h",
+    "SkImage_GpuBase.cpp",
+    "SkImage_GpuBase.h",
+    "SkImage_GpuYUVA.cpp",
+    "SkImage_GpuYUVA.h",
+    "SkSurface_Gpu.cpp",
+    "SkSurface_Gpu.h",
+]
+
+split_srcs_and_hdrs(
+    name = "gpu",
+    files = GPU_FILES,
+)
+
+# Not referenced by Bazel target.
+# File group use to export to //gn/gpu.gni:skia_metal_sources.
+skia_filegroup(
+    name = "mtl_srcs",
+    srcs = ["SkSurface_GpuMtl.mm"],
+)
+
+skia_filegroup(
+    name = "srcs",
+    srcs = [":core_srcs"] + select({
+        "//src/gpu:has_gpu_backend": [":gpu_srcs"],
+        "//conditions:default": [],
+    }),
+    visibility = ["//src:__pkg__"],
+)
+
+skia_filegroup(
+    name = "private_hdrs",
+    srcs = [":core_hdrs"] + select({
+        "//src/gpu:has_gpu_backend": [":gpu_hdrs"],
+        "//conditions:default": [],
+    }),
+    visibility = ["//src:__pkg__"],
+)

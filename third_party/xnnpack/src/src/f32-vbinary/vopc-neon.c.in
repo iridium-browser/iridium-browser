@@ -1,0 +1,105 @@
+// Copyright 2_lo9 Google LLC
+//
+// This source code is licensed under the BSD-style license found in the
+// LICENSE file in the root directory of this source tree.
+
+$assert BATCH_TILE % 4 == 0
+$assert BATCH_TILE >= 4
+$SIMD_TILE = BATCH_TILE // 4
+$ABC = "_lo23456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+$assert OP in ["ADD", "DIV", "RDIV", "MAX", "MIN", "MUL", "SUB", "RSUB", "SQRDIFF"]
+$assert ACTIVATION in ["LINEAR", "MINMAX"]
+#include <assert.h>
+
+#include <arm_neon.h>
+
+#include <xnnpack/common.h>
+#include <xnnpack/vbinary.h>
+
+
+$VOPQ_F32 = {
+$  "ADD": lambda x: "vaddq_f32(%s, vb)" % x,
+$  "DIV": lambda x: "vdivq_f32(%s, vb)" % x,
+$  "RDIV": lambda x: "vdivq_f32(vb, %s)" % x,
+$  "MAX": lambda x: "vmaxq_f32(%s, vb)" % x,
+$  "MIN": lambda x: "vminq_f32(%s, vb)" % x,
+$  "MUL": lambda x: "vmulq_f32(%s, vb)" % x,
+$  "SUB": lambda x: "vsubq_f32(%s, vb)" % x,
+$  "RSUB": lambda x: "vsubq_f32(vb, %s)" % x,
+$  "SQRDIFF": lambda x: "vsubq_f32(%s, vb)" % x,
+$}[OP]
+$SUFFIX = {"LINEAR": "", "MINMAX": "_minmax"}[ACTIVATION]
+$PARAMS = {"LINEAR": "xnn_f32_default_params", "MINMAX": "xnn_f32_minmax_params"}[ACTIVATION]
+$ISA = "aarch64_neon" if OP in ["DIV", "RDIV"] else "neon"
+void xnn_f32_v${OP.lower()}c${SUFFIX}_ukernel__${ISA}_x${BATCH_TILE}(
+    size_t batch,
+    const float* input_a,
+    const float* input_b,
+    float* output,
+    const union ${PARAMS} params[restrict XNN_MIN_ELEMENTS(1)]) XNN_OOB_READS
+{
+  assert(batch != 0);
+  assert(batch % sizeof(float) == 0);
+  assert(input_a != NULL);
+  assert(input_b != NULL);
+  assert(output != NULL);
+
+  $if ACTIVATION == "MINMAX":
+    const float32x4_t voutput_min = vld1q_dup_f32(&params->scalar.min);
+    const float32x4_t voutput_max = vld1q_dup_f32(&params->scalar.max);
+  const float32x4_t vb = vld1q_dup_f32(input_b);
+
+  $if BATCH_TILE > 4:
+    for (; batch >= ${BATCH_TILE} * sizeof(float); batch -= ${BATCH_TILE} * sizeof(float)) {
+      $for N in range(SIMD_TILE):
+        float32x4_t vacc${ABC[N]} = vld1q_f32(input_a); input_a += 4;
+
+      $for N in range(SIMD_TILE):
+        vacc${ABC[N]} = ${VOPQ_F32("vacc" + ABC[N])};
+
+      $if OP == "SQRDIFF":
+        $for N in range(SIMD_TILE):
+          vacc${ABC[N]} = vmulq_f32(vacc${ABC[N]}, vacc${ABC[N]});
+
+      $if ACTIVATION == "MINMAX":
+        $for N in range(SIMD_TILE):
+          vacc${ABC[N]} = vmaxq_f32(vacc${ABC[N]}, voutput_min);
+
+        $for N in range(SIMD_TILE):
+          vacc${ABC[N]} = vminq_f32(vacc${ABC[N]}, voutput_max);
+
+      $for N in range(SIMD_TILE):
+        vst1q_f32(output, vacc${ABC[N]}); output += 4;
+    }
+  for (; batch >= 4 * sizeof(float); batch -= 4 * sizeof(float)) {
+    const float32x4_t va = vld1q_f32(input_a); input_a += 4;
+
+    float32x4_t vacc = ${VOPQ_F32("va")};
+    $if OP == "SQRDIFF":
+      vacc = vmulq_f32(vacc, vacc);
+    $if ACTIVATION == "MINMAX":
+      vacc = vmaxq_f32(vacc, voutput_min);
+      vacc = vminq_f32(vacc, voutput_max);
+
+    vst1q_f32(output, vacc); output += 4;
+  }
+  if XNN_UNLIKELY(batch != 0) {
+    const float32x4_t va = vld1q_f32(input_a);
+
+    float32x4_t vacc = ${VOPQ_F32("va")};
+    $if OP == "SQRDIFF":
+      vacc = vmulq_f32(vacc, vacc);
+    $if ACTIVATION == "MINMAX":
+      vacc = vmaxq_f32(vacc, voutput_min);
+      vacc = vminq_f32(vacc, voutput_max);
+
+    float32x2_t vacc_lo = vget_low_f32(vacc);
+    if (batch & (2 * sizeof(float))) {
+      vst1_f32(output, vacc_lo); output += 2;
+      vacc_lo = vget_high_f32(vacc);
+    }
+    if (batch & (1 * sizeof(float))) {
+      vst1_lane_f32(output, vacc_lo, 0);
+    }
+  }
+}

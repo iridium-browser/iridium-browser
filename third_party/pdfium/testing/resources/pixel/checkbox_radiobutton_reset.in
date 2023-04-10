@@ -1,0 +1,25 @@
+{{header}}
+{{object 1 0}} <<
+  /Type /Catalog
+  /Pages 2 0 R
+  /AcroForm <<
+    /Fields [5 0 R 6 0 R 7 0 R 9 0 R]
+  >>
+  /OpenAction 13 0 R
+>>
+endobj
+{{include checkbox_radiobutton.fragment}}
+% Make some buttons be reset. Note that /T as an array of dict references
+% does not seem to work as expected. /Flags 1 means all fields *except*
+% those listed.
+{{object 13 0}} <<
+  /Type /Action
+  /S /ResetForm
+  /Fields [(readOnlyRadioButton.Widget8) (readOnlyCheckbox)]
+  /Flags 1
+>>
+endobj
+{{xref}}
+{{trailer}}
+{{startxref}}
+%%EOF

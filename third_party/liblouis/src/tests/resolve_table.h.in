@@ -1,0 +1,16 @@
+/* liblouis Braille Translation and Back-Translation Library
+
+Copyright (C) 2014 Swiss Library for the Blind, Visually Impaired and Print Disabled
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved. This file is offered as-is,
+without any warranty. */
+
+// The resolve_table test checks if it can resolve table paths.
+// Amongst other scenarios it also tests if relative paths can be
+// resolved. For that reason the test needs to be run in the test dir.
+// This is not the case in VPATH builds. So we need to do a chdir into
+// the test dir and we need to know the lecation of the test dir. This
+// is achieved via this header file which is adapted while configuring.
+#define TEST_SRC_DIR "@srcdir@"

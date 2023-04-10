@@ -1,0 +1,47 @@
+# Copyright 2018 The PDFium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("../../../pdfium.gni")
+import("../../../testing/test.gni")
+
+assert(pdf_enable_xfa)
+
+source_set("font") {
+  sources = [
+    "cfgas_defaultfontmanager.cpp",
+    "cfgas_defaultfontmanager.h",
+    "cfgas_fontmgr.cpp",
+    "cfgas_fontmgr.h",
+    "cfgas_gefont.cpp",
+    "cfgas_gefont.h",
+    "cfgas_gemodule.cpp",
+    "cfgas_gemodule.h",
+    "cfgas_pdffontmgr.cpp",
+    "cfgas_pdffontmgr.h",
+    "fgas_fontutils.cpp",
+    "fgas_fontutils.h",
+  ]
+  configs += [
+    "../../../:pdfium_strict_config",
+    "../../../:pdfium_noshorten_config",
+    "../../:xfa_warnings",
+  ]
+  deps = [
+    "../../../core/fpdfapi/font",
+    "../../../core/fpdfapi/page",
+    "../../../core/fpdfapi/parser",
+    "../../../core/fxcrt",
+    "../../../core/fxge",
+  ]
+  visibility = [ "../../../*" ]
+}
+
+pdfium_unittest_source_set("unittests") {
+  sources = [ "fgas_fontutils_unittest.cpp" ]
+  deps = [
+    ":font",
+    "../../../core/fxcrt",
+  ]
+  pdfium_root_dir = "../../../"
+}

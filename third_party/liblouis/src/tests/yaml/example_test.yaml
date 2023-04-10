@@ -1,0 +1,37 @@
+# lines starting with '#' are comments
+# first define which tables will be used for your tests
+table: [tables/unicode-without-blank.dis, tables/en-ueb-g1.ctb]
+
+# then optionally define flags such as testmode. If no flags are
+# defined forward translation is assumed
+
+# now define the tests
+tests:
+  - # each test is a list.
+    # The first item is the string to translate. Quoting of strings is
+    # optional
+    - hello
+    # The second item is the expected translation
+    - ⠓⠑⠇⠇⠕
+  - # optionally you can define additional parameters in a third
+    # item such as typeform or expected failure, etc
+    - Hello
+    - ⠨⠶⠠⠓⠑⠇⠇⠕⠨⠄
+    - {typeform: {italic: '++++ '}, xfail: true}
+  - # a simple, no-frills test
+    - Good bye
+    - ⠠⠛⠕⠕⠙ ⠃⠽⠑
+  # same as above using "flow style" notation
+  - [Good bye,  ⠠⠛⠕⠕⠙ ⠃⠽⠑]
+  - # and finally a test with an optional test description. Here the
+    # first item is the description, the second is the string to
+    # translate and the third is the expected outcome
+    - a test with an optional test description
+    - hello
+    - ⠓⠑⠇⠇⠕
+  -
+    - Number-text-transitions with italic
+    - 123abc
+    - ⠼⠁⠃⠉⠨⠂⠰⠁⠃⠉
+    - {typeform: {italic: '   +++'}}
+

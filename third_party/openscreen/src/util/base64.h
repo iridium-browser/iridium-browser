@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <cstdint>
 
 #include "absl/strings/string_view.h"
 #include "absl/types/span.h"

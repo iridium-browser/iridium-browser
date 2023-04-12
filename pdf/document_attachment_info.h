@@ -5,6 +5,7 @@
 #ifndef PDF_DOCUMENT_ATTACHMENT_INFO_H_
 #define PDF_DOCUMENT_ATTACHMENT_INFO_H_
 
+#include <cstdint>
 #include <string>
 
 

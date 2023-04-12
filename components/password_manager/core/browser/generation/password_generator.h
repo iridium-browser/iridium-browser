@@ -6,6 +6,7 @@
 #define COMPONENTS_PASSWORD_MANAGER_CORE_BROWSER_GENERATION_PASSWORD_GENERATOR_H_
 
 #include <string>
+#include <cstdint>
 
 
 namespace autofill {

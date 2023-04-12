@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <cstdint>
 
 #include "components/viz/common/viz_common_export.h"
 

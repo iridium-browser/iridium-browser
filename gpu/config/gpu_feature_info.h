@@ -5,6 +5,7 @@
 #ifndef GPU_CONFIG_GPU_FEATURE_INFO_H_
 #define GPU_CONFIG_GPU_FEATURE_INFO_H_
 
+#include <cstdint>
 #include <string>
 #include <vector>
 

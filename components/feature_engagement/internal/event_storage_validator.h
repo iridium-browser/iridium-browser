@@ -6,6 +6,7 @@
 #define COMPONENTS_FEATURE_ENGAGEMENT_INTERNAL_EVENT_STORAGE_VALIDATOR_H_
 
 #include <string>
+#include <cstdint>
 
 namespace feature_engagement {
 

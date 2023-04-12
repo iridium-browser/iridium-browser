@@ -6,6 +6,7 @@
 #define UI_GFX_LINEAR_GRADIENT_H_
 
 #include <array>
+#include <cstdint>
 #include <string>
 
 #include "ui/gfx/geometry/geometry_skia_export.h"

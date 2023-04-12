@@ -9,6 +9,7 @@
 
 #include <string_view>
 #include <vector>
+#include <cstdint>
 
 namespace net::string_util {
 

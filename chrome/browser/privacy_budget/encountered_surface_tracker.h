@@ -6,6 +6,7 @@
 #define CHROME_BROWSER_PRIVACY_BUDGET_ENCOUNTERED_SURFACE_TRACKER_H_
 
 #include <map>
+#include <cstdint>
 
 #include "base/containers/flat_set.h"
 

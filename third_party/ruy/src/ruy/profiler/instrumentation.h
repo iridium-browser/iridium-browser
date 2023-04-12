@@ -20,6 +20,7 @@ limitations under the License.
 #include <cstdio>
 #include <mutex>
 #include <vector>
+#include <string>
 #endif
 
 namespace ruy {

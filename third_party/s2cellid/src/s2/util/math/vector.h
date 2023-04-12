@@ -27,6 +27,7 @@
 #include <iostream>  // NOLINT(readability/streams)
 #include <limits>
 #include <type_traits>
+#include <cstdint>
 
 #include "base/check_op.h"
 

@@ -6,6 +6,7 @@
 #define COMPONENTS_AUTOFILL_CORE_BROWSER_AUTOFILL_ABLATION_STUDY_H_
 
 #include <string>
+#include <cstdint>
 
 class GURL;
 namespace base {

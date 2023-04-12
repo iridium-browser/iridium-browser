@@ -17,6 +17,7 @@
 
 #include <ostream>
 #include <vector>
+#include <cstdint>
 
 #include "dawn/native/stream/Sink.h"
 

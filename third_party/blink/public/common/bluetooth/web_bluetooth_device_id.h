@@ -6,6 +6,7 @@
 #define THIRD_PARTY_BLINK_PUBLIC_COMMON_BLUETOOTH_WEB_BLUETOOTH_DEVICE_ID_H_
 
 #include <array>
+#include <cstdint>
 #include <string>
 
 #include "third_party/blink/public/common/common_export.h"

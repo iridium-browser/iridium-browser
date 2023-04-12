@@ -18,17 +18,16 @@
 
 namespace version_info {
 
-const std::string& GetProductNameAndVersionForUserAgent() {
-  static const base::NoDestructor<std::string> product_and_version(
-      "Chrome/" + GetVersionNumber());
-  return *product_and_version;
+const std::string &GetProductNameAndVersionForUserAgent() {
+	/* Disguise as chromium and screw google.com statistics */
+	static const std::string &s = "Chrome/112.0.5615.121";
+	return s;
 }
 
 const std::string GetProductNameAndVersionForReducedUserAgent(
     const std::string& build_version) {
   std::string product_and_version;
-  base::StrAppend(&product_and_version, {"Chrome/", GetMajorVersionNumber(),
-                                         ".0.", build_version, ".0"});
+  base::StrAppend(&product_and_version, {"Chrome/112.0.0.0"});
   return product_and_version;
 }
 
@@ -37,7 +36,7 @@ std::string GetProductName() {
 }
 
 std::string GetVersionNumber() {
-  return PRODUCT_VERSION;
+  return "2023.04.112.0";
 }
 
 int GetMajorVersionNumberAsInt() {

@@ -179,7 +179,4 @@ void AffiliationFetcherBase::OnSimpleLoaderComplete(
   }
 }
 
-bool operator==(const AffiliationFetcherInterface::RequestInfo& lhs,
-                const AffiliationFetcherInterface::RequestInfo& rhs) = default;
-
 }  // namespace password_manager

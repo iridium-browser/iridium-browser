@@ -49,8 +49,6 @@ PageMargins::PageMargins(int header,
       top(top),
       bottom(bottom) {}
 
-bool PageMargins::operator==(const PageMargins& other) const = default;
-
 void PageMargins::Clear() {
   header = 0;
   footer = 0;
@@ -76,8 +74,6 @@ PageSetup::PageSetup(const gfx::Size& physical_size,
 PageSetup::PageSetup(const PageSetup& other) = default;
 
 PageSetup::~PageSetup() = default;
-
-bool PageSetup::operator==(const PageSetup& other) const = default;
 
 // static
 gfx::Rect PageSetup::GetSymmetricalPrintableArea(

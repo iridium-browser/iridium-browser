@@ -16,7 +16,7 @@ class COMPONENT_EXPORT(PRINTING) PageMargins {
   PageMargins();
   PageMargins(int header, int footer, int left, int right, int top, int bottom);
 
-  bool operator==(const PageMargins& other) const;
+  bool operator==(const PageMargins& other) const = default;
 
   void Clear();
 
@@ -44,7 +44,7 @@ class COMPONENT_EXPORT(PRINTING) PageSetup {
   PageSetup(const PageSetup& other);
   ~PageSetup();
 
-  bool operator==(const PageSetup& other) const;
+  bool operator==(const PageSetup& other) const = default;
 
   // Gets a symmetrical printable area.
   static gfx::Rect GetSymmetricalPrintableArea(const gfx::Size& page_size,

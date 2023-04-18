@@ -20,7 +20,7 @@ class AffiliationFetcherInterface {
     bool change_password_info = false;
     bool psl_extension_list = false;
 
-    friend bool operator==(const RequestInfo&, const RequestInfo&);
+    friend bool operator==(const RequestInfo&, const RequestInfo&) = default;
   };
 
   AffiliationFetcherInterface() = default;

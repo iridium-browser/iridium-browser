@@ -63,7 +63,7 @@ class COMPONENT_EXPORT(PRINTING) PrintSettings {
   // Media properties requested by the user. Default instance represents
   // default media selection.
   struct RequestedMedia {
-    bool operator==(const RequestedMedia& other) const;
+    bool operator==(const RequestedMedia& other) const = default;
     bool IsDefault() const {
       return size_microns.IsEmpty() && vendor_id.empty();
     }
@@ -83,7 +83,7 @@ class COMPONENT_EXPORT(PRINTING) PrintSettings {
   PrintSettings& operator=(const PrintSettings&);
   ~PrintSettings();
 
-  bool operator==(const PrintSettings& other) const;
+  bool operator==(const PrintSettings& other) const = default;
 
   // Reinitialize the settings to the default values.
   void Clear();

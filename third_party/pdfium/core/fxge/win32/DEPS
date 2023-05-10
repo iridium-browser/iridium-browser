@@ -1,0 +1,5 @@
+specific_include_rules = {
+  'cgdi_device_driver.cpp': [
+    '+third_party/agg23/agg_clip_liang_barsky.h',
+  ]
+}

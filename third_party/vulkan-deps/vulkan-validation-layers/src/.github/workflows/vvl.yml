@@ -1,0 +1,355 @@
+# Copyright (c) 2021-2023 Valve Corporation
+# Copyright (c) 2021-2023 LunarG, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: VVL (Build/Tests)
+
+# https://docs.github.com/en/actions/using-jobs/using-concurrency
+concurrency:
+  # github.head_ref is only defined on pull_request
+  # Fallback to the run ID, which is guaranteed to be both unique and defined for the run.
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id  }}
+  cancel-in-progress: true
+
+on:
+    push:
+    pull_request:
+        branches:
+            - main
+
+jobs:
+  linux:
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: [gcc, clang]
+        cxx: [g++, clang++]
+        config: [debug, release]
+        exclude:
+          - cc: gcc
+            cxx: clang++
+          - cc: clang
+            cxx: g++
+          - cc: clang
+            config: debug
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: 3.17.2
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ${{ runner.os }}-${{ matrix.config }}-${{ matrix.cc }}-${{ matrix.cxx }}
+      - name: Install build dependencies
+        run: |
+          python3 -m pip install jsonschema pyparsing
+          sudo apt-get -qq update
+          sudo apt-get install -y libxkbcommon-dev libwayland-dev libmirclient-dev libxrandr-dev \
+                                libx11-xcb-dev libxcb-keysyms1 libxcb-keysyms1-dev libxcb-ewmh-dev \
+                                libxcb-randr0-dev
+      # Turn on ccache this way, which is easier than figuring out how to turn it on for all deps
+      # PATH changes need to be done in an action before any action that needs it
+      - name: Add ccache to PATH
+        run: echo "/usr/lib/ccache" >> $GITHUB_PATH
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$GITHUB_WORKSPACE/external/${{ matrix.config }}/Vulkan-Headers/registry:$PYTHONPATH" >> $GITHUB_ENV
+      - name: Build Vulkan-ValidationLayers
+        run: |
+          echo "PYTHONPATH = $PYTHONPATH"
+          python3 scripts/github_ci_win_linux.py --build --config ${{ matrix.config }} --cmake='-DVVL_ENABLE_ASAN=ON'
+        env:
+          CC: ${{ matrix.cc }}
+          CXX: ${{ matrix.cxx }}
+      - name: Test Vulkan-ValidationLayers - Pixel 6 Adreno profile
+        run: python3 scripts/github_ci_win_linux.py --test --config release
+        env:
+          VK_KHRONOS_PROFILES_PROFILE_FILE: tests/device_profiles/pixel_6_adreno.json
+      - name: Test Vulkan-ValidationLayers - Pixel 6 Mali profile
+        run: python3 scripts/github_ci_win_linux.py --test --config release
+        env:
+          VK_KHRONOS_PROFILES_PROFILE_FILE: tests/device_profiles/pixel_6_mali.json
+      - name: Test Vulkan-ValidationLayers - NVIDIA Tegra X1 profile
+        run: python3 scripts/github_ci_win_linux.py --test --config release
+        env:
+          VK_KHRONOS_PROFILES_PROFILE_FILE: tests/device_profiles/nvidia_tegra_x1.json
+      - name: Test Vulkan-ValidationLayers - Max Profile
+        run: python3 scripts/github_ci_win_linux.py --test --config release
+        env:
+          VK_KHRONOS_PROFILES_PROFILE_FILE: tests/device_profiles/max_profile.json
+
+  linux-cpp20:
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+      - uses: lukka/get-cmake@latest
+      - name: Install build dependencies
+        run: |
+          python3 -m pip install jsonschema pyparsing
+          sudo apt-get -qq update
+          sudo apt-get install -y libxkbcommon-dev libwayland-dev libmirclient-dev libxrandr-dev \
+                                libx11-xcb-dev libxcb-keysyms1 libxcb-keysyms1-dev libxcb-ewmh-dev \
+                                libxcb-randr0-dev
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ${{ runner.os }}-release-cpp20
+      # Turn on ccache this way, which is easier than figuring out how to turn it on for all deps
+      # PATH changes need to be done in an action before any action that needs it
+      - name: Add ccache to PATH
+        run: echo "/usr/lib/ccache" >> $GITHUB_PATH
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$GITHUB_WORKSPACE/external/release/Vulkan-Headers/build/install/share/vulkan/registry:$PYTHONPATH" >> $GITHUB_ENV
+      - name: Build Vulkan-ValidationLayers
+        run: python3 scripts/github_ci_win_linux.py --build --config release --cmake='-DVVL_CPP_STANDARD=20 -DVVL_ENABLE_ASAN=ON'
+        env:
+          CC: clang
+          CXX: clang++
+      - name: Test Vulkan-ValidationLayers - Pixel 6 Adreno profile
+        run: python3 scripts/github_ci_win_linux.py --test --config release --cmake='-DVVL_CPP_STANDARD=20'
+        env:
+          VK_KHRONOS_PROFILES_PROFILE_FILE: tests/device_profiles/pixel_6_adreno.json
+      - name: Test Vulkan-ValidationLayers - Pixel 6 Mali profile
+        run: python3 scripts/github_ci_win_linux.py --test --config release --cmake='-DVVL_CPP_STANDARD=20'
+        env:
+          VK_KHRONOS_PROFILES_PROFILE_FILE: tests/device_profiles/pixel_6_mali.json
+      - name: Test Vulkan-ValidationLayers - NVIDIA Tegra X1 profile
+        run: python3 scripts/github_ci_win_linux.py --test --config release --cmake='-DVVL_CPP_STANDARD=20'
+        env:
+          VK_KHRONOS_PROFILES_PROFILE_FILE: tests/device_profiles/nvidia_tegra_x1.json
+      - name: Test Vulkan-ValidationLayers - Max Profile
+        run: python3 scripts/github_ci_win_linux.py --test --config release --cmake='-DVVL_CPP_STANDARD=20'
+        env:
+          VK_KHRONOS_PROFILES_PROFILE_FILE: tests/device_profiles/max_profile.json
+
+  gn:
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+      - name: Cache dependent components
+        # Speed up builds by caching the build/install artifacts so they can be retrieved without rebuilding.
+        # Note: Normally the build/install artifacts are enough to satisfy the dependencies.
+        #       But in this repo, there are extra tests and steps that require files that are not placed in build/install.
+        #       When adding new similar tests, make sure to add any other required directories/files to the cache list.
+        id: cache-deps
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-gn
+        with:
+          path: |
+            buildtools/
+            depot_tools/
+            testing/
+            tools/
+            third_party/
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashfiles('scripts/known_good.json') }}
+      - name: Install build dependencies
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get install -y libxkbcommon-dev libwayland-dev libxrandr-dev \
+                                  libx11-xcb-dev libxcb-keysyms1 libxcb-keysyms1-dev libxcb-ewmh-dev \
+                                  libxcb-randr0-dev
+      - name: Build Vulkan-ValidationLayers Using Ninja
+        run: python3 scripts/github_ci_gn.py
+
+  windows:
+    runs-on: ${{matrix.os}}
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [ x64, Win32 ]
+        config: [ debug, release ]
+        os: [ windows-latest ]
+        exclude:
+          - arch: Win32
+            config: release
+          - arch: x64
+            config: debug
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.arch }}
+      - name: Install build dependencies
+        run: |
+          python3 -m pip install jsonschema pyparsing
+      - name: Cache dependent components
+        # Speed up builds by caching the build/install artifacts so they can be retrieved without rebuilding.
+        # Note: Normally the build/install artifacts are enough to satisfy the dependencies.
+        #       But in this repo, there are extra tests and steps that require files that are not placed in build/install.
+        #       When adding new similar tests, make sure to add any other required directories/files to the cache list.
+        id: cache-deps
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-windows
+        with:
+          path: |
+            external/${{ matrix.config }}/glslang/build/install
+            external/${{ matrix.config }}/Vulkan-Headers/build/install
+            external/${{ matrix.config }}/SPIRV-Headers/build/install
+            external/${{ matrix.config }}/SPIRV-Tools/build/install
+            external/${{ matrix.config }}/robin-hood-hashing/build/install
+            external/${{ matrix.config }}/googletest/build/install
+            external/${{ matrix.config }}/Vulkan-Headers/registry
+            external/${{ matrix.config }}/SPIRV-Headers/include
+            external/${{ matrix.config }}/mimalloc/build/install
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.arch }}-${{ matrix.os }}-${{ matrix.config }}-${{ hashfiles('scripts/known_good.json') }}
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$env:GITHUB_WORKSPACE\\external\\${{ matrix.config }}\\Vulkan-Headers\\registry;$env:PYTHONPATH" >> $env:GITHUB_ENV
+      - name: Build and Test Vulkan-ValidationLayers
+        run: |
+          echo "PYTHONPATH = $env:PYTHONPATH"
+          python3 scripts/github_ci_build_desktop.py --config ${{ matrix.config }} --cmake='-DUPDATE_DEPS_SKIP_EXISTING_INSTALL=ON'
+
+  android:
+      runs-on: ubuntu-20.04
+      strategy:
+        fail-fast: false
+        matrix:
+          abi: [ arm64-v8a, armeabi-v7a ]
+
+      steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-python@v4
+          with:
+            python-version: '3.8'
+        - name: Build ValidationLayers
+          run: python3 scripts/github_ci_android.py --abi ${{ matrix.abi }}
+
+  macos-12:
+    runs-on: macos-12
+    strategy:
+      fail-fast: false
+      matrix:
+        config: [Debug, Release]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+      - uses: lukka/get-cmake@latest
+      - name: Cache dependent components
+        # Speed up builds by caching the build/install artifacts so they can be retrieved without rebuilding.
+        # Note: Normally the build/install artifacts are enough to satisfy the dependencies.
+        #       But in this repo, there are extra tests and steps that require files that are not placed in build/install.
+        #       When adding new similar tests, make sure to add any other required directories/files to the cache list.
+        id: cache-deps
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-macos-12-xcode
+        with:
+          path: |
+            external/${{ matrix.config }}/glslang/build/install
+            external/${{ matrix.config }}/Vulkan-Headers/build/install
+            external/${{ matrix.config }}/SPIRV-Headers/build/install
+            external/${{ matrix.config }}/SPIRV-Tools/build/install
+            external/${{ matrix.config }}/robin-hood-hashing/build/install
+            external/${{ matrix.config }}/googletest/build/install
+            external/${{ matrix.config }}/Vulkan-Headers/registry
+            external/${{ matrix.config }}/SPIRV-Headers/include
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.config }}-${{ hashfiles('scripts/known_good.json') }}
+      - name: Generate build files and dependencies
+        run: cmake -S. -B build --preset dev -DCMAKE_BUILD_TYPE=${{matrix.config}} -DUPDATE_DEPS_SKIP_EXISTING_INSTALL=ON -G "Xcode"
+        env:
+          # Ensure we can build against 10.15: https://cmake.org/cmake/help/latest/envvar/MACOSX_DEPLOYMENT_TARGET.html
+          MACOSX_DEPLOYMENT_TARGET: 10.15
+      - name: Build Vulkan-ValidationLayers
+        run: cmake --build build --parallel $(sysctl -n hw.logicalcpu) --config ${{matrix.config}}
+      - name: Install Vulkan-ValidationLayers
+        run: cmake --install build --prefix build/install --config ${{matrix.config}}
+
+  macos-11:
+    runs-on: macos-11
+    strategy:
+      fail-fast: false
+      matrix:
+        config: [Debug, Release]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+      - uses: lukka/get-cmake@latest
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ${{ runner.os }}-macOS11-${{ matrix.config }}
+      # Turn on ccache this way, which is easier than figuring out how to turn it on for all deps
+      # PATH changes need to be done in an action before any action that needs it
+      - name: Add ccache to PATH
+        run: echo "/usr/lib/ccache:/usr/local/opt/ccache/libexec" >> $GITHUB_PATH
+      - name: Generate build files and dependencies
+        run: cmake -S. -B build --preset dev -DCMAKE_BUILD_TYPE=${{matrix.config}} -G "Ninja"
+      - name: Build Vulkan-ValidationLayers
+        run: cmake --build build --parallel $(sysctl -n hw.logicalcpu) --config ${{matrix.config}}
+      - name: Install Vulkan-ValidationLayers
+        run: cmake --install build --prefix build/install --config ${{matrix.config}}
+
+  mingw:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+      - name: Cache dependent components
+        id: cache-deps
+        uses: actions/cache@v3
+        with:
+          path: |
+            external/Debug/glslang/build/install
+            external/Debug/Vulkan-Headers/build/install
+            external/Debug/SPIRV-Headers/build/install
+            external/Debug/SPIRV-Tools/build/install
+            external/Debug/robin-hood-hashing/build/install
+            external/Debug/googletest/build/install
+            external/Debug/Vulkan-Headers/registry
+            external/Debug/SPIRV-Headers/include
+            external/Debug/mimalloc/build/install
+          key: mingw-Debug-${{ hashfiles('scripts/known_good.json') }}
+      - uses: lukka/get-cmake@latest
+      - name: GCC Version
+        run: gcc --version # If this fails MINGW is not setup correctly
+      - name: Configure
+        run: cmake -S. -B build -D BUILD_WERROR=ON -D UPDATE_DEPS=ON -D CMAKE_BUILD_TYPE=Debug -D UPDATE_DEPS_SKIP_EXISTING_INSTALL=ON -G "Ninja"
+        env:
+          LDFLAGS: "-fuse-ld=lld" # MINGW linking is very slow. Use llvm linker instead.
+      - name: Build
+        run: cmake --build build
+      - name: Install
+        run: cmake --install build --prefix build/install

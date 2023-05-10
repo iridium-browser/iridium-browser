@@ -1,0 +1,28 @@
+# Copyright 2021 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//extensions/buildflags/buildflags.gni")
+
+assert(enable_extensions,
+       "Cannot depend on extensions because enable_extensions=false.")
+
+source_set("browser_tests") {
+  testonly = true
+
+  deps = [
+    "common:browser_tests",
+    "diagnostics:browser_tests",
+    "telemetry:browser_tests",
+  ]
+}
+
+source_set("unit_tests") {
+  testonly = true
+
+  deps = [
+    "common:unit_tests",
+    "diagnostics:unit_tests",
+    "telemetry:unit_tests",
+  ]
+}

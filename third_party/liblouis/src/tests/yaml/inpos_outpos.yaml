@@ -1,0 +1,484 @@
+# Simple replacement with context
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/latinLetterDef8Dots.uti
+  punctuation - 36
+  noback context "oo"["b"] @36-12
+  nofor context @135-135[@36-12] "b"
+
+flags: {testmode: bothDirections}
+tests:
+  # - |f|o|o|b|a|r|
+  # - |⠋|⠕|⠕|⠤⠃|⠁|⠗|
+  - - foobar
+    - ⠋⠕⠕⠤⠃⠁⠗
+    - outputPos: [0,1,2,3,5,6]
+      inputPos: [0,1,2,3,3,4,5]
+
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/latinLetterDef8Dots.uti
+  include tables/loweredDigits6Dots.uti
+  space \s 0
+  punctuation . 46
+  punctuation , 6
+  punctuation - 36
+  include tables/braille-patterns.cti
+  noback correct "f,"[]"o" "-"
+  nofor correct "f,"["-"]"o" ?
+  noback correct "f,"["."]"o" ?
+  nofor correct "f,"[]"o" "."
+  word above 1-12-1236
+  word below 23-123
+  partword en 26
+  noback context "o,"[]"o" @36
+  nofor context @135-6[@36]@135 ?
+  noback context "o,"["."]"o" ?
+  nofor context @135-6[]@135 "."
+  noback pass2 @135-6[]@12 @36
+  nofor pass2 @135-6[@36]@12 ?
+  noback pass2 @135-6[@46]@12 ?
+  nofor pass2 @135-6[]@12 @46
+  noback pass3 @12-6[]@1 @36
+  nofor pass3 @12-6[@36]@1 ?
+  noback pass3 @12-6[@46]@1 ?
+  nofor pass3 @12-6[]@1 @46
+  noback pass4 @1-6[]@1235 @36
+  nofor pass4 @1-6[@36]@1235 ?
+  noback pass4 @1-6[@46]@1235 ?
+  nofor pass4 @1-6[]@1235 @46
+
+# Simple test using regular pass 1 rules
+flags: {testmode: bothDirections}
+tests:
+  # - |h|e| |w|en|t| |above|
+  # - |⠓|⠑| |⠺|⠢|⠞| |⠁⠃⠧|
+  - - he went above
+    - ⠓⠑ ⠺⠢⠞ ⠁⠃⠧
+    - inputPos: [0,1,2,3,4,6,7,8,8,8]
+      outputPos: [0,1,2,3,4,4,5,6,7,7,7,7,7]
+
+# Insertion with correct rule: prepend to next
+flags: {testmode: bothDirections}
+tests:
+  # - |f|,|o|o|b|a|r|
+  # - |⠋|⠠|⠤⠕|⠕|⠃|⠁|⠗|
+  - - f,oobar
+    - ⠋⠠⠤⠕⠕⠃⠁⠗
+    - inputPos: [0,1,2,2,3,4,5,6]
+      outputPos: [0,1,2,4,5,6,7]
+
+# Deletion with correct rule: append to previous
+flags: {testmode: bothDirections}
+tests:
+  # - |f|,.|o|o|b|a|r|
+  # - |⠋|⠠|⠕|⠕|⠃|⠁|⠗|
+  - - f,.oobar
+    - ⠋⠠⠕⠕⠃⠁⠗
+    - inputPos: [0,1,3,4,5,6,7]
+      outputPos: [0,1,1,2,3,4,5,6]
+
+# Insertion with context rule: prepend to next
+flags: {testmode: bothDirections}
+tests:
+  # - |f|o|,|o|b|a|r|
+  # - |⠋|⠕|⠠|⠤⠕|⠃|⠁|⠗|
+  - - fo,obar
+    - ⠋⠕⠠⠤⠕⠃⠁⠗
+    - inputPos: [0,1,2,3,3,4,5,6]
+      outputPos: [0,1,2,3,5,6,7]
+
+# Deletion with context rule: append to previous
+flags: {testmode: bothDirections}
+tests:
+  # - |f|o|,.|o|b|a|r|
+  # - |⠋|⠕|⠠|⠕|⠃|⠁|⠗|
+  - - fo,.obar
+    - ⠋⠕⠠⠕⠃⠁⠗
+    - inputPos: [0,1,2,4,5,6,7]
+      outputPos: [0,1,2,2,3,4,5,6]
+
+# Insertion with pass2 rule: prepend to next
+flags: {testmode: bothDirections}
+tests:
+  # - |f|o|o|,|b|a|r|
+  # - |⠋|⠕|⠕|⠠|⠤⠃|⠁|⠗|
+  - - foo,bar
+    - ⠋⠕⠕⠠⠤⠃⠁⠗
+    - inputPos: [0,1,2,3,4,4,5,6]
+      outputPos: [0,1,2,3,4,6,7]
+
+# Deletion with pass2 rule: append to previous
+flags: {testmode: bothDirections}
+tests:
+  # - |f|o|o|,.|b|a|r
+  # - |⠋|⠕|⠕|⠠|⠃|⠁|⠗|
+  - - foo,.bar
+    - ⠋⠕⠕⠠⠃⠁⠗
+    - inputPos: [0,1,2,3,5,6,7]
+      outputPos: [0,1,2,3,3,4,5,6]
+
+# Insertion with pass3 rule: prepend to next
+flags: {testmode: bothDirections}
+tests:
+  # - |f|o|o|b|,|a|r|
+  # - |⠋|⠕|⠕|⠃|⠠|⠤⠁|⠗|
+  - - foob,ar
+    - ⠋⠕⠕⠃⠠⠤⠁⠗
+    - inputPos: [0,1,2,3,4,5,5,6]
+      outputPos: [0,1,2,3,4,5,7]
+
+# Deletion with pass3 rule: append to previous
+flags: {testmode: bothDirections}
+tests:
+  # - |f|o|o|b|,.|a|r|
+  # - |⠋|⠕|⠕|⠃|⠠|⠁|⠗|
+  - - foob,.ar
+    - ⠋⠕⠕⠃⠠⠁⠗
+    - inputPos: [0,1,2,3,4,6,7]
+      outputPos: [0,1,2,3,4,4,5,6]
+
+# Insertion with pass4 rule: prepend to next
+flags: {testmode: bothDirections}
+tests:
+  # - |f|o|o|b|a|,|r|
+  # - |⠋|⠕|⠕|⠃|⠁|⠠|⠤⠗|
+  - - fooba,r
+    - ⠋⠕⠕⠃⠁⠠⠤⠗
+    - inputPos: [0,1,2,3,4,5,6,6]
+      outputPos: [0,1,2,3,4,5,6]
+
+# Deletion with pass4 rule: append to previous
+flags: {testmode: bothDirections}
+tests:
+  # - |f|o|o|b|a|,.|r|
+  # - |⠋|⠕|⠕|⠃|⠁|⠠|⠗|
+  - - fooba,.r
+    - ⠋⠕⠕⠃⠁⠠⠗
+    - inputPos: [0,1,2,3,4,5,7]
+      outputPos: [0,1,2,3,4,5,5,6]
+
+# Using all passes!
+flags: {testmode: bothDirections}
+tests:
+  # - |f|,|o|,|o|,|b|,|a|,|r|
+  # - |⠋|⠠|⠤⠕|⠠|⠤⠕|⠠|⠤⠃|⠠|⠤⠁|⠠|⠤⠗|
+  - - f,o,o,b,a,r
+    - ⠋⠠⠤⠕⠠⠤⠕⠠⠤⠃⠠⠤⠁⠠⠤⠗
+    - inputPos: [0,1,2,2,3,4,4,5,6,6,7,8,8,9,10,10]
+      outputPos: [0,1,2,4,5,7,8,10,11,13,14]
+  # - |f|,.|o|,.|o|,.|b|,.|a|,.|r|
+  # - |⠋|⠠|⠕|⠠|⠕|⠠|⠃|⠠|⠁|⠠|⠗|
+  - - f,.o,.o,.b,.a,.r
+    - ⠋⠠⠕⠠⠕⠠⠃⠠⠁⠠⠗
+    - inputPos: [0,1,3,4,6,7,9,10,12,13,15]
+      outputPos: [0,1,1,2,3,3,4,5,5,6,7,7,8,9,9,10]
+
+# Insertion at the start of a string: prepend to next
+table: |
+  include tables/latinLetterDef6Dots.uti
+  sign . 123456
+  # noback correct `[]$a "." # "true" insertion not possible
+  noback correct `[$a] "."*
+  nofor correct `[$a] ?
+flags: {testmode: bothDirections}
+tests:
+  # - |f|o|o|b|a|r|
+  # - |.f|o|o|b|a|r|
+  - - foobar
+    - .foobar
+    - inputPos: [0,0,1,2,3,4,5]
+      outputPos: [0,2,3,4,5,6]
+
+# Insertion at the end of a string: append to previous
+table: |
+  include tables/latinLetterDef6Dots.uti
+  sign . 123456
+  noback correct $a[]~ "." # "true" insertion
+  nofor correct [$a]~ ?
+table: |
+  include tables/latinLetterDef6Dots.uti
+  sign . 123456
+  noback correct [$a]~ *"."
+  nofor correct [$a]~ ?
+flags: {testmode: bothDirections}
+tests:
+  # - |f|o|o|b|a|r|
+  # - |f|o|o|b|a|r.|
+  - - foobar
+    - foobar.
+    - inputPos: [0,1,2,3,4,5,5]
+      outputPos: [0,1,2,3,4,5]
+
+# Deletion at the start of a string: append to previous from pov of output (braille), prepend to next from pov of input
+table: |
+  include tables/latinLetterDef6Dots.uti
+  noback correct `[$a] ?
+  # nofor correct `[]$a "f" # "true" insertion not possible
+  nofor correct `[$a] "f"*
+flags: {testmode: bothDirections}
+tests:
+  # - f|o|o|b|a|r|
+  # - |o|o|b|a|r|
+  - - foobar
+    - oobar
+    - inputPos: [1,2,3,4,5]
+      outputPos: [0,0,1,2,3,4]
+
+# Deletion at the end of a string: append to previous
+table: |
+  include tables/latinLetterDef6Dots.uti
+  noback correct [$a]~ ?
+  nofor correct $a[]~ "r" # "true" insertion
+table: |
+  include tables/latinLetterDef6Dots.uti
+  noback correct [$a]~ ?
+  nofor correct [$a]~ *"r"
+flags: {testmode: bothDirections}
+tests:
+  # - |f|o|o|b|ar|
+  # - |f|o|o|b|a|
+  - - foobar
+    - fooba
+    - inputPos: [0,1,2,3,4]
+      outputPos: [0,1,2,3,4,4]
+
+# Deletion of all characters: append to (missing) previous
+table: |
+  include tables/latinLetterDef6Dots.uti
+  noback correct [$a]~ ?
+flags: {testmode: forward}
+tests:
+  # - |f|
+  # - ||
+  - - f
+    - ""
+    - inputPos: []
+      outputPos: [-1]
+
+# Deletion with replace rule: append to previous
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/latinLetterDef8Dots.uti
+  punctuation . 46
+  punctuation , 6
+  replace .
+flags: {testmode: forward}
+tests:
+  # - |f|,.|o|o|b|a|r|
+  # - |⠋|⠠|⠕|⠕|⠃|⠁|⠗|
+  - - f,.oobar
+    - ⠋⠠⠕⠕⠃⠁⠗
+    - inputPos: [0,1,3,4,5,6,7]
+      outputPos: [0,1,1,2,3,4,5,6]
+
+# Deletion of undefined character: append to previous
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/latinLetterDef8Dots.uti
+  punctuation , 6
+flags: {testmode: forward}
+tests:
+  # - |f|,.|o|o|b|a|r|
+  # - |⠋|⠠|⠕|⠕|⠃|⠁|⠗|
+  - - f,.oobar
+    - ⠋⠠⠕⠕⠃⠁⠗
+    - inputPos: [0,1,3,4,5,6,7]
+      outputPos: [0,1,1,2,3,4,5,6]
+      mode: [noUndefined]
+
+# Deletion of undefined dots: prepend to next
+table: |
+  include tables/unicode-without-blank.dis
+  include tables/latinLetterDef8Dots.uti
+  punctuation , 6
+flags: {testmode: backward}
+tests:
+  # - |⠋|⠠|⠤⠕|⠕|⠃|⠁|⠗|
+  # - |f|,|o|o|b|a|r|
+  - - ⠋⠠⠤⠕⠕⠃⠁⠗
+    - f,oobar
+    - inputPos: [0,1,2,4,5,6,7]
+      outputPos: [0,1,2,2,3,4,5,6]
+      mode: [noUndefined]
+
+# =============================================
+
+
+# Converted from inpos.c
+#     input      aaabcd ef g
+#                012345 67 8
+#     pass0      a  bcddef g
+#                0  345567 8
+#     pass1      x   cddw  g
+#                0   4556  8
+#     pass2      zy    dw  g
+#                00    56  8
+#     pass3      zy    deeeg
+#                00    56668
+                
+table: |
+  sign a 1
+  sign b 2
+  sign c 3
+  sign d 4
+  sign e 5
+  sign f 6
+  sign g 7
+  sign w 13
+  sign x 12
+  sign y 34
+  sign z 56
+  noback correct ["aaa"] "a"
+  noback correct ["d"] "dd"
+tests:
+  - - aaabcdefg
+    - abcddefg
+    - inputPos: [0,3,4,5,5,6,7,8]
+
+table: |
+  sign a 1
+  sign b 2
+  sign c 3
+  sign d 4
+  sign e 5
+  sign f 6
+  sign g 7
+  sign w 13
+  sign x 12
+  sign y 34
+  sign z 56
+  noback correct ["aaa"] "a"
+  noback correct ["d"] "dd"
+  noback context ["ab"] @12
+  always ef 13
+tests:
+  - - aaabcdefg
+    - xcddwg
+    - inputPos: [0,4,5,5,6,8]
+
+table: |
+  sign a 1
+  sign b 2
+  sign c 3
+  sign d 4
+  sign e 5
+  sign f 6
+  sign g 7
+  sign w 13
+  sign x 12
+  sign y 34
+  sign z 56
+  noback correct ["aaa"] "a"
+  noback correct ["d"] "dd"
+  noback context ["ab"] @12
+  always ef 13
+  noback pass2 @12-3-4 @56-34
+tests:
+  - - aaabcdefg
+    - zydwg
+    - inputPos: [0,0,5,6,8]
+
+table: |
+  sign a 1
+  sign b 2
+  sign c 3
+  sign d 4
+  sign e 5
+  sign f 6
+  sign g 7
+  sign w 13
+  sign x 12
+  sign y 34
+  sign z 56
+  noback correct ["aaa"] "a"
+  noback correct ["d"] "dd"
+  noback context ["ab"] @12
+  always ef 13
+  noback pass2 @12-3-4 @56-34
+  noback pass3 [@13] @5-5-5
+tests:
+  - - aaabcdefg
+    - zydeeeg
+    - inputPos: [0,0,5,6,6,6,8]
+
+# Converted from inpos_match_replace.c
+table: |
+  display A 1
+  display B 12
+  display E 15
+  display F 124
+  display G 1245
+  display I 24
+  display L 123
+  display N 1345
+  display R 1235
+  display S 234
+  display U 136
+  display V 1236
+  display 7 12456
+  display - 36
+  display - 36a
+  lowercase a 1
+  lowercase b 12
+  lowercase e 15
+  lowercase f 124
+  lowercase g 1245
+  lowercase i 24
+  lowercase l 123
+  lowercase n 1345
+  lowercase r 1235
+  lowercase s 234
+  lowercase u 136
+  lowercase v 1236
+  base uppercase A a
+  base uppercase B b
+  base uppercase E e
+  base uppercase F f
+  base uppercase G g
+  base uppercase I i
+  base uppercase L l
+  base uppercase N n
+  base uppercase R r
+  base uppercase S s
+  base uppercase U u
+  base uppercase V v
+  digit       \x0037        12456    7
+  punctuation \x002D        36       -
+  math        \x2212        36a      -
+  begword ver 36a
+  noback pass2 @36[@36a] @1236-12456
+tests:
+  - - Fussball-Vereinigung
+    - FUSSBALL-V7EINIGUNG
+    - inputPos: [0,1,2,3,4,5,6,7,8,9,9,12,13,14,15,16,17,18,19]
+
+# Converted from pass2_inpos.c
+table: |
+  lowercase e 15
+  lowercase n 1345
+  lowercase r 1235
+  lowercase o 135
+  lowercase x 1346
+  base uppercase E e
+  base uppercase N n
+  base uppercase R r
+  base uppercase O o
+  base uppercase X x
+  punctuation ' 6
+  noback pass2 @135 @6-135
+  noback pass2 @1346 ?
+tests:
+  # First check a plain word to see if inpos handling generally works
+  - - Rene
+    - rene
+    - inputPos: [0,1,2,3]
+  # then try a word which uses pass2 and makes the output longer
+  - - Reno
+    - "ren'o"
+    - inputPos: [0,1,2,3,3]
+  # Finally try a word also uses pass2, deletes a char from the
+  # output and essentially shortens the output
+  - - xRen
+    - ren
+    - inputPos: [1,2,3]

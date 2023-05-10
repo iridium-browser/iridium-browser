@@ -1,0 +1,9 @@
+digraph Fallback {
+
+  Automatic [label="Automatic (PAC) configuration"];
+  Direct;
+  Error [color="red", style=bold];
+
+  Automatic -> Direct [label="(On Javascript runtime error)"];
+  Automatic -> Error [label="(On exhaustion of proxy list)"];
+}

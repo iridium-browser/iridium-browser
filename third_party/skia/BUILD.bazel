@@ -1,0 +1,89 @@
+load("//:defines.bzl", "DEFAULT_DEFINES", "DEFAULT_LOCAL_DEFINES")
+load("//bazel:skia_rules.bzl", "exports_files_legacy", "skia_cc_library")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+# This target exposes the Skia public API. It is what external clients should use.
+skia_cc_library(
+    name = "skia_public",
+    srcs = [
+        "//include:private_hdrs",
+        "//include:srcs",
+        "//src:private_hdrs",
+        "//src:srcs",
+    ],
+    hdrs = ["//include:public_hdrs"],
+    defines = DEFAULT_DEFINES,
+    local_defines = DEFAULT_LOCAL_DEFINES,
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src:deps",
+    ],
+)
+
+# This target exposes headers beyond the public, supported API. It is intended to be
+# used by Skia's tests and tooling.
+skia_cc_library(
+    name = "skia_internal",
+    srcs = [
+        "//include:srcs",
+        "//src:srcs",
+    ],
+    hdrs = [
+        "//include:private_hdrs",
+        "//include:public_hdrs",
+        "//src:private_hdrs",
+    ],
+    defines = DEFAULT_DEFINES,
+    local_defines = DEFAULT_LOCAL_DEFINES,
+    visibility = [
+        "//dm:__subpackages__",
+        "//modules:__subpackages__",
+        "//tests:__subpackages__",
+        "//tools:__subpackages__",
+    ],
+    deps = [
+        "//src:deps",
+    ],
+)
+
+####################################################################
+# Experimental public buffet targets below
+
+alias(
+    name = "core",
+    actual = "//src:core",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "pathops",
+    actual = "//src:pathops",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "default_malloc",
+    actual = "//src/ports:default_malloc",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "default_logging",
+    actual = "//src/ports:default_logging",
+    visibility = ["//visibility:public"],
+)
+
+# Load bearing comment below - gazelle looks here (and not in any other BUILD.bazel files)
+# for a special comment indicating the prefix.
+# gazelle:prefix go.skia.org/skia
+
+# This is an alias to avoid having to load the golang toolchain code just to
+# create the rules in our primary BUILD.bazel file
+alias(
+    name = "gazelle",
+    actual = "//infra:gazelle",
+    visibility = ["//visibility:public"],
+)

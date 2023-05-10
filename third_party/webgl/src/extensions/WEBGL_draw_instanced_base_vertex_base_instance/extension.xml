@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<draft href="WEBGL_draw_instanced_base_vertex_base_instance/">
+
+  <name>WEBGL_draw_instanced_base_vertex_base_instance</name>
+
+  <contact> <a href="https://www.khronos.org/webgl/public-mailing-list/">WebGL
+  working group</a> (public_webgl 'at' khronos.org) </contact>
+
+  <contributors>
+    <contributor>Contributors to the ANGLE_base_vertex_base_instance specification</contributor>
+    <contributor>Members of the WebGL working group</contributor>
+  </contributors>
+
+  <number>46</number>
+
+  <depends>
+    <api version="2.0"/>
+  </depends>
+
+  <overview>
+    <mirrors href="https://chromium.googlesource.com/angle/angle/+/main/extensions/ANGLE_base_vertex_base_instance.txt" name="ANGLE_base_vertex_base_instance">
+      <addendum>
+        This extension exposes the <code>DrawArraysInstancedBaseInstanceANGLE</code> and
+        <code>DrawElementsInstancedBaseVertexBaseInstanceANGLE</code> entrypoints as
+        <code>drawArraysInstancedBaseInstanceWEBGL</code> and
+        <code>drawElementsInstancedBaseVertexBaseInstanceWEBGL</code>.
+      </addendum>
+      <addendum>
+        The vertex shader extension GL_ANGLE_base_vertex_base_instance is not added.
+        The vertex shader builtins <code>gl_BaseVertex</code> and <code>gl_BaseInstance</code> are not added.
+      </addendum>
+      <addendum>
+        The implementation must validate the arrays and indices referenced by
+        <code>drawArraysInstancedBaseInstanceWEBGL</code> and
+        <code>drawElementsInstancedBaseVertexBaseInstanceWEBGL</code>, similarly to how indices
+        referenced by <code>drawArrays</code> and <code>drawElements</code> are validated according
+        to section
+        <a href="https://www.khronos.org/registry/webgl/specs/latest/1.0/index.html#6.6">
+          Enabled Vertex Attributes and Range Checking
+        </a> and
+        <a href="https://www.khronos.org/registry/webgl/specs/latest/2.0/#RANGE_CHECKING">
+          Range Checking
+        </a> of the WebGL specification.
+      </addendum>
+    </mirrors>
+
+    <div class="nonnormative">
+      <p>
+        The baseVertex functionality could effectly help reduce CPU overhead with static batching
+        and text rendering in game engine implementations.
+      </p>
+      <p>
+        The baseInstance functionality could make instanced arrays more useful as they could start
+        instancing from a particular point in the buffer.
+      </p>
+    </div>
+
+    <features>
+      <feature>
+        The <code>drawArraysInstancedBaseInstanceWEBGL</code>
+        and <code>drawElementsInstancedBaseVertexBaseInstanceWEBGL</code> entry points are added.
+        These provide a counterpoint to instanced rendering and are more flexible for certain
+        scenarios.
+      </feature>
+      <feature><code>drawArraysInstancedBaseInstanceWEBGL</code> behaves identically to
+        <code>drawArraysInstanced</code> except that the first element within those instanced
+        vertex attributes is specified in <code>baseInstance</code>.
+      </feature>
+      <feature>
+        <code>drawElementsInstancedBaseVertexBaseInstanceWEBGL</code> is equivalent to
+        <code>drawElementsInstanced</code> except that the value of the base vertex passed into
+        driver is <code>baseVertex</code> instead of zero, and that the first element within those
+        instanced vertex attributes is specified in <code>baseInstance</code>.
+      </feature>
+    </features>
+  </overview>
+
+  <idl xml:space="preserve">
+
+[Exposed=(Window,Worker), LegacyNoInterfaceObject]
+interface WEBGL_draw_instanced_base_vertex_base_instance {
+  undefined drawArraysInstancedBaseInstanceWEBGL(
+      GLenum mode, GLint first, GLsizei count,
+      GLsizei instanceCount, GLuint baseInstance);
+  undefined drawElementsInstancedBaseVertexBaseInstanceWEBGL(
+      GLenum mode, GLsizei count, GLenum type, GLintptr offset,
+      GLsizei instanceCount, GLint baseVertex, GLuint baseInstance);
+};
+  </idl>
+
+  <newfun>
+    <function name="drawArraysInstancedBaseInstanceWEBGL" type="undefined">
+      <param name="mode" type="GLenum"/>
+      <param name="first" type="GLint"/>
+      <param name="count" type="GLsizei"/>
+      <param name="instanceCount" type="GLsizei"/>
+      <param name="baseInstance" type="GLuint"/>
+    </function>
+    <function name="drawElementsInstancedBaseVertexBaseInstanceWEBGL" type="undefined">
+      <param name="mode" type="GLenum"/>
+      <param name="count" type="GLsizei"/>
+      <param name="type" type="GLenum"/>
+      <param name="offset" type="GLintptr"/>
+      <param name="instanceCount" type="GLsizei"/>
+      <param name="baseVertex" type="GLint"/>
+      <param name="baseInstance" type="GLuint"/>
+    </function>
+  </newfun>
+
+  <security>
+    The base-vertex-base-instance-draw APIs are subject to all of the same rules regarding
+    <a href="https://www.khronos.org/registry/webgl/specs/latest/1.0/#4.5">out-of-range array
+    accesses</a> as the core WebGL APIs.
+  </security>
+
+  <samplecode xml:space="preserve">
+    <pre>
+var ext = gl.getExtension("WEBGL_draw_instanced_base_vertex_base_instance");
+
+{
+  // drawArraysInstancedBaseInstance variant.
+  let first = 0;
+  let count = 3;
+  let instanceCount = 2;
+  let baseInstance = 1;
+  gl.uniform1i(u_BaseVertex_location, 0);
+  gl.uniform1i(u_BaseInstance_location, baseInstance);
+  ext.drawArraysInstancedBaseInstanceWEBGL(
+      gl.TRIANGLES, first, count, instanceCount, baseInstance);
+}
+
+{
+  // drawElementsInstancedBaseVertexBaseInstance variant.
+  // Assumes that the indices which have been previously uploaded to the
+  // ELEMENT_ARRAY_BUFFER are to be treated as UNSIGNED_SHORT.
+  let count = 3;
+  let offset = 0;
+  let instanceCount = 2;
+  let baseVertex = 3;
+  let baseInstance = 1;
+  gl.uniform1i(u_BaseVertex_location, baseVertex);
+  gl.uniform1i(u_BaseInstance_location, baseInstance);
+  ext.drawElementsInstancedBaseVertexBaseInstanceWEBGL(
+      gl.TRIANGLES, count, gl.UNSIGHNED_SHORT, offset, instanceCount, baseVertex, baseInstance);
+}
+    </pre>
+    <pre>
+#version 300 es
+uniform int u_BaseVertex;
+uniform int u_BaseInstance;
+void main() {
+    gl_Position = vec4(u_BaseVertex, gl_InstanceID + u_BaseInstance, 0, 1);
+}
+    </pre>
+  </samplecode>
+
+  <tests/>
+
+  <issues/>
+
+  <history>
+    <revision date="2019/08/28">
+      <change>Initial version.</change>
+    </revision>
+    <revision date="2019/09/25">
+      <change>Move to draft.</change>
+    </revision>
+    <revision date="2021/05/26">
+      <change>Removed GLSL extension and builtins.</change>
+    </revision>
+  </history>
+</draft>

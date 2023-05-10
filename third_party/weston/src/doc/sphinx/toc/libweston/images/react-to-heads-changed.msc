@@ -1,0 +1,24 @@
+#!/usr/bin/mscgen -Tpng
+
+msc {
+	hscale="1.5";
+
+	c [label = "compositor"], w [label = "libweston core"],
+	b [label = "backend"];
+
+	|||;
+
+	--- [label = "Compositor reacts to heads_changed"];
+
+	c <<= w [label = "heads_changed callback"];
+	c box c [label = "Iterate with weston_compositor_iterate_heads(), for each head"];
+	c => w [label = "weston_head_is_connected()"];
+	c << w [label = "bool"];
+	c => w [label = "weston_head_is_enabled()"];
+	c << w [label = "bool"];
+	c => w [label = "weston_head_is_device_changed()"];
+	c << w [label = "bool"];
+	c abox c [label = "If the head needs enabling, create an output."];
+	c abox c [label = "If the head needs disabling, disable the output or destroy the output."];
+	c >> w;
+}

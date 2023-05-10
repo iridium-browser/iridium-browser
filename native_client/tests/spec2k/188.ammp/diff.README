@@ -1,0 +1,2 @@
+Removed erroneous argument from call to randf(), which takes no arguments
+Specified explicit type on function pointer arrays

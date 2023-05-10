@@ -1,0 +1,61 @@
+<style>
+  .key-container {
+    align-items: center;
+    border-radius: 12px;
+    box-sizing: border-box;
+    display: flex;
+    font-weight: 500;
+    height: 28px;
+    justify-content: center;
+    margin-inline-end: 8px;
+    min-width: 28px;
+    padding-inline: 8px;
+  }
+
+  #key-text {
+    color: var(--cros-text-color-secondary);
+  }
+
+  :host([key-state='not-selected']) .key-container {
+    border-color: var(--google-grey-200);
+    border-style: solid;
+    border-width: thin;
+    box-shadow: 0 1px 1px var(--google-grey-200);
+  }
+
+  :host([key-state='modifier-selected']) .key-container {
+    background-color: var(--cros-highlight-color);
+    border: none;
+    box-shadow: 0 1px 1px var(--cros-highlight-color);
+  }
+
+  :host([key-state='alpha-numeric-selected']) .key-container {
+    background-color: var(--cros-bg-color-dropped-elevation-1);
+    border: none;
+    box-shadow: 0 1px 1px var(--cros-bg-color-dropped-elevation-1);
+  }
+
+  :host(#ctrlKey) .key-container,
+  :host(#altKey) .key-container,
+  :host(#shiftKey) .key-container,
+  :host(#searchKey) .key-container,
+  :host([key-state='modifier-selected']) .key-container {
+    min-width: 46px;
+  }
+
+  #key-icon {
+    --iron-icon-height: 14px;
+    --iron-icon-width: 14px;
+  }
+</style>
+
+<div id="key" class="key-container">
+  <template is="dom-if" if="[[getIconIdForKey(key)]]">
+    <div aria-label$="[[getAriaLabelForIcon(key)]]" role="img">
+      <iron-icon icon="[[getIconIdForKey(key)]]" id="key-icon"></iron-icon>
+    </div>
+  </template>
+  <template is="dom-if" if="[[!getIconIdForKey(key)]]">
+    <span id="key-text">[[key]]</span>
+  </template>
+</div>

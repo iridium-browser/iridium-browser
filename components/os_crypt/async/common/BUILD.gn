@@ -1,0 +1,34 @@
+# Copyright 2023 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+source_set("common") {
+  sources = [
+    "encryptor.cc",
+    "encryptor.h",
+  ]
+
+  deps = [
+    "//base",
+    "//components/os_crypt/sync",
+  ]
+}
+
+source_set("unit_tests") {
+  testonly = true
+
+  sources = [ "encryptor_unittest.cc" ]
+
+  deps = [
+    ":common",
+    "//base",
+    "//base/test:test_support",
+    "//components/os_crypt/sync",
+    "//components/os_crypt/sync:test_support",
+    "//testing/gtest",
+  ]
+
+  if (is_win) {
+    libs = [ "crypt32.lib" ]
+  }
+}

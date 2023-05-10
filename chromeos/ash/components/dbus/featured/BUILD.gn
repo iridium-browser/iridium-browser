@@ -1,0 +1,42 @@
+# Copyright 2023 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/ui_mode.gni")
+import("//third_party/protobuf/proto_library.gni")
+
+assert(is_chromeos_ash)
+
+component("featured") {
+  defines = [ "IS_CHROMEOS_ASH_COMPONENTS_DBUS_FEATURED_IMPL" ]
+
+  deps = [
+    "//base",
+    "//components/variations/proto:cros_safe_seed_proto",
+    "//dbus",
+  ]
+
+  sources = [
+    "fake_featured_client.cc",
+    "fake_featured_client.h",
+    "featured_client.cc",
+    "featured_client.h",
+  ]
+}
+
+source_set("unit_tests") {
+  testonly = true
+
+  deps = [
+    ":featured",
+    "//base",
+    "//base/test:test_support",
+    "//components/variations/proto:cros_safe_seed_proto",
+    "//dbus",
+    "//dbus:test_support",
+    "//testing/gmock",
+    "//testing/gtest",
+  ]
+
+  sources = [ "featured_client_unittest.cc" ]
+}

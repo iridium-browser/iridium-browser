@@ -1,0 +1,31 @@
+{
+    // See loading.py for more details
+    pages: {
+        // Example below will result in:
+        // A Scenario named = Google and will perfom the actions listed synchronisly
+        // Check class Action for supported actions
+
+        //Time suffixes accepted:
+        // milliseconds: ['ms', 'milli', 'milliseconds']
+        // seconds: [s, sec, second, seconds]
+        // minutes: [m', 'min', 'minute', 'minutes]
+        // hours: ['h', 'hrs', 'hour', 'hours']
+
+        Google: [
+            {action: "get", value: "https://www.google.com"},
+            {action: "wait", duration: '5s'},
+            {action: "scroll", value: "down", duration: '3s'},
+        ],
+        Amazon: [
+            // For a "get" action both url and value are accepted
+            {action: "get", url: "https://www.amazon.com"},
+            {action: "wait", duration: '5s'},
+            {action: "scroll", value: "down", duration: '10s'},
+        ],
+        Youtube: [
+            {action: "get", value: "https://www.youtube.com"},
+            {action: "wait", duration: '5s'},
+            {action: "scroll", value: "down", duration: '8s'},
+        ],
+    },
+}

@@ -1,0 +1,25 @@
+// Copyright 2021 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package vm_tools.sk_forwarding;
+
+// Used by the Crostini VMs to forward Security Key requests to the gnubbyd
+// extension.
+message ForwardSecurityKeyMessageRequest {
+  string message = 1;
+
+  // Name of the VM this came from.
+  string vm_name = 2;
+
+  // The owner of the VM.
+  string owner_id = 3;
+}
+
+// Response for ForwardSecurityKeyMessageRequest
+message ForwardSecurityKeyMessageResponse {
+  string message = 1;
+}

@@ -1,0 +1,17 @@
+include_rules = [
+  "+components/google",
+  "+components/grit",
+  "+components/keyed_service",
+  "+components/prefs",
+  "+components/safe_search_api",
+  "+components/strings/grit",
+  "+components/signin",
+  "+components/sync",
+  "+components/url_matcher",
+  "+google_apis",
+  "+net",
+  "+services/network/public",
+  "+services/network/test",
+  "+third_party/protobuf",
+  "+ui/base",
+]

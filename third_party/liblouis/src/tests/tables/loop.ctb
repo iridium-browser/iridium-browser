@@ -1,0 +1,39 @@
+include spaces.uti
+
+lowercase \x0061  1       a      LATIN SMALL LETTER A
+lowercase \x0062  12      b      LATIN SMALL LETTER B
+lowercase \x0063  14      c      LATIN SMALL LETTER C
+lowercase \x0064  145     d      LATIN SMALL LETTER D
+lowercase \x0065  15      e      LATIN SMALL LETTER E
+lowercase \x0066  124     f      LATIN SMALL LETTER F
+lowercase \x0067  1245    g      LATIN SMALL LETTER G
+lowercase \x0068  125     h      LATIN SMALL LETTER H
+lowercase \x0069  24      i      LATIN SMALL LETTER I
+lowercase \x006A  245     j      LATIN SMALL LETTER J
+lowercase \x006C  123     l      LATIN SMALL LETTER L
+lowercase \x0072  1235    r      LATIN SMALL LETTER R
+lowercase \x0074  2345    t      LATIN SMALL LETTER T
+
+base uppercase \x0041 \x0061      Aa     LATIN CAPITAL LETTER A - LATIN SMALL LETTER A
+base uppercase \x0042 \x0062      Bb     LATIN CAPITAL LETTER B - LATIN SMALL LETTER B
+base uppercase \x0043 \x0063      Cc     LATIN CAPITAL LETTER C - LATIN SMALL LETTER C
+base uppercase \x0044 \x0064      Dd     LATIN CAPITAL LETTER D - LATIN SMALL LETTER D
+base uppercase \x0045 \x0065      Ee     LATIN CAPITAL LETTER E - LATIN SMALL LETTER E
+base uppercase \x0046 \x0066      Ff     LATIN CAPITAL LETTER F - LATIN SMALL LETTER F
+base uppercase \x0047 \x0067      Gg     LATIN CAPITAL LETTER G - LATIN SMALL LETTER G
+base uppercase \x0048 \x0068      Hh     LATIN CAPITAL LETTER H - LATIN SMALL LETTER H
+base uppercase \x0049 \x0069      Ii     LATIN CAPITAL LETTER I - LATIN SMALL LETTER I
+base uppercase \x004A \x006A      Jj     LATIN CAPITAL LETTER J - LATIN SMALL LETTER J
+base uppercase \x004C \x006C      Ll     LATIN CAPITAL LETTER L - LATIN SMALL LETTER L
+base uppercase \x0052 \x0072      Rr     LATIN CAPITAL LETTER R - LATIN SMALL LETTER R
+base uppercase \x0054 \x0074      Tt     LATIN CAPITAL LETTER T - LATIN SMALL LETTER T
+
+sign % 146
+
+attribute    digitletter           abcdefghij
+noback context  $d[]%digitletter      @6
+noback context  $d"."[]%digitletter   @6
+
+noback context  $U2[]$u                              @6
+noback context  $U[]$u                               @6
+

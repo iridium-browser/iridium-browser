@@ -1,0 +1,248 @@
+display: tables/unicode-without-blank.dis
+
+# Test letter, word and phrase emphasis
+
+table: |
+  include tables/spaces.uti
+  include tables/en-chardefs.cti
+  emphclass italic
+  emphletter italic 46-25
+  begemphword italic 456-46
+  endemphword italic 3-6
+  begemphphrase italic 456-46-46
+  endemphphrase italic before 456-46
+  lenemphphrase italic 3
+
+tests:
+  - # no emphasis, just warming up
+    - abcdefg
+    - ⠁⠃⠉⠙⠑⠋⠛
+  - # single letter emphasis
+    - abcdefg
+    - ⠁⠃⠉⠨⠒⠙⠑⠋⠛
+    - typeform:
+        italic: '   +   '
+  - # single letter emphasis
+    - abc defg
+    - ⠁⠃⠉ ⠨⠒⠙⠑⠋⠛
+    - typeform:
+        italic: '    +   '
+  - # plain old word emphasis
+    - abcdefg
+    - ⠸⠨⠁⠃⠉⠙⠑⠋⠛
+    - typeform:
+        italic: '+++++++'
+  - # again word emphasis
+    - abc defg
+    - ⠸⠨⠁⠃⠉ ⠙⠑⠋⠛
+    - typeform:
+        italic: '+++     '
+  - # again word emphasis
+    - abc defg
+    - ⠸⠨⠁⠃⠉ ⠸⠨⠙⠑⠋⠛
+    - typeform:
+        italic: '++++++++'
+  - # emphasis within word
+    - abcdefg
+    - ⠁⠃⠸⠨⠉⠙⠄⠠⠑⠋⠛
+    - typeform:
+        italic: '  ++   '
+  - # phrase emphasis
+    - abc abc abc defg defg
+    - ⠸⠨⠨⠁⠃⠉ ⠁⠃⠉ ⠁⠃⠉ ⠸⠨⠙⠑⠋⠛ ⠙⠑⠋⠛
+    - typeform:
+        italic: '++++++++++++++++     '
+
+# Test begemph and endemph
+
+table: |
+  include tables/spaces.uti
+  include tables/en-chardefs.cti
+  emphclass italic
+  begemph italic 46-3
+  endemph italic 46-36
+
+tests:
+  - # no emphasis, just warming up
+    - abcdefg
+    - ⠁⠃⠉⠙⠑⠋⠛
+  - # plain old emphasis
+    - abcdefg
+    - ⠨⠄⠁⠃⠉⠙⠑⠋⠛⠨⠤
+    - typeform:
+        italic: '+++++++'
+  - # emphasis just one word
+    - abc defg
+    - ⠨⠄⠁⠃⠉⠨⠤ ⠙⠑⠋⠛
+    - typeform:
+        italic: '+++     '
+  - # emphasis across multiple words
+    - abc defg
+    - ⠨⠄⠁⠃⠉ ⠙⠑⠋⠛⠨⠤
+    - typeform:
+        italic: '++++++++'
+  - # emphasis within word
+    - abcdefg
+    - ⠁⠃⠨⠄⠉⠙⠨⠤⠑⠋⠛
+    - typeform:
+        italic: '  ++   '
+  - # emphasis across multiple words
+    - abc abc abc defg defg
+    - ⠨⠄⠁⠃⠉ ⠁⠃⠉ ⠁⠃⠉ ⠙⠑⠋⠛⠨⠤ ⠙⠑⠋⠛
+    - typeform:
+        italic: '++++++++++++++++     '
+  - # emphasis ends on a space: the endemph indicator comes after the space
+    # (https://github.com/liblouis/liblouis/issues/1002)
+    - abc abc abc defg defg
+    - ⠨⠄⠁⠃⠉ ⠁⠃⠉ ⠁⠃⠉ ⠙⠑⠋⠛⠨⠤ ⠙⠑⠋⠛
+    - typeform:
+        italic: '+++++++++++++++++    '
+
+# Test emphletter in combination with begemphword and endemphword:
+# emphletter is only used for single letters
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  begcapsword 6-6
+  endcapsword 3
+  capsletter 6
+tests:
+  - - Abc ABc aBC ABC
+    - ⠠⠁⠃⠉ ⠠⠠⠁⠃⠄⠉ ⠁⠠⠠⠃⠉ ⠠⠠⠁⠃⠉
+
+# Test emphletter in combination with begemphword (but without
+# endemphword): emphletter is also used when emphasis ends within a
+# word
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  begcapsword 6-6
+  capsletter 6
+  punctuation . 46
+  punctuation - 36
+  capsmodechars -
+tests:
+  - - Abc ABc aBC ABC ABC.def ABC-def
+    - ⠠⠁⠃⠉ ⠠⠁⠠⠃⠉ ⠁⠠⠠⠃⠉ ⠠⠠⠁⠃⠉ ⠠⠠⠁⠃⠉⠨⠙⠑⠋ ⠠⠁⠠⠃⠠⠉⠤⠙⠑⠋
+
+# Test emphletter in combination with begemph and endemph: emphletter
+# is only used for single letters
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  begcaps 6-6
+  endcaps 3
+  capsletter 6
+tests:
+  - - Abc ABc aBC x ABC
+    - ⠠⠁⠃⠉ ⠠⠠⠁⠃⠄⠉ ⠁⠠⠠⠃⠉⠄ ⠭ ⠠⠠⠁⠃⠉⠄
+
+# Test emphletter when begemph and begemphword are both not defined
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  capsletter 6
+tests:
+  - - Abc ABc aBC ABC
+    - ⠠⠁⠃⠉ ⠠⠁⠠⠃⠉ ⠁⠠⠃⠠⠉ ⠠⠁⠠⠃⠠⠉
+
+# Test begemphword and endemphword when emphletter is not defined:
+# begcapsword and endemphword are also used for single letters
+
+table: |
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  begcapsword 6
+  endcapsword 3
+tests:
+  - - A Abc ABc aBC ABC
+    - ⠠⠁ ⠠⠁⠄⠃⠉ ⠠⠁⠃⠄⠉ ⠁⠠⠃⠉ ⠠⠁⠃⠉
+
+# Test that an emphasized section indicated with begemph/endemph does not start or end with a space
+
+display: |
+  display \s 0
+  include tables/latinLetterDef6Dots.uti
+  display / a
+  display _ b
+table: |
+  space \s 0
+  include tables/latinLetterDef6Dots.uti
+  emphclass italic
+  begemph italic a
+  endemph italic a
+tests:
+  - - " foo bar"
+    - " /foo/ bar"
+    - typeform:
+        italic:    '+++++   '
+
+# This behavior can be changed with the noemphchars opcode
+table: |
+  space \s 0
+  include tables/latinLetterDef6Dots.uti
+  emphclass italic
+  begemph italic a
+  endemph italic a
+  sign \xE000 e
+  noemphchars italic \xE000 # just some random character because list can not be empty; what matters is that \s is not included
+tests:
+  - - " foo bar"
+    - "/ foo /bar"
+    - typeform:
+        italic:    '+++++   '
+
+# Test order of opening and closing indicators
+
+display: |
+  display \s 0
+  include tables/latinLetterDef6Dots.uti
+  display / a
+  display _ b
+table: |
+  space \s 0
+  include tables/latinLetterDef6Dots.uti
+  emphclass italic
+  begemph italic a
+  endemph italic a
+  emphclass underline
+  begemph underline b
+  endemph underline b
+tests:
+  # 1. if closing multiple emphasis, order of closing indicators is inverse of order of opening indicators
+  - - "foobar"
+    - "_/foo/bar_"
+    - typeform:
+        italic:    '+++   '
+        underline: '++++++'
+  - - "foobar"
+    - "/_foo_bar/"
+    - typeform:
+        italic:    '++++++'
+        underline: '+++   '
+  # 2. if opening multiple emphasis, order of opening indicators is inverse of order of closing indicators
+  - - "foobar"
+    - "_foo/bar/_"
+    - typeform:
+        italic:    '   +++'
+        underline: '++++++'
+  - - "foobar"
+    - "/foo_bar_/"
+    - typeform:
+        italic:    '++++++'
+        underline: '   +++'
+  # 3. if above rules are not conclusive, order of indicators is determined by order of emphclass definitions
+  - - "foobar"
+    - "_/foobar/_"
+    - typeform:
+        italic:    '++++++'
+        underline: '++++++'
+  - - " foobar"
+    - " _/foobar/_"
+    - typeform:
+        italic:    '+++++++'
+        underline: ' ++++++'

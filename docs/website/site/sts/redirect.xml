@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Page Redirect"/>
+  <Content type="html">
+  <![CDATA[
+		<div>
+		</div>
+		<script>top.location = "https://www.chromium.org/hsts"</script>
+		<script>window.location = "https://www.chromium.org/hsts"</script>
+  ]]>
+  </Content>
+</Module>

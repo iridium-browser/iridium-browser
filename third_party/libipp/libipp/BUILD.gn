@@ -1,0 +1,111 @@
+# Copyright 2019 The ChromiumOS Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//common-mk/pkg_config.gni")
+
+group("all") {
+  deps = [
+    ":install_headers",
+    ":install_pkgconfig",
+    ":libipp",
+  ]
+  if (use.test) {
+    deps += [ ":libipp_test" ]
+  }
+  if (use.fuzzer) {
+    deps += [ ":libipp_fuzzer" ]
+  }
+}
+
+shared_library("libipp") {
+  sources = [
+    "attribute.h",
+    "builder.cc",
+    "builder.h",
+    "colls_view.cc",
+    "colls_view.h",
+    "errors.cc",
+    "errors.h",
+    "frame.cc",
+    "frame.h",
+    "ipp.h",
+    "ipp_attribute.cc",
+    "ipp_attribute.h",
+    "ipp_encoding.h",
+    "ipp_enums.cc",
+    "ipp_enums.h",
+    "ipp_export.h",
+    "ipp_frame.h",
+    "ipp_log.h",
+    "ipp_parser.cc",
+    "ipp_parser.h",
+    "parser.cc",
+    "parser.h",
+    "validator.cc",
+    "validator.h",
+  ]
+  install_path = "lib"
+}
+
+install_config("install_pkgconfig") {
+  sources = [ "libipp.pc" ]
+  install_path = "${libdir}/pkgconfig"
+}
+
+install_config("install_headers") {
+  sources = [
+    "attribute.h",
+    "builder.h",
+    "colls_view.h",
+    "errors.h",
+    "frame.h",
+    "ipp_attribute.h",
+    "ipp_enums.h",
+    "ipp_export.h",
+    "ipp_log.h",
+    "parser.h",
+    "validator.h",
+  ]
+  install_path = "/usr/include/chromeos/libipp"
+}
+
+if (use.test) {
+  executable("libipp_test") {
+    sources = [
+      "attribute_test.cc",
+      "colls_view_test.cc",
+      "errors_test.cc",
+      "frame_test.cc",
+      "ipp_attribute_test.cc",
+      "ipp_encoding_test.cc",
+      "ipp_enums_test.cc",
+      "ipp_test.cc",
+      "parser_test.cc",
+      "validator_test.cc",
+    ]
+    configs += [ "//common-mk:test" ]
+    run_test = true
+    deps = [
+      ":libipp",
+      "//common-mk/testrunner",
+    ]
+  }
+}
+
+if (use.fuzzer) {
+  pkg_config("libchrome_test_config") {
+    pkg_deps = [
+      "libchrome",
+      "libchrome-test",
+    ]
+  }
+  executable("libipp_fuzzer") {
+    sources = [ "ipp_fuzzer.cc" ]
+    configs += [
+      "//common-mk/common_fuzzer",
+      ":libchrome_test_config",
+    ]
+    deps = [ ":libipp" ]
+  }
+}

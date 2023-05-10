@@ -1,0 +1,17 @@
+load("//bazel:skia_rules.bzl", "exports_files_legacy", "skia_filegroup")
+
+licenses(["notice"])
+
+exports_files_legacy()
+
+skia_filegroup(
+    name = "public_hdrs",
+    srcs = [
+        "SkEncoder.h",
+        "SkICC.h",
+        "SkJpegEncoder.h",
+        "SkPngEncoder.h",
+        "SkWebpEncoder.h",
+    ],
+    visibility = ["//include:__pkg__"],
+)

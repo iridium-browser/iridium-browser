@@ -1,0 +1,276 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://something/streaming_schema.json",
+  "definitions": {
+    "ssrc": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+    "delay": {"type": "integer", "minimum": 1, "maximum": 4000},
+    "resolution": {
+      "width": {"type": "integer", "minimum": 320},
+      "height": {"type": "integer", "minimum": 240}
+    },
+    "frame_rate": {
+      "type": "string",
+      "pattern": "[0-9]+(/[0-9]+)?",
+      "examples": ["30", "30000/1001"]
+    },
+    "dimensions": {
+      "allOf": [
+        {"$ref": "#/definitions/resolution"},
+        {"properties": {"frameRate": {"$ref": "#/definitions/frame_rate"}}}
+      ]
+    },
+    "rtp_extensions": {
+      "type": "array",
+      "items": {"type": "string", "enum": ["adaptive_playout_delay"]}
+    },
+    "stream": {
+      "properties": {
+        "index": {"type": "integer", "minimum": 0},
+        "type": {"type": "string", "enum": ["audio_source", "video_source"]},
+        "codecName": {"type": "string", "enum": ["aac", "opus", "h264", "vp8", "hevc", "vp9", "av1"]},
+        "codecParameter": {"type": "string"},
+        "rtpProfile": {"type": "string", "enum": ["cast"]},
+        "rtpPayloadType": {"type": "integer", "minimum": 96, "maximum": 127},
+        "ssrc": {"$ref": "#/definitions/ssrc"},
+        "targetDelay": {"$ref": "#/definitions/delay"},
+        "aesKey": {"type": "string", "pattern": "[0-9a-fA-F]{32}"},
+        "aesIvMask": {"type": "string", "pattern": "[0-9a-fA-F]{32}"},
+        "receiverRtcpEventLog": {"type": "boolean"},
+        "receiverRtcpDscp": {"type": "integer", "minimum": 0, "default": 46},
+        "rtpExtensions": {"$ref": "#/definitions/rtp_extensions"},
+        "timeBase": {
+          "type": "string",
+          "pattern": "1/[0-9]+",
+          "default": "1/90000"
+        }
+      },
+      "required": [
+        "index",
+        "type",
+        "codecName",
+        "rtpPayloadType",
+        "ssrc",
+        "aesKey",
+        "aesIvMask",
+        "timeBase"
+      ]
+    },
+    "audio_stream": {
+      "allOf": [
+        {"$ref": "#/definitions/stream"},
+        {
+          "properties": {
+            "bitRate": {"type": "integer", "minimum": 0},
+            "channels": {"type": "integer", "minimum": 1}
+          },
+          "required": ["bitRate", "channels"]
+        }
+      ]
+    },
+    "video_stream": {
+      "allOf": [
+        {"$ref": "#/definitions/stream"},
+        {
+          "properties": {
+            "maxFrameRate": {"$ref": "#/definitions/frame_rate"},
+            "maxBitRate": {"type": "integer", "minimum": 0},
+            "resolutions": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/resolution"}
+            },
+            "errorRecoveryMode": {
+              "type": "string",
+              "enum": ["castv2", "intra_mb_refresh"],
+              "default": "castv2"
+            }
+          },
+          "required": ["maxFrameRate", "maxBitRate", "resolutions"]
+        }
+      ]
+    },
+    "offer": {
+      "properties": {
+        "supportedStreams": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/stream"}
+        },
+        "castMode": {"type": "string", "enum": ["mirroring", "remoting"]},
+        "receiverStatus": {"type": "boolean"}
+      }
+    },
+    "audio_constraints": {
+      "properties": {
+        "maxSampleRate": {
+          "type": "integer",
+          "minimum": 16000,
+          "default": 48000,
+          "maximum": 96000
+        },
+        "maxChannels": {"type": "integer", "minimum": 1, "default": 2},
+        "minBitRate": {"type": "integer", "minimum": 32000, "maximum": 320000},
+        "maxBitRate": {"type": "integer", "minimum": 32000, "maximum": 320000},
+        "maxDelay": {"$ref": "#/definitions/delay"}
+      },
+      "required": ["maxSampleRate", "maxChannels", "maxBitRate"]
+    },
+    "video_constraints": {
+      "properties": {
+        "maxPixelsPerSecond": {"type": "number", "minimum": 0},
+        "minResolution": {"$ref": "#/definitions/resolution"},
+        "maxDimensions": {"$ref": "#/definitions/dimensions"},
+        "minBitRate": {"type": "integer", "minimum": 300000},
+        "maxBitRate": {"type": "integer", "minimum": 300000},
+        "maxDelay": {"$ref": "#/definitions/delay"}
+      },
+      "required": ["maxDimensions", "maxBitRate"]
+    },
+    "constraints": {
+      "properties": {
+        "audio": {"$ref": "#/definitions/audio_constraints"},
+        "video": {"$ref": "#/definitions/video_constraints"}
+      },
+      "required": ["audio", "video"]
+    },
+    "display": {
+      "$id": "#display",
+      "properties": {
+        "dimensions": {"$ref": "#/definitions/dimensions"},
+        "aspectRatio": {"type": "string", "pattern": "[0-9]+:[0-9]+"},
+        "scaling": {"type": "string", "enum": ["sender", "receiver"]}
+      },
+      "required": []
+    },
+    "error": {
+      "properties": {
+        "code": {"type": "integer"},
+        "description": {"type": "string"}
+      },
+      "required": ["code", "description"]
+    },
+    "answer": {
+      "type": "object",
+      "properties": {
+        "udpPort": {"type": "integer", "minimum": 1, "maximum": 65535},
+        "sendIndexes": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 0}
+        },
+        "ssrcs": {"type": "array", "items": {"$ref": "#/definitions/ssrc"}},
+        "constraints": {"$ref": "#/definitions/constraints"},
+        "display": {"$ref": "#/definitions/display"},
+        "receiverRtcpEventLog": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 0}
+        },
+        "receiverRtcpDscp": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 0}
+        },
+        "rtpExtensions": {"$ref": "#/definitions/rtp_extensions"}
+      },
+      "required": ["udpPort", "sendIndexes", "ssrcs"]
+    },
+    "capabilities": {
+      "$id": "#capabilities",
+      "type": "object",
+      "properties": {
+        "mediaCaps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "audio",
+              "aac",
+              "opus",
+              "video",
+              "4k",
+              "h264",
+              "vp8",
+              "hevc",
+              "vp9"
+            ]
+          }
+        },
+        "remoting": {"type": "integer"}
+      },
+      "required": ["mediaCaps"]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "offer": {"$ref": "#/definitions/offer"},
+    "answer": {"$ref": "#/definitions/answer"},
+    "capabilities": {"$ref": "#/definitions/capabilities"},
+    "error": {"$ref": "#/definitions/error"},
+    "result": {"type": "string", "enum": ["ok", "error"]},
+    "seqNum": {"type": "integer", "minimum": 0},
+    "sessionId": {"type": "integer"},
+    "type": {
+      "type": "string",
+      "enum": [
+        "OFFER",
+        "ANSWER",
+        "GET_STATUS",
+        "STATUS_RESPONSE",
+        "GET_CAPABILITIES",
+        "CAPABILITIES_RESPONSE",
+        "RPC"
+      ]
+    }
+  },
+  "required": ["type"],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": ["ANSWER", "CAPABILITIES_RESPONSE", "STATUS_RESPONSE"]
+          }
+        }
+      },
+      "then": {"required": ["result"]}
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "OFFER",
+              "ANSWER",
+              "GET_CAPABILITIES",
+              "CAPABILITIES_RESPONSE",
+              "GET_STATUS",
+              "STATUS_RESPONSE"
+            ]
+          }
+        }
+      },
+      "then": {"required": ["seqNum"]}
+    },
+    {
+      "if": {"properties": {"type": {"const": "OFFER"}}},
+      "then": {"required": ["offer"]}
+    },
+    {
+      "if": {
+        "properties": {"type": {"const": "ANSWER"}, "result": {"const": "ok"}}
+      },
+      "then": {"required": ["answer"]}
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {"const": "CAPABILITIES_RESPONSE"},
+          "result": {"const": "ok"}
+        }
+      },
+      "then": {"required": ["capabilities"]}
+    },
+    {
+      "if": {
+        "properties": {"type": {"const": "RPC"}, "result": {"const": "ok"}}
+      },
+      "then": {"required": ["rpc"]}
+    }
+  ]
+}

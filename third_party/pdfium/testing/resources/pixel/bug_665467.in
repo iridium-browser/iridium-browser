@@ -1,0 +1,69 @@
+{{header}}
+{{object 1 0}} <<
+  /Type /Catalog
+  /Pages 2 0 R
+>>
+endobj
+{{object 2 0}} <<
+  /Type /Pages
+  /Count 1
+  /Kids [3 0 R]
+  /MediaBox [0 0 100 100]
+>>
+endobj
+{{object 3 0}} <<
+  /Type /Page
+  /Parent 2 0 R
+  /Contents 4 0 R
+  /Resources <<
+    /Font <<
+      /F1 5 0 R
+    >>
+  >>
+>>
+endobj
+{{object 4 0}} <<
+  {{streamlen}}
+>>
+stream
+BT
+50 50 Td
+/F1 15 Tf
+[<8C>]TJ
+ET
+endstream
+endobj
+{{object 5 0}} <<
+  /Type /Font
+  /Subtype /TrueType
+  /BaseFont /Tahoma
+  /Encoding 6 0 R
+  /FirstChar 139
+  /FontDescriptor 7 0 R
+  /LastChar 140
+  /Widths [943 677]
+>>
+endobj
+{{object 6 0}} <<
+  /Type /Encoding
+  /Differences [
+    140 /Elcyrillic
+  ]
+>>
+endobj
+{{object 7 0}} <<
+  /Type /FontDescriptor
+  /Ascent 1034
+  /CapHeight 0
+  /Descent -207
+  /Flags 32
+  /FontBBox [-599 -207 1338 1034]
+  /FontName /Tahoma
+  /ItalicAngle 0
+  /StemV 0
+>>
+endobj
+{{xref}}
+{{trailer}}
+{{startxref}}
+%%EOF

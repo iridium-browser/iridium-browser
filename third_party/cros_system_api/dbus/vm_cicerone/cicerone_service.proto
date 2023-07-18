@@ -1,0 +1,1993 @@
+// Copyright 2018 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+// This file defines messages used for interacting directly with containers
+// running inside of a VM.
+package vm_tools.cicerone;
+option go_package = "chromiumos/system_api/vm_cicerone_proto";
+
+// Message sent to cicerone when a VM has started up. This is just for
+// tracking purposes by cicerone.
+message NotifyVmStartedRequest {
+  // Name of the VM.
+  string vm_name = 1;
+
+  // The owner of the VM.
+  string owner_id = 2;
+
+  // The virtual socket context id assigned to the VM.
+  uint32 cid = 3;
+
+  // The token to identify the VM, only used with plugin VMs that don't have
+  // containers.
+  string vm_token = 4;
+
+  // The pid of the main VM process.
+  uint32 pid = 5;
+}
+
+// Message sent to cicerone when concierge is about to stop a VM.
+// This is just for tracking purposes by cicerone. This may not be
+// sent if the VM stops unexpectedly.
+message NotifyVmStoppingRequest {
+  // Name of the VM.
+  string vm_name = 1;
+
+  // The owner of the VM.
+  string owner_id = 2;
+}
+
+// Message sent to cicerone when a VM stopped or failed to complete startup.
+// This is just for tracking purposes by cicerone.
+message NotifyVmStoppedRequest {
+  // Name of the VM.
+  string vm_name = 1;
+
+  // The owner of the VM.
+  string owner_id = 2;
+}
+
+// Message sent to cicerone when requesting a token for linking to a container
+// that is going to be started for a VM.
+message ContainerTokenRequest {
+  // Name of the VM.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM.
+  string owner_id = 3;
+}
+
+// Reply to the GetContainerToken method.
+message ContainerTokenResponse {
+  // A token that should be passed into the container to identify itself. This
+  // token will be the empty string if the request was invalid.
+  string container_token = 1;
+}
+
+// Message used in the signal for when tremplin has started.
+message TremplinStartedSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // The owner of the VM.
+  string owner_id = 2;
+}
+
+// Message used in the signal for when a container has started up.
+message ContainerStartedSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // The username of uid 1000 in the container.
+  string container_username = 4;
+
+  // The home directory of uid 1000 in the container.
+  string container_homedir = 5;
+
+  // The IPv4 address of the container.
+  string ipv4_address = 6;
+
+  // The vsock port that sftp-server runs on.
+  uint32 sftp_vsock_port = 7;
+
+  // A token used to identify the container, usually stored in
+  // /.dev/container_token.
+  string container_token = 8;
+}
+
+// Message used in the signal for when a container has shut down.
+message ContainerShutdownSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+}
+
+enum ContainerFeature {
+  UNKNOWN = 0;
+  ENABLE_GTK3_IME_SUPPORT = 1;
+  ENABLE_VIRTUAL_KEYBOARD_SUPPORT = 2;
+}
+
+// Request to launch on application in the specified VM/container. Used with the
+// LaunchContainerApplication D-Bus message into vm_cicerone.
+message LaunchContainerApplicationRequest {
+  // Display scaling of the app windows.
+  enum DisplayScaling {
+    // Default scaling.
+    UNSCALED = 0;
+    // Windows scaled. Used to scale up older app windows that don't show well
+    // with HiDPI display otherwise.
+    SCALED = 1;
+  }
+
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container within the VM to target, if empty the default
+  // container name will be used.
+  string container_name = 2;
+
+  // ID of the application to launch, should map to the desktop_file_id that
+  // is in the application list sent back from the container.
+  string desktop_file_id = 3;
+
+  // The owner of the vm and container.
+  string owner_id = 4;
+
+  // Files to pass as arguments when launching the application, if any, given
+  // as absolute paths within the container's filesystem.
+  repeated string files = 5;
+
+  // Display scaling requested.
+  DisplayScaling display_scaling = 6;
+
+  // Features to enable in the container.
+  repeated ContainerFeature container_features = 7;
+}
+
+// Response sent back by vm_cicerone when it receives a
+// LaunchContainerApplication D-Bus message.
+message LaunchContainerApplicationResponse {
+  // If true, the requested application launched successfully.
+  bool success = 1;
+
+  // The failure_reason if the requested application could not be started.
+  string failure_reason = 2;
+}
+
+// Request to get application icons in the specified VM/container. Used with the
+// GetContainerAppIcon D-Bus message into vm_cicerone.
+message ContainerAppIconRequest {
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container within the VM to target, if empty the default
+  // container name will be used.
+  string container_name = 2;
+
+  // IDs of the application to get icons for, should map to the desktop_file_id
+  // that is in the application list sent back from the container.
+  repeated string desktop_file_ids = 3;
+
+  // The icon size with both its height and width equal to this number.
+  int32 size = 4;
+
+  // The target scale of this icon. This is the scale factor at which this icon
+  // is designed to be used.
+  int32 scale = 5;
+
+  // The owner of the VM and container.
+  string owner_id = 6;
+}
+
+// One desktop file ID and the icon found for it.
+message DesktopIcon {
+  enum Format {
+    PNG = 0;
+    SVG = 1;
+  }
+
+  string desktop_file_id = 1;
+
+  // Icon data as uninterpreted bytes.
+  bytes icon = 2;
+
+  // Interpretation hint for icon bytes
+  Format format = 3;
+}
+
+// Response sent back by vm_cicerone when it receives a
+// GetContainerAppIcon D-Bus message.
+// Some desktop_file_id may not have an icon.
+message ContainerAppIconResponse {
+  repeated DesktopIcon icons = 1;
+}
+
+// Launch vshd request.
+message LaunchVshdRequest {
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container within the VM to target.
+  string container_name = 2;
+
+  // The port for vshd to connect to.
+  uint32 port = 3;
+
+  // The owner of the VM and container.
+  string owner_id = 4;
+
+  // Features to enable in the container.
+  repeated ContainerFeature container_features = 5;
+}
+
+// Response sent back by vm_cicerone when it receives a LaunchVshd
+// call.
+message LaunchVshdResponse {
+  // True if vshd was successfully spawned in the VM.
+  bool success = 1;
+
+  // The reason vshd could not be started, if |success| is false.
+  string failure_reason = 2;
+
+  // The cid the LaunchVshd request was sent to. Only valid if |success|
+  // is true.
+  uint32 cid = 3;
+}
+
+// Request to get information about a Linux package in the container.
+message LinuxPackageInfoRequest {
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container within the VM to target.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Path to the package file (e.g. .deb) in the container's filesystem.
+  string file_path = 4;
+
+  // Name (not package_id) of package to look up. Used when |file_path| is
+  // empty.
+  string package_name = 5;
+}
+
+// Response sent back from a GetLinuxPackageInfo call.
+message LinuxPackageInfoResponse {
+  // True if the file was successfully parsed and the other fields are valid.
+  bool success = 1;
+
+  // Contains a textual reason for the failure in case success is false.
+  string failure_reason = 2;
+
+  // The package identifier is in the form of a semicolon delimited string of
+  // the format: name;version;arch;data
+  // name, version and arch are as expected. data is somewhat variant and refers
+  // to the state of the package as well as potentially remote repository
+  // information.
+  string package_id = 3;
+
+  // The license associated with the package. So far only the value of
+  // 'unknown' has been observed for this field.
+  string license = 4;
+
+  // The description of the package, can be a multi-line text string.
+  string description = 5;
+
+  // The URL for the homepage of the project.
+  string project_url = 6;
+
+  // Size of the package file in bytes.
+  uint64 size = 7;
+
+  // Usually more of a title for a package, but sometimes less descriptive
+  // than that.
+  string summary = 8;
+}
+
+// Request to install a Linux package in the container.
+message InstallLinuxPackageRequest {
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container within the VM to target.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Path to the package file (e.g. .deb) in the container's filesystem.
+  string file_path = 4;
+
+  // Package ID to install in the form "package_name;version;arch;data". Used
+  // when |file_path| is empty.
+  string package_id = 5;
+
+  // Command identifier to track installation progress.
+  string command_uuid = 6;
+}
+
+// Response sent back from a InstallLinuxPackage call.
+message InstallLinuxPackageResponse {
+  enum Status {
+    // Install process was successfully started, all further updates will be
+    // sent via the InstallLinuxPackageProgress signal.
+    STARTED = 0;
+
+    // Failed to start up for a general reason, specific details are given in
+    // failure_reason.
+    FAILED = 1;
+
+    // Indicates another install is already in process, this one will not be
+    // started.
+    INSTALL_ALREADY_ACTIVE = 2;
+  }
+  Status status = 1;
+
+  // Contains a textual reason for the failure in case of a FAILED status.
+  string failure_reason = 2;
+}
+
+// Message used in a signal for updates on Linux package installations.
+message InstallLinuxPackageProgressSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  enum Status {
+    // Install has completed and was successful. No further signals will be
+    // sent after this one.
+    SUCCEEDED = 0;
+
+    // Install failed to complete, the specific reason will be in
+    // failure_details. No further signals will be sent after this one.
+    FAILED = 1;
+
+    // This is sent periodically while packages are being downloaded.
+    DOWNLOADING = 2;
+
+    // This is sent periodically during the general installation phase for
+    // package and dependency installation.
+    INSTALLING = 3;
+  }
+
+  // Current status of the installation progress.
+  Status status = 4;
+
+  // Overall percentage progress.
+  uint32 progress_percent = 5;
+
+  // Details relating to the failure state. This can be a multi-line string in
+  // some cases (that's how it comes out of PackageKit, for example in the case
+  // of an unsatisfiable dependency).
+  string failure_details = 6;
+
+  // Command identifier that is specified in |InstallLinuxPackageRequest| to
+  // track installation progress.
+  string command_uuid = 7;
+}
+
+// Request to uninstall the package owning the indicated file. Identifying the
+// package-to-be-uninstalled by desktop file name is safer than using
+// package_id; we don't watch for package upgrades so the package_id may be
+// stale.
+message UninstallPackageOwningFileRequest {
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container within the VM to target.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // The ID of the .desktop file inside the container. The container will find
+  // the owning package and remove it.
+  string desktop_file_id = 4;
+}
+
+// Response sent back from a UninstallPackageOwningFile call.
+message UninstallPackageOwningFileResponse {
+  enum Status {
+    // Uninstall process was successfully started, all further updates will be
+    // sent via the UninstallPackageProgress signal.
+    STARTED = 0;
+
+    // Failed to start up for a general reason, specific details are given in
+    // failure_reason.
+    FAILED = 1;
+
+    // Indicates another blocking operation (uninstall, install, etc) is already
+    // in progress, this one will not be started.
+    BLOCKING_OPERATION_IN_PROGRESS = 2;
+  }
+  Status status = 1;
+
+  // Contains a textual reason for the failure in case status is FAILED.
+  string failure_reason = 2;
+}
+
+// Message used in a signal for updates on UninstallPackageOwningFile calls.
+message UninstallPackageProgressSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  enum Status {
+    // Uninstall has completed and was successful. No further signals will be
+    // sent after this one.
+    SUCCEEDED = 0;
+
+    // Uninstall failed to complete, the specific reason will be in
+    // failure_details. No further signals will be sent after this one.
+    FAILED = 1;
+
+    // This is sent while the uninstall is in progress. progress_percent will be
+    // filled in.
+    UNINSTALLING = 2;
+  }
+
+  // Current status of the uninstallation progress.
+  Status status = 4;
+
+  // Overall percentage progress.
+  uint32 progress_percent = 5;
+
+  // Details relating to the failure state.
+  string failure_details = 6;
+}
+
+// Request for creating an LXD container.
+message CreateLxdContainerRequest {
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container to start within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // LXD image server URL. Only simplestreams is supported for now.
+  string image_server = 4;
+
+  // LXD image alias.
+  string image_alias = 5;
+
+  // rootfs path to create the container from.
+  string rootfs_path = 6;
+
+  // metadata path to create the container from.
+  string metadata_path = 7;
+}
+
+// Response for creating an LXD container.
+message CreateLxdContainerResponse {
+  enum Status {
+    // The status of creating the container is unknown.
+    UNKNOWN = 0;
+
+    // The container is now being created. An LxdContainerCreated signal will
+    // relay the final result.
+    CREATING = 1;
+
+    // A container with this name already exists.
+    EXISTS = 2;
+
+    // The container could not be created.
+    FAILED = 3;
+  }
+
+  // Container creation status.
+  Status status = 1;
+
+  // The failure_reason if the container could not be created.
+  string failure_reason = 2;
+}
+
+// Message used in the LxdContainerCreated signal for the outcome of an
+// LxdCreateContainer message.
+message LxdContainerCreatedSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  enum Status {
+    // The container creation status is unknown.
+    UNKNOWN = 0;
+
+    // The container was successfully created.
+    CREATED = 1;
+
+    // The container download timed out.
+    DOWNLOAD_TIMED_OUT = 2;
+
+    // The container creation was cancelled.
+    CANCELLED = 3;
+
+    // The container creation failed for an unspecified reason.
+    FAILED = 4;
+  }
+
+  // Container creation status.
+  Status status = 4;
+
+  // The failure_reason if the container was not successfully created.
+  string failure_reason = 5;
+}
+
+// Request for deleting an LXD container.
+message DeleteLxdContainerRequest {
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container to start within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+}
+
+// Response for deleting an LXD container.
+message DeleteLxdContainerResponse {
+  enum Status {
+    // The status of deleting the container is unknown
+    UNKNOWN = 0;
+
+    // The container is being deleted.
+    DELETING = 1;
+
+    // The named container doesn't exist.
+    DOES_NOT_EXIST = 2;
+
+    // The container could not be deleted.
+    FAILED = 3;
+  }
+
+  // Container deletion status.
+  Status status = 1;
+
+  // The failure_reason if the container could not be deleted.
+  string failure_reason = 2;
+}
+
+// Message used in the LxdContainerDeleted signal for the outcome of an
+// LxdDeleteContainer message.
+message LxdContainerDeletedSignal {
+  enum Status {
+    // Deletion status is unknown.
+    UNKNOWN = 0;
+
+    // The container has been deleted.
+    DELETED = 1;
+
+    // The container deletion was cancelled.
+    CANCELLED = 2;
+
+    // One or more steps failed and the container could not be deleted.
+    FAILED = 3;
+  }
+
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Container deletion status.
+  Status status = 4;
+
+  // The failure_reason if the container was not successfully deleted.
+  string failure_reason = 5;
+}
+
+// Request to set timezone for all containers in all VMs known to cicerone.
+message SetTimezoneRequest {
+  // The timezone name to set, for example "America/Denver" or "Etc/UTC".
+  // See /usr/share/zoneinfo, 'timedatectl list-timezones', or the timezone-data
+  // package for other valid names.
+  //
+  // This name will also specify the zoneinfo file from which cicerone will
+  // parse a posix TZ string. That string will be used as a fallback in the
+  // case that the VM does not support zoneinfo files for timezones.
+  string timezone_name = 1;
+}
+
+// Response to setting timezone for all containers in all VMs known to cicerone.
+message SetTimezoneResponse {
+  // The number of containers for which the timezone was successfully set.
+  int32 successes = 1;
+
+  // The failure reason for each container for which the timezone could not be
+  // set.
+  repeated string failure_reasons = 2;
+}
+
+// Message used in the signal for when a container is downloading.
+message LxdContainerDownloadingSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Container download progress, as a percentage.
+  int32 download_progress = 4;
+}
+
+// Request for starting an LXD container.
+message StartLxdContainerRequest {
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container to start within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Deprecated.  All calls are async.
+  bool async = 4 [deprecated = true];
+
+  // Full path where drivefs is mounted (/media/fuse/drivefs-<drivefs-hash>).
+  string drivefs_mount_path = 5;
+
+  // Represents the privilege level with which a container should be started. If
+  // the container is already running this should take effect on the next boot.
+  enum PrivilegeLevel {
+    // Don't change the privilege level of the container.
+    UNCHANGED = 0;
+
+    // Make the container unprivileged.
+    UNPRIVILEGED = 1;
+
+    // Make the container privileged.
+    PRIVILEGED = 2;
+  }
+
+  PrivilegeLevel privilege_level = 6;
+
+  // Audio capture should not be allowed in the container even if the host VM
+  // supports it.
+  bool disable_audio_capture = 7;
+}
+
+// OsRelease encapsulates a subset of the os-release info as documented
+// at https://www.freedesktop.org/software/systemd/man/os-release.html.
+message OsRelease {
+  // A pretty operating system name in a format suitable for presentation to the
+  // user. May or may not contain a release code name or OS version of some
+  // kind, as suitable. (e.g. "Debian GNU/Linux 10 (buster)").
+  string pretty_name = 1;
+
+  // A string identifying the operating system, without a version component,
+  // and suitable for presentation to the user (e.g. "Debian GNU/Linux").
+  string name = 2;
+
+  // String identifying OS version possibly including release codename.
+  // (e.g. "10 (buster)").
+  string version = 3;
+
+  // Lower case string (mostly numeric) identifying OS version (e.g. "10").
+  string version_id = 4;
+
+  // Lower case string identifying the operating system (e.g. "debian").
+  string id = 5;
+}
+
+// Response for starting an LXD container.
+message StartLxdContainerResponse {
+  enum Status {
+    // The status of starting the container is unknown.
+    UNKNOWN = 0;
+
+    // The container has started. This is only valid if async was false in the
+    // request.
+    STARTED = 1;
+
+    // The container was already running.
+    RUNNING = 2;
+
+    // The container could not be started.
+    FAILED = 3;
+
+    // The container is starting. This is only valid if async was true in the
+    // request.
+    STARTING = 4;
+
+    // The container is remapping its rootfs uids/gids and will take longer than
+    // usual to start up. This is only valid if async was true in the request.
+    REMAPPING = 5;
+  }
+
+  // Container startup status.
+  Status status = 1;
+
+  // The failure_reason if the container could not be started.
+  string failure_reason = 2;
+
+  // OS strings found in the container's /etc/os-release, e.g. "stretch".
+  OsRelease os_release = 3;
+}
+
+// Message used in the signal for when a container is starting.
+message LxdContainerStartingSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  enum Status {
+    // Start status is unknown.
+    UNKNOWN = 0;
+
+    // The container has started. No more signals are expected.
+    STARTED = 1;
+
+    // The container start was cancelled. No more signals are expected.
+    CANCELLED = 2;
+
+    // One or more steps failed and the container could not be started. No
+    // more signals are expected.
+    FAILED = 3;
+
+    // Still starting, this is sent as a heartbeat on an interval.
+    STARTING = 4;
+  }
+
+  // The current status of starting the container.
+  Status status = 4;
+
+  // The failure_reason if the container was not successfully started.
+  string failure_reason = 5;
+
+  // OS strings found in the container's /etc/os-release, e.g. "stretch".
+  OsRelease os_release = 6;
+}
+
+message StopLxdContainerRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+}
+
+message StopLxdContainerResponse {
+  enum Status {
+    // The status of stopping the container is unknown
+    UNKNOWN = 0;
+
+    // The container is already stopped.
+    STOPPED = 1;
+
+    // The container is being stopped.
+    STOPPING = 2;
+
+    // The named container doesn't exist.
+    DOES_NOT_EXIST = 3;
+
+    // The container could not be stopped.
+    FAILED = 4;
+  }
+
+  // Container stopping status.
+  Status status = 1;
+
+  // The failure_reason if the container could not be stopped.
+  string failure_reason = 2;
+}
+
+message LxdContainerStoppingSignal {
+  enum Status {
+    // Stopping status is unknown.
+    UNKNOWN = 0;
+
+    // The container has been stopped.
+    STOPPED = 1;
+
+    // The container is stopping.
+    STOPPING = 2;
+
+    // The container stop was cancelled.
+    CANCELLED = 3;
+
+    // One or more steps failed and the container could not be stopped.
+    FAILED = 4;
+  }
+
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // The current stopping status of the container.
+  Status status = 4;
+
+  // The failure_reason if the container could not be stopped.
+  string failure_reason = 5;
+}
+
+// Request for getting the primary user for an LXD container.
+message GetLxdContainerUsernameRequest {
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container to get the primary user for.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+}
+
+// Response for getting the primary user for an LXD container.
+message GetLxdContainerUsernameResponse {
+  enum Status {
+    // The status is unknown.
+    UNKNOWN = 0;
+
+    // The primary username is stored in the username field.
+    SUCCESS = 1;
+
+    // A container with the specified name doesn't exist.
+    CONTAINER_NOT_FOUND = 2;
+
+    // The container is not running, so the username could not be found.
+    CONTAINER_NOT_RUNNING = 3;
+
+    // The primary user doesn't exist.
+    USER_NOT_FOUND = 4;
+
+    // Some part of the operation failed.
+    FAILED = 5;
+  }
+
+  // Status of getting the primary username.
+  Status status = 1;
+
+  // The primary username of the container, if successful.
+  string username = 2;
+
+  // The failure_reason if the username could not be retrieved.
+  string failure_reason = 3;
+
+  // The home directory of uid 1000 in the container.
+  string homedir = 4;
+}
+// Request for setting up the user for an LXD container.
+message SetUpLxdContainerUserRequest {
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container to start within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Username for the first user in the container.
+  string container_username = 4;
+}
+
+// Response for setting up the user on an LXD container.
+message SetUpLxdContainerUserResponse {
+  enum Status {
+    // The status of setting up the user is unknown.
+    UNKNOWN = 0;
+
+    // The user has been set up sucessfully.
+    SUCCESS = 1;
+
+    // The user already exists.
+    EXISTS = 2;
+
+    // Setting up the user failed.
+    FAILED = 3;
+  }
+
+  // Status of setting up the user.
+  Status status = 1;
+
+  // The failure_reason if the user was not set up successfully.
+  string failure_reason = 2;
+
+  // The username of uid 1000 in the container.
+  string container_username = 3;
+}
+
+// Request for debug information about virtual machine and container state.
+message GetDebugInformationRequest {}
+
+// Response for debug information about virtual machine and container state.
+message GetDebugInformationResponse {
+  // Debug information about virtual machine and container state in arbitrary
+  // format.
+  string debug_information = 1;
+}
+
+message ExportLxdContainerRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container exporting.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Path to write the exported container.  This path, or a parent
+  // must have already been shared using seneschal.  It is the path relative
+  // to the VM root mount point (/mnt/shared) as returned in seneschal
+  // SharePathResponse.path.  E.g.: "MyFiles/export".  If path is a directory,
+  // it must already exist, and the export will be named <fingerprint>.tar.gz
+  // otherwise this path must already exist as a file, or its parent directory
+  // must exist.
+  string export_path = 4;
+}
+
+message ExportLxdContainerResponse {
+  enum Status {
+    // The result is unknown.
+    UNKNOWN = 0;
+
+    // The container is exporting. Further updates will be delievered via
+    // ExportLxdContainerProgressSignal.
+    EXPORTING = 1;
+
+    // One or more steps failed and the container could not be exported.
+    FAILED = 2;
+  }
+
+  // Current container status.
+  Status status = 1;
+
+  // Details relating to the failure state.
+  string failure_reason = 2;
+}
+
+message CancelExportLxdContainerRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // The owner of the VM and container.
+  string owner_id = 2;
+
+  // The container name of the in-progress export.
+  string in_progress_container_name = 3;
+}
+
+message CancelExportLxdContainerResponse {
+  enum Status {
+    // The result is unknown.
+    UNKNOWN = 0;
+
+    // The cancel for the in-progress request has been queued.
+    // The in-progress request may yet complete before the cancel is processed.
+    CANCEL_QUEUED = 1;
+
+    // No in-progress request was found with that container name.
+    OPERATION_NOT_FOUND = 2;
+
+    // One or more steps failed and the cancel could not be scheduled.
+    FAILED = 3;
+  }
+
+  // The status of the cancellation.
+  Status status = 1;
+
+  // Details relating to the failure state.
+  string failure_reason = 2;
+}
+
+message ExportLxdContainerProgressSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container exporting.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  enum Status {
+    // The result is unknown.
+    UNKNOWN = 0;
+
+    // Export is completed.
+    DONE = 1;
+
+    // One or more steps failed and the container could not be exported.
+    FAILED = 2;
+
+    // Deprecated. The container is exporting into a tar file.
+    EXPORTING_TAR = 3 [deprecated = true];
+
+    // Deprecated. The container tar file is being compressed into an image
+    // file.
+    EXPORTING_COMPRESS = 4 [deprecated = true];
+
+    // Deprecated. The exported image file is being downloaded.
+    EXPORTING_DOWNLOAD = 5 [deprecated = true];
+
+    // Deprecated. The exported image file is being packed. This is equivalent
+    // to tar/compress.
+    EXPORTING_PACK = 6 [deprecated = true];
+
+    // EXPORTING_PACK and EXPORTING_DOWNLOAD have been combined into
+    // EXPORTING_STREAMING. The exported image file is being tar'd, compressed'd
+    // and download'd out of the container.
+    EXPORTING_STREAMING = 7;
+
+    // The export was cancelled by a CancelExportLxdContainerRequest.
+    CANCELLED = 8;
+  }
+
+  // Container status.
+  Status status = 4;
+
+  // Deprecated. Percentage progress for the current stage given in status.
+  uint32 progress_percent = 5 [deprecated = true];
+
+  // Deprecated. Speed (bytes per second) for the current stage given in status.
+  uint64 progress_speed = 6 [deprecated = true];
+
+  // Details relating to the failure state.
+  string failure_reason = 7;
+
+  // Total number of files in the input container.
+  uint32 total_input_files = 8;
+
+  // Total size of the files in the input container.
+  uint64 total_input_bytes = 9;
+
+  // Number of files in the input container that have been downloaded.
+  uint32 input_files_streamed = 10;
+
+  // Size of the files in the input container that have been downloaded.
+  uint64 input_bytes_streamed = 11;
+
+  // Number of compressed bytes that have been exported.
+  uint64 bytes_exported = 12;
+}
+
+message ImportLxdContainerRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container importing.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Path to read the imported container.  This is a file which
+  // must have already been shared using seneschal.  It is the path relative
+  // to the VM root mount point (/mnt/shared) as returned in seneschal
+  // SharePathResponse.path.  E.g.: "MyFiles/export/backup.tar.gz".
+  string import_path = 4;
+}
+
+message ImportLxdContainerResponse {
+  enum Status {
+    // The result is unknown.
+    UNKNOWN = 0;
+
+    // The container is importing. Further updates will be delievered via
+    // ImportLxdContainerProgressSignal.
+    IMPORTING = 1;
+
+    // One or more steps failed and the container could not be imported.
+    FAILED = 2;
+  }
+
+  // Current container status.
+  Status status = 1;
+
+  // Details relating to the failure state.
+  string failure_reason = 2;
+}
+
+message CancelImportLxdContainerRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // The owner of the VM and container.
+  string owner_id = 2;
+
+  // The container name of the in-progress import.
+  string in_progress_container_name = 3;
+}
+
+message CancelImportLxdContainerResponse {
+  enum Status {
+    // The result is unknown.
+    UNKNOWN = 0;
+
+    // The cancel for the in-progress request has been queued.
+    // The in-progress request may yet complete before the cancel is processed.
+    CANCEL_QUEUED = 1;
+
+    // No in-progress request was found with that container name.
+    OPERATION_NOT_FOUND = 2;
+
+    // One or more steps failed and the cancel could not be scheduled.
+    FAILED = 3;
+  }
+
+  // The status of the cancellation.
+  Status status = 1;
+
+  // Details relating to the failure state.
+  string failure_reason = 2;
+}
+
+message ImportLxdContainerProgressSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container importing.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  enum Status {
+    // The result is unknown.
+    UNKNOWN = 0;
+
+    // Import is completed.
+    DONE = 1;
+
+    // One or more steps failed and the container could not be imported.
+    FAILED = 2;
+
+    // The image is being uploaded.
+    IMPORTING_UPLOAD = 3;
+
+    // The image is being unpacked to create a container.
+    IMPORTING_UNPACK = 4;
+
+    // The container could not be imported due to mismatched architecture.
+    FAILED_ARCHITECTURE = 5;
+
+    // The container could not be imported due to insufficient space.
+    FAILED_SPACE = 6;
+
+    // The import was cancelled by a CancelImportLxdContainerRequest.
+    CANCELLED = 7;
+  }
+
+  // Container status.
+  Status status = 4;
+
+  // Percentage progress for the current stage given in status.
+  uint32 progress_percent = 5;
+
+  // Speed (bytes per second) for the current stage given in status.
+  uint64 progress_speed = 6;
+
+  // Details relating to the failure state.
+  string failure_reason = 7;
+
+  // Architecture of device.  Set when status is FAILED_ARCHITECTURE.
+  string architecture_device = 8;
+
+  // Architecture of container which failed to import.
+  // Set when status is FAILED_ARCHITECTURE.
+  string architecture_container = 9;
+
+  // Available space for import.  Set when status is FAILED_SPACE.
+  uint64 available_space = 10;
+
+  // Minimum required space for import.  Set when status is FAILED_SPACE.
+  uint64 min_required_space = 11;
+}
+
+message PendingAppListUpdatesSignal {
+  // Name of the VM on which the app list updates will run.
+  string vm_name = 1;
+
+  // Name of the container on which the app list updates will run.
+  string container_name = 2;
+
+  // Number of currently scheduled app list updates for this container.
+  uint32 count = 3;
+}
+
+message ApplyAnsiblePlaybookRequest {
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container within the VM to target.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Ansible playbook to be applied.
+  string playbook = 4;
+}
+
+message ApplyAnsiblePlaybookResponse {
+  enum Status {
+    // The status is unknown.
+    UNKNOWN = 0;
+
+    // Application process was successfully started, all further updates will be
+    // sent via the ApplyAnsiblePlaybookProgress signal.
+    STARTED = 1;
+
+    // Failed to start up for a general reason, specific details are given in
+    // failure_reason.
+    FAILED = 2;
+  }
+  Status status = 1;
+
+  // Contains a textual reason for the failure in case of a FAILED status.
+  string failure_reason = 2;
+}
+
+message ApplyAnsiblePlaybookProgressSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  enum Status {
+    // The signal has unknown status.
+    UNKNOWN = 0;
+
+    // Application has completed and was successfull. No further signals will be
+    // sent after this one.
+    SUCCEEDED = 1;
+
+    // Application failed to complete, the specific reason will be in
+    // failure_details. No further signals will be sent after this one.
+    FAILED = 2;
+
+    // Ansible playbook is being currently applied.
+    IN_PROGRESS = 3;
+  }
+
+  // Current status of the application progress.
+  Status status = 4;
+
+  // Contains a textual reason for the failure in case of a FAILED status.
+  string failure_details = 5;
+
+  // Displays details of the current progress of the Ansible process.
+  repeated string status_string = 6;
+}
+
+message ConfigureForArcSideloadRequest {
+  // Name of the VM to target.
+  string vm_name = 1;
+
+  // Name of the container within the VM to target.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+}
+
+message ConfigureForArcSideloadResponse {
+  enum Status {
+    // The status is unknown.
+    UNKNOWN = 0;
+
+    // The configuration succeeded.
+    SUCCEEDED = 2;
+
+    // The configuration failed.
+    FAILED = 3;
+  }
+
+  // Status of the request.
+  Status status = 1;
+
+  // If status is FAILED, contains the reason the request failed.
+  string failure_reason = 2;
+}
+
+// Request for a container to create a tunnel to a prepared port on the host.
+message ConnectChunnelRequest {
+  // Name of the VM to tunnel traffic to.
+  string vm_name = 1;
+
+  // Name of the container within the VM to target.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Name of the container to tunnel traffic to.
+  // Target vsock port to forward traffic from. This port must be listening
+  // and ready to accept a connection from the chunnel client.
+  uint32 chunneld_port = 4;
+
+  // Target TCPv4 port to forward traffic to. Chunnel in the guest will connect
+  // to localhost:target_tcp4_port.
+  uint32 target_tcp4_port = 5;
+}
+
+// Response to ConnectChunnelRequest.
+message ConnectChunnelResponse {
+  enum Status {
+    // The result is unknown.
+    UNKNOWN = 0;
+
+    // Chunnel was successfully launched in the container.
+    SUCCESS = 1;
+
+    // One or more steps failed and chunnel could not be connected.
+    FAILED = 2;
+  }
+
+  // Status of the request.
+  Status status = 1;
+
+  // If status is FAILED, contains the reason the request failed.
+  string failure_reason = 2;
+}
+
+message UpgradeContainerRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container to upgrade.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  enum Version {
+    // Uknown OS version.
+    UNKNOWN = 0;
+
+    // Debian 9 AKA Stretch.
+    DEBIAN_STRETCH = 1;
+
+    // Debian 10 AKA Buster.
+    DEBIAN_BUSTER = 2;
+
+    // Debian 11 AKA Bullseye.
+    DEBIAN_BULLSEYE = 3;
+  }
+
+  // Version from which the container will upgrade.
+  // Ignored, since tremplin is in a better place to determine this
+  // then the caller.
+  Version source_version = 4 [deprecated = true];
+
+  // Version to which the container will be upgraded.
+  Version target_version = 5;
+}
+
+message UpgradeContainerResponse {
+  enum Status {
+    // The result is unknown.
+    UNKNOWN = 0;
+
+    // Upgrade successfully started.
+    STARTED = 1;
+
+    // An upgrade is already running.
+    ALREADY_RUNNING = 2;
+
+    // Upgrade path not supported e.g. buster->stretch.
+    NOT_SUPPORTED = 3;
+
+    // The container is already upgraded to the requested target_version.
+    ALREADY_UPGRADED = 4;
+
+    // Failed to start the upgrade for some other reason.
+    FAILED = 5;
+  }
+
+  // Status of the request.
+  Status status = 1;
+
+  // If status is FAILED, contains the reason the request failed.
+  string failure_reason = 2;
+}
+
+message CancelUpgradeContainerRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container being upgraded.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+}
+
+message CancelUpgradeContainerResponse {
+  enum Status {
+    // The status is unknown.
+    UNKNOWN = 0;
+
+    // Upgrade was not in progress, nothing to do.
+    NOT_RUNNING = 1;
+
+    // Upgrade cancelled.
+    CANCELLED = 2;
+
+    // Failed to cancel.
+    FAILED = 3;
+  }
+
+  // Status of the request.
+  Status status = 1;
+
+  // If status is FAILED, contains the reason the request failed.
+  string failure_reason = 2;
+}
+
+message UpgradeContainerProgressSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container to upgrade.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  enum Status {
+    // The current status is unknown.
+    UNKNOWN = 0;
+
+    // Still in progress.
+    IN_PROGRESS = 1;
+
+    // Completed successfully.
+    SUCCEEDED = 2;
+
+    // Failed to complete.
+    FAILED = 3;
+  }
+
+  // Status of the upgrade.
+  Status status = 4;
+
+  // If status is FAILED, contains the reason the upgrade failed.
+  string failure_reason = 5;
+
+  // Human readable upgrade progress.
+  repeated string progress_messages = 6;
+}
+
+message StartLxdRequest {
+  // Name of the VM to start LXD in.
+  string vm_name = 1;
+
+  // The owner of the VM.
+  string owner_id = 2;
+
+  // If true, opt-in to resetting the LXD DB on launch. If false, use whatever
+  // the default behaviour is.
+  bool reset_lxd_db = 3;
+}
+
+message StartLxdResponse {
+  enum Status {
+    // The status of creating the container is unknown.
+    UNKNOWN = 0;
+
+    // LXD is starting.
+    STARTING = 1;
+
+    // LXD is already running.
+    ALREADY_RUNNING = 2;
+
+    // Could not launch LXD.
+    FAILED = 3;
+  }
+
+  // LXD launch status
+  Status status = 1;
+
+  // The failure_reason if LXD could not be started.
+  string failure_reason = 2;
+}
+
+// Sent by tremplin to update the host on the start progress of starting LXD.
+message StartLxdProgressSignal {
+  enum Status {
+    // The status of creating the container is unknown.
+    UNKNOWN = 0;
+
+    // LXD is starting.
+    STARTING = 1;
+
+    // Something went wrong, Tremplin is trying to recover LXD.
+    // This is still an in-progress status.
+    RECOVERING = 2;
+
+    // LXD is now running.
+    STARTED = 3;
+
+    // Could not launch LXD.
+    FAILED = 4;
+  }
+
+  // Name of the VM to start LXD in.
+  string vm_name = 1;
+
+  // The owner of the VM.
+  string owner_id = 2;
+
+  // LXD launch status
+  Status status = 3;
+
+  // The failure_reason if LXD could not be started.
+  string failure_reason = 4;
+}
+
+// Request to watch files and notify if there are changes. Used by FilesApp.
+message AddFileWatchRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Directory in container relative to $HOME to watch.
+  string path = 4;
+}
+
+message AddFileWatchResponse {
+  enum Status {
+    // The current status is unknown.
+    UNKNOWN = 0;
+
+    // Watch added successfully.
+    SUCCEEDED = 2;
+
+    // Add watch failed.
+    FAILED = 1;
+  }
+
+  // Add watch status.
+  Status status = 1;
+
+  // The failure_reason if the watcher could not be added.
+  string failure_reason = 2;
+}
+
+// Request to stop watching files.
+message RemoveFileWatchRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Directory in container relative to $HOME to stop watching.
+  string path = 4;
+}
+
+message RemoveFileWatchResponse {
+  enum Status {
+    // The current status is unknown.
+    UNKNOWN = 0;
+
+    // Watch removed successfully.
+    SUCCEEDED = 2;
+
+    // Remove watch failed.
+    FAILED = 1;
+  }
+
+  // Remove watch status.
+  Status status = 1;
+
+  // The failure_reason if the watcher could not be removed.
+  string failure_reason = 2;
+}
+
+// Sent by garcon to notify that a file in a watched directory has changed. Used
+// by FilesApp.
+message FileWatchTriggeredSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Path in container relative to $HOME that has changed.
+  string path = 4;
+}
+
+// Sent by garcon to notify that a container is running low on disk space.
+message LowDiskSpaceTriggeredSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // How much free space is left in bytes.
+  uint64 free_bytes = 4;
+}
+
+// Sent by vsh to register session information such as the container shell pid,
+// keyed from the host vsh pid. Crostini terminal will look up this info for
+// features such as starting new terminals in the same cwd.
+message RegisterVshSessionRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Process ID of vsh running in host.
+  int32 host_vsh_pid = 4;
+
+  // Process ID of shell spawned from vshd running in container. Set to 0 to
+  // remove mapping.
+  int32 container_shell_pid = 5;
+}
+
+message RegisterVshSessionResponse {
+  // True if pid mapping was completed.
+  bool success = 1;
+
+  // The reason the pid mapping failed.
+  string failure_reason = 2;
+}
+
+// Sent by chrome to query the container shell pid associated with vsh.
+message GetVshSessionRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Process ID of vsh running in host.
+  int32 host_vsh_pid = 4;
+}
+
+message GetVshSessionResponse {
+  // True if container pid was found.
+  bool success = 1;
+
+  // The reason the pid was not found.
+  string failure_reason = 2;
+
+  // Process ID of shell spawned from vshd running in container.
+  int32 container_shell_pid = 3;
+}
+
+// Sent by chrome in response to a SelectFile dialog request.
+message FileSelectedSignal {
+  // Name of the VM.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM.
+  string owner_id = 3;
+
+  // Token sent in request to match with response signal.
+  string select_file_token = 4;
+
+  // Files selected by user in SelectFile dialog.
+  repeated string files = 5;
+}
+
+// Sent by chrome to attach a USB device in a VM to a container.
+message AttachUsbToContainerRequest {
+  // Name of the VM.
+  string vm_name = 1;
+
+  // Name of the container within the VM to attach to.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Attach USB devices on to this port.
+  int32 port_num = 4;
+}
+
+message AttachUsbToContainerResponse {
+  enum Status {
+    // The status is unknown.
+    UNKNOWN = 0;
+
+    // The USB port will be attached.
+    OK = 1;
+
+    // The container doesn't exist.
+    NO_SUCH_CONTAINER = 2;
+
+    // Failed to attach.
+    FAILED = 3;
+  }
+
+  // The status.
+  Status status = 1;
+
+  // Human-readable failure reason.
+  string failure_reason = 2;
+}
+
+// Sent by chrome to detach a USB device in a VM from a container.
+message DetachUsbFromContainerRequest {
+  // Name of the VM.
+  string vm_name = 1;
+
+  // The owner of the VM.
+  string owner_id = 2;
+
+  // Detach USB devices on to this port.
+  int32 port_num = 3;
+}
+
+message DetachUsbFromContainerResponse {
+  enum Status {
+    // The status is unknown.
+    UNKNOWN = 0;
+
+    // The USB port will be detached.
+    OK = 1;
+
+    // Failed to detach.
+    FAILED = 2;
+  }
+
+  // The status.
+  Status status = 1;
+
+  // Human-readable failure reason.
+  string failure_reason = 2;
+}
+
+message ContainerInfo {
+  // The name of the VM.
+  string vm_name = 1;
+
+  // The name of the container within the VM.
+  string container_name = 2;
+
+  // OPTIONAL: If using LXD, information about the OS.
+  OsRelease os_release = 3;
+
+  // The token for the container. An empty string if not available.
+  string container_token = 4;
+}
+
+// Sent by chrome to query the list of containers and VMs that Cicerone knows
+// about.
+message ListRunningContainersRequest {
+  // The owner to list VMs and Containers for.
+  string owner_id = 1;
+}
+
+message ListRunningContainersResponse {
+  // List of known vms and containers.
+  repeated ContainerInfo containers = 1;
+}
+
+// Sent by chrome to get session info from Garcon.
+message GetGarconSessionInfoRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+}
+
+message GetGarconSessionInfoResponse {
+  enum Status {
+    // The current status is unknown.
+    UNKNOWN = 0;
+
+    // Generic error.
+    FAILED = 1;
+
+    // Unknown container.
+    NOT_FOUND = 2;
+
+    // Got info successfully.
+    SUCCEEDED = 3;
+  }
+
+  // Status.
+  Status status = 1;
+
+  // The failure reason if not successful.
+  string failure_reason = 2;
+
+  // The username of the user garcon is running as.
+  string container_username = 3;
+
+  // The home directory of the user garcon is running as.
+  string container_homedir = 4;
+
+  // The vsock port that sftp-server runs on.
+  uint32 sftp_vsock_port = 5;
+}
+
+// Sent to notify that a VM requests to inhibit sleep.
+message InhibitScreensaverSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Identifier for the request, same cookie will be used to uninhibit
+  uint32 cookie = 4;
+
+  // The client which sent this request
+  string client = 5;
+
+  // The reason for inhibiting
+  string reason = 6;
+}
+
+// Sent to notify  that a VM requests to uninhibit sleep.
+message UninhibitScreensaverSignal {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Identifier for the request, corresponding inhibit should have been sent
+  uint32 cookie = 4;
+}
+
+// Devices hosted by a VM that are optional in a container
+enum VmDevice {
+  MICROPHONE = 0;
+  CAMERA = 1;
+}
+
+enum VmDeviceAction {
+  // VmDevice should be enabled.
+  ENABLE = 0;
+  // VmDevice should be disabled.
+  DISABLE = 1;
+}
+
+message UpdateContainerDevicesRequest {
+  // Name of the VM the container is in.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM and container.
+  string owner_id = 3;
+
+  // Actions to take per VmDevice.
+  // The keys are really VmDevice, but proto doesn't allow enum keys.
+  map<string, VmDeviceAction> updates = 4;
+}
+
+message UpdateContainerDevicesResponse {
+  enum Status {
+    // The status is unknown.
+    UNKNOWN = 0;
+
+    // The actions were applied to the container where possible.
+    OK = 1;
+
+    // The requested container wasn't found.
+    NO_SUCH_CONTAINER = 2;
+
+    // Generic grpc error.
+    FAILED = 3;
+  }
+
+  enum UpdateResult {
+    // The VmDevice action was successful.
+    SUCCESS = 0;
+
+    // The VM had no such device so the action didn't apply.
+    NO_SUCH_VM_DEVICE = 1;
+
+    // The action could not be applied to the VmDevice.
+    ACTION_FAILED = 2;
+  }
+
+  // Status of the entire operation. Individual results should be checked even
+  // if status is OK.
+  Status status = 1;
+
+  // Human readable failure reason.
+  string failure_reason = 2;
+
+  // Results of actions per VmDevice.
+  // The keys are really VmDevice, but proto doesn't allow enum keys.
+  map<string, UpdateResult> results = 3;
+}

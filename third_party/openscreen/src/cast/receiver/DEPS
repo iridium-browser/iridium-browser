@@ -1,0 +1,13 @@
+# -*- Mode: Python; -*-
+
+include_rules = [
+   # libcast receiver code must not depend on the sender.
+   '+cast/common',
+   '+cast/receiver'
+]
+
+specific_include_rules = {
+   'application_agent_unittest.cc': [
+      '+json/writer.h',
+   ],
+}

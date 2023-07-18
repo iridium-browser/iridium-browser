@@ -1,0 +1,7 @@
+The following scripts are copied directly from
+https://github.com/chromium/chromium/tree/master/testing/merge_scripts/code_coverage
+ - merge_lib.py
+ - merge_steps.py
+
+The following script is based on a similar script in the same directory
+ - merge_results.py

@@ -1,0 +1,524 @@
+[
+  {
+    "cmd": [],
+    "name": "git"
+  },
+  {
+    "cmd": [
+      "git",
+      "init",
+      "[START_DIR]\\gn"
+    ],
+    "infra_step": true,
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "git.init",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "fetch",
+      "--tags",
+      "https://gn.googlesource.com/gn",
+      "2d72510e447ab60a9728aeea2362d8be2cbd7789"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "infra_step": true,
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "git.fetch",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "checkout",
+      "FETCH_HEAD"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "infra_step": true,
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "git.checkout",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "infra_step": true,
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "git.rev-parse",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd.bat",
+      "ensure",
+      "-root",
+      "[START_DIR]\\cipd",
+      "-ensure-file",
+      "infra/ninja/${platform} version:1.8.2",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "infra_step": true,
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:1.8.2---\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/ninja/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd.bat",
+      "ensure",
+      "-root",
+      "[CACHE]\\windows_sdk",
+      "-ensure-file",
+      "chrome_internal/third_party/sdk/windows uploaded:2019-09-06",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "infra_step": true,
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "ensure_installed (2)",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-uploaded:2019-09\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"chrome_internal/third_party/sdk/windows\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python3",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::json]\\resources\\read.py",
+      "[CACHE]\\windows_sdk\\win_sdk\\bin\\SetEnv.x64.json",
+      "/path/to/tmp/json"
+    ],
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "read SetEnv.x64.json",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"env\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"PATH\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      [@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"..\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"..\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"win_sdk\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"bin\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"x64\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      ]@@@",
+      "@@@STEP_LOG_LINE@json.output@    ], @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"VSINSTALLDIR\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      [@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"..\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"..\\\\\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      ]@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "debug"
+  },
+  {
+    "cmd": [],
+    "name": "debug.windows-amd64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python3",
+      "-u",
+      "[START_DIR]\\gn\\build\\gen.py",
+      "-d"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "env": {
+      "VSINSTALLDIR": "[CACHE]\\windows_sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\windows_sdk\\win_sdk\\bin\\x64"
+      ]
+    },
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "debug.windows-amd64.generate",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]\\cipd\\ninja",
+      "-C",
+      "[START_DIR]\\gn\\out"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "env": {
+      "VSINSTALLDIR": "[CACHE]\\windows_sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\windows_sdk\\win_sdk\\bin\\x64"
+      ]
+    },
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "debug.windows-amd64.build",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]\\gn\\out\\gn_unittests"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "env": {
+      "VSINSTALLDIR": "[CACHE]\\windows_sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\windows_sdk\\win_sdk\\bin\\x64"
+      ]
+    },
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "debug.windows-amd64.test",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "release"
+  },
+  {
+    "cmd": [],
+    "name": "release.windows-amd64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python3",
+      "-u",
+      "[START_DIR]\\gn\\build\\gen.py",
+      "--use-lto",
+      "--use-icf"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "env": {
+      "VSINSTALLDIR": "[CACHE]\\windows_sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\windows_sdk\\win_sdk\\bin\\x64"
+      ]
+    },
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "release.windows-amd64.generate",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]\\cipd\\ninja",
+      "-C",
+      "[START_DIR]\\gn\\out"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "env": {
+      "VSINSTALLDIR": "[CACHE]\\windows_sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\windows_sdk\\win_sdk\\bin\\x64"
+      ]
+    },
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "release.windows-amd64.build",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]\\gn\\out\\gn_unittests"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "env": {
+      "VSINSTALLDIR": "[CACHE]\\windows_sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\windows_sdk\\win_sdk\\bin\\x64"
+      ]
+    },
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "release.windows-amd64.test",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "release.windows-amd64.upload",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd.bat",
+      "pkg-build",
+      "-pkg-def",
+      "{\"data\": [{\"file\": \"gn.exe\"}, {\"version_file\": \".versions/gn.exe.cipd_version\"}], \"install_mode\": \"copy\", \"package\": \"gn/gn/windows-amd64\", \"root\": \"[START_DIR]\\\\gn\\\\out\"}",
+      "-out",
+      "[CLEANUP]\\gn.cipd",
+      "-hash-algo",
+      "sha256",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "env": {
+      "VSINSTALLDIR": "[CACHE]\\windows_sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\windows_sdk\\win_sdk\\bin\\x64"
+      ]
+    },
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "release.windows-amd64.upload.build gn/gn/windows-amd64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@3@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"instance_id\": \"40-chars-fake-of-the-package-instance_id\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"package\": \"gn/gn/windows-amd64\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "taskkill.exe",
+      "/f",
+      "/t",
+      "/im",
+      "mspdbsrv.exe"
+    ],
+    "luci_context": {
+      "realm": {
+        "name": "gn:ci"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "taskkill mspdbsrv"
+  },
+  {
+    "name": "$result"
+  }
+]

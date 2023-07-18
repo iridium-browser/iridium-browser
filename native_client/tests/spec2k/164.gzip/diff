@@ -1,0 +1,19 @@
+diff -Naurb /usr/local/google/home/ddchen/spec/2000/benchspec/CINT2000/164.gzip/src/util.c src/util.c
+--- src/util.c  1998-11-09 07:12:32.000000000 -0800
++++ src2/util.c 2016-08-11 13:52:52.409553232 -0700
+@@ -162,6 +162,7 @@
+     }
+ }
+
++#ifndef __EMSCRIPTEN__
+ /* ========================================================================
+  * Put string s in lower case, return s.
+  */
+@@ -172,6 +173,7 @@
+     for (t = s; *t; t++) *t = tolow(*t);
+     return s;
+ }
++#endif
+
+ /* ========================================================================
+  * Return the base name of a file (remove any directory prefix and

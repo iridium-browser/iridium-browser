@@ -1,0 +1,89 @@
+{
+  // Contains groups of flags with variants, use by browsers
+  flags: {
+    flag-group-1: {
+      --js-flags: [
+        null,
+        "--max-opt=1",
+        // "--max-opt=2",
+        // "--max-opt=4",
+      ],
+      --enable-fied-trial-config: [
+        null,
+        ""
+      ]
+    },
+    // Define custom flag groups here (referenced by name):
+    chrome-custom: {
+    },
+
+    // ------------------------------------------------------------------------
+    // Examples:
+    example-group-1: {
+      // This will result in 4 flag configurations that are run:
+      //
+      //  1. no flags (both entries have a `null` variant)
+      //  2. `--js-flags=--no-opt`
+      //  3. `--js-flags=--no-opt --enable-field-trial-config`
+      //  4. `--enable-field-trial-config`
+      --js-flags: [null, "--no-opt"],
+      --enable-field-trial-config: [null, ""]
+    },
+    example-group-2: {
+      // Use the empty string "" for flags without values
+      "--enable-fied-trial-config": "",
+      // A flag with multiple variants:
+      --js-flags: [
+        null, // variant 1: null == flag is not set
+        "--no-opt --no-ic", // variant 2
+        "--no-sparkplug", // variant 2
+      ]
+      // Flag with two variants: unset and set
+      "--no-sandbox": [
+        null, // variant 1: null ==> flag is not set
+        "", // variant 2: "" ==> flag is set without value
+      ]
+    },
+  },
+
+  // --------------------------------------------------------------------------
+  // Contains browser configs
+  browsers: {
+    "chrome-stable": {
+      // For "path" you can use a path, browser name, or a versioned browser.
+      // See '--browser' option for all possible values.
+      path: "chrome-stable",
+      flags: [
+        // You can reference multiple flag-groups here, any name added to
+        // the 'flags' dict above can be used here.
+        "flag-group-1",
+        // You can also directly define fixed flags
+        // "--js-flags=--no-opt",
+      ]
+    }
+  },
+
+  // You can use either comments or other sections to hide configurations
+  browsers-disabled: {
+    "chrome-mac-stable": {
+      path: "/Applications/Google Chrome.app",
+      flags: [ /* ... add your flag groups here */ ]
+    },
+    "chrome-mac-dev": {
+      path: "/Applications/Google Chrome Dev.app",
+      flags: [ /* ... add your flag groups here */  ]
+    },
+    "chrome-mac-canary": {
+      path: "/Applications/Google Chrome Canary.app",
+      flags: [ /* ... add your flag groups here */  ]
+    },
+    "safari-tech-preview": {
+      path: "/Applications/Safari.app",
+      flags: [/* ... add your flag groups here */ ],
+    },
+    "safari": {
+      path: "/Applications/Safari Technology Preview.app",
+      flags: [/* ... add your flag groups here */ ],
+    },
+  }
+}

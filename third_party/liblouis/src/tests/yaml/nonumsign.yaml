@@ -1,0 +1,33 @@
+table: |
+  display , 6
+  display # 3456
+  display ; 56
+  display - 36
+  punctuation - 36
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  include tables/litdigits6Dots.uti
+  include tables/braille-patterns.cti
+  capsletter 6
+  numsign 3456
+  nonumsign 56
+  numericnocontchars abcdefghij
+  numericmodechars -
+
+flags: {testmode: bothDirections}
+tests:
+  # characters in numericnocontchars require nonumsign to cancel numeric mode
+  - - "123abc"
+    - "#abc;abc"
+  # "k" is not in numericnocontchars so does not require nonumsign to cancel numeric mode
+  - - "123kabc"
+    - "#abckabc"
+  # numericmodechars do not cancel numeric mode
+  - - "123-123"
+    - "#abc-abc"
+  - - "123-abc"
+    - "#abc-;abc"
+  - - "123-Abc"
+    - "#abc-,abc"
+

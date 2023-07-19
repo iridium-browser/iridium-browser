@@ -17,6 +17,7 @@
 
 #include "System/Debug.hpp"
 
+#include <cstdint>
 #include <cstddef>
 #include <cstdint>
 #include <functional>

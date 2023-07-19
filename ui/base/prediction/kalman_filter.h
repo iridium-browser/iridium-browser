@@ -7,6 +7,8 @@
 
 #include <stdint.h>
 
+#include <cstdint>
+
 #include "base/component_export.h"
 #include "ui/gfx/geometry/matrix3_f.h"
 

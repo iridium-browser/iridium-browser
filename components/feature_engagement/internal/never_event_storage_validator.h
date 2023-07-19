@@ -5,6 +5,7 @@
 #ifndef COMPONENTS_FEATURE_ENGAGEMENT_INTERNAL_NEVER_EVENT_STORAGE_VALIDATOR_H_
 #define COMPONENTS_FEATURE_ENGAGEMENT_INTERNAL_NEVER_EVENT_STORAGE_VALIDATOR_H_
 
+#include <cstdint>
 #include <string>
 
 #include "components/feature_engagement/internal/event_storage_validator.h"

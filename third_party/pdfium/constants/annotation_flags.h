@@ -7,6 +7,8 @@
 
 #include <stdint.h>
 
+#include <cstdint>
+
 namespace pdfium {
 namespace annotation_flags {
 

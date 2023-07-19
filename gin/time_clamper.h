@@ -48,7 +48,7 @@ class GIN_EXPORT TimeClamper {
     const int64_t micros = now_micros % 1000;
     // abs() is necessary for devices with times before unix-epoch (most likely
     // configured incorrectly).
-    if (abs(micros) + kResolutionMicros < 1000) {
+    if (std::abs(micros) + kResolutionMicros < 1000) {
       return now_micros / 1000;
     }
     return ClampTimeResolution(now_micros) / 1000;

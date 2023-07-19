@@ -1,0 +1,54 @@
+# PNaCl component git revisions. The git base URL and repository names are at
+# the top of toolchain_build/toolchain_build_pnacl.py.
+# For backward compatibility, the key names match the directory names used by
+# gclient in the earlier version of this file, with the exception that
+# underscores in this file become dashes in the directory name (that means this
+# file can be 'source'ed in a shell script).
+#
+# You can auto-update this file with ./pnacl/deps_update.py
+
+binutils=47a96d057be116b4dc6289f54c873d086f320915
+#
+# Three lines avoid merge conflicts.
+#
+clang=c029fe2e0250ec34ba325624ab659835f06bf777
+#
+# Three lines avoid merge conflicts.
+#
+llvm=a3b836a9847468b1be6247bd596ee12d5783e332
+#
+# Three lines avoid merge conflicts.
+#
+gcc=574429118e460375c377728420c43aad4a3103dc
+#
+# Three lines avoid merge conflicts.
+#
+libcxx=4d75c197a1449829ae919e08a0160c6a21bf7f11
+#
+# Three lines avoid merge conflicts.
+#
+libcxxabi=de05b63efeb5df83abe927c08f330c35995c82a7
+#
+# Three lines avoid merge conflicts.
+#
+nacl_newlib=74e90df35c103a89cda36a2029cad7994190c212
+#
+# Three lines avoid merge conflicts.
+#
+llvm_test_suite=6438a2b505fa29f82eb850aed1785db1738b971c
+#
+# Three lines avoid merge conflicts.
+#
+compiler_rt=084c6bea9b495ff820ba55a1df941ba423680a10
+#
+# Three lines avoid merge conflicts.
+#
+subzero=4b1bdae3955769f62e563e826065d10ddfe040ea
+#
+# Three lines avoid merge conflicts.
+#
+binutils_x86=1d8592cc9f02cc9aeaef992c296376a8fd4c8761
+#
+# Three lines avoid merge conflicts.
+#
+llvm_saigo=33acb8b8c595921bf9cbfa6146e6e874d8b1ab7c

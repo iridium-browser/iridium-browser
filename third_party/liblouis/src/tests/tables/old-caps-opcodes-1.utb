@@ -1,0 +1,22 @@
+# Potential issue with v2.6.3 opcodes begcaps and endcaps.
+# See also: old-caps-opcodes-2.utb
+#
+# Translate:
+# HI    correct
+# HIII    correct
+# HIi    wrong
+# HIii    wrong
+# HIIi    correct
+
+include tables/braille-patterns.cti
+include tables/latinLetterDef6Dots.uti
+
+capsletter 46
+begcaps 45
+endcaps 6
+
+# The new opcodes yield the correct output,
+# but for those lou_trace reports all letters as lowercase.
+#singlelettercaps 46
+#capsword 45
+#capswordstop 6

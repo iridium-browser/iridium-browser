@@ -1,0 +1,9 @@
+prefix=/work/deps_prefix
+libdir=${prefix}/lib64
+includedir=${prefix}/include
+
+Name: libEI
+Description: Emulated Input client library
+Version: 0.4.1
+Libs: -L${libdir} -lei
+Cflags: -I${includedir}

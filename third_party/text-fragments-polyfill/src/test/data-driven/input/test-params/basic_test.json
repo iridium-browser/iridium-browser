@@ -1,0 +1,11 @@
+{
+  "htmlFileName": "basic_test.html",
+  "startParentId": "first",
+  "startOffsetInParent": 0,
+  "startTextOffset": 0,
+  "endParentId": "first",
+  "endOffsetInParent": 0,
+  "endTextOffset": 28,
+  "selectedText": "First paragraph text that is",
+  "highlightText": "First paragraph text that is"
+}

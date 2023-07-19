@@ -1,0 +1,28 @@
+	Remoting plugin for Weston
+
+
+The Remoting plugin creates a streaming image of a virtual output and transmits
+it to a remote host. It is currently only supported on the drm-backend. Virtual
+outputs are created and configured by adding a remote-output section to
+weston.ini. See man weston-drm(7) for configuration details. This plugin is
+loaded automatically if any remote-output sections are present.
+
+This plugin sends motion jpeg images to a client via RTP using gstreamer, and
+so requires gstreamer-1.0. This plugin starts sending images immediately when
+weston is run, and keeps sending them until weston shuts down. The image stream
+can be received by any appropriately configured RTP client, but a sample
+gstreamer RTP client script can be found at doc/scripts/remoting-client-receive.bash.
+
+Script usage:
+	remoting-client-receive.bash <PORT NUMBER>
+
+
+How to compile
+---------------
+Set --enable-remoting=true when configuring weston. The remoting-plugin.so
+module is created and installed in the libweston path.
+
+
+How to configure weston.ini
+----------------------------
+See man weston-drm(7).

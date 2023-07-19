@@ -1,0 +1,5 @@
+include_rules = [
+  '+fxjs',
+  '+v8/include/cppgc',
+  '+xfa/fwl',
+]

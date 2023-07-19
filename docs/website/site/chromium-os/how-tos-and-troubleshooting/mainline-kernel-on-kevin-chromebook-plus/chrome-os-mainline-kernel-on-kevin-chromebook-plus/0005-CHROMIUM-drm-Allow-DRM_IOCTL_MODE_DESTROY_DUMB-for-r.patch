@@ -1,0 +1,48 @@
+From 95bbdf1ee3a06eae8ffa677ab5ce381d77613645 Mon Sep 17 00:00:00 2001
+From: Lepton Wu <lepton@chromium.org>
+Date: Mon, 5 Feb 2018 09:31:20 -0800
+Subject: [PATCH 5/8] CHROMIUM: drm: Allow DRM_IOCTL_MODE_DESTROY_DUMB for
+ render nodes
+
+We've already allow DRM_IOCTL_MODE_CREATE_DUMB for render nodes in
+previous CL https://chromium-review.googlesource.com/378956. We have
+to allow DRM_IOCTL_MODE_DESTROY_DUMB for render nodes also otherwise
+memory could get leaked.
+
+BUG=b:69142323
+TEST=manual - run Chrome OS image inside emulator and check vram usage.
+
+Signed-off-by: Lepton Wu <lepton@chromium.org>
+Previously-reviewed-on: https://chromium-review.googlesource.com/902008
+Previously-reviewed-by: Gurchetan Singh <gurchetansingh@chromium.org>
+(cherry picked from commit 87c53790d6301eec6088dfc5f8b3070ee964fc78)
+
+Change-Id: I8c66172194c74cf5101fdaa89a3804108b5e6f75
+Signed-off-by: Tomasz Figa <tfiga@chromium.org>
+Reviewed-on: https://chromium-review.googlesource.com/1168664
+Reviewed-by: Lepton Wu <lepton@chromium.org>
+
+[rebase419(groeck): Context conflicts]
+Signed-off-by: Guenter Roeck <groeck@chromium.org>
+[tfiga: Rebase onto Linux 4.20]
+Signed-off-by: Tomasz Figa <tfiga@chromium.org>
+---
+ drivers/gpu/drm/drm_ioctl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/drm_ioctl.c b/drivers/gpu/drm/drm_ioctl.c
+index 4dcb63ad10ec7d..5ec32f02d94300 100644
+--- a/drivers/gpu/drm/drm_ioctl.c
++++ b/drivers/gpu/drm/drm_ioctl.c
+@@ -657,7 +657,7 @@ static const struct drm_ioctl_desc drm_ioctls[] = {
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_DIRTYFB, drm_mode_dirtyfb_ioctl, DRM_MASTER|DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_CREATE_DUMB, drm_mode_create_dumb_ioctl, DRM_UNLOCKED|DRM_RENDER_ALLOW),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_MAP_DUMB, drm_mode_mmap_dumb_ioctl, DRM_UNLOCKED|DRM_RENDER_ALLOW),
+-	DRM_IOCTL_DEF(DRM_IOCTL_MODE_DESTROY_DUMB, drm_mode_destroy_dumb_ioctl, DRM_UNLOCKED),
++	DRM_IOCTL_DEF(DRM_IOCTL_MODE_DESTROY_DUMB, drm_mode_destroy_dumb_ioctl, DRM_UNLOCKED|DRM_RENDER_ALLOW),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_OBJ_GETPROPERTIES, drm_mode_obj_get_properties_ioctl, DRM_UNLOCKED|DRM_RENDER_ALLOW),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_OBJ_SETPROPERTY, drm_mode_obj_set_property_ioctl, DRM_MASTER|DRM_UNLOCKED),
+ 	DRM_IOCTL_DEF(DRM_IOCTL_MODE_CURSOR2, drm_mode_cursor2_ioctl, DRM_MASTER|DRM_UNLOCKED),
+-- 
+2.20.0.rc2.403.gdbc3b29805-goog
+

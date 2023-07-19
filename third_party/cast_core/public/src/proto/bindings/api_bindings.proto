@@ -1,0 +1,39 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package cast.bindings;
+
+import "proto/web/message_channel.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+message ApiBinding {
+  // Script to execute before the load of a web document.
+  string before_load_script = 1;
+}
+
+message GetAllRequest {}
+
+message GetAllResponse {
+  repeated ApiBinding bindings = 1;
+}
+
+message ConnectRequest {
+  string port_name = 1;
+  cast.web.MessagePortDescriptor port = 2;
+}
+
+message ConnectResponse {}

@@ -1,0 +1,95 @@
+name: Emscripten
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  js-build:
+    name: Build liblouis for js
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # Contains tests and js snippets appended to builds. The tests are
+    # not run for now. liblouis-js version should be incremented by
+    # hand, to keep the repositories in sync.
+    - name: Obtain liblouis-js
+      run: git clone https://github.com/liblouis/liblouis-js.git
+
+    - name: Pull the docker image
+      run: docker pull dolp/liblouis-js-build-travis:1.37.3-64bit
+
+    - name: Run the docker image
+      run: docker run --rm -v $(pwd):/src dolp/liblouis-js-build-travis:1.37.3-64bit /bin/bash  ".github/workflows/scripts/emscripten-build.sh"
+
+#    - name: Move the build result to a better place
+#      run: |
+#        cp -r ./out/* ./liblouis-js/js-build
+#        cp -r ./out-emscripten-install/share/liblouis/tables ./liblouis-js/js-build/
+#
+#    - name: Echo phantomjs version
+#      run: phantomjs --version
+#
+#    # `npm link` exposes the newly build npm package to the test
+#    # runner. The `--production`-flag is necessary as it ensures that
+#    # no publicly published package of the build is downloaded and
+#    # tested instead.
+#    - name: Build and test the npm package
+#      run: |
+#        cd ./liblouis-js
+#        # FIXME: unclear why the npm link is needed
+#        sudo npm link js-build --production
+#        npm test
+#        cd ..
+
+    - name: Upload the release assets
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-no-tables-utf32.js
+        path: ./out/build-no-tables-utf32.js
+
+    - name: Upload the assets to the snapshot release
+      # only upload to snapshot page if it is a push to master in the main repo
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository =='liblouis/liblouis'}}
+      uses: shogo82148/actions-upload-release-asset@v1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        upload_url: https://uploads.github.com/repos/liblouis/liblouis/releases/8031256/assets{?name,label}
+        asset_path: ./out/build-no-tables-utf32.js
+        asset_name: build-no-tables-utf32.js
+        asset_content_type: application/javascript
+        overwrite: true
+
+    - name: Publish JS file and tables to js-build
+      # only publish if it is a push to master in the main repo
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository =='liblouis/liblouis'}}
+      env:
+        GITHUB_TOKEN: ${{ secrets.JS_BUILD_GITHUB_TOKEN }}
+      run: |
+        # clone the repository to a location outside of the liblouis
+        # repository to avoid issues caused by nested repositories
+        git clone --depth 1 https://github.com/liblouis/js-build.git ../js-build
+        rm -f ../js-build/build-*.js
+        rm -rf ../js-build/tables/
+        cp -R ./out-emscripten-install/share/liblouis/tables/ ../js-build/tables/
+        cp -Rf ./out/* ../js-build/
+        cd ../js-build
+        git add --all
+        git remote set-url origin https://${GITHUB_TOKEN}@github.com/liblouis/js-build.git
+        git config user.name "Github CI"
+        git config user.email "liblouis@users.noreply.github.com"
+        BUILD_VERSION=commit-$(echo $GITHUB_SHA | cut -c1-6)
+        if [[ -z $(git diff --cached --exit-code) ]]; then
+            : Build is identical to previous build. Omitting commit, only adding tag.
+        else
+            git commit -m "Automatic build of version ${BUILD_VERSION}"
+            git push origin master:master
+        fi
+        git tag -a ${BUILD_VERSION} -m "automatic build for version ${BUILD_VERSION}"
+        git push origin $BUILD_VERSION:$BUILD_VERSION

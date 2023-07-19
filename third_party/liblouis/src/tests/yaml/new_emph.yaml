@@ -1,0 +1,105 @@
+# FIXME: This test doesn't do anything useful at the moment.
+# The test was added by Davy for manually testing the new emphasis opcodes and behavior.
+# It could possibly be reused to create some more unit tests. For now it is excluded
+# from execution.
+
+table: |
+  include tables/nl-BE.dis
+  include tables/spaces.uti
+  include tables/latinLetterDef6Dots.uti
+  include tables/digits6Dots.uti
+  include tables/braille-patterns.cti
+  punctuation . 256
+  punctuation - 36
+  emphclass italic
+  #emphword italic 456
+  #emphwordstop italic 6
+  #firstletteremph italic 3456
+  #lastletteremph italic 123456
+  #singleletteremph italic 45
+  #lenemphphrase italic 400
+  #firstwordemph italic 56
+  #lastwordemphbefore italic 12346
+  #lastwordemphafter italic 2356
+tests:
+  - - o
+    - o
+    - {typeform: {italic: '+'}}
+  - - o n e
+    - o n e
+    - {typeform: {italic: '+ + +'}}
+  - - o . e
+    - o / e
+    - {typeform: {italic: '+ + +'}}
+  - - one
+    - one
+    - {typeform: {italic: '+++'}}
+  - - one two three
+    - one two three
+    - {typeform: {italic: '+++++++++++++'}}
+  - - one two three four
+    - one two three four
+    - {typeform: {italic: '++++++++++++++++++'}}
+  - - one two three
+    - one two three
+    - {typeform: {italic: '+++ +++ +++++'}}
+  - - one two three four
+    - one two three four
+    - {typeform: {italic: '+++ +++ +++++ ++++'}}
+  - - one two three.
+    - one two three/
+    - {typeform: {italic: '++++++++++++++'}}
+  - - one two three.
+    - one two three/
+    - {typeform: {italic: '+++++++++++++ '}}
+  - - one two three four.
+    - one two three four/
+    - {typeform: {italic: '+++++++++++++++++++'}}
+  - - one two three four.
+    - one two three four/
+    - {typeform: {italic: '++++++++++++++++++ '}}
+  - - one two ... four
+    - one two /// four
+    - {typeform: {italic: '++++++++++++++++'}}
+  - - ... two three
+    - /// two three
+    - {typeform: {italic: '+++++++++++++'}}
+  - - one two ...
+    - one two ///
+    - {typeform: {italic: '+++++++++++'}}
+  - - o.n.e
+    - o/n/e
+    - {typeform: {italic: '+++++'}}
+  - - o.n.e
+    - o/n/e
+    - {typeform: {italic: '+ + +'}}
+  - - o-n-e
+    - o-n-e
+    - {typeform: {italic: ' + + '}}
+  - - one.
+    - one/
+    - {typeform: {italic: '   +'}}
+  - - one...
+    - one///
+    - {typeform: {italic: '   +++'}}
+  - - one...
+    - one///
+    - {typeform: {italic: '++++  '}}
+  - - -one
+    - -one
+    - {typeform: {italic: '+   '}}
+  - - -one
+    - -one
+    - {typeform: {italic: '++++'}}
+  - - three
+    - three
+    - {typeform: {italic: ' ++  '}}
+  - - thr-ee
+    - thr-ee
+    - {typeform: {italic: '  +++ '}}
+  - - one -two- three
+    - one -two- three
+    - {typeform: {italic: '+++++++++++++++'}}
+  - - four three two one
+    - four three two one
+    - {typeform: {italic: '  ++++++++++++++++'}}

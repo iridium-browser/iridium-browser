@@ -1,0 +1,18 @@
+# The location of the build configuration file.
+buildconfig = "//build/config/BUILDCONFIG.gn"
+script_executable = "python3"
+
+# We don't check folders that either (1) are code we don't own, or (2)
+# don't have valid targets in them.
+check_targets = [
+  ":*",
+  "//build/*",
+  "//cast/*",
+  "//discovery/*",
+  "//osp/*",
+  "//platform/*",
+  "//test/*",
+  "//testing/*",
+  "//tools/*",
+  "//util/*",
+]

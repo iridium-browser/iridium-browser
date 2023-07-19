@@ -1,0 +1,14 @@
+#- * - Mode : Python; - * -
+
+include_rules = [
+  '+discovery/dnssd/public',
+  '+discovery/mdns/public',
+
+  # TODO(https://issuetracker.google.com/issues/194234872):
+  # Move these to discovery/mdns/public
+  '+discovery/mdns/mdns_domain_confirmed_provider.h',
+  '+discovery/mdns/mdns_record_changed_callback.h',
+  '+discovery/mdns/mdns_records.h',
+  
+  '+discovery/mdns/testing/mdns_test_util.h',
+]

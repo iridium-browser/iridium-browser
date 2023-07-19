@@ -1,0 +1,34 @@
+service: skia-bridge
+
+runtime: python
+env: flex
+
+runtime_config:
+  # As of Q1 2023, the latest python supported by Appengine flexible is 3.7.9.
+  python_version: 3.7
+
+entrypoint: gunicorn -b:$PORT main:APP
+
+automatic_scaling:
+  min_num_instances: 4
+  max_num_instances: 20
+  cool_down_period_sec: 180
+  cpu_utilization:
+    target_utilization: 0.6
+
+resources:
+  cpu: 4
+  memory_gb: 8
+
+handlers:
+- url: /.*
+  script: main.APP
+  secure: always
+
+readiness_check:
+  path: "/"
+  check_interval_sec: 30
+  timeout_sec: 1
+  failure_threshold: 2
+  success_threshold: 2
+  app_start_timeout_sec: 300

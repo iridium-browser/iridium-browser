@@ -1,0 +1,2 @@
+Add conditional ifdef to check for "strings.h" from emscripten to prevent multiple defines of "strncasecmp"
+Change function pointer types for comparison function to match qsort() usage

@@ -1,0 +1,10 @@
+[package]
+name = "array_view"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+
+[dev-dependencies]
+

@@ -1,0 +1,137 @@
+{{header}}
+{{object 1 0}} <<
+  /Type /Catalog
+  /Pages 2 0 R
+>>
+endobj
+{{object 2 0}} <<
+  /Type /Pages
+  /Count 1
+  /Kids [3 0 R]
+>>
+endobj
+{{object 3 0}} <<
+  /Type /Page
+  /Parent 2 0 R
+  /Contents 4 0 R
+  /MediaBox [0 0 612 792]
+  /Resources <<
+    /XObject <<
+      /X1 5 0 R
+    >>
+  >>
+>>
+endobj
+{{object 4 0}} <<
+  {{streamlen}}
+>>
+stream
+q
+/X1 Do
+Q
+endstream
+endobj
+{{object 5 0}} <<
+  /Type /XObject
+  /Subtype /Form
+  /BBox [0 0 612 792]
+  /Resources <<
+    /Pattern <<
+      /P1 6 0 R
+    >>
+  >>
+  {{streamlen}}
+>>
+stream
+q
+/Pattern cs
+/P1 scn
+0 0 612 792 re f
+Q
+endstream
+endobj
+{{object 6 0}} <<
+  /Type /Pattern
+  /PatternType 1
+  /TilingType 1
+  /PaintType 1
+  /BBox [0 0 600 900]
+  /XStep 2876
+  /YStep 2876
+  /Resources <<
+    /XObject <<
+      /X2 7 0 R
+    >>
+  >>
+  {{streamlen}}
+>>
+stream
+/X2 Do
+endstream
+endobj
+{{object 7 0}} <<
+  /Type /XObject
+  /Subtype /Form
+  /BBox [0 0 600 900]
+  /Resources <<
+    /Font <<
+      /F1 8 0 R
+    >>
+  >>
+  {{streamlen}}
+>>
+stream
+q
+0 0 0 rg
+BT
+100 200 Td
+/F1 16 Tf
+(   ) Tj
+ET
+Q
+endstream
+endobj
+{{object 8 0}} <<
+  /Type /Font
+  /Subtype /TrueType
+  /FirstChar 32
+  /BaseFont /AAAAAD+Test
+  /FontDescriptor 9 0 R
+  /ToUnicode 10 0 R
+  /LastChar 32
+  /Widths [1055]
+>>
+endobj
+{{object 9 0}} <<
+  /Type /FontDescriptor
+  /Descent -68
+  /MissingWidth 1000
+  /CapHeight 1149
+  /StemV 0
+  /FontFile2 11 0 R
+  /Flags 4
+  /FontBBox [0 -215 1000 932]
+  /FontName /AAAAAD+Test
+  /ItalicAngle 0
+  /Ascent 933
+>>
+endobj
+{{object 10 0}} <<
+  {{streamlen}}
+>>
+stream
+{{include ../bug_1388_cmap.fragment}}
+endstream
+endobj
+{{object 11 0}} <<
+  /Filter [/ASCIIHexDecode /FlateDecode]
+  {{streamlen}}
+>>
+stream
+{{include ../bug_1388_truetype_font.fragment}}
+endstream
+endobj
+{{xref}}
+{{trailer}}
+{{startxref}}
+%%EOF

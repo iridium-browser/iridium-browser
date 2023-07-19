@@ -1,0 +1,9 @@
+prefix=/work/out
+libdir=${prefix}/lib64
+includedir=${prefix}/include
+
+Name: libEIS
+Description: Emulated Input server library
+Version: 0.4.1
+Libs: -L${libdir} -leis
+Cflags: -I${includedir}

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocol name="ivi_hmi_controller">
+
+  <copyright>
+    Copyright (C) 2013 DENSO CORPORATION
+    Copyright (c) 2013 BMW Car IT GmbH
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the "Software"),
+    to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+    and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice (including the next
+    paragraph) shall be included in all copies or substantial portions of the
+    Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE SOFTWARE.
+  </copyright>
+
+  <interface name="ivi_hmi_controller" version="1">
+    <description summary="set up and control IVI style UI"/>
+
+    <request name="UI_ready">
+      <description summary="inform the ready for drawing desktop." />
+    </request>
+
+    <request name="workspace_control">
+      <description summary="start controlling a surface by server">
+        Reference protocol to control a surface by server.
+        To control a surface by server, it gives seat to the server
+        to e.g. control Home screen. Home screen has several workspaces
+        to group launchers of wayland application. These workspaces
+        are drawn on a horizontally long surface to be controlled
+        by motion of input device. E.g. A motion from right to left
+        happens, the viewport of surface is controlled in the ivi-shell
+        by using ivi-layout. client can recognizes the end of controlling
+        by event "workspace_end_control".
+      </description>
+      <arg name="seat" type="object" interface="wl_seat"/>
+      <arg name="serial" type="uint"/>
+    </request>
+
+    <enum name="layout_mode">
+      <entry name="tiling" value="0"/>
+      <entry name="side_by_side" value="1"/>
+      <entry name="full_screen" value="2"/>
+      <entry name="random" value="3" />
+    </enum>
+
+    <request name="switch_mode">
+      <description summary="request mode switch of application layout">
+        hmi-controller loaded to ivi-shall implements 4 types of layout
+        as a reference; tiling, side by side, full_screen, and random.
+      </description>
+      <arg name="layout_mode" type="uint"/>
+    </request>
+
+    <enum name="home">
+      <entry name="off" value="0"/>
+      <entry name="on" value="1"/>
+    </enum>
+
+    <request name="home">
+      <description summary="request displaying/undisplaying home screen">
+        home screen is a reference implementation of launcher to launch
+        wayland applications. The home screen has several workspaces to
+        group wayland applications. By defining the following keys in
+        weston.ini, user can add launcher icon to launch a wayland application
+        to a workspace.
+        [ivi-launcher]
+        workspace-id=0
+		: id of workspace to add a launcher
+        icon-id=4001
+		: ivi id of ivi_surface to draw an icon
+        icon=/home/user/review/build-ivi-shell/data/icon_ivi_flower.png
+		: path to icon image
+        path=/home/user/review/build-ivi-shell/weston-dnd
+		: path to wayland application
+      </description>
+      <arg name="home" type="uint"/>
+    </request>
+
+    <event name="workspace_end_control">
+      <description summary="notify controlling workspace end"/>
+      <arg name="is_controlled" type="int"/>
+    </event>
+
+  </interface>
+
+</protocol>

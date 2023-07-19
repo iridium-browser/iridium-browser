@@ -1,0 +1,37 @@
+# Copyright (c) 2019 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# Watchlist Rules
+# Refer: https://chromium.googlesource.com/chromium/src/+/main/docs/infra/watchlists.md
+
+# IMPORTANT: The regular expression filepath is tested against each path using
+# re.search, so it is not usually necessary to add .*.
+
+{
+  'WATCHLIST_DEFINITIONS': {
+    'all': {
+      'filepath': '.',
+    },
+    'chromedriver': {
+      'filepath': 'front_end/emulated_devices/',
+    },
+    'lighthouse': {
+      'filepath': '[Ll]ighthouse',
+    },
+    'third_party': {
+      'filepath': 'front_end/third_party/',
+    },
+    'tests': {
+      'filepath': 'test/',
+    },
+  },
+
+  'WATCHLISTS': {
+    'all': ['devtools-reviews+devtools@chromium.org'],
+    'chromedriver': ['johnchen+watch@chromium.org'],
+    'lighthouse': ['lighthouse-eng+devtools-cl@google.com'],
+    'third_party': ['devtools-reviews+third_party@chromium.org'],
+    'tests': ['almuthanna+watch@chromium.org'],
+  },
+}

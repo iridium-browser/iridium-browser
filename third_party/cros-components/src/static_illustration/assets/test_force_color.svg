@@ -1,0 +1,10 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    #blue {
+      fill: #0000ff;
+      stroke: cyan;
+    }
+  </style>
+  <circle fill="#ff0000" stroke='#00ff00' cx="25" cy="25" r="25" />
+  <circle id="blue" cx="75" cy="25" r="25" />
+</svg>

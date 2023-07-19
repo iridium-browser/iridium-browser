@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+S=$(pwd)
+SRCDIRS=$(find ./src -mindepth 1 -maxdepth 1 -type d|
+  egrep -v '^\./(ninja|out|\.git)' |sed -e "sX^\./X-s $S/Xg"| tr '\012' ' ')
+D=$(mktemp -d)
+cd $D
+cscope -Rbq $SRCDIRS
+mv * $S
+cd $S
+rmdir $D

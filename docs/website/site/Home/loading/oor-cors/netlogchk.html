@@ -1,0 +1,231 @@
+<html>
+<body>
+<input type="file" id="file">
+<hr>
+<div id="result"></div>
+<hr>
+<div id="log"></div>
+<script>
+let passedRequests = 0;
+let failedRequests = 0;
+let passedUrls = {};
+let failedUrls = {};
+
+function logStart() {
+  passedRequests = 0;
+  failedRequests = 0;
+  passedUrls = {};
+  failedUrls = {};
+
+  removeChildren = element => {
+    while (element.firstChild)
+      element.removeChild(element.firstChild);
+  };
+  removeChildren(document.getElementById('result'));
+  removeChildren(document.getElementById('log'));
+}
+
+function logEvent(result) {
+  const pre = document.createElement('pre');
+  if (result.allowed) {
+    ++passedRequests;
+    passedUrls[result.url] = "";
+    pre.innerText = '[PASS] "' + result.method + '" for ' + result.url;
+    pre.setAttribute('style', 'color:blue');
+  } else {
+    ++failedRequests;
+    failedUrls[result.url] = result.reason;
+    pre.innerText = '[FAIL] "' + result.method + '" for ' + result.url + '; ' +
+        result.reason;
+    pre.setAttribute('style', 'color:red');
+  }
+  document.getElementById('log').appendChild(pre);
+}
+
+function logEnd() {
+  const result = document.createElement('div');
+  const pass = document.createElement('div');
+  pass.innerText = passedRequests + ' CORS requests passed on ' +
+      Object.keys(passedUrls).length + ' URLs.';
+  result.appendChild(pass);
+  const fail = document.createElement('div');
+  fail.innerText = failedRequests + ' CORS requests failed on ' +
+      Object.keys(failedUrls).length + ' URLs.';
+  result.appendChild(fail);
+  document.getElementById('result').appendChild(result);
+}
+
+class NetLog {
+  constructor() {
+  }
+
+  import(data) {
+    this._phaseNone = data.constants.logEventPhase.PHASE_NONE;
+    this._phaseBegin = data.constants.logEventPhase.PHASE_BEGIN;
+
+    const eventTypes = data.constants.logEventTypes;
+    this._aliveEvent = eventTypes.REQUEST_ALIVE;
+    this._h1RequestEvent = eventTypes.HTTP_TRANSACTION_SEND_REQUEST_HEADERS;
+    this._h2RequestEvent = eventTypes.HTTP_TRANSACTION_HTTP2_SEND_REQUEST_HEADERS;
+    this._quicRequestEvent = eventTypes.HTTP_TRANSACTION_QUIC_SEND_REQUEST_HEADERS;
+    this._responseEvent = eventTypes.HTTP_TRANSACTION_READ_RESPONSE_HEADERS;
+
+    this.events = {};
+    const urlRequestType = data.constants.logSourceType.URL_REQUEST;
+    for (let event of data.events) {
+      if (event.source.type != urlRequestType)
+        continue;
+      const id = event.source.id;
+      if (this.events[id] === undefined)
+        this.events[id] = [];
+      if (this.events[id][event.phase] === undefined)
+        this.events[id][event.phase] = {};
+      this.events[id][event.phase][event.type] = event;
+    }
+  }
+
+  getUrl(event) {
+    if (!event || !event[this._phaseBegin])
+      return undefined;
+    const aliveEvent = event[this._phaseBegin][this._aliveEvent];
+    if (!aliveEvent || !aliveEvent.params)
+      return undefined;
+    return aliveEvent.params.url;
+  }
+
+  getNormalizedRequest(event) {
+    if (!event || !event[this._phaseNone])
+      return undefined;
+    const request = {};
+    const phaseNoneEvents = event[this._phaseNone];
+    if (phaseNoneEvents[this._h1RequestEvent]) {
+      const line = phaseNoneEvents[this._h1RequestEvent].params.line;
+      request['method'] = line.split(' ')[0];
+      const headers = phaseNoneEvents[this._h1RequestEvent].params.headers;
+      for (let header of headers) {
+        const pair = header.split(': ');
+        request[pair[0].toLowerCase()] = pair[1];
+      }
+    } else if (phaseNoneEvents[this._h2RequestEvent] ||
+        phaseNoneEvents[this._quicRequestEvent]) {
+      const event = phaseNoneEvents[this._h2RequestEvent] ||
+          phaseNoneEvents[this._quicRequestEvent];
+      const headers = event.params.headers;
+      for (let header of headers) {
+        if (header[0] == ':')
+          header = header.substr(1);
+        const pair = header.split(': ');
+        request[pair[0].toLowerCase()] = pair[1];
+      }
+    } else {
+      return undefined;
+    }
+    return request;
+  }
+
+  getNormalizedResponse(event) {
+    if (!event || !event[this._phaseNone])
+      return undefined;
+    const responseEvent = event[this._phaseNone][this._responseEvent];
+    if (!responseEvent || !responseEvent.params)
+      return undefined;
+    const response = {};
+    for (let header of responseEvent.params.headers) {
+      const pair = header.split(': ');
+      response[pair[0].toLowerCase()] = pair[1];
+    }
+    return response;
+  }
+}
+
+function check(data) {
+  logStart();
+
+  const netlog = new NetLog();
+  netlog.import(data);
+  for (let id in netlog.events) {
+    const ev = netlog.events[id];
+    const request = netlog.getNormalizedRequest(ev);
+    if (!request || !request.origin)
+      continue;
+    const url = netlog.getUrl(ev);
+    if (url.startsWith(request.origin))
+      continue;
+    const response = netlog.getNormalizedResponse(ev);
+    if (!response) {
+      console.log('no response for ', request);
+      continue;
+    }
+
+    const normalizeHeaderList = item => {
+      const upperItem = item.toUpperCase();
+      if (upperItem[0] == ' ')
+        return upperItem.substr(1);
+      return upperItem;
+    };
+
+    const result = {
+      url: url,
+      method: request.method,
+      request: request,
+      response: netlog.getNormalizedResponse(ev),
+      allowed: false,
+      reason: "",
+      debug: ev,
+    };
+    const allow_origin = result.response['access-control-allow-origin'];
+    if (!allow_origin) {
+      result.reason = 'No \'Access-Control-Allow-Origin\' header is present.';
+    } else if (allow_origin != '*' && allow_origin != request.origin) {
+      result.reason =
+          'The \'Access-Control-Allow-Origin\' header has a value \'' +
+          allow_origin + '\' that is not equal to the supplied origin.';
+    } else if (request.method != 'OPTIONS') {
+      result.allowed = true;
+    } else {
+      const method = response['access-control-allow-methods'];
+      const methods = method ? method.split(',').map(normalizeHeaderList) : [];
+      if (!methods.includes(request['access-control-request-method'])) {
+        result.reason =
+            'Method ' + request['access-control-request-method'] + ' is not ' +
+            'allowed by Access-Control-Allow-Methods in preflight response.';
+      } else {
+        const requestedHeaders = request['access-control-request-headers'];
+        const requestedHeaderList = requestedHeaders ?
+            requestedHeaders.split(',').map(normalizeHeaderList) : [];
+        const header = response['access-control-allow-headers'];
+        const headers = header ? header.split(',').map(normalizeHeaderList) : [];
+        for (let requestedHeader of requestedHeaderList) {
+          if (headers.includes(requestedHeader))
+            continue;
+          result.reason =
+              'Request header field ' + requestedHeader + ' is not allowed by ' +
+              'Access-Control-Allow-Headers in preflight response.';
+        }
+      }
+      if (!result.reason)
+        result.allowed = true;
+    }
+    if (!result.allowed)
+      console.log(result);
+    logEvent(result);
+  }
+  logEnd();
+}
+
+document.getElementById('file').addEventListener('change', e => {
+  const reader = new FileReader();
+  reader.onload = e => {
+    check(JSON.parse(e.target.result));
+  };
+  reader.readAsText(e.target.files[0]);
+}, false);
+
+async function main() {
+  const response = await fetch('chrome-net-export-log');
+  check(await response.json());
+} 
+//main();
+</script>
+</body>
+</html>

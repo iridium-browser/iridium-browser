@@ -69,6 +69,7 @@ void SafeArchiveAnalyzer::AnalyzeRarFile(
     base::File rar_file,
     mojo::PendingRemote<chrome::mojom::TemporaryFileGetter> temp_file_getter,
     AnalyzeRarFileCallback callback) {
+#if 0
   DCHECK(rar_file.IsValid());
   temp_file_getter_.Bind(std::move(temp_file_getter));
   callback_ = std::move(callback);
@@ -84,6 +85,9 @@ void SafeArchiveAnalyzer::AnalyzeRarFile(
   rar_analyzer_.Analyze(std::move(rar_file), base::FilePath(),
                         std::move(analysis_finished_callback),
                         std::move(temp_file_getter_callback), &results_);
+#else
+  NOTREACHED();
+#endif
 }
 
 void SafeArchiveAnalyzer::AnalyzeSevenZipFile(

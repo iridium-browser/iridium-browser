@@ -1,0 +1,31 @@
+[package]
+name = "crypto_provider_test-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+crypto_provider = { path = "../../crypto_provider" }
+crypto_provider_default = { path = "../../crypto_provider_default", default-features = false }
+arbitrary = { version = "1.2.3", features = ["derive"] }
+
+[features]
+default = ["crypto_provider_default/default"]
+openssl = ["crypto_provider_default/openssl"]
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[profile.release]
+debug = 1
+
+[[bin]]
+name = "fuzz_p256"
+path = "fuzz_targets/fuzz_p256.rs"
+test = false
+doc = false

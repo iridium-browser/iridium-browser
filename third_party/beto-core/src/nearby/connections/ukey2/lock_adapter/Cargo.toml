@@ -1,0 +1,13 @@
+[package]
+name = "lock_adapter"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+spin = { workspace = true, optional = true }
+
+[features]
+default = ["spin"]
+spin = ["dep:spin"]
+std = []

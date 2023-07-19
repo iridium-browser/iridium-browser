@@ -1,0 +1,400 @@
+Alert: *** starting test 1 ***
+Alert: PASS: AFDate_Format() threw AFDate_Format: Incorrect number of parameters passed to function.
+Alert: PASS: AFDate_Format(1, 2) threw AFDate_Format: Incorrect number of parameters passed to function.
+Alert: PASS: AFDate_Format(1) = 1/1/70
+Alert: PASS: AFDate_Format(1) = 5/9/14
+Alert: PASS: AFDate_Format('blooey') = 1/1
+Alert: PASS: AFDate_Format('blooey') = 5/9
+Alert: **********************
+Alert: PASS: AFDate_FormatEx() threw AFDate_FormatEx: Incorrect number of parameters passed to function.
+Alert: PASS: AFDate_FormatEx(1, 2) threw AFDate_FormatEx: Incorrect number of parameters passed to function.
+Alert: PASS: AFDate_FormatEx(2) = 2
+Alert: PASS: AFDate_FormatEx('blooey') = blooey
+Alert: PASS: AFDate_FormatEx('m/d') = 5/9
+Alert: PASS: AFDate_FormatEx('mm/dd/yyyy') = 12/02/2015
+Alert: PASS: AFDate_FormatEx('mm/dd/yyyy') = 05/09/2014
+Alert: **********************
+Alert: PASS: AFDate_Keystroke() threw AFDate_Keystroke: Incorrect number of parameters passed to function.
+Alert: PASS: AFDate_Keystroke(1, 2) threw AFDate_Keystroke: Incorrect number of parameters passed to function.
+Alert: PASS: AFDate_Keystroke(2) = 04/19
+Alert: PASS: AFDate_Keystroke('blooey') = 04/19/15
+Alert: **********************
+Alert: PASS: AFDate_KeystrokeEx() threw AFDate_KeystrokeEx: AFDate_KeystrokeEx's parameter size not correct
+Alert: PASS: AFDate_KeystrokeEx(1, 2) threw AFDate_KeystrokeEx: AFDate_KeystrokeEx's parameter size not correct
+AFDate_KeystrokeEx[icon=3,type=0]: The input value can't be parsed as a valid date/time (2).
+Alert: PASS: AFDate_KeystrokeEx(2) = x
+AFDate_KeystrokeEx[icon=3,type=0]: The input value can't be parsed as a valid date/time (blooey).
+Alert: PASS: AFDate_KeystrokeEx('blooey') = x
+AFDate_KeystrokeEx[icon=3,type=0]: The input value can't be parsed as a valid date/time (m/d).
+Alert: PASS: AFDate_KeystrokeEx('m/d') = x
+Alert: **********************
+Alert: PASS: AFExtractNums() threw AFExtractNums: Incorrect number of parameters passed to function.
+Alert: PASS: AFExtractNums(1, 2) threw AFExtractNums: Incorrect number of parameters passed to function.
+Alert: PASS: AFExtractNums('100 200') = 100,200
+Alert: **********************
+Alert: PASS: AFMakeNumber() threw AFMakeNumber: Incorrect number of parameters passed to function.
+Alert: PASS: AFMakeNumber(1, 2) threw AFMakeNumber: Incorrect number of parameters passed to function.
+Alert: PASS: AFMakeNumber('2blooey') = 0
+Alert: PASS: AFMakeNumber(1) = 1
+Alert: PASS: AFMakeNumber('1.2') = 1.2
+Alert: PASS: AFMakeNumber('1,2') = 1.2
+Alert: **********************
+Alert: PASS: AFMergeChange() threw AFMergeChange: Incorrect number of parameters passed to function.
+Alert: PASS: AFMergeChange(1, 2) threw AFMergeChange: Incorrect number of parameters passed to function.
+Alert: PASS: AFMergeChange(undefined) = one
+Alert: **********************
+Alert: PASS: AFNumber_Format() threw AFNumber_Format: Incorrect number of parameters passed to function.
+Alert: PASS: AFNumber_Format(0, 1, 0, 0, '', false, 42) threw AFNumber_Format: Incorrect number of parameters passed to function.
+Alert: PASS: AFNumber_Format(0, 1, 0, 0, '', false) = 0
+Alert: PASS: AFNumber_Format(0, 1, 0, 0, '', false) = 12
+Alert: **********************
+Alert: PASS: AFNumber_Keystroke() threw AFNumber_Keystroke: Incorrect number of parameters passed to function.
+Alert: PASS: AFNumber_Keystroke(1) threw AFNumber_Keystroke: Incorrect number of parameters passed to function.
+AFNumber_Keystroke[icon=3,type=0]: The input value is invalid.
+Alert: PASS: AFNumber_Keystroke(1, 2) threw AFNumber_Keystroke: The input value is invalid.
+Alert: PASS: AFNumber_Keystroke(1, 2) = 123
+Alert: PASS: AFNumber_Keystroke(1, 2, 3) = 123
+Alert: **********************
+Alert: PASS: AFParseDateEx() threw AFParseDateEx: Incorrect number of parameters passed to function.
+Alert: PASS: AFParseDateEx(1, 2, 3) threw AFParseDateEx: Incorrect number of parameters passed to function.
+Alert: PASS: AFParseDateEx(1, 2) = 1399672130000
+Alert: **********************
+Alert: PASS: AFPercent_Format() threw AFPercent_Format: Incorrect number of parameters passed to function.
+Alert: PASS: AFPercent_Format(0) threw AFPercent_Format: Incorrect number of parameters passed to function.
+Alert: PASS: AFPercent_Format(1, 0, 0) = -512.3%
+Alert: PASS: AFPercent_Format(1, 0, 0, 0) = -512.3%
+Alert: PASS: AFPercent_Format(1, 0, 0, 0, 0) = -512.3%
+Alert: PASS: AFPercent_Format(1, 0, 0, 0, 0, 0) = -512.3%
+Alert: PASS: AFPercent_Format(1, 0, 0) = -512.3%
+Alert: PASS: AFPercent_Format(1, 0, 1) = %-512.3
+Alert: PASS: AFPercent_Format(1, 0, 2) = %-512.3
+Alert: PASS: AFPercent_Format(10, 0, 0) = 0.0000000000%
+Alert: PASS: AFPercent_Format(10, 0, 1) = %0.0000000000
+Alert: PASS: AFPercent_Format(10, 0, 2) = %0.0000000000
+Alert: PASS: AFPercent_Format(0, 0, 0) = 98,765,432,100%
+Alert: PASS: AFPercent_Format(0, 1, 0) = 98765432100%
+Alert: PASS: AFPercent_Format(0, 2, 0) = 98.765.432.100%
+Alert: PASS: AFPercent_Format(0, 0, 1) = %98,765,432,100
+Alert: PASS: AFPercent_Format(0, 1, 1) = %98765432100
+Alert: PASS: AFPercent_Format(0, 2, 1) = %98.765.432.100
+Alert: PASS: AFPercent_Format(0, 0, 2) = %98,765,432,100
+Alert: PASS: AFPercent_Format(0, 1, 2) = %98765432100
+Alert: PASS: AFPercent_Format(0, 2, 2) = %98.765.432.100
+Alert: PASS: AFPercent_Format(-3, 0) threw AFPercent_Format: Incorrect parameter value.
+Alert: PASS: AFPercent_Format(-3, 1) threw AFPercent_Format: Incorrect parameter value.
+Alert: PASS: AFPercent_Format(-1, 3) threw AFPercent_Format: Incorrect parameter value.
+Alert: PASS: AFPercent_Format(0, -3) threw AFPercent_Format: Incorrect parameter value.
+Alert: PASS: AFPercent_Format(0, -1) threw AFPercent_Format: Incorrect parameter value.
+Alert: PASS: AFPercent_Format(0, 50) threw AFPercent_Format: Incorrect parameter value.
+Alert: PASS: AFPercent_Format(0, 51) threw AFPercent_Format: Incorrect parameter value.
+Alert: PASS: AFPercent_Format(0, 0) = 0%
+Alert: PASS: AFPercent_Format(0, 1) = 0%
+Alert: PASS: AFPercent_Format(0, 2) = 0%
+Alert: PASS: AFPercent_Format(0, 3) = 0%
+Alert: PASS: AFPercent_Format(0, 4) = 0%
+Alert: PASS: AFPercent_Format(1, 0) = 0.0%
+Alert: PASS: AFPercent_Format(1, 1) = 0.0%
+Alert: PASS: AFPercent_Format(1, 2) = 0,0%
+Alert: PASS: AFPercent_Format(1, 3) = 0,0%
+Alert: PASS: AFPercent_Format(1, 4) = 0.0%
+Alert: PASS: AFPercent_Format(2, 0) = 0.00%
+Alert: PASS: AFPercent_Format(2, 1) = 0.00%
+Alert: PASS: AFPercent_Format(2, 2) = 0,00%
+Alert: PASS: AFPercent_Format(2, 3) = 0,00%
+Alert: PASS: AFPercent_Format(2, 4) = 0.00%
+Alert: PASS: AFPercent_Format(3, 0) = 0.000%
+Alert: PASS: AFPercent_Format(3, 1) = 0.000%
+Alert: PASS: AFPercent_Format(3, 2) = 0,000%
+Alert: PASS: AFPercent_Format(3, 3) = 0,000%
+Alert: PASS: AFPercent_Format(3, 4) = 0.000%
+Alert: PASS: AFPercent_Format(10, 0) = 0.0000000000%
+Alert: PASS: AFPercent_Format(10, 1) = 0.0000000000%
+Alert: PASS: AFPercent_Format(10, 2) = 0,0000000000%
+Alert: PASS: AFPercent_Format(10, 3) = 0,0000000000%
+Alert: PASS: AFPercent_Format(10, 4) = 0.0000000000%
+Alert: PASS: AFPercent_Format(0, 0) = 0%
+Alert: PASS: AFPercent_Format(0, 1) = 0%
+Alert: PASS: AFPercent_Format(0, 2) = 0%
+Alert: PASS: AFPercent_Format(0, 3) = 0%
+Alert: PASS: AFPercent_Format(0, 4) = 0%
+Alert: PASS: AFPercent_Format(1, 0) = 0.0%
+Alert: PASS: AFPercent_Format(1, 1) = 0.0%
+Alert: PASS: AFPercent_Format(1, 2) = 0,0%
+Alert: PASS: AFPercent_Format(1, 3) = 0,0%
+Alert: PASS: AFPercent_Format(1, 4) = 0.0%
+Alert: PASS: AFPercent_Format(2, 0) = 0.00%
+Alert: PASS: AFPercent_Format(2, 1) = 0.00%
+Alert: PASS: AFPercent_Format(2, 2) = 0,00%
+Alert: PASS: AFPercent_Format(2, 3) = 0,00%
+Alert: PASS: AFPercent_Format(2, 4) = 0.00%
+Alert: PASS: AFPercent_Format(3, 0) = 0.000%
+Alert: PASS: AFPercent_Format(3, 1) = 0.000%
+Alert: PASS: AFPercent_Format(3, 2) = 0,000%
+Alert: PASS: AFPercent_Format(3, 3) = 0,000%
+Alert: PASS: AFPercent_Format(3, 4) = 0.000%
+Alert: PASS: AFPercent_Format(10, 0) = 0.0000000000%
+Alert: PASS: AFPercent_Format(10, 1) = 0.0000000000%
+Alert: PASS: AFPercent_Format(10, 2) = 0,0000000000%
+Alert: PASS: AFPercent_Format(10, 3) = 0,0000000000%
+Alert: PASS: AFPercent_Format(10, 4) = 0.0000000000%
+Alert: PASS: AFPercent_Format(0, 0) = -512%
+Alert: PASS: AFPercent_Format(0, 1) = -512%
+Alert: PASS: AFPercent_Format(0, 2) = -512%
+Alert: PASS: AFPercent_Format(0, 3) = -512%
+Alert: PASS: AFPercent_Format(0, 4) = -512%
+Alert: PASS: AFPercent_Format(1, 0) = -512.3%
+Alert: PASS: AFPercent_Format(1, 1) = -512.3%
+Alert: PASS: AFPercent_Format(1, 2) = -512,3%
+Alert: PASS: AFPercent_Format(1, 3) = -512,3%
+Alert: PASS: AFPercent_Format(1, 4) = -512.3%
+Alert: PASS: AFPercent_Format(2, 0) = -512.34%
+Alert: PASS: AFPercent_Format(2, 1) = -512.34%
+Alert: PASS: AFPercent_Format(2, 2) = -512,34%
+Alert: PASS: AFPercent_Format(2, 3) = -512,34%
+Alert: PASS: AFPercent_Format(2, 4) = -512.34%
+Alert: PASS: AFPercent_Format(3, 0) = -512.340%
+Alert: PASS: AFPercent_Format(3, 1) = -512.340%
+Alert: PASS: AFPercent_Format(3, 2) = -512,340%
+Alert: PASS: AFPercent_Format(3, 3) = -512,340%
+Alert: PASS: AFPercent_Format(3, 4) = -512.340%
+Alert: PASS: AFPercent_Format(10, 0) = -512.3400000000%
+Alert: PASS: AFPercent_Format(10, 1) = -512.3400000000%
+Alert: PASS: AFPercent_Format(10, 2) = -512,3400000000%
+Alert: PASS: AFPercent_Format(10, 3) = -512,3400000000%
+Alert: PASS: AFPercent_Format(10, 4) = -512.3400000000%
+Alert: PASS: AFPercent_Format(0, 0) = 512%
+Alert: PASS: AFPercent_Format(0, 1) = 512%
+Alert: PASS: AFPercent_Format(0, 2) = 512%
+Alert: PASS: AFPercent_Format(0, 3) = 512%
+Alert: PASS: AFPercent_Format(0, 4) = 512%
+Alert: PASS: AFPercent_Format(1, 0) = 512.3%
+Alert: PASS: AFPercent_Format(1, 1) = 512.3%
+Alert: PASS: AFPercent_Format(1, 2) = 512,3%
+Alert: PASS: AFPercent_Format(1, 3) = 512,3%
+Alert: PASS: AFPercent_Format(1, 4) = 512.3%
+Alert: PASS: AFPercent_Format(2, 0) = 512.34%
+Alert: PASS: AFPercent_Format(2, 1) = 512.34%
+Alert: PASS: AFPercent_Format(2, 2) = 512,34%
+Alert: PASS: AFPercent_Format(2, 3) = 512,34%
+Alert: PASS: AFPercent_Format(2, 4) = 512.34%
+Alert: PASS: AFPercent_Format(3, 0) = 512.340%
+Alert: PASS: AFPercent_Format(3, 1) = 512.340%
+Alert: PASS: AFPercent_Format(3, 2) = 512,340%
+Alert: PASS: AFPercent_Format(3, 3) = 512,340%
+Alert: PASS: AFPercent_Format(3, 4) = 512.340%
+Alert: PASS: AFPercent_Format(10, 0) = 512.3400000000%
+Alert: PASS: AFPercent_Format(10, 1) = 512.3400000000%
+Alert: PASS: AFPercent_Format(10, 2) = 512,3400000000%
+Alert: PASS: AFPercent_Format(10, 3) = 512,3400000000%
+Alert: PASS: AFPercent_Format(10, 4) = 512.3400000000%
+Alert: PASS: AFPercent_Format(1, 0) = 1,234.6%
+Alert: PASS: AFPercent_Format(4, 1) = 1234.5600%
+Alert: PASS: AFPercent_Format(0, 0) = 1%
+Alert: PASS: AFPercent_Format(0, 1) = 1%
+Alert: PASS: AFPercent_Format(0, 2) = 1%
+Alert: PASS: AFPercent_Format(0, 3) = 1%
+Alert: PASS: AFPercent_Format(0, 4) = 1%
+Alert: PASS: AFPercent_Format(1, 0) = 1.0%
+Alert: PASS: AFPercent_Format(1, 1) = 1.0%
+Alert: PASS: AFPercent_Format(1, 2) = 1,0%
+Alert: PASS: AFPercent_Format(1, 3) = 1,0%
+Alert: PASS: AFPercent_Format(1, 4) = 1.0%
+Alert: PASS: AFPercent_Format(2, 0) = 0.99%
+Alert: PASS: AFPercent_Format(2, 1) = 0.99%
+Alert: PASS: AFPercent_Format(2, 2) = 0,99%
+Alert: PASS: AFPercent_Format(2, 3) = 0,99%
+Alert: PASS: AFPercent_Format(2, 4) = 0.99%
+Alert: PASS: AFPercent_Format(3, 0) = 0.988%
+Alert: PASS: AFPercent_Format(3, 1) = 0.988%
+Alert: PASS: AFPercent_Format(3, 2) = 0,988%
+Alert: PASS: AFPercent_Format(3, 3) = 0,988%
+Alert: PASS: AFPercent_Format(3, 4) = 0.988%
+Alert: PASS: AFPercent_Format(10, 0) = 0.9876000000%
+Alert: PASS: AFPercent_Format(10, 1) = 0.9876000000%
+Alert: PASS: AFPercent_Format(10, 2) = 0,9876000000%
+Alert: PASS: AFPercent_Format(10, 3) = 0,9876000000%
+Alert: PASS: AFPercent_Format(10, 4) = 0.9876000000%
+Alert: PASS: AFPercent_Format(0, 0) = 98,765,432,100%
+Alert: PASS: AFPercent_Format(0, 1) = 98765432100%
+Alert: PASS: AFPercent_Format(0, 2) = 98.765.432.100%
+Alert: PASS: AFPercent_Format(0, 3) = 98765432100%
+Alert: PASS: AFPercent_Format(0, 4) = 98'765'432'100%
+Alert: PASS: AFPercent_Format(1, 0) = 98,765,432,100.1%
+Alert: PASS: AFPercent_Format(1, 1) = 98765432100.1%
+Alert: PASS: AFPercent_Format(1, 2) = 98.765.432.100,1%
+Alert: PASS: AFPercent_Format(1, 3) = 98765432100,1%
+Alert: PASS: AFPercent_Format(1, 4) = 98'765'432'100.1%
+Alert: PASS: AFPercent_Format(2, 0) = 98,765,432,100.12%
+Alert: PASS: AFPercent_Format(2, 1) = 98765432100.12%
+Alert: PASS: AFPercent_Format(2, 2) = 98.765.432.100,12%
+Alert: PASS: AFPercent_Format(2, 3) = 98765432100,12%
+Alert: PASS: AFPercent_Format(2, 4) = 98'765'432'100.12%
+Alert: PASS: AFPercent_Format(3, 0) = 98,765,432,100.123%
+Alert: PASS: AFPercent_Format(3, 1) = 98765432100.123%
+Alert: PASS: AFPercent_Format(3, 2) = 98.765.432.100,123%
+Alert: PASS: AFPercent_Format(3, 3) = 98765432100,123%
+Alert: PASS: AFPercent_Format(3, 4) = 98'765'432'100.123%
+Alert: PASS: AFPercent_Format(10, 0) = 98,765,432,100.1234130859%
+Alert: PASS: AFPercent_Format(10, 1) = 98765432100.1234130859%
+Alert: PASS: AFPercent_Format(10, 2) = 98.765.432.100,1234130859%
+Alert: PASS: AFPercent_Format(10, 3) = 98765432100,1234130859%
+Alert: PASS: AFPercent_Format(10, 4) = 98'765'432'100.1234130859%
+Alert: PASS: AFPercent_Format(0, 0) = 98,765,432,100%
+Alert: PASS: AFPercent_Format(0, 1) = 98765432100%
+Alert: PASS: AFPercent_Format(0, 2) = 98.765.432.100%
+Alert: PASS: AFPercent_Format(0, 3) = 98765432100%
+Alert: PASS: AFPercent_Format(0, 4) = 98'765'432'100%
+Alert: PASS: AFPercent_Format(1, 0) = 98,765,432,100.0%
+Alert: PASS: AFPercent_Format(1, 1) = 98765432100.0%
+Alert: PASS: AFPercent_Format(1, 2) = 98.765.432.100,0%
+Alert: PASS: AFPercent_Format(1, 3) = 98765432100,0%
+Alert: PASS: AFPercent_Format(1, 4) = 98'765'432'100.0%
+Alert: PASS: AFPercent_Format(2, 0) = 98,765,432,100.00%
+Alert: PASS: AFPercent_Format(2, 1) = 98765432100.00%
+Alert: PASS: AFPercent_Format(2, 2) = 98.765.432.100,00%
+Alert: PASS: AFPercent_Format(2, 3) = 98765432100,00%
+Alert: PASS: AFPercent_Format(2, 4) = 98'765'432'100.00%
+Alert: PASS: AFPercent_Format(3, 0) = 98,765,432,100.000%
+Alert: PASS: AFPercent_Format(3, 1) = 98765432100.000%
+Alert: PASS: AFPercent_Format(3, 2) = 98.765.432.100,000%
+Alert: PASS: AFPercent_Format(3, 3) = 98765432100,000%
+Alert: PASS: AFPercent_Format(3, 4) = 98'765'432'100.000%
+Alert: PASS: AFPercent_Format(10, 0) = 98,765,432,100.0000000000%
+Alert: PASS: AFPercent_Format(10, 1) = 98765432100.0000000000%
+Alert: PASS: AFPercent_Format(10, 2) = 98.765.432.100,0000000000%
+Alert: PASS: AFPercent_Format(10, 3) = 98765432100,0000000000%
+Alert: PASS: AFPercent_Format(10, 4) = 98'765'432'100.0000000000%
+Alert: PASS: AFPercent_Format(1, 0) = 1.0%
+Alert: PASS: AFPercent_Format(1, 0) = 0.1%
+Alert: PASS: AFPercent_Format(1, 0) = 0.0%
+Alert: PASS: AFPercent_Format(1, 0) = 0.0%
+Alert: PASS: AFPercent_Format(1, 0) = 0.0%
+Alert: PASS: AFPercent_Format(10, 2) = 0,0001000000%
+Alert: PASS: AFPercent_Format(20, 0) = 0.00000000000000000000%
+Alert: PASS: AFPercent_Format(308, 0) = 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+Alert: PASS: AFPercent_Format(308, 0) = 0.00009999999999999999123964644631712417321978136897087097167968750000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000%
+Alert: PASS: AFPercent_Format(513, 0) = %
+Alert: **********************
+Alert: PASS: AFPercent_Keystroke() threw AFPercent_Keystroke: Incorrect number of parameters passed to function.
+Alert: PASS: AFPercent_Keystroke(1) threw AFPercent_Keystroke: Incorrect number of parameters passed to function.
+AFNumber_Keystroke[icon=3,type=0]: The input value is invalid.
+Alert: PASS: AFPercent_Keystroke(1, 0) threw AFPercent_Keystroke: The input value is invalid.
+Alert: PASS: AFPercent_Keystroke(1, 0) = .123
+Alert: **********************
+Alert: PASS: AFRange_Validate() threw AFRange_Validate: Incorrect number of parameters passed to function.
+Alert: PASS: AFRange_Validate(1, 2, 3, 4, 5) threw AFRange_Validate: Incorrect number of parameters passed to function.
+AFRange_Validate[icon=3,type=0]: The input value must be greater than or equal to 2 and less than or equal to 4.
+Alert: PASS: AFRange_Validate(true, 2, true, 4) = 1
+AFRange_Validate[icon=3,type=0]: The input value must be greater than or equal to 2 and less than or equal to 4.
+Alert: PASS: AFRange_Validate(true, 2, true, 4) = 5
+AFRange_Validate[icon=3,type=0]: The input value must be greater than or equal to 2.
+Alert: PASS: AFRange_Validate(true, 2, false, 4) = 1
+AFRange_Validate[icon=3,type=0]: The input value must be less than or equal to 4.
+Alert: PASS: AFRange_Validate(false, 2, true, 4) = 5
+Alert: PASS: AFRange_Validate(true, 2, true, 4) = 3
+Alert: PASS: AFRange_Validate(false, 2, true, 4) = 1
+Alert: PASS: AFRange_Validate(true, 2, false, 4) = 5
+Alert: **********************
+Alert: PASS: AFSimple() threw AFSimple: Incorrect number of parameters passed to function.
+Alert: PASS: AFSimple(1, 2, 3, 4) threw AFSimple: Incorrect number of parameters passed to function.
+Alert: PASS: AFSimple(1, 2, 3) threw AFSimple: Incorrect parameter value.
+Alert: PASS: AFSimple('nonesuch', 2, 3) threw AFSimple: Incorrect parameter value.
+Alert: PASS: AFSimple('AVG', 2, 3) = 2.5
+Alert: PASS: AFSimple('MIN', 2, 3) = 2
+Alert: PASS: AFSimple('MAX', 2, 3) = 3
+Alert: PASS: AFSimple('SUM', 2, 3) = 5
+Alert: PASS: AFSimple('PRD', 2, 3) = 6
+Alert: PASS: AFSimple('AVG', 2, 'nonesuch') threw AFSimple: Incorrect parameter value.
+Alert: PASS: AFSimple('MIN', 2, 'nonesuch') threw AFSimple: Incorrect parameter value.
+Alert: PASS: AFSimple('MAX', 2, 'nonesuch') threw AFSimple: Incorrect parameter value.
+Alert: PASS: AFSimple('SUM', 2, 'nonesuch') threw AFSimple: Incorrect parameter value.
+Alert: PASS: AFSimple('PRD', 2, 'nonesuch') threw AFSimple: Incorrect parameter value.
+Alert: **********************
+Alert: PASS: AFSimple_Calculate() threw AFSimple_Calculate: Incorrect number of parameters passed to function.
+Alert: PASS: AFSimple_Calculate(1) threw AFSimple_Calculate: Incorrect number of parameters passed to function.
+Alert: ERROR: AFSimple_Calculate: Incorrect parameter value.
+Alert: PASS: AFSimple_Calculate('AVG', [1, 'nonesuch', {'crud': 32}]) = 0
+Alert: PASS: AFSimple_Calculate('AVG', ['Text2', 'Text3']) = 289.5
+Alert: PASS: AFSimple_Calculate('SUM', ['Text2', 'Text3']) = 579
+Alert: PASS: AFSimple_Calculate('PRD', ['Text2', 'Text3']) = 56088
+Alert: PASS: AFSimple_Calculate('MIN', ['Text2', 'Text3']) = 123
+Alert: PASS: AFSimple_Calculate('MAX', ['Text2', 'Text3']) = 456
+Alert: PASS: AFSimple_Calculate('AVG', 'Text2, Text3') = 289.5
+Alert: PASS: AFSimple_Calculate('AVG', ['Text4']) = 407.96
+Alert: PASS: AFSimple_Calculate('SUM', ['Text4']) = 407.96
+Alert: PASS: AFSimple_Calculate('MIN', ['Text4']) = 407.96
+Alert: PASS: AFSimple_Calculate('MAX', ['Text4']) = 407.96
+Alert: PASS: AFSimple_Calculate('AVG', ['Text2', 'Text4']) = 265.48
+Alert: PASS: AFSimple_Calculate('SUM', ['Text2', 'Text4']) = 530.96
+Alert: PASS: AFSimple_Calculate('PRD', ['Text2', 'Text4']) = 50179.08
+Alert: **********************
+Alert: PASS: AFSpecial_Format() threw AFSpecial_Format: Incorrect number of parameters passed to function.
+Alert: PASS: AFSpecial_Format(1, 2) threw AFSpecial_Format: Incorrect number of parameters passed to function.
+Alert: PASS: AFSpecial_Format(0) = 
+Alert: PASS: AFSpecial_Format(1) = -
+Alert: PASS: AFSpecial_Format(2) = -
+Alert: PASS: AFSpecial_Format(3) = --
+Alert: PASS: AFSpecial_Format(0) = 01234
+Alert: PASS: AFSpecial_Format(1) = 01234-5678
+Alert: PASS: AFSpecial_Format(2) = (012) 345-6789
+Alert: PASS: AFSpecial_Format(3) = 012-34-5678
+Alert: **********************
+Alert: PASS: AFSpecial_Keystroke() threw AFSpecial_Keystroke: Incorrect number of parameters passed to function.
+Alert: PASS: AFSpecial_Keystroke(65, 66) threw AFSpecial_Keystroke: Incorrect number of parameters passed to function.
+Alert: PASS: AFSpecial_Keystroke(65) = abc
+Alert: **********************
+Alert: PASS: AFSpecial_KeystrokeEx() threw AFSpecial_KeystrokeEx: Incorrect number of parameters passed to function.
+Alert: PASS: AFSpecial_KeystrokeEx('') = 12345
+AFSpecial_KeystrokeEx[icon=3,type=0]: The input value is invalid.
+Alert: PASS: AFSpecial_KeystrokeEx('9999') = 123
+AFSpecial_KeystrokeEx[icon=3,type=0]: The input value is too long.
+Alert: PASS: AFSpecial_KeystrokeEx('9999') = 12345
+AFSpecial_KeystrokeEx[icon=3,type=0]: The input value is invalid.
+Alert: PASS: AFSpecial_KeystrokeEx('9999') = abcd
+Alert: PASS: AFSpecial_KeystrokeEx('9999') = 1234
+Alert: PASS: AFSpecial_KeystrokeEx('XXXX') = abcd
+Alert: **********************
+Alert: PASS: AFTime_Format() threw AFTime_Format: Incorrect number of parameters passed to function.
+Alert: PASS: AFTime_Format(1, 2) threw AFTime_Format: Incorrect number of parameters passed to function.
+Alert: PASS: AFTime_Format(1) = 9:48 pm
+Alert: **********************
+Alert: PASS: AFTime_FormatEx() threw AFTime_FormatEx: Incorrect number of parameters passed to function.
+Alert: PASS: AFTime_FormatEx('blooey', 42) threw AFTime_FormatEx: Incorrect number of parameters passed to function.
+Alert: PASS: AFTime_FormatEx('blooey') = blooey
+Alert: **********************
+Alert: PASS: AFTime_Keystroke() threw AFTime_Keystroke: Incorrect number of parameters passed to function.
+Alert: PASS: AFTime_Keystroke(1, 2) threw AFTime_Keystroke: Incorrect number of parameters passed to function.
+Alert: PASS: AFTime_Keystroke(65) = 12:03
+Alert: **********************
+Alert: PASS: AFTime_KeystrokeEx() threw AFTime_KeystrokeEx: AFDate_KeystrokeEx's parameter size not correct
+Alert: PASS: AFTime_KeystrokeEx(1, 2) threw AFTime_KeystrokeEx: AFDate_KeystrokeEx's parameter size not correct
+Alert: PASS: AFTime_KeystrokeEx('blooey') = 12:04
+Alert: *** ending test 1 ***
+Alert: *** starting test 2 ***
+Alert: PASS: AFDate_Keystroke() threw AFDate_Keystroke: Incorrect number of parameters passed to function.
+Alert: PASS: AFDate_Keystroke(1, 2) threw AFDate_Keystroke: Incorrect number of parameters passed to function.
+Alert: PASS: AFDate_Keystroke(2) = 04/19
+Alert: PASS: AFDate_Keystroke('blooey') = 04/19/15
+Alert: **********************
+Alert: PASS: AFNumber_Keystroke() threw AFNumber_Keystroke: Incorrect number of parameters passed to function.
+Alert: PASS: AFNumber_Keystroke(1) threw AFNumber_Keystroke: Incorrect number of parameters passed to function.
+Alert: FAIL: AFNumber_Keystroke(1, 2) = undefined, expected to throw
+Alert: PASS: AFNumber_Keystroke(1, 2) = 123
+Alert: PASS: AFNumber_Keystroke(1, 2, 3) = 123
+Alert: **********************
+Alert: PASS: AFSpecial_KeystrokeEx() threw AFSpecial_KeystrokeEx: Incorrect number of parameters passed to function.
+Alert: PASS: AFSpecial_KeystrokeEx('') = 12345
+Alert: PASS: AFSpecial_KeystrokeEx('9999') = 123
+AFSpecial_KeystrokeEx[icon=3,type=0]: The input value is too long.
+Alert: PASS: AFSpecial_KeystrokeEx('9999') = 12345
+AFSpecial_KeystrokeEx[icon=3,type=0]: The input value is too long.
+Alert: PASS: AFSpecial_KeystrokeEx('9999') = abcd
+AFSpecial_KeystrokeEx[icon=3,type=0]: The input value is too long.
+Alert: PASS: AFSpecial_KeystrokeEx('9999') = 1234
+AFSpecial_KeystrokeEx[icon=3,type=0]: The input value is too long.
+Alert: PASS: AFSpecial_KeystrokeEx('XXXX') = abcd
+Alert: **********************
+Alert: PASS: AFMergeChange() threw AFMergeChange: Incorrect number of parameters passed to function.
+Alert: PASS: AFMergeChange(1, 2) threw AFMergeChange: Incorrect number of parameters passed to function.
+Alert: PASS: AFMergeChange(undefined) = Aone
+Alert: *** ending test 2 ***

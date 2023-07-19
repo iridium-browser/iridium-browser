@@ -1,0 +1,12 @@
+[package]
+name = "ldt_tbc"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+std = []
+
+[dependencies]
+crypto_provider.workspace = true

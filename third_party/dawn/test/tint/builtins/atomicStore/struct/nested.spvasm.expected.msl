@@ -1,0 +1,96 @@
+#include <metal_stdlib>
+
+using namespace metal;
+struct tint_private_vars_struct {
+  uint local_invocation_index_1;
+};
+
+struct S0_atomic {
+  int x;
+  atomic_uint a;
+  int y;
+  int z;
+};
+
+struct S0 {
+  int x;
+  uint a;
+  int y;
+  int z;
+};
+
+struct S1_atomic {
+  int x;
+  S0_atomic a;
+  int y;
+  int z;
+};
+
+struct S1 {
+  int x;
+  S0 a;
+  int y;
+  int z;
+};
+
+struct S2_atomic {
+  int x;
+  int y;
+  int z;
+  S1_atomic a;
+};
+
+struct S2 {
+  int x;
+  int y;
+  int z;
+  S1 a;
+};
+
+void compute_main_inner(uint local_invocation_index_2, threadgroup S2_atomic* const tint_symbol) {
+  (*(tint_symbol)).x = 0;
+  (*(tint_symbol)).y = 0;
+  (*(tint_symbol)).z = 0;
+  (*(tint_symbol)).a.x = 0;
+  (*(tint_symbol)).a.a.x = 0;
+  atomic_store_explicit(&((*(tint_symbol)).a.a.a), 0u, memory_order_relaxed);
+  (*(tint_symbol)).a.a.y = 0;
+  (*(tint_symbol)).a.a.z = 0;
+  (*(tint_symbol)).a.y = 0;
+  (*(tint_symbol)).a.z = 0;
+  threadgroup_barrier(mem_flags::mem_threadgroup);
+  atomic_store_explicit(&((*(tint_symbol)).a.a.a), 1u, memory_order_relaxed);
+  return;
+}
+
+void compute_main_1(thread tint_private_vars_struct* const tint_private_vars, threadgroup S2_atomic* const tint_symbol_1) {
+  uint const x_44 = (*(tint_private_vars)).local_invocation_index_1;
+  compute_main_inner(x_44, tint_symbol_1);
+  return;
+}
+
+void compute_main_inner_1(uint local_invocation_index_1_param, thread tint_private_vars_struct* const tint_private_vars, threadgroup S2_atomic* const tint_symbol_2) {
+  {
+    (*(tint_symbol_2)).x = 0;
+    (*(tint_symbol_2)).y = 0;
+    (*(tint_symbol_2)).z = 0;
+    (*(tint_symbol_2)).a.x = 0;
+    (*(tint_symbol_2)).a.a.x = 0;
+    atomic_store_explicit(&((*(tint_symbol_2)).a.a.a), 0u, memory_order_relaxed);
+    (*(tint_symbol_2)).a.a.y = 0;
+    (*(tint_symbol_2)).a.a.z = 0;
+    (*(tint_symbol_2)).a.y = 0;
+    (*(tint_symbol_2)).a.z = 0;
+  }
+  threadgroup_barrier(mem_flags::mem_threadgroup);
+  (*(tint_private_vars)).local_invocation_index_1 = local_invocation_index_1_param;
+  compute_main_1(tint_private_vars, tint_symbol_2);
+}
+
+kernel void compute_main(uint local_invocation_index_1_param [[thread_index_in_threadgroup]]) {
+  thread tint_private_vars_struct tint_private_vars = {};
+  threadgroup S2_atomic tint_symbol_3;
+  compute_main_inner_1(local_invocation_index_1_param, &(tint_private_vars), &(tint_symbol_3));
+  return;
+}
+

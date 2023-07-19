@@ -1,0 +1,45 @@
+// Copyright 2015 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef DEVICE_BLUETOOTH_BLUETOOTH_DEVICE_MAC_H_
+#define DEVICE_BLUETOOTH_BLUETOOTH_DEVICE_MAC_H_
+
+#include "device/bluetooth/bluetooth_device.h"
+#include "device/bluetooth/bluetooth_gatt_service.h"
+
+#if !defined(__has_feature) || !__has_feature(objc_arc)
+#error "This file requires ARC support."
+#endif
+
+@class NSError;
+
+namespace device {
+
+class BluetoothAdapter;
+
+class DEVICE_BLUETOOTH_EXPORT BluetoothDeviceMac : public BluetoothDevice {
+ public:
+  BluetoothDeviceMac(const BluetoothDeviceMac&) = delete;
+  BluetoothDeviceMac& operator=(const BluetoothDeviceMac&) = delete;
+
+  ~BluetoothDeviceMac() override;
+
+  // Converts between ConnectErrorCode and NSError.
+  static NSError* GetNSErrorFromConnectErrorCode(
+      BluetoothDevice::ConnectErrorCode error_code);
+  static BluetoothDevice::ConnectErrorCode GetConnectErrorCodeFromNSError(
+      NSError* error);
+  static NSError* GetNSErrorFromGattErrorCode(
+      BluetoothGattService::GattErrorCode error_code);
+  static BluetoothGattService::GattErrorCode GetGattErrorCodeFromNSError(
+      NSError* error);
+  virtual bool IsLowEnergyDevice() = 0;
+
+ protected:
+  explicit BluetoothDeviceMac(BluetoothAdapter* adapter);
+};
+
+}  // namespace device
+
+#endif  // DEVICE_BLUETOOTH_BLUETOOTH_DEVICE_MAC_H_

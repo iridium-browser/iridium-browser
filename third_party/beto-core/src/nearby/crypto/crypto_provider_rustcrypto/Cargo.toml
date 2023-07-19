@@ -1,0 +1,35 @@
+[package]
+name = "crypto_provider_rustcrypto"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+aead = "0.5.1"
+aes-gcm-siv = { version = "0.11.1", features = ["aes"] }
+crypto_provider.workspace = true
+hmac.workspace = true
+hkdf.workspace = true
+sha2.workspace = true
+x25519-dalek.workspace = true
+p256 = { workspace = true, features = ["ecdh"], default-features = false }
+sec1.workspace = true
+ed25519-dalek = { workspace = true, default-features = false, features = ["rand_core"] }
+rand = { workspace = true, default-features = false }
+rand_core.workspace = true
+subtle.workspace = true
+aes.workspace = true
+ctr.workspace = true
+cbc.workspace = true
+cfg-if.workspace = true
+rand_chacha = { workspace = true, default-features = false, optional = true }
+
+[dev-dependencies]
+hex.workspace = true
+crypto_provider_test.workspace = true
+crypto_provider_rustcrypto = { path = ".", features = ["std"] }
+
+[features]
+default = ["alloc", "rand_chacha"]
+std = ["ed25519-dalek/default", "rand/std", "rand/std_rng", "crypto_provider/std", "crypto_provider/alloc"]
+alloc = ["aead/bytes"]

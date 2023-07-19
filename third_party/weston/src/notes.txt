@@ -1,0 +1,87 @@
+This file is a collection of informal notes, with references to where
+they were originally written. Each note should have a source and date
+mentioned. Let's keep these in date order, newest first.
+
+
+
+-----------------------------------------------------------------------
+2015-04-14; Pekka Paalanen <ppaalanen@gmail.com>
+http://lists.freedesktop.org/archives/wayland-devel/2015-April/021309.html
+
+Never destroy weston_views or weston_surfaces from animation hooks.
+Never destroy weston_views from weston_view signals.
+
+Basically, never manipulate a list while transversing it.
+
+
+-----------------------------------------------------------------------
+2012-10-23; Pekka Paalanen <ppaalanen@gmail.com>
+http://lists.freedesktop.org/archives/wayland-devel/2012-October/005969.html
+
+For anyone wanting to port or write their own window manager to Wayland:
+
+Most likely you have a desktop window manager. A quick way to get
+started, is to fork Weston's desktop-shell plugin and start hacking it.
+Qt could be another good choice, but I am not familiar with it.
+
+You also need to understand some concepts. I'm repeating things I wrote
+to the wayland-devel list earlier, a little rephrased.
+
+We need to distinguish three different things here (towards Wayland
+clients):
+
+- compositors (servers)
+	All Wayland compositors are indistinguishable by definition,
+	since they are Wayland compositors. They only differ in the
+	global interfaces they advertise, and for general purpose
+	compositors, we should aim to support the same minimum set of
+	globals everywhere. For instance, all desktop compositors
+	should implement wl_shell. In X, this component corresponds to
+	the X server with a built-in compositing manager.
+
+- shells
+	This is a new concept compared to an X stack. A shell defines
+	how a user and applications interact. The most familiar is a
+	desktop (environment). If KDE, Gnome, and XFCE are desktop
+	environments, they all fall under the *same* shell: the desktop
+	shell. You can have applications in windows, several visible at
+	the same time, you have keyboards and mice, etc.
+
+	An example of something that is not a desktop shell
+	could be a TV user interface. TV is profoundly different:
+	usually no mouse, no keyboard, but you have a remote control
+	with some buttons. Freely floating windows probably do not make
+	sense. You may have picture-in-picture, but usually not several
+	applications showing at once. Most importantly, trying to run
+	desktop applications here does not work due to the
+	incompatible application and user interface paradigms.
+
+	On protocol level, a shell is the public shell interface(s),
+	currently for desktop it is the wl_shell.
+
+- "window managers"
+	The X Window Managers correspond to different wl_shell
+	implementations, not different shells, since they practically
+	all deal with a desktop environment. You also want all desktop
+	applications to work with all window managers, so you need to
+	implement wl_shell anyway.
+
+I understand there could be special purpose X Window Managers, that
+would better correspond to their own shells. These window managers
+might not implement e.g. EWMH by the spec.
+
+When you implement your own window manager, you want to keep the public
+desktop shell interface (wl_shell). You can offer new public
+interfaces, too, but keep in mind, that someone needs to make
+applications use them.
+
+In Weston, a shell implementation has two parts: a weston plugin, and a
+special client. For desktop shell (wl_shell) these are src/shell.c and
+clients/desktop-shell.c. The is also a private protocol extension that
+these two can explicitly communicate with.
+
+The plugin does window management, and the client does most of user
+interaction: draw backgrounds, panels, buttons, lock screen dialog,
+basically everything that is on screen.
+
+-----------------------------------------------------------------------

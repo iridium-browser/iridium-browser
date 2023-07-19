@@ -1,0 +1,57 @@
+diff --git a/google3/third_party/javascript/cros_components/lottie_renderer/lottie_worker.js b/google3/third_party/javascript/cros_components/lottie_renderer/lottie_worker.js
+--- a/google3/third_party/javascript/cros_components/lottie_renderer/lottie_worker.js
++++ b/google3/third_party/javascript/cros_components/lottie_renderer/lottie_worker.js
+@@ -1896,7 +1896,6 @@ var FontManager = (function(){
+                     l.setAttribute('f-origin', fontArr[i].origin);
+                     l.type = "text/css";
+                     l.rel = "stylesheet";
+-                    l.href = fontArr[i].fPath;
+                     document.body.appendChild(l);
+                 }
+             } else if(fontArr[i].fOrigin === 't' || fontArr[i].origin === 2){
+@@ -1913,8 +1912,6 @@ var FontManager = (function(){
+                     var sc = createTag('link');
+                     sc.setAttribute('f-forigin', fontArr[i].fOrigin);
+                     sc.setAttribute('f-origin', fontArr[i].origin);
+-                    sc.setAttribute('rel','stylesheet');
+-                    sc.setAttribute('href',fontArr[i].fPath);
+                     defs.appendChild(sc);
+                 }
+             }
+@@ -6463,7 +6460,11 @@ function MaskElement(data,element,global
+ 
+     if(count > 0){
+         this.maskElement.setAttribute('id', layerId);
+-        this.element.maskedElement.setAttribute(maskRef, "url(" + locationHref + "#" + layerId + ")");
++        if (maskRef == 'clip-path') {
++          this.element.maskedElement.style.clipPath = "url(" + locationHref + "#" + layerId + ")";
++        } else if (maskRef == 'mask') {
++          this.element.maskedElement.style.mask = "url(" + locationHref + "#" + layerId + ")";
++        }
+         defs.appendChild(this.maskElement);
+     }
+     if (this.viewData.length) {
+@@ -7507,7 +7508,6 @@ IImageElement.prototype.createContent = 
+     this.innerElem.setAttribute('width',this.assetData.w+"px");
+     this.innerElem.setAttribute('height',this.assetData.h+"px");
+     this.innerElem.setAttribute('preserveAspectRatio',this.assetData.pr || this.globalData.renderConfig.imagePreserveAspectRatio);
+-    this.innerElem.setAttributeNS('http://www.w3.org/1999/xlink','href',assetPath);
+ 
+     this.layerElement.appendChild(this.innerElem);
+ };
+@@ -9826,15 +9826,8 @@ var ExpressionManager = (function(){
+         var loopIn, loop_in, loopOut, loop_out, smooth;
+         var toWorld,fromWorld,fromComp,toComp,fromCompToSurface, position, rotation, anchorPoint, scale, thisLayer,thisComp,mask,valueAtTime,velocityAtTime;
+         var __expression_functions = [];
+-        if(data.xf) {
+-            var i, len = data.xf.length;
+-            for(i = 0; i < len; i += 1) {
+-                // __expression_functions[i] = eval('(function(){ return ' + data.xf[i] + '}())');
+-            }
+-        }
+ 
+         var scoped_bm_rt;
+-        // var expression_function = eval('[function _expression_function(){' + val+';scoped_bm_rt=$bm_rt}' + ']')[0];
+         var numKeys = property.kf ? data.k.length : 0;
+ 
+         var active = !this.data || this.data.hd !== true;

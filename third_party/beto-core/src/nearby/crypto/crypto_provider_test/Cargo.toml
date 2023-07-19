@@ -1,0 +1,17 @@
+[package]
+name = "crypto_provider_test"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+crypto_provider = {  workspace = true, features = ["test_vectors"] }
+rand_ext.workspace = true
+test_helper.workspace = true
+
+hex-literal.workspace = true
+rand.workspace = true
+rstest.workspace = true
+rstest_reuse.workspace = true
+wycheproof.workspace = true
+hex.workspace = true

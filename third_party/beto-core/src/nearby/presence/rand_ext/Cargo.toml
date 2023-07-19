@@ -1,0 +1,13 @@
+[package]
+name = "rand_ext"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+crypto_provider.workspace = true
+log.workspace = true
+rand = { workspace = true, features = ["std", "std_rng"] }
+rand_pcg.workspace = true
+
+[dev-dependencies]

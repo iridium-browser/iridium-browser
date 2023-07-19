@@ -1,0 +1,36 @@
+# negation of attribute matcher
+
+# "!$u" matches a single character that is not a letter
+table: |
+  include tables/latinLetterDef6Dots.uti
+  sign ; 46
+  noback context !$u @46*
+tests:
+  - - Foo
+    - ;foo
+
+# "!$u2" matches exactly two characters that are not letters
+table: |
+  include tables/latinLetterDef6Dots.uti
+  sign ; 46
+  noback context !$u2 @46*
+tests:
+  - - Foo
+    - foo
+  - - fO
+    - fo
+  - - fOo
+    - foo
+  - - fOO
+    - f;oo
+
+# "!$u" never matches the empty string
+table: |
+  include tables/latinLetterDef6Dots.uti
+  sign ; 46
+  noback context $u[]!$u @46
+tests:
+  - - foo
+    - foo
+  - - foO
+    - fo;o

@@ -1,0 +1,37 @@
+<!--
+Copyright 2023 The Chromium Authors
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file.
+-->
+<style include="oobe-dialog-host-styles">
+</style>
+<oobe-adaptive-dialog id="drivePinningDialogue" role="dialog"
+    for-step="overview">
+    <iron-icon slot="icon" icon="oobe-32:drive"></iron-icon>
+    <h1 slot="title">
+        [[i18nDynamic(locale, 'DevicePinningScreenTitle')]]
+    </h1>
+    <div slot="subtitle">
+        <p>
+            [[i18nDynamic(locale, 'DevicePinningScreenDescription')]]
+        </p>
+        <p id="spaceInformation">
+            [[getSpaceDescription_(locale, requiredSpace_, freeSpace_)]]
+        </p>
+    </div>
+    <div slot="content"  class="flex layout vertical center-justified center">
+        <iron-icon icon="oobe-illos:drive-sync-illo"
+            class="illustration-jelly">
+        </iron-icon>
+    </div>
+    <div slot="bottom-buttons">
+        <oobe-text-button on-click="onDeclineButtonClicked_"
+            id="declineButton"
+            text-key="DevicePinningScreenDeclineButton">
+        </oobe-text-button>
+        <oobe-next-button id="acceptButton" class="focus-on-show"
+            text-key="DevicePinningScreenAcceptButton"
+            on-click="onAcceptButtonClicked_">
+        </oobe-next-button>
+    </div>
+</oobe-adaptive-dialog>

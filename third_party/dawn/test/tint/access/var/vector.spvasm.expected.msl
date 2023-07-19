@@ -1,0 +1,18 @@
+#include <metal_stdlib>
+
+using namespace metal;
+void main_1() {
+  float3 v = float3(0.0f);
+  float const x_14 = v[1];
+  float3 const x_16 = v;
+  float2 const x_17 = x_16.xz;
+  float3 const x_18 = v;
+  float3 const x_19 = x_18.xzy;
+  return;
+}
+
+kernel void tint_symbol() {
+  main_1();
+  return;
+}
+

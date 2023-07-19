@@ -1,0 +1,31 @@
+[package]
+name = "crypto_provider"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+hex-literal.workspace = true
+crypto_provider_openssl.workspace = true
+crypto_provider_rustcrypto.workspace = true
+rand_ext.workspace = true
+rand.workspace = true
+
+[features]
+default = ["alloc"]
+std = []
+alloc = []
+test_vectors = []
+
+[[bench]]
+name = "hmac_bench"
+harness = false
+
+[[bench]]
+name = "hkdf_bench"
+harness = false
+
+[[bench]]
+name = "constant_time_eq_bench"
+harness = false

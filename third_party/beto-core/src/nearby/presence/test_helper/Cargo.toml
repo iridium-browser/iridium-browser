@@ -1,0 +1,9 @@
+[package]
+name = "test_helper"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+hex.workspace = true
+serde_json.workspace = true

@@ -1,0 +1,11 @@
+Name: CrossBench multi-purpose benchark runner
+Short Name: crossbench
+URL: https://chromium.googlesource.com/crossbench
+Version: 0
+License: BSD
+License File: NOT_SHIPPED
+Security Critical: not
+
+Description:
+CrossBench is a cross-browser/cross-benchmark runner to extract performance
+numbers for common press benchmarks and simple page loading.

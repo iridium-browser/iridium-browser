@@ -1,0 +1,82 @@
+// Copyright 2022 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package shadercached;
+option go_package = "chromiumos/system_api/shadercached_proto";
+
+message InstallRequest {
+  // Steam application id.
+  uint64 steam_app_id = 1;
+  // If true, mount the DLC contents in host-side VM gpu cache.
+  bool mount = 2;
+  // Name of the VM.
+  string vm_name = 3;
+  // Owner of the vm.
+  string vm_owner_id = 4;
+}
+
+message InstallResponse {
+  // If true, shader cache is installed and mounted.
+  bool mounted = 1;
+}
+
+message UninstallRequest {
+  // Steam application id.
+  uint64 steam_app_id = 1;
+}
+
+message ShaderCacheMountStatus {
+  // Name of the VM.
+  string vm_name = 1;
+  // Owner of the vm.
+  string vm_owner_id = 2;
+  // Steam application ID that was last requested to mount.
+  uint64 steam_app_id = 3;
+  // Set to true if shader cache is mounted.
+  bool mounted = 4;
+  // If set with reason string, (un)mount operation as not successful.
+  string error = 5;
+}
+
+message UnmountRequest {
+  // Name of the VM.
+  string vm_name = 1;
+  // Owner of the vm.
+  string vm_owner_id = 2;
+  // Steam application id.
+  uint64 steam_app_id = 3;
+}
+
+message PrepareShaderCacheRequest {
+  // Name of the VM.
+  string vm_name = 1;
+  // Owner of the vm.
+  string vm_owner_id = 2;
+  // TODO(b/271776528): Support general-purpose VM shader cache creation
+  // Per-boot cache
+  // bool per_boot_cache = 3;
+  // Support precompiled cache
+  // bool precompiled_cache = 4;
+}
+
+message PrepareShaderCacheResponse {
+  // TODO(b/271776528): Support general-purpose VM shader cache creation
+  // Path to device shader cache
+  // string device_path = 1;
+  // Path to render server cache
+  // string render_server_path = 2;
+  // Path to precompiled cache (if applicable)
+  string precompiled_cache_path = 3;
+}
+
+message PurgeRequest {
+  // Name of the VM.
+  string vm_name = 1;
+  // Owner of the vm.
+  string vm_owner_id = 2;
+}

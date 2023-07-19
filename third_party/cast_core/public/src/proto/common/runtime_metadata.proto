@@ -1,0 +1,102 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package cast.common;
+
+import "proto/common/duration.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// Runtime description.
+message RuntimeMetadata {
+  // Runtime name  (platform provided - optional).
+  string name = 1;
+  // Runtime type.
+  RuntimeType.Type type = 2;
+  // Various Runtime capabilities.
+  RuntimeCapabilities runtime_capabilities = 3;
+}
+
+message RuntimeType {
+  // RuntimeType enumeration sets defines the way runtimes are selected for a
+  // given Cast application. The following rules are applied in the order:
+  //  1. Select NATIVE runtime if Cast application ID is in the supported list.
+  //  2. Select CAST_LITE runtime if Cast application is audio-only.
+  //  3. Fall back to Cast Web runtime.
+  enum Type {
+    UNDEFINED = 0;
+    // Cast Web runtime. The list of supported Cast application IDs must be
+    // empty.
+    CAST_WEB = 1;
+    // Cast Lite runtime for audio.
+    CAST_LITE = 2;
+    // Runtimes native to specific platform (Netflix, YouTube applications etc)
+    NATIVE = 3;
+    // Cast Web runtime on Cobalt.
+    CAST_COBALT = 4;
+  }
+}
+
+message MediaCapabilities {
+  // Flags if runtime has video support.
+  bool video_supported = 2;
+}
+
+message ApplicationMetadata {
+  string app_id = 1;
+}
+
+message ApplicationCapabilities {
+  // Runtime can define either a list of supported apps or a list of unsupported
+  // ones.
+  // List of supported Cast application IDs.
+  repeated ApplicationMetadata supported_applications = 1;
+  // List of unsupported Cast application IDs.
+  repeated ApplicationMetadata unsupported_applications = 2;
+  // Maximum number of preloaded applications the runtime supports.
+  int32 maximum_preloaded_apps_count = 3;
+}
+
+message PrelaunchType {
+  enum Type {
+    UNDEFINED = 0;
+    // Do not prelaunch runtime.
+    NEVER = 1;
+    // Prelaunch Runtime and keep it alive.
+    ALWAYS = 2;
+  }
+}
+
+message PrelaunchCapabilities {
+  // Prelaunch type of the runtime.
+  PrelaunchType.Type prelaunch_type = 1;
+  // This is the duration between two consecutive Prelaunch requests.
+  // When a Prelaunch request is denied by platform (OEM), CastCore waits for
+  // this duration to retry again.
+  // If this value is 0 and the prelaunch type is
+  // ALWAYS, Cast will not retry prelaunch when the runtime stops or when
+  // Prelaunch request fails.
+  cast.common.Duration polling_frequency = 2;
+}
+
+message RuntimeCapabilities {
+  // Media capabilities of the runtime.
+  MediaCapabilities media_capabilities = 1;
+  // Application capabilities of the runtime.
+  ApplicationCapabilities application_capabilities = 2;
+  // Runtime prelaunch capabilities.
+  PrelaunchCapabilities prelaunch_capabilities = 5;
+}

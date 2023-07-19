@@ -1,0 +1,12 @@
+layout(binding=0) texture2D tex;
+
+half4 desaturate(half4 color) {
+    color.rgb = half3(dot(color.rgb, half3(0.22, 0.67, 0.11)));
+    return color;
+}
+
+void main() {
+    if (sk_GlobalInvocationID.x < textureWidth(tex) && sk_GlobalInvocationID.y < textureHeight(tex)) {
+        textureWrite(tex, sk_GlobalInvocationID.xy, desaturate(textureRead(tex, sk_GlobalInvocationID.xy)));
+    }
+}

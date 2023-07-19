@@ -1,0 +1,43 @@
+# Copyright 2023 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+static_library("redaction_tool") {
+  sources = [
+    "ip_address.cc",
+    "ip_address.h",
+    "pii_types.h",
+    "redaction_tool.cc",
+    "redaction_tool.h",
+    "url_canon.h",
+    "url_canon_internal.cc",
+    "url_canon_internal.h",
+    "url_canon_ip.cc",
+    "url_canon_ip.h",
+    "url_canon_stdstring.cc",
+    "url_canon_stdstring.h",
+    "url_parse.h",
+    "validation.cc",
+    "validation.h",
+  ]
+
+  public_deps = [ "//base" ]
+
+  deps = [
+    "//build:chromeos_buildflags",
+    "//third_party/re2",
+  ]
+
+  defines = [ "IS_REDACTION_TOOL_IMPL" ]
+}
+
+source_set("unit_tests") {
+  testonly = true
+  sources = [ "redaction_tool_unittest.cc" ]
+  deps = [
+    ":redaction_tool",
+    "//base/test:test_support",
+    "//testing/gmock",
+    "//testing/gtest",
+  ]
+}

@@ -1,0 +1,17 @@
+/.idea
+/.git
+/target
+/.dockerignore
+/.gitignore
+
+/presence/_deps
+/presence/ldt_np_adv_ffi/target
+/presence/*/fuzz/target
+/presence/*/fuzz/corpus
+/presence/cmake-build
+/connections/ukey2/*/fuzz/target
+/connections/ukey2/*/fuzz/corpus
+/crypto/crypto_provider_boringssl/target
+
+**/CMakeCache.txt
+**/CMakeFiles

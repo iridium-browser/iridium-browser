@@ -1,0 +1,85 @@
+struct FSIn {
+  @builtin(front_facing) sk_Clockwise: bool,
+};
+struct FSOut {
+  @location(0) sk_FragColor: vec4<f32>,
+};
+struct _GlobalUniforms {
+  uFloat: f32,
+};
+@binding(0) @group(0) var<uniform> _globalUniforms: _GlobalUniforms;
+fn various_parameter_types_vhhh(_stageOut: ptr<function, FSOut>, _skParam0: f32, _skParam1: ptr<function, f32>, _skParam2: ptr<function, f32>) {
+  let a = _skParam0;
+  let b = _skParam1;
+  let c = _skParam2;
+  {
+    (*_stageOut).sk_FragColor = vec4<f32>(a, (*b), (*c), _globalUniforms.uFloat);
+    (*b) = a;
+    (*c) = _globalUniforms.uFloat;
+  }
+}
+fn one_out_param_vh(_skParam0: ptr<function, f32>) {
+  let h = _skParam0;
+  {
+    (*h) = 2.0;
+  }
+}
+fn one_out_param_indirect_vh(_skParam0: ptr<function, f32>) {
+  let h = _skParam0;
+  {
+    var _skTemp0: f32;
+    one_out_param_vh(&_skTemp0);
+    (*h) = _skTemp0;
+  }
+}
+struct S {
+  v: vec4<f32>,
+};
+fn main(_stageOut: ptr<function, FSOut>) {
+  {
+    var x: f32 = 1.0;
+    var _skTemp1: f32;
+    one_out_param_vh(&_skTemp1);
+    x = _skTemp1;
+    var _skTemp2: f32;
+    one_out_param_indirect_vh(&_skTemp2);
+    x = _skTemp2;
+    var _skTemp3: f32;
+    var _skTemp4: f32 = x;
+    various_parameter_types_vhhh(_stageOut, x + 1.0, &_skTemp3, &_skTemp4);
+    x = _skTemp3;
+    x = _skTemp4;
+    var v: vec4<f32>;
+    var _skTemp5: f32;
+    var _skTemp6: f32 = v.x;
+    various_parameter_types_vhhh(_stageOut, x + 1.0, &_skTemp5, &_skTemp6);
+    v.x = _skTemp5;
+    v.x = _skTemp6;
+    var _skTemp7: f32;
+    var _skTemp8: f32 = v.y;
+    various_parameter_types_vhhh(_stageOut, x + 1.0, &_skTemp7, &_skTemp8);
+    v.y = _skTemp7;
+    v.y = _skTemp8;
+    var _skTemp9: f32;
+    var _skTemp10: f32 = v.y;
+    various_parameter_types_vhhh(_stageOut, x + 1.0, &_skTemp9, &_skTemp10);
+    v.x = _skTemp9;
+    v.y = _skTemp10;
+    var s: S;
+    var _skTemp11: f32;
+    var _skTemp12: f32 = x;
+    various_parameter_types_vhhh(_stageOut, x + 1.0, &_skTemp11, &_skTemp12);
+    s.v.x = _skTemp11;
+    x = _skTemp12;
+    var _skTemp13: f32;
+    var _skTemp14: f32 = x;
+    various_parameter_types_vhhh(_stageOut, x + 1.0, &_skTemp13, &_skTemp14);
+    s.v.y = _skTemp13;
+    x = _skTemp14;
+  }
+}
+@fragment fn fragmentMain(_stageIn: FSIn) -> FSOut {
+  var _stageOut: FSOut;
+  main(&_stageOut);
+  return _stageOut;
+}

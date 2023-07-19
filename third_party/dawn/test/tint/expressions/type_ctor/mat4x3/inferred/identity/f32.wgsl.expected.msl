@@ -1,0 +1,12 @@
+#include <metal_stdlib>
+
+using namespace metal;
+struct tint_private_vars_struct {
+  float4x3 m;
+};
+
+float4x3 f(thread tint_private_vars_struct* const tint_private_vars) {
+  float4x3 const m_1 = float4x3((*(tint_private_vars)).m);
+  return m_1;
+}
+

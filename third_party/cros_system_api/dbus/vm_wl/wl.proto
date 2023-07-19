@@ -1,0 +1,34 @@
+// Copyright 2023 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package vm_tools.wl;
+
+import "vm_applications/apps.proto";
+
+// Encodes a description of a unique running VM. Concierge will only allow one
+// instance of a VM per name+owner_id combo.
+message VmDescription {
+  // The name of the VM (i.e. its stateful disk's decoded filename).
+  string name = 1;
+
+  // The owner of the VM.
+  string owner_id = 2;
+
+  // The type of this VM, deduced when it was launched.
+  vm_tools.apps.VmType type = 3;
+}
+
+message ListenOnSocketRequest {
+  // Info about the VM which this wayland socket is for.
+  VmDescription desc = 1;
+}
+
+message CloseSocketRequest {
+  // Info about the VM whose wayland socket is being closed. This will be
+  // identical to the desc in the associated ListenOnSocketRequest.
+  VmDescription desc = 1;
+}

@@ -1,0 +1,159 @@
+// Copyright 2019 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+option go_package = "chromiumos/system_api/update_engine_proto";
+
+package update_engine;
+
+// Keep in sync with:
+// update_engine/client_library/include/update_engine/update_status.h
+enum Operation {
+  IDLE = 0;
+  CHECKING_FOR_UPDATE = 1;
+  UPDATE_AVAILABLE = 2;
+  DOWNLOADING = 3;
+  VERIFYING = 4;
+  FINALIZING = 5;
+  UPDATED_NEED_REBOOT = 6;
+  REPORTING_ERROR_EVENT = 7;
+  ATTEMPTING_ROLLBACK = 8;
+  DISABLED = 9;
+  NEED_PERMISSION_TO_UPDATE = 10;
+  CLEANUP_PREVIOUS_UPDATE = 11;
+  UPDATED_BUT_DEFERRED = 12;
+
+  // ERROR is only used by Chrome and update_engine doesn't really use/set this
+  // value as it is not the proper way to propagate errors. DO NOT use this
+  // anywhere other than Chrome.
+  // TODO(crbug.com/977320): Remove this from Chrome.
+  ERROR = -1;
+}
+
+// Keep in sync with:
+// update_engine/client_library/include/update_engine/update_status.h
+enum UpdateUrgency {
+  REGULAR = 0;
+  CRITICAL = 1;
+}
+
+enum UpdateDoneAction {
+  REBOOT = 0;
+  SHUTDOWN = 1;
+}
+
+// This is the message transferred from other processes to update_engine for
+// configuring the behavior of applying the deferred update.
+message ApplyUpdateConfig {
+  // The action to take after applying the deferred update.
+  UpdateDoneAction done_action = 1;
+}
+
+message Feature {
+  // The name of the feature.
+  string name = 1;
+
+  // Whether the feature is enabled or not.
+  bool enabled = 2;
+}
+
+// This is the message transferred between update_engine and other processes
+// about the current status of the update_engine. It is used either in
+// |GetUpdateStatusAdvanced| DBus method or |StatusUpdateAdvanced| signal.
+//
+// NOTE: Keep this updated with:
+// update_engine/client_library/include/update_engine/update_status.h
+message StatusResult {
+  // When the update_engine last checked for updates (time_t: seconds from Unix
+  // epoch).
+  int64 last_checked_time = 1;
+
+  // The current progress (0.0f-1.0f).
+  double progress = 2;
+
+  // The current status/operation of the update_engine.
+  Operation current_operation = 3;
+
+  // The new product version.
+  string new_version = 4;
+
+  // The size of the update payload (bytes).
+  int64 new_size = 5;
+
+  // Whether the update is actually an enterprise rollback. The value is valid
+  // only if the current_operation is passed |CHECKING_FOR_UPDATE|.
+  bool is_enterprise_rollback = 6;
+
+  // Indication of install for DLC(s).
+  bool is_install = 7;
+
+  // The end-of-life date of the device in the number of days since Unix Epoch.
+  int64 eol_date = 8;
+
+  // If true, the system will powerwash once the update is applied and the
+  // system is rebooted. This value is reliable on |UPDATE_NEED_REBOOT|.
+  bool will_powerwash_after_reboot = 9;
+
+  // The last update/install attempt error.
+  // Reference update_engine/dbus-constants.h for the errors that update_engine
+  // will propagate into this field.
+  int32 last_attempt_error = 10;
+
+  // If true, the update is critical. DEPRECATED.
+  // bool critical_update = 11;
+
+  // Indicates how important an update is.
+  UpdateUrgency update_urgency = 12;
+
+  // List of features managed by update_engine.
+  repeated Feature features = 13;
+
+  // Whether the update is interactive.
+  bool is_interactive = 14;
+
+  // If true, the update will be downloaded but deferred.
+  bool will_defer_update = 15;
+}
+
+// This is the message flags that influences how updates are performed.
+message UpdateFlags {
+  // Indicates if the update is interactive or not.
+  bool non_interactive = 1;
+}
+
+// This is the message transferred into update_engine to perform updates in a
+// certain manner.
+message UpdateParams {
+  // Version to update to. An empty string indicates that update engine should
+  // pick the most recent image on the current channel.
+  string app_version = 1;
+
+  // The omaha URL to force. Usually leave empty.
+  // Force update engine to look for updates from the given server. An empty
+  // string indicates update engine should get this parameter from the release
+  // file. This field will be ignored in production builds for security.
+  string omaha_url = 2;
+
+  // Additional fields that update_engine keeps track of during update requests.
+  UpdateFlags update_flags = 3;
+
+  // Checks for an update, but does not apply it.
+  bool skip_applying = 4;
+
+  // Forces a fw update with OS update.
+  bool force_fw_update = 5;
+}
+
+message InstallParams {
+  // ID of the DLC to install.
+  string id = 1;
+
+  // The Omaha URL to use. See `UpdateParams::omaha_url` for details.
+  string omaha_url = 2;
+
+  // Boolean indicating whether or not the DLC is scaled.
+  bool scaled = 3;
+}

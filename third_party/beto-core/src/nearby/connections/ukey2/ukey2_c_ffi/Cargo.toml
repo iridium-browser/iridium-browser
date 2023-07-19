@@ -1,0 +1,31 @@
+[package]
+name = "ukey2_c_ffi"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+ukey2_connections = { path = "../ukey2_connections" }
+ukey2_rs = { path = "../ukey2" }
+cfg-if.workspace = true
+crypto_provider_openssl = { workspace = true, optional = true }
+crypto_provider_rustcrypto = { workspace = true, optional = true, features = ["alloc"] }
+lock_adapter.workspace = true
+
+lazy_static.workspace = true
+log.workspace = true
+rand.workspace = true
+rand_chacha.workspace = true
+
+[features]
+default = ["rustcrypto"]
+std = ["crypto_provider_rustcrypto/std", "lock_adapter/std"]
+openssl = ["dep:crypto_provider_openssl", "std"]
+rustcrypto = ["crypto_provider_rustcrypto"]
+crypto_provider_rustcrypto = ["dep:crypto_provider_rustcrypto"]
+
+
+[lib]
+# Static lib is a bit large, resulting in quite a large test executable.
+# This will be also shipped as a dynamic lib in most environments (I think) so good to replicate those conditions.
+crate_type = ["cdylib"]

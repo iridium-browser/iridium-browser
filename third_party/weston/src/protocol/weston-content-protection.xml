@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocol name="weston_content_protection">
+
+  <copyright>
+    Copyright 2016 The Chromium Authors.
+    Copyright 2018-2019 Collabora, Ltd.
+    Copyright © 2018-2019 Intel Corporation.
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the "Software"),
+    to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+    and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice (including the next
+    paragraph) shall be included in all copies or substantial portions of the
+    Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE SOFTWARE.
+  </copyright>
+
+  <description summary="Protocol for providing secure output">
+    This protocol specifies a set of interfaces used to provide
+    content-protection for e.g. HDCP, and protect surface contents on the
+    secured outputs and prevent from appearing in screenshots or from being
+    visible on non-secure outputs.
+
+    A secure-output is defined as an output that is secured by some
+    content-protection mechanism e.g. HDCP, and meets at least the minimum
+    required content-protection level requested by a client.
+    
+    The term content-protection is defined in terms of HDCP type 0 and
+    HDCP type 1, but this may be extended in future.
+
+    This protocol is not intended for implementing Digital Rights Management on
+    general (e.g. Desktop) systems, and would only be useful for closed systems.
+    As the server is the one responsible for implementing
+    the content-protection, the client can only trust the content-protection as
+    much they can trust the server.
+
+    In order to protect the content and prevent surface contents from appearing
+    in screenshots or from being visible on non-secure outputs, a client must
+    first bind the global interface "weston_content_protection" which, if a
+    compositor supports secure output, is exposed by the registry.
+    Using the bound global object, the client uses the "get_protection" request
+    to instantiate an interface extension for a wl_surface object.
+    This extended interface will then allow surfaces to request for
+    content-protection, and also to censor the visibility of the surface on
+    non-secure outputs. Client applications should not wait for the protection
+    to change, as it might never change in case the content-protection cannot be
+    achieved. Alternatively, clients can use a timeout and start showing the
+    content in lower quality.
+
+    Censored visibility is defined as the compositor censoring the protected
+    content on non-secure outputs. Censoring may include artificially reducing
+    image quality or replacing the protected content completely with
+    placeholder graphics.
+
+    Censored visibility is controlled by protection mode, set by the client.
+    In "relax" mode, the compositor may show protected content on non-secure
+    outputs. It will be up to the client to adapt to secure and non-secure
+    presentation. In "enforce" mode, the compositor will censor the parts of
+    protected content that would otherwise show on non-secure outputs.
+  </description>
+
+  <interface name="weston_content_protection" version="1">
+    <description summary="content protection global interface">
+      The global interface weston_content_protection is used for exposing the
+      content protection capabilities to a client. It provides a way for clients
+      to request their wl_surface contents to not be displayed on an output
+      below their required level of content-protection.
+      Using this interface clients can request for a weston_protected_surface
+      which is an extension to the wl_surface to provide content-protection, and
+      set the censored-visibility on the non-secured-outputs.
+    </description>
+
+    <request name="destroy" type="destructor">
+      <description summary="unbind from the content protection interface">
+        Informs the server that the client will not be using this
+        protocol object anymore. This does not affect any other objects,
+        protected_surface objects included.
+      </description>
+    </request>
+
+    <enum name="error">
+      <entry name="surface_exists" value="0"
+        summary="the surface already has a protected surface associated"/>
+    </enum>
+
+    <request name="get_protection">
+      <description summary="extend surface interface for protection">
+        Instantiate an interface extension for the given wl_surface to
+        provide surface protection. If the given wl_surface already has
+        a weston_protected_surface associated, the surface_exists protocol
+        error is raised.
+      </description>
+      <arg name="id" type="new_id" interface="weston_protected_surface"
+        summary="new object id for protected surface"/>
+      <arg name="surface" type="object" interface="wl_surface"
+        summary="the surface"/>
+    </request>
+  </interface>
+
+  <interface name="weston_protected_surface" version="1">
+    <description summary="content protection interface to a wl_surface">
+      An additional interface to a wl_surface object, which allows a client to
+      request the minimum level of content-protection, request to change the
+      visibility of their contents, and receive notifications about changes in
+      content-protection.
+
+      A protected surface has a 'status' associated with it, that indicates
+      what type of protection it is currently providing, specified by
+      content-type. Updates to this status are sent to the client
+      via the 'status' event. Before the first status event is sent, the client
+      should assume that the status is 'unprotected'.
+
+      A client can request a content protection level to be the minimum for an
+      output to be considered secure, using the 'set_type' request.
+      It is responsibility of the client to monitor the actual
+      content-protection level achieved via the 'status' event, and make
+      decisions as to what content to show based on this.
+
+      The server should make its best effort to achieve the desired
+      content-protection level on all of the outputs the client's contents are
+      being displayed on. Any changes to the content protection status should be
+      reported to the client, even if they are below the requested
+      content-protection level. If the client's contents are being displayed on
+      multiple outputs, the lowest content protection level achieved should be
+      reported.
+
+      A client can also request that its content only be displayed on outputs
+      that are considered secure. The 'enforce/relax' requests can achieve this.
+      In enforce mode, the content is censored for non-secure outputs.
+      The implementation of censored-visibility is compositor-defined.
+      In relax mode there are no such limitation. On an attempt to show the
+      client on unsecured output, compositor would keep on showing the content
+      and send the 'status' event to the client. Client can take a call to
+      downgrade the content.
+
+      If the wl_surface associated with the protected_surface is destroyed,
+      the protected_surface becomes inert.
+    </description>
+
+    <enum name="error">
+      <entry name="invalid_type" value="0"
+        summary="provided type was not valid"/>
+    </enum>
+
+    <enum name="type">
+      <description summary="content types">
+        Description of a particular type of content protection.
+
+        A server may not necessarily support all of these types.
+
+        Note that there is no ordering between enum members unless specified.
+        Over time, different types of content protection may be added, which
+        may be considered less secure than what is already here.
+      </description>
+      <entry name="unprotected" value="0" summary="no protection required"/>
+      <entry name="hdcp_0" value="1" summary="HDCP type 0"/>
+      <entry name="hdcp_1" value="2"
+             summary="HDCP type 1. This is a more secure than HDCP type 0."/>
+    </enum>
+
+    <request name="destroy" type="destructor">
+      <description summary="remove security from the surface">
+        If the protected_surface is destroyed, the wl_surface desired protection
+        level returns to unprotected, as if set_type request was sent with type
+        as 'unprotected'.
+      </description>
+    </request>
+
+    <request name="set_type">
+      <description summary="set the acceptable level of content protection">
+        Informs the server about the type of content. The level of
+        content-protection depends upon the content-type set by the client
+        through this request. Initially, this is set to 'unprotected'.
+
+        If the requested value is not a valid content_type enum value, the
+        'invalid_type' protocol error is raised. It is not an error to request
+        a valid protection type the compositor does not implement or cannot
+        achieve.
+
+        The requested content protection is double-buffered, see
+        wl_surface.commit.
+      </description>
+      <arg name="type" type="uint" enum="type"
+        summary="the desired type of content protection"/>
+    </request>
+
+    <request name="enforce">
+      <description summary="enforce censored-visibility constrain">
+        Censor the visibility of the wl_surface contents on non-secure outputs.
+        See weston_protected_surface for the description.
+
+        The force constrain mode is double-buffered, see wl_surface.commit
+      </description>
+    </request>
+
+    <request name="relax">
+      <description summary="relax the censored-visibility constrain">
+        Do not enforce censored-visibility of the wl_surface contents on
+        non-secure-outputs. See weston_protected_surface for the description.
+
+        The relax mode is selected by default, if no explicit request is made
+        for enforcing the censored-visibility.
+
+        The relax mode is double-buffered, see wl_surface.commit
+      </description>
+    </request>
+
+    <event name="status">
+      <description summary="security status changed">
+        This event is sent to the client to inform about the actual protection
+        level for its surface in the relax mode.
+
+        The 'type' argument indicates what that current level of content
+        protection that the server has currently established.
+
+        The 'status' event is first sent, when a weston_protected_surface is
+        created.
+
+        Until this event is sent for the first time, the client should assume
+        that its contents are not secure, and the type is 'unprotected'.
+
+        Possible reasons the content protection status can change is due to
+        change in censored-visibility mode from enforced to relaxed, a new
+        connector being added, movement of window to another output, or,
+        the client attaching a buffer too large for what the server may secure.
+        However, it is not limited to these reasons.
+
+        A client may want to listen to this event and lower the resolution of
+        their content until it can successfully be shown securely.
+
+        In case of "enforce" mode, the client will not get any status event.
+        If the mode is then changed to "relax", the client will receive the
+        status event.
+      </description>
+      <arg name="type" type="uint" enum="type"
+        summary="the current content protection level"/>
+    </event>
+  </interface>
+
+</protocol>

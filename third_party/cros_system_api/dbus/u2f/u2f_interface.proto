@@ -1,0 +1,275 @@
+// Copyright 2019 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package u2f;
+option go_package = "chromiumos/system_api/u2f_proto";
+
+// UserNotification signal payload.
+message UserNotification {
+  enum EventType {
+    // This event is periodically sent when confirming physical presence is
+    // required for the integrated U2F device. In response, the UI should
+    // start/continue showing the 'touch powerbutton' user prompt.
+    TOUCH_NEEDED = 0;
+  }
+  EventType event_type = 1;
+}
+
+enum VerificationType {
+  VERIFICATION_UNKNOWN = 0;
+  VERIFICATION_USER_PRESENCE = 1;
+  VERIFICATION_USER_VERIFICATION = 2;
+}
+
+message MakeCredentialRequest {
+  enum AttestationConveyancePreference {
+    NONE = 0;
+    // Want u2f attestation.
+    U2F = 1;
+    // Want g2f attestation, with a cert and a signature from the TPM.
+    G2F = 2;
+  }
+
+  VerificationType verification_type = 1;
+  // String representing a valid domain name.
+  string rp_id = 2;
+  // Whether to store as a resident credential. Currently not implemented.
+  bool resident_credential = 3;
+  // User id for listing credentials to the user.
+  bytes user_id = 4;
+  // MakeCredential should fail if any excluded credential belongs to this
+  // device.
+  repeated bytes excluded_credential_id = 5;
+  reserved 6;  // uint64 request_id = 6 [deprecated = true];
+  // User display name for listing credentials to the user.
+  string user_display_name = 7;
+  // The appIdExclude extension. If set, values in |excluded_credential_id|
+  // will be tested against this AppID in addition to |rp_id|.
+  string app_id_exclude = 8;
+  // SHA-256 hash of client data, which is the same as "challenge" in u2f.
+  bytes client_data_hash = 9;
+  // What kind of attestation is desired.
+  AttestationConveyancePreference attestation_conveyance_preference = 10;
+  // The name of RP to display in credential management UI.
+  string rp_display_name = 11;
+  // Whether the credential should be a resident key, a.k.a. discoverable
+  // credential.
+  bool resident_key_required = 12;
+  // Id used to idenfity the window that initiated the request.
+  string request_id_str = 13;
+}
+
+message MakeCredentialResponse {
+  // These values are persisted to logs. Entries should not be renumbered and
+  // numeric values should never be reused.
+  enum MakeCredentialStatus {
+    UNKNOWN = 0;
+    SUCCESS = 1;
+    VERIFICATION_FAILED = 2;
+    VERIFICATION_TIMEOUT = 3;
+    INVALID_REQUEST = 4;
+    INTERNAL_ERROR = 5;
+    // An excluded credential belongs to this device.
+    EXCLUDED_CREDENTIAL_ID = 6;
+    REQUEST_PENDING = 7;
+    CANCELED = 8;
+  }
+
+  MakeCredentialStatus status = 1;
+
+  // Attestation object for newly created credential.
+  //
+  // See https://www.w3.org/TR/webauthn/#attestation-object for details
+  // on the format of these fields.
+  //
+  // Note that currently only 'none' attestation is supported.
+
+  // Includes the newly created credential ID and public key.
+  bytes authenticator_data = 2;
+
+  // Use of 'none' attestation means these fields always have values of "none"
+  // and "\xa0" respectively.
+  string attestation_format = 3;
+  bytes attestation_statement = 4;
+}
+
+message GetAssertionRequest {
+  VerificationType verification_type = 1;
+  // String representing a valid domain name.
+  string rp_id = 2;
+  // SHA-256 hash of client data.
+  bytes client_data_hash = 3;
+  // Currently must not be empty; resident credentials not implemented yet.
+  repeated bytes allowed_credential_id = 4;
+  reserved 5;  // uint64 request_id = 5 [deprecated = true];
+  // App id extension. Used in place of rp id for legacy u2f credentials.
+  string app_id = 6;
+  // Id used to idenfity the window that initiated the request.
+  string request_id_str = 7;
+  // Next ID: 8
+}
+
+message Assertion {
+  bytes credential_id = 1;
+  bytes authenticator_data = 2;
+  bytes signature = 3;
+  // Resident credentials not imlemented yet; this field is always empty.
+  bytes user_entity = 4;
+}
+
+message GetAssertionResponse {
+  // These values are persisted to logs. Entries should not be renumbered and
+  // numeric values should never be reused.
+  enum GetAssertionStatus {
+    UNKNOWN = 0;
+    SUCCESS = 1;
+    VERIFICATION_FAILED = 2;
+    VERIFICATION_TIMEOUT = 3;
+    INVALID_REQUEST = 4;
+    INTERNAL_ERROR = 5;
+    // No allowed credential belongs to this device.
+    UNKNOWN_CREDENTIAL_ID = 6;
+    REQUEST_PENDING = 7;
+    CANCELED = 8;
+  }
+
+  GetAssertionStatus status = 1;
+  repeated Assertion assertion = 2;
+}
+
+// Check whether the specified |credential_id|s are valid. Invalid
+// credentials will not be present in the response. If no |credential_id|s are
+// specified, returns any resident credentials for |rp_id|.
+// There are types of valid credentials:
+// 1. Credentials registered with platform authenticator (webauthn_handler).
+// 2. Credentials registered via u2fhid on WebAuthn API. Those will be scoped
+// to rp_id.
+// 3. Credentials registered via U2F API. Those will be scoped to app_id.
+message HasCredentialsRequest {
+  // String representing a valid domain name.
+  string rp_id = 1;
+  repeated bytes credential_id = 2;
+  // App id extension. Used in place of rp id for U2F API credentials.
+  string app_id = 3;
+}
+
+message HasCredentialsResponse {
+  enum HasCredentialsStatus {
+    UNKNOWN = 0;
+    SUCCESS = 1;
+    INVALID_REQUEST = 2;
+    INTERNAL_ERROR = 3;
+    // No specified credential belongs to this device.
+    UNKNOWN_CREDENTIAL_ID = 4;
+  }
+
+  HasCredentialsStatus status = 1;
+  // Valid or resident credentials for the specified rp_id.
+  repeated bytes credential_id = 2;
+}
+
+// Dismiss user verification UI and abort the operation.
+message CancelWebAuthnFlowRequest {
+  reserved 1;  // uint64 request_id = 1 [deprecated = true];
+  // Id used to idenfity the window that initiated the request.
+  string request_id_str = 2;
+}
+
+message CancelWebAuthnFlowResponse {
+  bool canceled = 1;
+}
+
+// Check whether the platform authenticator is initialized. Before initialized,
+// most operations will directly return an error.
+message IsPlatformAuthenticatorInitializedRequest {}
+
+message IsPlatformAuthenticatorInitializedResponse {
+  bool initialized = 1;
+}
+
+// Check whether user-verifying platform authenticator is available.
+message IsUvpaaRequest {}
+
+message IsUvpaaResponse {
+  bool available = 1 [deprecated = true];
+  // Before this field was introduced, IsUvpaa is always assumed to be true in
+  // Chrome. To preserve backward compatibility, the simplest way is to
+  // introduce this response field which default value (not_available = false)
+  // matches the old behavior.
+  bool not_available = 2;
+}
+
+// Check whether u2f is enabled (by policy or by force flag). If u2f is
+// enabled, the browser will dispatch a cross-platform MakeCredential call to
+// the Chrome OS platform authenticator (with VerificationType=USER_PRESENCE),
+// so that we preserve the MakeCredential behavior for u2f users.
+message IsU2fEnabledRequest {}
+
+message IsU2fEnabledResponse {
+  bool enabled = 1;
+}
+
+message CountCredentialsInTimeRangeRequest {
+  // Timestamp that indicates start of the specified time range.
+  int64 created_not_before_seconds = 1;
+  // Timestamp that indicates end of the specified time range.
+  int64 created_not_after_seconds = 2;
+}
+
+message CountCredentialsInTimeRangeResponse {
+  enum CountCredentialsInTimeRangeStatus {
+    UNKNOWN = 0;
+    SUCCESS = 1;
+    INVALID_REQUEST = 2;
+    INTERNAL_ERROR = 3;
+  }
+
+  CountCredentialsInTimeRangeStatus status = 1;
+  // Number of platform credentials in the specified time range.
+  uint64 num_credentials = 2;
+}
+
+message DeleteCredentialsInTimeRangeRequest {
+  // Timestamp that indicates start of the specified time range.
+  int64 created_not_before_seconds = 1;
+  // Timestamp that indicates end of the specified time range.
+  int64 created_not_after_seconds = 2;
+}
+
+message DeleteCredentialsInTimeRangeResponse {
+  enum DeleteCredentialsInTimeRangeStatus {
+    UNKNOWN = 0;
+    SUCCESS = 1;
+    INVALID_REQUEST = 2;
+    INTERNAL_ERROR = 3;
+  }
+
+  DeleteCredentialsInTimeRangeStatus status = 1;
+  // Number of platform credentials deleted in the specified time range.
+  uint64 num_credentials_deleted = 2;
+}
+
+// Check what public key algorithms are supported in the platform authenticator.
+message GetAlgorithmsRequest {}
+
+message GetAlgorithmsResponse {
+  enum GetAlgorithmsStatus {
+    UNKNOWN = 0;
+    SUCCESS = 1;
+    INTERNAL_ERROR = 2;
+  }
+
+  GetAlgorithmsStatus status = 1;
+  repeated int32 algorithm = 2;
+}
+
+message GetSupportedFeaturesRequest {}
+
+message GetSupportedFeaturesResponse {
+  // Whether the WebAuthn APIs are supported on lacros.
+  bool support_lacros = 1;
+}

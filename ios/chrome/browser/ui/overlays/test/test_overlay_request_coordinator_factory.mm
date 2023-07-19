@@ -1,0 +1,26 @@
+// Copyright 2020 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#import "ios/chrome/browser/ui/overlays/test/test_overlay_request_coordinator_factory.h"
+
+#import "ios/chrome/browser/overlays/public/overlay_request_support.h"
+#import "ios/chrome/browser/ui/overlays/test_modality/test_contained_overlay_coordinator.h"
+#import "ios/chrome/browser/ui/overlays/test_modality/test_presented_overlay_coordinator.h"
+
+#if !defined(__has_feature) || !__has_feature(objc_arc)
+#error "This file requires ARC support."
+#endif
+
+@implementation TestOverlayRequestCoordinatorFactory
+
+- (Class)coordinatorClassForRequest:(OverlayRequest*)request {
+  if ([TestContainedOverlayCoordinator requestSupport]->IsRequestSupported(
+          request)) {
+    return [TestContainedOverlayCoordinator class];
+  } else {
+    return [TestPresentedOverlayCoordinator class];
+  }
+}
+
+@end

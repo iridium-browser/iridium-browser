@@ -1,0 +1,42 @@
+name: Make check/distcheck
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - README
+      - NEWS
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: Build with ${{ matrix.ucs }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ucs: [ucs2, ucs4]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt-get update -qq && sudo apt-get install -y libyaml-dev texinfo texlive
+    - name: Autogen
+      run: ./autogen.sh
+    - name: Configure
+      run: ./configure
+      if: matrix.ucs == 'ucs2'
+    - name: Configure with ucs4
+      run: ./configure --enable-ucs4
+      if: matrix.ucs == 'ucs4'
+    - name: Make check
+      run: make check
+    - name: Store the test suite log
+      if: ${{ always() }} # store the test suite log even if the tests failed
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-suite-${{ matrix.ucs }}.log
+        path: tests/test-suite.log
+    - name: Make distcheck
+      run: make distcheck

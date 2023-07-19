@@ -1,0 +1,342 @@
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package cast.media;
+
+import "proto/common/duration.proto";
+
+option optimize_for = LITE_RUNTIME;
+
+// Cast audio service hosted by Cast Core.
+//
+// It defines a state machine with the following states:
+// - Uninitialized
+// - Playing
+// - Stopped
+// - Paused
+//
+// Note that the received ordering between different RPC calls is not
+// guaranteed to match the sent order.
+service CastAudioChannelService {
+  // Initializes the service and places the pipeline into the 'Stopped' state.
+  // This must be the first call received by the server, and no other calls
+  // may be sent prior to receiving this call's response.
+  rpc Initialize(InitializeRequest) returns (InitializeResponse);
+
+  // Returns the minimum buffering delay (min_delay) required by Cast.  This is
+  // a constant value and only needs to be queried once for each service.
+  // During a StartRequest or ResumeRequest, the system timestamp must be
+  // greater than this delay and the current time in order for the buffer to be
+  // successfully rendered on remote devices.
+  rpc GetMinimumBufferDelay(GetMinimumBufferDelayRequest)
+      returns (GetMinimumBufferDelayResponse);
+
+  // Update the pipeline state.
+  //
+  // StartRequest:
+  //   Places pipeline into 'Playing' state. Playback will start at the
+  //   specified buffer and system timestamp.
+  //
+  //   May only be called in the 'Stopped' state, and following this call the
+  //   state machine will be in the 'Playing' state.
+  //
+  // StopRequest
+  //   Stops media playback and drops all pushed buffers which have not yet been
+  //   played.
+  //
+  //   May only be called in the 'Playing' or 'Paused' states, and following
+  //   this call the state machine will be in the 'Stopped' state.
+  //
+  // PauseRequest
+  //   Pauses media playback.
+  //
+  //   May only be called in the 'Playing' state, and following this call the
+  //   state machine will be in the 'Paused' state.
+  //
+  // ResumeRequest
+  //   Resumes media playback at the specified buffer and system timestamp.
+  //
+  //   May only be called in the 'Paused' state, and following this call the
+  //   state machine will be in the 'Playing'' state.
+  //
+  // TimestampUpdateRequest
+  //   Sends a timestamp update for a specified buffer for audio
+  //   synchronization. This should be called when operating in
+  //   CAST_AUDIO_DECODER_MODE_MULTIROOM_ONLY when the runtime has detected a
+  //   discrepancy in the system clock or pipeline delay from the original
+  //   playback schedule.  See example below:
+  //
+  //   Assume all buffers have duration of 100us.
+  //
+  //   StartRequest(id=1, system_timestamp=0);
+  //   -> Cast expects id=1 to play at 0, id=2 at 100us, id=3 at 200 us...
+  //
+  //   TimestampUpdateRequest(id=4, system_timestamp=405us);
+  //   -> Cast expects id=4 to play at 405, id=5 at 505us, id=6 at 605 us...
+  //
+  //   May be called from any state.
+  //
+  // A state transition may only occur after a successful PushBuffer()
+  // call has been made with a valid configuration.
+  rpc StateChange(StateChangeRequest) returns (StateChangeResponse);
+
+  // Sets the volume multiplier for this audio stream.
+  // The multiplier is in the range [0.0, 1.0].  If not called, a default
+  // multiplier of 1.0 is assumed.
+  //
+  // May be called in any state, and following this call the state machine
+  // will be in the same state.
+  rpc SetVolume(SetVolumeRequest) returns (SetVolumeResponse);
+
+  // Sets the playback rate for this audio stream.
+  //
+  // May be called in any state, and following this call the state machine
+  // will be in the same state.
+  rpc SetPlaybackRate(SetPlaybackRateRequest) returns (SetPlaybackRateResponse);
+
+  // Sends decoded bits and responses to the audio service. The client must
+  // wait for a response from the server before sending another
+  // PushBufferRequest.
+  //
+  // May only be called in the 'Playing' or 'Paused' states, and following
+  // this call the state machine will remain the same state.
+  rpc PushBuffer(PushBufferRequest) returns (PushBufferResponse);
+
+  // Returns the current media time that has been rendered.
+  rpc GetMediaTime(GetMediaTimeRequest) returns (GetMediaTimeResponse);
+}
+
+message InitializeRequest {
+  // Cast session ID.
+  string cast_session_id = 1;
+
+  // Configures how the server should operate.
+  CastAudioDecoderMode mode = 2;
+}
+
+message InitializeResponse {}
+
+message GetMinimumBufferDelayRequest {}
+
+message GetMinimumBufferDelayResponse {
+  // The minimum buffering delay in microseconds.
+  int64 delay_micros = 1;
+}
+
+message StateChangeRequest {
+  oneof request {
+    StartRequest start = 1;
+    StopRequest stop = 2;
+    PauseRequest pause = 3;
+    ResumeRequest resume = 4;
+    TimestampUpdateRequest timestamp_update = 5;
+  }
+}
+
+message StateChangeResponse {
+  // Pipeline state after state change.
+  PipelineState state = 1;
+}
+
+message SetVolumeRequest {
+  // The multiplier is in the range [0.0, 1.0].
+  float multiplier = 1;
+}
+
+message SetVolumeResponse {}
+
+message SetPlaybackRateRequest {
+  // Playback rate greater than 0.
+  double rate = 1;
+}
+
+message SetPlaybackRateResponse {}
+
+message PushBufferRequest {
+  AudioDecoderBuffer buffer = 1;
+
+  // Audio configuration for this buffer and all subsequent buffers. This
+  // field must be populated for the first request or if there is an audio
+  // configuration change.
+  AudioConfiguration audio_config = 2;
+}
+
+message PushBufferResponse {
+  // The total number of  decoded bytes.
+  int64 decoded_bytes = 1;
+}
+
+message GetMediaTimeRequest {}
+
+message GetMediaTimeResponse {
+  // The current media time that has been rendered.
+  MediaTime media_time = 1;
+}
+
+enum PipelineState {
+  PIPELINE_STATE_UNINITIALIZED = 0;
+  PIPELINE_STATE_STOPPED = 1;
+  PIPELINE_STATE_PLAYING = 2;
+  PIPELINE_STATE_PAUSED = 3;
+}
+
+enum CastAudioDecoderMode {
+  // Both multiroom and audio rendering is enabled.
+  CAST_AUDIO_DECODER_MODE_ALL = 0;
+
+  // Only multiroom is enabled and audio rendering is disabled.  This should
+  // be used if the runtime is taking over responsibility for rendering audio.
+  CAST_AUDIO_DECODER_MODE_MULTIROOM_ONLY = 1;
+
+  // Only audio rendering is enabled and multiroom is disabled.
+  CAST_AUDIO_DECODER_MODE_AUDIO_ONLY = 2;
+}
+
+message AudioConfiguration {
+  enum AudioCodec {
+    AUDIO_CODEC_UNKNOWN = 0;
+    AUDIO_CODEC_AAC = 1;
+    AUDIO_CODEC_MP3 = 2;
+    AUDIO_CODEC_PCM = 3;
+    AUDIO_CODEC_PCM_S16BE = 4;
+    AUDIO_CODEC_VORBIS = 5;
+    AUDIO_CODEC_OPUS = 6;
+    AUDIO_CODEC_EAC3 = 7;
+    AUDIO_CODEC_AC3 = 8;
+    AUDIO_CODEC_DTS = 9;
+    AUDIO_CODEC_FLAC = 10;
+    AUDIO_CODEC_MPEG_H_AUDIO = 11;
+  }
+
+  enum ChannelLayout {
+    CHANNEL_LAYOUT_UNSUPPORTED = 0;
+
+    // Front C
+    CHANNEL_LAYOUT_MONO = 1;
+
+    // Front L, Front R
+    CHANNEL_LAYOUT_STEREO = 2;
+
+    // Front L, Front R, Front C, LFE, Side L, Side R
+    CHANNEL_LAYOUT_SURROUND_5_1 = 3;
+
+    // Actual channel layout is specified in the bitstream and the actual
+    // channel count is unknown at Chromium media pipeline level (useful for
+    // audio pass-through mode).
+    CHANNEL_LAYOUT_BITSTREAM = 4;
+
+    // Channels are not explicitly mapped to speakers.
+    CHANNEL_LAYOUT_DISCRETE = 5;
+  }
+
+  enum SampleFormat {
+    SAMPLE_FORMAT_UNKNOWN = 0;
+    SAMPLE_FORMAT_U8 = 1;          // Unsigned 8-bit w/ bias of 128.
+    SAMPLE_FORMAT_S16 = 2;         // Signed 16-bit.
+    SAMPLE_FORMAT_S32 = 3;         // Signed 32-bit.
+    SAMPLE_FORMAT_F32 = 4;         // Float 32-bit.
+    SAMPLE_FORMAT_PLANAR_S16 = 5;  // Signed 16-bit planar.
+    SAMPLE_FORMAT_PLANAR_F32 = 6;  // Float 32-bit planar.
+    SAMPLE_FORMAT_PLANAR_S32 = 7;  // Signed 32-bit planar.
+    SAMPLE_FORMAT_S24 = 8;         // Signed 24-bit.
+  }
+
+  // Audio codec.
+  AudioCodec codec = 1;
+
+  // Audio channel layout.
+  ChannelLayout channel_layout = 2;
+
+  // The format of each audio sample.
+  SampleFormat sample_format = 3;
+
+  // Number of bytes in each channel.
+  int64 bytes_per_channel = 4;
+
+  // Number of channels in this audio stream.
+  int32 channel_number = 5;
+
+  // Number of audio samples per second.
+  int64 samples_per_second = 6;
+
+  // Extra data buffer for certain codec initialization.
+  bytes extra_data = 7;
+}
+
+// The data buffer associated with a single frame of audio data.
+message AudioDecoderBuffer {
+  // The PTS of the frame in microseconds. This is a property of the audio frame
+  // and is used by the receiver to correctly order the audio frames and to
+  // determine when they should be decoded.
+  int64 pts_micros = 1;
+
+  // A single frame of audio data as a byte array.
+  bytes data = 2;
+
+  // Indicates if this is a special frame that indicates the end of the stream.
+  // If true, functions to access the frame content cannot be called.
+  bool end_of_stream = 3;
+
+  // Unique identifier.  This field should be greater than equal to 0 and
+  // incremented by one for each PushBuffeRequest.
+  int64 id = 4;
+}
+
+message MediaTime {
+  // The currents PTS that has been rendered.
+  int64 current_pts_micros = 1;
+
+  // The end of stream has been rendered.
+  bool end_of_stream = 2;
+
+  // Capture time with respect to CLOCK_MONOTONIC_RAW at which the delay
+  // measurement was taken.
+  cast.common.Duration capture_time = 3;
+}
+
+message TimestampInfo {
+  // System timestamp with respect to CLOCK_MONOTONIC_RAW at which the
+  // corresponding buffer is expected to be rendered.
+  cast.common.Duration system_timestamp = 1;
+
+  // AudioDecoderBuffer.id associated with the |system_timestamp|.
+  int64 buffer_id = 2;
+}
+
+message StartRequest {
+  // The start presentation timestamp in microseconds.
+  int64 pts_micros = 1;
+
+  // Timestamp information associated with the request.
+  // This field is optional and only used when this service is configured
+  // for CAST_AUDIO_DECODER_MODE_MULTIROOM_ONLY.
+  TimestampInfo timestamp_info = 2;
+}
+
+message StopRequest {}
+
+message PauseRequest {}
+
+message ResumeRequest {
+  // Timestamp information associated with the request.
+  // This field is optional and only used when this service is configured
+  // for CAST_AUDIO_DECODER_MODE_MULTIROOM_ONLY.
+  TimestampInfo resume_timestamp_info = 1;
+}
+
+message TimestampUpdateRequest {
+  TimestampInfo timestamp_info = 1;
+}

@@ -1,0 +1,13 @@
+# The packages to override
+paths = [
+    "../boringssl-build/boringssl/rust/bssl-crypto",
+    "../boringssl-build/boringssl/rust/bssl-sys",
+    "../boringssl-build/rust-openssl/openssl",
+    "../boringssl-build/rust-openssl/openssl-sys",
+]
+
+[env]
+WORKSPACE_DIR = { value = "", relative = true }
+
+
+

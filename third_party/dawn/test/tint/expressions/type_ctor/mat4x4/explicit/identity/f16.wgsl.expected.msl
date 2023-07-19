@@ -1,0 +1,12 @@
+#include <metal_stdlib>
+
+using namespace metal;
+struct tint_private_vars_struct {
+  half4x4 m;
+};
+
+half4x4 f(thread tint_private_vars_struct* const tint_private_vars) {
+  half4x4 const m_1 = half4x4((*(tint_private_vars)).m);
+  return m_1;
+}
+

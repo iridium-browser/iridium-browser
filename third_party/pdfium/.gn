@@ -1,0 +1,33 @@
+# Copyright 2016 The PDFium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# TODO(crbug.com/pdfium/1932): Switch back to //build/config/BUILDCONFIG.gn if
+# appropriate.
+buildconfig = "//build_overrides/BUILDCONFIG.gn"
+
+# The python interpreter to use by default. On Windows, this will look
+# for python3.exe and python3.bat.
+script_executable = "python3"
+
+default_args = {
+  # PDFs only need to run JavaScript.
+  v8_enable_webassembly = false
+
+  # Turns on compiler optimizations in V8 in Debug build.
+  v8_optimized_debug = true
+
+  # PDFium is currently incompatible with the V8 Sandbox.
+  # See https://crbug.com/v8/13014 for details.
+  v8_enable_sandbox = false
+}
+
+no_check_targets = [
+  # See https://crbug.com/v8/7330 and/or check if these entries exist in
+  # Chromium's //.gn file.
+  "//v8:cppgc_base",
+  "//v8:v8_internal_headers",
+  "//v8/src/inspector:inspector",
+  "//v8/test/cctest:cctest_sources",
+  "//v8/test/unittests:inspector_unittests_sources",
+]

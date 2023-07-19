@@ -25,7 +25,7 @@
 #include "media/gpu/chromeos/dmabuf_video_frame_pool.h"
 #include "testing/gmock/include/gmock/gmock.h"
 #include "testing/gtest/include/gtest/gtest.h"
-#include "third_party/libdrm/src/include/drm/drm_fourcc.h"
+#include <drm_fourcc.h>
 
 #if BUILDFLAG(IS_CHROMEOS_ASH)
 // gn check does not account for BUILDFLAG(), so including this header will

@@ -108,7 +108,11 @@ void SetDiscardPadding(AVPacket* packet,
   }
 
   // If the timestamp is positive, try to use FFmpeg's discard data.
+#if LIBAVUTIL_VERSION_MAJOR < 57
+  int skip_samples_size = 0;
+#else
   size_t skip_samples_size = 0;
+#endif
   const uint32_t* skip_samples_ptr =
       reinterpret_cast<const uint32_t*>(av_packet_get_side_data(
           packet, AV_PKT_DATA_SKIP_SAMPLES, &skip_samples_size));

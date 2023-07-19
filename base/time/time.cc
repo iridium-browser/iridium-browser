@@ -71,30 +71,6 @@ int TimeDelta::InDaysFloored() const {
                       : std::numeric_limits<int>::max();
 }
 
-double TimeDelta::InMillisecondsF() const {
-  if (!is_inf())
-    return static_cast<double>(delta_) / Time::kMicrosecondsPerMillisecond;
-  return (delta_ < 0) ? -std::numeric_limits<double>::infinity()
-                      : std::numeric_limits<double>::infinity();
-}
-
-int64_t TimeDelta::InMilliseconds() const {
-  if (!is_inf())
-    return delta_ / Time::kMicrosecondsPerMillisecond;
-  return (delta_ < 0) ? std::numeric_limits<int64_t>::min()
-                      : std::numeric_limits<int64_t>::max();
-}
-
-int64_t TimeDelta::InMillisecondsRoundedUp() const {
-  if (!is_inf()) {
-    const int64_t result = delta_ / Time::kMicrosecondsPerMillisecond;
-    // Convert |result| from truncating to ceiling.
-    return (delta_ > result * Time::kMicrosecondsPerMillisecond) ? (result + 1)
-                                                                 : result;
-  }
-  return delta_;
-}
-
 double TimeDelta::InMicrosecondsF() const {
   if (!is_inf())
     return static_cast<double>(delta_);

@@ -238,7 +238,10 @@ const NGLayoutResult* NGGridLayoutAlgorithm::LayoutInternal() {
                               : BuildGridSizingTree(&oof_children);
 
   LayoutUnit intrinsic_block_size;
-  auto& [grid_items, layout_data, tree_size] = grid_sizing_tree.TreeRootData();
+  auto& [g_i, l_d, t_s] = grid_sizing_tree.TreeRootData();
+  auto& grid_items = g_i;
+  auto& layout_data = l_d;
+  auto& tree_size = t_s;
 
   if (IsBreakInside(BreakToken())) {
     // TODO(layout-dev): When we support variable inline-size fragments we'll
@@ -655,8 +658,10 @@ NGGridSizingTree NGGridLayoutAlgorithm::BuildGridSizingTree(
   NGGridSizingTree sizing_tree;
 
   if (const auto* layout_subtree = ConstraintSpace().GridLayoutSubtree()) {
-    auto& [grid_items, layout_data, subtree_size] =
-        sizing_tree.CreateSizingData();
+    auto& [g_i, l_d, s_s] = sizing_tree.CreateSizingData();
+    auto& grid_items = g_i;
+    auto& layout_data = l_d;
+    auto& subtree_size = s_s;
 
     const auto& node = Node();
     grid_items =
@@ -1798,8 +1803,10 @@ void NGGridLayoutAlgorithm::CompleteTrackSizingAlgorithm(
     bool* opt_needs_additional_pass) const {
   DCHECK(sizing_subtree);
 
-  auto& [grid_items, layout_data, subtree_size] =
-      sizing_subtree.SubtreeRootData();
+  auto& [g_i, l_d, s_s] = sizing_subtree.SubtreeRootData();
+  auto& grid_items = g_i;
+  auto& layout_data = l_d;
+  auto& subtree_size = s_s;
 
   const bool is_for_columns = track_direction == kForColumns;
   const bool has_non_definite_track =

@@ -78,7 +78,7 @@ absl::optional<std::pair<std::string, int>> GetElementId(
   if (element_id == nullptr) {
     return absl::nullopt;
   }
-  static const size_t separator_length = std::strlen(kElementIdSeparator);
+  static const size_t separator_length = strlen(kElementIdSeparator);
   const size_t separator_pos = element_id->rfind(
       kElementIdSeparator, std::string::npos, separator_length);
   if (separator_pos == std::string::npos) {

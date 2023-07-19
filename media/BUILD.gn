@@ -74,12 +74,6 @@ buildflag_header("media_buildflags") {
   }
 }
 
-if (proprietary_codecs && media_use_ffmpeg) {
-  assert(
-      ffmpeg_branding != "Chromium",
-      "proprietary codecs and ffmpeg_branding set to Chromium are incompatible")
-}
-
 # Common configuration for targets in the media directory; these must not be
 # exported since things like USE_NEON and USE_CRAS have different meanings
 # elsewhere in the code base.

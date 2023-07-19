@@ -384,11 +384,19 @@ void FFmpegDemuxerStream::EnqueuePacket(ScopedAVPacket packet) {
   scoped_refptr<DecoderBuffer> buffer;
 
   if (type() == DemuxerStream::TEXT) {
+#if LIBAVUTIL_VERSION_MAJOR < 57
+    int id_size = 0;
+#else
     size_t id_size = 0;
+#endif
     uint8_t* id_data = av_packet_get_side_data(
         packet.get(), AV_PKT_DATA_WEBVTT_IDENTIFIER, &id_size);
 
+#if LIBAVUTIL_VERSION_MAJOR < 57
+    int settings_size = 0;
+#else
     size_t settings_size = 0;
+#endif
     uint8_t* settings_data = av_packet_get_side_data(
         packet.get(), AV_PKT_DATA_WEBVTT_SETTINGS, &settings_size);
 
@@ -400,7 +408,11 @@ void FFmpegDemuxerStream::EnqueuePacket(ScopedAVPacket packet) {
     buffer = DecoderBuffer::CopyFrom(packet->data, packet->size,
                                      side_data.data(), side_data.size());
   } else {
+#if LIBAVUTIL_VERSION_MAJOR < 57
+    int side_data_size = 0;
+#else
     size_t side_data_size = 0;
+#endif
     uint8_t* side_data = av_packet_get_side_data(
         packet.get(), AV_PKT_DATA_MATROSKA_BLOCKADDITIONAL, &side_data_size);
 
@@ -461,7 +473,11 @@ void FFmpegDemuxerStream::EnqueuePacket(ScopedAVPacket packet) {
                                        packet->size - data_offset);
     }
 
+#if LIBAVUTIL_VERSION_MAJOR < 57
+    int skip_samples_size = 0;
+#else
     size_t skip_samples_size = 0;
+#endif
     const uint32_t* skip_samples_ptr =
         reinterpret_cast<const uint32_t*>(av_packet_get_side_data(
             packet.get(), AV_PKT_DATA_SKIP_SAMPLES, &skip_samples_size));

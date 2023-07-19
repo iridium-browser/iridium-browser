@@ -232,9 +232,9 @@ class BASE_EXPORT TimeDelta {
   constexpr int InMinutes() const;
   constexpr double InSecondsF() const;
   constexpr int64_t InSeconds() const;
-  double InMillisecondsF() const;
-  int64_t InMilliseconds() const;
-  int64_t InMillisecondsRoundedUp() const;
+  constexpr double InMillisecondsF() const;
+  constexpr int64_t InMilliseconds() const;
+  constexpr int64_t InMillisecondsRoundedUp() const;
   constexpr int64_t InMicroseconds() const { return delta_; }
   double InMicrosecondsF() const;
   constexpr int64_t InNanoseconds() const;
@@ -945,6 +945,30 @@ constexpr double TimeDelta::InSecondsF() const {
 
 constexpr int64_t TimeDelta::InSeconds() const {
   return is_inf() ? delta_ : (delta_ / Time::kMicrosecondsPerSecond);
+}
+
+constexpr double TimeDelta::InMillisecondsF() const {
+  if (!is_inf())
+    return static_cast<double>(delta_) / Time::kMicrosecondsPerMillisecond;
+  return (delta_ < 0) ? -std::numeric_limits<double>::infinity()
+                      : std::numeric_limits<double>::infinity();
+}
+
+constexpr int64_t TimeDelta::InMilliseconds() const {
+  if (!is_inf())
+    return delta_ / Time::kMicrosecondsPerMillisecond;
+  return (delta_ < 0) ? std::numeric_limits<int64_t>::min()
+                      : std::numeric_limits<int64_t>::max();
+}
+
+constexpr int64_t TimeDelta::InMillisecondsRoundedUp() const {
+  if (!is_inf()) {
+    const int64_t result = delta_ / Time::kMicrosecondsPerMillisecond;
+    // Convert |result| from truncating to ceiling.
+    return (delta_ > result * Time::kMicrosecondsPerMillisecond) ? (result + 1)
+                                                                 : result;
+  }
+  return delta_;
 }
 
 constexpr int64_t TimeDelta::InNanoseconds() const {

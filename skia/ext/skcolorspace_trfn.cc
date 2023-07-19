@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #include "skia/ext/skcolorspace_trfn.h"
+#include <cmath>
 
 namespace skia {
 

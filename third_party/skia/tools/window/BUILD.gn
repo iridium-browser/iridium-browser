@@ -1,0 +1,53 @@
+# Copyright 2023 Google Inc.
+#
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("../../gn/skia.gni")
+
+config("public_config") {
+  defines = []
+  include_dirs = [ "." ]
+}
+
+skia_component("window") {
+  check_includes = false
+  testonly = true  # For access to gpu_tool_utils. TODO: clean up
+  public_configs = [ ":public_config" ]
+  public = [
+    "DisplayParams.h",
+    "WindowContext.h",
+  ]
+  sources = [
+    "DisplayParams.h",
+    "WindowContext.cpp",
+    "WindowContext.h",
+  ]
+  if (is_android) {
+    sources += [ "android/WindowContextFactory_android.h" ]
+  }
+
+  if (skia_use_gl) {
+    sources += [
+      "GLWindowContext.cpp",
+      "GLWindowContext.h",
+    ]
+    if (is_android) {
+      sources += [ "android/GLWindowContext_android.cpp" ]
+    }
+  }
+  if (skia_use_vulkan) {
+    sources += [
+      "VulkanWindowContext.cpp",
+      "VulkanWindowContext.h",
+    ]
+    if (is_android) {
+      sources += [ "android/VulkanWindowContext_android.cpp" ]
+    }
+  }
+  configs = [ "../../:skia_private" ]
+  deps = [
+    "../..:gpu_tool_utils",
+    "../..:skia",
+  ]
+}

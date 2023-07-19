@@ -1,0 +1,161 @@
+// Copyright 2018 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package vm_tools.apps;
+
+// Corresponds to a .desktop file from the Desktop Entry Spec:
+// https://www.freedesktop.org/wiki/Specifications/desktop-entry-spec/
+// with some additional parameters to support broader compatibility.
+// This message is replicated in vm_tools/proto/container_host.proto, and the
+// two definitions should be kept in sync.
+message App {
+  // A "localestring". Entries with a locale should set the |locale| field to
+  // the value inside the [] and the default entry should leave it empty. The
+  // browser is responsible for mapping this to something it can use.
+  message LocaleString {
+    message Entry {
+      string locale = 1;
+      string value = 2;
+    }
+    repeated Entry values = 1;
+  }
+
+  // A repeated "localestring". Entries with a locale should set the |locale|
+  // field to the value inside the [], e.g for the key "Name[fr]", |locale|
+  // should be "fr"; for the default entry, |locale| should be empty. The
+  // browser is responsible for mapping this to something it can use.
+  message LocaleStrings {
+    message StringsWithLocale {
+      string locale = 1;
+      repeated string value = 2;
+    }
+    repeated StringsWithLocale values = 1;
+  }
+
+  // This is the 'key' for the application and used in other requests such as
+  // launching the application or retrieving its icon.
+  string desktop_file_id = 1;
+
+  // These fields map directly to keys from the Desktop Entry spec:
+  // https://specifications.freedesktop.org/desktop-entry-spec/latest/ar01s06.html.
+  LocaleString name = 2;
+  LocaleString comment = 3;
+  repeated string mime_types = 4;
+  bool no_display = 5;
+  string startup_wm_class = 6;
+  bool startup_notify = 7;
+  LocaleStrings keywords = 9;
+  string exec = 12;
+
+  // This is the first argument of the 'exec' key, representing the name of the
+  // executable.
+  string executable_file_name = 10;
+
+  // If set, the package_id of the installed package that owns this .desktop
+  // file. If not set, the .desktop file is not owned by an installed package.
+  string package_id = 8;
+
+  // Similar to |mime_types| for applications that do not support mime types.
+  repeated string extensions = 11;
+}
+
+// Type of VM.
+enum VmType {
+  TERMINA = 0;
+  PLUGIN_VM = 1;
+  BOREALIS = 2;
+  BRUSCHETTA = 3;
+  // Ideally unknown would be 0, but the list was created without an unknown
+  // so for backcompat don't renumber.
+  UNKNOWN = 4;
+  ARCVM = 5;
+}
+
+// List of App.
+message ApplicationList {
+  repeated App apps = 1;
+
+  string vm_name = 2;
+  string container_name = 3;
+
+  // The owner of the vm and container.
+  string owner_id = 4;
+
+  VmType vm_type = 5;
+}
+
+// Used by the container to request that the host launches a new Terminal
+// application.
+message TerminalParams {
+  // Extra parameters to use when launching a terminal application that allow
+  // executing a command inside the terminal.
+  repeated string params = 1;
+
+  // Name of the VM to launch the terminal in.
+  string vm_name = 2;
+
+  // Name of the container within the VM to launch the terminal in.
+  string container_name = 3;
+
+  // The owner of the VM and container.
+  string owner_id = 4;
+
+  // Current working directory, optional to override default home dir.
+  string cwd = 5;
+}
+
+// MIME type mapping information internal to the container.
+message MimeTypes {
+  // MIME type mappings with file extension as the key without a period prefix
+  // and MIME type as the value.
+  map<string, string> mime_type_mappings = 1;
+
+  // Name of the VM this came from.
+  string vm_name = 2;
+
+  // Name of the container this came from.
+  string container_name = 3;
+
+  // The owner of the VM and container.
+  string owner_id = 4;
+}
+
+// Sent by the container to request that the host launches a SelectFile dialog.
+message SelectFileRequest {
+  // Name of the VM.
+  string vm_name = 1;
+
+  // Name of the container within the VM.
+  string container_name = 2;
+
+  // The owner of the VM.
+  string owner_id = 3;
+
+  // Token sent in request to match with response signal.
+  string select_file_token = 4;
+
+  // The type of file dialog to be shown.
+  // 'open-file': For opening files. Default.
+  // 'open-multi-file': Allow opening multiple files.
+  // 'saveas-file': For saving a file. Allows nonexistent file to be selected.
+  // 'folder': For selecting a folder. Allows nonexistent folder to be selected.
+  // 'upload-folder': For uploading a folder.
+  string type = 5;
+
+  // The title to be displayed in the dialog. If this string is empty, the
+  // default title is used.
+  string title = 6;
+
+  // The default path and suggested file name to be shown in the dialog. This
+  // only works for SELECT_SAVEAS_FILE and SELECT_OPEN_FILE.
+  // Can be an empty string to indicate the platform default.
+  string default_path = 7;
+
+  // Comma separated list of file extensions to filter which files are shown in
+  // the dialog. Leave empty to show all files. Do not include leading dot.
+  string allowed_extensions = 8;
+}

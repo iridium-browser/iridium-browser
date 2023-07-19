@@ -1,0 +1,30 @@
+table: |
+  include hyphenation.dic
+  # a1b
+  include tables/latinLetterDef8Dots.uti
+  hyphen - 36
+  always bb 1346
+
+# break only between a and b
+flags: {testmode: hyphenate}
+tests:
+  - - aaaabbbb
+    - aaaa-bbbb
+  - - bbbbaa
+    - bbbbaa
+
+# if input is braille, also break between a and x because bb is contracted to x
+flags: {testmode: bothDirections}
+tests:
+  - - bb
+    - x
+flags: {testmode: hyphenateBraille}
+tests:
+  - - xaaax
+    - xaaa-x
+
+# break compound words after the hyphen character
+flags: {testmode: hyphenate}
+tests:
+  - - ab-ccc
+    - a-b-|ccc

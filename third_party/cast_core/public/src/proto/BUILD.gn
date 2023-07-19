@@ -1,0 +1,30 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//third_party/protobuf/proto_library.gni")
+
+# NOTE: Builtin protos have to retain their "google/protobuf" path in order to
+# generate certain correct symbols.  This workaround allows the minimal set
+# set to be included.
+config("force_local_well_known_protos") {
+  include_dirs = [ "$target_gen_dir" ]
+}
+
+source_set("base_protos") {
+  all_dependent_configs = [
+    "//third_party/protobuf:protobuf_config",
+    "//third_party/grpc:grpc_config"
+  ]
+  sources = []
+}

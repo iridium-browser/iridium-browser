@@ -1,0 +1,6 @@
+specific_include_rules = {
+  # TODO(crbug.com/1294160): Remove this dependency.
+  "^browser_state_keyed_service_factories.mm": [
+    "+ios/chrome/browser/ui/voice/text_to_speech_playback_controller_factory.h",
+  ],
+}

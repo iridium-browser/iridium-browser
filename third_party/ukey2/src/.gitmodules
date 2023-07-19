@@ -1,0 +1,16 @@
+[submodule "third_party/secure_message"]
+	path = third_party/secure_message
+	url = https://github.com/google/securemessage
+	branch = master
+[submodule "third_party/gtest"]
+	path = third_party/gtest
+	url = https://github.com/google/googletest
+	branch = master
+[submodule "third_party/protobuf"]
+	path = third_party/protobuf
+	url = https://github.com/protocolbuffers/protobuf
+	branch = master
+[submodule "third_party/absl"]
+	path = third_party/absl
+	url = https://github.com/abseil/abseil-cpp
+	branch = master

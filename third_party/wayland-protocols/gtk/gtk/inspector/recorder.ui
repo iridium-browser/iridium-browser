@@ -1,0 +1,171 @@
+<interface domain="gtk40">
+  <object class="GListStore" id="recordings"/>
+  <template class="GtkInspectorRecorder" parent="GtkWidget">
+    <child>
+      <object class="GtkBox" id="box">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">6</property>
+            <property name="margin-start">6</property>
+            <property name="margin-end">6</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
+            <child>
+              <object class="GtkToggleButton">
+                <property name="has-frame">0</property>
+                <property name="icon-name">media-record-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Record frames</property>
+                <property name="active" bind-source="GtkInspectorRecorder" bind-property="recording" bind-flags="bidirectional|sync-create"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="has-frame">0</property>
+                <property name="icon-name">edit-clear-all-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Clear recorded frames</property>
+                <signal name="clicked" handler="recordings_clear_all"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkToggleButton">
+                <property name="has-frame">0</property>
+                <property name="icon-name">insert-object-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Add debug nodes</property>
+                <property name="active" bind-source="GtkInspectorRecorder" bind-property="debug-nodes" bind-flags="bidirectional|sync-create"/>
+                <property name="halign">start</property>
+                <property name="hexpand">1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkToggleButton" id="dark_mode_button">
+                <property name="has-frame">0</property>
+                <property name="icon-name">display-brightness-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Use a dark background</property>
+                <signal name="notify::active" handler="toggle_dark_mode" swapped="0" object="render_node_view"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="render_node_save_button">
+                <property name="has-frame">0</property>
+                <property name="sensitive">0</property>
+                <property name="icon-name">document-save-as-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Save selected node</property>
+                <signal name="clicked" handler="render_node_save"/>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="render_node_clip_button">
+                <property name="has-frame">0</property>
+                <property name="sensitive">0</property>
+                <property name="icon-name">edit-copy-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Copy to clipboard</property>
+                <signal name="clicked" handler="render_node_clip"/>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator" />
+        </child>
+        <child>
+          <object class="GtkBox">
+            <style>
+              <class name="view"/>
+            </style>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="hscrollbar-policy">never</property>
+                <property name="propagate-natural-width">1</property>
+                <style>
+                  <class name="sidebar"/>
+                </style>
+                <child>
+                  <object class="GtkListBox" id="recordings_list">
+                    <property name="vexpand">1</property>
+                    <signal name="row-selected" handler="recordings_list_row_selected"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="hscrollbar-policy">never</property>
+                <property name="propagate-natural-width">1</property>
+                <style>
+                  <class name="sidebar"/>
+                </style>
+                <child>
+                  <object class="GtkListView" id="render_node_list">
+                    <property name="vexpand">1</property>
+                    <property name="hexpand">1</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkPaned" id="render_paned">
+                <property name="orientation">vertical</property>
+                <property name="position">300</property>
+                <property name="wide-handle">1</property>
+                <child>
+                  <object class="GtkScrolledWindow">
+                    <child>
+                      <object class="GtkTreeView" id="node_property_tree">
+                        <property name="activate-on-single-click">1</property>
+                        <signal name="row-activated" handler="node_property_activated"/>
+                        <child>
+                          <object class="GtkTreeViewColumn">
+                            <property name="title" translatable="yes">Property</property>
+                            <child>
+                              <object class="GtkCellRendererText">
+                                <property name="yalign">0</property>
+                              </object>
+                              <attributes>
+                                <attribute name="text">0</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn">
+                            <property name="title" translatable="yes">Value</property>
+                            <child>
+                              <object class="GtkCellRendererText">
+                                <property name="yalign">0</property>
+                                <property name="wrap-mode">word</property>
+                                <property name="max-width-chars">50</property>
+                              </object>
+                              <attributes>
+                                <attribute name="text">1</attribute>
+                              </attributes>
+                            </child>
+                            <child>
+                              <object class="GtkCellRendererPixbuf">
+                                <property name="xalign">0</property>
+                              </object>
+                              <attributes>
+                                <attribute name="visible">2</attribute>
+                                <attribute name="texture">3</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkPicture" id="render_node_view">
+                    <property name="hexpand">1</property>
+                    <property name="vexpand">1</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

@@ -1,0 +1,21 @@
+[package]
+name = "ukey2_rs"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+crypto_provider.workspace = true
+rand.workspace = true
+ukey2_proto.workspace = true
+log.workspace = true
+
+derive-getters = "0.2.0"
+num-bigint = "0.4.3"
+
+[dev-dependencies]
+rand = { workspace = true, features = ["std_rng"] }
+crypto_provider_rustcrypto = {workspace = true, features = ["std"] }
+crypto_provider_openssl.workspace = true
+rstest = "0.16.0"
+sha2.workspace = true

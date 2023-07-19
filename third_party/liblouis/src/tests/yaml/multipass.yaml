@@ -1,0 +1,66 @@
+# A back translation attribute rule at the start of a string is incorrectly resolved
+table: |
+  include tables/en-chardefs.cti
+  nofor pass2 $l @123456
+flags: {testmode: backward}
+tests:
+  - - foo
+    - ===
+
+# Back translation using pass rules that match characters wasn't working
+table: |
+  include tables/en-chardefs.cti
+  nofor pass2 @123456 @135-135
+flags: {testmode: backward}
+tests:
+  - - f=
+    - foo
+
+# Forward translation using pass rules that have characters wasn't working
+table: |
+  include tables/en-chardefs.cti
+  noback context "oo" @123456
+flags: {testmode: forward}
+tests:
+  - - foo
+    - f=
+
+# A context rule with characters needs to be treated as a translation rule
+table: |
+  include tables/en-chardefs.cti
+  always oo 136
+  noback context "o" @123456
+flags: {testmode: forward}
+tests:
+  - - foo
+    - fu
+
+# A multipass test should fail if _ goes negative
+table: |
+  include tables/en-chardefs.cti
+  nofor correct _["fu"] "oo"
+flags: {testmode: backward}
+tests:
+  - - fu
+    - foo
+
+# Converted from pass2.c
+table: |
+  lowercase e 15
+  lowercase n 1345
+  lowercase r 1235
+  lowercase o 135
+  lowercase x 1346
+  base uppercase E e
+  base uppercase N n
+  base uppercase R r
+  base uppercase O o
+  base uppercase X x
+  punctuation ' 6
+  noback pass2 @135   @6-135
+  noback pass2 @1346  ?
+tests:
+  # First check a plain word to see if the table works 
+  - [Rene, rene]
+  # then try a word which uses pass2
+  - [Reno, "ren'o"]

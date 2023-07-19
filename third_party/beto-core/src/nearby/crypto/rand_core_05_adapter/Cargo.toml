@@ -1,0 +1,12 @@
+[package]
+name = "rand_core_05_adapter"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+rand.workspace = true
+#  an older rand_core used by ed25519-dalek so we can adapt newer rand to it
+rand_core05 = { package = "rand_core", version = "0.5.1" }
+
+[dev-dependencies]

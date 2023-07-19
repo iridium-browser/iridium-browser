@@ -1,0 +1,19 @@
+glmark2 is an OpenGL 2.0 and ES 2.0 benchmark.
+
+glmark2 is developed by Alexandros Frantzis and Jesse Barker based on the
+original glmark benchmark by Ben Smith.
+
+It is licensed under the GPLv3 (see COPYING).
+
+To build glmark2 you need:
+
+ * meson (>= 0.47) or python3 (if you are using WAF for building)
+ * libpng 1.6
+ * Window system development files for the flavors you want to build
+   (e.g, X11, Wayland, drm)
+ * libGL (for desktop GL)
+ * libEGL and libGLESv2 (for GLESv2)
+
+Read the INSTALL file for building/installation instructions,
+
+Read the INSTALL.android file for instructions for Android.

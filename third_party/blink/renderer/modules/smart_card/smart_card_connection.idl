@@ -1,0 +1,36 @@
+// Copyright 2022 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// https://github.com/WICG/web-smart-card/blob/main/README.md#web-idl
+
+enum SmartCardDisposition {
+  "leave",
+  "reset",
+  "unpower",
+  "eject"
+};
+
+[
+  Exposed=Window,
+  RuntimeEnabled=SmartCard,
+  SecureContext,
+  IsolatedContext
+] interface SmartCardConnection {
+  [CallWith=ScriptState, RaisesException]
+  Promise<void> disconnect(optional SmartCardDisposition disposition = "leave");
+
+  [CallWith=ScriptState, RaisesException]
+  Promise<ArrayBuffer> transmit(BufferSource sendBuffer);
+
+  Promise<SmartCardConnectionStatus> status();
+
+  [CallWith=ScriptState, RaisesException]
+  Promise<ArrayBuffer> control([EnforceRange] unsigned long controlCode,
+      BufferSource data);
+
+  [CallWith=ScriptState, RaisesException]
+  Promise<ArrayBuffer> getAttribute([EnforceRange] unsigned long tag);
+
+  // TODO(crbug.com/1386175): add the rest of the API
+};

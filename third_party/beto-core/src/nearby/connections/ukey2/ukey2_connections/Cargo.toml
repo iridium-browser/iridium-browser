@@ -1,0 +1,24 @@
+[package]
+name = "ukey2_connections"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+ukey2_rs = { path = "../ukey2" }
+
+crypto_provider.workspace = true
+rand = { workspace = true, features = ["std", "std_rng"] }
+ukey2_proto.workspace = true
+nom = { version = "7.1.1", features = ["alloc"] }
+bytes = "1.2.1"
+criterion = "0.4.0"
+
+[dev-dependencies]
+crypto_provider_openssl.workspace = true
+crypto_provider_rustcrypto = { workspace = true, features = ["alloc", "std"] }
+rstest = "0.16.0"
+
+[[bench]]
+name = "ukey2_benches"
+harness = false

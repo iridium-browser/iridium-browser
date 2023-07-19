@@ -1,0 +1,15 @@
+[package]
+name = "crypto_provider_boringssl"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+crypto_provider = { path = "../crypto_provider", features = ["alloc", "std"] }
+crypto_provider_stubs = { path = "../crypto_provider_stubs" }
+
+# Note: before this crate will work you need to run `scripts/prepare-boringssl.sh`
+bssl-crypto = {path = "../bssl-crypto"}
+
+[dev-dependencies]
+crypto_provider_test = {path = "../crypto_provider_test"}

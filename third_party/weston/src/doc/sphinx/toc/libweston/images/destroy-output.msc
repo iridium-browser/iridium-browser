@@ -1,0 +1,29 @@
+#!/usr/bin/mscgen -Tpng
+
+msc {
+	hscale="1.5";
+
+	c [label = "compositor"], w [label = "libweston core"],
+	b [label = "backend"];
+
+	|||;
+
+	--- [label = "Compositor destroys an output for a head"];
+
+	c box c [label = "A head is found disconnected, is being destroyed, or something else needs it disabled."];
+
+	c => w [label = "weston_head_get_output()"];
+	c << w [label = "weston_output"];
+
+	c box c [label = "decide the output needs to be destroyed"];
+
+	c => w [label = "weston_output_destroy()"];
+	w => b [label = "weston_output::destroy()"];
+	w <= b [label = "weston_output_release()"];
+	w <= w [label = "weston_head_detach()"];
+	w :> b [label = "weston_output::detach_head()"];
+	w >> b [label = "release return"];
+	b box b [label = "free(output)"];
+	w << b;
+	c << w;
+}

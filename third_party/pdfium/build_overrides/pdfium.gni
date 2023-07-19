@@ -1,0 +1,29 @@
+# Copyright 2016 The PDFium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# This file contains PDFium-related build overrides.
+
+# Build PDFium either using a bundled FreeType library, or using the FreeType
+# target defined in //build/config/freetype.
+# Default: Use a bundled FreeType.
+pdf_bundle_freetype_override = true
+
+# Build PDFium either with or without v8 support.
+# Default: With V8 support.
+pdf_enable_v8_override = true
+
+# Build PDFium either with or without XFA Forms support.
+# Default: Without XFA support.
+pdf_enable_xfa_override = false
+
+# Build PDFium with PartitionAlloc support, directing `fxcrt` to use
+# it as its memory allocator in lieu of `malloc()`.
+# Default: Use PartitionAlloc when building with Clang.
+pdf_use_partition_alloc_override = is_clang
+
+# Build PDFium to use Skia (experimental) for all PDFium graphics.
+# If enabled, coexists in build with AGG graphics and the default
+# renderer is selectable at runtime.
+# The default is to use AGG only when `pdf_use_skia_override` is false.
+pdf_use_skia_override = false

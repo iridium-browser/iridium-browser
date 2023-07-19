@@ -1,0 +1,92 @@
+.TH WESTON-RDP 7 "2017-12-14" "Weston @version@"
+.SH NAME
+weston-rdp \- the RDP backend for Weston
+.SH SYNOPSIS
+.B weston --backend=rdp-backend.so
+.
+.\" ***************************************************************
+.SH DESCRIPTION
+The RDP backend allows to run a
+.B weston
+environment without the need of specific graphic hardware, or input devices. Users can interact with
+.B weston
+only by connecting using the RDP protocol.
+
+The RDP backend uses FreeRDP to implement the RDP part, it acts as a RDP server
+listening for incoming connections. It supports different codecs for encoding the
+graphical content. Depending on what is supported by the RDP client, the backend will
+encode images using remoteFx codec, NS codec or will fallback to raw bitmapUpdate.
+
+On the security part, the backend supports RDP security or TLS, keys and certificates
+must be provided to the backend depending on which kind of security is requested. The RDP
+backend will announce security options based on which files have been given.
+
+The RDP backend is multi-seat aware, so if two clients connect on the backend,
+they will get their own seat.
+
+.\" ***************************************************************
+.SH OPTIONS
+.
+When the RDP backend is loaded,
+.B weston
+will understand the following additional command line options.
+.TP
+.B \-\-address\fR=\fIaddress\fR
+The IP address on which the RDP backend will listen for RDP connections. By
+default it listens on 0.0.0.0.
+.TP
+\fB\-\-port\fR=\fIport\fR
+The TCP port to listen on for connections, it defaults to 3389.
+.TP
+\fB\-\-no-clients-resize
+By default when a client connects on the RDP backend, it will instruct weston to
+resize to the dimensions of the client's announced resolution. When this option is
+set, weston will force the client to resize to its own resolution.
+.TP
+\fB\-\-rdp4\-key\fR=\fIfile\fR
+The file containing the RSA key for doing RDP security. As RDP security is known
+to be insecure, this option should be avoided in production.
+.TP
+\fB\-\-rdp\-tls\-key\fR=\fIfile\fR
+The file containing the key for doing TLS security. To have TLS security you also need
+to ship a file containing a certificate.
+.TP
+\fB\-\-rdp\-tls\-cert\fR=\fIfile\fR
+The file containing the certificate for doing TLS security. To have TLS security you also need
+to ship a key file.
+
+
+.\" ***************************************************************
+.SH Generating cryptographic material for the RDP backend
+.
+To generate a key file to use for RDP security, you need the
+.BR winpr-makecert
+utility shipped with FreeRDP:
+
+.nf
+$ winpr-makecert -rdp -silent -n rdp-security
+.fi
+
+This will create a rdp-security.key file.
+
+
+You can generate a key and certificate file to use with TLS security using a typical
+.B openssl
+invocations:
+
+.nf
+$ openssl genrsa -out tls.key 2048
+Generating RSA private key, 2048 bit long modulus
+[...]
+$ openssl req -new -key tls.key -out tls.csr
+[...]
+$ openssl x509 -req -days 365 -signkey tls.key -in tls.csr -out tls.crt
+[...]
+.fi
+
+You will get the tls.key and tls.crt files to use with the RDP backend.
+.
+.\" ***************************************************************
+.SH "SEE ALSO"
+.BR weston (1)
+.\".BR weston.ini (5)

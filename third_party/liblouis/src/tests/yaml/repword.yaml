@@ -1,0 +1,66 @@
+# see issue https://github.com/liblouis/liblouis/issues/787
+
+table: |
+  include tables/latinLetterDef6Dots.uti
+  space \s 0
+  display ^ 46
+  capsletter 46
+  begcapsword 46-46
+  punctuation . 6
+  sign - 25
+  display = 123456
+  display : 456
+  repword - 123456
+  rependword - 456,123456
+  always aaa 1-1-1
+  always ccc 14-14-14
+
+tests:
+  - - abc-abc
+    - abc=
+    - inputPos: [0,1,2,4]
+      outputPos: [0,1,2,2,3,3,3]
+  - - .abc-abc
+    - .abc=
+  - - .abc-.abc
+    - .abc-.abc
+  - - abc def-abc def
+    - abc def-abc def
+  - - abc abc-abc abc
+    - abc abc= abc
+  - - abc-abc-abc
+    - abc=
+    - inputPos: [0,1,2,4]
+      outputPos: [0,1,2,2,3,3,3,3,3,3,3]
+  - - aaabc-aaabc
+    - aaabc=
+  - - abc-abcxxx
+    - abc=xxx
+  - - abc-abccc
+    - abc=cc
+  - - xxxabc-abc
+    - xxx:abc=
+    - inputPos: [0,1,2,3,3,4,5,7]
+      outputPos: [0,1,2,3,5,6,6,7,7,7]
+  - - aaabc-abc
+    - aaabc-abc
+  - - xxxabc-abcxxx
+    - xxx:abc=xxx
+  - - Abc-abc
+    - ^abc=
+  - - Abc-Abc
+    - ^abc^=
+    - inputPos: [0,0,1,2,4,4]
+      outputPos: [0,2,3,3,4,4,4]
+  - - ABC-abc
+    - ^^abc=
+  - - abc-ABC
+    - abc^^=
+  - - XXXABC-Abc
+    - ^^xxx:abc^=
+    - inputPos: [0,0,0,1,2,3,3,4,5,7,7]
+      outputPos: [0,3,4,5,7,8,8,9,9,9]
+  - - Abc-Abc-Abc
+    - ^abc^=^=
+    - inputPos: [0,0,1,2,4,4,8,8]
+      outputPos: [0,2,3,3,4,4,4,4,6,6,6]

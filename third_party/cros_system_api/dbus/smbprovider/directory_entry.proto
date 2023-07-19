@@ -1,0 +1,68 @@
+// Copyright 2017 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package smbprovider;
+
+// ErrorType matches 1:1 to FileSystemProvider#ProviderError in Chromium up
+// until ERROR_PROVIDER_ERROR_COUNT. The ErrorTypes past that are specific to
+// SmbProvider.
+enum ErrorType {
+  ERROR_NONE = 0;
+  ERROR_OK = 1;
+  ERROR_FAILED = 2;
+  ERROR_IN_USE = 3;
+  ERROR_EXISTS = 4;
+  ERROR_NOT_FOUND = 5;
+  ERROR_ACCESS_DENIED = 6;
+  ERROR_TOO_MANY_OPENED = 7;
+  ERROR_NO_MEMORY = 8;
+  ERROR_NO_SPACE = 9;
+  ERROR_NOT_A_DIRECTORY = 10;
+  ERROR_INVALID_OPERATION = 11;
+  ERROR_SECURITY = 12;
+  ERROR_ABORT = 13;
+  ERROR_NOT_A_FILE = 14;
+  ERROR_NOT_EMPTY = 15;
+  ERROR_INVALID_URL = 16;
+  ERROR_IO = 17;
+  // Count of ProviderError.
+  ERROR_PROVIDER_ERROR_COUNT = 18;
+  // The following errors are not ProviderErrors, instead they are specific to
+  // SmbProvider. The jump in int value is to account for possible future
+  // additions to ProviderError.
+  ERROR_DBUS_PARSE_FAILED = 50;
+  ERROR_COPY_PENDING = 51;
+  ERROR_COPY_FAILED = 52;
+  ERROR_SMB1_UNSUPPORTED = 53;
+  ERROR_OPERATION_PENDING = 54;
+  ERROR_OPERATION_FAILED = 55;
+}
+
+message DirectoryEntryProto {
+  optional bool is_directory = 1;
+  optional string name = 2;
+  // Size in bytes.
+  optional int64 size = 3;
+  // Seconds since unix epoch.
+  optional int64 last_modified_time = 4;
+}
+
+// DirectoryEntryListProto is included in responses to ReadDirectory D-Bus
+// method calls.
+message DirectoryEntryListProto { repeated DirectoryEntryProto entries = 1; }
+
+// Used for passing inputs into SmbProvider.GetShares().
+message GetSharesOptionsProto {
+  // Url of the server containing the shares. (e.g. "smb://192.168.0.1")
+  optional string server_url = 1;
+}
+
+// Used for returning a list of hostnames from a parsed NetBios response packet.
+message HostnamesProto {
+  repeated string hostnames = 1;
+}

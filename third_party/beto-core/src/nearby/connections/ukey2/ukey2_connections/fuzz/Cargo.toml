@@ -1,0 +1,43 @@
+[package]
+name = "ukey2_connections-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+crypto_provider_rustcrypto = { path = "../../../../crypto/crypto_provider_rustcrypto" }
+ukey2_rs = { path = "../../ukey2" }
+rand_chacha = "0.3.1"
+arbitrary = { version = "1.2.3", features = ["derive"] }
+
+[dependencies.ukey2_connections]
+path = ".."
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[profile.release]
+debug = 1
+
+[[bin]]
+name = "fuzz_connection"
+path = "fuzz_targets/fuzz_connection.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "fuzz_handshake"
+path = "fuzz_targets/fuzz_handshake.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "fuzz_from_saved_session"
+path = "fuzz_targets/fuzz_from_saved_session.rs"
+test = false
+doc = false

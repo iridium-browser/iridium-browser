@@ -1,0 +1,12 @@
+diff -Naurb src2/uloop2.c src/uloop2.c
+--- src2/uloop2.c 2016-08-12 18:57:33.510089924 -0700
++++ src/uloop2.c 2016-08-12 18:57:51.278353834 -0700
+@@ -62,7 +62,7 @@
+
+ fds = 0 ;
+ if( estimate_feeds ) {
+-    fds = controlf( 1 ) ;
++    fds = controlf( ) ;
+ }
+
+ while( attempts < attmax ) {

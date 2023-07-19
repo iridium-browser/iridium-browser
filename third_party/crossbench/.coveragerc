@@ -1,0 +1,9 @@
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    if TYPE_CHECKING:
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    @abc.abstractmethod
+    except selenium.common.exceptions.WebDriverException as e:

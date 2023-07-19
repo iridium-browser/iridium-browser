@@ -737,6 +737,15 @@ void IDNSpoofChecker::SetAllowedUnicodeSet(UErrorCode* status) {
   allowed_set.remove(0x200Du);  // Zero Width Joiner
 #endif
 
+#if U_ICU_VERSION_MAJOR_NUM < 72
+  // Unicode 15 changes ZWJ and ZWNJ from allowed to restricted. Restrict them
+  // in lower versions too. This only relevant in Non-Transitional Mode as
+  // Transitional Mode maps these characters out.
+  // TODO(crbug.com/1386204): Remove these after ICU 72 is rolled out.
+  allowed_set.remove(0x200Cu);  // Zero Width Non-Joiner
+  allowed_set.remove(0x200Du);  // Zero Width Joiner
+#endif
+
   uspoof_setAllowedUnicodeSet(checker_, &allowed_set, status);
 }
 

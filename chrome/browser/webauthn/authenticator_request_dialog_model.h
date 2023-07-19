@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <string>
+#include <variant>
 #include <vector>
 #include <variant>
 

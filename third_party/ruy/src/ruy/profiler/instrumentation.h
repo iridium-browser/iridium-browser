@@ -17,6 +17,7 @@ limitations under the License.
 #define RUY_RUY_PROFILER_INSTRUMENTATION_H_
 
 #ifdef RUY_PROFILER
+#include <string>
 #include <cstdio>
 #include <mutex>
 #include <vector>

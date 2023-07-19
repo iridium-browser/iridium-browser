@@ -31,6 +31,7 @@ limitations under the License.
 #ifndef TENSORFLOW_LITE_KERNELS_INTERNAL_SPECTROGRAM_H_
 #define TENSORFLOW_LITE_KERNELS_INTERNAL_SPECTROGRAM_H_
 
+#include <cstdint>
 #include <complex>
 #include <deque>
 #include <vector>

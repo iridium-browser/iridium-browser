@@ -5,6 +5,7 @@
 #ifndef COMPONENTS_PAYMENTS_CONTENT_UTILITY_FINGERPRINT_PARSER_H_
 #define COMPONENTS_PAYMENTS_CONTENT_UTILITY_FINGERPRINT_PARSER_H_
 
+#include <cstdint>
 #include <stddef.h>
 #include <stdint.h>
 

@@ -6,5 +6,5 @@
 import subprocess
 import sys
 
-
-subprocess.check_call(["moc", sys.argv[1], "-o", sys.argv[2]])
+cmd = "moc-qt" + sys.argv[3]
+subprocess.check_call([cmd, sys.argv[1], "-o", sys.argv[2]])

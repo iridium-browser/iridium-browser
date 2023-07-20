@@ -409,6 +409,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
                       "Mozilla/5.0 (%s) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "%s Safari/537.36",
                       os_info.c_str(), product.c_str());
+  if (strncmp(product.c_str(), "Chrome/", 7) != 0)
+	base::StringAppendF(&user_agent, " Chrome/112.0.5615.121");
   return user_agent;
 }
 

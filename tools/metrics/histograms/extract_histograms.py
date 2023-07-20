@@ -83,7 +83,7 @@ DEFAULT_BASE_HISTOGRAM_OBSOLETE_REASON = (
     'Base histogram. Use suffixes of this histogram instead.')
 
 EXPIRY_DATE_PATTERN = "%Y-%m-%d"
-EXPIRY_MILESTONE_RE = re.compile(r'M[0-9]{2,3}\Z')
+EXPIRY_MILESTONE_RE = re.compile(r'M[0-9]{2,4}\Z')
 
 
 class Error(Exception):

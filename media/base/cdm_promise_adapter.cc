@@ -94,7 +94,9 @@ void CdmPromiseAdapter::RejectPromise(uint32_t promise_id,
 void CdmPromiseAdapter::Clear(ClearReason reason) {
   // Reject all outstanding promises.
   DCHECK(thread_checker_.CalledOnValidThread());
-  for (auto& [promise_id, promise] : promises_) {
+  for (auto& [p_i, p_e] : promises_) {
+    auto& promise_id = p_i;
+    auto& promise = p_e;
     TRACE_EVENT_NESTABLE_ASYNC_END1(
         "media", "CdmPromise", TRACE_ID_WITH_SCOPE("CdmPromise", promise_id),
         "status", "cleared");

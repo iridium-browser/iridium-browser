@@ -1393,7 +1393,8 @@ void ServiceWorkerContextWrapper::MaybeProcessPendingWarmUpRequest() {
     return;
   }
 
-  auto [document_url, key, callback] = std::move(*request);
+  auto [d_u, key, callback] = std::move(*request);
+  auto document_url = d_u;
 
   DCHECK(document_url.is_valid());
   TRACE_EVENT1("ServiceWorker",

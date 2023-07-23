@@ -84,6 +84,7 @@ CanvasStyle::CanvasStyle(const CanvasStyle& other) {
 
 void CanvasStyle::ApplyToFlags(cc::PaintFlags& flags,
                                float global_alpha) const {
+  SkColor4f custom_color = SkColor4f{0.0f, 0.0f, 0.0f, global_alpha};
   switch (type_) {
     case kColor:
       ApplyColorToFlags(flags, global_alpha);
@@ -91,12 +92,12 @@ void CanvasStyle::ApplyToFlags(cc::PaintFlags& flags,
     case kGradient:
       GetCanvasGradient()->GetGradient()->ApplyToFlags(flags, SkMatrix::I(),
                                                        ImageDrawOptions());
-      flags.setColor(SkColor4f(0.0f, 0.0f, 0.0f, global_alpha));
+      flags.setColor(custom_color);
       break;
     case kImagePattern:
       GetCanvasPattern()->GetPattern()->ApplyToFlags(
           flags, AffineTransformToSkMatrix(GetCanvasPattern()->GetTransform()));
-      flags.setColor(SkColor4f(0.0f, 0.0f, 0.0f, global_alpha));
+      flags.setColor(custom_color);
       break;
     default:
       NOTREACHED();

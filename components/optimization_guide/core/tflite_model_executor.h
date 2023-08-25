@@ -240,7 +240,7 @@ class TFLiteModelExecutor : public ModelExecutor<OutputType, InputType> {
   void SendForBatchExecution(
       BatchExecutionCallback callback_on_complete,
       base::TimeTicks start_time,
-      ModelExecutor<OutputType, InputType>::ConstRefInputVector inputs)
+      typename ModelExecutor<OutputType, InputType>::ConstRefInputVector inputs)
       override {
     DCHECK(execution_task_runner_->RunsTasksInCurrentSequence());
     DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);

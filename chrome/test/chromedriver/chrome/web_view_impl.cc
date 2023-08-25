@@ -11,6 +11,7 @@
 #include <queue>
 #include <utility>
 #include <vector>
+#include <cstring>
 
 #include "base/check.h"
 #include "base/files/file_path.h"

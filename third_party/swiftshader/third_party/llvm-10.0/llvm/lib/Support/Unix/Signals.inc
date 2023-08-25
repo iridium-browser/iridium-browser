@@ -45,6 +45,7 @@
 #include "llvm/Support/SaveAndRestore.h"
 #include "llvm/Support/raw_ostream.h"
 #include <algorithm>
+#include <cstdint>
 #include <string>
 #include <sysexits.h>
 #ifdef HAVE_BACKTRACE

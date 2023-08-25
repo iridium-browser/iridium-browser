@@ -7,6 +7,7 @@
 
 #include <stdint.h>
 
+#include <cstdint>
 #include <map>
 
 #include "base/containers/flat_set.h"

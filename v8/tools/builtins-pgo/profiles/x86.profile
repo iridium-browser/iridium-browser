@@ -142,6 +142,7 @@ block_hint,FastNewClosure,15,16,0
 block_hint,FastNewClosure,4,5,1
 block_hint,FastNewClosure,19,20,1
 block_hint,FastNewClosure,6,7,0
+block_hint,StringEqual,74,75,0
 block_hint,StringEqual,41,42,1
 block_hint,StringEqual,72,73,0
 block_hint,StringEqual,63,64,1
@@ -815,6 +816,7 @@ block_hint,HasProperty,64,65,0
 block_hint,HasProperty,219,220,1
 block_hint,HasProperty,242,243,1
 block_hint,HasProperty,47,48,0
+block_hint,HasProperty,49,50,0
 block_hint,HasProperty,274,275,0
 block_hint,HasProperty,231,232,0
 block_hint,HasProperty,37,38,0
@@ -901,6 +903,7 @@ block_hint,SetDataProperties,296,297,1
 block_hint,SetDataProperties,442,443,0
 block_hint,SetDataProperties,352,353,0
 block_hint,SetDataProperties,245,246,0
+block_hint,SetDataProperties,131,132,0
 block_hint,SetDataProperties,281,282,1
 block_hint,SetDataProperties,208,209,0
 block_hint,SetDataProperties,63,64,0
@@ -936,6 +939,7 @@ block_hint,ArraySingleArgumentConstructor_HoleySmi_DisableAllocationSites,26,27,
 block_hint,ArraySingleArgumentConstructor_HoleySmi_DisableAllocationSites,19,20,1
 block_hint,ArraySingleArgumentConstructor_Holey_DisableAllocationSites,5,6,1
 block_hint,ArraySingleArgumentConstructor_Holey_DisableAllocationSites,14,15,0
+block_hint,ArraySingleArgumentConstructor_Holey_DisableAllocationSites,16,17,0
 block_hint,ArraySingleArgumentConstructor_Holey_DisableAllocationSites,28,29,1
 block_hint,ArraySingleArgumentConstructor_Holey_DisableAllocationSites,26,27,1
 block_hint,ArraySingleArgumentConstructor_Holey_DisableAllocationSites,12,13,1
@@ -1261,7 +1265,6 @@ block_hint,LoadIC,305,306,0
 block_hint,LoadIC,136,137,1
 block_hint,LoadIC,342,343,1
 block_hint,LoadIC,101,102,0
-block_hint,LoadIC,103,104,0
 block_hint,LoadIC,20,21,1
 block_hint,LoadIC,63,64,0
 block_hint,LoadIC,138,139,0
@@ -1298,6 +1301,7 @@ block_hint,LoadIC_Megamorphic,125,126,1
 block_hint,LoadIC_Megamorphic,268,269,0
 block_hint,LoadIC_Megamorphic,312,313,1
 block_hint,LoadIC_Megamorphic,94,95,0
+block_hint,LoadIC_Megamorphic,96,97,0
 block_hint,LoadIC_Megamorphic,127,128,0
 block_hint,LoadIC_Megamorphic,270,271,1
 block_hint,LoadIC_Megamorphic,21,22,1
@@ -1396,9 +1400,6 @@ block_hint,KeyedLoadIC,499,500,0
 block_hint,KeyedLoadIC,429,430,1
 block_hint,KeyedLoadIC,668,669,0
 block_hint,KeyedLoadIC,120,121,1
-block_hint,KeyedLoadIC,318,319,0
-block_hint,KeyedLoadIC,320,321,1
-block_hint,KeyedLoadIC,69,70,0
 block_hint,KeyedLoadIC_Megamorphic,488,489,1
 block_hint,KeyedLoadIC_Megamorphic,490,491,0
 block_hint,KeyedLoadIC_Megamorphic,1250,1251,0
@@ -1553,7 +1554,6 @@ block_hint,StoreGlobalIC,234,235,1
 block_hint,StoreGlobalIC,273,274,0
 block_hint,StoreGlobalIC,146,147,0
 block_hint,StoreGlobalIC,207,208,0
-block_hint,StoreGlobalIC,96,97,0
 block_hint,StoreGlobalIC,98,99,0
 block_hint,StoreGlobalIC,148,149,1
 block_hint,StoreGlobalIC,100,101,1
@@ -1566,6 +1566,7 @@ block_hint,StoreIC,210,211,0
 block_hint,StoreIC,212,213,1
 block_hint,StoreIC,398,399,1
 block_hint,StoreIC,391,392,0
+block_hint,StoreIC,374,375,1
 block_hint,StoreIC,245,246,1
 block_hint,StoreIC,247,248,1
 block_hint,StoreIC,80,81,1
@@ -1603,7 +1604,6 @@ block_hint,StoreIC,168,169,1
 block_hint,StoreIC,298,299,0
 block_hint,StoreIC,317,318,1
 block_hint,StoreIC,82,83,0
-block_hint,StoreIC,251,252,0
 block_hint,StoreIC,178,179,0
 block_hint,StoreIC,44,45,1
 block_hint,StoreIC,225,226,0
@@ -1663,6 +1663,7 @@ block_hint,DefineNamedOwnIC,248,249,1
 block_hint,DefineNamedOwnIC,99,100,0
 block_hint,DefineNamedOwnIC,16,17,0
 block_hint,DefineNamedOwnIC,357,358,0
+block_hint,DefineNamedOwnIC,287,288,1
 block_hint,DefineNamedOwnIC,159,160,1
 block_hint,DefineNamedOwnIC,161,162,1
 block_hint,DefineNamedOwnIC,257,258,1
@@ -1684,6 +1685,7 @@ block_hint,KeyedStoreIC,173,174,0
 block_hint,KeyedStoreIC,169,170,0
 block_hint,KeyedStoreIC,239,240,0
 block_hint,KeyedStoreIC,171,172,1
+block_hint,KeyedStoreIC,89,90,1
 block_hint,KeyedStoreIC,93,94,1
 block_hint,KeyedStoreIC,396,397,1
 block_hint,KeyedStoreIC,260,261,0
@@ -1766,6 +1768,7 @@ block_hint,LoadGlobalICInsideTypeofTrampoline,3,4,1
 block_hint,LookupGlobalICBaseline,3,4,1
 block_hint,LookupGlobalICBaseline,14,15,1
 block_hint,LookupGlobalICBaseline,5,6,1
+block_hint,LookupGlobalICBaseline,11,12,1
 block_hint,LookupGlobalICBaseline,7,8,1
 block_hint,LookupGlobalICBaseline,9,10,1
 block_hint,KeyedHasIC,262,263,1
@@ -2000,6 +2003,7 @@ block_hint,Multiply_Baseline,47,48,0
 block_hint,Multiply_Baseline,55,56,0
 block_hint,Multiply_Baseline,61,62,1
 block_hint,Multiply_Baseline,57,58,1
+block_hint,Multiply_Baseline,22,23,0
 block_hint,Multiply_Baseline,10,11,1
 block_hint,Multiply_Baseline,49,50,1
 block_hint,Multiply_Baseline,67,68,1
@@ -2070,7 +2074,6 @@ block_hint,BitwiseOr_Baseline,68,69,1
 block_hint,BitwiseOr_Baseline,75,76,1
 block_hint,BitwiseOr_Baseline,20,21,1
 block_hint,BitwiseOrSmi_Baseline,6,7,0
-block_hint,BitwiseOrSmi_Baseline,27,28,1
 block_hint,BitwiseOrSmi_Baseline,23,24,0
 block_hint,BitwiseOrSmi_Baseline,21,22,0
 block_hint,BitwiseOrSmi_Baseline,33,34,1
@@ -2117,9 +2120,11 @@ block_hint,ShiftRightLogicalSmi_Baseline,30,31,1
 block_hint,ShiftRightLogicalSmi_Baseline,38,39,0
 block_hint,ShiftRightLogicalSmi_Baseline,28,29,0
 block_hint,ShiftRightLogicalSmi_Baseline,10,11,1
+block_hint,Equal_Baseline,81,82,0
 block_hint,Equal_Baseline,48,49,0
 block_hint,Equal_Baseline,18,19,1
 block_hint,Equal_Baseline,101,102,0
+block_hint,Equal_Baseline,14,15,1
 block_hint,Equal_Baseline,113,114,1
 block_hint,Equal_Baseline,45,46,0
 block_hint,Equal_Baseline,32,33,0
@@ -2129,6 +2134,7 @@ block_hint,Equal_Baseline,75,76,0
 block_hint,Equal_Baseline,83,84,0
 block_hint,Equal_Baseline,85,86,0
 block_hint,Equal_Baseline,59,60,0
+block_hint,Equal_Baseline,109,110,0
 block_hint,Equal_Baseline,65,66,0
 block_hint,Equal_Baseline,69,70,1
 block_hint,Equal_Baseline,98,99,0
@@ -4028,10 +4034,10 @@ block_hint,Equal,29,30,1
 block_hint,Equal,63,64,0
 block_hint,Equal,9,10,0
 block_hint,Equal,31,32,1
+block_hint,Equal,33,34,0
 block_hint,Equal,87,88,0
 block_hint,Equal,65,66,0
 block_hint,Equal,57,58,0
-block_hint,Equal,69,70,0
 block_hint,Equal,73,74,0
 block_hint,Equal,61,62,0
 block_hint,Equal,35,36,1
@@ -4150,6 +4156,7 @@ block_hint,ProxyGetProperty,217,218,1
 block_hint,ProxyGetProperty,207,208,0
 block_hint,ProxyGetProperty,156,157,1
 block_hint,ProxyGetProperty,28,29,0
+block_hint,ProxyGetProperty,30,31,0
 block_hint,ProxyGetProperty,174,175,0
 block_hint,ProxyGetProperty,196,197,1
 block_hint,ProxyGetProperty,138,139,1
@@ -5310,7 +5317,6 @@ block_hint,MulHandler,40,41,0
 block_hint,MulHandler,47,48,1
 block_hint,MulHandler,21,22,1
 block_hint,DivHandler,90,91,1
-block_hint,DivHandler,81,82,0
 block_hint,DivHandler,75,76,0
 block_hint,DivHandler,77,78,0
 block_hint,DivHandler,64,65,0
@@ -5407,9 +5413,11 @@ block_hint,BitwiseOrSmiHandler,45,46,1
 block_hint,BitwiseOrSmiHandler,22,23,1
 block_hint,BitwiseAndSmiHandler,7,8,0
 block_hint,BitwiseAndSmiHandler,22,23,1
+block_hint,ShiftLeftSmiHandler,30,31,1
 block_hint,ShiftLeftSmiHandler,52,53,1
 block_hint,ShiftLeftSmiHandler,42,43,1
 block_hint,ShiftLeftSmiHandler,54,55,1
+block_hint,ShiftLeftSmiHandler,13,14,0
 block_hint,ShiftLeftSmiHandler,22,23,1
 block_hint,ShiftRightSmiHandler,39,40,1
 block_hint,ShiftRightSmiHandler,43,44,0
@@ -5560,7 +5568,6 @@ block_hint,TestEqualStrictHandler,53,54,1
 block_hint,TestEqualStrictHandler,67,68,0
 block_hint,TestEqualStrictHandler,59,60,1
 block_hint,TestEqualStrictHandler,43,44,1
-block_hint,TestEqualStrictHandler,41,42,0
 block_hint,TestEqualStrictHandler,61,62,0
 block_hint,TestEqualStrictHandler,55,56,1
 block_hint,TestEqualStrictHandler,65,66,0
@@ -5570,6 +5577,8 @@ block_hint,TestEqualStrictHandler,7,8,1
 block_hint,TestLessThanHandler,41,42,0
 block_hint,TestLessThanHandler,13,14,0
 block_hint,TestLessThanHandler,63,64,0
+block_hint,TestLessThanHandler,65,66,1
+block_hint,TestLessThanHandler,49,50,1
 block_hint,TestLessThanHandler,30,31,1
 block_hint,TestLessThanHandler,9,10,1
 block_hint,TestGreaterThanHandler,41,42,0
@@ -5577,7 +5586,6 @@ block_hint,TestGreaterThanHandler,28,29,1
 block_hint,TestGreaterThanHandler,45,46,1
 block_hint,TestGreaterThanHandler,30,31,1
 block_hint,TestGreaterThanHandler,9,10,1
-block_hint,TestLessThanOrEqualHandler,61,62,0
 block_hint,TestLessThanOrEqualHandler,41,42,0
 block_hint,TestLessThanOrEqualHandler,9,10,1
 block_hint,TestGreaterThanOrEqualHandler,41,42,0
@@ -5677,13 +5685,9 @@ block_hint,CreateRestParameterHandler,25,26,1
 block_hint,CreateRestParameterHandler,13,14,0
 block_hint,CreateRestParameterHandler,27,28,0
 block_hint,CreateRestParameterHandler,23,24,1
-block_hint,JumpLoopHandler,29,30,1
-block_hint,JumpLoopHandler,7,8,0
-block_hint,JumpLoopHandler,26,27,0
-block_hint,JumpLoopHandler,17,18,1
+block_hint,JumpLoopHandler,37,38,1
 block_hint,JumpLoopHandler,24,25,0
 block_hint,JumpLoopHandler,9,10,1
-block_hint,JumpIfToBooleanTrueConstantHandler,18,19,1
 block_hint,JumpIfToBooleanTrueConstantHandler,14,15,0
 block_hint,JumpIfToBooleanTrueConstantHandler,20,21,0
 block_hint,JumpIfToBooleanTrueConstantHandler,6,7,0
@@ -5721,8 +5725,7 @@ block_hint,LdaImmutableContextSlotWideHandler,3,4,1
 block_hint,LdaImmutableContextSlotWideHandler,9,10,1
 block_hint,LdaImmutableContextSlotWideHandler,5,6,1
 block_hint,LdaImmutableCurrentContextSlotWideHandler,2,3,1
-block_hint,LdaGlobalWideHandler,254,255,0
-block_hint,LdaGlobalWideHandler,108,109,1
+block_hint,LdaGlobalWideHandler,12,13,0
 block_hint,StaCurrentContextSlotWideHandler,2,3,1
 block_hint,GetNamedPropertyWideHandler,360,361,1
 block_hint,GetNamedPropertyWideHandler,196,197,0
@@ -5734,16 +5737,24 @@ block_hint,GetNamedPropertyWideHandler,330,331,0
 block_hint,GetNamedPropertyWideHandler,224,225,0
 block_hint,GetNamedPropertyWideHandler,79,80,1
 block_hint,GetNamedPropertyWideHandler,91,92,0
+block_hint,GetNamedPropertyWideHandler,226,227,1
+block_hint,GetNamedPropertyWideHandler,228,229,1
+block_hint,GetNamedPropertyWideHandler,133,134,1
 block_hint,SetNamedPropertyWideHandler,3,4,0
 block_hint,DefineNamedOwnPropertyWideHandler,3,4,0
 block_hint,DefineKeyedOwnPropertyWideHandler,3,4,0
-block_hint,StaInArrayLiteralWideHandler,3,4,0
 block_hint,AddWideHandler,49,50,0
 block_hint,AddWideHandler,35,36,0
 block_hint,AddWideHandler,78,79,0
 block_hint,AddWideHandler,64,65,1
 block_hint,AddWideHandler,45,46,1
 block_hint,AddWideHandler,27,28,1
+block_hint,AddWideHandler,72,73,1
+block_hint,AddWideHandler,16,17,1
+block_hint,MulWideHandler,83,84,1
+block_hint,MulWideHandler,69,70,1
+block_hint,MulWideHandler,67,68,1
+block_hint,MulWideHandler,17,18,1
 block_hint,AddSmiWideHandler,49,50,0
 block_hint,AddSmiWideHandler,35,36,0
 block_hint,AddSmiWideHandler,24,25,1
@@ -5751,6 +5762,7 @@ block_hint,MulSmiWideHandler,80,81,1
 block_hint,MulSmiWideHandler,78,79,0
 block_hint,MulSmiWideHandler,65,66,0
 block_hint,MulSmiWideHandler,34,35,0
+block_hint,MulSmiWideHandler,23,24,1
 block_hint,MulSmiWideHandler,54,55,1
 block_hint,MulSmiWideHandler,36,37,0
 block_hint,MulSmiWideHandler,42,43,1
@@ -5770,7 +5782,9 @@ block_hint,ModSmiWideHandler,15,16,0
 block_hint,ModSmiWideHandler,23,24,1
 block_hint,BitwiseOrSmiWideHandler,7,8,0
 block_hint,BitwiseOrSmiWideHandler,22,23,1
+block_hint,BitwiseAndSmiWideHandler,29,30,1
 block_hint,BitwiseAndSmiWideHandler,7,8,0
+block_hint,BitwiseAndSmiWideHandler,13,14,0
 block_hint,BitwiseAndSmiWideHandler,22,23,1
 block_hint,ShiftLeftSmiWideHandler,7,8,0
 block_hint,ShiftLeftSmiWideHandler,48,49,0
@@ -5794,6 +5808,7 @@ block_hint,ConstructWideHandler,22,23,0
 block_hint,TestEqualWideHandler,103,104,0
 block_hint,TestEqualWideHandler,95,96,0
 block_hint,TestEqualWideHandler,19,20,1
+block_hint,TestLessThanWideHandler,41,42,0
 block_hint,TestGreaterThanWideHandler,41,42,0
 block_hint,TestGreaterThanWideHandler,9,10,1
 block_hint,CreateRegExpLiteralWideHandler,14,15,0

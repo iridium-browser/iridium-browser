@@ -2,17 +2,16 @@ block_hint,RecordWriteSaveFP,30,31,0
 block_hint,RecordWriteSaveFP,6,7,1
 block_hint,RecordWriteSaveFP,28,29,1
 block_hint,RecordWriteSaveFP,10,11,1
-block_hint,RecordWriteSaveFP,56,57,0
 block_hint,RecordWriteSaveFP,50,51,0
 block_hint,RecordWriteSaveFP,54,55,1
 block_hint,RecordWriteSaveFP,52,53,1
 block_hint,RecordWriteSaveFP,43,44,0
 block_hint,RecordWriteSaveFP,40,41,0
 block_hint,RecordWriteSaveFP,24,25,0
-block_hint,RecordWriteIgnoreFP,30,31,0
 block_hint,RecordWriteIgnoreFP,6,7,1
 block_hint,RecordWriteIgnoreFP,28,29,1
 block_hint,RecordWriteIgnoreFP,10,11,1
+block_hint,RecordWriteIgnoreFP,50,51,0
 block_hint,RecordWriteIgnoreFP,43,44,0
 block_hint,RecordWriteIgnoreFP,40,41,0
 block_hint,Call_ReceiverIsNullOrUndefined_Baseline_Compact,19,20,1
@@ -151,7 +150,6 @@ block_hint,StringEqual,124,125,0
 block_hint,StringEqual,121,122,1
 block_hint,StringEqual,100,101,0
 block_hint,StringEqual,79,80,0
-block_hint,StringEqual,49,50,1
 block_hint,StringEqual,117,118,0
 block_hint,StringEqual,115,116,1
 block_hint,StringEqual,113,114,0
@@ -248,7 +246,6 @@ block_hint,ToNumberConvertBigInt,5,6,0
 block_hint,ToNumberConvertBigInt,20,21,0
 block_hint,ToNumberConvertBigInt,17,18,1
 block_hint,ToNumberConvertBigInt,9,10,1
-block_hint,Typeof,15,16,0
 block_hint,Typeof,17,18,0
 block_hint,Typeof,9,10,0
 block_hint,Typeof,13,14,1
@@ -267,6 +264,7 @@ block_hint,KeyedLoadIC_PolymorphicName,121,122,1
 block_hint,KeyedLoadIC_PolymorphicName,316,317,1
 block_hint,KeyedLoadIC_PolymorphicName,109,110,0
 block_hint,KeyedLoadIC_PolymorphicName,166,167,0
+block_hint,KeyedLoadIC_PolymorphicName,111,112,1
 block_hint,KeyedLoadIC_PolymorphicName,42,43,1
 block_hint,KeyedLoadIC_PolymorphicName,73,74,0
 block_hint,KeyedLoadIC_PolymorphicName,237,238,0
@@ -815,7 +813,6 @@ block_hint,HasProperty,64,65,0
 block_hint,HasProperty,219,220,1
 block_hint,HasProperty,242,243,1
 block_hint,HasProperty,47,48,0
-block_hint,HasProperty,49,50,0
 block_hint,HasProperty,274,275,0
 block_hint,HasProperty,231,232,0
 block_hint,HasProperty,37,38,0
@@ -1113,7 +1110,6 @@ block_hint,ExtractFastJSArray,40,41,1
 block_hint,ExtractFastJSArray,8,9,0
 block_hint,ExtractFastJSArray,58,59,0
 block_hint,ExtractFastJSArray,33,34,0
-block_hint,ExtractFastJSArray,14,15,1
 block_hint,ExtractFastJSArray,22,23,0
 block_hint,ExtractFastJSArray,24,25,1
 block_hint,ExtractFastJSArray,50,51,1
@@ -1562,6 +1558,7 @@ block_hint,StoreIC,210,211,0
 block_hint,StoreIC,212,213,1
 block_hint,StoreIC,398,399,1
 block_hint,StoreIC,391,392,0
+block_hint,StoreIC,374,375,1
 block_hint,StoreIC,245,246,1
 block_hint,StoreIC,247,248,1
 block_hint,StoreIC,80,81,1
@@ -1999,6 +1996,7 @@ block_hint,Multiply_Baseline,47,48,0
 block_hint,Multiply_Baseline,55,56,0
 block_hint,Multiply_Baseline,61,62,1
 block_hint,Multiply_Baseline,57,58,1
+block_hint,Multiply_Baseline,22,23,0
 block_hint,Multiply_Baseline,10,11,1
 block_hint,Multiply_Baseline,49,50,1
 block_hint,Multiply_Baseline,67,68,1
@@ -2069,7 +2067,6 @@ block_hint,BitwiseOr_Baseline,68,69,1
 block_hint,BitwiseOr_Baseline,75,76,1
 block_hint,BitwiseOr_Baseline,20,21,1
 block_hint,BitwiseOrSmi_Baseline,6,7,0
-block_hint,BitwiseOrSmi_Baseline,27,28,1
 block_hint,BitwiseOrSmi_Baseline,23,24,0
 block_hint,BitwiseOrSmi_Baseline,21,22,0
 block_hint,BitwiseOrSmi_Baseline,33,34,1
@@ -2736,7 +2733,7 @@ block_hint,GetProperty,219,220,0
 block_hint,GetProperty,230,231,0
 block_hint,GetProperty,182,183,1
 block_hint,GetProperty,40,41,0
-block_hint,GetProperty,42,43,0
+block_hint,GetProperty,144,145,1
 block_hint,GetProperty,152,153,0
 block_hint,GetProperty,156,157,1
 block_hint,GetProperty,146,147,0
@@ -4151,7 +4148,6 @@ block_hint,ProxyGetProperty,217,218,1
 block_hint,ProxyGetProperty,207,208,0
 block_hint,ProxyGetProperty,156,157,1
 block_hint,ProxyGetProperty,28,29,0
-block_hint,ProxyGetProperty,30,31,0
 block_hint,ProxyGetProperty,174,175,0
 block_hint,ProxyGetProperty,196,197,1
 block_hint,ProxyGetProperty,138,139,1
@@ -5003,6 +4999,7 @@ block_hint,MergeAt,31,32,0
 block_hint,MergeAt,33,34,1
 block_hint,MergeAt,35,36,1
 block_hint,MergeAt,123,124,0
+block_hint,MergeAt,236,237,1
 block_hint,MergeAt,225,226,1
 block_hint,MergeAt,69,70,1
 block_hint,MergeAt,71,72,1
@@ -5544,7 +5541,6 @@ block_hint,ConstructHandler,45,46,1
 block_hint,TestEqualHandler,103,104,0
 block_hint,TestEqualHandler,25,26,1
 block_hint,TestEqualHandler,72,73,0
-block_hint,TestEqualHandler,15,16,1
 block_hint,TestEqualHandler,79,80,1
 block_hint,TestEqualHandler,35,36,0
 block_hint,TestEqualHandler,27,28,1
@@ -5625,6 +5621,7 @@ block_hint,CreateObjectLiteralHandler,139,140,1
 block_hint,CreateObjectLiteralHandler,92,93,1
 block_hint,CreateObjectLiteralHandler,46,47,0
 block_hint,CreateObjectLiteralHandler,94,95,1
+block_hint,CreateObjectLiteralHandler,80,81,0
 block_hint,CreateObjectLiteralHandler,50,51,1
 block_hint,CreateObjectLiteralHandler,54,55,0
 block_hint,CreateObjectLiteralHandler,98,99,1
@@ -5672,7 +5669,10 @@ block_hint,CreateRestParameterHandler,25,26,1
 block_hint,CreateRestParameterHandler,13,14,0
 block_hint,CreateRestParameterHandler,27,28,0
 block_hint,CreateRestParameterHandler,23,24,1
-block_hint,JumpLoopHandler,37,38,1
+block_hint,JumpLoopHandler,29,30,1
+block_hint,JumpLoopHandler,7,8,0
+block_hint,JumpLoopHandler,26,27,0
+block_hint,JumpLoopHandler,17,18,1
 block_hint,JumpLoopHandler,24,25,0
 block_hint,JumpLoopHandler,9,10,1
 block_hint,JumpIfToBooleanTrueConstantHandler,14,15,0
@@ -5737,7 +5737,6 @@ block_hint,MulWideHandler,67,68,1
 block_hint,MulWideHandler,17,18,1
 block_hint,AddSmiWideHandler,49,50,0
 block_hint,AddSmiWideHandler,35,36,0
-block_hint,AddSmiWideHandler,24,25,1
 block_hint,MulSmiWideHandler,80,81,1
 block_hint,MulSmiWideHandler,78,79,0
 block_hint,MulSmiWideHandler,65,66,0
@@ -5761,7 +5760,12 @@ block_hint,ModSmiWideHandler,15,16,0
 block_hint,ModSmiWideHandler,23,24,1
 block_hint,BitwiseOrSmiWideHandler,7,8,0
 block_hint,BitwiseOrSmiWideHandler,22,23,1
+block_hint,BitwiseAndSmiWideHandler,29,30,1
 block_hint,BitwiseAndSmiWideHandler,7,8,0
+block_hint,BitwiseAndSmiWideHandler,39,40,1
+block_hint,BitwiseAndSmiWideHandler,43,44,0
+block_hint,BitwiseAndSmiWideHandler,37,38,0
+block_hint,BitwiseAndSmiWideHandler,13,14,0
 block_hint,BitwiseAndSmiWideHandler,22,23,1
 block_hint,ShiftLeftSmiWideHandler,7,8,0
 block_hint,ShiftLeftSmiWideHandler,48,49,0
@@ -5785,6 +5789,7 @@ block_hint,ConstructWideHandler,22,23,0
 block_hint,TestEqualWideHandler,103,104,0
 block_hint,TestEqualWideHandler,95,96,0
 block_hint,TestEqualWideHandler,19,20,1
+block_hint,TestLessThanWideHandler,41,42,0
 block_hint,TestGreaterThanWideHandler,41,42,0
 block_hint,TestGreaterThanWideHandler,9,10,1
 block_hint,CreateRegExpLiteralWideHandler,14,15,0

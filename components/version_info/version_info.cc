@@ -15,7 +15,7 @@ namespace version_info {
 
 const std::string GetProductNameAndVersionForReducedUserAgent(
     const std::string& build_version) {
-	return "Chrome/116.0.5845.179";
+	return "Chrome/116.0.5845.187";
 }
 
 int GetMajorVersionNumberAsInt() {

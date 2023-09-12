@@ -313,7 +313,7 @@ vars = {
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling Skia
   # and whatever else without interference from each other.
-  'skia_revision': 'ffbc376172738894f15bd22909a285a23436fdf4',
+  'skia_revision': 'bb40886d43b5fcbcdfb5587a2d20db418622990a',
   # Three lines of non-changing comments so that
   # the commit queue can handle CLs rolling V8
   # and whatever else without interference from each other.
@@ -820,7 +820,7 @@ deps = {
 
   'src/clank': {
     'url': Var('chrome_git') + '/clank/internal/apps.git' + '@' +
-    '5b9f1a2b9d42801dee3f15dd5b58c1f419c70f87',
+    '2983d7fe76a4641e2d9169f264308312aa863732',
     'condition': 'checkout_android and checkout_src_internal',
   },
 
@@ -1262,7 +1262,7 @@ deps = {
     Var('chromium_git') + '/devtools/devtools-frontend' + '@' + Var('devtools_frontend_revision'),
 
   'src/third_party/devtools-frontend-internal': {
-      'url': Var('chrome_git') + '/devtools/devtools-internal.git' + '@' + '5fbcb777d309c757c7e914bc338eaa04d82036a1',
+      'url': Var('chrome_git') + '/devtools/devtools-internal.git' + '@' + 'c7ddeb4cf9dabcf307b1ec7988d63ef87c90d372',
     'condition': 'checkout_src_internal',
   },
 
@@ -1593,7 +1593,7 @@ deps = {
     Var('chromium_git') + '/webm/libwebm.git' + '@' + 'e4fbea0c9751ae8aa86629b197a28d8276a2b0da',
 
   'src/third_party/libwebp/src':
-    Var('chromium_git') + '/webm/libwebp.git' + '@' +  '6a319d4da3956f22f0dd5ad5a7bb294f88131bbd',
+    Var('chromium_git') + '/webm/libwebp.git' + '@' +  '4619a48fc3292743d7ce9658bee4245406734109',
 
   'src/third_party/libyuv':
     Var('chromium_git') + '/libyuv/libyuv.git' + '@' + '04821d1e7d60845525e8db55c7bcd41ef5be9406',

@@ -31,7 +31,7 @@ Vector<FontPalette::FontPaletteOverride> PaletteInterpolation::MixColorRecords(
         color_interpolation_space, hue_interpolation_method, start_color,
         end_color, percentage, alpha_multiplier);
 
-    FontPalette::FontPaletteOverride result_color_record(i, result_color);
+    FontPalette::FontPaletteOverride result_color_record{static_cast<int>(i), result_color};
     result_color_records.push_back(result_color_record);
   }
   return result_color_records;

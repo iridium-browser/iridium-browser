@@ -474,10 +474,10 @@ void ChromeOmniboxClient::OnAutocompleteAccept(
               alternative_nav_match);
 
   // Store the details necessary to open the omnibox match via browser commands.
-  location_bar_->set_navigation_params(LocationBar::NavigationParams(
+  location_bar_->set_navigation_params(LocationBar::NavigationParams{
       destination_url, disposition, transition, match_selection_timestamp,
       destination_url_entered_without_scheme,
-      destination_url_entered_with_http_scheme));
+      destination_url_entered_with_http_scheme});
 
   if (browser_) {
     auto navigation = chrome::OpenCurrentURL(browser_);

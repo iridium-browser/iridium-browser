@@ -161,7 +161,7 @@ void HostResolverCache::Set(
 
   std::string domain_name = result->domain_name();
   entries_.emplace(
-      Key(std::move(domain_name), network_anonymization_key),
+      Key{std::move(domain_name), network_anonymization_key},
       Entry(std::move(result), source, secure, staleness_generation_));
 
   if (entries_.size() > max_entries_) {

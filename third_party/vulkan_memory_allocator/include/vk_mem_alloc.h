@@ -2388,6 +2388,7 @@ VMA_CALL_PRE void VMA_CALL_POST vmaFreeVirtualBlockStatsString(VmaVirtualBlock V
 #ifdef VMA_IMPLEMENTATION
 #undef VMA_IMPLEMENTATION
 
+#include <cstdio>
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>

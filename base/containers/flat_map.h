@@ -5,6 +5,7 @@
 #ifndef BASE_CONTAINERS_FLAT_MAP_H_
 #define BASE_CONTAINERS_FLAT_MAP_H_
 
+#include <cstdint>
 #include <functional>
 #include <tuple>
 #include <type_traits>

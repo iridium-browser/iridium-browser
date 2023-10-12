@@ -8,6 +8,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <variant>
 
 #include "base/containers/span.h"
 #include "base/functional/callback_forward.h"

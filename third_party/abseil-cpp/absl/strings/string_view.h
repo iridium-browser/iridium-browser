@@ -27,6 +27,7 @@
 #ifndef ABSL_STRINGS_STRING_VIEW_H_
 #define ABSL_STRINGS_STRING_VIEW_H_
 
+#include <cstdint>
 #include <algorithm>
 #include <cassert>
 #include <cstddef>

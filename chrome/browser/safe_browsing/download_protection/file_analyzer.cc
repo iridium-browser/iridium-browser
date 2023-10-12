@@ -77,8 +77,6 @@ void FileAnalyzer::Start(const base::FilePath& target_path,
 
   if (inspection_type == DownloadFileType::ZIP) {
     StartExtractZipFeatures();
-  } else if (inspection_type == DownloadFileType::RAR) {
-    StartExtractRarFeatures();
 #if BUILDFLAG(IS_MAC)
   } else if (inspection_type == DownloadFileType::DMG) {
     StartExtractDmgFeatures();

@@ -7,7 +7,6 @@
 
 #include "chrome/common/safe_browsing/archive_analyzer_results.h"
 #include "chrome/services/file_util/public/mojom/safe_archive_analyzer.mojom.h"
-#include "chrome/utility/safe_browsing/rar_analyzer.h"
 #include "chrome/utility/safe_browsing/seven_zip_analyzer.h"
 #include "chrome/utility/safe_browsing/zip_analyzer.h"
 #include "mojo/public/cpp/bindings/remote.h"
@@ -66,7 +65,6 @@ class SafeArchiveAnalyzer : public chrome::mojom::SafeArchiveAnalyzer {
   void Timeout();
 
   safe_browsing::ZipAnalyzer zip_analyzer_;
-  safe_browsing::RarAnalyzer rar_analyzer_;
   safe_browsing::SevenZipAnalyzer seven_zip_analyzer_;
 #if BUILDFLAG(IS_MAC)
   safe_browsing::dmg::DMGAnalyzer dmg_analyzer_;

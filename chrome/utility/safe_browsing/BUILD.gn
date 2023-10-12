@@ -31,8 +31,6 @@ source_set("safe_browsing") {
     sources = [
       "archive_analyzer.cc",
       "archive_analyzer.h",
-      "rar_analyzer.cc",
-      "rar_analyzer.h",
       "seven_zip_analyzer.cc",
       "seven_zip_analyzer.h",
       "zip_analyzer.cc",
@@ -55,7 +53,6 @@ source_set("safe_browsing") {
       "//components/safe_browsing/content/common:file_type_policies",
       "//components/safe_browsing/core/common",
       "//third_party/lzma_sdk/google:seven_zip_reader",
-      "//third_party/unrar:unrar",
       "//third_party/zlib",
     ]
 

@@ -137,7 +137,6 @@ source_set("safe_browsing") {
       "//components/safe_browsing/content/common:file_type_policies",
       "//components/safe_browsing/core/common",
       "//third_party/lzma_sdk/google:seven_zip_reader",
-      "//third_party/unrar:unrar",
     ]
 
     public_deps = [

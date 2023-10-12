@@ -225,8 +225,8 @@ void OneTimePermissionProvider::OnSuspend() {
 
       while (rule_iterator && rule_iterator->HasNext()) {
         auto rule = rule_iterator->Next();
-        patterns_to_delete.emplace_back(setting_type, rule->primary_pattern,
-                                        rule->secondary_pattern);
+        patterns_to_delete.emplace_back() = {setting_type, rule->primary_pattern,
+                                        rule->secondary_pattern};
         permissions::PermissionUmaUtil::RecordOneTimePermissionEvent(
             setting_type,
             permissions::OneTimePermissionEvent::EXPIRED_ON_SUSPEND);
@@ -320,8 +320,8 @@ void OneTimePermissionProvider::DeleteEntriesMatchingGURL(
     auto rule = rule_iterator->Next();
     if (rule->primary_pattern.Matches(origin_gurl) &&
         rule->secondary_pattern.Matches(origin_gurl)) {
-      patterns_to_delete.emplace_back(
-          content_setting_type, rule->primary_pattern, rule->secondary_pattern);
+      patterns_to_delete.emplace_back() = {
+          content_setting_type, rule->primary_pattern, rule->secondary_pattern};
       permissions::PermissionUmaUtil::RecordOneTimePermissionEvent(
           content_setting_type, trigger_event);
     }

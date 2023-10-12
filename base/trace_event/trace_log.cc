@@ -2190,8 +2190,8 @@ void TraceLog::SetTraceBufferForTesting(
 #if BUILDFLAG(USE_PERFETTO_CLIENT_LIBRARY)
 void TraceLog::OnSetup(const perfetto::DataSourceBase::SetupArgs& args) {
   AutoLock lock(track_event_lock_);
-  track_event_sessions_.emplace_back(args.internal_instance_index, *args.config,
-                                     args.backend_type);
+  track_event_sessions_.emplace_back() = {args.internal_instance_index, *args.config,
+                                     args.backend_type};
 }
 
 void TraceLog::OnStart(const perfetto::DataSourceBase::StartArgs&) {

@@ -955,11 +955,11 @@ ui::DisplayConfig GtkUi::GetDisplayConfig() const {
     GdkRectangle geometry;
     gdk_monitor_get_geometry(monitor, &geometry);
     int monitor_scale = std::max(1, gdk_monitor_get_scale_factor(monitor));
-    config.display_geometries.emplace_back(
+    config.display_geometries.emplace_back() = {
         gfx::Rect(monitor_scale * geometry.x, monitor_scale * geometry.y,
                   monitor_scale * geometry.width,
                   monitor_scale * geometry.height),
-        monitor_scale * font_scale);
+        static_cast<float>(monitor_scale * font_scale)};
   }
   return config;
 }

@@ -346,7 +346,7 @@ Status ParseMobileEmulation(const base::Value& option,
                         "'version' field of type string");
         }
 
-        brands.emplace_back(*brand, *version);
+        brands.emplace_back() = {*brand, *version};
       }
 
       client_hints.brands = std::move(brands);
@@ -384,7 +384,7 @@ Status ParseMobileEmulation(const base::Value& option,
                         "a 'version' field of type string");
         }
 
-        full_version_list.emplace_back(*brand, *version);
+        full_version_list.emplace_back() = {*brand, *version};
       }
 
       client_hints.full_version_list = std::move(full_version_list);

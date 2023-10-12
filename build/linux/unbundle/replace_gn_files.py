@@ -75,6 +75,7 @@ REPLACEMENTS = {
   #
   'woff2': 'third_party/woff2/BUILD.gn',
   'zlib': 'third_party/zlib/BUILD.gn',
+  'zstd': 'third_party/zstd/BUILD.gn',
 }
 
 

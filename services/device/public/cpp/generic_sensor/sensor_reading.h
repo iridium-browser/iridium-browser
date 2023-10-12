@@ -6,6 +6,8 @@
 #define SERVICES_DEVICE_PUBLIC_CPP_GENERIC_SENSOR_SENSOR_READING_H_
 
 #include <type_traits>
+#include <stdint.h>
+#include <cstddef>
 
 namespace device {
 

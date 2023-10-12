@@ -165,10 +165,10 @@ class ParallelFetchManager {
 
   // Starts the fetch. Underlying fetcher is stored internally, and will be
   // cleaned up after finish or when this manager is destroyed.
-  void Fetch(const Request& request, Fetcher::Callback callback);
+  void Fetch(const Request& request, typename Fetcher::Callback callback);
 
  private:
-  using KeyType = base::IDMap<std::unique_ptr<Fetcher>>::KeyType;
+  using KeyType = typename base::IDMap<std::unique_ptr<Fetcher>>::KeyType;
 
   // Remove fetcher under key from requests_in_flight_.
   void Remove(KeyType key);

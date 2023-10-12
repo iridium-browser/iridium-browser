@@ -262,7 +262,7 @@ class TFLiteModelExecutor : public ModelExecutor<OutputType, InputType> {
   // Starts the synchronous execution of the model. Returns model outputs.
   // Model needs to be loaded. Synchronous calls do not load or unload model.
   std::vector<absl::optional<OutputType>> SendForBatchExecutionSync(
-      ModelExecutor<OutputType, InputType>::ConstRefInputVector inputs)
+      typename ModelExecutor<OutputType, InputType>::ConstRefInputVector inputs)
       override {
     DCHECK(execution_task_runner_->RunsTasksInCurrentSequence());
     DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
@@ -417,7 +417,7 @@ class TFLiteModelExecutor : public ModelExecutor<OutputType, InputType> {
   // executes it on the model execution thread.
   void LoadModelFileAndBatchExecute(
       BatchExecutionCallback callback_on_complete,
-      ModelExecutor<OutputType, InputType>::ConstRefInputVector inputs) {
+      typename ModelExecutor<OutputType, InputType>::ConstRefInputVector inputs) {
     DCHECK(execution_task_runner_->RunsTasksInCurrentSequence());
     DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
 
@@ -434,7 +434,7 @@ class TFLiteModelExecutor : public ModelExecutor<OutputType, InputType> {
 
   // Batch executes the loaded model for inputs.
   void BatchExecuteLoadedModel(
-      ModelExecutor<OutputType, InputType>::ConstRefInputVector inputs,
+      typename ModelExecutor<OutputType, InputType>::ConstRefInputVector inputs,
       std::vector<absl::optional<OutputType>>* outputs) {
     DCHECK(execution_task_runner_->RunsTasksInCurrentSequence());
     DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
@@ -494,7 +494,7 @@ class TFLiteModelExecutor : public ModelExecutor<OutputType, InputType> {
   // Unloads the model if needed.
   void BatchExecuteLoadedModelAndRunCallback(
       BatchExecutionCallback callback_on_complete,
-      ModelExecutor<OutputType, InputType>::ConstRefInputVector inputs,
+      typename ModelExecutor<OutputType, InputType>::ConstRefInputVector inputs,
       ExecutionStatus execution_status) {
     DCHECK(execution_task_runner_->RunsTasksInCurrentSequence());
     DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);

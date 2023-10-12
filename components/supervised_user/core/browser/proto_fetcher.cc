@@ -399,7 +399,7 @@ class RetryingFetcherImpl final : public DeferredFetcherImpl<Response> {
   RetryingFetcherImpl(const RetryingFetcherImpl&) = delete;
   RetryingFetcherImpl& operator=(const RetryingFetcherImpl&) = delete;
 
-  void Start(ProtoFetcher<Response>::Callback callback) override {
+  void Start(typename ProtoFetcher<Response>::Callback callback) override {
     callback_ = std::move(callback);
     Retry();
   }
@@ -435,7 +435,7 @@ class RetryingFetcherImpl final : public DeferredFetcherImpl<Response> {
   }
 
   // Client callback.
-  ProtoFetcher<Response>::Callback callback_;
+  typename ProtoFetcher<Response>::Callback callback_;
 
   // Retry controls.
   base::OneShotTimer timer_;
@@ -578,7 +578,7 @@ ParallelFetchManager<Request, Response>::ParallelFetchManager(
 template <typename Request, typename Response>
 void ParallelFetchManager<Request, Response>::Fetch(
     const Request& request,
-    Fetcher::Callback callback) {
+    typename Fetcher::Callback callback) {
   CHECK(callback) << "Use base::DoNothing() instead of empty callback.";
   KeyType key = requests_in_flight_.Add(MakeFetcher(request));
   requests_in_flight_.Lookup(key)->Start(

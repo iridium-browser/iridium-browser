@@ -1,0 +1,9 @@
+match_block_trailing_comma = true
+force_multiline_blocks = true
+report_todo = "Unnumbered"
+report_fixme = "Unnumbered"
+struct_lit_single_line = false
+trailing_comma = "Vertical"
+license_template_path = ".license.template"
+# This is only necessary until rustfmt 1.4.11 is used.
+skip_children = true

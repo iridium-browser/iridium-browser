@@ -1,0 +1,513 @@
+{
+  "name": "Mir_0_3",
+  "kind": "Digraph",
+  "nodes": [
+    {
+      "label": "bb0",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb0",
+      "stmts": [
+        "StorageLive(_1)",
+        "_1 = Vec::<i32>::new()"
+      ]
+    },
+    {
+      "label": "bb1",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb1",
+      "stmts": [
+        "resume"
+      ]
+    },
+    {
+      "label": "bb2",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb2",
+      "stmts": [
+        "StorageLive(_2)", "StorageLive(_3)", "(_3.0: i32) = const 1_i32", "(_3.1: i32) = const 10_i32",
+        "_2 = <std::ops::Range<i32> as IntoIterator>::into_iter(move _3)"
+      ]
+    },
+    {
+      "label": "bb3",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb3",
+      "stmts": [
+        "StorageDead(_3)", "StorageLive(_4)", "_4 = move _2",
+        "goto"
+      ]
+    },
+    {
+      "label": "bb4",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb4",
+      "stmts": [
+        "drop(_1)"
+      ]
+    },
+    {
+      "label": "bb5",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb5",
+      "stmts": [
+        "StorageLive(_5)", "StorageLive(_6)", "StorageLive(_7)", "StorageLive(_8)", "_8 = &mut _4", "_7 = &mut (*_8)",
+        "_6 = <std::ops::Range<i32> as Iterator>::next(move _7)"
+      ]
+    },
+    {
+      "label": "bb6",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb6",
+      "stmts": [
+        "StorageDead(_7)", "_9 = discriminant(_6)",
+        "switchInt(move _9)"
+      ]
+    },
+    {
+      "label": "bb7",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb7",
+      "stmts": [
+        "StorageDead(_8)", "StorageDead(_6)", "StorageDead(_5)", "StorageDead(_4)", "StorageDead(_2)", "StorageLive(_21)", "StorageLive(_22)", "(_22.0: i32) = const 1_i32", "(_22.1: i32) = const 10_i32",
+        "_21 = <std::ops::Range<i32> as IntoIterator>::into_iter(move _22)"
+      ]
+    },
+    {
+      "label": "bb8",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb8",
+      "stmts": [
+        "unreachable"
+      ]
+    },
+    {
+      "label": "bb9",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb9",
+      "stmts": [
+        "StorageLive(_10)", "_10 = ((_6 as Some).0: i32)", "StorageLive(_11)", "_11 = _10", "_5 = move _11", "StorageDead(_11)", "StorageDead(_10)", "StorageDead(_8)", "StorageDead(_6)", "StorageLive(_12)", "_12 = _5", "StorageLive(_13)", "StorageLive(_14)", "_14 = _12", "_15 = const false", "_16 = Eq(_14, const i32::MIN)", "_17 = BitAnd(move _15, move _16)",
+        "assert(!move _17, \"attempt to compute the remainder of `{} % {}` which would overflow\", _14, const 2_i32)"
+      ]
+    },
+    {
+      "label": "bb10",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb10",
+      "stmts": [
+        "_13 = Rem(move _14, const 2_i32)", "StorageDead(_14)",
+        "switchInt(move _13)"
+      ]
+    },
+    {
+      "label": "bb11",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb11",
+      "stmts": [
+        "StorageDead(_13)",
+        "goto"
+      ]
+    },
+    {
+      "label": "bb12",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb12",
+      "stmts": [
+        "StorageDead(_13)", "StorageLive(_18)", "StorageLive(_19)", "_19 = &mut _1", "StorageLive(_20)", "_20 = _12",
+        "_18 = Vec::<i32>::push(move _19, move _20)"
+      ]
+    },
+    {
+      "label": "bb13",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb13",
+      "stmts": [
+        "StorageDead(_20)", "StorageDead(_19)", "StorageDead(_18)",
+        "goto"
+      ]
+    },
+    {
+      "label": "bb14",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb14",
+      "stmts": [
+        "StorageDead(_12)", "StorageDead(_5)",
+        "goto"
+      ]
+    },
+    {
+      "label": "bb15",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb15",
+      "stmts": [
+        "StorageDead(_22)", "StorageLive(_23)", "_23 = move _21",
+        "goto"
+      ]
+    },
+    {
+      "label": "bb16",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb16",
+      "stmts": [
+        "StorageLive(_24)", "StorageLive(_25)", "StorageLive(_26)", "StorageLive(_27)", "_27 = &mut _23", "_26 = &mut (*_27)",
+        "_25 = <std::ops::Range<i32> as Iterator>::next(move _26)"
+      ]
+    },
+    {
+      "label": "bb17",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb17",
+      "stmts": [
+        "StorageDead(_26)", "_28 = discriminant(_25)",
+        "switchInt(move _28)"
+      ]
+    },
+    {
+      "label": "bb18",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb18",
+      "stmts": [
+        "_0 = const ()", "StorageDead(_27)", "StorageDead(_25)", "StorageDead(_24)", "StorageDead(_23)", "StorageDead(_21)",
+        "drop(_1)"
+      ]
+    },
+    {
+      "label": "bb19",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb19",
+      "stmts": [
+        "unreachable"
+      ]
+    },
+    {
+      "label": "bb20",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb20",
+      "stmts": [
+        "StorageLive(_29)", "_29 = ((_25 as Some).0: i32)", "StorageLive(_30)", "_30 = _29", "_24 = move _30", "StorageDead(_30)", "StorageDead(_29)", "StorageDead(_27)", "StorageDead(_25)", "StorageLive(_31)", "_31 = _24", "StorageLive(_32)", "StorageLive(_33)", "_33 = _31", "_34 = const false", "_35 = Eq(_33, const i32::MIN)", "_36 = BitAnd(move _34, move _35)",
+        "assert(!move _36, \"attempt to compute the remainder of `{} % {}` which would overflow\", _33, const 3_i32)"
+      ]
+    },
+    {
+      "label": "bb21",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb21",
+      "stmts": [
+        "_32 = Rem(move _33, const 3_i32)", "StorageDead(_33)",
+        "switchInt(move _32)"
+      ]
+    },
+    {
+      "label": "bb22",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb22",
+      "stmts": [
+        "StorageDead(_32)",
+        "goto"
+      ]
+    },
+    {
+      "label": "bb23",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb23",
+      "stmts": [
+        "StorageDead(_32)", "StorageLive(_37)", "StorageLive(_38)", "_38 = &mut _1", "StorageLive(_39)", "_39 = _31",
+        "_37 = Vec::<i32>::push(move _38, move _39)"
+      ]
+    },
+    {
+      "label": "bb24",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb24",
+      "stmts": [
+        "StorageDead(_39)", "StorageDead(_38)", "StorageDead(_37)",
+        "goto"
+      ]
+    },
+    {
+      "label": "bb25",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb25",
+      "stmts": [
+        "StorageDead(_31)", "StorageDead(_24)",
+        "goto"
+      ]
+    },
+    {
+      "label": "bb26",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb26",
+      "stmts": [
+        "StorageDead(_1)",
+        "return"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "bb0",
+      "to": "bb2",
+      "label": "return"
+    },
+    {
+      "from": "bb2",
+      "to": "bb3",
+      "label": "return"
+    },
+    {
+      "from": "bb2",
+      "to": "bb4",
+      "label": "unwind"
+    },
+    {
+      "from": "bb3",
+      "to": "bb5",
+      "label": ""
+    },
+    {
+      "from": "bb4",
+      "to": "bb1",
+      "label": "return"
+    },
+    {
+      "from": "bb5",
+      "to": "bb6",
+      "label": "return"
+    },
+    {
+      "from": "bb5",
+      "to": "bb4",
+      "label": "unwind"
+    },
+    {
+      "from": "bb6",
+      "to": "bb7",
+      "label": "0_isize"
+    },
+    {
+      "from": "bb6",
+      "to": "bb9",
+      "label": "1_isize"
+    },
+    {
+      "from": "bb6",
+      "to": "bb8",
+      "label": "otherwise"
+    },
+    {
+      "from": "bb7",
+      "to": "bb15",
+      "label": "return"
+    },
+    {
+      "from": "bb7",
+      "to": "bb4",
+      "label": "unwind"
+    },
+    {
+      "from": "bb9",
+      "to": "bb10",
+      "label": "success"
+    },
+    {
+      "from": "bb9",
+      "to": "bb4",
+      "label": "unwind"
+    },
+    {
+      "from": "bb10",
+      "to": "bb12",
+      "label": "0_i32"
+    },
+    {
+      "from": "bb10",
+      "to": "bb11",
+      "label": "otherwise"
+    },
+    {
+      "from": "bb11",
+      "to": "bb14",
+      "label": ""
+    },
+    {
+      "from": "bb12",
+      "to": "bb13",
+      "label": "return"
+    },
+    {
+      "from": "bb12",
+      "to": "bb4",
+      "label": "unwind"
+    },
+    {
+      "from": "bb13",
+      "to": "bb14",
+      "label": ""
+    },
+    {
+      "from": "bb14",
+      "to": "bb5",
+      "label": ""
+    },
+    {
+      "from": "bb15",
+      "to": "bb16",
+      "label": ""
+    },
+    {
+      "from": "bb16",
+      "to": "bb17",
+      "label": "return"
+    },
+    {
+      "from": "bb16",
+      "to": "bb4",
+      "label": "unwind"
+    },
+    {
+      "from": "bb17",
+      "to": "bb18",
+      "label": "0_isize"
+    },
+    {
+      "from": "bb17",
+      "to": "bb20",
+      "label": "1_isize"
+    },
+    {
+      "from": "bb17",
+      "to": "bb19",
+      "label": "otherwise"
+    },
+    {
+      "from": "bb18",
+      "to": "bb26",
+      "label": "return"
+    },
+    {
+      "from": "bb20",
+      "to": "bb21",
+      "label": "success"
+    },
+    {
+      "from": "bb20",
+      "to": "bb4",
+      "label": "unwind"
+    },
+    {
+      "from": "bb21",
+      "to": "bb23",
+      "label": "0_i32"
+    },
+    {
+      "from": "bb21",
+      "to": "bb22",
+      "label": "otherwise"
+    },
+    {
+      "from": "bb22",
+      "to": "bb25",
+      "label": ""
+    },
+    {
+      "from": "bb23",
+      "to": "bb24",
+      "label": "return"
+    },
+    {
+      "from": "bb23",
+      "to": "bb4",
+      "label": "unwind"
+    },
+    {
+      "from": "bb24",
+      "to": "bb25",
+      "label": ""
+    },
+    {
+      "from": "bb25",
+      "to": "bb16",
+      "label": ""
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+#include <metal_stdlib>
+
+using namespace metal;
+void d() {
+  float const l = 0.14112000167369842529f;
+}
+

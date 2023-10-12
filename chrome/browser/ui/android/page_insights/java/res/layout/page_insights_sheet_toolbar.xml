@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2023 The Chromium Authors
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file.
+-->
+
+<!-- A toolbar layout designed for page insight bottom-sheet -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/sheet_tab_toolbar_height"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/drag_handlebar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingVertical="10dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/drag_handlebar" />
+
+    <org.chromium.components.browser_ui.widget.text.TextViewWithCompoundDrawables
+        android:id="@+id/page_insights_feed_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="@dimen/page_insights_header_text_margin"
+        android:drawableStart="@drawable/page_insights_icon"
+        android:drawablePadding="@dimen/page_insights_title_margin"
+        android:text="@string/page_insights_hub_title_text"
+        android:textAppearance="@style/TextAppearance.Headline2.Primary.Baseline"/>
+
+    <LinearLayout
+        android:id="@+id/page_insights_child_page_header"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:orientation="horizontal"
+        android:importantForAccessibility="no"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/page_insights_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="15dp"
+            android:src="@drawable/ic_arrow_back_24dp"
+            app:tint="@color/default_icon_color_baseline"
+            android:background="@android:color/transparent"
+            android:importantForAccessibility="yes"
+            android:contentDescription="@string/page_insights_back_button_description"/>
+
+        <TextView
+            android:id="@+id/page_insights_child_title"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:paddingVertical="3dp"
+            android:paddingHorizontal="5dp"
+            android:textAppearance="@style/TextAppearance.TextAccentLarge.Primary.Baseline"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,44 @@
+// Copyright 2021 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package minios;
+
+// This is the message that is returned from MiniOs via `GetState` method
+// and indicates what state MiniOs is in.
+message State {
+  // Indicates what state MiniOs is in.
+  enum States {
+    IDLE = 0;
+    NETWORK_SCANNING = 1;
+    NETWORK_SELECTION = 2;
+    NETWORK_CREDENTIALS = 3;
+    CONNECTING = 4;
+    CONNECTED = 5;
+    RECOVERING = 6;
+    FINALIZING = 7;
+    COMPLETED = 8;
+    ERROR = 9;
+    DEBUG_OPTIONS = 10;
+    DEBUG_LOGS = 11;
+    LANGUAGE_SELECTION = 12;
+  }
+  States state = 1;
+}
+
+// Format definition for log storage manifest.
+message LogManifest {
+  message Entry {
+    // Number of bytes to skip to reach the start of this log blob from the
+    // start of the partition.
+    int32 offset = 1;
+    // Count in bytes to read to fully extract this log.
+    int64 count = 2;
+  }
+  // In the future this can be changed to repeated if need be without breakage.
+  Entry entry = 1;
+}

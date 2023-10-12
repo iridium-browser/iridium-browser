@@ -1,0 +1,426 @@
+{
+  // Usage:
+  //   ./cb.py loading --page-config=browsing_story.hjson --playback=15m
+  "pages": {
+    "1": [
+      {
+        "action": "get",
+        "url": "https://bbs.ruliweb.com",
+        "duration": "15s"
+      }
+    ],
+    "2": [
+      {
+        "action": "get",
+        "url": "https://ca.linkedin.com/school/university-of-toronto/",
+        "duration": "15s"
+      }
+    ],
+    "3": [
+      {
+        "action": "get",
+        "url": "https://chrome.google.com/webstore",
+        "duration": "15s"
+      }
+    ],
+    "4": [
+      {
+        "action": "get",
+        "url": "https://docs.google.com/document/d/1Ll-8Nvo6JlhzKEttst8GHWCc7_A8Hluy2fX99cy4Sfg/edit?usp=sharing",
+        "duration": "15s"
+      }
+    ],
+    "5": [
+      {
+        "action": "get",
+        "url": "https://docs.google.com/spreadsheets/d/17UMtuMVaxFn8CHsPGRhYUP92LgauOzy88sEXPIId0d4/edit?usp=sharing",
+        "duration": "15s"
+      }
+    ],
+    "6": [
+      {
+        "action": "get",
+        "url": "https://drive.google.com/drive/folders/1Zk7SFZXaeqnMQ1_JSV02fsZqa3gYzAJD?usp=sharing",
+        "duration": "15s"
+      }
+    ],
+    "7": [
+      {
+        "action": "get",
+        "url": "https://duckduckgo.com/?q=computers&t=h_&ia=places",
+        "duration": "15s"
+      }
+    ],
+    "8": [
+      {
+        "action": "get",
+        "url": "https://en.wikipedia.org/wiki/Candidates_Tournament_2022",
+        "duration": "15s"
+      }
+    ],
+    "9": [
+      {
+        "action": "get",
+        "url": "https://fr.airbnb.ca/s/Montr%C3%A9al/homes?place_id=ChIJDbdkHFQayUwR7-8fITgxTmU&query=Montr%C3%A9al&refinement_paths%5B%5D=%2Fhomes&tab_id=home_tab",
+        "duration": "15s"
+      }
+    ],
+    "10": [
+      {
+        "action": "get",
+        "url": "https://gall.dcinside.com",
+        "duration": "15s"
+      }
+    ],
+    "11": [
+      {
+        "action": "get",
+        "url": "https://game.granbluefantasy.jp",
+        "duration": "15s"
+      }
+    ],
+    "12": [
+      {
+        "action": "get",
+        "url": "https://news.yahoo.co.jp",
+        "duration": "15s"
+      }
+    ],
+    "13": [
+      {
+        "action": "get",
+        "url": "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=bernoulli&btnG=&oq=Bernou",
+        "duration": "15s"
+      }
+    ],
+    "14": [
+      {
+        "action": "get",
+        "url": "https://translate.google.com",
+        "duration": "15s"
+      }
+    ],
+    "15": [
+      {
+        "action": "get",
+        "url": "https://twitter.com/twitter",
+        "duration": "15s"
+      }
+    ],
+    "16": [
+      {
+        "action": "get",
+        "url": "https://us02web.zoom.us",
+        "duration": "15s"
+      }
+    ],
+    "17": [
+      {
+        "action": "get",
+        "url": "https://weather.com/en-CA",
+        "duration": "15s"
+      }
+    ],
+    "18": [
+      {
+        "action": "get",
+        "url": "https://web.whatsapp.com/",
+        "duration": "15s"
+      }
+    ],
+    "19": [
+      {
+        "action": "get",
+        "url": "https://www.allrecipes.com/recipe/261983/tourtiere-french-canadian-meat-pie/",
+        "duration": "15s"
+      }
+    ],
+    "20": [
+      {
+        "action": "get",
+        "url": "https://www.amazon.com",
+        "duration": "15s"
+      }
+    ],
+    "21": [
+      {
+        "action": "get",
+        "url": "https://www.amazon.com/Sceptre-E248W-19203R-Monitor-Speakers-Metallic/dp/B0773ZY26F/ref=lp_16225007011_1_2",
+        "duration": "15s"
+      }
+    ],
+    "22": [
+      {
+        "action": "get",
+        "url": "https://www.ancestry.ca",
+        "duration": "15s"
+      }
+    ],
+    "23": [
+      {
+        "action": "get",
+        "url": "https://www.baidu.com",
+        "duration": "15s"
+      }
+    ],
+    "24": [
+      {
+        "action": "get",
+        "url": "https://www.bbc.co.uk/news/uk",
+        "duration": "15s"
+      }
+    ],
+    "25": [
+      {
+        "action": "get",
+        "url": "https://www.bilibili.com/video/online.html",
+        "duration": "15s"
+      }
+    ],
+    "26": [
+      {
+        "action": "get",
+        "url": "https://www.bing.com",
+        "duration": "15s"
+      }
+    ],
+    "27": [
+      {
+        "action": "get",
+        "url": "https://www.booking.com/searchresults.en-gb.html?label=gen173nr-1FCAEiBWhvdGVsKIICOOgHSAlYBGgniAEBmAEJuAEHyAEM2AEB6AEB-AECiAIBqAIDuAKDruGWBsACAdICJGMxYjcxODU5LWVlYTctNDQ0OS04NmU5LTM4N2FhOWRlNzE5M9gCBeACAQ&lang=en-gb&sid=17ce3c75df94ea14c79d265986a05ea7&sb=1&sb_lp=1&src=theme_landing_index&src_elem=sb&error_url=https%3A%2F%2F",
+        "duration": "15s"
+      }
+    ],
+    "28": [
+      {
+        "action": "get",
+        "url": "https://www.chase.com/",
+        "duration": "15s"
+      }
+    ],
+    "29": [
+      {
+        "action": "get",
+        "url": "https://www.cnn.com/world",
+        "duration": "15s"
+      }
+    ],
+    "30": [
+      {
+        "action": "get",
+        "url": "https://www.ebay.com/b/Cars-Trucks/6001/bn_1865117",
+        "duration": "15s"
+      }
+    ],
+    "31": [
+      {
+        "action": "get",
+        "url": "https://www.espn.com/",
+        "duration": "15s"
+      }
+    ],
+    "32": [
+      {
+        "action": "get",
+        "url": "https://www.etsy.com/",
+        "duration": "15s"
+      }
+    ],
+    "33": [
+      {
+        "action": "get",
+        "url": "https://www.facebook.com/mazdacanada/",
+        "duration": "15s"
+      }
+    ],
+    "34": [
+      {
+        "action": "get",
+        "url": "https://www.fandom.com",
+        "duration": "15s"
+      }
+    ],
+    "35": [
+      {
+        "action": "get",
+        "url": "https://www.fiverr.com/",
+        "duration": "15s"
+      }
+    ],
+    "36": [
+      {
+        "action": "get",
+        "url": "https://www.france24.com/fr/",
+        "duration": "15s"
+      }
+    ],
+    "37": [
+      {
+        "action": "get",
+        "url": "https://www.freepik.com/popular-photos",
+        "duration": "15s"
+      }
+    ],
+    "38": [
+      {
+        "action": "get",
+        "url": "https://www.github.com/google/pprof",
+        "duration": "15s"
+      }
+    ],
+    "39": [
+      {
+        "action": "get",
+        "url": "https://www.globo.com",
+        "duration": "15s"
+      }
+    ],
+    "40": [
+      {
+        "action": "get",
+        "url": "https://www.google.com",
+        "duration": "15s"
+      }
+    ],
+    "41": [
+      {
+        "action": "get",
+        "url": "https://www.google.com/maps/place/Notre-Dame+Basilica+of+Montreal/@45.5052525,-73.5640892,15z/data=!4m5!3m4!1s0x4cc91a575897713d:0x1ffcef9f1d0d96aa!8m2!3d45.5045254!4d-73.5561204",
+        "duration": "15s"
+      }
+    ],
+    "42": [
+      {
+        "action": "get",
+        "url": "https://www.google.com/search?q=computers",
+        "duration": "15s"
+      }
+    ],
+    "43": [
+      {
+        "action": "get",
+        "url": "https://www.homedepot.ca/search?q=computer#!q=computer",
+        "duration": "15s"
+      }
+    ],
+    "44": [
+      {
+        "action": "get",
+        "url": "https://www.ilovepdf.com/add_pdf_page_number",
+        "duration": "15s"
+      }
+    ],
+    "45": [
+      {
+        "action": "get",
+        "url": "https://www.imdb.com/title/tt1190634/",
+        "duration": "15s"
+      }
+    ],
+    "46": [
+      {
+        "action": "get",
+        "url": "https://www.instagram.com/good.boy.ollie/?hl=en",
+        "duration": "15s"
+      }
+    ],
+    "47": [
+      {
+        "action": "get",
+        "url": "https://www.inven.co.kr/board/maple/2299",
+        "duration": "15s"
+      }
+    ],
+    "48": [
+      {
+        "action": "get",
+        "url": "https://www.macys.com/",
+        "duration": "15s"
+      }
+    ],
+    "49": [
+      {
+        "action": "get",
+        "url": "https://www.msn.com/en-ca",
+        "duration": "15s"
+      }
+    ],
+    "50": [
+      {
+        "action": "get",
+        "url": "https://www.naver.com/",
+        "duration": "15s"
+      }
+    ],
+    "51": [
+      {
+        "action": "get",
+        "url": "https://www.nytimes.com/ca/section/technology",
+        "duration": "15s"
+      }
+    ],
+    "52": [
+      {
+        "action": "get",
+        "url": "https://www.reddit.com/r/leagueoflegends",
+        "duration": "15s"
+      }
+    ],
+    "53": [
+      {
+        "action": "get",
+        "url": "https://www.stackoverflow.com/questions/tagged/python",
+        "duration": "15s"
+      }
+    ],
+    "54": [
+      {
+        "action": "get",
+        "url": "https://www.tiktok.com/@tiktok",
+        "duration": "15s"
+      }
+    ],
+    "55": [
+      {
+        "action": "get",
+        "url": "https://www.twitch.tv/directory/game/Stray",
+        "duration": "15s"
+      }
+    ],
+    "56": [
+      {
+        "action": "get",
+        "url": "https://www.walmart.ca/en",
+        "duration": "15s"
+      }
+    ],
+    "57": [
+      {
+        "action": "get",
+        "url": "https://www.yahoo.co.jp",
+        "duration": "15s"
+      }
+    ],
+    "58": [
+      {
+        "action": "get",
+        "url": "https://www.yandex.ru/",
+        "duration": "15s"
+      }
+    ],
+    "59": [
+      {
+        "action": "get",
+        "url": "https://www.youtube.com",
+        "duration": "15s"
+      }
+    ],
+    "60": [
+      {
+        "action": "get",
+        "url": "https://www.youtube.com/warcraft",
+        "duration": "15s"
+      }
+    ]
+  }
+}

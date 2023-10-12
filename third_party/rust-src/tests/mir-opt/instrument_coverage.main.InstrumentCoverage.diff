@@ -1,0 +1,48 @@
+- // MIR for `main` before InstrumentCoverage
++ // MIR for `main` after InstrumentCoverage
+  
+  fn main() -> () {
+      let mut _0: ();
+      let mut _1: ();
+      let mut _2: bool;
+      let mut _3: !;
+  
+      bb0: {
++         Coverage::Counter(1) for /the/src/instrument_coverage.rs:11:1 - 11:11;
+          goto -> bb1;
+      }
+  
+      bb1: {
++         Coverage::Expression(4294967295) = 1 + 2 for /the/src/instrument_coverage.rs:12:5 - 13:17;
+          falseUnwind -> [real: bb2, unwind: bb6];
+      }
+  
+      bb2: {
+          StorageLive(_2);
+          _2 = bar() -> [return: bb3, unwind: bb6];
+      }
+  
+      bb3: {
+          switchInt(move _2) -> [0: bb5, otherwise: bb4];
+      }
+  
+      bb4: {
++         Coverage::Expression(4294967293) = 4294967294 + 0 for /the/src/instrument_coverage.rs:17:1 - 17:2;
++         Coverage::Expression(4294967294) = 4294967295 - 2 for /the/src/instrument_coverage.rs:14:13 - 14:18;
+          _0 = const ();
+          StorageDead(_2);
+          return;
+      }
+  
+      bb5: {
++         Coverage::Counter(2) for /the/src/instrument_coverage.rs:15:10 - 15:11;
+          _1 = const ();
+          StorageDead(_2);
+          goto -> bb1;
+      }
+  
+      bb6 (cleanup): {
+          resume;
+      }
+  }
+  

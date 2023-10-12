@@ -1,0 +1,130 @@
+// Copyright 2017 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+package biod;
+
+option go_package = "chromiumos/system_api/biod_messages_proto";
+
+import "constants.proto";
+
+// Included in biod's AuthScanDone signal
+message FingerprintMessage {
+  oneof msg {
+    FingerprintError error = 1;
+    ScanResult scan_result = 2;
+  }
+}
+
+// Included in biod's EnrollScanDone signal.
+message EnrollScanDone {
+  optional ScanResult scan_result = 1;
+  optional bool done = 2;
+  optional int32 percent_complete = 3;
+  optional bytes auth_nonce = 4;
+}
+
+// Included in AuthStackManager's AuthScanDone signal.
+message AuthScanDone {
+  optional bytes auth_nonce = 1;
+}
+
+// Returned from biod's StartEnrollSession method.
+message StartEnrollSessionReply {
+  optional FingerprintError error = 1;
+}
+
+// Returned from biod's StartAuthSession method.
+message StartAuthSessionReply {
+  optional FingerprintError error = 1;
+}
+
+// Included in StatusChanged signal.
+message BiometricsManagerStatusChanged {
+  optional BiometricsManagerStatus status = 1;
+}
+
+message FpPublicKey {
+  optional bytes x = 1;
+  optional bytes y = 2;
+}
+
+message CreateCredentialRequest {
+  optional string user_id = 1;
+  optional bytes gsc_nonce = 2;
+  optional bytes encrypted_label_seed = 3;
+  optional bytes iv = 4;
+  optional FpPublicKey pub = 5;
+}
+
+message CreateCredentialReply {
+  // These values are persisted to logs. Entries should not be renumbered and
+  // numeric values should never be reused.
+  enum CreateCredentialStatus {
+    UNKNOWN = 0;
+    SUCCESS = 1;
+    INCORRECT_STATE = 2;  // biod isn't ready for creating credential.
+    SET_NONCE_FAILED = 3;
+    NO_TEMPLATE = 4;           // failed to retrieve template from AuthStack.
+    NO_SECRET = 5;             // failed to retrieve secrets from AuthStack.
+    CREATE_RECORD_FAILED = 6;  // failed to create record for the template.
+  }
+
+  optional CreateCredentialStatus status = 1;
+  optional bytes encrypted_secret = 2;
+  optional bytes iv = 3;
+  optional FpPublicKey pub = 4;
+  optional string record_id = 5;
+}
+
+message AuthenticateCredentialRequest {
+  optional bytes gsc_nonce = 1;
+  optional bytes encrypted_label_seed = 2;
+  optional bytes iv = 3;
+  optional FpPublicKey pub = 4;
+}
+
+message AuthenticateCredentialReply {
+  // These values are persisted to logs. Entries should not be renumbered and
+  // numeric values should never be reused.
+  enum AuthenticateCredentialStatus {
+    UNKNOWN = 0;
+    SUCCESS = 1;
+    INCORRECT_STATE = 2;   // biod isn't ready for authenticating credential.
+    SET_NONCE_FAILED = 3;  // Failed to establish nonce session.
+    UPLOAD_TEMPLATES_FAILED = 4;  // Failed to upload templates for match.
+    MATCH_FAILED = 5;             // The match command itself failed.
+    NO_TEMPLATES = 6;    // AuthStack reports there are no templates to match.
+    NO_SECRET = 7;       // Failed to retrieve match secret.
+    INTERNAL_ERROR = 8;  // AuthStack internal error.
+  }
+
+  optional AuthenticateCredentialStatus status = 1;
+  optional ScanResult scan_result = 2;
+  optional bytes encrypted_secret = 3;
+  optional bytes iv = 4;
+  optional FpPublicKey pub = 5;
+  optional string record_id = 6;
+}
+
+message DeleteCredentialRequest {
+  optional string user_id = 1;
+  optional string record_id = 2;
+}
+
+message DeleteCredentialReply {
+  enum DeleteCredentialStatus {
+    UNKNOWN = 0;
+    SUCCESS = 1;
+    INCORRECT_STATE = 2;
+    // The credential to delete doesn't exist. No need for deletion.
+    NOT_EXIST = 3;
+    // The credential to delete exists, but deletion failed.
+    DELETION_FAILED = 4;
+  }
+  optional DeleteCredentialStatus status = 1;
+}

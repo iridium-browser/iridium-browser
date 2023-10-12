@@ -1,0 +1,114 @@
+{
+    "repos": [
+        {
+            "name": "glslang",
+            "url": "https://github.com/KhronosGroup/glslang.git",
+            "sub_dir": "glslang",
+            "build_dir": "glslang/build",
+            "install_dir": "glslang/build/install",
+            "commit": "76b52ebf77833908dc4c0dd6c70a9c357ac720bd",
+            "optional": [
+                "tests"
+            ]
+        },
+        {
+            "name": "Vulkan-Headers",
+            "api": "vulkan",
+            "url": "https://github.com/KhronosGroup/Vulkan-Headers.git",
+            "sub_dir": "Vulkan-Headers",
+            "build_dir": "Vulkan-Headers/build",
+            "install_dir": "Vulkan-Headers/build/install",
+            "commit": "v1.3.262"
+        },
+        {
+            "name": "Vulkan-Utility-Libraries",
+            "url": "https://github.com/KhronosGroup/Vulkan-Utility-Libraries.git",
+            "sub_dir": "Vulkan-Utility-Libraries",
+            "build_dir": "Vulkan-Utility-Libraries/build",
+            "install_dir": "Vulkan-Utility-Libraries/build/install",
+            "commit": "v1.3.262",
+            "deps": [
+                {
+                    "var_name": "VULKAN_HEADERS_INSTALL_DIR",
+                    "repo_name": "Vulkan-Headers"
+                }
+            ]
+        },
+        {
+            "name": "SPIRV-Headers",
+            "url": "https://github.com/KhronosGroup/SPIRV-Headers.git",
+            "sub_dir": "SPIRV-Headers",
+            "build_dir": "SPIRV-Headers/build",
+            "install_dir": "SPIRV-Headers/build/install",
+            "commit": "d790ced752b5bfc06b6988baadef6eb2d16bdf96"
+        },
+        {
+            "name": "SPIRV-Tools",
+            "url": "https://github.com/KhronosGroup/SPIRV-Tools.git",
+            "sub_dir": "SPIRV-Tools",
+            "build_dir": "SPIRV-Tools/build",
+            "install_dir": "SPIRV-Tools/build/install",
+            "cmake_options": [
+                "-DSPIRV-Headers_SOURCE_DIR={repo_dir}/../SPIRV-Headers",
+                "-DSPIRV_WERROR=OFF",
+                "-DSPIRV_SKIP_TESTS=ON",
+                "-DSPIRV_SKIP_EXECUTABLES=ON"
+            ],
+            "commit": "1b3c4cb6855f7db1636985e1652ebbf91f81cd50"
+        },
+        {
+            "name": "robin-hood-hashing",
+            "url": "https://github.com/martinus/robin-hood-hashing.git",
+            "sub_dir": "robin-hood-hashing",
+            "build_dir": "robin-hood-hashing/build",
+            "install_dir": "robin-hood-hashing/build/install",
+            "cmake_options": [
+                "-DRH_STANDALONE_PROJECT=OFF"
+            ],
+            "commit": "3.11.5"
+        },
+        {
+            "name": "googletest",
+            "url": "https://github.com/google/googletest.git",
+            "sub_dir": "googletest",
+            "build_dir": "googletest/build",
+            "install_dir": "googletest/build/install",
+            "cmake_options": [
+                "-DBUILD_GMOCK=OFF",
+                "-Dgtest_force_shared_crt=ON",
+                "-DBUILD_SHARED_LIBS=OFF"
+            ],
+            "commit": "ec4fed93217bc2830959bb8e86798c1d86956949",
+            "optional": [
+                "tests"
+            ]
+        },
+        {
+            "name": "mimalloc",
+            "url": "https://github.com/microsoft/mimalloc.git",
+            "sub_dir": "mimalloc",
+            "build_dir": "mimalloc/build",
+            "install_dir": "mimalloc/build/install",
+            "cmake_options": [
+                "-DMI_BUILD_STATIC=ON",
+                "-DMI_BUILD_OBJECT=OFF",
+                "-DMI_BUILD_SHARED=OFF",
+                "-DMI_BUILD_TESTS=OFF"
+            ],
+            "commit": "v2.0.7",
+            "build_platforms": [
+                "windows"
+            ]
+        }
+    ],
+    "install_names": {
+        "glslang": "GLSLANG_INSTALL_DIR",
+        "Vulkan-Headers": "VULKAN_HEADERS_INSTALL_DIR",
+        "Vulkan-Utility-Libraries": "VULKAN_UTILITY_LIBRARIES_INSTALL_DIR",
+        "SPIRV-Headers": "SPIRV_HEADERS_INSTALL_DIR",
+        "SPIRV-Tools": "SPIRV_TOOLS_INSTALL_DIR",
+        "robin-hood-hashing": "ROBIN_HOOD_HASHING_INSTALL_DIR",
+        "googletest": "GOOGLETEST_INSTALL_DIR",
+        "mimalloc": "MIMALLOC_INSTALL_DIR"
+    }
+}

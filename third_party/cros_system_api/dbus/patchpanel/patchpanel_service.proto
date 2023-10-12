@@ -1,0 +1,794 @@
+// Copyright 2019 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+// This file defines the messages used by the patchpanel D-Bus API. It is
+// strongly recommended to not use the patchpanel D-Bus API directly and to
+// instead use the thin client defined at platform2/patchpanel/client.h that
+// provides additional functionalities and abstracts the details of the wire
+// format. Access control for clients is defined in platform2/patchpanel/dbus.
+package patchpanel;
+option go_package = "chromiumos/system_api/patchpanel_proto";
+
+// Notification that the ARC++ container is starting up.
+// This is informational. The ARC boot and setup sequences do not require
+// any information or permission from networking to continue.
+message ArcStartupRequest {
+  // The PID of the ARC++ container.
+  // Required.
+  int32 pid = 1;
+}
+
+// This is an intentionally empty mesage. ARC++ startup does not require
+// any information from networking to proceed.
+message ArcStartupResponse {}
+
+// Notification that the ARC++ container is shutting down.
+message ArcShutdownRequest {
+  // TODO(hugobenichi) Deprecate this unused argument.
+  // The PID of the ARC++ container; must match the PID that was sent at
+  // startup.
+  // Required.
+  int32 pid = 1;
+}
+
+// This is an intentionally empty message. ARC++ startup does not require
+// any information from networking to proceed.
+message ArcShutdownResponse {}
+
+// Notification that the ARC VM is starting up.
+// Unlike in the container case, Concierge needs to know which TAP devices
+// it can use.
+message ArcVmStartupRequest {
+  // The content ID of the VM.
+  uint32 cid = 1;
+}
+
+// Represents an IPv4 subnet given a base address and prefix length.
+message IPv4Subnet {
+  // The base address of the subnet, represented as 4 bytes in network order.
+  bytes addr = 3;
+
+  // Deprecated, use addr instead. The base address in network order.
+  uint32 base_addr = 1 [deprecated = true];
+
+  // The prefix length of the subnet.
+  uint32 prefix_len = 2;
+}
+
+// Represents a virtual network device created and managed by patchpanel and
+// used for one of the hosted guest platforms.
+message NetworkDevice {
+  // Identifies the guest for which the virtual device is used.
+  enum GuestType {
+    UNKNOWN = 0;
+    ARC = 1;
+    ARCVM = 2;
+    TERMINA_VM = 3;
+    PARALLELS_VM = 4;
+  };
+
+  // The name of the main virtual interface created by patchpanel for carrying
+  // packets out of the guest environment and onto the host routing setup. For
+  // ARC this corresponds to the virtual bridge used for that virtual device.
+  // For other crosvm guests (Termina, Crostini, Parallels VM, etc) this
+  // corresponds to the tap device used by crosvm virtio net stack.
+  string ifname = 1;
+
+  // The name of the physical interface to which the virtual device is mapped.
+  // This corresponds to the interface name used by the shill Network class and
+  // may be different from the shill "Interface" property of the DBus Device
+  // object associated with this physical interface, e.g., Cellular multiplexed
+  // PDN connections. Only valid for ARC virtual devices and otherwise empty for
+  // virtual devices tracking the default logical or physical networks.
+  // TODO(b/273744897): Replace the ifname here by the patchpanel Network id
+  // and/or add the DBus path of the shill Device tracked by this virtual
+  // Device.
+  string phys_ifname = 5;
+
+  // The name of the interface inside the guest. Only available for ARC virtual
+  // devices, and otherwise empty for other crosvm guests.
+  string guest_ifname = 7;
+
+  // The IPv4 address assigned to the guest, in network order.
+  uint32 ipv4_addr = 2;
+
+  // The IPv4 address assigned to the host device interface, in network order.
+  // This corresponds to the next hop IPv4 address for the guest and should be
+  // used for the default IPv4 route of the guest.
+  uint32 host_ipv4_addr = 6;
+
+  // The IPv4 subnet allocated for this virtual device.
+  IPv4Subnet ipv4_subnet = 3;
+
+  // The type of guest to which the device is bound.
+  GuestType guest_type = 4;
+
+  // The IPv4 and IPv6 addresses of the DNS proxy instance tied to the guest
+  // virtual device. Only available for ARC virtual devices with the GetDevices
+  // DBus method call. The addresses are represented in network order as a byte
+  // array of size 4 and 16 respectively for IPv4 and IPv6.
+  bytes dns_proxy_ipv4_addr = 8;
+  bytes dns_proxy_ipv6_addr = 9;
+}
+
+// Request to obtain the list of virtual network devices that patchpanel
+// manages for guest OSes. This does not include physical or virtual (e.g. VPN)
+// devices managed by shill or virtual devices in connected namespaces.
+message GetDevicesRequest {}
+
+message GetDevicesResponse {
+  // The list of devices under patchpanel's management/control.
+  repeated NetworkDevice devices = 1;
+}
+
+// Information required by Concierge to continue the ARC VM startup process.
+message ArcVmStartupResponse {
+  // The list of TAP devices to be used in the VM.
+  repeated NetworkDevice devices = 1;
+}
+
+// Notification that the ARC VM is shutting down.
+// This message should also be sent if the startup process fails so any
+// allocated resources are properly freed.
+message ArcVmShutdownRequest {
+  // The CID of the ARC VM; must match the CID that was sent at
+  // startup.
+  // Required.
+  uint32 cid = 1;
+}
+
+// Intentionally empty response.
+message ArcVmShutdownResponse {}
+
+// Notification that a Termina VM is starting up.
+message TerminaVmStartupRequest {
+  // The content ID of the VM.
+  uint32 cid = 1;
+}
+
+// Information required by Concierge to continue the Termina VM startup.
+message TerminaVmStartupResponse {
+  // The TAP device to be used for the VM.
+  string tap_device_ifname = 1;
+
+  // The IPv4 subnet assigned to the VM.
+  IPv4Subnet ipv4_subnet = 2;
+
+  // The IPv4 address assigned to the VM, represented as 4 bytes in network
+  // order, contained inside |ipv4_subnet|.
+  bytes ipv4_address = 3;
+
+  // The IPv4 next hop gateway address for the VM, represented as 4 bytes in
+  // network order, contained inside |ipv4_subnet|.
+  bytes gateway_ipv4_address = 4;
+
+  // The container IPv4 subnet to be used for the LXD bridge.
+  IPv4Subnet container_ipv4_subnet = 5;
+
+  // The container IPv4 address, contained inside |container_ipv4_subnet|.
+  bytes container_ipv4_address = 6;
+};
+
+// Notification that the Termina VM is shutting down.
+// This message must also be sent if the startup process fails so any
+// allocated resources, including the subnets, are properly freed.
+message TerminaVmShutdownRequest {
+  // The CID of the Termina VM; must match the PID that was sent at
+  // startup.
+  // Required.
+  uint32 cid = 1;
+}
+
+// Intentionally empty response.
+message TerminaVmShutdownResponse {}
+
+// Notification that a Parallels VM is starting up.
+message ParallelsVmStartupRequest {
+  // The unique ID of the VM.
+  uint64 id = 1;
+
+  // The 1-based index of the desired subnet to allocate for use.
+  // Optional.
+  // TODO(b/236092161) Migrate to uint32.
+  int32 subnet_index = 2;
+}
+
+// Information required by Concierge to continue the Parallels VM startup.
+message ParallelsVmStartupResponse {
+  // The TAP device to be used for the VM.
+  string tap_device_ifname = 1;
+
+  // The IPv4 subnet assigned to the VM.
+  IPv4Subnet ipv4_subnet = 2;
+
+  // The IPv4 address assigned to the VM, represented as 4 bytes in network
+  // order, contained inside |ipv4_subnet|.
+  bytes ipv4_address = 3;
+};
+
+// Notification that the Parallels VM is shutting down.
+// This message must also be sent if the startup process fails so any
+// allocated resources, including the subnets, are properly freed.
+message ParallelsVmShutdownRequest {
+  // The unique ID of the Parallels VM; must match what was sent at startup.
+  // Required.
+  uint64 id = 1;
+}
+
+// Intentionally empty response.
+message ParallelsVmShutdownResponse {}
+
+// Request to set the VPN routing policy for a socket. The socket file
+// descriptor must be immediately appended to the DBUS message after the
+// serialized SetVpnIntentRequest message. The request must be sent before
+// the socket is connected.
+message SetVpnIntentRequest {
+  // Possible policies for VPN routing available to system processes.
+  // The enum values defined here are not meaningful with respect to the actual
+  // bits used inside the socket fwmark for encoding the VPN routing intent.
+  enum VpnRoutingPolicy {
+    // Let the routing layer apply the default policy for that process uid.
+    // This is the default policy for newly created sockets. It is in general
+    // incorrect to use this policy for the purpose of clearing any other VPN
+    // policy after the socket became connected. Instead a new socket should
+    // be made.
+    DEFAULT_ROUTING = 0;
+    // The socket traffic is always routed through the VPN if there is one.
+    ROUTE_ON_VPN = 1;
+    // The socket traffic is always routed through the physical network.
+    BYPASS_VPN = 2;
+  }
+
+  VpnRoutingPolicy policy = 1;
+}
+
+// Response to a SetVpnIntentRequest.
+message SetVpnIntentResponse {
+  bool success = 1;
+}
+
+// Request for connecting and routing a network namespace. The client must
+// append a valid file descriptor immediately after the serialized
+// ConnectNamespaceRequest proto. This file descriptor must remain valid for as
+// long as the client namespace needs to remain connected. Invalidating the file
+// descriptor explicitly by closing it or implicitly when the client exits will
+// trigger the teardown of the routing setup, the veth setup, and the release
+// of the IPv4 subnet assigned to the namespace.
+message ConnectNamespaceRequest {
+  // The pid of the client network namespace. If set to -1, a new network
+  // namespace which is not associated with any process will be created.
+  int32 pid = 1;
+
+  // If the client sets this field to the name of a physical or VPN network
+  // interface managed by shill, the namespace egress traffic routed outside the
+  // host will be routed using the routing table specific to that physical or
+  // VPN network interface . If left empty, the namespace will be routed through
+  // the system highest priority interface (physical or virtual).
+  // TODO(b/273744897): Replace this interface name by the patchpanel Network
+  // id.
+  string outbound_physical_device = 2;
+
+  // If true, traffic originated from managed OSs (Termina VMs, ARC, Parallels
+  // VM) and from Chrome can be routed to this namespace, and traffic originated
+  // from this namespace can be routed to these other privilege domains.
+  bool allow_user_traffic = 3;
+
+  // This field specifies the routing behavior to use when (1)
+  // |outbound_physical_device| is empty and (2) the system's highest priority
+  // network interface is a VPN. If true, egress traffic will be routed to the
+  // VPN; if false, it will be left on the underlying physical interface.
+  bool route_on_vpn = 4;
+
+  // Specifies how the traffic flowing over the new virtual network should be
+  // accounted, if applicable.
+  // This field is required. The default behavior will be to treat unspecified
+  // and UNKNOWN sources as SYSTEM traffic for accounting purposes.
+  TrafficCounter.Source traffic_source = 5;
+
+  // This field specifies whether IPv6 should be created statically behind NAT66
+  // or through SLAAC.
+  bool static_ipv6 = 6;
+}
+
+// Response to a ConnectNamespaceRequest. If the operation failed then all
+// fields are left set to their default value (empty string or 0).
+message ConnectNamespaceResponse {
+  // The subnet allocated to the client namespace.
+  IPv4Subnet ipv4_subnet = 1;
+
+  // Name of the veth interface created in the client namespace.
+  string peer_ifname = 2;
+
+  // The IPv4 address in network order assigned to the interface inside the
+  // client namespace.
+  uint32 peer_ipv4_address = 3;
+
+  // Name of the veth interface created in the host namespace.
+  string host_ifname = 4;
+
+  // The IPv4 address in network order assigned to the interface in the host
+  // namespace.
+  uint32 host_ipv4_address = 5;
+
+  // Name of the netns attached or created.
+  string netns_name = 6;
+}
+
+// Represents the traffic usage ({tx, rx} x {packets, bytes}) between a source
+// and a shill device (interface), since the system (CrOS) is booted up. A
+// counter will keep growing until the system (CrOS) shuts down.
+// Used in TrafficCountersResponse.
+message TrafficCounter {
+  // Possible traffic sources.
+  enum Source {
+    UNKNOWN = 0;
+    // Traffic associated with user chronos.
+    CHROME = 1;
+    // Traffic associated with user debugd, cups, and tlsdate, i.e., other user
+    // traffic except for that for user chronos.
+    USER = 2;
+    ARC = 3;
+    CROSVM = 4;
+    PARALLELS_VM = 5;
+    UPDATE_ENGINE = 6;
+    // As a source, VPN means traffic initiated by the VPN app/program and going
+    // to the underlying physical network (or from physical network to the VPN
+    // app/program).
+    VPN = 7;
+    // All other traffic.
+    SYSTEM = 8;
+  }
+
+  // Possible IP address family numbers.
+  enum IpFamily {
+    NONE = 0;
+    IPV4 = 1;
+    IPV6 = 2;
+  }
+
+  // Counter values need to be 64bits as 32bits is not enough to account for
+  // more than ~4GB of traffic.
+  uint64 rx_bytes = 1;
+  uint64 tx_bytes = 2;
+  uint64 rx_packets = 3;
+  uint64 tx_packets = 4;
+
+  // The source that originated the traffic.
+  Source source = 5;
+
+  // The shill device (interface) name (e.g., eth0) where the traffic leaves
+  // from or comes in.
+  string device = 6;
+
+  // The IP family of the traffic.
+  IpFamily ip_family = 7;
+}
+
+// Requests the traffic counters kept by patchpanel. |devices| is the set of
+// interfaces for which counters should be returned, any unknown interfaces will
+// be ignored. If |devices| is empty, counters for all known interfaces will be
+// returned. Note that if an interface once appeared but does not exist now,
+// counters for it will also be returned.
+message TrafficCountersRequest {
+  repeated string devices = 1;
+}
+
+// Response to a TrafficCountersRequest.
+message TrafficCountersResponse {
+  repeated TrafficCounter counters = 1;
+}
+
+// Request for opening and closing firewall port. If the request is valid,
+// PatchPanel will run iptables commands following the request.
+message ModifyPortRuleRequest {
+  enum Operation {
+    INVALID_OPERATION = 0;
+    CREATE = 1;
+    DELETE = 2;
+  }
+
+  enum RuleType {
+    INVALID_RULE_TYPE = 0;
+    ACCESS = 1;      // Equivalent of iptables 'ACCEPT'
+    LOCKDOWN = 2;    // Equivalent of iptables 'DROP'
+    FORWARDING = 3;  // Equivalent of iptables 'DNAT'
+  }
+
+  enum Protocol {
+    INVALID_PROTOCOL = 0;
+    TCP = 1;
+    UDP = 2;
+  }
+
+  // Arguments specifying the type of operation, rule and protocol.
+  Operation op = 1;
+  RuleType type = 2;
+  Protocol proto = 3;
+
+  // A network interface name, or empty if unspecified. This is optional for
+  // ACCESS and FORWARDING, and is ignored for other rule types.
+  // b/273741099: Port rule requests are only allowed for WiFi and Ethernet
+  // networks. Multiplexed Cellular interfaces can be ignored.
+  // TODO(b/273744897): Replace this interface name argument by the patchpanel
+  // Network id.
+  string input_ifname = 4;
+
+  // An IPv4 address, or empty if unspecified. This is optional for FORWARDING,
+  // and is ignored for other rule types.
+  string input_dst_ip = 5;
+
+  // A port value in-between 1 and 65535. This is required for all rule types.
+  // TODO(b/236092161) Migrate to uint16.
+  uint32 input_dst_port = 6;
+
+  // An IPv4 address, or empty if unspecified. This is required for FORWARDING,
+  // and is ignored for other rule types.
+  string dst_ip = 7;
+
+  // A port value between 1 and 65535. This is required for FORWARDING, and is
+  // ignored for other rule types.
+  // TODO(b/236092161) Migrate to uint16.
+  uint32 dst_port = 8;
+}
+
+// Response to a ModifyPortRuleRequest.
+message ModifyPortRuleResponse {
+  bool success = 1;
+}
+
+// Request to start or stop VPN lockdown. When VPN lockdown is enabled and no
+// VPN connection exists, any non-ARC traffic that would be routed to a VPN
+// connection is instead rejected. ARC traffic is ignored because Android
+// already implements VPN lockdown.
+message SetVpnLockdownRequest {
+  // true: start VPN lockdown. false: stop VPN lockdown.
+  bool enable_vpn_lockdown = 1;
+}
+
+// Intentionally empty response to a SetVpnIntentRequest.
+message SetVpnLockdownResponse {}
+
+// Signal that is emitted when a device managed by patchpanel is added or
+// removed.
+message NetworkDeviceChangedSignal {
+  enum Event {
+    UNKNOWN_CHANGE = 0;
+    DEVICE_ADDED = 1;
+    DEVICE_REMOVED = 2;
+  };
+
+  NetworkDevice device = 1;
+  Event event = 2;
+}
+
+// Signal for notifying an event about the layer 2 reachability of a neighbor
+// monitored by NeighborLinkMonitor.
+message NeighborReachabilityEventSignal {
+  // Possible roles of a neighbor in the corresponding ipconfig.
+  enum Role {
+    INVALID_ROLE = 0;
+    GATEWAY = 1;
+    DNS_SERVER = 2;
+    GATEWAY_AND_DNS_SERVER = 3;
+  };
+
+  // Possible event types. Two consecutive events for the same neighbor should
+  // have different types. Also see the class comment of NeighborLinkMonitor
+  // for more details about how these events are generated.
+  enum EventType {
+    INVALID_EVENT_TYPE = 0;
+    // Indicates a failure is detected for this neighbor. Note that the neighbor
+    // may still be unreachable even if this signal is not sent out. For
+    // example, sometimes we may lose track of a neighbor from the kernel. We
+    // will not send out a FAILED signal when that happens, since that does not
+    // always mean a link failure.
+    FAILED = 1;
+    // Indicates the bidirectional reachability has just been confirmed.
+    REACHABLE = 2;
+  };
+
+  // The interface index of the device that connects to this neighbor.
+  int32 ifindex = 1;
+
+  // Neighbor properties.
+  string ip_addr = 2;
+  Role role = 3;
+
+  EventType type = 4;
+}
+
+// Request to start DNS traffic redirection when DNS proxy is running. The rules
+// created depend on the type requested. The client must append a valid file
+// descriptor immediately after the serialized SetDnsRedirectionRuleRequest
+// proto. This file descriptor must remain valid for as long as the DNS traffic
+// need to be redirected. Invalidating the file descriptor explicitly by closing
+// it or implicitly when the client exits will trigger the teardown of the
+// redirection rules.
+message SetDnsRedirectionRuleRequest {
+  enum RuleType {
+    INVALID_RULE_TYPE = 0;
+    // Rules for traffic from guests that track the default network (e.g.
+    // Crostini, Parallels VMs).
+    DEFAULT = 1;
+    // Rules for traffic from ARC interfaces (e.g. arc_eth0, arc_wlan0).
+    ARC = 2;
+    // Rule for traffic associated with user traffic (e.g. chronos, cups).
+    USER = 3;
+    // Rules to exclude traffic that is not using the underlying network's
+    // name server. This is only used for user traffic.
+    EXCLUDE_DESTINATION = 4;
+  }
+
+  RuleType type = 1;
+
+  // Identifies from which network interface the traffic originates.
+  // This field is required for ARC and DEFAULT type.
+  string input_ifname = 2;
+
+  // The IP address of the proxy. This field is required for ARC and
+  // USER type.
+  string proxy_address = 3;
+
+  // Nameservers are only necessary for Chrome redirect (USER type).
+  repeated string nameservers = 4;
+
+  // Name of the "local" veth interface visible in the host namespace.
+  string host_ifname = 5;
+}
+
+// Response to a SetDnsRedirectionRuleRequest.
+message SetDnsRedirectionRuleResponse {
+  bool success = 1;
+}
+
+// Signal that is emitted when a network configuration change happens.
+message NetworkConfigurationChangedSignal {}
+
+// IPv4 configuration for a L3 network created with CreateLocalOnlyNetwork or
+// CreateTetheredNetwork. If DHCP is not used, clients must configure their own
+// IPv4 configuration manually. In the case of tethering where the traffic is
+// forwarded to an upstream network, SNAT is always implicitly used.
+message IPv4Configuration {
+  // IPv4 prefix to use for configuring IPv4 connectivity. If empty, a random
+  // prefix will be picked in the Class B (172.16.0.0/12) or Class C
+  // (192.128.0.0/16) private network ranges with a typical /24 prefix length.
+  // This configuration can be static and applied manually by clients, or
+  // managed dynamically and automatically with DHCP in which case the DHCP
+  // address range is the full prefix.
+  optional IPv4Subnet ipv4_subnet = 1;
+
+  // IPv4 address used by the DUT on the network, represented as 4 bytes in
+  // network order. This address will be used for the DHCP server if DHCP is
+  // used. This address will be used as the next hop and advertised through DHCP
+  // if DHCP is used. If empty, a random address in the chosen IPv4 subnet will
+  // be used. This address is always pingable for clients connected to the
+  // network and can be resolved with ARP.
+  optional bytes gateway_addr = 2;
+
+  // If true, a DHCP service is started on the network.
+  bool use_dhcp = 3;
+
+  // A DHCP option to advertise to clients.
+  message DhcpOption {
+    // DHCP option code.
+    uint32 code = 1;
+
+    // DHCP option content. How to interpret the bytes is option specific.
+    bytes content = 2;
+  }
+
+  // If DHCP is used, these additional options will be advertised by the DHCP
+  // service.
+  repeated DhcpOption options = 4;
+
+  // The DHCP range represented as 4 bytes in network order. It should be set
+  // iff |use_dhcp| is true and |ipv4_subnet| is set.
+  optional bytes dhcp_start_addr = 5;
+  optional bytes dhcp_end_addr = 6;
+
+  // The DNS servers for DHCP option number 6, represented as 4 bytes in network
+  // order.
+  repeated bytes dns_servers = 7;
+
+  // The list of domain search for DHCP option number 119.
+  repeated string domain_searches = 8;
+}
+
+// Describes possible errors when creating a downstream network for
+// CreateTetheredNetwork or CreateLocalOnlyNetwork requests.
+enum DownstreamNetworkResult {
+  // The request was successful.
+  SUCCESS = 0;
+  // The request was invalid.
+  INVALID_ARGUMENT = 1;
+  // The network interface specified for the downstream network is already in
+  // use.
+  INTERFACE_USED = 2;
+  // The request failed due to an internal error.
+  ERROR = 3;
+  // The DHCP server could not start successfully.
+  DHCP_SERVER_FAILURE = 4;
+  // The network interface specified for the upstream network is unknown
+  // (tethering only).
+  UPSTREAM_UNKNOWN = 5;
+  // The datapath could not be configured.
+  DATAPATH_ERROR = 6;
+  // The request could not be parsed.
+  INVALID_REQUEST = 7;
+}
+
+message DownstreamNetwork {
+  // Name of the network interface on which the downstream L3 network was
+  // created.
+  string downstream_ifname = 1;
+
+  // IPv4 subnet assigned to the downstream network. Undefined if the upstream
+  // network does not have IPv4 connectivity.
+  IPv4Subnet ipv4_subnet = 2;
+
+  // IPv4 address represented as 4 bytes in network order that was assigned to
+  // the gateway of the created network. This is the address of the DUT on the
+  // network and the next hop address for remote clients connected to the
+  // network. Empty if the upstream network does not have IPv4 connectivity.
+  bytes ipv4_gateway_addr = 3;
+}
+
+// Request to create a L3 logical network on a network interface and share
+// Internet access from another upstream network with this network. In this
+// configuration The DUT acts as a transparent router for remote clients
+// connected on the downstream network and forward the traffic to the upstream
+// network. The downstream network itself is not reachable from the DUT
+// (exception: DHCP service, RA server, ARP, ND proxy). The traffic accounting
+// source for traffic sent and received on the downstream network is always set
+// to TETHER. Dynamic IP configuration services for IPv4 and IPv6 are
+// automatically started depending on the configuration. The IPv4 configuration
+// is explicitly specified by the caller. The IPv6 configuration is always the
+// same as the upstream network if available. The client must append a valid
+// file descriptor immediately after the serialized proto. This file descriptor
+// must remain valid for as long as routing setup needs to persist. Invalidating
+// the file descriptor explicitly by closing it or implicitly when the client
+// process terminates will trigger the teardown of the routing setup and
+// associated services.
+message TetheredNetworkRequest {
+  // Required. Name of the network interface on which a L3 network should
+  // be created. It is assumed that no L3 connection is active on that
+  // interface and that shill has brought the interface up and prepared the link
+  // layer for accepting clients.
+  string ifname = 1;
+
+  // Required. Name of the network interface of the upstream network. The
+  // caller is in charge of the necessary setup for creating an active L3
+  // connection on this network interface.
+  string upstream_ifname = 2;
+
+  // Link technology associated with the upstream network.
+  enum UpstreamTechnology {
+    UNKNOWN = 0;
+    CELLULAR = 1;
+    WIFI = 2;
+    ETHERNET = 3;
+  }
+  // Required. Link technology of the upstream network.
+  UpstreamTechnology upstream_technology = 3;
+
+  // IPv4 configuration for this network. Optional if the upstream is an
+  // IPv6-only network.
+  optional IPv4Configuration ipv4_config = 4;
+
+  // If true, IPv6 RAs from the upstream networks and IPv6 neighbor discovery
+  // packets are forwarded on the downstream network and IPv6 forwarding is
+  // enabled between the upstream and downstream networks. The implementation
+  // will automatically choose between NDProxy mode and RA server mode.
+  bool enable_ipv6 = 5;
+
+  // The MTU of the upstream. Set the value when it is not the default value
+  // (i.e. 1500). When the value is set, we should:
+  // - configure it on the downstream interface
+  // - advertise through DHCP if DHCP is used
+  // - advertise through the RA server if RA server is used
+  optional int32 mtu = 6;
+}
+
+// Response to a CreateTetheredNetwork call.
+message TetheredNetworkResponse {
+  // Status of the request.
+  DownstreamNetworkResult response_code = 1;
+}
+
+// Request to create an isolated L3 logical network on a network interface like
+// a WiFi hotspot or a WiFi Direct connection in Group Owner mode. In this
+// configuration the network will be reachable from Chrome, ARC, Crostini, etc
+// for any connection initiated from the DUT. Remote clients connected to the
+// network will be able to reach application listening on the DUT with the same
+// semantics as on a physical network, i.e ARC inbound DNAT rules will be
+// enabled by default, and port access/forwarding rules will apply. Dynamic IP
+// configuration services for IPv4 is automatically started depending on the
+// configuration. The IPv4 configuration is explicitly specified by the caller.
+// IPv6 is currently not supported. The client must append a valid file
+// descriptor immediately after the serialized proto. This file descriptor must
+// remain valid for as long as routing setup needs to persist. Invalidating the
+// file descriptor explicitly by closing it or implicitly when the client
+// process terminates will trigger the teardown of the routing setup and
+// associated services.
+message LocalOnlyNetworkRequest {
+  // Required. Name of the network interface on which a L3 network should
+  // be created. It is assumed that no L3 connection is active on that
+  // interface and that shill is not actively using the network interface.
+  string ifname = 1;
+
+  // Required. IPv4 configuration for this network.
+  IPv4Configuration ipv4_config = 2;
+}
+
+// Response to a CreateLocalOnlyNetwork call.
+message LocalOnlyNetworkResponse {
+  // Status of the request.
+  DownstreamNetworkResult response_code = 1;
+}
+
+// GetDownstreamNetworkInfo request object to obtain the IP configuration of a
+// network created with CreateLocalOnlyNetwork or CreateTetheredNetwork and
+// to obtain available IP information of all connected clients.
+message GetDownstreamNetworkInfoRequest {
+  // Required. Interface name on which a network was created with
+  // CreateTetheredNetwork or with CreateLocalOnlyNetwork call.
+  string downstream_ifname = 1;
+}
+
+// Information about a client connected to a network created with the
+// CreateTetheredNetwork or CreateLocalOnlyNetwork calls.
+message NetworkClientInfo {
+  // The EUI-64 hardware address of the client represented as 8 bytes network
+  // order. For Ethernet or WiFi networks, the hardware address is always a
+  // EUI-48 identifier with the upper 2 bytes always set to 0.
+  bytes mac_addr = 1;
+
+  // The IPv4 address assigned to the client in network order represented as 4
+  // 4 bytes in network order. Empty if IPv4 was disabled on the network.
+  bytes ipv4_addr = 2;
+
+  // All IPv6 addresses that have been seen used by the client (based on its
+  // hardware address). Addresses are always 16 bytes long and in network order.
+  repeated bytes ipv6_addresses = 3;
+
+  // The Hostname of the client if it was advertised with the DHCP Client option
+  // 12 during DHCP lease acquisition.
+  string hostname = 4;
+
+  // The Vendor-Class DHCP client option 60 if it was advertised by the client
+  // during DHCP lease acquisition.
+  string vendor_class = 5;
+}
+
+// Response to a GetDownstreamNetworkInfo call.
+message GetDownstreamNetworkInfoResponse {
+  // True if the request was valid and completed successfully.
+  bool success = 1;
+
+  // Describes the downstream network.
+  DownstreamNetwork downstream_network = 2;
+
+  // Describes clients connected to the network.
+  repeated NetworkClientInfo clients_info = 3;
+}
+
+// Notification change in power state of ARC.
+message NotifyAndroidInteractiveStateRequest {
+  bool interactive = 1;
+}
+
+// Response to a NotifyAndroidInteractiveState call.
+message NotifyAndroidInteractiveStateResponse {}
+
+// Notification change in whether Android WiFi multicast lock is held by any
+// app in ARC.
+message NotifyAndroidWifiMulticastLockChangeRequest {
+  bool held = 1;
+}
+
+// Response to a NotifyAndroidWifiMulticastLockChange call.
+message NotifyAndroidWifiMulticastLockChangeResponse {}

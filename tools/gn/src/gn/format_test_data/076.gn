@@ -1,0 +1,12 @@
+# Intentionally contains tabs which the formatter should convert to spaces, but
+# only where it's not relevant to the parse.
+
+if (true) {
+	sources = [
+	  "a.c", "a.h", "main.c"
+	]
+}
+
+if (false) {
+  embedded = "a tab	to leave	alone"
+}

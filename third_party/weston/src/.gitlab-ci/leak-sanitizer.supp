@@ -1,0 +1,11 @@
+# AddressSanitizer memory leak suppressions
+
+# Cairo internal leaks from weston-keyboard
+leak:cairo_select_font_face
+leak:cairo_text_extents
+
+# Pango thread-global state (not destroyable?)
+leak:pango_language_get_default
+
+# This leaks in Debian's fontconfig/Xwayland setup?
+leak:FcConfigSubstituteWithPat

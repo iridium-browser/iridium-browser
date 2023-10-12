@@ -1,0 +1,11 @@
+[package]
+name = "quine-mc_cluskey"
+version = "0.2.4"
+authors = ["Oliver Schneider <git-spam-no-reply9815368754983@oli-obk.de>"]
+description = "Rust implementation of the Quine-McCluskey algorithm and Petrick's method"
+license = "MIT"
+repository = "https://github.com/oli-obk/quine-mc_cluskey"
+documentation = "https://oli-obk.github.io/quine-mc_cluskey"
+
+[dependencies]
+quickcheck = { version = "0.3.1", optional = true }

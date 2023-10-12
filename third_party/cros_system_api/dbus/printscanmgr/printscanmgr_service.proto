@@ -1,0 +1,122 @@
+// Copyright 2023 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+// This file defines messages used for interacting with printscanmgr, the
+// printing and scanning daemon.
+package printscanmgr;
+option go_package = "chromiumos/system_api/printscanmgr_proto";
+
+// CupsAdd* results.
+enum AddPrinterResult {
+  ADD_PRINTER_RESULT_UNSPECIFIED = 0;
+  ADD_PRINTER_RESULT_SUCCESS = 1;
+  ADD_PRINTER_RESULT_CUPS_FATAL = 2;
+  ADD_PRINTER_RESULT_CUPS_INVALID_PPD = 3;
+  ADD_PRINTER_RESULT_CUPS_LPADMIN_FAILURE = 4;
+  ADD_PRINTER_RESULT_CUPS_AUTOCONF_FAILURE = 5;
+  ADD_PRINTER_RESULT_CUPS_BAD_URI = 6;
+  ADD_PRINTER_RESULT_CUPS_IO_ERROR = 7;
+  ADD_PRINTER_RESULT_CUPS_MEMORY_ALLOC_ERROR = 8;
+  ADD_PRINTER_RESULT_CUPS_PRINTER_UNREACHABLE = 9;
+  ADD_PRINTER_RESULT_CUPS_PRINTER_WRONG_RESPONSE = 10;
+  ADD_PRINTER_RESULT_CUPS_PRINTER_NOT_AUTOCONF = 11;
+  ADD_PRINTER_RESULT_DBUS_GENERIC = 12;
+  ADD_PRINTER_RESULT_DBUS_NO_REPLY = 13;
+  ADD_PRINTER_RESULT_DBUS_TIMEOUT = 14;
+  ADD_PRINTER_RESULT_DBUS_ENCODING_FAILURE = 15;
+};
+
+// Input for the org.chromium.printscanmgr.CupsAddAutoConfiguredPrinter D-Bus
+// method. Details the printer to be added to CUPS. The printer must be able to
+// be configured automatically.
+message CupsAddAutoConfiguredPrinterRequest {
+  // Name of the printer to be added to CUPS.
+  string name = 1;
+  // URI of the printer to be added to CUPS.
+  string uri = 2;
+}
+
+// Output for the org.chromium.printscanmgr.CupsAddAutoConfiguredPrinter D-Bus
+// method.
+message CupsAddAutoConfiguredPrinterResponse {
+  reserved 1;
+  // Must not be `ADD_PRINTER_RESULT_UNSPECIFIED`.
+  AddPrinterResult result = 2;
+}
+
+// Input for the org.chromium.printscanmgr.CupsAddManuallyConfiguredPrinter
+// D-Bus method. Details the printer to be added to CUPS.
+message CupsAddManuallyConfiguredPrinterRequest {
+  // Name of the printer to be added to CUPS.
+  string name = 1;
+  // URI of the printer to be added to CUPS.
+  string uri = 2;
+  // Contents of the CUPS Postscript Printer Driver for the printer to be added
+  // to CUPS. Can optionally be gzip compressed.
+  bytes ppd_contents = 3;
+}
+
+// Output for the org.chromium.printscanmgr.CupsAddManuallyConfiguredPrinter
+// D-Bus method.
+message CupsAddManuallyConfiguredPrinterResponse {
+  reserved 1;
+  // Must not be `ADD_PRINTER_RESULT_UNSPECIFIED`.
+  AddPrinterResult result = 2;
+}
+
+// Input for the org.chromium.printscanmgr.CupsRemovePrinter D-Bus method.
+// Details the printer to be removed from CUPS.
+message CupsRemovePrinterRequest {
+  // Name of the printer to be removed from CUPS.
+  string name = 1;
+}
+
+// Output for the org.chromium.printscanmgr.CupsRemovePrinter D-Bus method.
+message CupsRemovePrinterResponse {
+  // `result` will be true if the printer was successfully removed from CUPS,
+  // and false if an error occurred while attempting to remove the printer.
+  bool result = 1;
+}
+
+// Input for the org.chromium.printscanmgr.CupsRetrievePpd D-Bus method. Details
+// the printer whose PPD will be returned.
+message CupsRetrievePpdRequest {
+  // Name of the printer whose PPD will be returned.
+  string name = 1;
+}
+
+// Output for the org.chromium.printscanmgr.CupsRetrievePpd D-Bus method.
+message CupsRetrievePpdResponse {
+  // `ppd` will be empty if an error occurred while attempting to retrieve the
+  // PPD.
+  bytes ppd = 1;
+}
+
+// Input for the org.chromium.printscanmgr.PrintscanDebugSetCategories D-Bus
+// method. Details which categories to collect debug logs for.
+message PrintscanDebugSetCategoriesRequest {
+  // The different categories of debug logging which can be enabled.
+  enum DebugLogCategory {
+    DEBUG_LOG_CATEGORY_UNSPECIFIED = 0;
+    DEBUG_LOG_CATEGORY_PRINTING = 1;
+    DEBUG_LOG_CATEGORY_SCANNING = 2;
+  };
+
+  // Categories to enable debug logging for. Must not be
+  // `DEBUG_LOG_CATEGORY_UNSPECIFIED`.
+  repeated DebugLogCategory categories = 1;
+  // If `disable_logging` is true, then `categories` will be ignored and all
+  // printing and scanning debug logging will be disabled.
+  bool disable_logging = 2;
+}
+
+// Output for the org.chromium.printscanmgr.PrintscanDebugSetCategories D-Bus
+// method.
+message PrintscanDebugSetCategoriesResponse {
+  // Whether or not the debug logging was set correctly.
+  bool result = 1;
+}

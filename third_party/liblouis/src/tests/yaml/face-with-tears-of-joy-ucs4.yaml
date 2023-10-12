@@ -1,0 +1,29 @@
+table: |
+  include tables/en-ueb-g1.ctb
+  noback correct "\y1f602" "(face\swith\stears\sof\sjoy)"
+  noback correct "\y1f923" "(rolling\son\sthe\sfloor\slaughing)"
+  noback correct "\y1f602" "(grinning\sface\swith\sbig\seyes)"
+flags: {testmode: forward}
+tests:
+  - - "😂"
+    - '"<face with tears of joy">'
+  - - "a 😂"
+    - 'a "<face with tears of joy">'
+  - - "😂 b"
+    - '"<face with tears of joy"> b'
+  - - "a 😂 b"
+    - 'a "<face with tears of joy"> b'
+  - - "before 😂"
+    - 'before "<face with tears of joy">'
+  - - "😂 after"
+    - '"<face with tears of joy"> after'
+  - - "before 😂 after"
+    - 'before "<face with tears of joy"> after'
+  - - "🤣"
+    - '"<rolling on the floor laughing">'
+  - - "a 🤣"
+    - 'a "<rolling on the floor laughing">'
+  - - "🤣 b"
+    - '"<rolling on the floor laughing"> b'
+  - - "a 🤣 b"
+    - 'a "<rolling on the floor laughing"> b'

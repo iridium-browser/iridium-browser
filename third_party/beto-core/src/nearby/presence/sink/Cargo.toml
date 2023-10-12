@@ -1,0 +1,12 @@
+[package]
+name = "sink"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+tinyvec.workspace = true
+
+[features]
+std = []
+

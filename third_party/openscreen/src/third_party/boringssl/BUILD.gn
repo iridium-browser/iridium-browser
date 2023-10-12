@@ -1,0 +1,82 @@
+# Copyright 2019 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build_overrides/build.gni")
+import("BUILD.generated.gni")
+import("BUILD.generated_tests.gni")
+
+if (build_with_chromium) {
+  group("boringssl") {
+    public_configs = [ "//build/config/compiler:default_include_dirs" ]
+    public_deps = [ "//third_party/boringssl" ]
+  }
+} else {
+  # Config for us and everybody else depending on BoringSSL.
+  config("external_config") {
+    include_dirs = [ "src/include" ]
+    cflags = []
+    if (is_clang) {
+      cflags += [ "-Wno-extra-semi" ]
+    }
+  }
+
+  # Config internal to this build file, shared by boringssl and boringssl_fuzzer.
+  config("internal_config") {
+    visibility = [ ":*" ]  # Only targets in this file can depend on this.
+    defines = [
+      "BORINGSSL_ALLOW_CXX_RUNTIME",
+      "BORINGSSL_IMPLEMENTATION",
+      "BORINGSSL_NO_STATIC_INITIALIZER",
+      "OPENSSL_SMALL",
+    ]
+
+    # TODO(https://issuetracker.google.com/202964797): Possibly remove once
+    # building with updated clang.
+    if (current_os == "mac") {
+      defines += [
+        # Since BoringSSL includes .../usr/include/sys/proc.h, which use u_int,
+        # u_short, and u_char, this define is necessary enable the _u_char.h,
+        # _u_short.h, and _u_int.h headers in <sys/_types>.
+        "_DARWIN_C_SOURCE",
+      ]
+    }
+    cflags = [ "-w" ]  # Disable all warnings.
+
+    defines += [ "_XOPEN_SOURCE=700" ]
+  }
+
+  config("no_asm_config") {
+    visibility = [ ":*" ]  # Only targets in this file can depend on this.
+    defines = [ "OPENSSL_NO_ASM" ]
+  }
+
+  # This has no sources on some platforms so must be a source_set.
+  source_set("boringssl_asm") {
+    visibility = [ ":*" ]  # Only targets in this file can depend on this.
+
+    if (current_os == "win" && (current_cpu == "x86" || current_cpu == "x64")) {
+      # Windows' x86 and x86_64 assembly is built with NASM, which is not
+      # supported by this build.
+      public_configs = [ ":no_asm_config" ]
+    } else {
+      # All other targets use GAS-compatible assembler. BoringSSL's assembly
+      # files are all wrapped in processor checks for the corresponding target,
+      # so there is no need to add target conditions in the build.
+      sources = crypto_sources_asm
+      include_dirs = [ "src/include" ]
+    }
+  }
+
+  source_set("boringssl") {
+    sources = crypto_sources + ssl_sources
+    public = crypto_headers + ssl_headers
+    deps = [
+      ":boringssl_asm",
+      "src/third_party/fiat:fiat_license",
+    ]
+
+    public_configs = [ ":external_config" ]
+    configs += [ ":internal_config" ]
+  }
+}

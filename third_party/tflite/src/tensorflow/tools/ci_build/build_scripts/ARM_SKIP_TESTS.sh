@@ -1,0 +1,27 @@
+# Copyright 2019 The TensorFlow Authors. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ==============================================================================
+#!/bin/bash
+set -x
+
+ARM_SKIP_TESTS="-//tensorflow/lite/... \
+-//tensorflow/compiler/mlir/lite/quantization/lite:quantize_model_test \
+-//tensorflow/compiler/mlir/lite/quantization/lite:quantize_weights_test \
+-//tensorflow/compiler/mlir/lite/sparsity:sparsify_model_test \
+-//tensorflow/compiler/xla/service/cpu/tests:cpu_eigen_dot_operation_test \
+-//tensorflow/compiler/xla/service/gpu:fusion_merger_test \
+-//tensorflow/core/kernels/image:resize_bicubic_op_test \
+-//tensorflow/python/kernel_tests/nn_ops:atrous_conv2d_test \
+-//tensorflow/python/kernel_tests/nn_ops:conv_ops_test \
+"

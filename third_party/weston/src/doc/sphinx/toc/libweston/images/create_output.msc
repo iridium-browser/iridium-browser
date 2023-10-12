@@ -1,0 +1,31 @@
+#!/usr/bin/mscgen -Tpng
+
+msc {
+	hscale="1.5";
+
+	c [label = "compositor"], w [label = "libweston core"],
+	b [label = "backend"];
+
+	|||;
+
+	--- [label = "Compositor creates an output for a head"];
+
+	c box c [label = "Have an existing head to process."];
+	c => w [label = "weston_compositor_create_output()"];
+	w => b [label = "weston_backend::create_output()"];
+	w << b [label = "an empty output, no hw resources"];
+	w => b [label = "weston_output::attach_head()"];
+	w << b [label = "success"];
+	c << w [label = "success"];
+
+	c abox c [label = "optionally more heads with weston_output_attach_head() for hardware clone mode."];
+
+	c :> w [label = "weston_output_set_scale()"];
+	c :> w [label = "weston_output_set_transform()"];
+	c :> b [label = "backend specific settings via plugin API"];
+	c => w [label = "weston_output_enable()"];
+	w => b [label = "weston_output::enable()"];
+	b box b [label = "hw resource allocation"];
+	w << b [label = "success"];
+	c << w [label = "success"];
+}

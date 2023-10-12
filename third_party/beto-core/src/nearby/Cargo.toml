@@ -1,0 +1,176 @@
+[workspace]
+members = [
+    "connections/ukey2/lock_adapter",
+    "connections/ukey2/ukey2",
+    "connections/ukey2/ukey2_connections",
+    "connections/ukey2/ukey2_c_ffi",
+    "connections/ukey2/ukey2_jni",
+    "connections/ukey2/ukey2_proto",
+    "connections/ukey2/ukey2_shell",
+    "crypto/bssl-crypto",
+    "crypto/crypto_provider",
+    "crypto/crypto_provider_openssl",
+    "crypto/crypto_provider_rustcrypto",
+    "crypto/crypto_provider_stubs",
+    "crypto/crypto_provider_test",
+    "crypto/crypto_provider_default",
+    "crypto/rand_core_05_adapter",
+    "presence/array_view",
+    "presence/handle_map",
+    "presence/ldt",
+    "presence/ldt_np_adv",
+    "presence/ldt_np_jni",
+    "presence/ldt_tbc",
+    "presence/np_adv",
+    "presence/np_ed25519",
+    "presence/np_ffi_core",
+    "presence/np_hkdf",
+    "presence/rand_ext",
+    "presence/sink",
+    "presence/test_helper",
+    "presence/xts_aes",
+]
+
+# TODO: remove ldt_np_adv_ffi once support for no_std + alloc no longer requires nightly
+# TODO: remove boringssl once we figure out a better plan for integrating the build system
+# TODO: remove np_c_ffi once cbindgen no longer requires nightly
+exclude = [
+    "presence/ldt_np_adv_ffi",
+    "crypto/crypto_provider_boringssl",
+    "presence/np_c_ffi",
+]
+
+[workspace.dependencies]
+# local crates
+array_ref = { path = "presence/array_ref" }
+array_view = { path = "presence/array_view" }
+crypto_provider = { path = "crypto/crypto_provider" }
+crypto_provider_default = { path = "crypto/crypto_provider_default", default-features = false }
+crypto_provider_openssl = { path = "crypto/crypto_provider_openssl" }
+crypto_provider_rustcrypto = { path = "crypto/crypto_provider_rustcrypto" }
+crypto_provider_stubs = { path = "crypto/crypto_provider_stubs" }
+crypto_provider_test = { path = "crypto/crypto_provider_test" }
+lock_adapter = { path = "connections/ukey2/lock_adapter" }
+handle_map = { path = "presence/handle_map" }
+rand_core_05_adapter = { path = "crypto/rand_core_05_adapter" }
+rand_ext = { path = "presence/rand_ext" }
+test_helper = { path = "presence/test_helper" }
+ukey2_proto = { path = "connections/ukey2/ukey2_proto" }
+np_hkdf = { path = "presence/np_hkdf" }
+xts_aes = { path = "presence/xts_aes" }
+ldt = { path = "presence/ldt" }
+ldt_np_adv = { path = "presence/ldt_np_adv" }
+ldt_tbc = { path = "presence/ldt_tbc" }
+np_adv = { path = "presence/np_adv" }
+np_ed25519 = { path = "presence/np_ed25519" }
+np_ffi_core = { path = "presence/np_ffi_core" }
+sink = { path = "presence/sink" }
+
+# from crates.io
+rand = { version = "0.8.5", default-features = false }
+rand_core = "0.6.4"
+rand_pcg = "0.3.1"
+sha2 = { version = "0.10.6", default-features = false }
+aes = "0.8.2"
+cbc = { version = "0.1.2", features = ["alloc", "block-padding"] }
+ctr = "0.9.1"
+hashbrown = "0.14.0"
+hkdf = "0.12.3"
+hmac = "0.12.1"
+ed25519-dalek = { version = "2.0.0-rc.3", default-features = false }
+ed25519 = "2.2.0"
+aes-gcm = "0.10.1"
+hex = "0.4.3"
+serde_json = { version = "1.0.96", features = [
+    "alloc",
+], default-features = false }
+base64 = "0.21.0"
+x25519-dalek = { version = "2.0.0-rc.3", default-features = false }
+subtle = { version = "2.5.0", default-features = false }
+rand_chacha = { version = "0.3.1", default-features = false }
+p256 = { version = "0.13.2", default-features = false }
+sec1 = "0.7.2"
+portable-atomic = "1.3.2"
+protobuf = "3.2.0"
+protobuf-codegen = "3.2.0"
+jni = "0.21.1"
+lock_api = "0.4.9"
+spin = { version = "0.9.8", features = ["once", "lock_api", "rwlock"] }
+anyhow = "1.0.64"
+log = "0.4.17"
+env_logger = "0.10.0"
+criterion = { version = "0.4.0", features = ["html_reports"] }
+clap = { version = "4.0.25", features = ["derive"] }
+lazy_static = { version = "1.4.0", features = ["spin_no_std"] }
+hex-literal = "0.4.1"
+openssl = "0.10.48"
+cfg-if = "1.0.0"
+blake2 = "0.10.4"
+hdrhistogram = "7.5.0"
+regex = "1.7.0"
+tokio = { version = "1.20.3", features = ["full"] }
+xts-mode = "0.5.1"
+rstest = { version = "0.17.0", default-features = false }
+rstest_reuse = "0.5.0"
+wycheproof = "0.4.0"
+chrono = { version = "0.4.24", default-features = false, features = ["clock"] }
+tempfile = "3.5.0"
+thiserror = "1.0.40"
+tinyvec = {version = "1.6.0", features = ["rustc_1_55"]}
+mlua = "0.8.8"
+strum = "0.24.1"
+strum_macros = "0.24.2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[profile.test]
+# speed up test execution
+opt-level = 3
+
+[profile.bench]
+# Since xts, ldt, etc are in separate crates, use LTO to allow cross-crate inlining.
+# fat vs thin: thin compiles a lot faster, and doesn't seem any slower.
+lto = "thin"
+
+# build profile optimized for size
+[profile.release-min-size]
+inherits = "release"
+panic = "abort"
+codegen-units = 1
+lto = true
+# z optimizes for size
+opt-level = "z"
+strip = true
+
+[package]
+name = "build-scripts"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+clap.workspace = true
+anyhow.workspace = true
+shell-escape = "0.1.5"
+owo-colors = "3.5.0"
+reqwest = { version = "0.11.17", default-features = false, features = [
+    "blocking",
+    "rustls-tls",
+] }
+semver = "1.0.17"
+base64.workspace = true
+walkdir = "2.3.3"
+globset = "0.4.10"
+crossbeam = "0.8.2"
+tinytemplate = "1.2.1"
+chrono.workspace = true
+thiserror.workspace = true
+log.workspace = true
+env_logger.workspace = true
+which = "4.4.0"
+
+[dev-dependencies]
+tempfile.workspace = true

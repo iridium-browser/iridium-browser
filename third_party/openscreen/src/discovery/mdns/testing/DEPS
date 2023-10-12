@@ -1,0 +1,5 @@
+# -*- Mode: Python; -*-
+
+include_rules = [
+  '+discovery/mdns',
+]

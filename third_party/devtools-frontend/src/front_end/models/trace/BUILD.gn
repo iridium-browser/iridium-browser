@@ -1,0 +1,59 @@
+# Copyright 2022 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("../../../scripts/build/ninja/devtools_entrypoint.gni")
+import("../../../scripts/build/ninja/devtools_module.gni")
+import("../visibility.gni")
+
+devtools_module("trace") {
+  sources = [
+    "LegacyTracingModel.ts",
+    "ModelImpl.ts",
+    "Processor.ts",
+    "TracingManager.ts",
+    "TreeManipulator.ts",
+  ]
+
+  deps = [
+    "../../core/common:bundle",
+    "../../core/platform:bundle",
+    "../../core/sdk:bundle",
+    "extras:bundle",
+    "handlers:bundle",
+    "helpers:bundle",
+    "types:bundle",
+  ]
+}
+
+devtools_entrypoint("bundle") {
+  entrypoint = "trace.ts"
+
+  deps = [ ":trace" ]
+
+  visibility = [
+    ":*",
+    "../../../test/unittests/front_end/*",
+    "../../panels/lighthouse/*",
+    "../../panels/network/*",
+    "../../panels/recorder/*",
+    "../../panels/timeline/*",
+    "../../services/tracing/*",
+    "../../ui/components/docs/*",
+    "../timeline_model/*",
+  ]
+
+  visibility += devtools_models_visibility
+}
+
+devtools_entrypoint("legacy") {
+  entrypoint = "trace-legacy.ts"
+
+  deps = [ ":bundle" ]
+
+  visibility = [
+    "../..:legacy_entrypoints",
+    "../../entrypoints/shell/*",
+    "../../legacy_test_runner/*",
+  ]
+}

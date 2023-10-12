@@ -1,0 +1,20 @@
+[package]
+name = "crypto_provider_default"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+crypto_provider.workspace = true
+crypto_provider_rustcrypto = {workspace = true, optional = true}
+crypto_provider_boringssl = {path = "../crypto_provider_boringssl", optional = true}
+crypto_provider_openssl = {workspace = true, optional = true}
+cfg-if.workspace = true
+
+[features]
+default = ["rustcrypto"]
+std = ["crypto_provider_rustcrypto/std"]
+rustcrypto = ["crypto_provider_rustcrypto"]
+boringssl = ["crypto_provider_boringssl"]
+opensslbssl = ["crypto_provider_openssl/boringssl"]
+openssl = ["crypto_provider_openssl"]

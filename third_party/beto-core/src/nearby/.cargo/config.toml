@@ -1,0 +1,16 @@
+[env]
+WORKSPACE_DIR = { value = "", relative = true }
+
+# Needed for mlua per https://github.com/khvzak/mlua#module-mode
+[target.x86_64-apple-darwin]
+rustflags = [
+  "-C", "link-arg=-undefined",
+  "-C", "link-arg=dynamic_lookup",
+]
+
+# Needed for mlua per https://github.com/khvzak/mlua#module-mode
+[target.aarch64-apple-darwin]
+rustflags = [
+  "-C", "link-arg=-undefined",
+  "-C", "link-arg=dynamic_lookup",
+]

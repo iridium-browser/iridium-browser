@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "crossbench"
+version = "0.0.1"
+authors = [ "Camillo Bruni <cbruni@chromium.org>" ]
+description = "A cross-browser, cross-system benchmark runner"
+readme = "README.md"
+license = "BSD-3-Clause"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+]
+
+[tool.poetry.urls]
+"Homepage" = "https://chromium.googlesource.com/crossbench"
+"Bug Tracker" = "https://bugs.chromium.org/p/chromium/issues/list?q=crossbench"
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+frozendict = "^2.3.8"
+hjson = "^3.1.0"
+psutil = "^5.9.1"
+selenium = "^4.1.0"
+tabulate = "^0.8.10"
+websockets = "^11.0.3"
+
+[tool.poetry.scripts]
+crossbench = 'scripts:crossbench'
+cb = 'scripts:crossbench'
+
+[tool.poetry.group.dev.dependencies]
+debugpy = "^1.6.3"
+isort = "^5.10.1"
+pyfakefs = "^5.2.2"
+pylint = "^2.7"
+pytest-cov = "^4.0.0"
+pytest-xdist = "^3.3.1"
+mypy = "^1.2"
+
+[tool.poetry.group.dev-pytype.dependencies]
+python = ">=3.8,<3.11"
+pytype = "^2023.4.18"
+
+[build-system]
+requires = ["poetry_core>=1.1.5"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts="--ignore=tests/cbb -n auto"

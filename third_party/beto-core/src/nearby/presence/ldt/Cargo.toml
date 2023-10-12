@@ -1,0 +1,50 @@
+[package]
+name = "ldt"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+std = []
+
+[dependencies]
+crypto_provider.workspace = true
+ldt_tbc.workspace = true
+
+[dev-dependencies]
+crypto_provider_default = {workspace = true}
+rand_ext.workspace = true
+test_helper.workspace = true
+xts_aes.workspace = true
+
+rand.workspace = true
+rand_pcg.workspace = true
+base64.workspace = true
+serde_json = {workspace = true, features = ["std"]}
+anyhow.workspace = true
+hex.workspace = true
+
+# benchmark/example only deps
+crypto_provider_rustcrypto.workspace = true
+clap.workspace = true
+criterion.workspace = true
+sha2.workspace = true
+ctr.workspace = true
+aes.workspace = true
+subtle.workspace = true
+blake2.workspace = true
+hdrhistogram.workspace = true
+
+[[bench]]
+name = "ldt_scan"
+harness = false
+
+[[example]]
+name = "ldt_prp"
+
+[[example]]
+name = "ldt_benchmark"
+
+[[example]]
+name = "gen_ldt_xor_pad_test_vectors"

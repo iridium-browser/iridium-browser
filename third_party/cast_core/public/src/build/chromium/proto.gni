@@ -1,0 +1,101 @@
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//third_party/grpc/grpc_library.gni")
+import("//third_party/protobuf/proto_library.gni")
+
+cast_core_grpc_generator_py = "//third_party/cast_core/public/src/build/chromium/cast_core_grpc_generator_wrapper.py"
+cast_core_grpc_generator_label = "//third_party/cast_core/public/src/build/chromium:cast_core_grpc_generator($host_toolchain)"
+cast_core_grpc_generator_path = get_label_info(
+    cast_core_grpc_generator_label, "root_out_dir") + "/cast_core_grpc_generator"
+
+# Cast Core gRPC framework headers.
+cast_core_grpc_headers_list = [
+  "chromecast/cast_core/grpc/grpc_server_streaming_handler.h",
+  "chromecast/cast_core/grpc/grpc_server_streaming_call.h",
+  "chromecast/cast_core/grpc/grpc_stub.h",
+  "chromecast/cast_core/grpc/grpc_unary_call.h",
+  "chromecast/cast_core/grpc/grpc_unary_handler.h",
+]
+cast_core_grpc_headers = string_join(",", cast_core_grpc_headers_list)
+
+# Cast Core gRPC framework libraries.
+cast_core_grpc_deps = [
+  "//chromecast/cast_core/grpc",
+  "//third_party/grpc:grpc++",
+]
+
+# Additional static variables.
+cast_core_grpc_suffix = "castcore.pb"
+
+# Create a source set with generated Cast Core gRPC stubs and required deps.
+#
+# Parameters:
+#   services: List of targets that built with cast_core_grpc_library rule that
+#             will be packaged in the source_set.
+#
+#   deps: Additional C++ deps.
+#
+template("cast_core_grpc_stub_library") {
+  castcore_grpc_action_name = "${target_name}_castcore_gen"
+  action_foreach(castcore_grpc_action_name) {
+    forward_variables_from(invoker,
+                           [
+                             "sources",
+                             "testonly",
+                             "visibility",
+                           ])
+
+    script = cast_core_grpc_generator_py
+
+    args = [
+      "--generator", "./" + rebase_path(cast_core_grpc_generator_path, root_build_dir),
+      "--proto", "{{source}}",
+      "--includes", cast_core_grpc_headers,
+      "--source-root", rebase_path("//", root_build_dir),
+      "--out-dir", rebase_path(root_gen_dir , root_build_dir),
+      "--proto-in-dir", invoker.proto_in_dir,
+    ]
+    if (defined(invoker.import_dirs)) {
+      args += ["--import-dirs", string_join(",", invoker.import_dirs)]
+    }
+
+    outputs = [ "${target_gen_dir}/{{source_name_part}}.${cast_core_grpc_suffix}.h" ]
+
+    deps = [ "$cast_core_grpc_generator_label" ]
+  }
+
+  _sources = get_target_outputs(":${castcore_grpc_action_name}")
+
+  _deps = cast_core_grpc_deps + [
+    ":${target_name}",
+    ":${castcore_grpc_action_name}"
+  ]
+  if (defined(invoker.deps)) {
+    _deps += invoker.deps
+  }
+
+  source_set("${target_name}_castcore") {
+    forward_variables_from(invoker,
+                           [
+                             "deps",
+                             "testonly",
+                             "visibility",
+                           ])
+
+    sources = _sources
+
+    public_deps =  _deps
+  }
+}

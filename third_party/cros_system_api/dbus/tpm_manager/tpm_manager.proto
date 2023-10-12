@@ -1,0 +1,427 @@
+// Copyright 2015 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// NOTE: All tpm_manager protobufs are in the same file because the Android
+// build system cannot handle import statements without using Android-specific
+// paths.
+
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+package tpm_manager;
+option go_package = "chromiumos/system_api/tpm_manager_proto";
+
+enum TpmManagerStatus {
+  STATUS_SUCCESS = 0;
+  STATUS_DEVICE_ERROR = 1;
+  STATUS_NOT_AVAILABLE = 2;
+  // The error that is translated into by the client to indicate any kind of
+  // D-Bus error.
+  STATUS_DBUS_ERROR = 3;
+
+  // Note: TpmManagerStatus should not exceed 127, or it may cause problem with
+  // libhwsec's unified error code. See libhwsec/error/tpm_error.h.
+}
+
+// Result codes. For convenience, keep these in sync with Brillo NVRAM HAL
+// values defined in hardware/nvram_defs.h.
+enum NvramResult {
+  NVRAM_RESULT_SUCCESS = 0;
+  // An unexpected TPM error occurred. More information should be in logs.
+  NVRAM_RESULT_DEVICE_ERROR = 1;
+  // The caller is not authorized to perform the requested operation. This may
+  // be due to a bad authorization value or to system state.
+  NVRAM_RESULT_ACCESS_DENIED = 2;
+  NVRAM_RESULT_INVALID_PARAMETER = 3;
+  NVRAM_RESULT_SPACE_DOES_NOT_EXIST = 4;
+  NVRAM_RESULT_SPACE_ALREADY_EXISTS = 5;
+  // This may be because a space is locked or because an operation has been
+  // explicitly disabled.
+  NVRAM_RESULT_OPERATION_DISABLED = 6;
+  // Literally, the TPM is out of non-volatile storage.
+  NVRAM_RESULT_INSUFFICIENT_SPACE = 7;
+  // An error occurred sending the request to the system service.
+  NVRAM_RESULT_IPC_ERROR = 100;
+
+  // Note: NvramResult should not exceed 127, or it may cause problem with
+  // libhwsec's unified error code. See libhwsec/error/tpm_error.h.
+}
+
+// More background on these attributes can be found by looking up the TPMA_NV_*
+// constants in the TPM 2.0 specification or the TPM_NV_PER_* constants in the
+// TPM 1.2 specification.
+enum NvramSpaceAttribute {
+  // The space can be locked for writing until it is destroyed. Without TPM
+  // owner privilege this is always after the TPM is cleared. This typically
+  // occurs during device factory reset.
+  NVRAM_PERSISTENT_WRITE_LOCK = 0;
+  // The space can be locked for writing until the next boot.
+  NVRAM_BOOT_WRITE_LOCK = 1;
+  // The space can be locked for reading until the next boot.
+  NVRAM_BOOT_READ_LOCK = 2;
+  // The space requires an authorization value for writing.
+  NVRAM_WRITE_AUTHORIZATION = 3;
+  // The space requires an authorization value for reading.
+  NVRAM_READ_AUTHORIZATION = 4;
+  // The space can not be written directly, only extended.
+  // E.g. new_value = HASH(old_value + input)
+  NVRAM_WRITE_EXTEND = 5;
+  // The space is tied to the global lock (bGlobalLock). This global lock is
+  // typically locked early in boot. This is defined for inspecting existing
+  // spaces, this interface cannot be used to define spaces with this attribute.
+  NVRAM_GLOBAL_LOCK = 6;
+  // The space is tied to the platform rather than the TPM owner. The 'platform'
+  // is whatever executes first after boot. Typically this access is locked
+  // early in boot. This is defined for inspecting existing spaces, this
+  // interface cannot be used to define spaces with this attribute.
+  NVRAM_PLATFORM_WRITE = 7;
+  // The space can only be written by the TPM owner. For TPM 2.0 this can be
+  // used only for inspecting existing spaces, not for defining new spaces.
+  NVRAM_OWNER_WRITE = 8;
+  // The space can only be read by the TPM owner. For TPM 2.0 this can be used
+  // only for inspecting existing spaces, not for defining new spaces.
+  NVRAM_OWNER_READ = 9;
+  // This space can be read by firmware (which always uses platform
+  // authorization) in addition to other authorizations defined here. Used
+  // by spaces like FWMP, which are defined in userland but can be read
+  // by firmware.
+  NVRAM_PLATFORM_READ = 10;
+  // This space may be undefined with Platform Authorization but not with Owner
+  // Authorization.
+  NVRAM_PLATFORM_CREATE = 11;
+}
+
+enum NvramSpacePolicy {
+  // No policy, only authorization values are enforced. This is the default.
+  // AUTHREAD | AUTHWRITE attributes are set for the space.
+  // Authorization values are enforced via authValue defined for the space.
+  NVRAM_POLICY_NONE = 0;
+  // Bind both read and write access to the current PCR0 value in addition to
+  // enforcing any authorization value.
+  // For TPM 2.0:
+  // POLICYREAD | POLICYWRITE attributes are set for the space.
+  // Authorization values are enforced by binding the policy to the
+  // defined value using PolicyAuthValue command.
+  NVRAM_POLICY_PCR0 = 1;
+}
+
+enum GscVersion {
+  GSC_VERSION_NOT_GSC = 0;
+  GSC_VERSION_CR50 = 1;
+  GSC_VERSION_TI50 = 2;
+}
+
+// The status of whether last AP reboot is triggered by RO verification.
+enum RoVerificationStatus {
+  // Not triggered by RO verification.
+  RO_STATUS_NOT_TRIGGERED = 0;
+  // Triggered by RO verification, and it passed but didn't verify the GBB.
+  RO_STATUS_PASS_UNVERIFIED_GBB = 1;
+  // Triggered by RO verification, and it failed.
+  RO_STATUS_FAIL = 2;
+  // RO verification is not supported. (deprecated)
+  RO_STATUS_UNSUPPORTED = 3;
+  // RO verification is not supported but triggered.
+  RO_STATUS_UNSUPPORTED_NOT_TRIGGERED = 4;
+  // RO verification is not supported and not triggered.
+  RO_STATUS_UNSUPPORTED_TRIGGERED = 5;
+  // Triggered by RO verification, and it passed.
+  RO_STATUS_PASS = 6;
+  // Triggered by RO verification, and it is still in progress.
+  RO_STATUS_IN_PROGRESS = 7;
+  // The following are RO verification V2 status.
+  RO_STATUS_V2_SUCCESS = 20;
+  RO_STATUS_V2_FAILED_VERIFICATION = 21;
+  RO_STATUS_V2_INCONSISTENT_GSCVD = 22;
+  RO_STATUS_V2_INCONSISTENT_KEYBLOCK = 23;
+  RO_STATUS_V2_INCONSISTENT_KEY = 24;
+  RO_STATUS_V2_SPI_READ = 25;
+  RO_STATUS_V2_UNSUPPORTED_CRYPTO_ALGORITHM = 26;
+  RO_STATUS_V2_VERSION_MISMATCH = 27;
+  RO_STATUS_V2_OUT_OF_MEMORY = 28;
+  RO_STATUS_V2_INTERNAL = 29;
+  RO_STATUS_V2_TOO_BIG = 30;
+  RO_STATUS_V2_MISSING_GSCVD = 31;
+  RO_STATUS_V2_BOARD_ID_MISMATCH = 32;
+  RO_STATUS_V2_SETTING_NOT_PROVISIONED = 33;
+  RO_STATUS_V2_NON_ZERO_GBB_FLAGS = 36;
+  RO_STATUS_V2_WRONG_ROOT_KEY = 37;
+  RO_STATUS_V2_UNKNOWN = 255;
+}
+
+// Tracks the expected policy for a particular NVRAM space.
+message NvramPolicyRecord {
+  optional uint32 index = 1;
+  optional NvramSpacePolicy policy = 2;
+  // This will be true if the NVRAM_READ_AUTHORIZATION attribute was not
+  // specified when the space was created.
+  optional bool world_read_allowed = 3;
+  // This will be true if the NVRAM_WRITE_AUTHORIZATION attribute was not
+  // specified when the space was created.
+  optional bool world_write_allowed = 4;
+  repeated bytes policy_digests = 5;
+}
+
+// Holds owner delegation information.
+// Copied from attestation/common/database.proto and removed reserved fields.
+message AuthDelegate {
+  // The delegate owner blob.
+  optional bytes blob = 1;
+  // The authorization secret.
+  optional bytes secret = 2;
+  // Whether this delegate has permissions to call TPM_ResetLockValue.
+  optional bool has_reset_lock_permissions = 3;
+}
+
+// The format of persistent local TPM management data stored on the device.
+// When TPM ownership is taken, this protobuf is populated with the passwords
+// used to take ownership, and with a list of clients who have a dependency on
+// the owner password (like Attestation, InstallAttributes and BootLockbox).
+// When all the clients have the owner password injected, the owner password
+// is cleared from this protobuf.
+message LocalData {
+  optional bytes owner_password = 2;
+  repeated string owner_dependency = 3;
+  optional bytes endorsement_password = 4;
+  optional bytes lockout_password = 5;
+  repeated NvramPolicyRecord nvram_policy = 6;
+  optional AuthDelegate owner_delegate = 7;
+  // Whether the SRK can't be used with default auth or not.
+  // If this is true, we should prevent using SRK related commands.
+  // This value should be reset after the TPM had been cleared and only
+  // applicable on TPM1.2 devices.
+  optional bool no_srk_auth = 8;
+}
+
+// The format of the ownership taken signal payload.
+message OwnershipTakenSignal {}
+
+////////////////////////////////////////////////////////////////////////////////
+// A series of request and reply messages for the NVRAM interface methods.
+////////////////////////////////////////////////////////////////////////////////
+message DefineSpaceRequest {
+  optional uint32 index = 1;
+  optional uint32 size = 2;
+  repeated NvramSpaceAttribute attributes = 3;
+  optional bytes authorization_value = 4;
+  optional NvramSpacePolicy policy = 5;
+}
+
+message DefineSpaceReply {
+  optional NvramResult result = 1;
+}
+
+message DestroySpaceRequest {
+  optional uint32 index = 1;
+}
+
+message DestroySpaceReply {
+  optional NvramResult result = 1;
+}
+
+message WriteSpaceRequest {
+  optional uint32 index = 1;
+  optional bytes data = 2;
+  optional bytes authorization_value = 3;
+  optional bool use_owner_authorization = 4;
+}
+
+message WriteSpaceReply {
+  optional NvramResult result = 1;
+}
+
+message ReadSpaceRequest {
+  optional uint32 index = 1;
+  optional bytes authorization_value = 2;
+  optional bool use_owner_authorization = 3;
+}
+
+message ReadSpaceReply {
+  optional NvramResult result = 1;
+  optional bytes data = 2;
+}
+
+message LockSpaceRequest {
+  optional uint32 index = 1;
+  optional bool lock_read = 2;
+  optional bool lock_write = 3;
+  optional bytes authorization_value = 4;
+  optional bool use_owner_authorization = 5;
+}
+
+message LockSpaceReply {
+  optional NvramResult result = 1;
+}
+
+message ListSpacesRequest {}
+
+message ListSpacesReply {
+  optional NvramResult result = 1;
+  repeated uint32 index_list = 2;
+}
+
+message GetSpaceInfoRequest {
+  optional uint32 index = 1;
+}
+
+message GetSpaceInfoReply {
+  optional NvramResult result = 1;
+  optional uint32 size = 2;
+  optional bool is_read_locked = 3;
+  optional bool is_write_locked = 4;
+  repeated NvramSpaceAttribute attributes = 5;
+  optional NvramSpacePolicy policy = 6;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// A series of request and reply messages for the tpm manager interface methods.
+////////////////////////////////////////////////////////////////////////////////
+message GetTpmStatusRequest {
+  reserved 1;
+  // The cached status may be stale after someone unintendedly change the local
+  // data of tpm_manager. This option would be helpful to fetch the current
+  // local data.
+  // TODO(b/178332041): Consider to remove this after we tackle the issue.
+  optional bool ignore_cache = 2;
+}
+
+message GetTpmStatusReply {
+  optional TpmManagerStatus status = 1;
+  // Whether a TPM is enabled on the system.
+  optional bool enabled = 2;
+  // Whether the TPM has been owned by tpm_manager(ready to use).
+  optional bool owned = 3;
+  // Local TPM management data (including the owner password if available).
+  // TODO(b/168852740): Refine the comments above.
+  optional LocalData local_data = 4;
+
+  reserved 5 to 9;
+}
+
+message GetTpmNonsensitiveStatusRequest {
+  // The cached status may be stale after someone unintendedly change the local
+  // data of tpm_manager. This option would be helpful to fetch the current
+  // local data.
+  // TODO(b/178332041): Consider to remove this after we tackle the issue.
+  optional bool ignore_cache = 1;
+}
+
+message GetTpmNonsensitiveStatusReply {
+  optional TpmManagerStatus status = 1;
+  // Whether a TPM is enabled on the system.
+  optional bool is_enabled = 2;
+  // Whether the TPM has been owned by tpm_manager(ready to use).
+  optional bool is_owned = 3;
+  // Whether the owner password is still retained.
+  optional bool is_owner_password_present = 4;
+  // Whether tpm manager is capable of reset DA.
+  optional bool has_reset_lock_permissions = 5;
+  // Whether the SRK can be used with default auth or not.
+  // This should be true when the TPM is owned by tpm_manaber.
+  optional bool is_srk_default_auth = 6;
+}
+
+message GetVersionInfoRequest {}
+
+message GetVersionInfoReply {
+  // The success or error code of the call GetVersionInfo.
+  optional TpmManagerStatus status = 1;
+
+  // TPM family. We use the TPM 2.0 style encoding, e.g.:
+  //  * TPM 1.2: "1.2" -> 0x312e3200
+  //  * TPM 2.0: "2.0" -> 0x322e3000
+  optional uint32 family = 2;
+  // TPM spec level.
+  optional uint64 spec_level = 3;
+  // Manufacturer code.
+  optional uint32 manufacturer = 4;
+  // TPM model number.
+  optional uint32 tpm_model = 5;
+  // Firmware version.
+  optional uint64 firmware_version = 6;
+  // Vendor specific information.
+  optional bytes vendor_specific = 7;
+  // The GSC version.
+  optional GscVersion gsc_version = 8;
+  // The RW firmware version.
+  optional string rw_version = 9;
+}
+
+message GetSupportedFeaturesRequest {}
+
+message GetSupportedFeaturesReply {
+  // The success or error code of the call GetSupportedFeatures.
+  optional TpmManagerStatus status = 1;
+
+  // Whether the u2f is supported or not.
+  optional bool support_u2f = 2;
+
+  // Whether the pinweaver is supported or not.
+  optional bool support_pinweaver = 3;
+
+  // Whether the platform supports runtime TPM selection or not.
+  optional bool support_runtime_selection = 4;
+
+  // Whether the TPM is allowed to use or not.
+  optional bool is_allowed = 5;
+}
+
+message GetDictionaryAttackInfoRequest {}
+
+message GetDictionaryAttackInfoReply {
+  // The success or error code of the call GetDictionaryAttackInfo.
+  optional TpmManagerStatus status = 1;
+
+  // The current dictionary attack counter value.
+  optional uint32 dictionary_attack_counter = 2;
+  // The current dictionary attack counter threshold.
+  optional uint32 dictionary_attack_threshold = 3;
+  // Whether the TPM is in some form of dictionary attack lockout.
+  optional bool dictionary_attack_lockout_in_effect = 4;
+  // The number of seconds remaining in the lockout.
+  optional uint32 dictionary_attack_lockout_seconds_remaining = 5;
+}
+
+message GetRoVerificationStatusRequest {}
+
+message GetRoVerificationStatusReply {
+  // The success or error code of the call GetRoVerificationStatus.
+  optional TpmManagerStatus status = 1;
+
+  // The status about if the last reboot was triggered by RO verification.
+  optional RoVerificationStatus ro_verification_status = 2;
+}
+
+message ResetDictionaryAttackLockRequest {
+  // If it is `true`, the D-Bus call returns immediately w/o waiting for the
+  // result.
+  optional bool is_async = 1;
+}
+
+message ResetDictionaryAttackLockReply {
+  optional TpmManagerStatus status = 1;
+}
+
+message TakeOwnershipRequest {
+  // If it is `true`, the D-Bus call returns immediately w/o waiting for the
+  // result.
+  optional bool is_async = 1;
+}
+
+message TakeOwnershipReply {
+  optional TpmManagerStatus status = 1;
+}
+
+message RemoveOwnerDependencyRequest {
+  optional bytes owner_dependency = 1;
+}
+
+message RemoveOwnerDependencyReply {
+  optional TpmManagerStatus status = 1;
+}
+
+message ClearStoredOwnerPasswordRequest {}
+
+message ClearStoredOwnerPasswordReply {
+  optional TpmManagerStatus status = 1;
+}

@@ -1,0 +1,45 @@
+[package]
+name = "ldt_np_adv_ffi"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+crypto_provider = { path = "../../crypto/crypto_provider" }
+crypto_provider_openssl = {path = "../../crypto/crypto_provider_openssl", optional = true}
+crypto_provider_rustcrypto = {path = "../../crypto/crypto_provider_rustcrypto", optional = true}
+crypto_provider_boringssl = {path = "../../crypto/crypto_provider_boringssl", optional = true}
+ldt = { path = "../ldt" }
+ldt_np_adv = { path = "../ldt_np_adv" }
+np_hkdf = {path = "../np_hkdf"}
+
+cfg-if = "1.0.0"
+lazy_static = { version = "1.4.0"}
+
+# no_std only deps
+libc_alloc = {version = "1.0.4", optional = true }
+panic-abort = { version = "0.3.2", optional = true }
+spin = {version = "0.9.8", optional = true }
+
+[dev-dependencies]
+rand = "0.8.5"
+
+[lib]
+# boringssl and bssl-sys are built as a static lib, so we need to as well
+crate-type = ["staticlib"]
+
+[features]
+# by default we support no_std and use rustcrypto primitives
+default = ["lazy_static/spin_no_std", "spin", "libc_alloc", "panic-abort", "crypto_provider_rustcrypto"]
+std = ["crypto_provider_rustcrypto", "crypto_provider_rustcrypto/std"]
+openssl = ["crypto_provider_openssl"]
+boringssl = ["crypto_provider_boringssl"]
+
+[profile.release-min-size]
+inherits = "release"
+panic = "abort"
+codegen-units = 1
+lto = true
+# z optimizes for size
+opt-level = "z"
+strip = true

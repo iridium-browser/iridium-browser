@@ -1,0 +1,97 @@
+# Copyright 2019 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+visibility = [ "./*" ]
+
+# TODO(https://issuetracker.google.com/255951872): Move public code into the
+# public/ folder.
+source_set("channel") {
+  visibility += [ "*" ]
+  public = [
+    "channel/device_auth_namespace_handler.h",
+    "channel/message_util.h",
+    "channel/static_credentials.h",
+    "public/receiver_socket_factory.h",
+  ]
+  sources = [
+    "channel/device_auth_namespace_handler.cc",
+    "channel/message_util.cc",
+    "channel/receiver_socket_factory.cc",
+    "channel/static_credentials.cc",
+  ]
+
+  public_deps = [
+    "../../platform",
+    "../../third_party/abseil",
+    "../../third_party/boringssl",
+    "../common:channel",
+    "../common/channel/proto:channel_proto",
+  ]
+
+  deps = [
+    "../../util",
+    "../common:certificate",
+  ]
+}
+
+source_set("agent") {
+  visibility += [ "../standalone_receiver:*" ]
+  public = [ "application_agent.h" ]
+  sources = [ "application_agent.cc" ]
+
+  public_deps = [
+    "../../platform",
+    "../common:channel",
+    "../common:public",
+  ]
+
+  deps = [
+    ":channel",
+    "../../util",
+  ]
+}
+
+source_set("test_helpers") {
+  testonly = true
+  visibility += [ "../test:unittests" ]
+  public = [ "channel/testing/device_auth_test_helpers.h" ]
+  sources = [ "channel/testing/device_auth_test_helpers.cc" ]
+
+  public_deps = [
+    ":channel",
+    "../../third_party/boringssl",
+    "../common:test_helpers",
+  ]
+  deps = [
+    "../../third_party/googletest:gtest",
+    "../common/channel/proto:channel_proto",
+  ]
+}
+
+source_set("unittests") {
+  testonly = true
+  visibility += [
+    "../..:openscreen_unittests_all",
+    "../test:unittests",
+  ]
+  public = []
+  sources = [
+    "application_agent_unittest.cc",
+    "channel/device_auth_namespace_handler_unittest.cc",
+  ]
+
+  deps = [
+    ":agent",
+    ":channel",
+    ":test_helpers",
+    "../../platform:test",
+    "../../testing/util",
+    "../../third_party/googletest:gmock",
+    "../../third_party/googletest:gtest",
+    "../common:channel",
+    "../common/channel/proto:channel_proto",
+  ]
+
+  data = [ "../../test/data/cast/receiver/channel/" ]
+}

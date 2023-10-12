@@ -1,0 +1,166 @@
+.\" shorthand for double quote that works everywhere.
+.ds q \N'34'
+.TH weston-bindings 7 "2019-03-27" "Weston @version@"
+.SH NAME
+weston-bindings \- a list of keyboard bindings for
+.B Weston
+\- the reference Wayland
+compositor
+.SH INTRODUCTION
+The Weston desktop shell has a number of keyboard shortcuts. They are listed here.
+.SH DESCRIPTION
+Almost all keyboard shortcuts for
+.B Weston
+include a specified modifier
+.I mod
+which is determined in the file
+.BR weston.ini (5).
+.\" Begin list
+.P
+.RE
+.B mod + Shift + F
+.RS 4
+Make active window fullscreen
+.P
+.RE
+.B mod + K
+.RS 4
+Kill active window
+.P
+.RE
+.B mod + Shift + M
+.RS 4
+Maximize active window
+.P
+.RE
+.B mod + Shift + KEY_LEFT
+.RS 4
+Make the active window tiled left.
+.P
+.RE
+.B mod + Shift + KEY_RIGHT
+.RS 4
+Make the active window tiled right.
+.P
+.RE
+.B mod + Shift + KEY_UP
+.RS 4
+Make the active window tiled top.
+.P
+.RE
+.B mod + Shift + KEY_DOWN
+.RS 4
+Make the active window tiled bottom.
+.P
+.RE
+.B mod + Tab
+.RS 4
+Switch active window
+.P
+.RE
+.B Ctrl + Alt + Backspace
+.RS 4
+If supported, terminate Weston. (Note this combination often is used to hard restart Xorg.)
+.P
+.RE
+.B Ctrl + Alt + F
+.RS 4
+Toggle if Weston is fullscreen; only works when nested under a Wayland compositor
+.P
+.RE
+.B Ctrl + Alt + S
+.RS 4
+Share output screen, if possible
+.P
+.RE
+.B Ctrl + Alt + F1/F2/F3/F4/F5/F6/F7/F8
+.RS 4
+Switch virtual terminal, if possible
+.P
+.RE
+.B Super + S
+.RS 4
+Make a screenshot of the desktop
+.P
+.RE
+.B Super + R
+.RS 4
+Start or stop recording video of the desktop
+
+.SS "TOUCH / MOUSE BINDINGS"
+
+There are also a number of bindings involving a mouse:
+.P
+.RE
+.B \fI<Touch>\fI, \fI<Left button>\fB, \fI<Right button>\fB
+.RS 4
+Activate clicked window
+.P
+.RE
+.B Super + Alt + \fI<Vertical Scroll>\fB
+.RS 4
+Change the opacity of a window
+.P
+.RE
+.B mod + \fI<Vertical Scroll>\fB
+.RS 4
+Zoom/magnify the visible desktop
+.P
+.RE
+.B mod + \fI<Left button>\fB
+.RS 4
+Click and drag to move a window
+.P
+.RE
+.B mod + Shift + \fI<Left button>\fB, mod + \fI<Right button>\fB, mod + \fI<Touch>\fB
+.RS 4
+Click and drag to resize a window
+.P
+.RE
+.B mod + \fI<Middle button>\fB
+.RS 4
+Rotate the window (if supported)
+
+.SS DEBUG BINDINGS
+The combination \fBmod + Shift + Space\fR begins a debug binding. Debug
+bindings are completed by pressing an additional key. For example, pressing
+F may toggle texture mesh wireframes with the GL renderer.
+(In fact, most debug effects can be disabled again by repeating the command.)
+Debug bindings are often tied to specific backends. Below are the debug bindings available.
+
+.RS
+- KEY_D :
+.RS 4
+Subscribe for flight recorder.
+.RE
+- KEY_C : 
+.RS 4
+Enable/Disable cursor planes.
+.RE
+- KEY_V :
+.RS 4
+Enable/Disable overlay planes.
+.RE
+- KEY_Q :
+.RS 4
+Start VAAPI recorder.
+.RE
+- KEY_S : 
+.RS 4
+Enable fragment debugging for gl-renderer.
+.RE
+- KEY_F :
+.RS 4
+Enable fan debugging for gl-renderer.
+.RE
+- KEY_R :
+.RS 4
+Enable repaint debugging for Pixman.
+.RE
+.RE
+
+.SH "SEE ALSO"
+.BR weston (1),
+.BR weston-drm (7),
+.BR weston.ini (5),
+.BR xkeyboard-config (7)

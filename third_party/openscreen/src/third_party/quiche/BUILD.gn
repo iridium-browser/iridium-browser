@@ -1,0 +1,69 @@
+# Copyright (c) 2021 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build_overrides/build.gni")
+
+if (build_with_chromium) {
+  source_set("quiche") {
+    public_deps = [ "//net/third_party/quiche" ]
+  }
+} else {
+  import("//third_party/protobuf/proto_library.gni")
+  import("//third_party/quiche/src/build/source_list.gni")
+
+  config("quiche_internal_config") {
+    cflags = [ "-Wno-sign-compare" ]
+    if (is_clang) {
+      cflags += [
+        "-Wno-implicit-int-float-conversion",
+        "-Wno-shadow",
+        "-Wno-shadow-field",
+        "-Wno-unused-private-field",
+        "-Wno-unreachable-code-return",
+      ]
+    }
+
+    defines = [ "IS_QUICHE_IMPL" ]
+  }
+
+  config("quiche_config") {
+    include_dirs = [
+      "src/quiche/common/platform/default",
+      "src",
+    ]
+  }
+
+  source_set("quiche") {
+    sources = quiche_core_hdrs + quiche_core_srcs + binary_http_hdrs +
+              binary_http_srcs + oblivious_http_hdrs + oblivious_http_srcs +
+              default_platform_impl_hdrs + default_platform_impl_srcs
+
+    configs += [ ":quiche_internal_config" ]
+    all_dependent_configs = [ ":quiche_config" ]
+
+    deps = [
+      "//third_party/protobuf:protobuf_lite",
+      "//third_party/zlib",
+    ]
+
+    public_deps = [
+      ":net_quic_proto",
+      "//third_party/abseil",
+      "//third_party/boringssl",
+      "//third_party/googleurl",
+    ]
+  }
+
+  proto_library("net_quic_proto") {
+    visibility = [ ":quiche" ]
+
+    sources = [
+      "src/quiche/quic/core/proto/cached_network_parameters.proto",
+      "src/quiche/quic/core/proto/crypto_server_config.proto",
+      "src/quiche/quic/core/proto/source_address_token.proto",
+    ]
+
+    proto_in_dir = "src"
+  }
+}

@@ -1,0 +1,78 @@
+// Copyright 2022 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+// This file defines messages used by arc::data_migrator.
+package arc.data_migrator;
+
+// The message that is sent from Chrome with HasDataToMigrate call.
+message HasDataToMigrateRequest {
+  // Username of the current login user. Usually looks like an email address.
+  string username = 1;
+}
+
+// The message that is sent from Chrome with GetAndroidDataInfo call.
+message GetAndroidDataInfoRequest {
+  // Username of the current login user. Usually looks like an email address.
+  string username = 1;
+}
+
+message GetAndroidDataInfoResponse {
+  // Total disk space (in bytes) allocated for files in the pre-migration data
+  // (located under host's /home/root/<hash>/android-data/data).
+  int64 total_allocated_space_src = 1;
+
+  // Estimated total disk space (in bytes) allocated for files in the migrated
+  // /data. This is calculated based on the apparent size (st_size) of files in
+  // the migration source (host's /home/root/<hash>/android-data/data) and can
+  // be bigger than |total_allocated_space_src| if the migration source contains
+  // sparse files. To be on the safe side, this estimation assumes that an
+  // additional 4KB block (which Ext4 allocates for files with large xattrs) is
+  // allocated for all files, and thus can be a little bigger than the actual
+  // allocated space for the migrated /data.
+  int64 total_allocated_space_dest = 2;
+}
+
+// The type of the migration destination.
+enum DataMigrationDestinationType {
+  // A disk image created by concierge (/home/root/<hash>/crosvm/YXJjdm0=.img).
+  CROSVM_DISK = 0;
+  // An LVM block device (/dev/mapper/vm/dmcrypt-<hash>-arcvm).
+  LVM_DEVICE = 1;
+}
+
+// The message that is sent from Chrome with StartMigration call.
+message StartMigrationRequest {
+  // Username of the current login user. Usually looks like an email address.
+  string username = 1;
+
+  DataMigrationDestinationType destination_type = 2;
+}
+
+// Status code for the message DataMigrationProgress below.
+enum DataMigrationStatus {
+  // The migration completed successfully.
+  DATA_MIGRATION_SUCCESS = 0;
+  // The migration was terminated with a failure.
+  DATA_MIGRATION_FAILED = 1;
+  // The migration is in progress.
+  DATA_MIGRATION_IN_PROGRESS = 2;
+}
+
+// The message that comes with DataMigrationProgress signal.
+message DataMigrationProgress {
+  // The status of the migration.
+  DataMigrationStatus status = 1;
+
+  // The amount of bytes that we've migrated over. This field is
+  // undefined when |status| is not DATA_MIGRATION_IN_PROGRESS.
+  uint64 current_bytes = 2;
+
+  // The total amount of bytes that need to be migrated, including what
+  // has been migrated. This field is undefined when |status| is not
+  // DATA_MIGRATION_IN_PROGRESS.
+  uint64 total_bytes = 3;
+}

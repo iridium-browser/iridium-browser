@@ -1,0 +1,78 @@
+ifdef VERBOSE
+Q :=
+BOOTSTRAP_ARGS := -v
+else
+Q := @
+BOOTSTRAP_ARGS :=
+endif
+
+BOOTSTRAP := $(CFG_PYTHON) $(CFG_SRC_DIR)src/bootstrap/bootstrap.py
+
+all:
+	$(Q)$(BOOTSTRAP) build --stage 2 $(BOOTSTRAP_ARGS)
+	$(Q)$(BOOTSTRAP) doc --stage 2 $(BOOTSTRAP_ARGS)
+
+help:
+	$(Q)echo 'Welcome to the rustbuild build system!'
+	$(Q)echo
+	$(Q)echo This makefile is a thin veneer over the ./x.py script located
+	$(Q)echo in this directory. To get the full power of the build system
+	$(Q)echo you can run x.py directly.
+	$(Q)echo
+	$(Q)echo To learn more run \`./x.py --help\`
+
+clean:
+	$(Q)$(BOOTSTRAP) clean $(BOOTSTRAP_ARGS)
+
+rustc-stage1:
+	$(Q)$(BOOTSTRAP) build --stage 1 library/test $(BOOTSTRAP_ARGS)
+rustc-stage2:
+	$(Q)$(BOOTSTRAP) build --stage 2 library/test $(BOOTSTRAP_ARGS)
+
+docs: doc
+doc:
+	$(Q)$(BOOTSTRAP) doc --stage 2 $(BOOTSTRAP_ARGS)
+nomicon:
+	$(Q)$(BOOTSTRAP) doc --stage 2 src/doc/nomicon $(BOOTSTRAP_ARGS)
+book:
+	$(Q)$(BOOTSTRAP) doc --stage 2 src/doc/book $(BOOTSTRAP_ARGS)
+standalone-docs:
+	$(Q)$(BOOTSTRAP) doc --stage 2 src/doc $(BOOTSTRAP_ARGS)
+check:
+	$(Q)$(BOOTSTRAP) test --stage 2 $(BOOTSTRAP_ARGS)
+check-aux:
+	$(Q)$(BOOTSTRAP) test --stage 2 \
+		src/tools/cargo \
+		src/tools/cargotest \
+		$(BOOTSTRAP_ARGS)
+dist:
+	$(Q)$(BOOTSTRAP) dist $(BOOTSTRAP_ARGS)
+distcheck:
+	$(Q)$(BOOTSTRAP) dist $(BOOTSTRAP_ARGS)
+	$(Q)$(BOOTSTRAP) test --stage 2 distcheck $(BOOTSTRAP_ARGS)
+install:
+	$(Q)$(BOOTSTRAP) install $(BOOTSTRAP_ARGS)
+tidy:
+	$(Q)$(BOOTSTRAP) test --stage 2 src/tools/tidy $(BOOTSTRAP_ARGS)
+prepare:
+	$(Q)$(BOOTSTRAP) build --stage 2 nonexistent/path/to/trigger/cargo/metadata
+
+## MSVC native builders
+
+# this intentionally doesn't use `$(BOOTSTRAP)` so we can test the shebang on Windows
+ci-msvc-py:
+	$(Q)$(CFG_SRC_DIR)/x.py test --stage 2 tidy
+ci-msvc-ps1:
+	$(Q)$(CFG_SRC_DIR)/x.ps1 test --stage 2 --exclude tidy
+ci-msvc: ci-msvc-py ci-msvc-ps1
+
+## MingW native builders
+
+# test both x and bootstrap entrypoints
+ci-mingw-x:
+	$(Q)$(CFG_SRC_DIR)/x test --stage 2 tidy
+ci-mingw-bootstrap:
+	$(Q)$(BOOTSTRAP) test --stage 2 --exclude tidy
+ci-mingw: ci-mingw-x ci-mingw-bootstrap
+
+.PHONY: dist

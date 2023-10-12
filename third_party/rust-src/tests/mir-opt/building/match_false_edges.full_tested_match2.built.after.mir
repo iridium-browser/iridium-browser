@@ -1,0 +1,110 @@
+// MIR for `full_tested_match2` after built
+
+fn full_tested_match2() -> () {
+    let mut _0: ();
+    let mut _1: (i32, i32);
+    let mut _2: std::option::Option<i32>;
+    let mut _3: isize;
+    let mut _4: &std::option::Option<i32>;
+    let _5: i32;
+    let _6: &i32;
+    let mut _7: bool;
+    let mut _8: i32;
+    let _9: i32;
+    let mut _10: i32;
+    scope 1 {
+    }
+    scope 2 {
+        debug x => _5;
+        debug x => _6;
+    }
+    scope 3 {
+        debug y => _9;
+    }
+
+    bb0: {
+        StorageLive(_1);
+        StorageLive(_2);
+        _2 = Option::<i32>::Some(const 42_i32);
+        FakeRead(ForMatchedPlace(None), _2);
+        _3 = discriminant(_2);
+        switchInt(move _3) -> [0: bb1, 1: bb2, otherwise: bb4];
+    }
+
+    bb1: {
+        falseEdge -> [real: bb10, imaginary: bb3];
+    }
+
+    bb2: {
+        falseEdge -> [real: bb5, imaginary: bb1];
+    }
+
+    bb3: {
+        StorageLive(_9);
+        _9 = ((_2 as Some).0: i32);
+        StorageLive(_10);
+        _10 = _9;
+        _1 = (const 2_i32, move _10);
+        StorageDead(_10);
+        StorageDead(_9);
+        goto -> bb11;
+    }
+
+    bb4: {
+        unreachable;
+    }
+
+    bb5: {
+        StorageLive(_6);
+        _6 = &((_2 as Some).0: i32);
+        _4 = &shallow _2;
+        StorageLive(_7);
+        _7 = guard() -> [return: bb6, unwind: bb12];
+    }
+
+    bb6: {
+        switchInt(move _7) -> [0: bb8, otherwise: bb7];
+    }
+
+    bb7: {
+        StorageDead(_7);
+        FakeRead(ForMatchGuard, _4);
+        FakeRead(ForGuardBinding, _6);
+        StorageLive(_5);
+        _5 = ((_2 as Some).0: i32);
+        StorageLive(_8);
+        _8 = _5;
+        _1 = (const 1_i32, move _8);
+        StorageDead(_8);
+        StorageDead(_5);
+        StorageDead(_6);
+        goto -> bb11;
+    }
+
+    bb8: {
+        goto -> bb9;
+    }
+
+    bb9: {
+        StorageDead(_7);
+        StorageDead(_6);
+        falseEdge -> [real: bb3, imaginary: bb1];
+    }
+
+    bb10: {
+        _1 = (const 3_i32, const 3_i32);
+        goto -> bb11;
+    }
+
+    bb11: {
+        PlaceMention(_1);
+        StorageDead(_2);
+        StorageDead(_1);
+        _0 = const ();
+        return;
+    }
+
+    bb12 (cleanup): {
+        resume;
+    }
+}

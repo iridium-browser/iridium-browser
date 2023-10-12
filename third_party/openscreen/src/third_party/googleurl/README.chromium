@@ -1,0 +1,11 @@
+Name: googleurl
+URL: https://quiche.googlesource.com/googleurl
+Version: git
+License: BSD
+License File: src/LICENSE
+Security Critical: yes
+Shipped: yes
+
+Description:
+This is a copy of Chrome's URL parsing library. It is meant to
+be used by QUICHE, but can be also used by other projects.

@@ -1,0 +1,5 @@
+#
+# This file contains llvm saigo regression tests that are known to fail.
+#
+LLVM-Unit::Support/./SupportTests/failed_to_discover_tests_from_gtest linux
+Clang::Interpreter/simple-exception.cpp linux

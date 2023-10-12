@@ -1,0 +1,231 @@
+/*
+// Copyright 2023 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+*/
+
+:root {
+  --bg-color: rgb(220, 232, 254);
+  --input-bg-color: rgb(252, 251, 247);
+  --bg-color-dark: rgb(209, 224, 250);
+  --bg-color-darkest: rgb(177, 195, 227);
+  --section-bg-color: rgb(149, 169, 206);
+  --error-color: rgb(238, 148, 148);
+  --connected-color: rgb(112, 201, 155);
+  --running-color: rgb(173, 231, 146);
+}
+
+html,
+button {
+  font-family: "Gill Sans", sans-serif;
+}
+
+html {
+  background-color: var(--bg-color);
+  color: #333;
+}
+
+html,
+p,
+body {
+  font-size: 13px !important;
+}
+
+a {
+  color: initial;
+}
+
+h1 {
+  font-size: 40px;
+  padding: 0 3px;
+  text-align: center;
+  text-shadow:
+    -2px -2px 0 rgba(255, 255, 255, 0.1),
+    2px -2px 0 rgba(255, 255, 255, 0.1),
+    -2px 2px 0 rgba(255, 255, 255, 0.1),
+    2px 2px 0 rgba(255, 255, 255, 0.1);
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h1,
+h2 {
+  margin-top: 0px;
+  margin-bottom: 6px;
+  font-weight: normal;
+}
+
+section {
+  background-color: var(--section-bg-color);
+  border-radius: 10px;
+  border: 2px rgba(0, 0, 0, 0.1) solid;
+  padding: 5px;
+  margin: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+section span {
+  white-space: nowrap;
+}
+
+section .buttons {
+  float: right;
+}
+
+textarea,
+input,
+button {
+  border: 1px rgba(0, 0, 0, 0.3) solid;
+  border-radius: 5px;
+  background-color: var(--input-bg-color);
+}
+
+textarea,
+pre,
+code {
+  font-family: "Roboto Mono", "Monaco", monospace;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 100px;
+  padding: 4px 4px 4px 6px;
+}
+
+button {
+  margin-left: 3px;
+  cursor: pointer;
+  float: right;
+  opacity: 1;
+  padding: 3px 8px;
+  transition: visibility 0s, opacity 0.1s linear;
+}
+
+button:hover {
+  background-color: var(--bg-color-dark);
+}
+
+button:active {
+  background-color: var(--bg-color-darkest);
+}
+
+h2 button {
+  margin: 0px 0 4px 5px;
+}
+
+.info {
+  font-family: "Georgia", serif;
+  font-weight: bold;
+}
+
+.icon {
+  display: inline-block;
+  position: relative;
+  width: 0.537em;
+  height: 13px;
+  margin: -10px 0 -10px 0;
+}
+
+.headerImage {
+  float: right;
+  margin: 25px -20px 0 -80px;
+  filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0.2));
+}
+
+h1 img {
+  width: 200px;
+  transform: rotate(-55deg);
+
+}
+
+@media screen and (max-width: 670px) {
+  .headerImage {
+    display: none !important;
+  }
+}
+
+#settingsSection {
+  line-height: 25px;
+  padding-top: 4px;
+  transition: background-color 0.2s linear 0.3s;
+}
+
+.inputGroup {
+  margin-right: 10px;
+}
+
+#settingsSection button {
+  margin-top: 1px;
+}
+
+#settingsSection input {
+  font-family: "Roboto Mono", "Monaco", monospace;
+  margin-top: -1px;
+}
+
+#status {
+  float: right;
+  background-color: var(--section-bg-color);
+  margin-top: 2px !important;
+  text-align: center;
+}
+
+input.error {
+  background-color: var(--error-color);
+}
+
+#runButton,
+#stopButton,
+.running button.help {
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.connected #connectButton,
+.running #connectButton {
+  opacity: 0.5;
+}
+
+.connected #runButton {
+  opacity: 1;
+  pointer-events: inherit;
+}
+
+.running #stopButton {
+  opacity: 1;
+  pointer-events: inherit;
+}
+
+.connected #settingsSection {
+  background-color: var(--connected-color);
+}
+
+@keyframes status-blink {
+  from {
+    background-color: var(--connected-color);
+  }
+
+  to {
+    background-color: var(--running-color);
+  }
+}
+
+.running #settingsSection,
+.connecting #settingsSection {
+  animation: 1s linear 0.4s infinite alternate status-blink;
+}
+
+.disconnected #settingsSection {
+  background-color: var(--error-color);
+}
+
+#stopButton {
+  background-color: var(--error-color);
+}
+
+#outputStderr {
+  color: rgb(142, 56, 56);
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Web App Internals</title>
+  <link rel="stylesheet" href="web_app_internals.css">
+
+  <script type="module" src="web_app_internals.js"></script>
+</head>
+
+<body>
+  <button id="download-button">Download</button>
+  <button id="copy-button">Copy to Clipboard</button>
+
+  <hr>
+
+  <div id="iwa-install-div" style="display: none;">
+    <p>Isolated Web Apps</p>
+    <p>Install IWA via Dev Mode Proxy:
+      <input type="url" id="iwa-install-url" size="30" required
+          placeholder="http://localhost:8000/">
+      <button id="iwa-install-button" type="submit">Install</button>
+    </p>
+    <div id="iwa-install-message-div"></div>
+    <hr>
+  </div>
+
+  <pre id="json"></pre>
+</body>
+
+</html>

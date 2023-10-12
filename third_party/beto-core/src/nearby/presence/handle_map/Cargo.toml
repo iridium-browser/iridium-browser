@@ -1,0 +1,19 @@
+[package]
+name = "handle_map"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+hashbrown.workspace = true
+lock_api.workspace = true
+portable-atomic.workspace = true
+spin.workspace = true
+crypto_provider.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+
+[[bench]]
+name = "benches"
+harness = false

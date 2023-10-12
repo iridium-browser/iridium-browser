@@ -1,0 +1,8 @@
+pre-release-replacements = [
+  { file="README.md", search="libffi-sys = \"[0-9.]*\"", replace="libffi-sys = \"{{version}}\"" },
+  { file="README.md", search="version = \"[0-9.]*\"", replace="version = \"{{version}}\"" },
+  { file="src/lib.rs", search="libffi-sys = \"[0-9.]*\"", replace="libffi-sys = \"{{version}}\"" },
+  { file="src/lib.rs", search="version = \"[0-9.]*\"", replace="version = \"{{version}}\"" },
+  { file="src/lib.rs", search="https://docs[.]rs/libffi-sys/[0-9.]*", replace="https://docs.rs/libffi-sys/{{version}}" },
+  { file="CHANGELOG.md", search="\\[Unreleased\\]", replace="[{{version}}] - {{date}}" }
+]

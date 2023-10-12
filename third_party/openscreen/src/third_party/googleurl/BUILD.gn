@@ -1,0 +1,134 @@
+# Copyright 2023 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build_overrides/build.gni")
+
+if (build_with_chromium) {
+  source_set("googleurl") {
+    public_deps = [ "//url" ]
+  }
+} else {
+  config("googleurl_config") {
+    include_dirs = [ "//third_party/googleurl/src" ]
+  }
+
+  config("private_googleurl_config") {
+    cflags = [ "-Wno-return-type" ]
+  }
+
+  source_set("googleurl") {
+    sources = [
+      "src/base/bits.h",
+      "src/base/compiler_specific.h",
+      "src/base/containers/checked_iterators.h",
+      "src/base/containers/contains.h",
+      "src/base/containers/contiguous_iterator.h",
+      "src/base/containers/span.h",
+      "src/base/containers/util.h",
+      "src/base/cxx20_is_constant_evaluated.h",
+      "src/base/cxx20_to_address.h",
+      "src/base/debug/crash_logging.cc",
+      "src/base/debug/crash_logging.h",
+      "src/base/debug/leak_annotations.h",
+      "src/base/functional/identity.h",
+      "src/base/functional/invoke.h",
+      "src/base/functional/not_fn.h",
+      "src/base/memory/raw_ptr_exclusion.h",
+      "src/base/no_destructor.h",
+      "src/base/numerics/checked_math.h",
+      "src/base/numerics/checked_math_impl.h",
+      "src/base/numerics/clamped_math.h",
+      "src/base/numerics/clamped_math_impl.h",
+      "src/base/numerics/safe_conversions.h",
+      "src/base/numerics/safe_conversions_arm_impl.h",
+      "src/base/numerics/safe_conversions_impl.h",
+      "src/base/numerics/safe_math.h",
+      "src/base/numerics/safe_math_arm_impl.h",
+      "src/base/numerics/safe_math_clang_gcc_impl.h",
+      "src/base/numerics/safe_math_shared_impl.h",
+      "src/base/ranges/algorithm.h",
+      "src/base/ranges/functional.h",
+      "src/base/ranges/ranges.h",
+      "src/base/stl_util.h",
+      "src/base/strings/string_number_conversions.h",
+      "src/base/strings/string_piece.h",
+      "src/base/strings/string_piece_forward.h",
+      "src/base/strings/string_util.cc",
+      "src/base/strings/string_util.h",
+      "src/base/strings/string_util_constants.cc",
+      "src/base/strings/string_util_impl_helpers.h",
+      "src/base/strings/string_util_internal.h",
+      "src/base/strings/string_util_posix.h",
+      "src/base/strings/utf_ostream_operators.cc",
+      "src/base/strings/utf_ostream_operators.h",
+      "src/base/strings/utf_string_conversion_utils.cc",
+      "src/base/strings/utf_string_conversion_utils.h",
+      "src/base/strings/utf_string_conversions.cc",
+      "src/base/strings/utf_string_conversions.h",
+      "src/base/template_util.h",
+      "src/base/third_party/icu_utf.h",
+      "src/base/types/always_false.h",
+      "src/build/build.config.h",
+      "src/build/buildflag.h",
+      "src/polyfills/base/allocator/buildflags.h",
+      "src/polyfills/base/base_export.h",
+      "src/polyfills/base/check.h",
+      "src/polyfills/base/check_op.h",
+      "src/polyfills/base/component_export.h",
+      "src/polyfills/base/cpu_reduction_experiment.h",
+      "src/polyfills/base/dcheck_is_on.h",
+      "src/polyfills/base/debug/alias.h",
+      "src/polyfills/base/export_template.h",
+      "src/polyfills/base/feature_list.h",
+      "src/polyfills/base/logging.h",
+      "src/polyfills/base/memory/raw_ptr.h",
+      "src/polyfills/base/memory/raw_ptr_exclusion.h",
+      "src/polyfills/base/metrics/histogram_functions.h",
+      "src/polyfills/base/metrics/histogram_macros.h",
+      "src/polyfills/base/notreached.h",
+      "src/polyfills/base/trace_event/memory_usage_estimator.h",
+      "src/polyfills/third_party/perfetto/include/perfetto/tracing/traced_value.h",
+      "src/url/gurl.cc",
+      "src/url/gurl.h",
+      "src/url/third_party/mozilla/url_parse.cc",
+      "src/url/third_party/mozilla/url_parse.h",
+      "src/url/url_canon.cc",
+      "src/url/url_canon.h",
+      "src/url/url_canon_etc.cc",
+      "src/url/url_canon_filesystemurl.cc",
+      "src/url/url_canon_fileurl.cc",
+      "src/url/url_canon_host.cc",
+      "src/url/url_canon_icu.h",
+      "src/url/url_canon_internal.cc",
+      "src/url/url_canon_internal.h",
+      "src/url/url_canon_internal_file.h",
+      "src/url/url_canon_ip.cc",
+      "src/url/url_canon_ip.h",
+      "src/url/url_canon_mailtourl.cc",
+      "src/url/url_canon_path.cc",
+      "src/url/url_canon_pathurl.cc",
+      "src/url/url_canon_query.cc",
+      "src/url/url_canon_relative.cc",
+      "src/url/url_canon_stdstring.cc",
+      "src/url/url_canon_stdstring.h",
+      "src/url/url_canon_stdurl.h",
+      "src/url/url_constants.cc",
+      "src/url/url_constants.h",
+      "src/url/url_features.cc",
+      "src/url/url_features.h",
+      "src/url/url_file.h",
+      "src/url/url_idna_ascii_only.cc",
+      "src/url/url_parse_file.h",
+      "src/url/url_parse_internal.h",
+      "src/url/url_util.cc",
+      "src/url/url_util.h",
+      "src/url/url_util_internal.h",
+    ]
+
+    public_deps = [ "//third_party/abseil" ]
+
+    configs += [ ":private_googleurl_config" ]
+    public_configs = [ ":googleurl_config" ]
+  }
+}

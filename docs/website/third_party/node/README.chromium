@@ -1,0 +1,17 @@
+Name: Node JS
+Short Name: node
+URL: https://github.com/nodejs/node
+Version: 14.15.1
+License: NodeJS
+Security Critical: no
+Shipped: no
+
+Description:
+This directory holds the Node.js binaries that are downloaded via DEPS hooks.
+The binaries are used to run the build process for the website.
+
+The Mac/ARM64 binary is actually version 16.0.0-pre, there wasn't a supported
+binary for that platform in 14.15.1.
+
+Local Modifications:
+None

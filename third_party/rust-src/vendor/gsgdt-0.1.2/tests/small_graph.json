@@ -1,0 +1,36 @@
+{
+  "name": "small",
+  "kind": "Digraph",
+  "nodes": [
+    {
+      "label": "bb0",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb0",
+      "stmts": [
+        "StorageLive(_1)",
+        "_1 = Vec::<i32>::new()"
+      ]
+    },
+    {
+      "label": "bb1",
+      "style": {
+        "title_bg": null,
+        "last_stmt_sep": false
+      },
+      "title": "bb1",
+      "stmts": [
+        "resume"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "bb0",
+      "to": "bb1",
+      "label": "return"
+    }
+  ]
+}

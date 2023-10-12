@@ -1,0 +1,8 @@
+[package]
+name = "crypto_provider_stubs"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+crypto_provider = {workspace = true, features = ["std", "alloc"] }

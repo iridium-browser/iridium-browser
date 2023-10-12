@@ -1,0 +1,14 @@
+[package]
+name = "np_ed25519"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+array_view.workspace = true
+crypto_provider.workspace = true
+sink.workspace = true
+tinyvec.workspace = true
+
+[features]
+std = ["crypto_provider/std"]

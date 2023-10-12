@@ -1,0 +1,42 @@
+[package]
+name = "np_adv"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+array_view = { path = "../array_view" }
+ldt_np_adv.workspace = true
+ldt.workspace = true
+np_hkdf.workspace = true
+np_ed25519.workspace = true
+xts_aes.workspace = true
+crypto_provider.workspace = true
+strum.workspace = true
+strum_macros.workspace = true
+nom = { version = "7.1.1", features = ["alloc"] }
+lazy_static.workspace = true
+sink.workspace = true
+tinyvec.workspace = true
+rand.workspace = true
+
+[features]
+default = []
+devtools = []
+testing = []
+
+[dev-dependencies]
+hex.workspace = true
+rand_ext = { path = "../rand_ext" }
+init_with = "1.1.0"
+serde_json.workspace = true
+anyhow.workspace = true
+test_helper = { path = "../test_helper" }
+criterion.workspace = true
+crypto_provider_default = {workspace = true, features = ["std", "rustcrypto"]}
+np_ed25519 = {workspace = true, features = ["std"]}
+sink = {workspace = true, features = ["std"]}
+
+[[bench]]
+name = "deser_adv"
+harness = false

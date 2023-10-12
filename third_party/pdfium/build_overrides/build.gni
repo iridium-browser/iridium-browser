@@ -1,0 +1,53 @@
+# Copyright 2016 The PDFium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# Variable that can be used to support multiple build scenarios, like having
+# Chromium specific targets in a client project's GN file etc.
+build_with_chromium = false
+
+# PDFium builds don't support building java targets.
+enable_java_templates = false
+
+# Enables assertions on safety checks in libc++.
+enable_safe_libcxx = true
+
+# Whether to use the neon FPU instruction set or not.
+if (current_cpu == "arm") {
+  arm_use_neon = true
+}
+
+# PDFium just uses the Chromium suppression files for now.
+asan_suppressions_file = "//build/sanitizers/asan_suppressions.cc"
+lsan_suppressions_file = "//build/sanitizers/lsan_suppressions.cc"
+tsan_suppressions_file = "//build/sanitizers/tsan_suppressions.cc"
+
+declare_args() {
+  # Android 32-bit non-component, non-clang builds cannot have symbol_level=2
+  # due to 4GiB file size limit, see https://crbug.com/648948.
+  # Set this flag to true to skip the assertion.
+  ignore_elf32_limitations = false
+
+  # Use the system install of Xcode for tools like ibtool, libtool, etc.
+  # This does not affect the compiler. When this variable is false, targets will
+  # instead use a hermetic install of Xcode. [The hermetic install can be
+  # obtained with gclient sync after setting the environment variable
+  # FORCE_MAC_TOOLCHAIN].
+  use_system_xcode = ""
+
+  # Allows googletest to pretty-print various absl types.
+  # Assumes //third_party/abseil-cpp is an available dependency for googletest.
+  gtest_enable_absl_printers = true
+}
+
+if (use_system_xcode == "") {
+  if (target_os == "mac") {
+    _result = exec_script("//build/mac/should_use_hermetic_xcode.py",
+                          [ target_os ],
+                          "value")
+    use_system_xcode = _result == 0
+  }
+  if (target_os == "ios") {
+    use_system_xcode = true
+  }
+}

@@ -1,0 +1,17 @@
+# Copyright 2023 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+group("single_group_per_study_prefer_existing_behavior_seed") {
+  testonly = true
+  data = [
+    "single_group_per_study_prefer_existing_behavior/",
+  ]
+}
+
+group("single_group_per_study_prefer_new_behavior_seed") {
+  testonly = true
+  data = [
+    "single_group_per_study_prefer_new_behavior/",
+  ]
+}

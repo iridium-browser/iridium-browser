@@ -1,0 +1,7 @@
+include_rules = [
+  "+chromeos/components/kiosk",
+  "+components/metrics",
+  "+components/history/core/browser",
+  "+components/sync",
+  "+google_apis",
+]

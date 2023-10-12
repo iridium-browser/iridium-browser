@@ -1,0 +1,17 @@
+[package]
+name = "np_ffi_core"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+array_view.workspace = true
+np_adv.workspace = true
+handle_map.workspace = true
+crypto_provider.workspace = true
+#TODO: Allow this to be configurable!
+crypto_provider_default = {workspace = true, features = ["rustcrypto"]}
+spin.workspace = true
+
+[features]
+std = []

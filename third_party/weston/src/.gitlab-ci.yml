@@ -1,0 +1,423 @@
+# vim: set expandtab shiftwidth=2 tabstop=8 textwidth=0:
+
+.templates_sha: &template_sha 567700e483aabed992d0a4fea84994a0472deff6 # see https://docs.gitlab.com/ee/ci/yaml/#includefile
+# This file uses the freedesktop ci-templates to build Weston and run our
+# tests in CI.
+#
+# ci-templates uses a multi-stage build process. First, the base container
+# image is built which contains the core distribution, the toolchain, and
+# all our build dependencies. This container is aggressively cached; if a
+# container image matching $FDO_DISTRIBUTION_TAG is found in either the
+# upstream repo (wayland/weston) or the user's downstream repo, it is
+# reused for the build. This gives us predictability of build and far
+# quicker runtimes, however it means that any changes to the base container
+# must also change $FDO_DISTRIBUTION_TAG. When changing this, please use
+# the current date as well as a unique build identifier.
+#
+# After the container is either rebuilt (tag mismatch) or reused (tag
+# previously used), the build stage executes within this container.
+#
+# The final stage is used to expose documentation and coverage information,
+# including publishing documentation to the public site when built on the
+# main branch.
+#
+# Apart from the 'variables', 'include', and 'stages' top-level anchors,
+# everything not beginning with a dot ('.') is the name of a job which will
+# be executed as part of CI, unless the rules specify that it should not be
+# run.
+#
+# Variables prefixed with CI_ are generally provided by GitLab itself;
+# variables prefixed with FDO_ and templates prefixed by .fdo are provided
+# by the ci-templates.
+#
+# For more information on GitLab CI, including the YAML syntax, see:
+#   https://docs.gitlab.com/ee/ci/yaml/README.html
+#
+# Note that freedesktop.org uses the 'Community Edition' of GitLab, so features
+# marked as 'premium' or 'ultimate' are not available to us.
+#
+# For more information on ci-templates, see:
+#   - documentation at https://freedesktop.pages.freedesktop.org/ci-templates/
+#   - repo at https://gitlab.freedesktop.org/freedesktop/ci-templates/
+
+variables:
+  FDO_UPSTREAM_REPO: wayland/weston
+  FDO_REPO_SUFFIX: "$BUILD_OS/$BUILD_ARCH"
+  FDO_DISTRIBUTION_TAG: '2023-04-28-add-libdisplay-info.4'
+
+
+include:
+  # Here we use a fixed ref in order to isolate ourselves from ci-templates
+  # API changes. If you need new features from ci-templates you must bump
+  # this to the current SHA you require from the ci-templates repo, however
+  # be aware that you may need to account for API changes when doing so.
+  - project: 'freedesktop/ci-templates'
+    ref: *template_sha
+    file: '/templates/debian.yml'
+  - project: 'freedesktop/ci-templates'
+    ref: *template_sha
+    file: '/templates/ci-fairy.yml'
+
+
+# Define the build stages. These are used for UI grouping as well as
+# dependencies.
+stages:
+  - "Merge request checks"
+  - "Base container"
+  - "Full build and test"
+  - "No-GL build and test"
+  - "Other builds"
+  - pages
+
+
+# Base variables used for anything using a Debian environment
+.os-debian:
+  variables:
+    BUILD_OS: debian
+    FDO_DISTRIBUTION_VERSION: bullseye
+    FDO_DISTRIBUTION_EXEC: 'env FDO_CI_CONCURRENT=${FDO_CI_CONCURRENT} BUILD_ARCH=${BUILD_ARCH} KERNEL_IMAGE=${KERNEL_IMAGE} KERNEL_DEFCONFIG=${KERNEL_DEFCONFIG} bash .gitlab-ci/debian-install.sh'
+
+.ci-rules:
+  rules:
+    - when: on_success
+
+# Does not inherit .ci-rules as we only want it to run in MR context.
+check-commit:
+  extends:
+    - .fdo.ci-fairy
+  stage: "Merge request checks"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+    - when: never
+  script:
+    - ci-fairy check-commits --signed-off-by --junit-xml=results.xml
+    - ci-fairy check-merge-request --require-allow-collaboration --junit-xml=results.xml
+  variables:
+    GIT_DEPTH: 100
+  artifacts:
+    reports:
+      junit: results.xml
+
+.debian-x86_64:
+  extends:
+    - .os-debian
+  variables:
+    BUILD_ARCH: "x86-64"
+    KERNEL_IMAGE: "bzImage"
+    KERNEL_DEFCONFIG: "x86_64_defconfig"
+
+.debian-armv7:
+  extends:
+    - .os-debian
+  variables:
+    BUILD_ARCH: "armv7"
+
+.debian-aarch64:
+  extends:
+    - .os-debian
+  variables:
+    BUILD_ARCH: "aarch64"
+    KERNEL_IMAGE: "Image"
+    KERNEL_DEFCONFIG: "defconfig"
+    QEMU_SMP: 8 # built-in QEmu limit
+
+# Build our base container image, which contains the core distribution, the
+# toolchain, and all our build dependencies. This will be reused in the build
+# stage.
+x86_64-debian-container_prep:
+  extends:
+    - .ci-rules
+    - .debian-x86_64
+    - .fdo.container-build@debian
+  timeout: 30m
+  stage: "Base container"
+
+armv7-debian-container_prep:
+  extends:
+    - .ci-rules
+    - .debian-armv7
+    - .fdo.container-build@debian
+  tags:
+    - aarch64
+  variables:
+    FDO_BASE_IMAGE: "arm32v7/debian:$FDO_DISTRIBUTION_VERSION"
+  timeout: 30m
+  stage: "Base container"
+
+aarch64-debian-container_prep:
+  extends:
+    - .ci-rules
+    - .debian-aarch64
+    - .fdo.container-build@debian
+  tags:
+    - aarch64
+  timeout: 30m
+  stage: "Base container"
+
+# Core templates for all of our build steps. These are reused by all build jobs
+# through the `extends` keyword.
+.build-env:
+  timeout: 15m
+  variables:
+    BUILDDIR: $CI_PROJECT_DIR/build-weston-$CI_JOB_NAME
+    PREFIX: $CI_PROJECT_DIR/prefix-weston-$CI_JOB_NAME
+  before_script:
+  - export PATH=~/.local/bin:$PATH
+  - export XDG_RUNTIME_DIR="$(mktemp -p $(pwd) -d xdg-runtime-XXXXXX)"
+  - export TESTS_RES_PATH="$BUILDDIR/tests-res.txt"
+  - mkdir "$BUILDDIR" "$PREFIX"
+
+.build-with-clang:
+  variables:
+    CC: clang-11
+    CC_LD: lld-11
+    MESON_TOOLCHAIN_OPTIONS: "$MESON_OPTIONS -Db_lundef=false" # clang+ASan+undef=boom
+
+# Extends the core build templates to also provide for running our testing. We
+# run this inside a virtme (qemu wrapper) VM environment so we can test the DRM
+# backend using the 'vkms' virtual driver under Linux.
+.build-and-test:
+  extends:
+  - .ci-rules
+  script:
+  - cd "$BUILDDIR"
+  - meson --prefix="$PREFIX" --wrap-mode=nofallback -Db_sanitize=address ${MESON_OPTIONS} ${MESON_TOOLCHAIN_OPTIONS} ..
+  - ninja -k0 -j${FDO_CI_CONCURRENT:-4}
+  - ninja install
+  - test -n "${QEMU_SMP}" || QEMU_SMP=${FDO_CI_CONCURRENT:-4}
+  - virtme-run --rw --pwd --kimg /weston-virtme/${KERNEL_IMAGE} --kopt quiet --kopt log_buf_len=2M --script-dir ../.gitlab-ci/virtme-scripts --qemu-opts -m 4096 -smp ${QEMU_SMP}
+  - TEST_RES=$(cat $TESTS_RES_PATH)
+  - rm $TESTS_RES_PATH
+  - cp -R /weston-virtme ./
+  - rm weston-virtme/${KERNEL_IMAGE}
+  - exit $TEST_RES
+  artifacts:
+    name: weston-$CI_COMMIT_SHA
+    when: always
+    paths:
+    - $BUILDDIR/*.png
+    - $BUILDDIR/meson-logs
+    - $BUILDDIR/dmesg.log
+    - $BUILDDIR/weston-virtme
+    - $PREFIX
+    reports:
+      junit: $BUILDDIR/meson-logs/testlog-per-test-asan.sh.junit.xml
+
+# Same as above, but without running any tests.
+.build-no-test:
+  extends:
+  - .ci-rules
+  script:
+  - cd "$BUILDDIR"
+  - meson --prefix="$PREFIX" --wrap-mode=nofallback ${MESON_OPTIONS} ..
+  - ninja -k0 -j${FDO_CI_CONCURRENT:-4}
+  - ninja install
+  - ninja clean
+  artifacts:
+    name: weston-$CI_COMMIT_SHA
+    when: always
+    paths:
+    - $BUILDDIR/meson-logs
+    - $PREFIX
+
+# OS/architecture-specific variants
+.build-env-debian-x86_64:
+  extends:
+    - .debian-x86_64
+    - .fdo.suffixed-image@debian
+    - .build-env
+  needs:
+    - job: x86_64-debian-container_prep
+      artifacts: false
+
+.build-env-debian-armv7:
+  tags:
+    - aarch64
+  extends:
+    - .debian-armv7
+    - .fdo.suffixed-image@debian
+    - .build-env
+  needs:
+    - job: armv7-debian-container_prep
+      artifacts: false
+
+.build-env-debian-aarch64:
+  tags:
+    - aarch64
+  extends:
+    - .debian-aarch64
+    - .fdo.suffixed-image@debian
+    - .build-env
+  needs:
+    - job: aarch64-debian-container_prep
+      artifacts: false
+
+.test-env-debian-x86_64:
+  tags:
+    - kvm
+  extends:
+    - .build-env-debian-x86_64
+    - .build-and-test
+  needs:
+    - job: x86_64-debian-container_prep
+      artifacts: false
+
+.test-env-debian-aarch64:
+  tags:
+    - kvm-aarch64
+  extends:
+    - .build-env-debian-aarch64
+    - .build-and-test
+  needs:
+    - job: aarch64-debian-container_prep
+      artifacts: false
+
+# Full build, used for testing under KVM.
+.build-options-full:
+  stage: "Full build and test"
+  variables:
+    MESON_OPTIONS: >
+      -Doptimization=0
+      -Db_coverage=true
+      -Dwerror=true
+      -Dtest-skip-is-failure=true
+      -Dlauncher-libseat=true
+      -Ddeprecated-launcher-logind=true
+      -Ddeprecated-color-management-static=true
+      -Ddeprecated-color-management-colord=true
+  after_script:
+  - ninja -C "$BUILDDIR" coverage-html > "$BUILDDIR/meson-logs/ninja-coverage-html.txt"
+  - ninja -C "$BUILDDIR" coverage-xml
+
+x86_64-debian-full-build:
+  extends:
+    - .test-env-debian-x86_64
+    - .build-options-full
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: $BUILDDIR/meson-logs/coverage.xml
+
+aarch64-debian-full-build:
+  extends:
+    - .test-env-debian-aarch64
+    - .build-options-full
+
+x86_64-clang-debian-full-build:
+  extends:
+    - .test-env-debian-x86_64
+    - .build-with-clang
+    - .build-options-full
+
+aarch64-clang-debian-full-build:
+  extends:
+    - .test-env-debian-aarch64
+    - .build-with-clang
+    - .build-options-full
+
+# Docs should be invariant on all architectures, so we only do it on Debian
+# x86-64.
+docs-build:
+  stage: "Other builds"
+  variables:
+    MESON_OPTIONS: >
+      -Dwerror=true
+      -Ddoc=true
+  extends:
+    - .build-env-debian-x86_64
+    - .build-no-test
+
+# Building without gl-renderer, to make sure this keeps working.
+.build-options-no-gl:
+  stage: "No-GL build and test"
+  variables:
+    MESON_OPTIONS: >
+      -Dsimple-clients=damage,im,shm,touch,dmabuf-v4l
+      -Drenderer-gl=false
+      -Dremoting=false
+      -Dpipewire=false
+      -Dwerror=true
+      -Dlauncher-libseat=true
+
+x86_64-debian-no-gl-build:
+  extends:
+    - .test-env-debian-x86_64
+    - .build-options-no-gl
+
+armv7-debian-no-gl-build:
+  extends:
+    - .build-env-debian-armv7
+    - .build-no-test
+    - .build-options-no-gl
+
+armv7-clang-debian-no-gl-build:
+  extends:
+    - .build-env-debian-armv7
+    - .build-with-clang
+    - .build-no-test
+    - .build-options-no-gl
+
+aarch64-debian-no-gl-build:
+  extends:
+    - .test-env-debian-aarch64
+    - .build-options-no-gl
+
+# Expose docs and coverage reports, so we can show users any changes to these
+# inside their merge requests, letting us check them before merge.
+#
+# This does not build the docs or coverage information itself, but just reuses
+# the docs and coverage information from the x86-64 Debian builds as the
+# canonical sources of coverage information; the docs themselves should be
+# invariant across any architecture or OS.
+docs-and-coverage:
+  extends:
+    - .ci-rules
+    - .debian-x86_64
+    - .fdo.suffixed-image@debian
+  stage: pages
+  needs:
+    - job: docs-build
+      artifacts: true
+    - job: x86_64-debian-full-build
+      artifacts: true
+  timeout: 5m
+  script:
+  - mv prefix-weston-docs-build/share/doc/weston Documentation
+  - mv build-weston-x86_64-debian-full-build/meson-logs/coveragereport Test_Coverage
+  - rm Test_Coverage/gcov.css
+  - cp doc/style/lcov-style.css Test_Coverage/gcov.css
+  - cp doc/style/*.png Test_Coverage/
+  - rm -rf build-* prefix-*
+  artifacts:
+    expose_as: 'Documentation preview and test coverage report'
+    paths:
+    - Documentation/
+    - Test_Coverage/
+
+# Generate the documentation for https://wayland.pages.freedesktop.org/weston/
+# Anything under public/ is published to this URL.
+#
+# Does not inherit .ci-rules as it should only run in our default branch for
+# the upstream repo.
+pages:
+  extends:
+    - .debian-x86_64
+    - .fdo.suffixed-image@debian
+  stage: pages
+  timeout: 5m
+  needs:
+    - job: docs-build
+      artifacts: true
+  script:
+  - export PREFIX=$(pwd)/prefix-weston-docs-build
+  - mkdir public
+  - cp -R $PREFIX/share/doc/weston/* public/
+  artifacts:
+    paths:
+    - public
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_PROJECT_PATH == "wayland/weston" && $CI_BUILD_REF_NAME == $CI_DEFAULT_BRANCH'
+      when: on_success
+    - when: never

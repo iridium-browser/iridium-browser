@@ -1,0 +1,429 @@
+#!tools/lou_checkyaml
+#
+# Comparison of match and multi-pass opcodes
+# ::::::::::::::::::::::::::::::::::::::::::
+#
+# Copyright © 2019 by Bert Frees
+#
+# Copying and distribution of this file, with or without modification,
+# are permitted in any medium without royalty provided the copyright
+# notice and this notice are preserved. This file is offered as-is,
+# without any warranty.
+# ..............................................................................................
+
+display: tables/unicode-without-blank.dis
+
+# multipass-vs-match_common.uti:
+#   include tables/latinLetterDef8Dots.uti
+#   include tables/loweredDigits6Dots.uti
+#   space \s 0
+#   letter ç 4-14
+#   punctuation ! 2346
+#   punctuation . 46
+#   punctuation - 36
+#   sign % 146
+#   sign _ 145
+
+# ..............................................................................................
+
+# simple match replace
+table: |
+  include multipass-vs-match_common.uti
+  noback context "abc" @123
+table : |
+  include multipass-vs-match_common.uti
+  noback context ["abc"] @123
+table: |
+  include multipass-vs-match_common.uti
+  match - abc - 123
+tests:
+  - - "abc"
+    - "⠇"
+
+# lookbehind
+table: |
+  include multipass-vs-match_common.uti
+  always x 456
+  noback context _"x"["abc"] @123
+table: |
+  include multipass-vs-match_common.uti
+  always x 456
+  match x abc - 123
+tests:
+  - - "xabc"
+    - "⠸⠇"
+
+# without the _ it is not a true lookbehind
+table: |
+  include multipass-vs-match_common.uti
+  always x 456
+  noback context "x"["abc"] @123
+tests:
+  - - "xabc"
+    - "⠸⠁⠃⠉"
+
+# lookahead
+table: |
+  include multipass-vs-match_common.uti
+  always x 456
+  noback context ["abc"]"x" @123
+table: |
+  include multipass-vs-match_common.uti
+  always x 456
+  match - abc x 123
+tests:
+  - - "abcx"
+    - "⠇⠸"
+
+# zero-length match (insert)
+# cursor advances at least one so that a zero-length match does not result in an endless loop
+
+# with lookahead
+table: |
+  include multipass-vs-match_common.uti
+  always x 456
+  noback context []"xx" @123
+tests:
+  - - "xxx"
+    - "⠇⠸⠇⠸⠸"
+
+# with lookbehind
+table: |
+  include multipass-vs-match_common.uti
+  always x 456
+  noback context "x"[] @123
+tests:
+  - - "xxx"
+    - "⠭⠇⠭⠇⠭⠇"
+    - xfail: got ⠇⠸⠇
+table: |
+  include multipass-vs-match_common.uti
+  always x 456
+  noback context "xx"[] @123
+tests:
+  - - "xxx"
+    - "⠭⠭⠇⠭⠇"
+    - xfail: got ⠭⠭⠇⠸
+
+# error: characters, dots, attributes, or class swap not found in test part
+# table: |
+#  include multipass-vs-match_common.uti
+#   noback context _"x"[] @123
+# tests:
+#   - - "xxx"
+#     - "⠇⠭⠇⠭⠇⠭"
+
+# beginning of string
+table: |
+  include multipass-vs-match_common.uti
+  noback context `["abc"] @123
+table: |
+  include multipass-vs-match_common.uti
+  noback context `"abc" @123
+table: |
+  include multipass-vs-match_common.uti
+  match ^ abc - 123
+table: |
+  include multipass-vs-match_common.uti
+  match $ abc - 123
+tests:
+  - - "xabc"
+    - "⠭⠁⠃⠉"
+  - - "abc"
+    - "⠇"
+
+# end of string
+table: |
+  include multipass-vs-match_common.uti
+  noback context ["abc"]~ @123
+table: |
+  include multipass-vs-match_common.uti
+  noback context "abc"~ @123
+table: |
+  include multipass-vs-match_common.uti
+  match - abc $ 123
+table: |
+  include multipass-vs-match_common.uti
+  match - abc ^ 123
+tests:
+  - - "abcx"
+    - "⠁⠃⠉⠭"
+  - - "abc"
+    - "⠇"
+
+# wildcard
+table: |
+  include multipass-vs-match_common.uti
+  noback context ["abc"]$a"x" @123
+table: |
+  include multipass-vs-match_common.uti
+  match - abc .x 123
+tests:
+  - - "abcdx"
+    - "⠇⠙⠭"
+  - - "abc!x"
+    - "⠇⠮⠭"
+
+# character classes
+table: |
+  include multipass-vs-match_common.uti
+  noback context ["abc"]$U @123@1 # uppercase letter
+  noback context ["abc"]$u @123@2 # lowercase letter
+  noback context ["abc"]$l @123@3 # letter
+  noback context ["abc"]$p @123@4 # punctuation
+  noback context ["abc"]$d @123@5 # digit
+  noback context ["abc"]$s @123@6 # space
+  noback context ["abc"]$S @123@7 # sign
+  noback context ["def"]$sp @456  # space or punctuation
+table: |
+  include multipass-vs-match_common.uti
+  match - abc %u 123-1  # uppercase letter
+  match - abc %l 123-2  # lowercase letter
+  match - abc %a 123-3  # letter
+  match - abc %. 123-4  # punctuation
+  match - abc %# 123-5  # digit
+  match - abc %_ 123-6  # space
+  match - abc %$ 123-7  # sign
+  match - def %[_.] 456 # space or punctuation
+tests:
+  - - "abcX"
+    - "⠇⠁⡭"
+  - - "abcx"
+    - "⠇⠂⠭"
+  - - "abcç"
+    - "⠇⠄⠈⠉"
+  - - "abc!"
+    - "⠇⠈⠮"
+  - - "abc1"
+    - "⠇⠐⠂"
+  - - "abc "
+    - "⠇⠠ "
+  - - "abc%"
+    - "⠇⡀⠩"
+  - - "def!"
+    - "⠸⠮"
+  - - "def "
+    - "⠸ "
+  - - "defx"
+    - "⠙⠑⠋⠭"
+
+# character sets / custom character classes
+table: |
+  include multipass-vs-match_common.uti
+  attribute xy xy
+  noback context ["abc"]%xy @123
+table: |
+  include multipass-vs-match_common.uti
+  attribute xy xy
+  noback context ["abc"]$w @123
+table: |
+  include multipass-vs-match_common.uti
+  match - abc [xy] 123
+table: |
+  include multipass-vs-match_common.uti
+  match - abc x|y 123
+table: |
+  include multipass-vs-match_common.uti
+  match - abc (x|y) 123
+table: |
+  include multipass-vs-match_common.uti
+  attribute 0 xy
+  match - abc %0 123
+tests:
+  - - "abcx"
+    - "⠇⠭"
+  - - "abcy"
+    - "⠇⠽"
+  - - "abcz"
+    - "⠁⠃⠉⠵"
+
+# alternation
+table: |
+  include multipass-vs-match_common.uti
+  match - abc xy|z 123
+table: |
+  include multipass-vs-match_common.uti
+  noback context ["abc"]"xy" @123
+  noback context ["abc"]"z" @123
+tests:
+  - - "abcx"
+    - "⠁⠃⠉⠭"
+  - - "abcxy"
+    - "⠇⠭⠽"
+  - - "abcz"
+    - "⠇⠵"
+
+# repitition
+
+# single character
+table: |
+  include multipass-vs-match_common.uti
+  match - abc x+y 123
+table: |
+  include multipass-vs-match_common.uti
+  attribute x x
+  noback context ["abc"]%x."y" @123
+tests:
+  - - "abcy"
+    - "⠁⠃⠉⠽"
+  - - "abcxy"
+    - "⠇⠭⠽"
+  - - "abcxxy"
+    - "⠇⠭⠭⠽"
+
+# character set/class
+table: |
+  include multipass-vs-match_common.uti
+  match - abc [xy]+z 123
+table: |
+  include multipass-vs-match_common.uti
+  match - abc (x|y)+z 123
+table: |
+  include multipass-vs-match_common.uti
+  attribute xy xy
+  noback context ["abc"]%xy."z" @123
+tests:
+  - - "abcxz"
+    - "⠇⠭⠵"
+  - - "abcxyz"
+    - "⠇⠭⠽⠵"
+  - - "abcyyxz"
+    - "⠇⠽⠽⠭⠵"
+
+# group of characters
+table: |
+  include multipass-vs-match_common.uti
+  match - abc (xy)+z 123
+tests:
+  - - "abcxyz"
+    - "⠇⠭⠽⠵"
+  - - "abcxyxz"
+    - "⠁⠃⠉⠭⠽⠭⠵"
+  - - "abcxyxyz"
+    - "⠇⠭⠽⠭⠽⠵"
+
+# zero or more
+table: |
+  include multipass-vs-match_common.uti
+  match - abc x*y 123
+table: |
+  include multipass-vs-match_common.uti
+  attribute x x
+  noback context ["abc"]"y" @123
+  noback context ["abc"]%x."y" @123
+tests:
+  - - "abcy"
+    - "⠇⠽"
+  - - "abcxy"
+    - "⠇⠭⠽"
+  - - "abcxxy"
+    - "⠇⠭⠭⠽"
+
+# optional
+table: |
+  include multipass-vs-match_common.uti
+  match - abc x?y 123
+table: |
+  include multipass-vs-match_common.uti
+  noback context ["abc"]"y" @123
+  noback context ["abc"]"xy" @123
+tests:
+  - - "abcy"
+    - "⠇⠽"
+  - - "abcxy"
+    - "⠇⠭⠽"
+  - - "abcxxy"
+    - "⠁⠃⠉⠭⠭⠽"
+
+# limiting repitition (not more than two)
+table: |
+  include multipass-vs-match_common.uti
+  attribute x x
+  noback context ["abc"]%x1-2"y" @123
+tests:
+  - - "abcy"
+    - "⠁⠃⠉⠽"
+  - - "abcxy"
+    - "⠇⠭⠽"
+  - - "abcxxy"
+    - "⠇⠭⠭⠽"
+  - - "abcxxxy"
+    - "⠁⠃⠉⠭⠭⠭⠽"
+
+# exact repitition
+table: |
+  include multipass-vs-match_common.uti
+  attribute x x
+  noback context ["abc"]%x2"y" @123
+tests:
+  - - "abcxy"
+    - "⠁⠃⠉⠭⠽"
+  - - "abcxxy"
+    - "⠇⠭⠭⠽"
+  - - "abcxxxy"
+    - "⠁⠃⠉⠭⠭⠭⠽"
+
+# three or more
+table: |
+  include multipass-vs-match_common.uti
+  attribute x x
+  noback context ["abc"]%x2%x."y" @123
+tests:
+  - - "abcxxy"
+    - "⠁⠃⠉⠭⠭⠽"
+  - - "abcxxxy"
+    - "⠇⠭⠭⠭⠽"
+  - - "abcxxxxy"
+    - "⠇⠭⠭⠭⠭⠽"
+
+# negation
+table: |
+  include multipass-vs-match_common.uti
+  match - abc !x 123
+table: |
+  include multipass-vs-match_common.uti
+  noback context ["abc"]!"x" @123
+table: |
+  include multipass-vs-match_common.uti
+  attribute x x
+  noback context ["abc"]!%x @123
+tests:
+  - - "abcx"
+    - "⠁⠃⠉⠭"
+  - - "abcy"
+    - "⠇⠽"
+  - - "abc"
+    - "⠁⠃⠉"
+
+# negated group
+table: |
+  include multipass-vs-match_common.uti
+  match - abc !(xy) 123
+tests:
+  - - "abcx"
+    - "⠁⠃⠉⠭"
+  - - "abcxy"
+    - "⠁⠃⠉⠭⠽"
+
+# replace with nothing
+table: |
+  include multipass-vs-match_common.uti
+  noback context "abc" ?
+tests:
+  - - "xabcx"
+    - "⠭⠭"
+
+# character classes in match
+table: |
+  include multipass-vs-match_common.uti
+  attribute xy xy
+  noback context $s  @1
+  noback context $d. @3
+  noback context %xy @2
+tests:
+  - - " "
+    - "⠁"
+  - - "y"
+    - "⠂"
+  - - "12345"
+    - "⠄"

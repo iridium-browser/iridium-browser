@@ -1,0 +1,7 @@
+digraph Fallback {
+
+  Manual [label="Manual configuration"];
+  Error [color="red", style=bold];
+
+  Manual -> Error [label="(On any error)"];
+}

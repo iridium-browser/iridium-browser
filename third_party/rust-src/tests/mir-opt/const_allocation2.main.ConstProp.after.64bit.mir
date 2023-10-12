@@ -1,0 +1,61 @@
+// MIR for `main` after ConstProp
+
+fn main() -> () {
+    let mut _0: ();
+    let _1: &[(std::option::Option<i32>, &[&u8])];
+    let mut _2: &&[(std::option::Option<i32>, &[&u8])];
+
+    bb0: {
+        StorageLive(_1);
+        StorageLive(_2);
+        _2 = const {alloc1: &&[(Option<i32>, &[&u8])]};
+        _1 = (*_2);
+        StorageDead(_2);
+        StorageDead(_1);
+        _0 = const ();
+        return;
+    }
+}
+
+alloc1 (static: FOO, size: 16, align: 8) {
+    ╾───────alloc23───────╼ 03 00 00 00 00 00 00 00 │ ╾──────╼........
+}
+
+alloc23 (size: 72, align: 8) {
+    0x00 │ 00 00 00 00 __ __ __ __ ╾───────alloc10───────╼ │ ....░░░░╾──────╼
+    0x10 │ 00 00 00 00 00 00 00 00 00 00 00 00 __ __ __ __ │ ............░░░░
+    0x20 │ ╾───────alloc15───────╼ 02 00 00 00 00 00 00 00 │ ╾──────╼........
+    0x30 │ 01 00 00 00 2a 00 00 00 ╾───────alloc21───────╼ │ ....*...╾──────╼
+    0x40 │ 03 00 00 00 00 00 00 00                         │ ........
+}
+
+alloc10 (size: 0, align: 8) {}
+
+alloc15 (size: 16, align: 8) {
+    ╾───────alloc13───────╼ ╾───────alloc14───────╼ │ ╾──────╼╾──────╼
+}
+
+alloc13 (size: 1, align: 1) {
+    05                                              │ .
+}
+
+alloc14 (size: 1, align: 1) {
+    06                                              │ .
+}
+
+alloc21 (size: 24, align: 8) {
+    0x00 │ ╾─────alloc18+0x3─────╼ ╾───────alloc19───────╼ │ ╾──────╼╾──────╼
+    0x10 │ ╾─────alloc20+0x2─────╼                         │ ╾──────╼
+}
+
+alloc18 (size: 4, align: 1) {
+    2a 45 15 6f                                     │ *E.o
+}
+
+alloc19 (size: 1, align: 1) {
+    2a                                              │ *
+}
+
+alloc20 (size: 4, align: 1) {
+    2a 45 15 6f                                     │ *E.o
+}

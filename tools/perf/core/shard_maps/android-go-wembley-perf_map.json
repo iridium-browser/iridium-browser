@@ -1,0 +1,30 @@
+{
+    "0": {
+        "benchmarks": {
+            "speedometer2": {
+                "abridged": false
+            },
+            "startup.mobile": {
+                "end": 1,
+                "abridged": false
+            }
+        }
+    },
+    "1": {
+        "benchmarks": {
+            "startup.mobile": {
+                "begin": 1,
+                "abridged": false
+            }
+        }
+    },
+    "extra_infos": {
+        "num_stories": 5,
+        "predicted_min_shard_time": 221.0,
+        "predicted_min_shard_index": 0,
+        "predicted_max_shard_time": 277.0,
+        "predicted_max_shard_index": 1,
+        "shard #0": 221.0,
+        "shard #1": 277.0
+    }
+}

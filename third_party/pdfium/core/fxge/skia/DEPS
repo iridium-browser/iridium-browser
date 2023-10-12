@@ -1,0 +1,9 @@
+include_rules = [
+  '+third_party/skia/include',
+]
+
+specific_include_rules = {
+  'fx_skia_device_embeddertest.cpp': [
+    '+fpdfsdk',
+  ]
+}

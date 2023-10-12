@@ -1,0 +1,91 @@
+- // MIR for `main` before ConstDebugInfo
++ // MIR for `main` after ConstDebugInfo
+  
+  fn main() -> () {
+      let mut _0: ();
+      let _1: u8;
+      let mut _5: u8;
+      let mut _6: u8;
+      let mut _7: u8;
+      let mut _8: u8;
+      let mut _12: u32;
+      let mut _13: u32;
+      scope 1 {
+-         debug x => _1;
++         debug x => const 1_u8;
+          let _2: u8;
+          scope 2 {
+-             debug y => _2;
++             debug y => const 2_u8;
+              let _3: u8;
+              scope 3 {
+-                 debug z => _3;
++                 debug z => const 3_u8;
+                  let _4: u8;
+                  scope 4 {
+-                     debug sum => _4;
++                     debug sum => const 6_u8;
+                      let _9: &str;
+                      scope 5 {
+-                         debug s => _9;
++                         debug s => const "hello, world!";
+                          let _14: bool;
+                          let _15: bool;
+                          let _16: u32;
+                          scope 6 {
+                              debug f => (bool, bool, u32){ .0 => _14, .1 => _15, .2 => _16, };
+                              let _10: std::option::Option<u16>;
+                              scope 7 {
+                                  debug o => _10;
+                                  let _17: u32;
+                                  let _18: u32;
+                                  scope 8 {
+                                      debug p => Point{ .0 => _17, .1 => _18, };
+                                      let _11: u32;
+                                      scope 9 {
+-                                         debug a => _11;
++                                         debug a => const 64_u32;
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  
+      bb0: {
+          _1 = const 1_u8;
+          _2 = const 2_u8;
+          _3 = const 3_u8;
+          StorageLive(_4);
+          StorageLive(_5);
+          _5 = const 3_u8;
+          _4 = const 6_u8;
+          StorageDead(_5);
+          StorageLive(_9);
+          _9 = const "hello, world!";
+          StorageLive(_14);
+          StorageLive(_15);
+          StorageLive(_16);
+          _14 = const true;
+          _15 = const false;
+          _16 = const 123_u32;
+          StorageLive(_10);
+          _10 = Option::<u16>::Some(const 99_u16);
+          _17 = const 32_u32;
+          _18 = const 32_u32;
+          StorageLive(_11);
+          _11 = const 64_u32;
+          StorageDead(_11);
+          StorageDead(_10);
+          StorageDead(_14);
+          StorageDead(_15);
+          StorageDead(_16);
+          StorageDead(_9);
+          StorageDead(_4);
+          return;
+      }
+  }
+  

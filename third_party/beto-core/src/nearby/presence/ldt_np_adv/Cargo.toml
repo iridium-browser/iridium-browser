@@ -1,0 +1,40 @@
+[package]
+name = "ldt_np_adv"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+std = []
+
+[dependencies]
+crypto_provider.workspace = true
+array_view.workspace = true
+ldt.workspace = true
+np_hkdf.workspace = true
+xts_aes.workspace = true
+ldt_tbc.workspace = true
+
+[dev-dependencies]
+crypto_provider_default.workspace = true
+crypto_provider_openssl.workspace = true
+rand_ext.workspace = true
+test_helper.workspace = true
+
+rand.workspace = true
+base64.workspace = true
+serde_json = {workspace = true, features=["std"]}
+hex.workspace = true
+anyhow.workspace = true
+criterion.workspace = true
+rand_pcg.workspace = true
+
+# Benchmark only dependency
+crypto_provider_rustcrypto.workspace = true
+
+[[bench]]
+name = "ldt_adv_scan"
+harness = false
+
+

@@ -1,0 +1,103 @@
+# Copyright 2019 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+#
+# NOTE: this BUILD.gn is based heavily on Chrome's, however it does require
+# modification to work properly. When updating, try doing a diff with the
+# new version of the Chrome BUILD.gn if you see build errors.
+
+import("//build_overrides/build.gni")
+import("proto_sources.gni")
+
+config("protobuf_config") {
+  include_dirs = [ "src" ]
+  defines = [
+    "GOOGLE_PROTOBUF_NO_RTTI",
+    "GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER",
+    "HAVE_PTHREAD",
+  ]
+}
+
+config("protobuf_warnings") {
+  cflags_cc = [
+    "-Wno-sign-compare",
+    "-Wno-unused-function",
+  ]
+  if (is_clang) {
+    cflags_cc += [
+      "-Wno-exit-time-destructors",
+      "-Wno-extra-semi",
+      "-Wno-invalid-noreturn",
+      "-Wno-unreachable-code-return",
+      "-Wno-shadow",
+      "-Wno-implicit-int-float-conversion",
+      "-Wno-unreachable-code-break",
+      "-Wno-deprecated-declarations",
+    ]
+  }
+}
+
+# This config should be applied to targets using generated code from the proto
+# compiler. It sets up the include directories properly.
+config("using_proto") {
+  include_dirs = [
+    "src",
+    "$root_gen_dir",
+  ]
+}
+
+source_set("protobuf_lite") {
+  sources = protobuf_lite_sources + protobuf_headers
+
+  configs += [ ":protobuf_warnings" ]
+  public_configs = [ ":protobuf_config" ]
+}
+
+# This is the full, heavy protobuf lib that's needed for c++ .protos that don't
+# specify the LITE_RUNTIME option. The protocol compiler itself (protoc) falls
+# into that category. Do not use in Open Screen code.
+static_library("protobuf_full") {
+  sources = protobuf_sources + protobuf_headers
+  deps = [
+    ":protobuf_lite",
+    "../zlib",
+  ]
+
+  configs += [
+    ":protobuf_warnings",
+    "../zlib:zlib_config",
+  ]
+  public_configs = [ ":protobuf_config" ]
+
+  defines = [ "HAVE_ZLIB" ]
+
+  visibility = [
+    ":protoc_lib",
+    "../chromium_quic/src/third_party:quic_trace",
+    "//third_party/libprotobuf-mutator:*",
+  ]
+}
+
+# Only compile the compiler for the host architecture.
+if (current_toolchain == host_toolchain) {
+  # protoc compiler is separated into protoc library and executable targets to
+  # support protoc plugins that need to link libprotoc, but not the main()
+  # itself. See src/google/protobuf/compiler/plugin.h
+  static_library("protoc_lib") {
+    sources = protoc_sources + protoc_headers
+
+    configs += [ ":protobuf_warnings" ]
+    public_configs = [ ":protobuf_config" ]
+
+    public_deps = [ ":protobuf_full" ]
+  }
+
+  executable("protoc") {
+    sources = [ "src/google/protobuf/compiler/main.cc" ]
+
+    deps = [ ":protoc_lib" ]
+
+    configs += [ ":protobuf_warnings" ]
+    public_configs = [ ":protobuf_config" ]
+  }
+}

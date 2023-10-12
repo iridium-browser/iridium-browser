@@ -1,0 +1,38 @@
+# Copyright 2019 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# NOTE: Only add *_dirs declarations if the libraries have been installed at
+# non-standard locations. See the [documentation](external_libraries.md) for
+# more details.
+declare_args() {
+  have_ffmpeg = false
+  ffmpeg_libs = [
+    "avcodec",
+    "avformat",
+    "avutil",
+    "swresample",
+  ]
+  ffmpeg_include_dirs = []
+  ffmpeg_lib_dirs = []
+
+  have_libopus = false
+  libopus_libs = [ "opus" ]
+  libopus_include_dirs = []
+  libopus_lib_dirs = []
+
+  have_libsdl2 = false
+  libsdl2_libs = [ "SDL2" ]
+  libsdl2_include_dirs = []
+  libsdl2_lib_dirs = []
+
+  have_libvpx = false
+  libvpx_libs = [ "vpx" ]
+  libvpx_include_dirs = []
+  libvpx_lib_dirs = []
+
+  have_libaom = false
+  libaom_libs = [ "aom" ]
+  libaom_include_dirs = []
+  libaom_lib_dirs = []
+}

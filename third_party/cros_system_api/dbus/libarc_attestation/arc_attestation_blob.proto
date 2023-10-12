@@ -1,0 +1,92 @@
+// Copyright 2023 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package arc_attestation;
+
+// CrOSVersionAttestationVersion is an enum that denotes the device type the
+// blob is generated on and the version of the blob, for the ChromeOS Version
+// Attestation Blob.
+enum CrOSVersionAttestationVersion {
+  // CROS_BLOB_VERSION_UNSET indicates that the blob version is not set, server
+  // should reject this blob as invalid if this value is present.
+  CROS_BLOB_VERSION_UNSET = 0;
+
+  // CROS_BLOB_VERSION_TPM2_FORMAT_1 is the first version of ChromeOS-specific
+  // Blob used by devices with a TPM2.0 chip. This includes cr50 and ti50
+  // devices.
+  CROS_BLOB_VERSION_TPM2_FORMAT_1 = 1;
+}
+
+// This message is used to hold all information needed to remotely verify the
+// ChromeOS version. It is designed to abstract away different underlying
+// secure element or TPM.
+message CrOSVersionAttestationBlob {
+  // Denotes the version and device this is generated on.
+  CrOSVersionAttestationVersion version = 1;
+
+  // A TPM certifying key is a key provisioned with the TPM's Attestation
+  // Identity Key (a key outlined in TPM standard) through the ChromeOS PCA
+  // (Privacy Certificate Authority). Its task is to certify any TPM related
+  // data in this blob, such as PCR or NVRAM Quotation.
+  // This field contains the entire x.509 cert chain.
+  // Currently, this field is populate for all supported devices and blob
+  // version.
+  bytes tpm_certifying_key_cert = 2;
+
+  // kernel_cmdline_quote contains a PCR quotation of the PCR that have the
+  // kernel commandline measured into it.
+  // For TPM2_FORMAT_1 version, this field will contain TPM2B_ATTEST, whereby
+  // extraData in TPM2B_ATTEST is set to the challenge.
+  // The quotation is generated with TPM2_PCR_QUOTE.
+  // Note that TPM2B_ATTEST and the TPMS_QUOTE_INFO within does not contain
+  // the PCR content itself, but the hash of it, therefore to verify it, the
+  // server side should:
+  // 1. Compute the hash of kernel_cmdline_content field below.
+  // 2. Simulate the PCR Extend process to compute the resulting PCR value.
+  // 3. Compute the hash of resulting PCR value and see if it matches what's
+  //    in TPMS_QUOTE_INFO.
+  // Server side should also verify the quote PCR is PCR3.
+  bytes kernel_cmdline_quote = 3;
+
+  // Same as above, but contains the TPMT_SIGNATURE part of the quote in DER
+  // format.
+  bytes kernel_cmdline_quote_signature = 4;
+
+  // kernel_cmdline_content contains the raw content of /proc/cmdline.
+  // Its content can be verified together with the kernel_cmdline_quote above.
+  // Within the kernel command line, there's a key named
+  // "cros_lsb_release_hash" that contains the hex-encoded SHA256 hash of
+  // lsb_release_content field below.
+  // Currently, this field is populated for all supported devices and blob
+  // version.
+  bytes kernel_cmdline_content = 5;
+
+  // lsb_release_content contains the raw content of /etc/lsb-release
+  // This file contains the ChromeOS version. Note that not all fields in the
+  // file can be relied upon. See this document for more detail:
+  // https://chromium.googlesource.com/chromiumos/docs/+/HEAD/os_config.md#LSB
+  // Currently, this field is populated for all supported devices and blob
+  // version.
+  bytes lsb_release_content = 6;
+
+  // kernel_antirollback_quote contains an NVRAM quotation of the NVRAM that
+  // holds the kernel antirollback version.
+  // For TPM2_FORMAT_1 version, this field will contain the concatenation of
+  // TPM2B_NV_PUBLIC, TPM2B_ATTEST and TPMT_SIGNATURE, whereby extraData in
+  // TPM2B_ATTEST is set to the challenge.
+  // The quotation is generated with TPM2_NV_Certify.
+  // The NVRAM content is in TPM2B_ATTEST and can be verified directly.
+  bytes kernel_antirollback_quote = 7;
+}
+
+// This message is used to hold all additional information needed to validate
+// a ChromeOS system for the purpose of Android Remote Key Provisioning (RKP).
+message CrOSSpecificBlob {
+  // Records the version attestation information.
+  CrOSVersionAttestationBlob version_attestation = 1;
+}

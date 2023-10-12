@@ -1,0 +1,35 @@
+{
+    // See loading.py  or `crossbench loading --help` for more details.
+    // Usage:
+    //   crossbench loading --page-config=config.hjson
+    pages: {
+        // Example below will result in:
+        // A Scenario named = Google and will perfom the actions listed synchronisly
+        // Check class Action for supported actions
+
+        // Time suffixes accepted:
+        //   milliseconds: ["ms", "millis", "milliseconds"]
+        //   seconds:      ["s", "sec", "second", "seconds"]
+        //   minutes:      ["m", "min", "minute", "minutes"]
+        //   hours:        ["h", "hrs", "hour", "hours"]
+
+        Google: [
+            { action: "get", url: "https://www.google.com", duration: "15s"},
+            { action: "scroll", value: "down", duration: "3s"},
+        ],
+        Amazon: [
+            { action: "get", url: "https://www.amazon.com"},
+            { action: "wait", duration: "5s"},
+            { action: "scroll", value: "down", duration: "10s"},
+        ],
+        Youtube: [
+            {
+                action: "get",
+                url: "https://www.youtube.com",
+                timeout: "20s",
+                ready-state: "interactive"
+            },
+            { action: "scroll", value: "down", duration: "8s"},
+        ],
+    },
+}

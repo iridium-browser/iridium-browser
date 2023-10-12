@@ -1,0 +1,74 @@
+{{header}}
+{{object 1 0}} <<
+  /Type /Catalog
+  /Pages 2 0 R
+>>
+endobj
+{{object 2 0}} <<
+  /Type /Pages
+  /Kids [3 0 R]
+  /Count 1
+>>
+endobj
+{{object 3 0}} <<
+  /Type /Page
+  /Parent 2 0 R
+  /Contents 4 0 R
+  /Resources <<
+    /ColorSpace <<
+      /CS0 5 0 R
+    >>
+    /ProcSet [
+      /PDF
+      /ImageC
+      /ImageI
+    ]
+    /XObject <<
+      /Im0 6 0 R
+    >>
+  >>
+>>
+endobj
+{{object 4 0}} <<
+  {{streamlen}}
+>>
+stream
+150 0 0 150 200 200 cm
+/Im0 Do
+endstream
+endobj
+{{object 5 0}} [
+  /Indexed
+  /DeviceRGB
+  0
+  <000000>
+]
+endobj
+{{object 6 0}} <<
+  /BitsPerComponent 8
+  /ColorSpace 5 0 R
+  /Filter [/ASCIIHexDecode /JPXDecode]
+  /Height 200
+  /Name /X
+  /Subtype /Image
+  /Type /XObject
+  /Width 200
+  {{streamlen}}
+>>
+stream
+0000000c6a5020200d0a870a0000001c667479706a703220000000006a7032206a7078626a7078
+200000001e7272657101f8f80005000180000540000c20001210002d080000000000526a703268
+0000001669686472000000c8000000c80001070701000000000f636f6c72010201000000100000
+001170636c7200010307070700000000000014636d6170000001000000010100000102000000bb
+6a703263ff4fff5100290000000000c8000000c80000000000000000000000c8000000c8000000
+00000000000001070101ff52000c00010001000503030001ff5c00134040484850484850484850
+484850484850ff90000a0000000000160006ff93df80281150548af0ff90000a00000000000f01
+06ff9380ff90000a00000000000f0206ff9380ff90000a00000000000f0306ff9380ff90000a00
+000000000f0406ff9380ff90000a00000000000f0506ff9380ffd9
+endstream
+endobj
+{{xref}}
+{{trailer}}
+{{startxref}}
+%%EOF
+

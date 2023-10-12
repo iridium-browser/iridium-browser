@@ -1,0 +1,9 @@
+include_rules = [
+  '+base',
+  '+core',
+  '+fpdfsdk',
+  '+fxjs',
+  '+public',
+  '+v8',
+  '+xfa'
+]

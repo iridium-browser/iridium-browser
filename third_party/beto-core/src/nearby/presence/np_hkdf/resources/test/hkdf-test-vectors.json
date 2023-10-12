@@ -1,0 +1,2802 @@
+[
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "99D59E9A0A1761D40F4F28E1D56F4C25",
+      "derived_salt_first_section_no_de": "4D02FD0C02250E221A8C63A1A9865AE2",
+      "derived_salt_first_section_third_de": "8A72AE14A6EA06DAD91CC5970FBD005F",
+      "section_salt": "C561AB4667AA9D7E126E79F060BAD04F"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "05B8575BCA2486B5A1DD5D7D",
+      "extended_signed_metadata_key_hmac_key": "072C62C8F3A83F2ED0EEDD3107249160FF2ABEEDBEBA4607EF517A60F6640C7C",
+      "extended_signed_section_aes_key": "4DF7DE7DECCF54059C259EC7529D8AF8",
+      "extended_unsigned_metadata_key_hmac_key": "DC9FC71D78B822B6763ED1058E77DFCEF41B5F9F4810330AE034F962700EE225",
+      "extended_unsigned_section_aes_key": "A4E14FCB637F18E3B908635B67F4695B",
+      "extended_unsigned_section_mic_hmac_key": "C456B4C30D6E8F33B2D4010D656E3321ACF572EE09C831A87177B04F0F692AEF",
+      "key_seed": "E78C9A018A4B81DD837D9C7E2995B265E3363AAE9E9F7A46D1E0ECC81689D004",
+      "legacy_ldt_key": "E584BE2B557549287AAF196A765A0BB7F26F81210FFBA9AFE314ED0A4912BC4098779896121E6F0DAFFB30A70F358854C984611C4C249D48D8793F35512CBCE7",
+      "legacy_metadata_key_hmac_key": "EF9805022265A8B11D56B8E9EB2A17307EFC258EA1B8CEF70380BE6A3A3B1F43",
+      "legacy_metadata_nonce": "2ED7B79A45C428DFB747460B"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "202A",
+      "expanded_salt": "BBB2F537324B844F10631A119EB7C1C0"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "EFB7E58C4EF1CE656C9D2691CD46880E",
+      "legacy_metadata_key": "E36847D19B3DB1715E6542D66205"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "3B9EB63E2B808E95384B37049EC52296",
+      "derived_salt_first_section_no_de": "DA32C8270314D33E521BD6D455CEBAED",
+      "derived_salt_first_section_third_de": "FED4AB32F733BBD3A1F6CC3568925182",
+      "section_salt": "E6F154A2B223214012758A37E5EEEF10"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "ABA8038F9AF71FC6C1DA0AA4",
+      "extended_signed_metadata_key_hmac_key": "D65DA42911CD5ED334C530F869DB03C6614CA35E6FA866D9E38E69C777ABB6DA",
+      "extended_signed_section_aes_key": "A017DA593FF63BDF6FE6F77ECFD2AB5E",
+      "extended_unsigned_metadata_key_hmac_key": "A38246B6BD7F50873ACB4C04E0EC64FC189F64055D297E0965D98EEE19173A10",
+      "extended_unsigned_section_aes_key": "6727FBCBDC7B6C29F3ED05346661ADD6",
+      "extended_unsigned_section_mic_hmac_key": "E5DC924147B60D7F39EAA86AD504DB3C37230DBF79EDAB9005150135443864BF",
+      "key_seed": "80FCB0995D122213A13491854547AE8DC1F9DA0FBCDC425EF8CAE2F1621B5123",
+      "legacy_ldt_key": "791FFF186FAB641481FA4F9CED1FA84BE86FD44118214C4D911C7FED6E72367DD7E7D516CA45EBA6F39140D735EAE911C9FD41FF64AA5A1D6FAB6945EF95ACC7",
+      "legacy_metadata_key_hmac_key": "FB0D2011320B53ADC656F21ADAC39599A84660CC06E01E6BF71FA3A13EC7017F",
+      "legacy_metadata_nonce": "65E4371B55813FF7B1EF282B"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "8527",
+      "expanded_salt": "41DF3C96FD61381D21C6B33C4ABF109B"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "D3CFD17D054FAEBD7E7FC121915090B3",
+      "legacy_metadata_key": "788B30E87219D982203B007557BE"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "29F63E30C4CA477654EA633EF851EF2C",
+      "derived_salt_first_section_no_de": "9F1DA62A3038226B6E1A0B7BA3AE6735",
+      "derived_salt_first_section_third_de": "078A761182B0E4C9FAB615B1B5BD76F3",
+      "section_salt": "3EFE885D2597608370E56E69A0EBBE08"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "3F20992295F10AD806832D05",
+      "extended_signed_metadata_key_hmac_key": "74273A7D5F63F7E8F319716489804EF7B0693EE94831B24B94DEC7916B3A7E75",
+      "extended_signed_section_aes_key": "95C76B3AB159ECC6AA7AF3806E065EC7",
+      "extended_unsigned_metadata_key_hmac_key": "91ACB7139211ABCEEFD27C3371D8E8E3DA4AA1EF62DE05331A6A97671E4C1E13",
+      "extended_unsigned_section_aes_key": "A6A6E1AB38E8D1E1734D8E6F2ED72F55",
+      "extended_unsigned_section_mic_hmac_key": "81DF7CFC39442A2A065D795A1B836FE11A1E9EDA04DDF5C206A6C5E35DB37442",
+      "key_seed": "49F89927FDFEE5496504B4A130919BA8967C66E28BEAD4525DFEFCC704A18423",
+      "legacy_ldt_key": "C298669D7FFAE75E0DF93574FBCB1FF2ED135A0211256FCD6942981B832FBE35AD444D1678697DAF07F5D8A9E117CC86C3E57BB6BDB8689DF9CF969F097E68BA",
+      "legacy_metadata_key_hmac_key": "AF3EBA58151897927BE02FD78E68AAF90675CD8D556800B736752426ECD48764",
+      "legacy_metadata_nonce": "BED3836FD96FD34EB7FC9983"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "BE30",
+      "expanded_salt": "66BC953964F357EE08DD1C7668A79D6A"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "8C16CCF3C80E07746B1F8471932A1FE5",
+      "legacy_metadata_key": "74135EB8B0F379AAA4D4478ADE7F"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "82AD47824247F00924ECF0A43621BC57",
+      "derived_salt_first_section_no_de": "C737B65B994BF8CD872CA41BDB8A53A7",
+      "derived_salt_first_section_third_de": "9BB8BB55E1DE5129A43AC0EA937B4430",
+      "section_salt": "72C9E759C172DA23B71FB6B0C6ED8CC7"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "80921E0D404179D9F04DC155",
+      "extended_signed_metadata_key_hmac_key": "B9B1F73D7FCFD25EB6A62B788032C71104926922C436A137B95A46D7B63C5EE6",
+      "extended_signed_section_aes_key": "85C1D9D14D09C0722DCFF12643CF2669",
+      "extended_unsigned_metadata_key_hmac_key": "F89C26264B27E1A265C60D69A20AE73222CE9E2F68E0F1D71C6DEF936C4092D0",
+      "extended_unsigned_section_aes_key": "43639BFCEBDF4EE61629156E04F92EA0",
+      "extended_unsigned_section_mic_hmac_key": "AF81B5A56EC2D2541E46AB2F9F583A48155A2F9BB272372E8064E446BE8A182A",
+      "key_seed": "286E2029CF579A26495BE93926BC663732C46DE57049C1A5E2BEBFE03A12A096",
+      "legacy_ldt_key": "ED36084F2492B19D07D5A09D174C16A01B8AFEAF27C86EC145CEAD08C8BE67A80BCFF79C40F7E63019B81821A715DFEFCA273F467A176C61D7A024BC245A6B8E",
+      "legacy_metadata_key_hmac_key": "2A48789FF8B93282B4D483566E9FF4DFB65AF5FBB869BAEF6C408465A310879D",
+      "legacy_metadata_nonce": "6803BD4BD4D435930449C17E"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "3353",
+      "expanded_salt": "C86C20A42866236AB1CD9F1E815DDFD5"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "95E24D5EA5EBA3152427BF48A3781BDC",
+      "legacy_metadata_key": "4FE2300F2CA3C469959DC0A5510D"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "98C14D785DD885F3D039C8F84EB65B81",
+      "derived_salt_first_section_no_de": "94C66E08758D83DCE457073C6B911483",
+      "derived_salt_first_section_third_de": "1BAED8E606422F18BC5CCD3F649BAEE6",
+      "section_salt": "9D82CCB568AEFB50C4D1061D29220A63"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "05B2831B07DF537F173ED291",
+      "extended_signed_metadata_key_hmac_key": "D120FC54257B1EA765E2D210C6F77D5066404601BBAC598725BDE993CCA9D90B",
+      "extended_signed_section_aes_key": "52605A8345524539B05A4DD5DD7A51EC",
+      "extended_unsigned_metadata_key_hmac_key": "ED44D698082772261DB4F47F37999E5474523A75A5F046A671B9138086A31B7A",
+      "extended_unsigned_section_aes_key": "8A0EC8AE2F2177300A418614507F0F27",
+      "extended_unsigned_section_mic_hmac_key": "E7456EDF9F5B5F614FDF8C88BF45B897307E2A48405FE3DC0F4B6966E9693C04",
+      "key_seed": "4F1E079363BF2CF5C475F0D927C36B81FBEC8B4F323A0417184414914AC95ADB",
+      "legacy_ldt_key": "BCB0EFC03494AD2260CE8925A140E58FA12FF5C6D59B467D6C4C6F616D0DEE6212DF667F5144F29E6DB4F04443EC2143A429F49189D4B96B077469D12FB609B7",
+      "legacy_metadata_key_hmac_key": "E43D59616850DA473A9820F0F4215FB23E0BCBFF91360EC9A8DCB2166DD360FF",
+      "legacy_metadata_nonce": "EDE3166B65C4FFCE477B0344"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "D3B5",
+      "expanded_salt": "75DF7B4DAE71EAA2531A2A66BD67CC34"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "24921B2F2ADDC07DE0E4818DF0FA218D",
+      "legacy_metadata_key": "F36505BC7D272E0A61E6F825CBCD"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "A188BBEE6CBAB5C972EE985C21ABF21E",
+      "derived_salt_first_section_no_de": "5170EA5075FD2D3346430FE8781E352C",
+      "derived_salt_first_section_third_de": "A7280620B2E6907C765DB1B005C56485",
+      "section_salt": "C362D9DEEAB32835AADB2713E86AA3BE"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "BD6393FDA5A002CF968AD7F9",
+      "extended_signed_metadata_key_hmac_key": "6CAFF8DE3681C4445926AF1CB615B8A7EA39687BD24597384002F0EF1BFE7FC2",
+      "extended_signed_section_aes_key": "03A107EEEDE319EC3C14B287533F26F9",
+      "extended_unsigned_metadata_key_hmac_key": "48107D08007213F545238626291ADF3963F71D64A7E42D859B77F5B5FED3DEDB",
+      "extended_unsigned_section_aes_key": "918832BE7D5E3E5DCB8D6FFCFC53324C",
+      "extended_unsigned_section_mic_hmac_key": "A0E2D0EE71984DD82D3AC1BDDD030913D4BC9BD276E71E2BEDB57290B0AD652B",
+      "key_seed": "7B1FB28E5884B2B7DEEDC2620A87E729C1AA5E3810C56F59FAAE375BA22750D8",
+      "legacy_ldt_key": "00A9B6FD99AF13743AA3B6E31381E4321EF15F21D4DF1D8B904307896ABB7ACE185526619BDE388E462847F178F32439245D8A4AD45AA26759DAFB751B6BB544",
+      "legacy_metadata_key_hmac_key": "27F5E15D51C393501B5C9AC3254A8FADDE756110C8E8A952DE2FD58AB3EFD16A",
+      "legacy_metadata_nonce": "DEC66637548279AB556A1219"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "781C",
+      "expanded_salt": "28C257CC0BDEFCDC63D28B14D38A5E9B"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "DD89372C6BC8038EF866314AE0015DBB",
+      "legacy_metadata_key": "D0D0C08326310877A07002234539"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "425882E16247B61965C2CB122571CFCF",
+      "derived_salt_first_section_no_de": "0C8429B057889FF103029651B0178DB1",
+      "derived_salt_first_section_third_de": "61F70C6EA361790E715295EB500A9DF6",
+      "section_salt": "2BE5976B6054DC8EC9B517B03FA25754"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "22E652B9D05090C3CD17A386",
+      "extended_signed_metadata_key_hmac_key": "B1F52377B751B3CD5456DF79607FF00F47388F2063BE559A151B7B9985030D9A",
+      "extended_signed_section_aes_key": "6C6A2C0C4FB7B10E71D4B9C90DCF97D4",
+      "extended_unsigned_metadata_key_hmac_key": "AE15A2095E41AFC7E33ED5A4F1210E36BC8B08761DCA1A50C8AAAF4D18804096",
+      "extended_unsigned_section_aes_key": "FF93EDCD2458BD330CB8F6461CB5F3FE",
+      "extended_unsigned_section_mic_hmac_key": "2ED5F7C30A3EBF854A6EC62863D9C22CA14BB8B3EE34C2E4CA48AA1972E6D74D",
+      "key_seed": "674EAC48402573CBF8D9C71F862F2F773330F1C8777B86D6C1C054DCBDD7F5BF",
+      "legacy_ldt_key": "C98FED8E0671B3B73E31019FACA33127F2EAE11BBC8D6D503E7C4C36DCDF42F8711EAFAD6E64AE2EDB6D2870203B64EF74388AA0FDFDEC9372AE06E4B14639BD",
+      "legacy_metadata_key_hmac_key": "C39A23027BA99068BB113712449125BE8B4E891C92B9B822EF14FEEFF64D01F3",
+      "legacy_metadata_nonce": "03759271308F135FCD00566D"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "F14E",
+      "expanded_salt": "1F35B6CAACCB4DABC88F014F186FD58A"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "4DBA128B48257E51906815A44EBB31C8",
+      "legacy_metadata_key": "1BCB5E77E87246FB145B53599415"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "C210EEC7E5F37ED5DD585CA78E4F461C",
+      "derived_salt_first_section_no_de": "512F88EC4D2C1D98155A79C50766881E",
+      "derived_salt_first_section_third_de": "5C51EAFD14CCB470D455818FC233951D",
+      "section_salt": "1F6F7DCED1EAB1B9AC53C24BF29D9E74"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "6EAE4DC82AB5941A1E09FEF9",
+      "extended_signed_metadata_key_hmac_key": "8646A00AC8922FCCC259807B3B9EAEC556701927DC03ACADCB1DE1517F2C6C3B",
+      "extended_signed_section_aes_key": "DA63146BE1A81A806C6DFADB9076E6C8",
+      "extended_unsigned_metadata_key_hmac_key": "2F437D2C9BD771D02A87C0E17CB053958F62DC13559413C871FC01B4E5FB496E",
+      "extended_unsigned_section_aes_key": "9366D940C998995D7846B28F0FCA05E1",
+      "extended_unsigned_section_mic_hmac_key": "092BC3A92351F4673A37BFEC4BC62F8FA042EE9E5ACF391B2668142015570658",
+      "key_seed": "6028F5FEE8F66DC80D4F1C4155D7DCF9495C4D98DD481AB2BC30C9FDF0672A2E",
+      "legacy_ldt_key": "AC718CAC29033FF1FF300BC44B99BFD97F5419AE42BD79837E19D52C115C01FE32F0B2AA678D756B088BDD276CF6402B729A69F2689FFF6A035B5C9B6363A49C",
+      "legacy_metadata_key_hmac_key": "B0A90F0DBC1ABA5AEE0F4A8CABD5764EBC83F3BD618656BDA509E594A91E4D52",
+      "legacy_metadata_nonce": "4788CA94F7A0AB258486D3F7"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "18BD",
+      "expanded_salt": "1702E72B0270FAB301ECFAE901FEB45F"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "ED1208D4B3435736B92075B4E2DFBA3D",
+      "legacy_metadata_key": "AF7F068F3FD3FEF1B9ECA66F33A0"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "B27EF32036E2AD671536F7CDFCF3D8D4",
+      "derived_salt_first_section_no_de": "3841B50190E59B72F7F47281ED980317",
+      "derived_salt_first_section_third_de": "1658D434AD2BD8190467E009476C1F7B",
+      "section_salt": "F9172022012C774D058C8383D2D4235F"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "F7BFDC47005FE9892DD1A940",
+      "extended_signed_metadata_key_hmac_key": "9864300E87DD5F34284AA47C00381B36C69813423B6BFCB14250715BAFF34259",
+      "extended_signed_section_aes_key": "93C04B6BA7CF6F4A9B27615C900086B0",
+      "extended_unsigned_metadata_key_hmac_key": "4CF4F78468301DC365A2C27BF4D544CE525F3CACDB471868FFCFF896D896155C",
+      "extended_unsigned_section_aes_key": "908CC6D593CD9401D47CB850BF4812F9",
+      "extended_unsigned_section_mic_hmac_key": "68283A8DDFC70B5B523E8ADB8DD98C209DD458140E3ED6C61509D4259DA8D4BE",
+      "key_seed": "F04F58F4C6158F4E05EABEADADC3453F3A75FC3B6D331B45FD5589D0B16D5F1C",
+      "legacy_ldt_key": "AEC307B3A752EB1C5FDFC64843A93ABF5D2674A9505C736D131B1C84BB89A17D09CAC89BEFB1274B56262CAB56F04EB013A4475B518170C321AF4DFEB3F3CF27",
+      "legacy_metadata_key_hmac_key": "2C16FE1F32E5077BBB9C659C55BD9A77600FCA5D45FCE0430127514E513973A5",
+      "legacy_metadata_nonce": "628F79EC288BDD800A4ED6BF"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "94A0",
+      "expanded_salt": "9201A2F2DAB3488533230CD580588267"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "735ACB0A5B5A47743F22EAAD1F64F8BB",
+      "legacy_metadata_key": "1DD0B9A032ADAB96501E851CD707"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "64C97FC6CB9A499116614733309E473D",
+      "derived_salt_first_section_no_de": "3B2B9FCD5DEAEE859EFE8B7C2C8FF150",
+      "derived_salt_first_section_third_de": "38999F9FDE0BB4A02621675A265C0F53",
+      "section_salt": "E152E9CA82C846268793A13AC2CFEE01"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "0FAE226D0C037417DF2CC8F1",
+      "extended_signed_metadata_key_hmac_key": "B03AF5D25B64EA34DEA4A04B30E234D0C45D0844AD3D76E9D4BDF72B9E1634EF",
+      "extended_signed_section_aes_key": "419A9B17073BB3A7DEA566D14B322675",
+      "extended_unsigned_metadata_key_hmac_key": "8CD58449D0AF3398E3649F977A8FBC55573464F4E25818E8ED94230A270E5B42",
+      "extended_unsigned_section_aes_key": "52CFA465829A0AF17FCD496C302E7094",
+      "extended_unsigned_section_mic_hmac_key": "B098BCE7ECBE5DC667C7DCD99B186B3294C442783741A2AF02973B9C1CEC3E7A",
+      "key_seed": "26005EBE2B54878D7D51E8AE0A133F601F845706CFFE22EF5406E848D743CDBD",
+      "legacy_ldt_key": "86F94EB0B3514972F54E4B072694BE295FACB1C9B1CFFEC97F7AEEE7E7A4B2EEF8D83CF3F46A1046553F0FBA739B512BEB70E8294AB3A8E9D354DC15904F8FE4",
+      "legacy_metadata_key_hmac_key": "6C5F27B8758F150413A0E723AD2C87A89FC8E0922D6AFC9C4BEE7D640564F20E",
+      "legacy_metadata_nonce": "C9E22F8D09D4F4593A61FE7C"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "35EE",
+      "expanded_salt": "6DD6FC15DC3871D1664A44C78A886FC4"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "D1B46D2631F70EEDEB29AA47D4437686",
+      "legacy_metadata_key": "1416021C29E743088B02B41B571E"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "9651CD6607E54363129153CA5315FB86",
+      "derived_salt_first_section_no_de": "0A54495999A555463622F3875F8B0589",
+      "derived_salt_first_section_third_de": "E47744FCFD5DC037621555A11E000988",
+      "section_salt": "5EECCF54ED89546D031A0103EDB17A2E"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "57F6D756297E1693FB8A1D4A",
+      "extended_signed_metadata_key_hmac_key": "1A7B18552F2818F7B17106C0D32337D33F69903604CFA6807DA5DCF2746108E3",
+      "extended_signed_section_aes_key": "194961312A320FBF060414DB8650ED9A",
+      "extended_unsigned_metadata_key_hmac_key": "25B117B4EE587290C4F7CEC17115E104FF96E7EFED13033C1DD4705BAFF3694A",
+      "extended_unsigned_section_aes_key": "B5E64E57E00D022C4A1ED7F1841B5A1D",
+      "extended_unsigned_section_mic_hmac_key": "D499BB4DA43B7ECCB3499AC1B5B0E251AEC407EBCA917F0EB08838BD618476DD",
+      "key_seed": "D3457A18BF634AD2166223C38B4A1BD74C66DCCE809D410CAD1218F56EA363D4",
+      "legacy_ldt_key": "D32BB668B2AA256B27339F45F228672FD51BCD73C3C0C044E9A9E27E282D867BF2A7ABDE2300452BDBE49B79C3457F65F38186A59D9B88FD5164365212DAB6C6",
+      "legacy_metadata_key_hmac_key": "10A19D2EEA33F510D969E3A7036D1F288079A6D242EA2B1376DBEBB02F49C503",
+      "legacy_metadata_nonce": "CA9A9DBF70527FBBDD94E59D"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "00CA",
+      "expanded_salt": "B2D541DDC7E007FD5D9B394E66C33319"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "0A4F31037E77231B0B51C8A447E3E329",
+      "legacy_metadata_key": "03E5B8D922677CE5DC011BAFFBEF"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "9B1DCFE8149C1EBD905A5F2B71341C05",
+      "derived_salt_first_section_no_de": "BEF89573FEA45BEE4E9BF988824904F6",
+      "derived_salt_first_section_third_de": "41E32C74EDC315E7929DDA7FBC91CC8E",
+      "section_salt": "EBF3C70C17A01679A563A39FA46D7F0C"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "605D86FAD007BC4EA0878430",
+      "extended_signed_metadata_key_hmac_key": "EBA52456957CA17961D098C55159D6D79C3451E5738468586D4187B15300ED2D",
+      "extended_signed_section_aes_key": "76FD6B925AA863C06D42FBEC0F29B98C",
+      "extended_unsigned_metadata_key_hmac_key": "C80E7E9DE0E1357E95AEBABEA46C14C4065D8FB1B4B4CF755413B3F5EBD930C7",
+      "extended_unsigned_section_aes_key": "AF6EB46E7DE399B15CBBB1F54BA7436A",
+      "extended_unsigned_section_mic_hmac_key": "0F3EB356450F0A6C99BCBA4D69899631CCB0E18D5CAAFBF844D61B741EA44E9C",
+      "key_seed": "3652F27504B90685287D9F9EFC800244A4F250F153B825F00389A5578D50F9D5",
+      "legacy_ldt_key": "656543A5C4CA235799BFA3EDEF3734AA57830F3EB0D4BC94BC42A9E4265D0DA8838B9E69414F07E0F933784DD054194E660F604F345EFBCD694C2F466499747F",
+      "legacy_metadata_key_hmac_key": "836A63241862CFE7B29FD00B05A9438D293E05E460C0E77C56804461803DCCDA",
+      "legacy_metadata_nonce": "E188B583B00F2910B16EF19F"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "E5D8",
+      "expanded_salt": "FBEED7B8E11129FBB42F282F988B1A81"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "95124B323D4373E93FD74091B97406D6",
+      "legacy_metadata_key": "CE875009453430A68CDB21A04D5F"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "A04BF6A2FF522EFB9682A288C93BB656",
+      "derived_salt_first_section_no_de": "57DC6F81CE5B7432540EB145659C56D1",
+      "derived_salt_first_section_third_de": "769504709A8FCC5EAC8927039CE9DA64",
+      "section_salt": "B10E4B3856910D59B98435355E69AB25"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "C0FC2A8AD5C0AD828ACD91F5",
+      "extended_signed_metadata_key_hmac_key": "720F677655EB635563DE99FA07E045D7074C1E099401341E7A7A3C93B55BAD55",
+      "extended_signed_section_aes_key": "BDE744442E32EBA45FCC5C6340342AE9",
+      "extended_unsigned_metadata_key_hmac_key": "1B380539C060707E986587B52E0EFB9EBC7907F939467741D385A3A706137078",
+      "extended_unsigned_section_aes_key": "AD4E22885C75C1767DDD55943AA675C9",
+      "extended_unsigned_section_mic_hmac_key": "3D1170B39B5766B83A74425A1CECFDD73786EDBDC4943C1063D29609AA6281DF",
+      "key_seed": "E05713CE94A34C790D245E5340F0034B7FCE8C470639AACFB649E351C4517996",
+      "legacy_ldt_key": "B77B168EB6924B7DAF554027BF77FEC4C5B0D5FFD370AA0D8A2D6AC2BAB0C678DF858B7B28A143BB4AD12E7D9CAD3B51D939E23C0AE1289797078334530D8BAE",
+      "legacy_metadata_key_hmac_key": "B564B6695F774376499A95B28B11591EFBDD492948B9840B7207949154A46510",
+      "legacy_metadata_nonce": "4DDA74813EC3FDD85ECF79A6"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "F388",
+      "expanded_salt": "8967E476B2B0068E17A1B71FCFCBDFF1"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "E36AFC309B6E668C2C3A0CE5FAC3DBD3",
+      "legacy_metadata_key": "8A97CFB9BF30ECCFA0EFD7E11022"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "D5B0B8A104592ED2AA6605FAD6E2B786",
+      "derived_salt_first_section_no_de": "546BD228DA5EC1C6706BBD0B6512260F",
+      "derived_salt_first_section_third_de": "D9093EABE9731CFE5CD5EDC03B3593B7",
+      "section_salt": "625AC46C5387C640952FD435DCE7BF8F"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "256918D6714CA183AEA76E3A",
+      "extended_signed_metadata_key_hmac_key": "44E27B5CF5EB7F40E301D513BFCC0E7AD1D064268ECED1C93E08521C2DA9CDAB",
+      "extended_signed_section_aes_key": "C717E7186766C821588610DDA234BD1A",
+      "extended_unsigned_metadata_key_hmac_key": "5BBC3B99F800486E7D1ABF0998E8553CF827B4CB79D556CFC43954397909EFBA",
+      "extended_unsigned_section_aes_key": "49E46036FD7EEDF2E316C8E3A2C83E18",
+      "extended_unsigned_section_mic_hmac_key": "9EF8F3A9C044C579691C59EE221859361ED13B4C588E1576C019CBB83411A0C4",
+      "key_seed": "E2633861C773DE669266B36268FD535E3B04A5269F5BA3B58DD1B2B2800141AF",
+      "legacy_ldt_key": "B68B9BFB869949766927D96D8E11A8F7AE6B4D0CE4AD11FFEB56CCDE74B4329315EF8BDE16F5B89B6A05373EBDB09ED7272D20F51ABFABF50C901FF4A5B6D45B",
+      "legacy_metadata_key_hmac_key": "B20510C6C750BFE0991CA3CD6CA3A6D1132A09CD845BDC3C2E006CFA4243682C",
+      "legacy_metadata_nonce": "F82A5657110463EB4993D5EE"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "98AA",
+      "expanded_salt": "13661848812A9F40B2C9550857E3ABF4"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "521F75308E4F3ACBA82DA74134C46309",
+      "legacy_metadata_key": "4F767CCD14102B29ED949CE30218"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "DE24781BCD7E2BD9F39DBD8EDF8EE2E8",
+      "derived_salt_first_section_no_de": "647E6F36D4F8529748EC831811ECEE59",
+      "derived_salt_first_section_third_de": "A755924F3874F3E5661E8AA0F3F62173",
+      "section_salt": "5A6632D4602C01565447BD6939610E7D"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "1280F2BF6B120289C45DC96B",
+      "extended_signed_metadata_key_hmac_key": "6D058C55D5B2CBB0B4BBBD51028C0B973F469A1B8E3DAC59D52A1886D088F125",
+      "extended_signed_section_aes_key": "37E713DAE40FD31E2F92C329CAAFEBF8",
+      "extended_unsigned_metadata_key_hmac_key": "1A20B4BFE3EB4EDADE909358ACEBF1C020E9539BA5140BC2EF986EBEEEAB45AE",
+      "extended_unsigned_section_aes_key": "3F872A127339C6C6C511AA00604C411D",
+      "extended_unsigned_section_mic_hmac_key": "A837546D57AB36B017645E740D6631016E14E5B16DBF71E058DEC61F5F8AF1A9",
+      "key_seed": "02FED3D1E3307A9FCE2B11203249FDC09CF979ACD85DF62359860EDCE2DC5507",
+      "legacy_ldt_key": "B4D501B6B7DD28A54A49E3F57F99C782285B30CD69203E5AF7F838CC4A0380DF6EC89D1D67113E4517C6EE916460017B655F5A4AC373AE8FD68410DF230BB138",
+      "legacy_metadata_key_hmac_key": "E1707BBBB1337ED59704AF606EA54550074F5B3D5C0310738C04128D634A8558",
+      "legacy_metadata_nonce": "4DB188779B676BC7B70F234B"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "3B69",
+      "expanded_salt": "A05E1016967C2E7DA79688AF74615B4F"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "FA9ABBC8316622DC2A9843BA0097E0DE",
+      "legacy_metadata_key": "AE83451CAC8181606BE17AC715C4"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "40ECE473568BE946121A394FE60B8737",
+      "derived_salt_first_section_no_de": "7548394C226D05F10C9B557BD0359040",
+      "derived_salt_first_section_third_de": "2E8189954D8068F3CB284740CE552CCD",
+      "section_salt": "B3A517BB5CA6D1627B9A0255B31CFE31"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "CB9E33EEDAA33993FC4B5318",
+      "extended_signed_metadata_key_hmac_key": "08AD406C9CCDB3892CFF81B5FDABB9ED3B08A24FFE60FBA487A9DE2EAB871A26",
+      "extended_signed_section_aes_key": "973BF0F1F7B463EB9A97E1681BD1D3DF",
+      "extended_unsigned_metadata_key_hmac_key": "E1DABB2A2F8D3CB975196C9BF900491D463BBEE01E408B3E595E718EBD1AA2AE",
+      "extended_unsigned_section_aes_key": "CB15F4F517DBD310BCD5FEA2DFEBBF26",
+      "extended_unsigned_section_mic_hmac_key": "865316C4BD1F483DF2FB1F819AFD6798B26344E9CB7D5F33C0FE5AD5C8DBC1E0",
+      "key_seed": "4129B6D0A4B84BA1F7241CCC11F9C75EDCB74E50DAEDA9B94E7E5EAFD418921F",
+      "legacy_ldt_key": "A3322720422B4E51C75B1C66F3BD3DF06DE13496B38FBA0BEBC4CE11B12238F3C779A2136C2B616F5E680A9A708E5E2CCC3F8AE9F0047AEA0B1AEA088C823EC2",
+      "legacy_metadata_key_hmac_key": "43C5B9A88F6818DCEA6F93D49466F31BFFD5A4EBEC3C2ECF5A872BE86F5B99F6",
+      "legacy_metadata_nonce": "A3CAF797ABC475FB19F5B602"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "AF5C",
+      "expanded_salt": "C7F68B27D565702CF382B680B8E7055F"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "1CC170AD6BC9799CB87FECFEB7FB593B",
+      "legacy_metadata_key": "4D860E0531136A82B22D80EED522"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "EB90E68FE9C38FF5A956B2DA2D44D399",
+      "derived_salt_first_section_no_de": "014EA160B58368629BA76FF16A844341",
+      "derived_salt_first_section_third_de": "9ABC5ED7EF8973C8FF865B6174CF18D8",
+      "section_salt": "04CDB186B08FB26AF67486FA439CA9AA"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "69EFD440262ABCAD6340712C",
+      "extended_signed_metadata_key_hmac_key": "ABE74AB6340DB962F20CC9D40EAD220DB2E644547F110AAE1AFA59E98ACA5073",
+      "extended_signed_section_aes_key": "C30E2EE7462A487197359E2B1E6B592F",
+      "extended_unsigned_metadata_key_hmac_key": "46BC94A1996B114BB3EDFF2EE8ECA2A897EEC62704CB2EDDFFD5B97330E770D4",
+      "extended_unsigned_section_aes_key": "F3ADC71F3D1948E5609C740FE8DC5DFD",
+      "extended_unsigned_section_mic_hmac_key": "45F4745792A7129CD8864CDFB715B7047356DF99F7A3ECDFA4F1191C2EEF39DA",
+      "key_seed": "8D228D34A11D8C6E89BEAD97C32CF1CDEB83128EDE806AB12AC1C315104A12C4",
+      "legacy_ldt_key": "58B087E71D5AFBE1B2C9D40770425BF2F950EC54A80BD266A8C3DC184F4FCE7F6799BC221FA5FE4025EA898632E2F3D3C8A983E9468B99AC033002779395CEB0",
+      "legacy_metadata_key_hmac_key": "79C5E3C3D6BBCB4FD9BE972683D273484578E592AB7808B1A2DBCB6A0AF0EB20",
+      "legacy_metadata_nonce": "22C6BF85F720FB130D698F43"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "AA36",
+      "expanded_salt": "1DCEFB9DA72BA3A4AEF988EA5C803E39"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "60989D8A1EB13AE51250E2698F544BD0",
+      "legacy_metadata_key": "E9B69DC6D89A0FB49D43B34F5311"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "64555F0FD7574CDB19BA389CDFBC543B",
+      "derived_salt_first_section_no_de": "3E0E5C26DD09AA19522AE9FF60E299B5",
+      "derived_salt_first_section_third_de": "2177B3044D79C03B816CD8E8433C5B3B",
+      "section_salt": "BFE9AF6A7740CD26E60E7C5A8AB281C0"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "8F2CC361A133B662D60E70B4",
+      "extended_signed_metadata_key_hmac_key": "14F28363041B1AC420116ADBE5E862E36C4F209C68D784AAF659003123931F20",
+      "extended_signed_section_aes_key": "F68813A0A51D3A7D6460C05109EF1730",
+      "extended_unsigned_metadata_key_hmac_key": "6AC0B8555E39508D3F72BA8984E530E59A42777BEB16A2A6CFC760345AB6AB13",
+      "extended_unsigned_section_aes_key": "F3DF15F42B2DCD3617C60847F88EC279",
+      "extended_unsigned_section_mic_hmac_key": "149F3635D7BB841DE87493388AF27E75F0D5C374DF9108C5865EB3F1B631AD1A",
+      "key_seed": "0D4D259D5D0E5D7C9B2A569A1C17D389E618B782D1BCE04F8484035492CE11C4",
+      "legacy_ldt_key": "E1628A30487D83BB90ED7B5643AE314CD9FD98C9679F37C25D922DFAA0FFA66999FDBEFC099EAC5250C6CBCBA2314085DBDEBC4341A2074226D3E92773B1946A",
+      "legacy_metadata_key_hmac_key": "9549B17906EDCEC2E747744703EF977F5236528197E55617F93755C860CBD0B5",
+      "legacy_metadata_nonce": "BAA28085EE97A8DF527A5594"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "57EB",
+      "expanded_salt": "D275F5AB0B47DB46096D6A2ECDF58D52"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "F3B453CA100ED3E10C91E12A7481F4CB",
+      "legacy_metadata_key": "859FCE97618BF2DB58D184DC53DE"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "74F425482431EB42FF996BAC1A227F0F",
+      "derived_salt_first_section_no_de": "CAC0DBDE04AB7B70FBF8A40E18814286",
+      "derived_salt_first_section_third_de": "B751EC2415541106D79351A34AA5D2DC",
+      "section_salt": "4B0BF5D2EE37C72845CD0776F7AAA512"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "183FB3B68B7A48FFF0C161AC",
+      "extended_signed_metadata_key_hmac_key": "50027ADA2FF20DD6132B1729D7CDDF3D6619EC2F0B676D68946B199C65EDF004",
+      "extended_signed_section_aes_key": "2C4916F70427AB1247D581CDEF656639",
+      "extended_unsigned_metadata_key_hmac_key": "211294989AB217BBC4794503C433B7B886612E2D9A8B824B0EDD590F2DEC8B7B",
+      "extended_unsigned_section_aes_key": "FEB3354D18E5ADA3E7684F96EDB719DB",
+      "extended_unsigned_section_mic_hmac_key": "144845A3ED634D768F0F4E4BCEED5E9F23D77A033D67FDBE6F1BA225FA0A71A1",
+      "key_seed": "2B4907289260929651D6339AE8157C6F509BF34AA7E2672B5C671837C62A0363",
+      "legacy_ldt_key": "2A1BDC158660033902E9EC6F47BCF81C99EF5AE759CB03352320324BEACAC4D62F816CA1A190BCC28A276838F565FA5F41E2A7BA8574FA77D61F2A83DCDF665B",
+      "legacy_metadata_key_hmac_key": "1266E50907BFA5ED5990F295F10B1562D4780775A3CC95F2F5D7DD9912644961",
+      "legacy_metadata_nonce": "27B1A368FC746D389CAB7604"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "2CF1",
+      "expanded_salt": "2D9360CAD492BF9B3F8BA5659FBFD479"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "B04A6E310A7D824C2ECBAC27C078CF20",
+      "legacy_metadata_key": "2E262ABE8F4651CE3875F82BBF18"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "A36E49ABD02685DAC38CE1D19D0B8B9E",
+      "derived_salt_first_section_no_de": "D531C60F8CA7C63115E838F71519894F",
+      "derived_salt_first_section_third_de": "722AD6D5D32103BE533568A2C3903320",
+      "section_salt": "581234FE7E1189244C5C61BAFDA5DDB4"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "45E5E1444674572E775B8224",
+      "extended_signed_metadata_key_hmac_key": "E0B347400DE60F9FA04DA4ADBAF3B6BD04C644F6793CE46F85CB71479ECF3EF9",
+      "extended_signed_section_aes_key": "B6DDDDAF922C963512160E75225D09F4",
+      "extended_unsigned_metadata_key_hmac_key": "AF0BE49B0E816D8F7712328C5F4E6ECC82DDC48892B3BDE3F1C4C01E5FA03136",
+      "extended_unsigned_section_aes_key": "848215F6E61B20D5928039AD45AD2132",
+      "extended_unsigned_section_mic_hmac_key": "8B905A2A15AD9CF4FB406828D832C9A035D4230C0F539D7647C55022232A9FE8",
+      "key_seed": "32DD54629DB08642CDD3D8FADA206AAC7283C4CA3E2A8C555AD8DD6598720562",
+      "legacy_ldt_key": "4274705A9EB207FFA0F1D42694C47173DAB548F1255772A438CB64BC9A03E80C50DC01E2F201BE9A1FF32E40C9008B4EAF1242A11CA3C0B4D398419369228C8C",
+      "legacy_metadata_key_hmac_key": "EDE5263B245DA34B73AD72B20E1D07CDC64A814F65676AD59F056B31D3525B34",
+      "legacy_metadata_nonce": "AE685D297E2D64B79DC9C2B7"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "8CA2",
+      "expanded_salt": "49637910997ECD98BC7F3190BAB36A4C"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "BF435149C0B6A7FA723E18855A5D02B2",
+      "legacy_metadata_key": "96FD3B89B68B0B14A3781DDF9538"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "DCBBEE3140866817D5B3E64BF6AFD60F",
+      "derived_salt_first_section_no_de": "C7DBA60E81BB4A0F806B82F9DD4DE170",
+      "derived_salt_first_section_third_de": "00C8B3CA67C7C566A850C3E17B7E3A29",
+      "section_salt": "80FC0A629CE7F0CD7B603F171F162D24"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "CA66CE6D69EA86A41AB0F413",
+      "extended_signed_metadata_key_hmac_key": "6EA8DF938647F825C60C6251F0CC1CD82FC642A0E254EF2620A746F46C9E1258",
+      "extended_signed_section_aes_key": "0F0B94A88E78E605C74B5B91AE62BFFD",
+      "extended_unsigned_metadata_key_hmac_key": "6C5D462BCD86343B68C4435D5B1EF6CF9AFB3C38F226AA84B7ADE93CDB23E83A",
+      "extended_unsigned_section_aes_key": "E2C02DADB79D7CBFEA71F94C4A65575D",
+      "extended_unsigned_section_mic_hmac_key": "38350921EF19BA63EA5D6A5511230EA652628101961EA4504A597C5FE4510591",
+      "key_seed": "3836F8FDE174BAA5BFCE8F199CD45AF774C245312F90939B6D6FF51892F5C549",
+      "legacy_ldt_key": "EC34EF3B3714001DD85534A5D3600A70645B612F7E8937362E43C683149F6F5621C3E2F700EC3E9E40AE468116316DB52F85746E6B9856FECFD94BA6BA852AF9",
+      "legacy_metadata_key_hmac_key": "7B2DE270684F7A3872B5752AACE00BDA88CA3D832833432EF1FCEA8D04523E59",
+      "legacy_metadata_nonce": "5A9EC7E213B30C88FB1F32BC"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "EE17",
+      "expanded_salt": "D206579E8B5DA9132DBF4D1582A846E5"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "BECFD5FC4083874524BD1E5A11A15CEF",
+      "legacy_metadata_key": "FD47DB9B922B170C9332494805DB"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "BE32AD26A190F96FC445AABBCB1CE959",
+      "derived_salt_first_section_no_de": "8F061686BF5B1411A332C523C4E0A209",
+      "derived_salt_first_section_third_de": "232C9AB5D992F3411339C60540915063",
+      "section_salt": "8C2DCAFB7C90877729124D34A7D5B6E5"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "23CDFE5E54488821F6ED0A27",
+      "extended_signed_metadata_key_hmac_key": "2B262B746F258E0AE1CECEDC1C761535AB94C83536FB700A8C005F7DD418C388",
+      "extended_signed_section_aes_key": "DBAABCE45273B37FD68B63B6957E5785",
+      "extended_unsigned_metadata_key_hmac_key": "E177B64123EFE628A6268D943BB7824EFF52212CACF2E3F59C07E165E4F16637",
+      "extended_unsigned_section_aes_key": "B085C6252DC18DCD41D7F83A28071565",
+      "extended_unsigned_section_mic_hmac_key": "32CD283375EF7007BA71BA8540A8AA91A05AFD714FE80809A9F92F0754F3CC72",
+      "key_seed": "2E489B259C0566C778FA0ED37E2E7FA41DF3A664CAF4EF875A4427EDB479BB23",
+      "legacy_ldt_key": "68682B202007B1B9DDA6871451170B1B093C2A051C7C5416E71313ADC01B5F61C9E849A9C2C1CECC480F8658C6A649F195EAC21EC41749E4E9034894B1A13462",
+      "legacy_metadata_key_hmac_key": "9B6569331C5F5BC18C8444EDE38A946F59FF525D71C9DD3A0C0AF93BD799EF34",
+      "legacy_metadata_nonce": "A6A810AA0DCBD8FB7C957713"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "76E3",
+      "expanded_salt": "DB8C04B9A21DCCEC75C4D2C7806F57AE"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "0243B20CDF5D6EC2B5F40DE90BD517C6",
+      "legacy_metadata_key": "10D3F1C4B9422B343140B77FC230"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "CC2F52EBC86DB28E36451CDAF13079E4",
+      "derived_salt_first_section_no_de": "DF2CF0AF9608449FBD2545BEBE111B51",
+      "derived_salt_first_section_third_de": "0B60FF977CD4A5D900642F660C496EC8",
+      "section_salt": "3D36E649B2617F943C57E5845043BD7B"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "92124C3375F66E88EFE35C53",
+      "extended_signed_metadata_key_hmac_key": "A0D58D77AF063A719AF9FF4EE9073C16B9BE7624AAB46951032E2DCA7E58F9A9",
+      "extended_signed_section_aes_key": "2B11051C494B15EFF095B1CE27731780",
+      "extended_unsigned_metadata_key_hmac_key": "0DAC827E8E114BE7A5377C68A902C3F9F9ADAA3799DCAB115B4402D6986B6693",
+      "extended_unsigned_section_aes_key": "9EBE28389C5D4037FE9CE66E5815318A",
+      "extended_unsigned_section_mic_hmac_key": "575A04282694E59058B0B62D8EE68F9F97063EB4CAADBBBBDD49CCD58C00AF3A",
+      "key_seed": "0A188883B6CA017E98A98E6F25D090AD8B59432D5978D9B54F41A7E4F60BD880",
+      "legacy_ldt_key": "C393CA2F2A769B0C37F6F394C806FAB5E6D73AE829B7AD0AA58351D65A8436D09F67C076069BE57AE561CFEC65DF13F31A2D78C583835335B9E79D42667884E6",
+      "legacy_metadata_key_hmac_key": "CC4DDD317D155D714F0BCDCF55F7C7596B9593B5A331561D1E075D63605F1311",
+      "legacy_metadata_nonce": "9D15BA91B10DA670512B7F69"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "0786",
+      "expanded_salt": "90BF5725A647F3877EACDFE93F00743A"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "44412FD614B0F95EB598CBD223F560A3",
+      "legacy_metadata_key": "3A127741C99A09FD4F7416C678B9"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "BF6F7B9731537CD65957FE062847164E",
+      "derived_salt_first_section_no_de": "7A4C1F1972B35CB2F1D8ED706210BF86",
+      "derived_salt_first_section_third_de": "86D64154463B1BA93C139DDB0476F29E",
+      "section_salt": "006BC21D03AFA7BD1316E76B52AF72AA"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "460BECD309A3EE6B35175031",
+      "extended_signed_metadata_key_hmac_key": "63CB2E1C16F5B94BFD5DCF725B322E2EC4CFED49BECD757FA4A5066524875C15",
+      "extended_signed_section_aes_key": "7D3E000289F97FEAC66DBA48492A985E",
+      "extended_unsigned_metadata_key_hmac_key": "3C9232DEF5692ECB5F753CF1CE5AE15F1E251881D947B0EF726D86720C1E03A4",
+      "extended_unsigned_section_aes_key": "A2FCCB33B71B1A8D807DC1D9241584D2",
+      "extended_unsigned_section_mic_hmac_key": "52C00EB623D242318A865DAD8FB76A775F6D5D80F5CF030CED9777F6B704E9B8",
+      "key_seed": "B48D65795DEEF4190966FEA215BB96F6052507BF909CB2DD5345E9FDEDF321CC",
+      "legacy_ldt_key": "22F49B6998414150E646326B75F7AC83CF5DF705B33C582310A963116845F5E00B2937634AA8338AF18E9B45EC6C892708924A0868051A44ED4561D9D091F47F",
+      "legacy_metadata_key_hmac_key": "8A28B3F414B387807148BB37C2C74977C2755E41863DAAC7B15E3B7C006A5E6A",
+      "legacy_metadata_nonce": "1CD3B2E498B4D30985B1E11A"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "2619",
+      "expanded_salt": "11CD75FA9ED0CC386D81040E5E28BD5A"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "6F0D67269728308DBCBB1DF1D485512C",
+      "legacy_metadata_key": "F3FA997825C9B8CE27114093994F"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "C4394DDD7E50753EA4F6A380BEAA6D75",
+      "derived_salt_first_section_no_de": "9FBAB23311FF8DC91ED5581625BE5C31",
+      "derived_salt_first_section_third_de": "7EA2A3C3E08970ED0ADDDA2EE28989E3",
+      "section_salt": "F7802897A51C9CC8CB4F39237AA5AF75"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "32EBBA46F34FE6447FCB9F03",
+      "extended_signed_metadata_key_hmac_key": "9D457FEC0DED032FCA7C4663788C3413D985458D3B7DD7C77CA808CEC7A7EE23",
+      "extended_signed_section_aes_key": "C89264716F9ED0AD1A591D4E7B535537",
+      "extended_unsigned_metadata_key_hmac_key": "A478F927217CE04B52D69110C6FC26C773B68C9CF862C586474F498B38AF736A",
+      "extended_unsigned_section_aes_key": "726704CD26B963222D3ACE2E8510FDA8",
+      "extended_unsigned_section_mic_hmac_key": "6912E3F7E93AA50850A908EBEAC4595C5542BD274247902C4EEE48E9EE5C55DD",
+      "key_seed": "880B555B9AA8600F636A51A179B7E8F577425885545DF12D1CD6E01C87D3FE92",
+      "legacy_ldt_key": "AFD7043040B31C0F86D1CF833660C533AA297AA161B8D2EFEA77BD0B1A1A2FBE3A194A52BF2950CC1E307695D750E818EB6CF2161FC3C1A0AB54B647FF9275F0",
+      "legacy_metadata_key_hmac_key": "CDAC9BFD8382DDBB3941D3051353EFCD37015CA03452C66273EECBEFA22E03E5",
+      "legacy_metadata_nonce": "C80E0C617C7A3CB8D2863481"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "7165",
+      "expanded_salt": "C7DAAE6B6635A8AB95D2300CB6416269"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "42BCC04B27A64629343177218F57BE0A",
+      "legacy_metadata_key": "A876ABB90315F25712F38499B85C"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "0F6D736CE65D5C65A3B2D6559F5FD402",
+      "derived_salt_first_section_no_de": "554244AF344CA2C83F253966F6102027",
+      "derived_salt_first_section_third_de": "13F1B8E4B07D0A51B509F878A71C50A0",
+      "section_salt": "FA523DAC59FFB86119FFC29D753AA473"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "2DF7FDECC381703DE06DFC8B",
+      "extended_signed_metadata_key_hmac_key": "002E77DA262FAF5BEFB7668D09710373FD69821DC3F563320202DFC6F7F8DAFF",
+      "extended_signed_section_aes_key": "A9B5C0BC08AFE740B6FD1E6BA8220E53",
+      "extended_unsigned_metadata_key_hmac_key": "2FB80909E593CEDE519FA19B034FFC6D189E0B772B0C4FC686C3732C82B34F19",
+      "extended_unsigned_section_aes_key": "E8D6F9C80CCF633B9F37574DBC38ECCA",
+      "extended_unsigned_section_mic_hmac_key": "4A3E71A87ED54DFECD1FC9EDC09371D329E8B231A189D072F827863C3377FD7F",
+      "key_seed": "B641968304F3D65286618FE936844A883932A98F172FAEB1CF5DC6E77007488D",
+      "legacy_ldt_key": "9D925DBD151593EAC40F2C7FEA7BE2EC81891FE87971CF1C7F38369BDB8B12EBA067EEA5BCDDC36E5D8430CC67C9F8C85C272E868D75404E64A087FFAB92D7CA",
+      "legacy_metadata_key_hmac_key": "F8AA867BD12B81AE663E62C650E705DD1F2A1D9ABE38A99A2E1D51EF7E2DA26A",
+      "legacy_metadata_nonce": "46D5A1760D44590DCE76FCE6"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "587E",
+      "expanded_salt": "D3CDEC97B00233FD542022C2EB5F3848"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "0D01ADC26CDE59CB3350AC0374ADD752",
+      "legacy_metadata_key": "F9664E87F9E82683417A6C69FC6A"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "D2B338926A1201F6CD659AC639B1862F",
+      "derived_salt_first_section_no_de": "B3E7AA07BD4FAFB10015CD6C196E067C",
+      "derived_salt_first_section_third_de": "4D84FFA3D9A34766CCBD37DF356A9FFC",
+      "section_salt": "1D99919B07153CBA8C4D3311A118B9FC"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "F8495F6B16683501AE5B19E7",
+      "extended_signed_metadata_key_hmac_key": "75B5C62C60C3019BC2D9D4CD91CCAA2E76D33EDC43AD13384123F3B5D52D67C0",
+      "extended_signed_section_aes_key": "BCC8DB06C53733E8F793BD7D64DBF46E",
+      "extended_unsigned_metadata_key_hmac_key": "A90E9E7F829DDFB44D1C10AD1BC1BF08401781B8C22FCE5DE73AC6DC0AC66BEB",
+      "extended_unsigned_section_aes_key": "9F6E49E8CAD1919314298C3A354FC392",
+      "extended_unsigned_section_mic_hmac_key": "C316406D229A27AF3CB3C13E906287EF8B5036B658FE824A076C8B6E74D2B885",
+      "key_seed": "BEB2E5288A42FD7AC9E4BE6D4998F32CA5AD102DD6BBF21D9A63E92ECE14F7C8",
+      "legacy_ldt_key": "7B180A8344D1E4A7E154BDE1DFD16888E3778686A35DCDB75485EF2A93762E0932D6D79EA0826E5ABAF79DEC504B7D539C6324CFF9B7D4C1F19B60B65D3B9BCD",
+      "legacy_metadata_key_hmac_key": "BE281084F50E511096BF52D7FAA5AE64949796EFAD2615C4FD16495016C5CDE1",
+      "legacy_metadata_nonce": "42ED5DFB6ABF8FC2CA75DDB4"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "9288",
+      "expanded_salt": "EB04D1DB34235FE2814ABE28338AF6BD"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "E1478A4ABBA0D34E1DBB8440636BA1DE",
+      "legacy_metadata_key": "3B2669DBE04D22E4146856F24964"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "2315A6A6A255AFDF9CB9BC23D7481C70",
+      "derived_salt_first_section_no_de": "2F871D368ECA88997CA4EA877F8BCDA1",
+      "derived_salt_first_section_third_de": "F4D547600C7C3CC1ECEB4D83C821D191",
+      "section_salt": "D82414D60C56BC7571AC11EA22FD95A1"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "3225229E97DE8EF6EF3738A4",
+      "extended_signed_metadata_key_hmac_key": "8F2D19779DE3D0BD45A93F9D546C7D70BA7D24A3039FC10FBED142099A7E48B0",
+      "extended_signed_section_aes_key": "552CF2D3F72D8AD6AE4613521D744069",
+      "extended_unsigned_metadata_key_hmac_key": "4DD906B20F0F537A4759DEC498B3F5F35A26A850F458B7AF9D140304C138DA3D",
+      "extended_unsigned_section_aes_key": "E915FB586132C17710BDDBBC7BE734D3",
+      "extended_unsigned_section_mic_hmac_key": "00FAB34E3EF9BABCC38BB24476583539C41F2C0CA69FBCD21C278742108158B2",
+      "key_seed": "B835493E7A34BA1C0ED885CF78EB30CED4203067CFB0E3501CF1509C44A10EA4",
+      "legacy_ldt_key": "63DDFA294943D9D30A1B8A911EF3C9643719AF8B1E30F6CC7FE9EA490E1F5544D22A65721399122A0A6324F215CC2FB178447E5D9F7F54FC326B994C27B257BB",
+      "legacy_metadata_key_hmac_key": "15C70495ED3FD7EF63650611395B8BD9D6015DEDFE41685077911059081639BC",
+      "legacy_metadata_nonce": "BBE949BBD59C4F963E7E2821"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "54C1",
+      "expanded_salt": "0DB76FBA8F6AC46D1C0E4D3BF4F9760B"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "6815ACAD17F576FCFAC31D7CA348B9C7",
+      "legacy_metadata_key": "D56BC285FCBC28F14904C110D022"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "A63D90F8D31E70B5F12FA49567853940",
+      "derived_salt_first_section_no_de": "DBA2B7268B2EDFCE658C2DF7D1F50E18",
+      "derived_salt_first_section_third_de": "923531B496A572D8E6C45ECDC3598D78",
+      "section_salt": "228003CED4DE76F9E2E12998C3ACF2ED"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "9D7BBE2671E7D6C30CD6F810",
+      "extended_signed_metadata_key_hmac_key": "33EB25BFFFC7B15197FAEB32C928CF5A128D01D00735C3EF7727F1F761F51BAE",
+      "extended_signed_section_aes_key": "7D5EE6F4E07F8C5F07E258ECD20D4D34",
+      "extended_unsigned_metadata_key_hmac_key": "792E4F635AD3FD8AA5054F8EC58AADF6BDF7471EDF9EAA2445C944C3C10B6463",
+      "extended_unsigned_section_aes_key": "9DDB1E227FD6E4F9FA7D29BB7A5A1C4F",
+      "extended_unsigned_section_mic_hmac_key": "9611D448338D20F3C6A6464C9CBE3841CD703E6FCBEBAC5EB44D3F5F5D6997B4",
+      "key_seed": "D116B27178BB5F9D9979CBAA97159E4D4410DE3D26CE2AC3ABA7BDAB63A6B85B",
+      "legacy_ldt_key": "5628DCC812A21B82C0619D613EE0E4B67082C89E316D23EA3409563EB8E297377F472FF25C4A0A70B2889BB27293873724B8C0E94A83D9EE2E080D3A5CFE0429",
+      "legacy_metadata_key_hmac_key": "76D7B1B4B3E7432884C9A49F46FF26F1DCE8D583344AFDC7A6635254EEB5CFA7",
+      "legacy_metadata_nonce": "3C2CA3B55509876DACCE58B2"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "A386",
+      "expanded_salt": "F59E3504B2B86D465989D0F5B5F04E7A"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "D4522DEB87180CBAD14338BCF3B1107E",
+      "legacy_metadata_key": "F1A6EEEAEFD437330DFB706FBC43"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "06C173FF92776658E2DB2394907E31C7",
+      "derived_salt_first_section_no_de": "CC2D079DF426A5359DB15CF4DF6C894D",
+      "derived_salt_first_section_third_de": "5FD567F78807129F25151725F939CA7A",
+      "section_salt": "375DB6FAE577F7F2BBB1483161B62D98"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "4DB0F75206E7B33C55CD1A87",
+      "extended_signed_metadata_key_hmac_key": "F01DA0E7048DC47AF21AE6E1E00705711F397C80E4E5872FD484CB2A353EA84B",
+      "extended_signed_section_aes_key": "EA0D9B928C271079D8DE740792217A2E",
+      "extended_unsigned_metadata_key_hmac_key": "0FE25C53F513D8C4079663AD26D3EFB76C9E53403A32CF3DD1AC5C4F0B46D401",
+      "extended_unsigned_section_aes_key": "BEFF54630EB0851BABD6C9080B3650AB",
+      "extended_unsigned_section_mic_hmac_key": "41E49DFF047BB3D9DFEBB5D86CA2FED61CCA22A8DA4AFE08010B4B2E026605DC",
+      "key_seed": "8E94D64DA399A2EF9428419B72C2D6B96EBD83470CC5894564DC624BCAB5F437",
+      "legacy_ldt_key": "2B802CC087114906FA80A9C68E0991C1D99CAE898EF25F2EF7FEC84E4B8F194AA4608F022C7912B8879BADAF1689140CB37BD15C4646BE36C61CDE4199AD27B3",
+      "legacy_metadata_key_hmac_key": "290F16A7EF5A15726241870605899132979F304FC452B6E7D3CB80822AE3DA7F",
+      "legacy_metadata_nonce": "9FDD6FDAE7D43E1937EFD1B8"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "1161",
+      "expanded_salt": "CAFA25E3F8E00053BC3825E8FF5D5078"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "D918D076ABA54A6B7FB5406522616208",
+      "legacy_metadata_key": "6C7A1A6D9A337FD3FE62B2E2ADF9"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "D2C405851BBC1268709BCA5E92ACB57B",
+      "derived_salt_first_section_no_de": "8F84A4AB6444AFD08FE7110D0D16C74D",
+      "derived_salt_first_section_third_de": "4C3C84632D69672E8921C5067A7DFB56",
+      "section_salt": "5D950CB5E7D9F44E9429359415FED1B4"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "F061EE619FB13FE95DE267E8",
+      "extended_signed_metadata_key_hmac_key": "F276A731C51D5936687E7F908F88224BA28BDC2D6A4F94999765822DEE917D6B",
+      "extended_signed_section_aes_key": "CD9E5F7C922F58A56A17CB8F62B9DD09",
+      "extended_unsigned_metadata_key_hmac_key": "174295A2B19CD4F9A821895D098CC63CB4CF17AC16CA7BD0DABF7136C2D3D194",
+      "extended_unsigned_section_aes_key": "1CEC9AA427A98480A6642003700F4A5A",
+      "extended_unsigned_section_mic_hmac_key": "6780C7E76F1A85B3E31A1382505FE21BA04AAFE268C9810C626E72C9203C638E",
+      "key_seed": "234DD6BBDADEA172BB97EA68E22A0B0321F8DBD65EAAAA38F95940D73770F35A",
+      "legacy_ldt_key": "7E7C646B51F1867F6D7CEA56F2AC7EE80DE9D9DE2015E9CBD7525ABD0FA05656CAEFE120EEEF521CEB7D9E296555CF8A249862D97F0D3FCAEDE9A4E8C309092E",
+      "legacy_metadata_key_hmac_key": "1DA50172EAFA031A15FADA0313BA770324BC8A0D1223FD5EBC127A331459F2B2",
+      "legacy_metadata_nonce": "74C72A883D6BA2CFB5F68830"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "F836",
+      "expanded_salt": "F8809BFDD69EE831A7686D8359BBBAE4"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "A97B037072AC4D59472E20AE1C8688CE",
+      "legacy_metadata_key": "4E18A6F5EEDEDFAE9AEE43A53094"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "146332F0DF9B6701D5F6ED9173B966D7",
+      "derived_salt_first_section_no_de": "CA5CEB6D8BA41402859B0706E603C25D",
+      "derived_salt_first_section_third_de": "E93B2C310878FED27F89298CA9F77731",
+      "section_salt": "EB9DA18BDB815DBF4BF9906E8AAFB491"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "588AB130BE0197CBF1E240AB",
+      "extended_signed_metadata_key_hmac_key": "948A762DFB558385CDAE56420D2AF863F8AD6ACB9EC442775C20F1D12793D08A",
+      "extended_signed_section_aes_key": "FDFA11ABDAC005CD0C6DBAFE22CB84F5",
+      "extended_unsigned_metadata_key_hmac_key": "A8ABEFCD7AF7D09F7862E825FC5D641A23CF32210676F1CB8AFD375F180DE059",
+      "extended_unsigned_section_aes_key": "895814EEFA0514080381B2466C5560DF",
+      "extended_unsigned_section_mic_hmac_key": "770CD91393852E19BB1A5878B8BDA5E4B9AF9A0640856804C470EDE355DB0914",
+      "key_seed": "519521C296DA4C8A13A47835506AA306C9782F3F1C946D061616CA248E64CD9E",
+      "legacy_ldt_key": "84406D27E7717B520A082163CE7DF98BCC0261E8342C105F210C31FDE6B5521547E51414E67D00BDDDB57046564FD491A88E4C5CB913D28FDA7C972EA21A9DA0",
+      "legacy_metadata_key_hmac_key": "24032DA88D3510F18FEAF898A414BCCC55EF1E56350D07B6A4AAAC85AD09C863",
+      "legacy_metadata_nonce": "F0392AFD52B25E66D0D16B50"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "AF9B",
+      "expanded_salt": "488FC6BDA553D9894C6C397E009D56F9"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "AF67A28D0088401BE912DFF010C7CD2B",
+      "legacy_metadata_key": "0A0692A83815A72C28C2E1A0C324"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "B57FD4C4A95B5FA80E77FB0A4342B558",
+      "derived_salt_first_section_no_de": "804C7287DBC4705759D1543D3BB19796",
+      "derived_salt_first_section_third_de": "185B5BE5742AF28DA4D9BA8FFDC8E609",
+      "section_salt": "1D6723044D269740F2E422789242AD4A"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "E4EDFA97754C39393AEEF09A",
+      "extended_signed_metadata_key_hmac_key": "AE6C660ACBE3D637F9D01CFB4EA927FF4B1DEB1446EB096688BCB54F5C1A5389",
+      "extended_signed_section_aes_key": "DC58AF65EDAB2BDB393DDD7033F781CD",
+      "extended_unsigned_metadata_key_hmac_key": "578C17FC68D03B2A9FFA8352C4ECD9D15DE2F97B5500DB4A9FEE70A93E28AD2D",
+      "extended_unsigned_section_aes_key": "573CC36574396A27D5CD12DE72470637",
+      "extended_unsigned_section_mic_hmac_key": "9D8CFA87DB083EF2FC4C495E6A7E3F8483C608A186AC9EFB6C22144B4A654034",
+      "key_seed": "A34102D098DBC12FBAAFAC0DE0F0959450DF888C7323AF55CF04B976E6B9152C",
+      "legacy_ldt_key": "78065CCC471C92F1328DF45AF7180DCF3073A56F599B861706DB9691DEE1580AAC1FBE1215CF24AF403A0BEA04E27C87E91E24DE63CB61C35576326B32A50F97",
+      "legacy_metadata_key_hmac_key": "E8B03892D17EFBAAFC23A96ABEF538A2AC1B34A9A76E5C32E70D67CA73491EFB",
+      "legacy_metadata_nonce": "889DB55C293C1227BCFA48AB"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "4644",
+      "expanded_salt": "8E7143D60063DC6AFF6A285C0CAED64A"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "B61F6E359C97537CC9B30A51581DCAE4",
+      "legacy_metadata_key": "D3E6FF7D90D25CD472C672173992"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "0CA731695CA701A5DA7CA3F15898E7B4",
+      "derived_salt_first_section_no_de": "C576F3146312E1744C5AAB5553880FD8",
+      "derived_salt_first_section_third_de": "39E3A93EEE518127370FD04B92CA2506",
+      "section_salt": "DC536229ABCC11D225875AFE64B192BF"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "D28B1E59115D3A1862CA1F90",
+      "extended_signed_metadata_key_hmac_key": "59A3E079DC5F8697219BEB4ED10CBD2BE60551E59B9FC30296574304026D05D2",
+      "extended_signed_section_aes_key": "15491B6EF07D98836A01228ED8225758",
+      "extended_unsigned_metadata_key_hmac_key": "ED9C566500737283B6CBE3288D119DC773E50C22A2736E0F95F6EF4BD583C67A",
+      "extended_unsigned_section_aes_key": "FE8FBBDB0EEEED2024B35F30E49E06B8",
+      "extended_unsigned_section_mic_hmac_key": "24EAB7D66302B766B2BFE287A784673467022D56E7A4706B3EE7BAE1A04787FB",
+      "key_seed": "09A152AA290EC4BF418AFB60B3F66BE866078A5F59FC3BB39728DC80EFDDC5A1",
+      "legacy_ldt_key": "E3265FA3C650A2F0DAF5CBE890CE5430807AD6C7E423858F4D8A47DACD39BD87C5439DC6D952CF87DBD0840736D5FFDF0EB5FE2661A9141B2CB3C8B28DBB7F77",
+      "legacy_metadata_key_hmac_key": "6497FF0A4F742EBD8C908673D696FFA289C2C1DB64434ED082F9D2C7D8862196",
+      "legacy_metadata_nonce": "21BEB33970139E57B2BB897A"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "DD89",
+      "expanded_salt": "0F01369801DE549FC4946F13D754CCE9"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "EA4CA525B09663EBCABF017A6AF3FE89",
+      "legacy_metadata_key": "0D4C5F0560894C41FA9951DF6EE3"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "621132026D7F9CCCF26A682B7761183E",
+      "derived_salt_first_section_no_de": "24DAE7CEF38D92425B0C2C94B88566BC",
+      "derived_salt_first_section_third_de": "813BBB1469B4319669B8093FC8FBAA15",
+      "section_salt": "42D31FE0C4495AB88C2CC34728DF59B9"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "99E72102DE2485A8CD026DCF",
+      "extended_signed_metadata_key_hmac_key": "49534D2085653D32DCBD06492CE860375D41A3D91C5517D98759257E6D22D46F",
+      "extended_signed_section_aes_key": "F7091AD2941314A7934D2C74D2D2CB35",
+      "extended_unsigned_metadata_key_hmac_key": "A0BA2094C1CBDD22854EB846FA4DDEC387B0C1E13A7BB833C6E7110ADA47F6AC",
+      "extended_unsigned_section_aes_key": "ED03585313F4DCE95E765913E100E591",
+      "extended_unsigned_section_mic_hmac_key": "EC361DD6B444EAED4BF342CA6479319B2FA391062D6E627A50F40730EFC50B5B",
+      "key_seed": "154EB89F568C5D04EDC4AB0A61DD783D0EBF04437A188B2175B495C8D5019655",
+      "legacy_ldt_key": "171DEF9D37747E6F9D6BBABE17B2F7E049608D67518DE48445AD0FD1901F6016C95AEFBE451AE7E256541B8307A16A7E0B7D259219DC81D4985EAA3FDB743E44",
+      "legacy_metadata_key_hmac_key": "9BC8F5BF79FD354DAE71DE2CA4B91AAC36D6A875D3287D721D3EDB4AF52AB3C5",
+      "legacy_metadata_nonce": "A5C09B3E1E02FC388CE5D124"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "42AF",
+      "expanded_salt": "D2BB747C495DD8231531B9149C9C866F"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "7831F6B9B71D322F74FA91734B8C193C",
+      "legacy_metadata_key": "6C33C973C499174E058F63F0D59B"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "3D772AF59FA77F172C0C61E75864316A",
+      "derived_salt_first_section_no_de": "45BDC255A9DC922C4D816CE216609E29",
+      "derived_salt_first_section_third_de": "C7256E328AFE8C6ADAA9007494408E01",
+      "section_salt": "3AA898649E58CC9FB5D7CC5FC9B26C7D"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "EAA31B86CCF3CA56AE358D43",
+      "extended_signed_metadata_key_hmac_key": "52DFF69B372CDF7A4E4844CFF34AFF3B97EAEFC323FD0BFEE409062D8D283ABA",
+      "extended_signed_section_aes_key": "51AE16500538B6819A646EB9AD330FF4",
+      "extended_unsigned_metadata_key_hmac_key": "8772D7EFEF2CA10A882DE8F73A4F5949575BF58E5293FEA863ACBABFC7E12EAA",
+      "extended_unsigned_section_aes_key": "70847AF7A37D9C84957AABC667F6F066",
+      "extended_unsigned_section_mic_hmac_key": "5E659C4B61ED807910D78AEB440F13CA494228B7F0332854B2D54C984254BFFD",
+      "key_seed": "314E89C6DD5D18FE4B824727DFD96F2844000FE144F0BB3AB004B4A8584DEA1C",
+      "legacy_ldt_key": "4E0F8B2D2B62F991AC23EEE229F133DF03674A412318DAE3B7D31B1EB3F5FC1394FBF81FE0CC0088C08624C058F8A4F5069A6B7DCFB26B2C24F59FE8999EADD6",
+      "legacy_metadata_key_hmac_key": "F3595FCB9F437ED53C7BB6D2A52EB890BCA1D8B823722383D76830B50E58086F",
+      "legacy_metadata_nonce": "BE5139909CF99938E465B5F3"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "E9D7",
+      "expanded_salt": "8143B10A7353AFD1884BD8652E38C1A1"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "22B61200D9EEC2A81E8FAC74ADF6F9E6",
+      "legacy_metadata_key": "6EBCAA307ED2B72FFD2CD6F249C5"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "9D4357DFBE20C028112104A515ACC3E2",
+      "derived_salt_first_section_no_de": "A23C5D2DB650AD57227C15A86F1BF40E",
+      "derived_salt_first_section_third_de": "7A4B1899973D71DDCB4F92E1665072B3",
+      "section_salt": "68C6FD12C8C56CB58DF60455A0FE7AD1"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "76EEC201AB36A236EC186625",
+      "extended_signed_metadata_key_hmac_key": "A0F331B488ED78B4190BB62063B6A66CDA7A3503E1CBC08368E39565C307C062",
+      "extended_signed_section_aes_key": "BC854924304C1F14181F985F2A7875E0",
+      "extended_unsigned_metadata_key_hmac_key": "0A298E55442FA855F3EF35E748D52E1EABBB0FA1B3E17D24957F964F413A76B5",
+      "extended_unsigned_section_aes_key": "6ACFA834A2FA81A1A4A7D6DB9988078F",
+      "extended_unsigned_section_mic_hmac_key": "B34EFE5E312B504B811E32330C120106154D5303F431DED9FB1FC845C71CE193",
+      "key_seed": "FFE98778134B058DDA1C17F3B368FF6DE1C9FCE69BF5AC63C133177E707AB259",
+      "legacy_ldt_key": "976F3552251D50BB5E6B10A291ECA51F7E5C0C62F13035B55420530F464364C74CB41036BB8294CA2A438F946EEF622071841005B6D804412959092ACDE0A22F",
+      "legacy_metadata_key_hmac_key": "1278970FF627F1F077A0AF1C370317EAA0CCC33843B47DCD94C59A908069A70A",
+      "legacy_metadata_nonce": "23C0DB064837D54FF3883DFC"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "F2D0",
+      "expanded_salt": "BF636415E72B8974D9CEA57DFBD9713C"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "869D047A3EFED540B16C867918B5CA06",
+      "legacy_metadata_key": "D6C78751DF42B853DCB42F723B6D"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "F6AF11DAE90B198388EA1D778C10CA4A",
+      "derived_salt_first_section_no_de": "3AEC2DD5E0D29A9EE0DE8B6C00DB2285",
+      "derived_salt_first_section_third_de": "29C1901D0646729360364695E47F59AA",
+      "section_salt": "B0955AB7ADF6FD11F1AAECB1A777A329"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "E1CD4A0A0F44E1B9EBDC99E4",
+      "extended_signed_metadata_key_hmac_key": "B2EFABA87A2E8BCC4ADB9CA2C94B425E824A0B9E9ADE39C000E7AFC3D4084D8C",
+      "extended_signed_section_aes_key": "A59CFDB9BAB8A6774B67B80F1D5EB576",
+      "extended_unsigned_metadata_key_hmac_key": "E975F5B3AF3C931B94F7D7ABD332BA9AF8C40F822BFBE93685714E49FA34BE81",
+      "extended_unsigned_section_aes_key": "B9E68CEA1E1836ADA1C2B6F72F19814E",
+      "extended_unsigned_section_mic_hmac_key": "9054020C39D0AC975FA1446386B282FBA102D3B13B94E06751182223E8BACD20",
+      "key_seed": "92CC48D1E46FD37FD8D92063C275E5601F7956B1D79EB4DA6406989177F795E6",
+      "legacy_ldt_key": "79873B89C6801423B759014737AD82E8774EFC2648416703942B31D831438D9C7AE96912B7CE48F10A5A81222BFD11E7BA68188FF8A68594ACCC5F3EFD183376",
+      "legacy_metadata_key_hmac_key": "DB7883B5FC9939D08A478BA41CBC8D205359391813FF7AA1B1CE8E5446835005",
+      "legacy_metadata_nonce": "CAD17CB88CBB262FA2648FAA"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "2760",
+      "expanded_salt": "ACE0FB227A299B29532B691723192E4C"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "CECFCF062962713BF67A2C253C34C430",
+      "legacy_metadata_key": "514B537E9F65528BB70C726EAB75"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "711E72342E2DF4D9DB3E21CB79E15B1A",
+      "derived_salt_first_section_no_de": "4AF7B282B09493FE2AB824CE11CF5A3D",
+      "derived_salt_first_section_third_de": "BDECA0D713545F2C06E92ECFD90F32FA",
+      "section_salt": "5A7297E0F00FB0AE50DB911EA8320E32"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "53C12B415D361B1E7CFD2BE9",
+      "extended_signed_metadata_key_hmac_key": "1A903300F25E61572D66E6F92E4F20526EFB141748AC018547F164847EC33029",
+      "extended_signed_section_aes_key": "8EDD20D6C52E46FDB3005E2F11D40E78",
+      "extended_unsigned_metadata_key_hmac_key": "51AC4D0DCC343FB2A8442E497D086767A0F904FD8FF0C2F5C1C3C7F462E2690D",
+      "extended_unsigned_section_aes_key": "DDD633E7ABBC286E409104446AACE0F7",
+      "extended_unsigned_section_mic_hmac_key": "57061A968056E7ED330F1C8F65242B18335B0203B3AE5F863F861FBA07155CFE",
+      "key_seed": "9E095A9E979E0556C03FE1276821A0905A530027A4E48B445FF150DA40A47BC5",
+      "legacy_ldt_key": "74EDD1187CF248366FADC5DD69BB431EDB9FB39621221F62A67FED5CB3D0129EE8B5526BEEC86BC1CA0193239184A23D70D901B12F89079E1560A25AC839F6FE",
+      "legacy_metadata_key_hmac_key": "5B34A6319FD27843706A8E1A7A1E779200E3D9BE8DA1246CC5E32D88DE816486",
+      "legacy_metadata_nonce": "F23109B82D2099F6F94B4C88"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "FE58",
+      "expanded_salt": "9C7EA9924564F03D6340019D4BCBBA47"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "439B31109FE781639C510638CD037A12",
+      "legacy_metadata_key": "1F22EFEAA64F55866D64968A732A"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "F1CA484DCFEEEAF8652F00199C50A97F",
+      "derived_salt_first_section_no_de": "9F52A5DAA201CD3307BC80F9A3FF5A64",
+      "derived_salt_first_section_third_de": "BCC55DC7AD531D04D24F88CD03FC9947",
+      "section_salt": "96E68F69CE0AF1CA5947D950AC03167C"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "790DA0B3358A34B85EAC7667",
+      "extended_signed_metadata_key_hmac_key": "8CA9AA70936AFBCBABF150D6E5B27AB91974D4B039CCE5C1F3AD7CD09B124F08",
+      "extended_signed_section_aes_key": "9B148D55787368596D67A8536F89214E",
+      "extended_unsigned_metadata_key_hmac_key": "2497B036129D2F25F43E6838495CA54DA3E39DFBD80906C945F1C536CA8B54F3",
+      "extended_unsigned_section_aes_key": "680EB9CE125DA2B614C1768023E69C8D",
+      "extended_unsigned_section_mic_hmac_key": "4FDA73846885210F5E42B57D32C559C5C176B4FC17A5DE755E9832F7473A6615",
+      "key_seed": "1C21EF77FDCFE2F77ADC1687CCB48A85C71A6D53E8BBF9C445F9A81E44C96010",
+      "legacy_ldt_key": "65D36DD12CFA1D5985EBD4547CEE55D85A439A6879A390A114E8265B52DDC19071E346DE0F8AF67D8D91B506399043DE945F3B61F0698D58E80543BCD6FB57AF",
+      "legacy_metadata_key_hmac_key": "7D96F6A20DDE772C03F269C6B5D1851A569C300D5B0277B7AAEF6EB9C71C884A",
+      "legacy_metadata_nonce": "3E4300FD8F982F491BD335EC"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "9CC4",
+      "expanded_salt": "61B568A967985A5611EF9256E29E9894"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "D477CF6201CC1CADBA21370D16760F8F",
+      "legacy_metadata_key": "50841355894155E171A91BD507A7"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "DCA35224242C81D062E2D7806C58D0B2",
+      "derived_salt_first_section_no_de": "54EF44DB16594004E554658EFA470231",
+      "derived_salt_first_section_third_de": "001814C42510FCD65262A3B4CC145933",
+      "section_salt": "B601766283CBAE3A4CE5C7DFF2A0DA74"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "A15525217C62F032E6D54151",
+      "extended_signed_metadata_key_hmac_key": "298E19377343EA2CA328F5BFA39DC8517F1C426BDA2171E0A09208C39BA50145",
+      "extended_signed_section_aes_key": "2167A0F9007EB1A8EFED8341491C5B68",
+      "extended_unsigned_metadata_key_hmac_key": "2219E955FC16E04FEF31B79E0C620133CC4BFE2CD2CB6FDFB756DD88FDBC0799",
+      "extended_unsigned_section_aes_key": "1F7AE997F2B6D9AE904158DDF91C7A62",
+      "extended_unsigned_section_mic_hmac_key": "4D3627566109F030079FC771DED6D567F556A1FB703A89C51FB76C2B59FC5443",
+      "key_seed": "121462ED1B16BC8682D880878916CDB81CD7E7556FEEBA1FE22210D2949F0931",
+      "legacy_ldt_key": "0EF6436C70F2797E08DCAE6D368C1C3EE7B8578572EA873C8B7C185D8CD1616FB0F33F4632618E4A60B9B6F9FBFD7D34655A50C444995C7059C93DD28AF58176",
+      "legacy_metadata_key_hmac_key": "184A3999BCF8CC12D37D4013D7822C64A11CE426267A0271C1ED53E7E8DB1000",
+      "legacy_metadata_nonce": "78C1769887FDE04453C81658"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "296A",
+      "expanded_salt": "F44EA8B30FD9F999BC7E31C8130892C3"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "4299BCBB2412A71215EDFBFE1F8176E7",
+      "legacy_metadata_key": "07C4A089310EACCA1B3BA2D4EA94"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "F3CAEB25DC97A317A38C99E7F1438E1F",
+      "derived_salt_first_section_no_de": "EC4686E3C2F9A5AF8934C8EADAFAEB6D",
+      "derived_salt_first_section_third_de": "921DBFBA6B75D60A97443F20A6AE5779",
+      "section_salt": "F3A5EA6D8CC24F111F84B17EA038A2FC"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "944F676AE58D1738571A6988",
+      "extended_signed_metadata_key_hmac_key": "D5642BD297591472FEDD16557F86D9FC98701FC19BB83E24A87EE5D31314CCF7",
+      "extended_signed_section_aes_key": "B2FE576CBF190EFF36B7DDF428D08806",
+      "extended_unsigned_metadata_key_hmac_key": "80E4277B7C98DE76783580F99D7AFFBD0C939069E129FCD2A451DE2A4DFB347C",
+      "extended_unsigned_section_aes_key": "84AF72363AC42837703E0233DA58AF15",
+      "extended_unsigned_section_mic_hmac_key": "309CEADE18269614513CC150680E07E79A395BFD00966021D074AA51D5DBB0B3",
+      "key_seed": "174C6D54B1B0CC84774E8FB9339AC57933CFEC2D78A57F66268A2ED648C79D54",
+      "legacy_ldt_key": "FEFDC3138EC8C0F7CC34C171A43E9AEEBB4A0FE5EAADC607A9D6600D8B9B54D207A2BC90D0B38DD989EB57AEE3A21F11DFA1C22F8DEEFCBB84F14DE16706CB5E",
+      "legacy_metadata_key_hmac_key": "181967500164E896A23C22E206E00208E0A82CBF97B839DA87F9C3EC5759F1EB",
+      "legacy_metadata_nonce": "0688E75E1B921F995491EB07"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "BEB5",
+      "expanded_salt": "C401AFC676735287424E9F7F0DF237B2"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "8AB09C04AC42D4F4E123FC884885C595",
+      "legacy_metadata_key": "191530A2A7F75BBDFD7777601AE1"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "99D022786E9CC9AB870AC2FF57DA80EB",
+      "derived_salt_first_section_no_de": "01E17F91C55F51BD79A72463BC8493F8",
+      "derived_salt_first_section_third_de": "AE2DCB3E34AB81BF22F460D7546376F0",
+      "section_salt": "3E1F652AE28F8335D7B15864E9F7CCF5"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "F3ABE0F91D65A95957CF2AD7",
+      "extended_signed_metadata_key_hmac_key": "0F4E56038ABF9ACAA73EC95395B337124A89ACC20399E1DBAB7F8F73182BC107",
+      "extended_signed_section_aes_key": "13B7FEAF3CD5ABF9905CDA55AFDDEFF4",
+      "extended_unsigned_metadata_key_hmac_key": "B42A14360C1128B0B4AA1D99E89B32F4D13D2C8A191EC5E58DB841EDDC4ABF76",
+      "extended_unsigned_section_aes_key": "3AE1FBA492CE6D8854923EEAC2AB8A17",
+      "extended_unsigned_section_mic_hmac_key": "9FF77BD8BF275AB41652950CE40976102A641CE5CBCF346A9E755281FC0259B3",
+      "key_seed": "9864ECFD656E7B608A63883FBEC4F62E8E6F7A3590114C39E036AEC87BECBE41",
+      "legacy_ldt_key": "8FC7B079C4225368931B03C4814EAB6DC02175EF1873B1A224CFD39B9CD99814417A884A2FDB9D324747F55A9BF7758B22C2C3113D06ADC373B0A47E925FADF3",
+      "legacy_metadata_key_hmac_key": "493B6E99413B5E07771053F536EEB8DBF169B4DE6E78EE341E1627C5055200B9",
+      "legacy_metadata_nonce": "B4245B6A65DA3B698B64B9B1"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "8C5F",
+      "expanded_salt": "1E634D3633DB16B5698B53B1FAC7318A"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "ABACBBEA70871DA67332DAD622F9877E",
+      "legacy_metadata_key": "711C81AF55689C9F41F26EC0B3D9"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "D42F8611248F16803F100880FD2C40A8",
+      "derived_salt_first_section_no_de": "0AFD085C634D64812B22120E6EA087A2",
+      "derived_salt_first_section_third_de": "0530E299A7CECDA05EF000FCBD461AE6",
+      "section_salt": "1025402C2B74145C70E2CA2E518A83C4"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "37CAFFB8E8BC64931F3190F3",
+      "extended_signed_metadata_key_hmac_key": "15D89B2AEEBF854A0BE65C186885E4AAAB903E312CF27B67F8881FACB082B7D6",
+      "extended_signed_section_aes_key": "640271AF293235DD4592A0FD12EDCDBB",
+      "extended_unsigned_metadata_key_hmac_key": "3E5D5FBA4B63F41DD8B5F42C1A285DA8C0AACD5AE96891BF9BE94BA7F2A3422E",
+      "extended_unsigned_section_aes_key": "573C4B8052EF1CB1BFCE2EE02A21FDDB",
+      "extended_unsigned_section_mic_hmac_key": "269360FAD76012F1BFB9B46E48CCB4A4484C959B46AAF666E7E99BB571D02DBF",
+      "key_seed": "AED5B53B0E0A4A8E7A00B1DFCC03428D99E7B07CC6B90A2A226DAC3C51C53300",
+      "legacy_ldt_key": "80B93319EEC4CB0E43E07CE1DCC54AFA5143E3E0688297837BE19921550E3903AC441802CF7816C959C8BB5B5F650C294379767E8A13821F0BD4CD0164748355",
+      "legacy_metadata_key_hmac_key": "AD90B2CF579CA71E41CE8EED3E8D2EDBE74BC6B3E090C298B3027E2071E1D707",
+      "legacy_metadata_nonce": "28C25CA1937E414689922A89"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "5CD7",
+      "expanded_salt": "3479EE965DA3C29D12C79B83F87DE36A"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "EBB365F56DD11C290CF18ABAAA208F68",
+      "legacy_metadata_key": "798BB2405B1E4C58708885C8C64C"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "E06D761A8CA571BF0B0F44BECE8D84E5",
+      "derived_salt_first_section_no_de": "F4FA7DA6B4BEB32FB8D61AD5529221DB",
+      "derived_salt_first_section_third_de": "C8B3BAE8D808A3E4CACFDF99B9006801",
+      "section_salt": "44829BD9245724BB422CDF85FE06575A"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "3E8E5771EC037DFE9655CF21",
+      "extended_signed_metadata_key_hmac_key": "FB1E172D8BDC30C0686494050F0545AA14AC4CEB4B80178D1A60BA91F52E4220",
+      "extended_signed_section_aes_key": "CCCCAB2218464982259AC1F9E1C883C9",
+      "extended_unsigned_metadata_key_hmac_key": "A165FBA7AE751FB806EB71B517C107108ADE8AD83CAF2270CCBB500A16D6E8B8",
+      "extended_unsigned_section_aes_key": "939BC65E829C365A53FA76DEC5CCAF72",
+      "extended_unsigned_section_mic_hmac_key": "F517D42A409DECE9A73326D2D83073F5354D5FA6E18E361C8F5C322DF0DE2074",
+      "key_seed": "AFBF0717AAE34C12160C6699E875BC497324201A00F28BB689E72FF81EA02083",
+      "legacy_ldt_key": "64701C13AAFD18BD719961E5168794D660F2B303265D8164B3F42DA11DC1689AF643525BD5674FD39E4EDA98217D04C0F72188D4290C1820C3E7DD999E5C26A2",
+      "legacy_metadata_key_hmac_key": "3228A4757D856906247B16A2E70ACBA3E2B3A556B48C3F34188605EF76C36EEC",
+      "legacy_metadata_nonce": "5E989D42F47971FBB6D02CA2"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "B7BF",
+      "expanded_salt": "B08300567B79FF302A5C7E88AA9FD54B"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "D98863233D54488599DDB89774AEE330",
+      "legacy_metadata_key": "0077F1879D872A287071D462AF20"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "CAB00A6159E6DE851D7E64435197DBFA",
+      "derived_salt_first_section_no_de": "9D33AA17D4672886D95B8040F714E99A",
+      "derived_salt_first_section_third_de": "F000BFD919B6C082652650B4A5C5E1A1",
+      "section_salt": "11D3A895308F443C74723FE45C9AD464"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "9594966607D85F389214AE63",
+      "extended_signed_metadata_key_hmac_key": "FA1A0A53C819972F4E4F9DC3557D7E48EF74FD16FD1B4E6E343EC2DB2CAC2812",
+      "extended_signed_section_aes_key": "03570780D11AF5A85038B03FF4DD0700",
+      "extended_unsigned_metadata_key_hmac_key": "7379F3362DF6C3204A4B334B8AE60369493FF4E5296C5A7AF2485881940F6170",
+      "extended_unsigned_section_aes_key": "2DF64D6C5F0843468AA52DFAA6A587CD",
+      "extended_unsigned_section_mic_hmac_key": "6259F5119F8B9D77E2DEB23DC41A54DDE67742AD520F225E83E67E98C44DE6A0",
+      "key_seed": "5EA0EF5C2E1E60B1741DAD421FC11EE78391D9598D143B5DAC4FB07091847EA3",
+      "legacy_ldt_key": "A2D8CD41763E0C7F5A24C05FEA4BBF9C05B50338FAD3B877F69A81768FA01BB0CC9704C1A8DCA929025CCC8F6E80507FD74D140BC8D56EFE9E201F2C34077DDB",
+      "legacy_metadata_key_hmac_key": "B5CCC3B2437D3D659C4CDFDF7B0EF920A5ECABFBF75DC6C36CE47E946F35CB9E",
+      "legacy_metadata_nonce": "745E3B9CDE832DE4EE67847F"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "81EB",
+      "expanded_salt": "400E2A436293377A368189866BF5A615"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "C0B5A3D9B7E8EB4D8A68F6AA158D0C90",
+      "legacy_metadata_key": "8E9165673AEFCC49B33E4535E0AF"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "0FCF0C13F89FFAFF9CF2EBB9C74238B2",
+      "derived_salt_first_section_no_de": "D1375663E1B57A43DD17E6FFAFC17279",
+      "derived_salt_first_section_third_de": "2EFF6AC282F726CA937B8B9AEED2B9FA",
+      "section_salt": "76B2FF4BF7A1754AA61E2FDD6C88FC30"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "5706AFC8EE2B6341CC4D3B05",
+      "extended_signed_metadata_key_hmac_key": "D790D59CCEEEA5A0C804429344D35C3AC9A515A9CFF7E10043125388CF5D326C",
+      "extended_signed_section_aes_key": "E23DF3CEBC1F83A569DDC05DE27DCA19",
+      "extended_unsigned_metadata_key_hmac_key": "A396B34DBF66E482B53D2B79DABD00F098E1E5240D45C3805F2386A1237B06ED",
+      "extended_unsigned_section_aes_key": "03D99FA28322A9506C3CB7B9F51F4542",
+      "extended_unsigned_section_mic_hmac_key": "E495765950E61B023CB6E2686ED4DC4189CA56F915CB3AF877B15ADE845EF31A",
+      "key_seed": "206C196A03EB7DE2525B6C27E478552CD3B1904D4D89D3785D51C02B8F1D9B36",
+      "legacy_ldt_key": "71534CC9368B8B599431DDAE5F62200DDFBDF8009248436F92636CF214F43E85CE80EC8703B78FC26503F6DD3634526B7301D8DDF45339A3B63C64838A09734A",
+      "legacy_metadata_key_hmac_key": "3158EF75327E4F117A5ABAB3EF29954CF76B7249C74DC50CB8D1EE4027F70CD2",
+      "legacy_metadata_nonce": "704A450B927CC83483CB5210"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "4E36",
+      "expanded_salt": "D96E799C1F673C3AB5621DE38FB7D9FE"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "DC4C0824F5965E110BE7C9036B6043D2",
+      "legacy_metadata_key": "D2DE6C51A1B2F0CC740A0433BA0C"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "D735F933C91F70E6703FA277DD9D6B07",
+      "derived_salt_first_section_no_de": "A1216FDE48D4E7CF716EBA6304B0E002",
+      "derived_salt_first_section_third_de": "6C6F84F7B0ADB3DC95733154462DC464",
+      "section_salt": "EE077330D38FA4E741EEB2A423C44E16"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "E8591F5F7A4A9BEEFD11704A",
+      "extended_signed_metadata_key_hmac_key": "0D06ED71FA2DAF112A89EBA86E42961C0CCF5F114C9D5414221ACAB16493615A",
+      "extended_signed_section_aes_key": "5DCDDA469454FEB3C2EA71021F93C392",
+      "extended_unsigned_metadata_key_hmac_key": "770A74886ECB2E13C09DA386048A1FFDD32F184821CFABF97C591F2F1AF593D9",
+      "extended_unsigned_section_aes_key": "74093EBAD21C75C9FB6496AB55D71D10",
+      "extended_unsigned_section_mic_hmac_key": "528D1D684E3DBB6A55B3C74B76F12E3BF88F622796E111436F8436F9C68BD7AB",
+      "key_seed": "CB62878D769D49414CD07AB82DD01A567BD320BCDFE120E137EA6D24FD754A31",
+      "legacy_ldt_key": "526A62E198AF94F8E1C97AD51BCAD021ADE8BE68CBD16DA8FEDA9186141099AB4D1FB09B3C45E06217A50F20143C6669E024A5FF127311B46024E981A8F79C80",
+      "legacy_metadata_key_hmac_key": "C3FEF82D19D4198A12825C7B81D92F92A27E04C0D512FC07D2C144C48DF39A9A",
+      "legacy_metadata_nonce": "6A2FC44C5DCC8ECE690470BB"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "4B93",
+      "expanded_salt": "0618681E330AA95ABCF5908C7D80266E"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "176853A104A7E84FB244044ADB23E60B",
+      "legacy_metadata_key": "AD1ADA1E3F33D44DBAD9D68546F8"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "1A605E7282BBB65E768BA802674316E4",
+      "derived_salt_first_section_no_de": "46EDD6B928BC45D5349843C3DA660A46",
+      "derived_salt_first_section_third_de": "23866A17B31C30E4B6BFCE65FF9EF2DD",
+      "section_salt": "CF0811E9E51806ED2EC869D2DCF7C3DD"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "D1031370C1491071F4D7C54A",
+      "extended_signed_metadata_key_hmac_key": "E27E04EEE22E36C87CA16C6AD7D5ADD10776EF643CE1D9CE30EB22D00A30FD59",
+      "extended_signed_section_aes_key": "15D907F25E7808AB08BECD25DC12BB17",
+      "extended_unsigned_metadata_key_hmac_key": "F3F714D219EEE49D4F2BBDEA6245570148A513989BDB07C72D940C8F6174A6C5",
+      "extended_unsigned_section_aes_key": "3449B21771EA3B2B1B246A73B031C67C",
+      "extended_unsigned_section_mic_hmac_key": "7AA8030A85FF64635D6B913A1E96D58EE649BD9E29A27F24A2EE429AADF5B6C5",
+      "key_seed": "FF255729FEA933CDB4EFEC5E38D382C2B8166FC1F61099FAB8E0DD472A1EA192",
+      "legacy_ldt_key": "95B5891E32CDD742FEFDF510C32937F19926BA8A2FF7568AA3A2049E4AC468620FB72DD2E0720EEDC69ABE700AAAD9077345CBC40B410C01F03D7B0B34EBF852",
+      "legacy_metadata_key_hmac_key": "B76F11E187F71D17D2A8038BBDA38DA7F6090E2CEDCF324D4DEBA899F9D39985",
+      "legacy_metadata_nonce": "72FE7AB45734E2C87AE34B96"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "3CF9",
+      "expanded_salt": "469C89FF0AFE6B7AEA5A94E8E5D413EF"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "34C8733D5598224EBE7E0F468AC42AE0",
+      "legacy_metadata_key": "B4EBC9A698A9F67B3360AB444B65"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "6C0B7CAAB6B77D7E69927BEC4CF9857D",
+      "derived_salt_first_section_no_de": "E85B82E53864343FE2E11C3BBA921BE8",
+      "derived_salt_first_section_third_de": "B5C9E52B81072C158A44DA3D0F1B863C",
+      "section_salt": "55F816AB16A494DA8DB45539F30C615E"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "9F3A841BC948F67E6F6C1394",
+      "extended_signed_metadata_key_hmac_key": "1741C9FEFE5F3C189A06E18FF55693BAD6F850740AE5EE91CF0CE7E1A6A48D65",
+      "extended_signed_section_aes_key": "6624413BF4F1665423E6AFC7E48F6DBA",
+      "extended_unsigned_metadata_key_hmac_key": "79009162ED60569C88E211D09543E5612C1D5A590B8277C44F5F86A3C1ED26FD",
+      "extended_unsigned_section_aes_key": "4AF8134B5774E0DA661D4D74424BDC8D",
+      "extended_unsigned_section_mic_hmac_key": "FC55078A316070CD61B23304D7E0A076490E3425F2257503D1FA3B13F806B8DD",
+      "key_seed": "17D52F8EE6C17DAA338290F9E0D08F91C9BE1AB1DEA910D487309BBB09F67F0F",
+      "legacy_ldt_key": "F01C06D770236831C55B3A10BC648812125B0A8F65367DE7AD83E48F6EB6C2151F09F83B933B2339BD08E36DB74780BE1F435F035DE643D28CE067AF88D4E30A",
+      "legacy_metadata_key_hmac_key": "4BC9A35B25DA286883594B8258037CCBA46F26A76CF3D16DA66B79A5AA645FBF",
+      "legacy_metadata_nonce": "BAC048C167A5890EA8D5D060"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "651A",
+      "expanded_salt": "D9C1AB2EA41BDCC8839A83CF4EFFBEA8"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "ECB322FC63A5B136F19A39403AB4A3FF",
+      "legacy_metadata_key": "0224F2C3F01DF3961A9DDB33D33F"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "9BCC1DE1FB74CC1CD16D0B4200B04D30",
+      "derived_salt_first_section_no_de": "9ECDB554F3EF801381DB9373B9886BFB",
+      "derived_salt_first_section_third_de": "B898A171766659C0B6CFD5A54D7D3ED6",
+      "section_salt": "12120586C731008F58E2EBE90F2D9FD7"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "43EC170E0B76202475557760",
+      "extended_signed_metadata_key_hmac_key": "99B0F78F43A68D4F6367ED11338BD73DA00CAD40BCC917DC0E10CD1D3B8225FC",
+      "extended_signed_section_aes_key": "FDB4A65AC4DB43107994369895BB7340",
+      "extended_unsigned_metadata_key_hmac_key": "A4E32E714DBCC3AF4BB2054620ED0E26B05A00235AA46DE36E87DD1C33ED4B02",
+      "extended_unsigned_section_aes_key": "3A50203C921E126E8D1B0A31660E025D",
+      "extended_unsigned_section_mic_hmac_key": "F722C6EA33D7F8257B668A6A48AD451E90292DA2B5C5A2565383AABB3B75B158",
+      "key_seed": "DB33ED53F748F16D4C44A0D7256951E46737473A2ABEA4FF1A66166072D198A4",
+      "legacy_ldt_key": "4679142868B7A72EAE5D275C6077F84BF4A2AEF5A6B638925752B30C9A43F356CEBD1000C540CD5103F5FCF620E11FEE9900D951667026D68770E1CC9F37F9B7",
+      "legacy_metadata_key_hmac_key": "B81CE82EC7918F849BD209F9CBE4F6232FCC22FE773D96A7823468BD9FE6F6BF",
+      "legacy_metadata_nonce": "4DEC4087D83773E0A57AD6DC"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "C854",
+      "expanded_salt": "7F509331897315561AE87E8E465731D5"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "445F1AC997B6F6258C04D6612730F576",
+      "legacy_metadata_key": "5A0395FCA63385D863B94C161830"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "C5D4701E3941FA12EBDFE7EAF8D1103D",
+      "derived_salt_first_section_no_de": "CA9740A690C83B28BB8EB6C99A28471B",
+      "derived_salt_first_section_third_de": "0C2ACC54B8EB3433574E87CC03090508",
+      "section_salt": "1420CFC23918397B5B0743A7BD1D33DE"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "2AE39BFE66BFF7F3685B7FFC",
+      "extended_signed_metadata_key_hmac_key": "1E5B00AADD20BEF97BB6CA33F97C20661F041FF73DB72D33787C374028FBDAB5",
+      "extended_signed_section_aes_key": "59A55BB848376BB2A1F2212E954743C4",
+      "extended_unsigned_metadata_key_hmac_key": "A33A337FC8BF0C5C435B46121BE28F5D119617D044C990ECDC61A36F8EF60808",
+      "extended_unsigned_section_aes_key": "4B6F0EA5C9C9A1DBC1203B0B5AA1D81C",
+      "extended_unsigned_section_mic_hmac_key": "D5B603436CA006324D83AE5020DAC7BD98F9E05EF3E94BA41F63558E2282FED2",
+      "key_seed": "0982F189CB2F763A17D3D68430CA8DE5C22D6B44C21881CF76473C21F4CF573F",
+      "legacy_ldt_key": "C61EEED8BF13DC405DFB8C57232F66381B7FF78CDFD4DA1FFB6737565E5419E98EB38C237064656DB9BC31611F4C47864D54DEB96CEE29F4BE9BFA8CA257D036",
+      "legacy_metadata_key_hmac_key": "DB9E4BF67F914548B813C071B42B37A486B1564DEB98D90CF8B4A020DB9A2702",
+      "legacy_metadata_nonce": "3BBD17F0F4C43E279C69A7E0"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "065F",
+      "expanded_salt": "1360903389867A3F865080EE99218A93"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "13D9CD7AB4481EC78AAE713AC7F7A534",
+      "legacy_metadata_key": "13A49EE19095CFD061978BE2DA07"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "5809826FE4C41311D0DF8490071E4BA5",
+      "derived_salt_first_section_no_de": "B10FE9FE08BB71AAEF17701E3805E337",
+      "derived_salt_first_section_third_de": "5C8C4CFD85E659D2CCC0A735E4C14C44",
+      "section_salt": "C1290354344488D39DD88998567BFA1E"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "A0A936CA136E8ECA670708EB",
+      "extended_signed_metadata_key_hmac_key": "27200867B9446FAEC18E4B472C0C2A43D8180753607B42B678184CC5CA3B1AB1",
+      "extended_signed_section_aes_key": "2214D4050FEBA4E4C18543FD920D15C4",
+      "extended_unsigned_metadata_key_hmac_key": "51EE6B49F353568E055B06CFB717A8A467DEE6D90A6D5B325052DFFA15564C6E",
+      "extended_unsigned_section_aes_key": "6F162714F3BDA65324EBBC4B328CD0CE",
+      "extended_unsigned_section_mic_hmac_key": "DA51358ED2AA0916325399E9A2B0244D1791A1C5D600AFD8A351BBCADBE616EA",
+      "key_seed": "8EDCDDAE0F2742D381A7E56284E6804AC68080F872F6A587DE4DADC5B589A4A5",
+      "legacy_ldt_key": "6AC852D94DAFB8C18917A6406D3E8364125F01B03D1EC583FD20E5F9B71DD579B807D3874C4B3AB0FD9582F505E558C98F3E96F609636AAEAB90E9DE51703CA8",
+      "legacy_metadata_key_hmac_key": "89D14E7C13E4B33BDA2B0A70AFC4376FC82BC5E8B6D028F1C91D0E9159F9D549",
+      "legacy_metadata_nonce": "CDD93F6D02D83D0685DF0729"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "5E81",
+      "expanded_salt": "A1D53BE4EC3D0418587BD370BEFC413A"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "39B757F61E136408F7D8CD58DBAE1A89",
+      "legacy_metadata_key": "F58C1AE45F74112200878EB16AD2"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "4B9D669E994848CF832475821E5BA9A0",
+      "derived_salt_first_section_no_de": "B0DD4242F201361D92B775C5F192C979",
+      "derived_salt_first_section_third_de": "E5A6AE615AE988C06CEAB18846B5F659",
+      "section_salt": "33CC65E1EC1CE33B169733DC3096B450"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "DDBF503438D36104DA4B319D",
+      "extended_signed_metadata_key_hmac_key": "DB2C6A4EEBCA496FE06C311A8A26AB0C208E2785ACC33A02AEB4ABC1FFC8E5BB",
+      "extended_signed_section_aes_key": "8E5E7C2C79A489BA786B7FBA6B85383B",
+      "extended_unsigned_metadata_key_hmac_key": "803D250E88446724C7192F9BBBB5F1E4EBA342D5391DC8CB8FF53349D4E8DB67",
+      "extended_unsigned_section_aes_key": "58C6E7AFDBC57C0482C6E611EF1A346E",
+      "extended_unsigned_section_mic_hmac_key": "D704D0EC34F6D775C575D3C09AE34A5CC1926C88E59A4DDE6A8B5E0FAC2AD3F0",
+      "key_seed": "EFBE104969A3580E48A63285BFA56DB95CAF3C81137B5DEDA8BBC0ACC12C658E",
+      "legacy_ldt_key": "382BC725B508E73E5616B110C92CD8F55CEAF87EB9E0E5BC372150AD9BEE1F1647F3944E3171519B94249A3A789D472C9961FD675653927D1DFE345FF3266358",
+      "legacy_metadata_key_hmac_key": "8D6251503286E357F6EC394CC68446A36BD0C62D50F20FAC6C258B3DF1FACC4D",
+      "legacy_metadata_nonce": "A19B0D2A97B7F3B3CC296F97"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "5FC9",
+      "expanded_salt": "C69D7BCD94B23FBD8E2AC68B96330BF5"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "6AFDFA46631667385F2C5D764E5301C7",
+      "legacy_metadata_key": "062743EDE5C56F5130998BADF2D0"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "58552F903E39FAD1B6FF06B7E55835B0",
+      "derived_salt_first_section_no_de": "586199F442C8473B9690A6AEAC36A405",
+      "derived_salt_first_section_third_de": "B69365658EE47B79809645ACBD160173",
+      "section_salt": "D08A6947309047818E4529E4CC80F9E2"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "1C2BD072C9330CB6D3807B9F",
+      "extended_signed_metadata_key_hmac_key": "7EB76208F558DB04B0ED9C741F7F4146AD323ED5A9676708F3C2718FCF61DD5D",
+      "extended_signed_section_aes_key": "9E043B7A0F1D242100D98F88D77180D1",
+      "extended_unsigned_metadata_key_hmac_key": "4D6397EEC391828BA27EA7E0F01DCB8350A081577CC0DF9FA3C244CACA923EC5",
+      "extended_unsigned_section_aes_key": "13D8B05613887623BFC72CB4BD57D0DD",
+      "extended_unsigned_section_mic_hmac_key": "249A8EFEEF21C7597AB5EAAABA00536ADD7F2D57CDB1C7F81914946748922B30",
+      "key_seed": "C952629EA0AAF16EDF450AB792C0FDF454B3748F14F8228CA39B3AC3D733BCC8",
+      "legacy_ldt_key": "7D90190372B6EB72DE892F159FD90C723D0B30CD1F97D7A6C15536C8766335AF62DD0BFD8FCB33CF808EA9A8565EA8AEE60D03B9A21849C7473B5E653DD58E94",
+      "legacy_metadata_key_hmac_key": "C02E17C17A1E010FB5F8B34E104B6F4B83C3697CE3878896D9C1D8E12128F28A",
+      "legacy_metadata_nonce": "D2834CF3DD852C5D65EF47AF"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "79A5",
+      "expanded_salt": "18FB4E698A2B0F8FEEAE8D6571217051"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "359493D5139411922367E5C050162264",
+      "legacy_metadata_key": "579718BBEB70558182C85652E2FB"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "81083ED8ADE4D6E6EBFEC991A837AC97",
+      "derived_salt_first_section_no_de": "8BDCE6C08C41DDB5EF3990EE1962965F",
+      "derived_salt_first_section_third_de": "6451CAC1C77CDD02F6339AC8F5011935",
+      "section_salt": "19E1A6466DF15274E28FD2AA96C01BB0"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "C47EAAC92D0E2BC76D5B7168",
+      "extended_signed_metadata_key_hmac_key": "8666FC7A47A63BAB78216CE4225E819D8680DB8C6F79F3FFBFB8B573C0A35C95",
+      "extended_signed_section_aes_key": "E4CFAEF9DAA97426A0F6776ABBDD0615",
+      "extended_unsigned_metadata_key_hmac_key": "18B3DA3C8736739FBD9D203493BC7697E47EC2072DE351475F332A989CCE2600",
+      "extended_unsigned_section_aes_key": "3732E014F15539C1999F6486B7933A43",
+      "extended_unsigned_section_mic_hmac_key": "F0ABA5CC299B1D3C210774DA1B065BCBB877A0991EED7C34E1DF5B318D1D5C25",
+      "key_seed": "E49335220345649BE4C6AD75B3EDE2A49A9CD22D291764E90510826835CA3528",
+      "legacy_ldt_key": "637CA1A46B169B80D0833678505E3FBEBDDCD42C7D297E78EC5DD6CE1F8007914742F09396A5439592568445117436BBF0B8A4075BE65843259B28A49C8C4A3F",
+      "legacy_metadata_key_hmac_key": "1780831E70950E84CEDBB6D08591E5867DB33D64B9AEFC60C1D29D3F4BD0DB6A",
+      "legacy_metadata_nonce": "4FE56B42C34913314149EAD3"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "7369",
+      "expanded_salt": "7B7D59EA9882AC8D8E5B95F11ED6773B"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "20D2CA28DAD44F40276871C7B8AD6D1A",
+      "legacy_metadata_key": "AD5DBAB68501DADA871E6CE6EFF0"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "C27C4FA03E43A46EADAC3A827A6ABDA1",
+      "derived_salt_first_section_no_de": "28B6CEF526584124B03720FC4A65188B",
+      "derived_salt_first_section_third_de": "76B42830B3813795F19CF07B6EFD17C8",
+      "section_salt": "3DAC056F62D259B969B815D08DA79507"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "8BC4D291417DA2637FDCA948",
+      "extended_signed_metadata_key_hmac_key": "69305759C5CF4AD06490F51BF9305543E835A219F53EA84F39ABF714F6B2F855",
+      "extended_signed_section_aes_key": "69E4C6301882A5494C10231DD82FD9AB",
+      "extended_unsigned_metadata_key_hmac_key": "F6F45381D06AD669756F4BC421495F60F02FAA2FFD3ACF9FAE6755CE54AEEA0C",
+      "extended_unsigned_section_aes_key": "744A7950D65D03AEEF5AF17C36AC3954",
+      "extended_unsigned_section_mic_hmac_key": "AF012F292628BFCB7421B4A846361AD4829FB93FD766A014A5D846B7F471F5A8",
+      "key_seed": "B46750D2A75BDF9960E825289F24D8A1C777C4481FDE9E1E38F72A3DF7B29AEA",
+      "legacy_ldt_key": "7C689AF4CE7D769DEC4BE41DE5651B9C87F76D988C90DF4A5263859159CF855DCEFEA5B0047F450AE9033FE5E3C4D96D0B81DA5D52C94487C481C11BC5204A71",
+      "legacy_metadata_key_hmac_key": "4EFEB0DFFB5E37BF0BE1373A4917078FE2F54EAAC0E22CD049D3A84F79CD5BCA",
+      "legacy_metadata_nonce": "0185B0580338EA6BD57D801E"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "4456",
+      "expanded_salt": "4C0B15F195F4E9506FD3BF692C8A81A9"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "F7B19B1F77FDDDA49AD637F92F559434",
+      "legacy_metadata_key": "71C96FDFE7539BAA0A52B6F4C1ED"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "DB0238E42DD58FFCEF52697A6B60EEAC",
+      "derived_salt_first_section_no_de": "76B8797D8220B4F7D3F2994F57AF40F6",
+      "derived_salt_first_section_third_de": "8FEFF73B163E9ECBF0B75743237146C2",
+      "section_salt": "3FF3074E6E32C3A1282DA7E7486FD5D2"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "8E1A231A33610A9B3F78D046",
+      "extended_signed_metadata_key_hmac_key": "724CBBC4F7B44408327A62B1EF12BBC451732406FE77B1F7E6F5EB125D47F69D",
+      "extended_signed_section_aes_key": "EADDEDCCE98E6DC2145C48C5648052A8",
+      "extended_unsigned_metadata_key_hmac_key": "9519CC0F24A2DB8D534B9233E863D1105711E79E84DFBE17E13DC3D6C1332D2A",
+      "extended_unsigned_section_aes_key": "80C1210F4F306D881C7ED5568A78D643",
+      "extended_unsigned_section_mic_hmac_key": "590362F05927596F04EEE3633FD526DA7C17FBA4A4489DC1B09F33FA2A84DACC",
+      "key_seed": "D83D79192D3A1490BB2DF4F72686E8E351F5F354BBEDB83B389DBC94D0DECC6F",
+      "legacy_ldt_key": "F6CC44D2FB8A497FDEF4D8505BF8954C1673F7AA74279938FF60D74F2D56E5E590B1EA7E71EEE7A14782FB6E5DDF856402DE2F388BC7A6BE7808C6B02D6AF3CF",
+      "legacy_metadata_key_hmac_key": "8EC62082A556856D8D9622063340E8B7A649CBB82193EE3FF1980DB7918A74C8",
+      "legacy_metadata_nonce": "0AE81376D41C4A66A58C9E15"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "7538",
+      "expanded_salt": "9C0EAC987D64D64324502964CE4260AD"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "809FF61B6778348B260BFB91DB789913",
+      "legacy_metadata_key": "BBCFBE39DF3BDF239B25E14976A5"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "86485E5604FA2EF6F8EAF42DF4CE0CF1",
+      "derived_salt_first_section_no_de": "5506D594D6DEBDF6AA3FF103EF018765",
+      "derived_salt_first_section_third_de": "DE2468D8B660E2757D9D80315450D573",
+      "section_salt": "C7321D6A2F9877CB0FF99B9B11D34309"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "D7D49880F809AFFDCF2AB7BF",
+      "extended_signed_metadata_key_hmac_key": "89280461B4D2102D3F829CBBDA32CD75F01579E2B25E8C2F01F3983804A7B5D1",
+      "extended_signed_section_aes_key": "9B42E858D2ED7439F951403533CAF3F0",
+      "extended_unsigned_metadata_key_hmac_key": "509A8BF8096E9A547D14F27284C20D7EAFDA6C9D8D0946EF81D4611DE00F22DC",
+      "extended_unsigned_section_aes_key": "88F058A2EAD74A4BAED5F99136508DAD",
+      "extended_unsigned_section_mic_hmac_key": "3729770DD90FEFA7253F53F87244C928CDE14CF5D2D5513D8EB3C1889C34AAA0",
+      "key_seed": "96B3E4E23374C3162E94B1701F6720E0D0918AAAF10FA0E7FCBC4D7059C824D7",
+      "legacy_ldt_key": "4B0AB9E1C8CDE2F1B55EE0EA4A331B8B923E34AF5DADC5F18971111F45D41BDDC7E9A9F7D28F94AC71F50DFE5AAD7FA7B85884169FE0099175073100CE1DA9C7",
+      "legacy_metadata_key_hmac_key": "5FE8C268D4DFCFCC91F4B7820BA679D26A54C8FF0F3063EB856BE84FF4AED8F9",
+      "legacy_metadata_nonce": "D885F819DB614904DEF77E09"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "3881",
+      "expanded_salt": "839E06D9CAFECE9EB910ECA73E7B7041"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "C4ABC2194181D14624AFE1B545E87B95",
+      "legacy_metadata_key": "2F8C7737B5E98216C6358DFD1163"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "A662F512F68A331133401EA5EB2A2A66",
+      "derived_salt_first_section_no_de": "BFE2EA19A0984DEE6BE7EB90DC2FC58E",
+      "derived_salt_first_section_third_de": "92E3744D86B5ED21D50C726A66ED36B5",
+      "section_salt": "55DA08E873B5664E175650BAAA9A8021"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "8E7098BA5E6A64E0F97746AD",
+      "extended_signed_metadata_key_hmac_key": "D8C3614062B4B68DFDEC328EE588C257CB5D8378F33F514181FFBAABF9C18A2C",
+      "extended_signed_section_aes_key": "9215527DA83060DC2F32E39048ECD4FB",
+      "extended_unsigned_metadata_key_hmac_key": "345516B0AFF7928137B9AF940CB13EBC734F9015540C713C0C813AD136BCAA09",
+      "extended_unsigned_section_aes_key": "C563004B3236B38E9C02BC6817B9B199",
+      "extended_unsigned_section_mic_hmac_key": "2F4A9499095C511768D57BEC00A3EC265E9384BC9A12B0F9956791D8617BBE3C",
+      "key_seed": "4678C5DAC152DF06265640453E53177D237E72FD58E1B784C692D95363B3DB30",
+      "legacy_ldt_key": "08D4D021EC845DCE579783FAA377F1B8E20A75CD4768D18DF0326F314A181C17CBB821F0033C970B8A7448E208FA06025A855D25DC38775E44917DC51CF267CE",
+      "legacy_metadata_key_hmac_key": "0D31EE249C7FFA7A827E90EA8C20D70CF22F5DD8DE8BA331A5B05B3831435C36",
+      "legacy_metadata_nonce": "DA5011061FF4017D38381053"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "7C72",
+      "expanded_salt": "7F599F5A3FA8CA8046C80BD2F8D43377"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "77B1D1B130E78CD88DB0FB2D439722A5",
+      "legacy_metadata_key": "0FA76D2A99B2E693B6D358C41D42"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "532346C01C3D5C6488233523F1239853",
+      "derived_salt_first_section_no_de": "00FA8A3468172AA618AA22518A04AB90",
+      "derived_salt_first_section_third_de": "1B2BBA5F893D87824BD4D36EB568ADE3",
+      "section_salt": "F3BADB4D93D44B2C83651C4D977BDA85"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "AC7F3D2E8F0CA67D9E3286FB",
+      "extended_signed_metadata_key_hmac_key": "09F574FCD463AC6C36B8E3444B5C205D4E7F34FEE2C50F4C9D8F4E21F3F08E8D",
+      "extended_signed_section_aes_key": "03929B8C9D55DE8A2DB331F3A458C5A0",
+      "extended_unsigned_metadata_key_hmac_key": "41CB06A6ACA499582A97E506954CF3346E10922C6816893088E920400C15724A",
+      "extended_unsigned_section_aes_key": "8586ADD0A300F594781EC6A91F7525DC",
+      "extended_unsigned_section_mic_hmac_key": "0A104999429CBD6CC254840DEC399C70F9A64F4BD4B9EA572861F44280311D1C",
+      "key_seed": "5EA22F37C2895A5ECBEF49AA18F9BEF14E2221E8AD6B73C48B500059C0920563",
+      "legacy_ldt_key": "2CF083240697097DB14CCE7EC06542F2D8CA93DBF4404BF733A67BE123A7D577A4ACEAA6EAFF9BE5B73FAB9E48AAA93D63779D8FAA7044C24D1DF6E6415540D4",
+      "legacy_metadata_key_hmac_key": "5DF6ED321FFE805FD33A7A17CE8CB8348532798C604F3878892D3A6B1D12E4D0",
+      "legacy_metadata_nonce": "E9872F6F6C5595E82DE87409"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "2D24",
+      "expanded_salt": "09935DB3B8781070715F440E27D5CD90"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "7B9525E023AE6563A1938D713276A250",
+      "legacy_metadata_key": "E95212B84FBB8BD181401FB77BCE"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "F4A7A1A0A42EE2C34BB44EE7CB7FDF50",
+      "derived_salt_first_section_no_de": "F13440BC0A2B7911039742C57654D2B6",
+      "derived_salt_first_section_third_de": "AE1A8F016C73B5BA485C27D9F21C4379",
+      "section_salt": "B7C7FD8E1C40228B71165C00DF490496"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "62E90AEC398397F92486725B",
+      "extended_signed_metadata_key_hmac_key": "512490244C6AFB22B8E1FF0AE15B1BD9BF61B02C20FDF18AFCC28704FAA04B11",
+      "extended_signed_section_aes_key": "C650084EAA3E35460C65A6D5A3BC056F",
+      "extended_unsigned_metadata_key_hmac_key": "969259ED1CC21D9DC198921204BD98F1B60D51E52758EF03EA42A088FC33AA99",
+      "extended_unsigned_section_aes_key": "A12E741FBEE73C341789F4A2E217E568",
+      "extended_unsigned_section_mic_hmac_key": "C11625C0E356394FA499EA6E7606CD7ED016364FC8913C2590CD04E6B7101C33",
+      "key_seed": "9FE70D5318CEACFFBC1C0BF66168E2404D67AC342B36AFAC5306F65AB75D4BD1",
+      "legacy_ldt_key": "07DB2360A6FF579827C73C33947D3432F0D2D44282C3055447C79C732A3DA4CFCA3423D87D080259F2056D9EEF0AD03D874AA6D3767019608486CCCE1CB34CAD",
+      "legacy_metadata_key_hmac_key": "B8EF43182F6E8159601E63E474DA30B6A0A18FAC8D37BA25207395990F75CA70",
+      "legacy_metadata_nonce": "B8E730D17A2B71DFD2113E80"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "7141",
+      "expanded_salt": "9E8C5C44E412C2E5D54FB423AB48102F"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "1FC5EA826AA0C33800219591A2856184",
+      "legacy_metadata_key": "DBEE14EB39323EE9CC4B341C3A00"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "BA4492E8755975045094D06AC8930F50",
+      "derived_salt_first_section_no_de": "20B8815C2C7788BE334D8D945AFD59DC",
+      "derived_salt_first_section_third_de": "2E567F8F25DF8D06C7DF61A05811F7F1",
+      "section_salt": "627BA43CFCB6B9FD6C4676C1102635CF"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "D1FE7EF66BC90F8B53E64538",
+      "extended_signed_metadata_key_hmac_key": "1484C6E96375DD5B4314600D12BCADC5063E1C865D64C8390CFF60E52E6FC0A1",
+      "extended_signed_section_aes_key": "CF4880570B17863BCC0B17D263BD563F",
+      "extended_unsigned_metadata_key_hmac_key": "E3CF564D084FEC04FC96B6CD5A23B288D49F360B326005698B6B1CBD8B8860A9",
+      "extended_unsigned_section_aes_key": "6193B4A238BE3240C7E4D53E7708EE8B",
+      "extended_unsigned_section_mic_hmac_key": "45CC2AFD5BB72392874172AC5C059E871BD6E9C46D977E6D0F7510B817B180B4",
+      "key_seed": "B237A0FC008DF51F15EA3E1789FC834923556B61A7BD30664EA06BE6C40169D2",
+      "legacy_ldt_key": "FEE50CF8496A24EB1A216C0FDBED6CB9559099E8650BEC22C2DEF7ED4E490A9CFF5E21C40572A40AA9F5FC3E9C60F60CA60C257D08155849CADCEE76FC869202",
+      "legacy_metadata_key_hmac_key": "8E854A8DB7B847B84862757EDC73881609F0CF90A99DBD82571C204B040B5D54",
+      "legacy_metadata_nonce": "F58512DCB899E1F857C3394D"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "770E",
+      "expanded_salt": "7A1A3782A82F1E40CCBD5330A84750E7"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "C8C682033DA60D93756D23338D6427BC",
+      "legacy_metadata_key": "E12C6EE466A1ED61753B30E6BD6C"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "B20A3B57F64EFC41D079734A14A3D576",
+      "derived_salt_first_section_no_de": "09B542C88D08F276B29C0E1A2A424246",
+      "derived_salt_first_section_third_de": "962AC562D09F20F714EB885E729D4C3E",
+      "section_salt": "53F5CD677966C5D1E3EC25D1089BDFF2"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "BE6106BCD5D7388E53C26ECA",
+      "extended_signed_metadata_key_hmac_key": "0D98105D990B688F91C10BC27885E635B1DBDBF2DAE215EE49E04C06E33DAFEE",
+      "extended_signed_section_aes_key": "7A3A2341DB494F1D5AB346E54EA49729",
+      "extended_unsigned_metadata_key_hmac_key": "C6C0836CC438960704071E2EC71EC18219A7CA336E314C9DF1FD5F5848803C07",
+      "extended_unsigned_section_aes_key": "C00032E500DD04C16176DE5EF45466F9",
+      "extended_unsigned_section_mic_hmac_key": "2B813176336A7A645826F95F3763A536ED2EDC15EF25C87FAE32C3766114323F",
+      "key_seed": "BFF3192023AF42A5D4B3D12DC34350E7F41E214B25501A7FE0ADD19497A48276",
+      "legacy_ldt_key": "37E2DFCFDEFECB1FC486B6B26670AA37D3BE7E106E0C2CB5AFD9CCB1130EE7899A3D38CAF15142CD3A06DFC2A39D34503F7826EE517F9232DCC7CB1931855028",
+      "legacy_metadata_key_hmac_key": "5771D06F65AFD121908E4750EF2EBA0E9C385839E6987F30161FBCF88F49A974",
+      "legacy_metadata_nonce": "20448FEFB69E2643D7932CAA"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "524B",
+      "expanded_salt": "F0B23D5EB99A02DF9E8A7D6F8B8A1A3D"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "C6B9DB92F2818C6B57A3E386BD44B236",
+      "legacy_metadata_key": "A4C003398DEF995E0CF5457DF3A0"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "EB8E676E9E53A4828200A25942EBA2CF",
+      "derived_salt_first_section_no_de": "A342A8CFFBD87DA2F95D1C72CB0EEA36",
+      "derived_salt_first_section_third_de": "6F049F5664239C49D76286B8218D64B1",
+      "section_salt": "8096BBCFC6AE0C6CA7A17D5623929518"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "586425C6E1CAAE439F588912",
+      "extended_signed_metadata_key_hmac_key": "FD0CA08040BB854BDF7414DA7ECF4733A094644B4FE3473C04F787DBEF6E53E1",
+      "extended_signed_section_aes_key": "E4FA3E811B0C7263CCE2CD60500587A4",
+      "extended_unsigned_metadata_key_hmac_key": "6E6DA7DC5B6F17C7B6C8B37E9B8E82D09DA5C4300DB8C601CDBB258161A8701C",
+      "extended_unsigned_section_aes_key": "3E0E93D5EA50FC6420B0331F2D30EE07",
+      "extended_unsigned_section_mic_hmac_key": "78F44EA95AED2D816672A0EB7BC16B8DA13DC285CC903E63BB844BF6499949D4",
+      "key_seed": "66E4BFB8633C10BDD7B8C2E5653E014BC1E652D809487B1810DBF79515ED66F9",
+      "legacy_ldt_key": "D53EDC7BDDEF9CD6FFA5C7DCE7FCFC6A4653412B7F690454201BB6536FCD2EB04A090D3C252375FD703D87869AF7F6CC60EB7F381896396662C472C5B1626A81",
+      "legacy_metadata_key_hmac_key": "466B32DC5CCF02949C092E5AA5AB321CA35E339CA8F6483FB1F9F6F0C7E6A438",
+      "legacy_metadata_nonce": "BFF9144266F9BC3527CB8C46"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "CCB6",
+      "expanded_salt": "0F9B6162C8CDBC3092573D85B26DBC37"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "AEB39B7A005D27F8DA9FAB9AD80D220E",
+      "legacy_metadata_key": "A52FF0A8837236A5D3DDA03BA23E"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "FC6812BA03F06BEFD59BF0F949D8F449",
+      "derived_salt_first_section_no_de": "2DCB709ACE9617A6119BD2CC960EED9E",
+      "derived_salt_first_section_third_de": "FE06376C4AE96023D51C6C8475072558",
+      "section_salt": "2F808BAF3FE99E6E84B565038CA90BC9"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "D8C89D6886078AF21EE678DB",
+      "extended_signed_metadata_key_hmac_key": "FCE0422748BD4D4082B66F25B06DD3056E9D37C135CF212CE1C8631FEA94F864",
+      "extended_signed_section_aes_key": "9EB35E1816D04630AECA453BC64A8FE8",
+      "extended_unsigned_metadata_key_hmac_key": "D161E19CB3638E925E028602B7928D6889C776062DF66A33C97F2C45890C0581",
+      "extended_unsigned_section_aes_key": "A7AB3B735821FB8F59F63A8E8DE3F3F8",
+      "extended_unsigned_section_mic_hmac_key": "CEAD2B2095603CC58A1C5DDE0A5ECBC2FC960840DE6A463E9893C97409B0437A",
+      "key_seed": "3538A99DC75533C5A301539C166BD8A6476AF6F5F52A73382441681781283A4B",
+      "legacy_ldt_key": "32360EC7E4FE0B3C5FE27E236639D62C5C81BEE8397B320688087B4D4009B10E6C15B6057CCE1BC1B8F8732606E730BA172746D8CBD34DEECF911CBFB9712B15",
+      "legacy_metadata_key_hmac_key": "90A819E29083F6DF7FD2C7E9EC4A872CF4887CA8D964984E49C4CCC292EB8938",
+      "legacy_metadata_nonce": "0982939640FCC0CEE8551409"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "7975",
+      "expanded_salt": "AE096CF053C4F4A17ADB41DF4AF79D01"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "EA6B4A31500F98886521EBCEC6ECAAC5",
+      "legacy_metadata_key": "70A44BF295A6510C039A031BCB04"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "0818451F633193982BFEBBD61988FF62",
+      "derived_salt_first_section_no_de": "48ED1DF2C5BBF94DB0DADE30C0BE21C6",
+      "derived_salt_first_section_third_de": "633611AFE0697A6F36BC5B76E685391E",
+      "section_salt": "AAFCF56E0A0F6A8F76E2BC44E54F2B78"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "30696C2FFD88091165B93256",
+      "extended_signed_metadata_key_hmac_key": "346B7958CA1259BB7197FDCA84B718A41AF9049D2DE6B472B64B19102D4240CF",
+      "extended_signed_section_aes_key": "854ADA9753D9A82E94E5D6ADBB22873E",
+      "extended_unsigned_metadata_key_hmac_key": "29D905607B3ABF4E2CD261EE4E67C19EF36F41311A61CAADB60C95FC468FB72D",
+      "extended_unsigned_section_aes_key": "DD5329454006EC3BD37FE3520810CD98",
+      "extended_unsigned_section_mic_hmac_key": "E4077D45CDDD895F5577A11D2FE9CB3BE65242D5DFEDAC87471C76038605741C",
+      "key_seed": "3719ACB4884750708757D20A58648804B8B7A614C176AEF7DFA6E0A5BB9CD5A0",
+      "legacy_ldt_key": "88CAEB0E79177042908D16AF2ED4025D95448A76E901A4B6195F405E5210A6889324B3DB121508D411A012499EDAEFF35A280BFCD32B35B2DC773AAFFAC9DC35",
+      "legacy_metadata_key_hmac_key": "A358646C1D338EC123E72FBCAF4BF615844764F91F8F2BD9811CDFCEF5FC2548",
+      "legacy_metadata_nonce": "EB2B57119D7662AFA40BC448"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "7BC6",
+      "expanded_salt": "F81E9EC1C91B1007FF2A32D72FB6483C"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "36BB3E66C0820FC418EB2F1B873BDDA5",
+      "legacy_metadata_key": "89981C312BA536E82EC3B1090CA5"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "218AB6D163ADEB31634B1DED52E56326",
+      "derived_salt_first_section_no_de": "0F4F42636DBC8ADE1DF3383E6E8C80F1",
+      "derived_salt_first_section_third_de": "B667CEF8B176732FD56AFE83BFAA7611",
+      "section_salt": "D884E95FCD3A29F4E951A3C64D43C020"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "497081ADD0EAAD948AC3D743",
+      "extended_signed_metadata_key_hmac_key": "4CF4E05DA1B0EF538CA84515202E1AFC845E94A236C672F091D7998A1AFD0D24",
+      "extended_signed_section_aes_key": "7DF8CEF6BFDA7D1944BC5F5105BD003D",
+      "extended_unsigned_metadata_key_hmac_key": "4892A9FD8A1080F06D299D8DF2FBD1382E5F31E32FDE1B974ED1958AD7348C08",
+      "extended_unsigned_section_aes_key": "608194400C0D4390A12891645FEE4EA1",
+      "extended_unsigned_section_mic_hmac_key": "8B3B932C61B0B9E2FF883B13791EAF9EBBE382E4539242DEEFAF03C6930FEE9C",
+      "key_seed": "871B0FD2D15F8C5EA49B610C544D0F957884876C614228083A414F8A441A2D30",
+      "legacy_ldt_key": "D41A6CF8C5BB99BB8FE8B33F341FAD33AF603E980B6C2FF70B6F0BC0080F655141D0421932F573706664085752947678D4F106E1FA71E8E584445BCE7ABBA35D",
+      "legacy_metadata_key_hmac_key": "99D2C4B908B8FF9151F30A4B7ADD9590BF85EBD4D086560B32A20AFB529CC524",
+      "legacy_metadata_nonce": "60B88352445ED074EA447690"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "BFDF",
+      "expanded_salt": "AFDBB3A928B41B9C72F3CC9C21437B63"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "4F832379A70733EB481C98C287573D51",
+      "legacy_metadata_key": "9C8893A6DB94328439157550279E"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "1F3AC1292A3E34943F65ACBD5A5D5F71",
+      "derived_salt_first_section_no_de": "6162875F35A6B9B20C0F81C8CC9BC0D6",
+      "derived_salt_first_section_third_de": "EF5A3849BB1526EFEF254214AE714CD9",
+      "section_salt": "4058BBC28C1E874801AB570EAA0B1EB6"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "213546D6654AD76E62DDABF6",
+      "extended_signed_metadata_key_hmac_key": "359FCC4FB2576B773E11B61937E190FD0D9249EFE348AAABF18EEB331373BF66",
+      "extended_signed_section_aes_key": "48FEA76F4BA226E1880B3D8245125AEE",
+      "extended_unsigned_metadata_key_hmac_key": "59118D794BC59C9D1F4A6008E3AFB9FDBBC9F874C1F6C25812ADB75AD7744314",
+      "extended_unsigned_section_aes_key": "F55C149FB252D0744AAC781C04E87251",
+      "extended_unsigned_section_mic_hmac_key": "6A6C6DD45298CE923C01E0CCE68519E1C6E2C494F0E9476E596539DCB30423FA",
+      "key_seed": "7B65E45190EA159343E5562D63AE83ECF4B15DA7506706FBFAE25DC607D88720",
+      "legacy_ldt_key": "7801EA9A9FE16C5554116B72463EF63DE1565CA8AAF6DC1025FE6AF53C4B798AB15609774385FC25FDDDC4D28E57A2661ABDD074638A10C7C9CD7E852CCBB9A8",
+      "legacy_metadata_key_hmac_key": "3787DCAE0CC30E049935477D8562D380B9DB021BA494FD1ADD9925DBC8864A85",
+      "legacy_metadata_nonce": "902CCFD130ACF873A78F9481"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "9A70",
+      "expanded_salt": "4ECBEE3BBC2B85F39E379254D7163227"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "AD4B09305929D4A277BBB2D3227B54BF",
+      "legacy_metadata_key": "ACA208D4C92030B19114C73F8399"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "34BCFCB74C32AAE99B97D24A839C4533",
+      "derived_salt_first_section_no_de": "C6C751B4257933CCE05AD7C336B3F17B",
+      "derived_salt_first_section_third_de": "292892273B46FB6C99FA4BC3C44708BD",
+      "section_salt": "74F5AC8F69F601C07AB4AC92E9F51C3F"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "3564E475886853F7BF5EC55A",
+      "extended_signed_metadata_key_hmac_key": "35A5FF3F932BDC655A9FD8AAEA36E25ED917C509A42F3337E3E3E89F2DDBCD0D",
+      "extended_signed_section_aes_key": "470C528EF53B704C515C58A17EDF6C86",
+      "extended_unsigned_metadata_key_hmac_key": "4144AFA9B5D527A9D1E05AA282A7C1D00DF51E79CFE93D7578043A5191C8D1A7",
+      "extended_unsigned_section_aes_key": "C32F8F9706900F0FCFEE149D120CAAB5",
+      "extended_unsigned_section_mic_hmac_key": "7D1D483580DA73C3322F088E3D2A24FE640A9F818CBD72842D288364A1937286",
+      "key_seed": "A8590C79753059E9873CB4F0BEEECD1B43071D76BDD4A1E07809FFA0B89AD5E6",
+      "legacy_ldt_key": "82D25B8271ABE1D6262F09DA005D99BB6046EC6BB387800B4E2E01993998867FBBD487C65E0BCDCECBDD89E1EA23ACDE697862E2D9B644963625BE8BAC4E3F99",
+      "legacy_metadata_key_hmac_key": "C574697B87A56EA447BD202BFD3D960E2393119A5AA4BD270CEB0E37B719BF16",
+      "legacy_metadata_nonce": "1CFD6A666E8F405C39D9E1AA"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "5685",
+      "expanded_salt": "8AF7ACB0C156A5882E64105535A8521F"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "9B9FEE02950DC453BFB4EF3C1CCF4811",
+      "legacy_metadata_key": "B2C2A05B519CF20021C9996DF808"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "89CF340356F2E40A23A033F98DDF7D28",
+      "derived_salt_first_section_no_de": "853D5F3E410E67A666A9E41F86BD4EFD",
+      "derived_salt_first_section_third_de": "DE0B861151059E218B754C32B123C147",
+      "section_salt": "226836AA61CC797529A81307D64EA301"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "285561F74E853C3208B51748",
+      "extended_signed_metadata_key_hmac_key": "32C03F14E9AA9082E4A87375B53543103A6B8B041922778BFA9C083D5E1F39B2",
+      "extended_signed_section_aes_key": "A0BE8DF66519E26A80CA4C1D84958150",
+      "extended_unsigned_metadata_key_hmac_key": "98CB9A09F93AB43D229C1D1699E998BB21DCC535128B4F3EBA93939CB2806199",
+      "extended_unsigned_section_aes_key": "C579BE805B3801B4680EC72CF6F4C888",
+      "extended_unsigned_section_mic_hmac_key": "DAE01D0E3D8A08A8B3BB00A48BC81E8C6B730133EC90A03326189F2E43A1B0A2",
+      "key_seed": "82B0C4B354909A4A05C43CFD728804FD58C9A339362576865378D1B92A3DC3FF",
+      "legacy_ldt_key": "A939DFBDC50FBF27637C0B2AE4357D4403A5E3956373BD17CB8C589657517E79D1EB900F634E3F41092E4E25787C6161D2D18EE09A13A35A354A449AB8292BCC",
+      "legacy_metadata_key_hmac_key": "4D32558AF034F2AC2E63AB36256B842852598D49ADC8E2F244C8AC13DA1E9D04",
+      "legacy_metadata_nonce": "F00120FCD5FFEC079D2CA173"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "6C58",
+      "expanded_salt": "92EC631F08ABD78DC8552A2484D568F2"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "04443FC782143B5B62BFFB6F4E0EFE8C",
+      "legacy_metadata_key": "F011C17EDC3FB4095C9ED4BFCEF6"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "7104EDAF3D39ACA85F0DE66FB8A0E6A4",
+      "derived_salt_first_section_no_de": "297FC2DCC22C9793610FD3504DBAAA3B",
+      "derived_salt_first_section_third_de": "CF455558C8C67E5AB573C79AC356B02D",
+      "section_salt": "19421ECBB444B94A369F1684DA6E87F6"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "C1BCED6F35A78F0FB40F698B",
+      "extended_signed_metadata_key_hmac_key": "30BB3C9AA11570317B0551F667CAB16554C72400B318F99E70FCDBE24138CBB9",
+      "extended_signed_section_aes_key": "A32C24E09D4ADAAE24CA1944697B961A",
+      "extended_unsigned_metadata_key_hmac_key": "4B5F583F19BB6D221E6105E55B45F9A2CEA17CCE179B03BEB99A9C50147CD2FD",
+      "extended_unsigned_section_aes_key": "5F97AE24166CBFAF9BFE96EC213142C9",
+      "extended_unsigned_section_mic_hmac_key": "C7AE5C3B45B8FA9AD2EB92D39CCF3D67C9F10BCFB44BDC747EEFF84FDEAFF921",
+      "key_seed": "ADBFB02FB9DFC75BD74516C628285096F2C4350DEA65D4616BB4DD30DF2C8907",
+      "legacy_ldt_key": "9CD5AFBB5CDB94FBF0A51B07C7B8C0CDE7EC9E8985D40CCB6E2EA21EBBA409B9D5E2123BA5EFB45000FB0660EC063274F4E112324037D7548F4CC9DD2B00A9EC",
+      "legacy_metadata_key_hmac_key": "CE65891EF8F79F286A62705AAB9FFDB3CC49FDDC42F084BC06D11A4B7C254403",
+      "legacy_metadata_nonce": "5630BBB459F3C2FF04480607"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "6716",
+      "expanded_salt": "7EC07D3176C5ABCB3731A38D7CACE699"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "97CCAE1E7A2BB5319834306D940B4798",
+      "legacy_metadata_key": "736A5584FB8EF29D722171B0E133"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "AD388BD4C9CA419A983A50DE70B96E87",
+      "derived_salt_first_section_no_de": "ABACFA97695D2FBA00E7D5F2BB322165",
+      "derived_salt_first_section_third_de": "C3BDDC19E7A1D453F8BE2B85958C2B6A",
+      "section_salt": "522FF617F4877D7FCCB569597903DD05"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "2D02434C5257433FC62E157D",
+      "extended_signed_metadata_key_hmac_key": "BC06E2ECDF44C4E749F07AA9FFDAE6786156382DEB38214C23ADF9676273F058",
+      "extended_signed_section_aes_key": "277CC3A4FBD6FA8A0433813C35AE03E0",
+      "extended_unsigned_metadata_key_hmac_key": "A93DCADBFDB56157B57CE0FB27845AB3B14072BB8F51AD430251D5FE431E4862",
+      "extended_unsigned_section_aes_key": "01AACC054CCC1E4C69A30F5BDB083DF6",
+      "extended_unsigned_section_mic_hmac_key": "ABD3E647D57721A8AFD6CE354E65FA9717FE273B3D3002C9EF116E3060EE49CA",
+      "key_seed": "04A09B2901EA8F73BF4503081DA2B2F1C701C8FB2E6D0727229AAF18E618D6B2",
+      "legacy_ldt_key": "F728279808DAA6957480F08D9A71EAFCDCA22F6D8BB646A1B55174997DF3C161D95E50BDC84F2AF897D97319D86D6CF1F4D29755B2A4BD4C896188B493579F69",
+      "legacy_metadata_key_hmac_key": "93F7B7662855DC419AEA47D99180AABAA42DE340259E5875C60E90DF9600F419",
+      "legacy_metadata_nonce": "D451E840855973EBCD5CB21E"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "4BE1",
+      "expanded_salt": "76209392CCAC5FB22D8EEAFAEDD20ECC"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "2EAFE79FB0028DEEAAABCC1ACE7F7B08",
+      "legacy_metadata_key": "1B9CE163FB544E4B189C5F2B72E1"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "2F0D5E19F15AD52B54C40021FEE0F9E1",
+      "derived_salt_first_section_no_de": "7826CEB8C46C4FE75DFAEB56973BC3BD",
+      "derived_salt_first_section_third_de": "CAC8343515178DAE36FD923FEBD8452D",
+      "section_salt": "CDBB37DFF788530779D089D6EDD732F5"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "71177ECD2A4AF37C9608B3A8",
+      "extended_signed_metadata_key_hmac_key": "B1ABA8C85AFC6DF1FA37250E164F40BD88ACBEA2E74A12437E13C3E0640C1FD6",
+      "extended_signed_section_aes_key": "FD479476C02CE97482D3AC90876BBD75",
+      "extended_unsigned_metadata_key_hmac_key": "01D6F430855496FE82A98334CEBD234A31BEBEFC900AEBE86C89ADDA184F1510",
+      "extended_unsigned_section_aes_key": "7B66F349E92928431F7499B1609BD60B",
+      "extended_unsigned_section_mic_hmac_key": "AB9676BE62D30988CB70A5A7F958E73B2DB6765CB2B06F06F37D462A930FCE4C",
+      "key_seed": "7C6A118C1331C9276169A367E049962899C7A2E20444F9F964D83FEE4B0C46A8",
+      "legacy_ldt_key": "A0C190B05BC945FE38E1C117D1AB06FE7DA9C46D74F76974CFD558344964054B05EE748E0F8F17D6A3AD995B129EC83F5A803F9FDE0098551020356E59CBE674",
+      "legacy_metadata_key_hmac_key": "C12FF27071B70A96145919151789D0C4311B5CE896C010D49431A78FF933393A",
+      "legacy_metadata_nonce": "F388B3284F9C4983BAC29498"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "B1F7",
+      "expanded_salt": "7DD107544AA52412D36D5AC0C65E8A86"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "B6A84A4591AA5C4115D0D47E9D475DD1",
+      "legacy_metadata_key": "66D7DAC60B00990F01D618D929E7"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "C03F4007F1E7180EC871FE12519F98B2",
+      "derived_salt_first_section_no_de": "A76C0BBEFDC804F829DEF65EA3F51C90",
+      "derived_salt_first_section_third_de": "A4DF26763162B19617B24D357C4E7EC3",
+      "section_salt": "4D555178782275479BAEBFCD147C9C61"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "E4E6C206BDD5477A4894F465",
+      "extended_signed_metadata_key_hmac_key": "9274B9E3806FFB99E2D096597B8716E0949486FF30BA7A1FAB01FB5D143E5E30",
+      "extended_signed_section_aes_key": "5E09FB429564270B1E01C0C12064457F",
+      "extended_unsigned_metadata_key_hmac_key": "AE2B21B4DD683EEA3815374C1E606EFE81B3012A20C244F3EF44E4B126C1B060",
+      "extended_unsigned_section_aes_key": "4FC383A9EB6FC92D4E550C0869BA7424",
+      "extended_unsigned_section_mic_hmac_key": "A2D2F07EE970FFA7030BC81DB05D87AD7A1CF60E45A0F607F7F7D6CE64E7FE1E",
+      "key_seed": "06E34312B7BA188C16BF9EC455B7C3DB7BFF273ED7E671DCA6218923F6315EAC",
+      "legacy_ldt_key": "9A779C0695146D84379F839C1B01410A77838D4627A16D697AD8BA062BAF892C0518FF10250348929DD369E8A6B0D41076A485B48287E01F9D28F76A7AA93C25",
+      "legacy_metadata_key_hmac_key": "802F06CF894D4A44E91C384CD4CA11282E443D9E44D9A038715A3CC889DDCB19",
+      "legacy_metadata_nonce": "0918753240B432ADA508D2A0"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "B28E",
+      "expanded_salt": "27122881802D23D4B730928B317AD649"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "A60426318C060F541DED5C1F7AFA6E87",
+      "legacy_metadata_key": "4EE9FB0C014E5C8DEC62CDCE3A54"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "C9264AB98A5CBEC98A59B436301C9456",
+      "derived_salt_first_section_no_de": "75AA3B31D990FA958C0BAB07C316137C",
+      "derived_salt_first_section_third_de": "20F8C6AA4C641C3EBAC513410853A637",
+      "section_salt": "63056BE924D9AF7A4E1EDFB78F8FFD42"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "641A9E897828B9CAD7C16FF8",
+      "extended_signed_metadata_key_hmac_key": "690679062F05D8BAC47BA64D13F91029084631B9FD39696B64702B533283C8F1",
+      "extended_signed_section_aes_key": "A521430F5CF09B5073A2EE5DCA704962",
+      "extended_unsigned_metadata_key_hmac_key": "2685C8CB006301455AA48F317D812AFA9F36FC071A692A7E21F411CA4B203E26",
+      "extended_unsigned_section_aes_key": "ADE5DC26FA3ECD51A6B4BE7B2EA0C70A",
+      "extended_unsigned_section_mic_hmac_key": "D8AE4269C81599401F6DE7805A5DD401BBEAFCE68BCF3245E315940130C041C5",
+      "key_seed": "41ECB16B981741F3FE1EC685A601EA8FB5F3B26ABAEC70294805339C90A8AD71",
+      "legacy_ldt_key": "8A6B4B8EFAF5DE8701684F7470183A4046FBFEE965E61D4219E09F95280D43B895BC9FE4B39499C927FF0541F067C95D98377D139CA23D19AD7B729F75207BD2",
+      "legacy_metadata_key_hmac_key": "D9A2131A2E99553E598BAACC299C5E40E3051A4E4244F3FB8705FEACE0CAB3AB",
+      "legacy_metadata_nonce": "862DF488A461D0EFA780FC19"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "7CE1",
+      "expanded_salt": "72F031CD4FB7AB7A03423FBF04BA2A9E"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "07EDA657E63FC8F6737B5B3F4A0A8C81",
+      "legacy_metadata_key": "F141D580CA3325C5FC485E552438"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "D9498F72764DFB0266F773788284BCC9",
+      "derived_salt_first_section_no_de": "2736F330B0FC8CE3AC39558F48513039",
+      "derived_salt_first_section_third_de": "2B485FFF58AC337F216B01885F0A1FEB",
+      "section_salt": "482DFB90D8B4501C8089AD97750EC132"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "F1FA2EBDE91BEFEFDFC7CF00",
+      "extended_signed_metadata_key_hmac_key": "B1DF6DF11C98D5BE667BC5CE8B91321CC5498F9149B0217D48BA9C6E81BE9074",
+      "extended_signed_section_aes_key": "D63F841B59C4398735CCE79146AADC3F",
+      "extended_unsigned_metadata_key_hmac_key": "37A581DC364BB86DDC2AA8F8A1B939A7A92BBA83CA3697408D1CDED5699A4243",
+      "extended_unsigned_section_aes_key": "20A1EA0E7454FEFBFF4DA2BB4DF6CD8D",
+      "extended_unsigned_section_mic_hmac_key": "2842AAA512670388A45EC3DF52356B28AE1F7C3CEA324BE4847E9D8AF578A5DE",
+      "key_seed": "37399B354FF258D23A87941C4E9A348D851C5CAB79E1DB345BB2568841ADE7B7",
+      "legacy_ldt_key": "070759E454B3EBE99755C4C8C6FF67BB9DEA89D49A2CB68E02D3A4E66F12D1F97862F8A8B8664CD80A6F17EE9372170908F47B70681CCD6673019505E4130542",
+      "legacy_metadata_key_hmac_key": "535D5A54192D3E58EFB23C815A099924B2602137D8E12F6279A24077E232C3EA",
+      "legacy_metadata_nonce": "04B9108D0FB4A41EB17D754A"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "D6EB",
+      "expanded_salt": "83EB2FECC0F1C19A6EF7FB30E945C103"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "60C52A4D9245D6E8D49DB7FE7FDA5C43",
+      "legacy_metadata_key": "4E2117A0CED10CE233750FBAB835"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "849B406AC1383E3333C4526823350AC8",
+      "derived_salt_first_section_no_de": "F2657BBB7FB8879E98F9D4EE55343AA4",
+      "derived_salt_first_section_third_de": "9025C1E15E5668F1144640D7C2CB7F63",
+      "section_salt": "971929C83FBFB8552FAC4316895F82EF"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "BAB6E78DEE99392F09D6A045",
+      "extended_signed_metadata_key_hmac_key": "FE88421ABA3A3E0DA9E519243749AB2B28586480DB9B59C41F7E4AB17A9459CF",
+      "extended_signed_section_aes_key": "EB1F668BACAD4DE4555036C8B9F21D9F",
+      "extended_unsigned_metadata_key_hmac_key": "F7016A22618D636539DD37221EB7BA8BE8764707AB9DEBA695FAE93546E1E777",
+      "extended_unsigned_section_aes_key": "7AF856E9EA5F3AC6EBF2DA80EC065050",
+      "extended_unsigned_section_mic_hmac_key": "17738046ED5E72F0C379D08FE6A815CDF72CB1B8BA2C675DD013872E7B0DD185",
+      "key_seed": "185AF89CD890AD6F7C0F9DE8228DB8A92AE25DEF3BE510289663D4C196FC2CDD",
+      "legacy_ldt_key": "3659A65B725059278CB5ACD34B73F32EC5D8D267C15E567BD4EEE489618EFA62D03DF9A8C77D3B407F107927AEB771EC613320B1DAE7A295FC49AC8E1B274F8A",
+      "legacy_metadata_key_hmac_key": "5F10B1A7CCA2F40E32B00738583CA2604312F1D9648EB375995EF725438B6B5B",
+      "legacy_metadata_nonce": "EE05CC8759A360B9699FFD9F"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "7FEA",
+      "expanded_salt": "C7E9D2070465A796CB27EA5E81D7B5C9"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "E4AB233100D9D776DEBA1949426DC104",
+      "legacy_metadata_key": "C5E5885E8041F9A0E290D0174FF0"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "582878C554E5BFF92A4C26C50BBC2B27",
+      "derived_salt_first_section_no_de": "C9FA9274CB4C3F6F03BB7F2AA5D70A11",
+      "derived_salt_first_section_third_de": "582276B5F71F65E87B883C86DEC83349",
+      "section_salt": "2DA2B6676B05EADBBA2AC2C7A1B91E5B"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "1516355E155E481A2C1BC292",
+      "extended_signed_metadata_key_hmac_key": "A96AB799DBBF000DBD6429124DF1AB94AD26BA8EA3CFA2BD3685D18F74AB95B5",
+      "extended_signed_section_aes_key": "2EA7AA6081C6055A50D2BA83F7650ECE",
+      "extended_unsigned_metadata_key_hmac_key": "54D6DE3AB30E06638AF867C79CA8F291499A6A912964EDAE3FFF06D75D6734FE",
+      "extended_unsigned_section_aes_key": "FCF1C0C04D383C2B440E91142D5F8DF3",
+      "extended_unsigned_section_mic_hmac_key": "617A0B559B6C31312C6DB59956560DB2200B0DA19132085BB51EEC4662365BEC",
+      "key_seed": "BEE55110B49523CA92D9CD1921A3A3556D3DAE9E7D2DC1DCF809A7F744D744FB",
+      "legacy_ldt_key": "3050E135E4A609B600FA94D673AD60C6800F860CEB26E0C080669174F4967FC877241054D94C945CFC4F511404AAB3941EF5337E49A3C0357DDCFBEE6D0FF178",
+      "legacy_metadata_key_hmac_key": "D4CD2F5513409E9C08796B367D68ED86E7F8AA1D73B3BC80E310A6A89FBB5AF1",
+      "legacy_metadata_nonce": "69BBF34C4C06F9098ED5822C"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "E41C",
+      "expanded_salt": "F90A3A5A7E184026B2412B7981E6E4EA"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "7CBB4317E53C77A6EAF04270340C8E74",
+      "legacy_metadata_key": "290406B8E4F3FDD69F77100C25F8"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "09C85DC366B0A127E44BC3EB55F1B69F",
+      "derived_salt_first_section_no_de": "8E806978646803E71CF5A89A993EBD15",
+      "derived_salt_first_section_third_de": "A79CB0BE50F815A706B75686E8AF95A8",
+      "section_salt": "BDC5C3A2FDEFF52154DBEE9B2DC99272"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "38347176312E7BF0CFC150F5",
+      "extended_signed_metadata_key_hmac_key": "AF37F8DDF621E95E9DF9E960D7C3C3B204CF5F660E33015C0F76E1FFBF793255",
+      "extended_signed_section_aes_key": "DDCE8B724FCB835C5769FC12FBBBCFA1",
+      "extended_unsigned_metadata_key_hmac_key": "2A31672AF767AD1C20F69A40FC0C39E82760A88CF7FC32AC562B4334A3BB6FE1",
+      "extended_unsigned_section_aes_key": "A6DA0A55C2DF68D9A268E2E7D5DFA910",
+      "extended_unsigned_section_mic_hmac_key": "842AC63178D49573C9A294B11B23053A8D7D032E2092A7B090B18C3B4B1B0D41",
+      "key_seed": "5507520DCBC7FB26D474314F10DE9CA600A29F7EA2B4EE3FCBA75A79812410EB",
+      "legacy_ldt_key": "13FAD5A042A94E5BB18ACB097E8D9AC9BC3212ECECCAE8B3F0877B28BE475A00F055E916510D5E37B70EBFFC6E20281A98E960BB875B6CA04DC4A4D791D728D4",
+      "legacy_metadata_key_hmac_key": "D208CCF899D7738EFA94AF2F50D71E96A850ABD8DEA1E731513BF959E52245D8",
+      "legacy_metadata_nonce": "55869FF688A156A9AD67F4B0"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "5D87",
+      "expanded_salt": "6CD22F42846D18DEB8B16AEC28055646"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "67C50D4BE0C807CC777A451E55290706",
+      "legacy_metadata_key": "CC56E75A8BB54C3CE1EE9DAC6855"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "724B63781CDFD0DE57D682E929C0F1AC",
+      "derived_salt_first_section_no_de": "DA6C22EBBD2E4FC58307D725E7001E18",
+      "derived_salt_first_section_third_de": "70E96C64C5013DDA87D8750BFC734CCF",
+      "section_salt": "60922665EAA6734D3AC84D0BC6B8173E"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "6195C05F850120907C37E671",
+      "extended_signed_metadata_key_hmac_key": "C197E6E017FDECD561EA88AD8CBF7F9826B17CC993E15803C2B770DB98803F71",
+      "extended_signed_section_aes_key": "0400A8E1E5D2A6D93FE2DA13E109D10A",
+      "extended_unsigned_metadata_key_hmac_key": "DA4F587EA32EE460D0605AEFB2A3D4916137A0D27FE142D2BA315CFE40A7CF7E",
+      "extended_unsigned_section_aes_key": "97F44ECF5B72FCAA7730A06BC7E21466",
+      "extended_unsigned_section_mic_hmac_key": "1B2815943A5DAE1D4823E8B146AA3CABB59017B2D01E9DDA7731933E77354459",
+      "key_seed": "933CC9ED79D768475F2C50D65DD35E354AEC0ACDDBB1DB7A406B16A967262F95",
+      "legacy_ldt_key": "B3C8DB885F6949E585C9B9CFB8292A2E1D16DFAEB0D8B4CB859362AF85EEB78F55C676BAED4ED82FE690EB5A52DC194E3C09037367E0AF6C012DC33AFE024750",
+      "legacy_metadata_key_hmac_key": "68B1BDFFCEC2A954A0C61C07BA65A3028BB117945F0D405BFF859719E90C603F",
+      "legacy_metadata_nonce": "9368E6A9BFD9CA79ED0FCC4D"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "2C1F",
+      "expanded_salt": "764B370D8ED153B4D9AF7326FD7E3131"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "6B947A303D99A9874028683C7663E5AE",
+      "legacy_metadata_key": "95E95ADB8AAC112E502641BB3974"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "699F64EEEE0A421370D20D1E656D8EF1",
+      "derived_salt_first_section_no_de": "0B9CC994DEB1CBEE31334AAE82BB01C6",
+      "derived_salt_first_section_third_de": "E883BA14BB1E9C1CF2CA544507A8E26D",
+      "section_salt": "93EC27FD11A0710A12D837043C9CB895"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "8C118284D7A96BF2A60C1239",
+      "extended_signed_metadata_key_hmac_key": "C6CE919C79E1CB055C77D1213E9266D95C8B828D32E93F77A8EA73EA48C6CD20",
+      "extended_signed_section_aes_key": "6E770DC0F1C276CE1DCFB138E8005EC3",
+      "extended_unsigned_metadata_key_hmac_key": "2582C714334AAEE935486705696B9196C27A4EC495CB0E59C8601CD60831022D",
+      "extended_unsigned_section_aes_key": "255034A404E961637FCF4CE1CA72B44F",
+      "extended_unsigned_section_mic_hmac_key": "4216782A51DCB1997224685E06185109FEF99FA3354038A49FAE4F0E0076FEE7",
+      "key_seed": "562111357842DD6AD71E95C6B9DC635ADE5E2EC3A2E29A242117147A0148705A",
+      "legacy_ldt_key": "D258BC177A33B5E2256475FDC9F84AD78F8B4886EB8781B4F1926716A6BA6D527D75D2953CC4037044B14107A91B292A45DD46ECEA653A1D086283EAB5607FC1",
+      "legacy_metadata_key_hmac_key": "8BBC6480F67E0BB2AE62AEFBB16D97BFD4C37618E34B1982B29BA56B34FDB466",
+      "legacy_metadata_nonce": "3EA11851CAC5F5608CCCE44F"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "1C18",
+      "expanded_salt": "A58037650FF49441923278D15FE312D6"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "96B7834CD34C6EE7027864BC6CC410FF",
+      "legacy_metadata_key": "B8CD0EC6CBB33A4601A522200869"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "B091260FEC73EE7A8D70201F9D464F83",
+      "derived_salt_first_section_no_de": "EE1D6CE31F19649C24841A7F6533AF34",
+      "derived_salt_first_section_third_de": "14FD75BF7AD5B802CE6725D9A4C2EAC9",
+      "section_salt": "CC587F388F406FC90B64C0AF1000419C"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "0F1F6DDCDD98D829428F0551",
+      "extended_signed_metadata_key_hmac_key": "6BDD30B0682F92D8E01A1483C3B21887F0053B3E99435388C6DD41037EB51AEB",
+      "extended_signed_section_aes_key": "3F4604AD3B2C106C10BA72C3ECE5AE49",
+      "extended_unsigned_metadata_key_hmac_key": "874627B363F91A534891A9285E0DF0EDD15DC79E3E48A165B0984D4521ACAD7B",
+      "extended_unsigned_section_aes_key": "B103A43F35DC81696985B85943FC9F7C",
+      "extended_unsigned_section_mic_hmac_key": "4983A837EC95679DFBB7BBC1EDA6839C351059CF76E3465FCB7150E2C9DAA555",
+      "key_seed": "67E041F864141E3F2D046910D9F966739B5C393ACC320E68C5DA6017D4599DC7",
+      "legacy_ldt_key": "D8BB8E5985E39A4E64C54FCBDE74D1D5D3E27781C34AC260999F4FF0C06B0E1AE7A0E6D4099F9BF71BCEF921B24C85751314574F394891E49C8001FF56806572",
+      "legacy_metadata_key_hmac_key": "2BE0A55DA15AA8323C56AB17C946C6A4E539560BA87A85C656BD1EF2326300BF",
+      "legacy_metadata_nonce": "6E488DABE0EF2C8F5EDEE07B"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "246C",
+      "expanded_salt": "A04B4F4D54258A3481BC4E119A6A2B62"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "9DF4EB64B8D5D2959CFD9D092BC37B17",
+      "legacy_metadata_key": "5505114A304DFA404B9258AB6AF7"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "92F14175B1DFC4CE170902636E42713E",
+      "derived_salt_first_section_no_de": "4156C04BB9AE6EFA9DEC3233CD5A305A",
+      "derived_salt_first_section_third_de": "3C58FB419F0BD045E235ADC4352676DA",
+      "section_salt": "FCC5C8C0A905123991DB1963CA187342"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "E6CB1D645A1C322DD231C530",
+      "extended_signed_metadata_key_hmac_key": "6541D917FFD4EBE53C09BF098B18DADAAA8DFF5ACBB1356BB3E1439EAE91E399",
+      "extended_signed_section_aes_key": "A5C69E0BB040A4ED7AEA8D202D1AC1B6",
+      "extended_unsigned_metadata_key_hmac_key": "0F3C39ABFB77F95C5B015829511A821DC453306953B33D12A1D0BA5F2E48F3DE",
+      "extended_unsigned_section_aes_key": "F73B279C87F7D8145D53BCE3FBE49FA2",
+      "extended_unsigned_section_mic_hmac_key": "C386709CED7BF9873F36D764C601B3DB06FFF096993FE59E2C2E7A2E06C83ECE",
+      "key_seed": "66BD6221C1E30871D422B67F060C9E22800A834DF098843BFC648B76E54ED908",
+      "legacy_ldt_key": "79204103FD0DC36158434265D60D9D4A7CDF2569D1A855CC1C0A5616298C41E07A25577E028C13A4C517D2BEBCFC6F2198710BE7573B7C0C70E73BFF28C9710F",
+      "legacy_metadata_key_hmac_key": "FDE5E6233F81A1DA995A94969207DA3CF835C672B2C4A5F65D36AE45B2A5D2A1",
+      "legacy_metadata_nonce": "57EA5DBE1D8D34591922A866"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "AE61",
+      "expanded_salt": "EE04115499CE6C19FB6BB2610257A5FC"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "45FE6BCBC3E86F2B10458F44DBC73647",
+      "legacy_metadata_key": "D9B336A4E52CB722943FFD9CF784"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "6919D48644FFCB351097E0A7F63BAD7C",
+      "derived_salt_first_section_no_de": "B40EEC7CA7711C443BC6131AE1209711",
+      "derived_salt_first_section_third_de": "EE87CC5CE451FACAC62DD63C70F53BB3",
+      "section_salt": "E9C2AB1A142AAD88D5B3E8ECE861F46C"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "1F7415759E6AF70ED5ECFB8B",
+      "extended_signed_metadata_key_hmac_key": "4C52B8B27F4405B995784DA1A19800280D7790F02E1A4ED718AFF3B9D2CFB632",
+      "extended_signed_section_aes_key": "E39A23C3DE620D184AD6717B9441B453",
+      "extended_unsigned_metadata_key_hmac_key": "D97C790467145FC66B8962922BE7163D01E72398E58A7381E94E52205A99C49B",
+      "extended_unsigned_section_aes_key": "FB9F25B845153CD75A97C8FCDA32A6B9",
+      "extended_unsigned_section_mic_hmac_key": "7F291513A23A7AA803A1CD8DBA7A9DE24180EE1580B31E3AE689EF51851EF266",
+      "key_seed": "C76E4012BA6DAE4B2CC7DE0FD6A60790E7E69183D4C894EEB2C14F55F691D200",
+      "legacy_ldt_key": "02D0233B56EB07765A584139A7791E9E338698C5C16A32B89973A921DCE26B483E7322D354F8D597A48A67818E7697686C9416CE10A2FD5B5A153A80EF0C3DD7",
+      "legacy_metadata_key_hmac_key": "D3BFBF4AEF2B0EAA29B8C0A4A5A8E140C9861C55AE77939A9100863458F73A48",
+      "legacy_metadata_nonce": "3DB25905270EA45BDE8B2C78"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "C0DC",
+      "expanded_salt": "51AFDF06C286189BE2A38DF2AC5C157F"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "DBFD6CB8BEF948E30034942C217AB49F",
+      "legacy_metadata_key": "A6572C02A89BFC53CE24AFE726A5"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "F0C2D07232D5E955E8C82CD835B56E1C",
+      "derived_salt_first_section_no_de": "1F34BDC3807F158859A6FACC33B76BA6",
+      "derived_salt_first_section_third_de": "8B547F100FE1EAD817E8DD7AC7FA6D7D",
+      "section_salt": "E887AFFFEBC6CAEA000CD7B2843AD21E"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "817052592ED2AC889E53F3DB",
+      "extended_signed_metadata_key_hmac_key": "ED836D0F732D1051DD4E7DAE505FFB670CA6717F7BC287E0C8957EEAA6AAB9EC",
+      "extended_signed_section_aes_key": "03D31EED691F220ED807A0A3699D01E5",
+      "extended_unsigned_metadata_key_hmac_key": "0C304D6EA35B6602646FC0E6951EFF09249712E42E8AA6BD995666AC29E774B6",
+      "extended_unsigned_section_aes_key": "8507DF1A8D34390EE03C10C29C16E20C",
+      "extended_unsigned_section_mic_hmac_key": "857FA3CEE51F9018367961FF82F30041D43DB1F1916BF067396EE7DEEE08B063",
+      "key_seed": "F7E47754ED974913367ECC4B4DE2B1E66D9C8EF36BC36875111231A421A1F892",
+      "legacy_ldt_key": "DF739460333EED047E4700C6D43763208D6F7B8994CD36AFA6C3B725124BD68F50A5DF542D16780F8FAA64C919F4E1321752C2473BF44843012F49CCD2BDC43F",
+      "legacy_metadata_key_hmac_key": "7BC61FACD5C01C6F0B24B38004BD8CC5BD00215D9270D8621919266CFC7CC1F5",
+      "legacy_metadata_nonce": "23DE6EA7BB73D686CA04432D"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "FD97",
+      "expanded_salt": "AB621F612EC9F1DBF995C1CE7610A3F4"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "7E59495C2E31ACF37A8A82914D67A3C2",
+      "legacy_metadata_key": "FD95D8D7F1234F29C61B73586E50"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "B1FFFDB5149EB2C1E55818C9AC278F22",
+      "derived_salt_first_section_no_de": "9FF7BA7CA2D7A64907CAD503C9D9E931",
+      "derived_salt_first_section_third_de": "E05CE47FEAAB471BDAAEEFE326144F87",
+      "section_salt": "05FD6AD5FB6ECEF67187AB22628D83F5"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "656ECAFAD9D02F5C53D1499C",
+      "extended_signed_metadata_key_hmac_key": "3C07733D5EADB798C0F0A085711E7980D5437BC8D9003F2E6D32EB1E997D8D08",
+      "extended_signed_section_aes_key": "D49EF1EFFE0236EA082EF79C6BEF496E",
+      "extended_unsigned_metadata_key_hmac_key": "BBAF91442DABA83EAEA9AA3C6312972672AB20FE962605FDD01FD709F832D562",
+      "extended_unsigned_section_aes_key": "D472A600CD6F77F233D6274917328EDE",
+      "extended_unsigned_section_mic_hmac_key": "62A45AFFBCAE257E682BCB364B77F8FFFEF9088BB8DE260FAA6E622088E44A43",
+      "key_seed": "744EE5E68214D686A678E2F964A33C054EBF0155354CEEEC0EE77448F6E156F1",
+      "legacy_ldt_key": "A3F256081813BAEF903C9DC155AAAA8F7D8443726E1DB42695632D36BA9932E0A70D568A10CC1631D1CCB86AABA44B82CE08A65EB31C466C4E41728A11429BA0",
+      "legacy_metadata_key_hmac_key": "33EADD4558505A6805581DC7E514C624670C824B489D63F54500E7AE348184E4",
+      "legacy_metadata_nonce": "33283F73B1E3EBA32C5D862D"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "5987",
+      "expanded_salt": "BDA17AF3C8D8E8E7627742B3AB2075B6"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "F9BFA683C1B856991A2C5CA893D71050",
+      "legacy_metadata_key": "DCE4D724E5161B46AC54E4C18A08"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "DB22BC19A27CCC15E51A0A1B950857F7",
+      "derived_salt_first_section_no_de": "547CC56DC0A5507125082C68C053D5D5",
+      "derived_salt_first_section_third_de": "DFBAFDA1CF3AA59B26FE011EA450B823",
+      "section_salt": "078A2C255BB03030F52965D13B0AA53D"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "1020F8C375AC5BF5D3DAC380",
+      "extended_signed_metadata_key_hmac_key": "98F6FD73D248D52E1338E6F37EF4BE53160EB68C57687BBD5F4C4AE7F2C5A6CD",
+      "extended_signed_section_aes_key": "63B0CB478D4E5F38F454521A785B5DA1",
+      "extended_unsigned_metadata_key_hmac_key": "77A743C542941356A1DB8D8F3031439401B82F1B7A6C5BDA68152C1232603CE9",
+      "extended_unsigned_section_aes_key": "B743EB7D63164D30EEA5F452F4ECB6EF",
+      "extended_unsigned_section_mic_hmac_key": "F34F5FED159362C0CFCE08702216F77B7BC9BD6739D7B7A6BE022F69E119A011",
+      "key_seed": "8D8B909F903746E317D2FAD7B81C44E14C2BC911BF57505FD21E657BDE7B9448",
+      "legacy_ldt_key": "B95B352CC7A616CFCEF94F140DB1FFF6C96699456B53E22EF2A92C189C8ACF71B15996E5592651FDB0B9EF482E3D3A77F69C43381BFA3FBEB77EF3FF3508C4F6",
+      "legacy_metadata_key_hmac_key": "0FA59F92E4D45EA6F7CE221654D40FD7F04723C271B02CF2E6FE7D2F38B1F9C8",
+      "legacy_metadata_nonce": "B8CE49F04135E2EFADD82878"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "E04C",
+      "expanded_salt": "C09ED0239B32A0C2BE3A0EE440CCBE42"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "3FEE720404CE1EA1B1D761262F6E2C09",
+      "legacy_metadata_key": "5D81EB7355CC5ED9A8979ACB3DC3"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "0062A464AD7B46EC51A8083B2F34410E",
+      "derived_salt_first_section_no_de": "08E8417B389B48DF971A62A738A28A1A",
+      "derived_salt_first_section_third_de": "A475206446E694B5751C5E3CAD225454",
+      "section_salt": "F2F39B46ED2763C2D2471485E6EAE97F"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "9D465DB8703FD644B14B99E1",
+      "extended_signed_metadata_key_hmac_key": "14BA9DEE1626741059F8B6D426CF83FCE010C26124E5AC9D66925D3B89EE2BB1",
+      "extended_signed_section_aes_key": "591995C12F75A6D28673E9BA651BF099",
+      "extended_unsigned_metadata_key_hmac_key": "7BCCE36CAE2D834C397513EA6C8F90026A1108A856285F9106B38319EFC9FF9C",
+      "extended_unsigned_section_aes_key": "A5A156C9EC17E50D3D4D5DABB63CCBA7",
+      "extended_unsigned_section_mic_hmac_key": "EBCEE2B687E58DD608CA3BE824C5465BB325FF602E30DAEBB2F2544DAABEF580",
+      "key_seed": "6EF7F1684C5C353B4ECDB1EEFDC10C34CF78B9E60D067EC7DB769595F8914CD8",
+      "legacy_ldt_key": "8251C9BC73D421AE9345E27335D84A03BB706EE9A2ED41A90D3E7BE66B3EEE9D98ADDF2958DD85B21FF1BF5CB06DD1B7180781BC89EA0AC6B31E0DFA8B6F49BA",
+      "legacy_metadata_key_hmac_key": "177B5056A2BF6ADE707EC448CE3825FC7F4EEFBF6118F58BAFB9504B461FB3C0",
+      "legacy_metadata_nonce": "989E60F047E8D4BD15075FDA"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "0E4A",
+      "expanded_salt": "45841BEF518D55BC872449D35B69D3D3"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "07BE6AE936B1ED68B3823A6893702467",
+      "legacy_metadata_key": "0C15537A85CACDC26F26019ED439"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "3DE9D56F37147C866D25DF4D1EC6E854",
+      "derived_salt_first_section_no_de": "2FDE5B60AFED59C1CF366A514FBBACA3",
+      "derived_salt_first_section_third_de": "AF10E5F3A5DF61DE19420E75E55D12BD",
+      "section_salt": "ED4025D9A2CBE10CAA5B8A1ABA910BE4"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "6F59318B12B620600E40892E",
+      "extended_signed_metadata_key_hmac_key": "383DEB0C8AA51D119AF01606930A19F42C253BA8AB6A6CA730F7F0DA67F6526B",
+      "extended_signed_section_aes_key": "8E2158CCE463C86814C3A923EB66BAAC",
+      "extended_unsigned_metadata_key_hmac_key": "551F2045C860E1A7B7B0E190ABB6A51447E9DBE9009AFC46FECD25331E4AA414",
+      "extended_unsigned_section_aes_key": "8AEF9D42C27067B232BEA8242FE93F3D",
+      "extended_unsigned_section_mic_hmac_key": "788130EA49F3BC5C2D9FEBA9C9758A4B268A0FB16C2B844A4F28E03E7549D602",
+      "key_seed": "0C692A79213891396CD3B92C3FAC2DA33EB0491272E59411E1CCBAD01F1CC663",
+      "legacy_ldt_key": "AEBD9A429EF5E38A23C12F825C269950D231BBC7548115E198C7BE64B096B6FA6C11CB120803241FFDE8A78BACF27CE5545DFE3E896F598CB5EA715115B9EE56",
+      "legacy_metadata_key_hmac_key": "D68DC293B640E8E6E0E60DAA01B744FB59FC2EF5868D8856EBDB39772A510E5A",
+      "legacy_metadata_nonce": "EC688179F89D775E64394EC6"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "BD8B",
+      "expanded_salt": "F3078BA520F2080B927ADF89CF273A18"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "DDACF0C5D556F78DE46253E77A85ACFF",
+      "legacy_metadata_key": "9732F406F870342BEE8B0A914078"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "EB86DD1685C8017EAACF542B7A32C154",
+      "derived_salt_first_section_no_de": "2E1D91452B6BE755CA6D1A510B786F95",
+      "derived_salt_first_section_third_de": "3F6795CB4E05C03486FBAD12D98543FF",
+      "section_salt": "700111649D792ABCC1E004978C637E0E"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "E3A2F71B15300A7232927D5B",
+      "extended_signed_metadata_key_hmac_key": "688536A171F65ED7AF6DBE841968025720997891374D0E30EAD96C2DBA1C6CD8",
+      "extended_signed_section_aes_key": "72B7CD1147CAD43C239D0637C9192967",
+      "extended_unsigned_metadata_key_hmac_key": "22EFB24D7DEE84A07643AFF3D11A0EF56D818466C43882E3170027DE0CBEF920",
+      "extended_unsigned_section_aes_key": "C38BC169874FB5551DEA99A853A3242C",
+      "extended_unsigned_section_mic_hmac_key": "28F8743A05F77BB067BE29BB714EF5208532383125EB35317F6C9B464E65159B",
+      "key_seed": "8062D40BA07D2331C15DB4F4992D45A4C500350EB2B4DE00BF5EBBCE396A96E7",
+      "legacy_ldt_key": "4ABC6C92EEAAA16D277812A851D8A1334846D9FDA1DCCAEEA24927F74765F37C48FB6297F88982234DA5B576A6FA5EA69D11972104350CC3CD20932799E3EFDC",
+      "legacy_metadata_key_hmac_key": "30121B3A3B523BCD071DECE2F469E96D24EBD5B83CA941EAF7F038010A70A1B1",
+      "legacy_metadata_nonce": "873248D5319D71CF756CD8B6"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "2D7F",
+      "expanded_salt": "3C48F27B1F13EE4BD87F817785EF7703"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "50979493AC77E7C48BABD922BBBF9775",
+      "legacy_metadata_key": "EC8D649AF82B50E56F7E5F2C1426"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "D262A02E3A58DF486E345BEC4A2B5D4F",
+      "derived_salt_first_section_no_de": "9E106096FF44973E527F2F7CBBB68275",
+      "derived_salt_first_section_third_de": "F9B9F4D9CBCB69C7A00DA254229D4BF3",
+      "section_salt": "4496838ABE23AA21C0CA736114A37BD6"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "786176FCFF3231D1572CA808",
+      "extended_signed_metadata_key_hmac_key": "18CE44A7087E1E3FEDAA6248262F697E1BAC68F878815DDF44A330BFF19A43ED",
+      "extended_signed_section_aes_key": "AC9B94AC20F1D81E1D1DEC0684E36297",
+      "extended_unsigned_metadata_key_hmac_key": "47C8F715E8E2E9F67B1C376E2D726A60D30D1B8033E2D78B7EA3D1DD55BA23FE",
+      "extended_unsigned_section_aes_key": "0C40C4BA4105CE4F2CBE9C8DE5F01123",
+      "extended_unsigned_section_mic_hmac_key": "6D9373A7A34B9072FA386B06725B4BEF851EEEE601907991C5D2D51500356F2E",
+      "key_seed": "EA366AAA629102AB6B62305B92BFF85C878A1E7536C2057444C989AA68370138",
+      "legacy_ldt_key": "4FEC3FF94C7E7BBB8A7ADB496EE01056B702AD1EFE5458E94FD0D9436EE976CB367F12FF19A31166D2E7541C7C71C1B3BF25E532B08D80A456A1FF04A6C79503",
+      "legacy_metadata_key_hmac_key": "EF0679E429D9B23036DBE7B8AB08AD5B02C236DC8C2D526EF3E0E840E1FAE6FE",
+      "legacy_metadata_nonce": "B90108EF65B54923459A2B9F"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "5203",
+      "expanded_salt": "A3A47B0B38AB2899441F905548251625"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "BB0BAE62AFF2FE5A6E20B8D581A272DE",
+      "legacy_metadata_key": "DF9B54563110C3D424C36C7A0B12"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "9794C1A08CF2F8E1E64FC53A89C81798",
+      "derived_salt_first_section_no_de": "899E09BEA7E181371FC7DB3E064B93BC",
+      "derived_salt_first_section_third_de": "BDA3B1732F5E0E7F2D0E8F3EA79402FD",
+      "section_salt": "82CF94C9A74170CDB84C8132E0A9AA25"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "9E2E62CFF064E5688C2B785E",
+      "extended_signed_metadata_key_hmac_key": "397D11E6EE958656F2674EF69001146BEE0F972C497C92C71914B90F908228F7",
+      "extended_signed_section_aes_key": "C5AB5145752AA16E3C65C6EFE561EC9C",
+      "extended_unsigned_metadata_key_hmac_key": "EAB5C3F841C81AE3394987D3AE876D5043778BB711A191C36BBCCEF42CA3FF6A",
+      "extended_unsigned_section_aes_key": "E9B70118BF8A4D58A758F1B3FA1661AC",
+      "extended_unsigned_section_mic_hmac_key": "B3E6D61C78A8867BDD3F33404218279D13F6F89059671DED0E8D4EE34C7FB5D2",
+      "key_seed": "F61539C310341BFDA73F7D9504502B785A27BD555E2A4B80BCE329AB213522D0",
+      "legacy_ldt_key": "2D427E218733944B5F784EBE48E0DA05A515BE4D4D6C56FF79E36661F2DDDD8D6ACEB11FBB0F7C9DFA18EABF0BB2FA96F093F0D599DBFE357265DC5A6C860ECB",
+      "legacy_metadata_key_hmac_key": "53DB1506A87A258744C9B065C1B6D0C39395EFA8F0E6C543415506BFD6252FE0",
+      "legacy_metadata_nonce": "D3B81B8D52920BB3D47EC5BD"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "2037",
+      "expanded_salt": "E1430F688FBB46C8F6067E50A1F4B296"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "1D4C9F7C2CE767CDAAF1F2E2CC9E56D4",
+      "legacy_metadata_key": "8A521A8E6FD14285498B5DEC2A79"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "4363CB3C7259246F4B123095550EE704",
+      "derived_salt_first_section_no_de": "6E95B9CFB044108DE5EABDDD098667A4",
+      "derived_salt_first_section_third_de": "F4441684E3A1C584AE218220C5823D63",
+      "section_salt": "4FB82CF0A6F46347DE465EF01BEF9DC7"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "7F8B9AF9663AE92297910F2F",
+      "extended_signed_metadata_key_hmac_key": "12328EBBAC73837BAC2D4B82D2EB0943C41F11DEA46B6562C1992B49F91D78F4",
+      "extended_signed_section_aes_key": "DB11AC0C3FBD6B105EB4ECF65440F2BF",
+      "extended_unsigned_metadata_key_hmac_key": "D8A37BEB7EC0DB54ABEA9C4A05616090ADE42C3C255949698690C5D38D683627",
+      "extended_unsigned_section_aes_key": "AF42DDA012ADF8A795EE4A7B15DAA081",
+      "extended_unsigned_section_mic_hmac_key": "48EA765212AD49D3527D56554149629C969AE888F1D681DEAFE78CB0F0EAF658",
+      "key_seed": "E615EDD2FD82BB47855C4BE869BFC649E0BD0EF7A15EB0C8F99E5884156711DB",
+      "legacy_ldt_key": "EBC006F8343DAC70202A8ACA714C41EDCFBC6B5A5E6756DE2687A2A2B02068CF3317F3083E0DC3D626BCA08DFC188F1FA131B90679899618782C58CE2D3416E5",
+      "legacy_metadata_key_hmac_key": "F50BB9D2761D9FF880911989A82C2B844E21D7F4AFEAEA1CDB5F8BEB417F1EE0",
+      "legacy_metadata_nonce": "9152D3FCAB6D25F3EB847E41"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "889B",
+      "expanded_salt": "7FBF8613F21C47797F4814D1939629E4"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "B10610105C6FB841987ED5DA28B1A8FA",
+      "legacy_metadata_key": "82558AF0C2A123C0577AD47FDDD9"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "BF63189D3C53D46BC6D15EA10B4AB4E0",
+      "derived_salt_first_section_no_de": "C2D485579DD258D6806CF6E345E0EC22",
+      "derived_salt_first_section_third_de": "1CCCCF350FD11768168AC0C94F598931",
+      "section_salt": "3EE85997BA02AB4A6620B2CE05469FE2"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "6743665EF1F2534A7EB969AF",
+      "extended_signed_metadata_key_hmac_key": "355F49A98438F06E21D1501BF501ECCE624C206CC9F9430B0AFBC30041DA605A",
+      "extended_signed_section_aes_key": "CDD0694A18EF582345EA7C785F928EBD",
+      "extended_unsigned_metadata_key_hmac_key": "C82654B0FE5E9E50821806DDDD7F8114A79E9C2DA232C557A4B0AC98A514CEC3",
+      "extended_unsigned_section_aes_key": "E45A101D48BEBF02D446F97609EAFEC2",
+      "extended_unsigned_section_mic_hmac_key": "CE08A1DD793049E727DA51A8E6BA3B0AF1563D9DA40474FB335199037BFA7CAB",
+      "key_seed": "E396273E0432224E384CF4CA199547E73E985A3E7886102E0B9ABE911ADBDECC",
+      "legacy_ldt_key": "78E0EF38C80C61C0B907FF322D047C00664B19B5C704E3698E30B4860EED1814AA25097D7437E972007C5B923DB8D3708B312420EB1708817353D5D3345D40B6",
+      "legacy_metadata_key_hmac_key": "7266C9A1D0B38E92E975FE7E9E16436F7C596C62A99DCEDC01B26D65651917B9",
+      "legacy_metadata_nonce": "9CB20BBE3E11C360C90F4433"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "F44E",
+      "expanded_salt": "CC8D7F5AAE254573F1775BD42817E483"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "A5CEB053C9960AF550E753C41D78D146",
+      "legacy_metadata_key": "E9E844761B0DA4549C8136A68534"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "73E81E7AD1FD560A8492C57B58F0EF4B",
+      "derived_salt_first_section_no_de": "52C7E3EED057E22BEE798D1EF0AA09F8",
+      "derived_salt_first_section_third_de": "075B795823F03E6D0877E58125F3BA2B",
+      "section_salt": "600FE29E6B140E51AFEFA00BB3C72EAF"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "34D8405F3BEFA5DA663ABD38",
+      "extended_signed_metadata_key_hmac_key": "A773F7699265B7BAC958E1EBFBA32B1C7B20B10F09DE32FE9F57ADD3190D6037",
+      "extended_signed_section_aes_key": "3648115AE3CE58377A3CBEF0B3BB2911",
+      "extended_unsigned_metadata_key_hmac_key": "64CBB1F7D08A526D5FF00C9C55C3B3F050B64DFEA5D2EEA4B1B5978632552635",
+      "extended_unsigned_section_aes_key": "380C378C2656B11DDBE2DB9BC188C2CB",
+      "extended_unsigned_section_mic_hmac_key": "2606D0A2E28E00E248C1A72D6441575A6737ED0E291F510F3C683E333F6E7860",
+      "key_seed": "FF0CA47221553F08490BF23140D052CEC0055B8B4BF7F1217F20E3325C1A14CD",
+      "legacy_ldt_key": "6CF901B6EF11F104077A3C8FC9DFCD406FFC0A9DEDA5BD1F373D61DF23C020BE603D604C67E2D6C8050AE464EC3F7DC3D6D90732E2E3935C339C5C4BCCD2EB0F",
+      "legacy_metadata_key_hmac_key": "42AB1CF389132FF5895D75FC9695AE07CEB1C228FD9590FDB49A07F612F11F56",
+      "legacy_metadata_nonce": "2F0439B0E875A3BFBC685D90"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "355E",
+      "expanded_salt": "E6423E380E5D5970BE91AE9CCFCF0636"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "2E0A709E2856F0807AE68B785B51F0D1",
+      "legacy_metadata_key": "26A21171AC7983950B900C2F2979"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "40D2F105E8C926AB9D7F7DA89596F555",
+      "derived_salt_first_section_no_de": "33440FBB64C6BAB6453F7F9A050FFEB5",
+      "derived_salt_first_section_third_de": "21899A6B8657F7ACB1048C1F683BAC29",
+      "section_salt": "7B7751AF729D27E3E4C2384D7DB8BEB7"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "0155A616ECEC864B00282442",
+      "extended_signed_metadata_key_hmac_key": "A824088645C02D59479DC7A74318CC5E07654B61F06478C67CF046E7B85BB252",
+      "extended_signed_section_aes_key": "D8D511E9F1CBC39FEA821CEC36BF13CF",
+      "extended_unsigned_metadata_key_hmac_key": "7AA177254B5A06EA9EBAF174490B4117DB213D894B3CFF4F877E4CD83BFAF8C4",
+      "extended_unsigned_section_aes_key": "E902E759E6DEC479968A81B77B94257A",
+      "extended_unsigned_section_mic_hmac_key": "CB6FEBD1421C381E3110CF4D3AB26B66DD581D0E0D56675314B389BF26D80231",
+      "key_seed": "476578AA15A168B1AA7A31A35118008730FB1557A71CB1FB4B49A71103F8900F",
+      "legacy_ldt_key": "EE0CC526127D2D552A052880C0903B85898507C0247F4635F50B0E4A7F00DF2B96CF572DFF31ADB922932C4A119DE3EC06FCCA823709A090BCD3E4F6E3C89B8D",
+      "legacy_metadata_key_hmac_key": "65FA3562C23D80DAA78FF2CAC8C6D283D75C674079FAA21E9381E66DDB977AB4",
+      "legacy_metadata_nonce": "9CC3630D7C3686BE3ACFB38E"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "9909",
+      "expanded_salt": "AB6B101F206D124E8B55520349C8F4DC"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "DF7EC5214955F4A2666598DBCBC1337B",
+      "legacy_metadata_key": "B37A8ED8D672D20361D8F3D51AAB"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "CAF806EE61C9F98C033B6CE648B0A9AA",
+      "derived_salt_first_section_no_de": "7656E7E7B214432B15B30F17901A592C",
+      "derived_salt_first_section_third_de": "DAAF85C2FF8DCA2EEAB6524A94EB001A",
+      "section_salt": "DB0B46A3A5A38945744BC413851D8452"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "0598BCB940F7E46AEB02391A",
+      "extended_signed_metadata_key_hmac_key": "4B37B033B3911F061486FDD312F423269F345C5EC9D6EE4C9E427B2E2D584159",
+      "extended_signed_section_aes_key": "E28193D56E706173061F6890E557F96A",
+      "extended_unsigned_metadata_key_hmac_key": "4817CC85BC549519BEDA10D2257EDADE178B2AA9A710C462DD1190727B9E2E14",
+      "extended_unsigned_section_aes_key": "197FE5273519A250224BC5E582F599AE",
+      "extended_unsigned_section_mic_hmac_key": "E2B6BD73DD9018FC0D73C63574CDB10E27D5B84386958EB961B30AED26BD5303",
+      "key_seed": "2E84B9175D2AF64DCF5592A6CE6A600430F36D1E326268C8628A0790CB832637",
+      "legacy_ldt_key": "78BF29E2890F20C2359FFD32E20DD90972C660DEE7626DFB2FD89DA4DF2AD34B146973BF7FBC08E477F18199F3861A089BC32F247BDE835A7E34D4242241830C",
+      "legacy_metadata_key_hmac_key": "6F73D2A56EC7A166FF4965BD10FF5BD53225F9E598E9835120D4D3ECE29839B1",
+      "legacy_metadata_nonce": "6643257603952C875B40D527"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "0518",
+      "expanded_salt": "F5CB5C30716D50337E3597A008774306"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "C7437CB6E1910745E1D5F85217DE6C3B",
+      "legacy_metadata_key": "836B4F0F57011DEE3EF79471A08A"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "509E424CBCC5964DC827CD736417FDA6",
+      "derived_salt_first_section_no_de": "8269B8D8C65B9F7519F17EA1B501DCF2",
+      "derived_salt_first_section_third_de": "313C4472E5BF2EC6F08F8E407433E2D5",
+      "section_salt": "0C98C48D64771BD607BEE3CFA873E048"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "44F203FA2E7FC2E7DE0985A6",
+      "extended_signed_metadata_key_hmac_key": "077688F727BAADA52A42D5F4C5DE0FB10028190F68A2950BD1B622A8810A4F84",
+      "extended_signed_section_aes_key": "74959A95D5FE867B35646442EE2367F0",
+      "extended_unsigned_metadata_key_hmac_key": "6F5E34C56135FDACC90EDD77AB27D40C583689FDA915AD2B3E053FB287A9B7C9",
+      "extended_unsigned_section_aes_key": "BFBA8DDD3768E1475F6C2C8167DE2ED7",
+      "extended_unsigned_section_mic_hmac_key": "7723F9AA8F4694412A19AAF981149B03F332C2CA84EE7A7EA30F0A6CFFE8DF5F",
+      "key_seed": "C2F7D2B6C8A814B76198CC2838B787E70BE404B7F30C2D3300F00657FF15D4D7",
+      "legacy_ldt_key": "A675CA45BBA982D8027F96AB8E65B2B267F317805A8E92547DE9B59FF68D1D5D0464197908115D84F1699DF1321671D201AD42918AEDB938A32D4C9145505949",
+      "legacy_metadata_key_hmac_key": "C8B1A0EA176953817E25A5C2DD984AAA997A0841FD5795EBD596F8954490995D",
+      "legacy_metadata_nonce": "811CF06428436C54CFFBF02F"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "FB05",
+      "expanded_salt": "5E11580A3CE991235E9CC3C7F2ADF285"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "3226C766C11C315F46A2173286D56880",
+      "legacy_metadata_key": "A3B88B75A089E3D23A9DEE562FCC"
+    }
+  },
+  {
+    "extended_section_salt_hkdf": {
+      "derived_salt_first_section_first_de": "BD4BA99CDFEEFD741D662D819B4D14F8",
+      "derived_salt_first_section_no_de": "64FB9A93030B0365D875001B3E96C350",
+      "derived_salt_first_section_third_de": "6A3C091F49BF86800AE97AE1E7E45328",
+      "section_salt": "E48DDB9A0AB7F195FC4CE1EECE95C905"
+    },
+    "key_seed_hkdf": {
+      "extended_metadata_nonce": "E3B03E7EC1C59A97088C54F1",
+      "extended_signed_metadata_key_hmac_key": "827D30C971E64E75A26047C6288B4709D814C9BE9CC7F46572BB9B343D49A1FC",
+      "extended_signed_section_aes_key": "31F40B5580260656F90D47F58C6FFE3E",
+      "extended_unsigned_metadata_key_hmac_key": "EEF0C2830B30035F6EC56904F132AEFB4098A88951CC33286939CB9789AD1638",
+      "extended_unsigned_section_aes_key": "A60216A1AC950D161D157EDD08C98073",
+      "extended_unsigned_section_mic_hmac_key": "8AADFDEEA0DF6A71D95D3570846F53A4FEC594274282DD4BD227C4BD64FF98AF",
+      "key_seed": "0BE1EE39610085A3BA277EBBEAD2872369707174526F23FFC67AA8BA962ABB1F",
+      "legacy_ldt_key": "8D4922931521FB95569442172FAC2118E396C92702DAFC1DC3CB9E205C0E3ED7896179B06D1A0B9528B936E2F85B6FFC741F8654016FD47107333BD247E96EA5",
+      "legacy_metadata_key_hmac_key": "FAE1B3B936C6756EFD9AEBCA751389891DACDEE3EAFD3A808D0797F0C128F544",
+      "legacy_metadata_nonce": "094573CD360778668C292C9D"
+    },
+    "legacy_adv_salt_hkdf": {
+      "adv_salt": "3E9E",
+      "expanded_salt": "D7A319F27E248AB5CA95967784D6AF77"
+    },
+    "legacy_metadata_key_hkdf": {
+      "expanded_key": "15896E896566D60C3810FAADC94A05CE",
+      "legacy_metadata_key": "C08895650105CE9C165A9BCA08D8"
+    }
+  }
+]

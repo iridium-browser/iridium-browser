@@ -1,0 +1,84 @@
+.TH WESTON-RDP 7 "2017-12-14" "Weston @version@"
+.SH NAME
+weston-vnc \- the VNC backend for Weston
+.SH SYNOPSIS
+.B weston --backend=vnc
+.
+.\" ***************************************************************
+.SH DESCRIPTION
+The VNC backend allows to run a
+.B weston
+environment without the need of specific graphic hardware, or input devices. Users can interact with
+.B weston
+only by connecting using the remote framebuffer protocol (RFB).
+
+The VNC backend uses Neat VNC to implement the VNC part, it acts as a VNC server
+listening for incoming connections. It supports different encodings for encoding
+the graphical content, depending on what is supported by the VNC client.
+
+The VNC backend is not multi-seat aware, so if a second client connects to the
+backend, the first client will be disconnected.
+
+The VNC client has to authenticate as the user running weston. This requires a PAM configuration file
+.BR /etc/pam.d/weston-remote-access .
+
+.\" ***************************************************************
+.SH CONFIGURATION
+.
+The VNC backend uses the following entries from
+.BR weston.ini .
+.SS Section vnc
+.TP
+\fBrefresh-rate\fR=\fIrate\fR
+Specifies the desktop redraw rate in Hz. If unspecified, the default is 60Hz. Changing
+this may be useful if you have a faster than 60Hz display, or if you want to reduce updates to
+reduce network traffic.
+
+.\" ***************************************************************
+.SH OPTIONS
+.
+When the VNC backend is loaded,
+.B weston
+will understand the following additional command line options.
+.TP
+.B \-\-width\fR=\fIwidth\fR
+The width of the framebuffer. It defaults to 640.
+.TP
+.B \-\-height\fR=\fIheight\fR
+The height of the framebuffer. It defaults to 480.
+.TP
+\fB\-\-port\fR=\fIport\fR
+The TCP port to listen on for connections. It defaults to 5900.
+.TP
+\fB\-\-vnc\-tls\-key\fR=\fIfile\fR
+The file containing the key for doing TLS security. To have TLS security you also need
+to ship a file containing a certificate.
+.TP
+\fB\-\-vnc\-tls\-cert\fR=\fIfile\fR
+The file containing the certificate for doing TLS security. To have TLS security you also need
+to ship a key file.
+
+
+.\" ***************************************************************
+.SH Generating cryptographic material for the VNC backend
+.
+You can generate a key and certificate file to use with TLS security using typical
+.B openssl
+invocations:
+
+.nf
+$ openssl genrsa -out tls.key 2048
+Generating RSA private key, 2048 bit long modulus
+[...]
+$ openssl req -new -key tls.key -out tls.csr
+[...]
+$ openssl x509 -req -days 365 -signkey tls.key -in tls.csr -out tls.crt
+[...]
+.fi
+
+You will get the tls.key and tls.crt files to use with the VNC backend.
+.
+.\" ***************************************************************
+.SH "SEE ALSO"
+.BR weston (1)
+.\".BR weston.ini (5)

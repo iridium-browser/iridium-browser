@@ -1,0 +1,44 @@
+// Copyright 2022 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+
+option optimize_for = LITE_RUNTIME;
+
+package spaced;
+
+// Output parameters for SetProjectId().
+message SetProjectIdReply {
+  // Set to true if ioctl syscall for setting the project inheritance flag
+  // succeeds.
+  bool success = 1;
+
+  // Errno if success == false.
+  int32 error = 2;
+}
+
+// Output parameters for SetProjectInheritanceFlag().
+message SetProjectInheritanceFlagReply {
+  // Set to true if ioctl syscall for setting the project id succeeds.
+  bool success = 1;
+
+  // Errno if success == false.
+  int32 error = 2;
+}
+
+enum StatefulDiskSpaceState {
+  // No value was set.
+  NONE = 0;
+  // No action is taken in this state.
+  NORMAL = 1;
+  // Prepare applications for impending critical disk space state.
+  LOW = 2;
+  // Critical disk space state.
+  CRITICAL = 3;
+}
+
+message StatefulDiskSpaceUpdate {
+  StatefulDiskSpaceState state = 1;
+  int64 free_space_bytes = 2;
+}

@@ -1,0 +1,7 @@
+# Crash found by afl-fuzz (non-literal import).
+import("x")
+import(sources)
+import(zip)
+import(zap)
+import(a+b+c+d)
+import(zzz+yyy)

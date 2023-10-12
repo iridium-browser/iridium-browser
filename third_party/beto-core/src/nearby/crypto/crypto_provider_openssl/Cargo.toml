@@ -1,0 +1,22 @@
+[package]
+name = "crypto_provider_openssl"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+crypto_provider = { workspace = true, features = ["alloc", "std"] }
+crypto_provider_stubs.workspace = true
+openssl.workspace = true
+cfg-if.workspace = true
+
+ouroboros = "0.17.0"
+
+[features]
+default = []
+boringssl = ["openssl/unstable_boringssl"]
+
+[dev-dependencies]
+crypto_provider_test.workspace = true
+rstest.workspace = true
+hex-literal.workspace = true

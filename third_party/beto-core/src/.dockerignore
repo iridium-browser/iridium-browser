@@ -1,0 +1,14 @@
+**
+
+!nearby/.cargo
+!nearby/connections/
+!nearby/crypto/
+!nearby/presence/
+nearby/presence/cmake-build
+!nearby/scripts/
+!nearby/src/
+!nearby/Cargo.lock
+!nearby/Cargo.toml
+!nearby/deny.toml
+!nearby/rustfmt.toml
+!third_party

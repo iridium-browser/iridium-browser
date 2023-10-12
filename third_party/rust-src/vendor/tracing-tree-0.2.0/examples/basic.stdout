@@ -1,0 +1,41 @@
+1:main┐basic::hierarchical-example version=0.1
+1:main├┐basic::hierarchical-example version=0.1
+1:main│└┐basic::server host="localhost", port=8080
+1:main│ ├─ms INFO basic starting
+1:main│ ├─ms INFO basic listening
+1:main│ ├┐basic::server host="localhost", port=8080
+1:main│ │└┐basic::conn peer_addr="82.9.9.9", port=42381
+1:main│ │ ├─ms DEBUG basic connected
+1:main│ │ ├─ms DEBUG basic message received, length=2
+1:main│ │┌┘basic::conn peer_addr="82.9.9.9", port=42381
+1:main│ ├┘basic::server host="localhost", port=8080
+1:main│ ├┐basic::server host="localhost", port=8080
+1:main│ │└┐basic::conn peer_addr="8.8.8.8", port=18230
+1:main│ │ ├─ms DEBUG basic connected
+1:main│ │┌┘basic::conn peer_addr="8.8.8.8", port=18230
+1:main│ ├┘basic::server host="localhost", port=8080
+1:main│ ├┐basic::server host="localhost", port=8080
+1:main│ │└┐basic::foomp 42 <- format string, normal_var=43
+1:main│ │ ├─ms ERROR basic hello
+1:main│ │┌┘basic::foomp 42 <- format string, normal_var=43
+1:main│ ├┘basic::server host="localhost", port=8080
+1:main│ ├┐basic::server host="localhost", port=8080
+1:main│ │└┐basic::conn peer_addr="82.9.9.9", port=42381
+1:main│ │ ├─ms WARN basic weak encryption requested, algo="xor"
+1:main│ │ ├─ms DEBUG basic response sent, length=8
+1:main│ │ ├─ms DEBUG basic disconnected
+1:main│ │┌┘basic::conn peer_addr="82.9.9.9", port=42381
+1:main│ ├┘basic::server host="localhost", port=8080
+1:main│ ├┐basic::server host="localhost", port=8080
+1:main│ │└┐basic::conn peer_addr="8.8.8.8", port=18230
+1:main│ │ ├─ms DEBUG basic message received, length=5
+1:main│ │ ├─ms DEBUG basic response sent, length=8
+1:main│ │ ├─ms DEBUG basic disconnected
+1:main│ │┌┘basic::conn peer_addr="8.8.8.8", port=18230
+1:main│ ├┘basic::server host="localhost", port=8080
+1:main│ ├─ms WARN basic internal error
+1:main│ ├─ms ERROR basic this is a log message
+1:main│ ├─ms INFO basic exit
+1:main│┌┘basic::server host="localhost", port=8080
+1:main├┘basic::hierarchical-example version=0.1
+1:main┘basic::hierarchical-example version=0.1

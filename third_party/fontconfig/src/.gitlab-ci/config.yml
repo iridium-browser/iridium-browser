@@ -1,0 +1,86 @@
+.default_tag: &default_tag "2023-07-15.0"
+
+distributions:
+  - name: fedora
+    tag: *default_tag
+    base_type: fedora
+    versions:
+      - "rawhide"
+      - "38"
+      - "37"
+    builds:
+      - name: "autotools shared expat"
+        variables:
+          FC_BUILDSYS: autotools
+          FC_BUILD_TYPE: shared
+          FC_XML_BACKEND: expat
+      - name: "autotools shared libxml2"
+        variables:
+          FC_BUILDSYS: autotools
+          FC_BUILD_TYPE: shared
+          FC_XML_BACKEND: libxml2
+          FC_BUILD_DISTCHECK: 1
+      - name: "autotools static expat"
+        variables:
+          FC_BUILDSYS: autotools
+          FC_BUILD_TYPE: static
+          FC_XML_BACKEND: expat
+      - name: "autotools static libxml2"
+        variables:
+          FC_BUILDSYS: autotools
+          FC_BUILD_TYPE: static
+          FC_XML_BACKEND: libxml2
+      - name: "mingw autotools static libxml2"
+        variables:
+          FC_BUILDSYS: autotools
+          FC_BUILD_TYPE: static
+          FC_XML_BACKEND: libxml2
+          FC_BUILD_PLATFORM: mingw
+          FC_BUILD_ARCH: x86_64-mingw32
+      - name: "meson shared expat"
+        variables:
+          FC_BUILDSYS: meson
+          FC_BUILD_TYPE: shared
+          FC_XML_BACKEND: expat
+      - name: "meson static expat"
+        variables:
+          FC_BUILDSYS: meson
+          FC_BUILD_TYPE: static
+          FC_XML_BACKEND: expat
+      - name: "mingw meson static expat"
+        variables:
+          FC_BUILDSYS: meson
+          FC_BUILD_TYPE: static
+          FC_XML_BACKEND: expat
+          FC_BUILD_PLATFORM: mingw
+          FC_BUILD_ARCH: linux-mingw-w64-64bit
+          FC_BUILD_NO_INSTALL: 1
+
+packages:
+  fedora:
+    needed:
+      [
+        "@buildsys-build",
+        "autoconf",
+        "automake",
+        "libtool",
+        "gettext",
+        "gettext-devel",
+        "gperf",
+        "expat-devel",
+        "libxml2-devel",
+        "freetype-devel",
+        "json-c-devel",
+        "git",
+        "docbook-utils",
+        "docbook-utils-pdf",
+        "bubblewrap",
+        "ninja-build",
+        "wget",
+        "python3-pip",
+        "mingw64-gettext",
+        "mingw64-freetype",
+        "mingw64-libxml2",
+        "wine",
+      ]
+    use_qemu: false

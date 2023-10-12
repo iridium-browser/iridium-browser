@@ -1,0 +1,29 @@
+[package]
+name = "xts_aes"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[features]
+default = []
+std = []
+
+[dependencies]
+array_ref.workspace = true
+crypto_provider.workspace = true
+ldt_tbc.workspace = true
+
+[dev-dependencies]
+crypto_provider_default.workspace = true
+rand_ext.workspace = true
+test_helper.workspace = true
+
+anyhow.workspace = true
+base64.workspace = true
+hex.workspace = true
+rand.workspace = true
+rand_pcg.workspace = true
+regex.workspace = true
+
+aes.workspace = true
+xts-mode.workspace = true

@@ -1,0 +1,25 @@
+From 097eaa7166ad1f6298c41bc66e094a15a9a4e73e Mon Sep 17 00:00:00 2001
+From: Nabil Wadih <nwadih@google.com>
+Date: Tue, 6 Jun 2023 15:57:04 -0700
+Subject: [PATCH 2/2] fix boringssl dsa build errors
+
+---
+ openssl/src/dsa.rs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/openssl/src/dsa.rs b/openssl/src/dsa.rs
+index c550f654..ffebdf8a 100644
+--- a/openssl/src/dsa.rs
++++ b/openssl/src/dsa.rs
+@@ -283,7 +283,7 @@ impl<T> fmt::Debug for Dsa<T> {
+ }
+ 
+ cfg_if! {
+-    if #[cfg(any(ossl110, libressl273))] {
++    if #[cfg(any(ossl110, libressl273, boringssl))] {
+         use ffi::{DSA_get0_key, DSA_get0_pqg, DSA_set0_key, DSA_set0_pqg};
+     } else {
+         #[allow(bad_style)]
+-- 
+2.41.0.162.gfafddb0af9-goog
+

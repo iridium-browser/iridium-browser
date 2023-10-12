@@ -1,0 +1,69 @@
+include_directories(
+	..
+	${DEQP_INL_DIR}
+	)
+
+set(DEQP_VK_RAY_TRACING_SRCS
+	vktRayTracingBarrierTests.cpp
+	vktRayTracingBarrierTests.hpp
+	vktRayTracingBarycentricCoordinatesTests.cpp
+	vktRayTracingBarycentricCoordinatesTests.hpp
+	vktRayTracingBuildIndirectTests.cpp
+	vktRayTracingBuildIndirectTests.hpp
+	vktRayTracingBuiltinTests.cpp
+	vktRayTracingBuiltinTests.hpp
+	vktRayTracingBuildLargeTests.cpp
+	vktRayTracingBuildLargeTests.hpp
+	vktRayTracingBuildTests.cpp
+	vktRayTracingBuildTests.hpp
+	vktRayTracingCallableShadersTests.cpp
+	vktRayTracingCallableShadersTests.hpp
+	vktRayTracingComplexControlFlowTests.cpp
+	vktRayTracingComplexControlFlowTests.hpp
+	vktRayTracingDataSpillTests.cpp
+	vktRayTracingDataSpillTests.hpp
+	vktRayTracingDirectionTests.cpp
+	vktRayTracingDirectionTests.hpp
+	vktRayTracingTraceRaysTests.cpp
+	vktRayTracingTraceRaysTests.hpp
+	vktRayTracingMemGuaranteeTests.cpp
+	vktRayTracingMemGuaranteeTests.hpp
+	vktRayTracingMiscTests.cpp
+	vktRayTracingMiscTests.hpp
+	vktRayTracingNonUniformArgsTests.cpp
+	vktRayTracingNonUniformArgsTests.hpp
+	vktRayTracingNullASTests.cpp
+	vktRayTracingNullASTests.hpp
+	vktRayTracingShaderBindingTableTests.cpp
+	vktRayTracingShaderBindingTableTests.hpp
+	vktRayTracingTraversalControlTests.cpp
+	vktRayTracingTraversalControlTests.hpp
+	vktRayTracingAccelerationStructuresTests.cpp
+	vktRayTracingAccelerationStructuresTests.hpp
+	vktRayTracingWatertightnessTests.cpp
+	vktRayTracingWatertightnessTests.hpp
+	vktRayTracingPipelineLibraryTests.cpp
+	vktRayTracingPipelineLibraryTests.hpp
+	vktRayTracingProceduralGeometryTests.cpp
+	vktRayTracingProceduralGeometryTests.hpp
+	vktRayTracingCaptureReplayTests.cpp
+	vktRayTracingCaptureReplayTests.hpp
+	vktRayTracingTests.cpp
+	vktRayTracingTests.hpp
+	vktRayTracingPipelineFlagsTests.cpp
+	vktRayTracingPipelineFlagsTests.hpp
+	vktRayTracingOpacityMicromapTests.cpp
+	vktRayTracingOpacityMicromapTests.hpp
+	vktRayTracingPositionFetchTests.cpp
+	vktRayTracingPositionFetchTests.hpp
+	)
+
+set(DEQP_VK_RAY_TRACING_LIBS
+	tcutil
+	vkutil
+	)
+
+PCH(DEQP_VK_RAY_TRACING_SRCS ../pch.cpp)
+
+add_library(deqp-vk-ray-tracing STATIC ${DEQP_VK_RAY_TRACING_SRCS})
+target_link_libraries(deqp-vk-ray-tracing ${DEQP_VK_RAY_TRACING_LIBS})

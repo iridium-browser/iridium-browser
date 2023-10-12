@@ -1,0 +1,74 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: CMake Test
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+  workflow_dispatch:
+
+# TODO: Support caching.
+jobs:
+  run_tests:
+    name: Run CMake tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        mode: ['default', 'fuzzing']
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -yq \
+            clang libprotobuf-dev protobuf-compiler
+      - uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: "3.19.0"  # Use exactly 3.19.0. And it also installs the latest ninja
+      - name: Check whether fuzztest can be build with FetchContent
+        run: |
+          CC=clang CXX=clang++ cmake \
+            -S codelab -B build_codelab -G Ninja  \
+            -DFUZZTEST_REPO_BRANCH="${{ github.head_ref || github.ref_name }}" && \
+          cmake --build build_codelab -j
+      - name: Run all tests in default mode
+        if: matrix.mode == 'default'
+        run: |
+          mkdir build && \
+          cd build && \
+          CC=clang CXX=clang++ cmake -G Ninja \
+            -DCMAKE_BUILD_TYPE=RelWithDebug \
+            -DRE2_BUILD_TESTING=off \
+            -Dprotobuf_BUILD_TESTS=off \
+            -DFUZZTEST_TESTING=on .. && \
+            ninja -j $(nproc) && \
+            ctest -j $(nproc) --output-on-failure
+      - name: Run end-to-end tests in fuzzing mode
+        if: matrix.mode == 'fuzzing'
+        run: |
+          mkdir build && \
+          cd build && \
+          CC=clang CXX=clang++ cmake -G Ninja \
+            -DCMAKE_BUILD_TYPE=RelWithDebug \
+            -DRE2_BUILD_TESTING=off \
+            -Dprotobuf_BUILD_TESTS=off \
+            -DFUZZTEST_FUZZING_MODE=on \
+            -DFUZZTEST_TESTING=on .. && \
+            ninja -j $(nproc) && \
+            ctest -j $(nproc) --output-on-failure -R "functional_test"
+

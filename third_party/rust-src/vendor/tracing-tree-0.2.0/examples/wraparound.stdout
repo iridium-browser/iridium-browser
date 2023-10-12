@@ -1,0 +1,96 @@
+1:main┐wraparound::recurse i=0
+1:main├─ms WARN wraparound boop
+1:main├─┐wraparound::recurse i=1
+1:main│ ├─ms WARN wraparound boop
+1:main│ ├─┐wraparound::recurse i=2
+1:main│ │ ├─ms WARN wraparound boop
+1:main│ │ ├─┐wraparound::recurse i=3
+1:main│ │ │ ├─ms WARN wraparound boop
+1:main│ │ │ ├─┐wraparound::recurse i=4
+1:main────────┘
+1:mainms WARN wraparound boop
+1:main┐wraparound::recurse i=5
+1:main├─ms WARN wraparound boop
+1:main├─┐wraparound::recurse i=6
+1:main│ ├─ms WARN wraparound boop
+1:main│ ├─┐wraparound::recurse i=7
+1:main│ │ ├─ms WARN wraparound boop
+1:main│ │ ├─┐wraparound::recurse i=8
+1:main│ │ │ ├─ms WARN wraparound boop
+1:main│ │ │ ├─┐wraparound::recurse i=9
+1:main────────┘
+1:mainms WARN wraparound boop
+1:main┐wraparound::recurse i=10
+1:main├─ms WARN wraparound boop
+1:main├─┐wraparound::recurse i=11
+1:main│ ├─ms WARN wraparound boop
+1:main│ ├─┐wraparound::recurse i=12
+1:main│ │ ├─ms WARN wraparound boop
+1:main│ │ ├─┐wraparound::recurse i=13
+1:main│ │ │ ├─ms WARN wraparound boop
+1:main│ │ │ ├─┐wraparound::recurse i=14
+1:main────────┘
+1:mainms WARN wraparound boop
+1:main┐wraparound::recurse i=15
+1:main├─ms WARN wraparound boop
+1:main├─┐wraparound::recurse i=16
+1:main│ ├─ms WARN wraparound boop
+1:main│ ├─┐wraparound::recurse i=17
+1:main│ │ ├─ms WARN wraparound boop
+1:main│ │ ├─┐wraparound::recurse i=18
+1:main│ │ │ ├─ms WARN wraparound boop
+1:main│ │ │ ├─┐wraparound::recurse i=19
+1:main────────┘
+1:mainms WARN wraparound boop
+1:main┐wraparound::recurse i=20
+1:main├─ms WARN wraparound boop
+1:main├─┐wraparound::recurse i=21
+1:main│ ├─ms WARN wraparound boop
+1:main│ ├─ms WARN wraparound bop
+1:main├─┘
+1:main├─ms WARN wraparound bop
+1:main┘
+1:mainms WARN wraparound bop
+1:main────────┐
+1:main│ │ │ ├─┘
+1:main│ │ │ ├─ms WARN wraparound bop
+1:main│ │ ├─┘
+1:main│ │ ├─ms WARN wraparound bop
+1:main│ ├─┘
+1:main│ ├─ms WARN wraparound bop
+1:main├─┘
+1:main├─ms WARN wraparound bop
+1:main┘
+1:mainms WARN wraparound bop
+1:main────────┐
+1:main│ │ │ ├─┘
+1:main│ │ │ ├─ms WARN wraparound bop
+1:main│ │ ├─┘
+1:main│ │ ├─ms WARN wraparound bop
+1:main│ ├─┘
+1:main│ ├─ms WARN wraparound bop
+1:main├─┘
+1:main├─ms WARN wraparound bop
+1:main┘
+1:mainms WARN wraparound bop
+1:main────────┐
+1:main│ │ │ ├─┘
+1:main│ │ │ ├─ms WARN wraparound bop
+1:main│ │ ├─┘
+1:main│ │ ├─ms WARN wraparound bop
+1:main│ ├─┘
+1:main│ ├─ms WARN wraparound bop
+1:main├─┘
+1:main├─ms WARN wraparound bop
+1:main┘
+1:mainms WARN wraparound bop
+1:main────────┐
+1:main│ │ │ ├─┘
+1:main│ │ │ ├─ms WARN wraparound bop
+1:main│ │ ├─┘
+1:main│ │ ├─ms WARN wraparound bop
+1:main│ ├─┘
+1:main│ ├─ms WARN wraparound bop
+1:main├─┘
+1:main├─ms WARN wraparound bop
+1:main┘

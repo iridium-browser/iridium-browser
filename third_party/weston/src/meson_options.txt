@@ -1,0 +1,236 @@
+# This option is not implemented:
+#  --with-cairo=[image|gl|glesv2] Which Cairo renderer to use for the clients
+# It is hardcoded to cairo-image for now.
+
+option(
+	'backend-drm',
+	type: 'boolean',
+	value: true,
+	description: 'Weston backend: DRM/KMS'
+)
+option(
+	'backend-drm-screencast-vaapi',
+	type: 'boolean',
+	value: true,
+	description: 'DRM/KMS backend support for VA-API screencasting'
+)
+option(
+	'backend-headless',
+	type: 'boolean',
+	value: true,
+	description: 'Weston backend: headless (testing)'
+)
+option(
+	'backend-pipewire',
+	type: 'boolean',
+	value: true,
+	description: 'PipeWire backend: screencasting via PipeWire'
+)
+option(
+	'backend-rdp',
+	type: 'boolean',
+	value: true,
+	description: 'Weston backend: RDP remote screensharing'
+)
+option(
+	'screenshare',
+	type: 'boolean',
+	value: true,
+	description: 'Compositor: RDP screen-sharing support'
+)
+option(
+	'backend-vnc',
+	type: 'boolean',
+	value: true,
+	description: 'Weston backend: VNC remote screensharing'
+)
+option(
+	'backend-wayland',
+	type: 'boolean',
+	value: true,
+	description: 'Weston backend: Wayland (nested)'
+)
+option(
+	'backend-x11',
+	type: 'boolean',
+	value: true,
+	description: 'Weston backend: X11 (nested)'
+)
+option(
+	'backend-default',
+	type: 'combo',
+	choices: [ 'auto', 'drm', 'wayland', 'x11', 'headless', 'rdp' ],
+	value: 'drm',
+	description: 'Default backend when no parent display server detected'
+)
+
+option(
+	'renderer-gl',
+	type: 'boolean',
+	value: true,
+	description: 'Weston renderer: EGL / OpenGL ES 2.x'
+)
+
+option(
+	'xwayland',
+	type: 'boolean',
+	value: true,
+	description: 'Xwayland: support for X11 clients inside Weston'
+)
+option(
+	'xwayland-path',
+	type: 'string',
+	value: '/usr/bin/Xwayland',
+	description: 'Xwayland: path to installed Xwayland binary'
+)
+
+option(
+	'systemd',
+	type: 'boolean',
+	value: true,
+	description: 'systemd service plugin: state notify, watchdog, socket activation'
+)
+
+option(
+	'remoting',
+	type: 'boolean',
+	value: true,
+	description: 'Virtual remote output with GStreamer on DRM backend'
+)
+
+option(
+	'pipewire',
+	type: 'boolean',
+	value: true,
+	description: 'Virtual remote output with Pipewire on DRM backend'
+)
+
+option(
+	'shell-desktop',
+	type: 'boolean',
+	value: true,
+	description: 'Weston shell UI: traditional desktop'
+)
+option(
+	'shell-fullscreen',
+	type: 'boolean',
+	value: true,
+	description: 'Weston shell UI: fullscreen/kiosk'
+)
+option(
+	'shell-ivi',
+	type: 'boolean',
+	value: true,
+	description: 'Weston shell UI: IVI (automotive)'
+)
+option(
+	'shell-kiosk',
+	type: 'boolean',
+	value: true,
+	description: 'Weston shell UI: kiosk (desktop apps)'
+)
+
+option(
+	'desktop-shell-client-default',
+	type: 'string',
+	value: 'weston-desktop-shell',
+	description: 'Weston desktop shell: default helper client selection'
+)
+
+option(
+	'color-management-lcms',
+	type: 'boolean',
+	value: true,
+	description: 'Compositor color management: Little CMS'
+)
+option(
+	'deprecated-color-management-static',
+	type: 'boolean',
+	value: false,
+	description: 'DEPRECATED: color management plugin cms-static'
+)
+option(
+	'deprecated-color-management-colord',
+	type: 'boolean',
+	value: false,
+	description: 'DEPRECATED: color management plugin cms-colord (requires cms-static)'
+)
+
+option(
+	'deprecated-launcher-logind',
+	type: 'boolean',
+	value: false,
+	description: 'DEPRECATED: Compositor: support systemd-logind D-Bus protocol (superseded by launcher-libseat)'
+)
+
+option(
+	'launcher-libseat',
+	type: 'boolean',
+	value: true,
+	description: 'Compositor: support libseat'
+)
+
+option(
+	'image-jpeg',
+	type: 'boolean',
+	value: true,
+	description: 'JPEG loading support'
+)
+option(
+	'image-webp',
+	type: 'boolean',
+	value: true,
+	description: 'WebP loading support'
+)
+
+option(
+	'tools',
+	type: 'array',
+	choices: [ 'calibrator', 'debug', 'info', 'terminal', 'touch-calibrator' ],
+	description: 'List of accessory clients to build and install'
+)
+option(
+	'demo-clients',
+	type: 'boolean',
+	value: true,
+	description: 'Sample clients: toytoolkit demo programs'
+)
+option(
+	'simple-clients',
+	type: 'array',
+	choices: [ 'all', 'damage', 'im', 'egl', 'shm', 'touch', 'dmabuf-feedback', 'dmabuf-v4l', 'dmabuf-egl' ],
+	value: [ 'all' ],
+	description: 'Sample clients: simple test programs'
+)
+
+option(
+	'resize-pool',
+	type: 'boolean',
+	value: true,
+	description: 'Sample clients: optimize window resize performance'
+)
+option(
+	'wcap-decode',
+	type: 'boolean',
+	value: true,
+	description: 'Tools: screen recording decoder tool'
+)
+
+option(
+	'test-junit-xml',
+	type: 'boolean',
+	value: true,
+	description: 'Tests: output JUnit XML results'
+)
+option(
+	'test-skip-is-failure',
+	type: 'boolean',
+	value: false,
+	description: 'Tests: consider skip to be a failure'
+)
+option(
+	'doc',
+	type: 'boolean',
+	value: false,
+	description: 'Generate documentation'
+)

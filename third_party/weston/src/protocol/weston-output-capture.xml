@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocol name="weston_output_capture">
+
+  <copyright>
+    Copyright 2020, 2022 Collabora, Ltd.
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the "Software"),
+    to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense,
+    and/or sell copies of the Software, and to permit persons to whom the
+    Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice (including the next
+    paragraph) shall be included in all copies or substantial portions of the
+    Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+    THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+    DEALINGS IN THE SOFTWARE.
+  </copyright>
+
+  <interface name="weston_capture_v1" version="1">
+    <description summary="image capture factory">
+      The global interface exposing Weston screenshooting functionality
+      intended for single shots.
+
+      This is a privileged inteface.
+    </description>
+
+    <request name="destroy" type="destructor">
+      <description summary="unbind image capture factory">
+        Affects no other protocol objects in any way.
+      </description>
+    </request>
+
+    <enum name="error">
+      <entry name="invalid_source" value="0"
+             summary="invalid source enum value"/>
+    </enum>
+
+    <enum name="source">
+      <entry name="writeback" value="0" summary="use hardware writeback"/>
+      <entry name="framebuffer" value="1"
+             summary="copy from framebuffer, desktop area"/>
+      <entry name="full_framebuffer" value="2"
+             summary="copy whole framebuffer, including borders"/>
+      <entry name="blending" value="3" summary="copy from blending space"/>
+    </enum>
+
+    <request name="create">
+      <description summary="create an object for capturing output images">
+        This creates a weston_capture_source_v1 object corresponding to the
+        given wl_output. The object delivers information for allocating
+        suitable buffers, and exposes the capture function.
+
+        The object will be using the given pixel source for capturing images.
+        If the source is not available, all attempts to capture will fail
+        gracefully.
+
+        'writeback' source will use hardware writeback feature of DRM KMS for
+        capturing. This may allow hardware planes to remain used
+        during the capture. This source is often not available.
+
+        'framebuffer' source copies the contents of the final framebuffer.
+        Using this source temporarily disables all use of hardware planes and
+        DRM KMS color pipeline features. This source is always available.
+
+        'full_framebuffer' is otherwise the same as 'framebuffer' except it
+        will include also any borders (decorations) that the framebuffer may
+        contain.
+
+        'blending' source copies the contents of the intermediate blending
+        buffer, which should be in linear-light format.  Using this source
+        temporarily disables all use of hardware planes. This source is only
+        available when a blending buffer exists, e.g. when color management
+        is active on the output.
+
+        If the pixel source is not one of the defined enumeration values,
+        'invalid_source' protocol error is raised.
+      </description>
+      <arg name="output" type="object" interface="wl_output"
+           summary="output to shoot"/>
+      <arg name="source" type="uint" enum="source" summary="pixel source"/>
+      <arg name="capture_source_new_id" type="new_id"
+           interface="weston_capture_source_v1" summary="new object"/>
+    </request>
+  </interface>
+
+  <interface name="weston_capture_source_v1" version="1">
+    <description summary="image capturing source">
+      An object representing image capturing functionality for a single
+      source. When created, it sends the initial events if and only if the
+      output still exists and the specified pixel source is available on
+      the output.
+    </description>
+
+    <enum name="error">
+      <entry name="bad_buffer" value="0"
+             summary="the wl_buffer is not writable"/>
+      <entry name="sequence" value="1"
+             summary="capture requested again before previous retired"/>
+    </enum>
+
+    <request name="destroy" type="destructor">
+      <description summary="cancel the capture, and destroy">
+        If a capture is on-going on this object, this will cancel it and
+        make the image buffer contents undefined.
+
+        This object is destroyed.
+      </description>
+    </request>
+
+    <request name="capture">
+      <description summary="capture an image">
+        If the given wl_buffer is compatible, the associated output will go
+        through a repaint some time after this request has been processed,
+        and that repaint will execute the capture.
+        Once the capture is complete, 'complete' event is emitted.
+
+        If the given wl_buffer is incompatible, the event 'retry' is
+        emitted.
+
+        If the capture fails or the buffer type is unsupported, the event
+        'failed' is emitted.
+
+        The client must wait for one of these events before attempting
+        'capture' on this object again. If 'capture' is requested again before
+        any of those events, 'sequence' protocol error is raised.
+
+        The wl_buffer object will not emit wl_buffer.release event due to
+        this request.
+
+        The wl_buffer must refer to compositor-writable storage. If buffer
+        storage is not writable, either the protocol error bad_buffer or
+        wl_shm.error.invalid_fd is raised.
+
+        If the wl_buffer is destroyed before any event is emitted, the buffer
+        contents become undefined.
+
+        A compositor is required to implement capture into wl_shm buffers.
+        Other buffer types may or may not be supported.
+      </description>
+      <arg name="buffer" type="object" interface="wl_buffer"
+           summary="a writable image buffer"/>
+    </request>
+
+    <event name="format">
+      <description summary="pixel format for a buffer">
+        This event delivers the pixel format that should be used for the
+        image buffer. Any buffer is incompatible if it does not have
+        this pixel format.
+
+        The format modifier is linear (DRM_FORMAT_MOD_LINEAR).
+
+        This is an initial event, and sent whenever the required format
+        changes.
+      </description>
+      <arg name="drm_format" type="uint" summary="DRM pixel format code"/>
+    </event>
+
+    <event name="size">
+      <description summary="dimensions for a buffer">
+        This event delivers the size that should be used for the
+        image buffer. Any buffer is incompatible if it does not have
+        this size.
+
+        Row alignment of the buffer must be 4 bytes, and it must not contain
+        further row padding. Otherwise the buffer is unsupported.
+
+        This is an initial event, and sent whenever the required size
+        changes.
+      </description>
+      <arg name="width" type="int" summary="width in pixels"/>
+      <arg name="height" type="int" summary="height in pixels"/>
+    </event>
+
+    <event name="complete">
+      <description summary="capture has completed">
+        This event is emitted as a response to 'capture' request when it
+        has successfully completed.
+
+        If the buffer used in the shot is a dmabuf, the client also needs to
+        wait for any implicit fences on it before accessing the contents.
+      </description>
+    </event>
+
+    <event name="retry">
+      <description summary="retry image capture with a different buffer">
+        This event is emitted as a response to 'capture' request when it
+        cannot succeed due to an incompatible buffer. The client has already
+        received the events delivering the new buffer parameters. The client
+        should retry the capture with the new buffer parameters.
+      </description>
+    </event>
+
+    <event name="failed">
+      <description summary="capture failed">
+        This event is emitted as a response to 'capture' request when it
+        has failed for reasons other than an incompatible buffer. The reasons
+        may include: unsupported buffer type, unsupported buffer stride,
+        unsupported image source, the image source (output) was removed, or
+        compositor policy denied the capture.
+
+        The string 'msg' may contain a human-readable explanation of the
+        failure to aid debugging.
+      </description>
+      <arg name="msg" type="string" allow-null="true"
+           summary="human-readable hint"/>
+    </event>
+  </interface>
+
+</protocol>

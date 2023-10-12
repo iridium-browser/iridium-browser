@@ -1,0 +1,16 @@
+# Copyright 2019 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build_overrides/build.gni")
+import("//third_party/libprotobuf-mutator/fuzzable_proto_library.gni")
+import("//third_party/protobuf/proto_library.gni")
+
+# Used by several targets in Chromium.
+# TODO(https://issuetracker.google.com/issues/244211254): Move protos to public/
+fuzzable_proto_library("channel_proto") {
+  sources = [
+    "authority_keys.proto",
+    "cast_channel.proto",
+  ]
+}

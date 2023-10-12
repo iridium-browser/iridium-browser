@@ -1,0 +1,250 @@
+.TH WESTON-DRM 7 "2012-11-27" "Weston @version@"
+.SH NAME
+weston-drm \- the DRM backend for Weston
+.SH SYNOPSIS
+.B weston --backend=drm
+.
+.\" ***************************************************************
+.SH DESCRIPTION
+The DRM backend is the native Weston backend for systems that support
+the Linux kernel DRM, kernel mode setting (KMS), and evdev input devices.
+It is the recommended backend for desktop PCs, and aims to provide
+the full Wayland experience with the "every frame is perfect" concept.
+It also relies on the Mesa GBM interface.
+
+With the DRM backend,
+.B weston
+runs without any underlying windowing system. The backend uses the
+Linux KMS API to detect connected monitors. Monitor hot-plugging is
+supported. Input devices are found automatically by
+.BR udev (7).
+Compositing happens mainly in GL\ ES\ 2, initialized through EGL. It
+is also possible to take advantage of hardware cursors and overlays,
+when they exist and are functional. Full-screen surfaces will be
+scanned out directly without compositing, when possible.
+Hardware accelerated clients are supported via EGL.
+
+The backend chooses the DRM graphics device first based on seat id.
+If seat identifiers are not set, it looks for the graphics device
+that was used in boot. If that is not found, it finally chooses
+the first DRM device returned by
+.BR udev (7).
+Combining multiple graphics devices is not supported yet.
+
+The DRM backend also supports virtual outputs that are transmitted over
+an RTP session as a series of JPEG images (RTP payload type 26) to a remote
+client. Virtual outputs are configured in the
+.BR remote-output
+section of
+.BR weston.ini.
+.
+.\" ***************************************************************
+.SH CONFIGURATION
+.
+The DRM backend uses the following entries from
+.BR weston.ini .
+.SS Section core
+.TP
+\fBgbm-format\fR=\fIformat\fR
+Sets the default pixel format for DRM KMS framebuffers.
+.IR Format " can be"
+.BR xrgb8888 ", " xrgb2101010 ", " rgb565
+or others. Weston recognizes the names of most pixel formats defined by
+the kernel DRM subsystem in
+.B drm_fourcc.h
+header without the DRM_FORMAT_ prefix.
+The actually supported pixel formats depend on the DRM driver and hardware,
+and the renderer used. Using Pixman-renderer, DRM-backend supports
+.BR xrgb8888 ", " xrgb2101010 ", " rgb565
+and some of their permutations.
+The formats supported with GL-renderer depend on the EGL and OpenGL ES 2 or 3
+implementations. The names are case-insensitive. This setting applies only to
+.RB "outputs in SDR mode, see " eotf-mode " in " weston.ini (5).
+
+.RB "If not specified, " xrgb8888 " is used. See also " gbm-format " in"
+.BR output " section."
+.TP
+\fBpageflip-timeout\fR=\fImilliseconds\fR
+sets Weston's pageflip timeout in milliseconds.  This sets a timer to exit
+gracefully with a log message and an exit code of 1 in case the DRM driver is
+non-responsive.  Setting it to 0 disables this feature.
+
+.SS Section output
+.TP
+\fBname\fR=\fIconnector\fR
+The KMS connector name identifying the output, for instance
+.IR LVDS1 .
+.TP
+\fBmode\fR=\fImode\fR
+Specify the video mode for the output. The argument
+.I mode
+can be one of the words
+.BR off " to turn the output off, "
+.BR preferred " to use the monitor's preferred video mode, or "
+.BR current " to use the current video mode and avoid a mode switch."
+It can also be a resolution as:
+.TP
+\fBmode\fR=\fIwidth\fBx\fIheight\fR
+.TP
+\fBmode\fR=\fIwidth\fBx\fIheight\fB@\fIrefresh_rate\fR
+Specify a mode with a given refresh-rate measured in Hz.
+.TP
+\fBmode\fR=\fIwidth\fBx\fIheight\fB@\fIrefresh_rate ratio\fR
+Here \fIratio\fR is Picture Aspect-Ratio which can have values as 4:3, 16:9,
+64:27, and 256:135. This resolution-format helps to select a CEA mode, if such a
+video mode is present in the mode-list of the output.
+
+CEA defines the timing of a video mode, which is considered as a standard for
+HDMI spcification and compliance testing. It defines each and every parameter of
+a video mode, like hactive, vactive, vfront, vback etc., including aspect-ratio
+information. For CEA modes, the drm layer, stores this aspect-ratio information
+in user-mode (drmModeModeInfo) flag bits 19-22. For the non-CEA modes a value of
+0 is stored in the aspect-ratio flag bits.
+
+Each CEA-mode is identified by a unique, Video Identification Code (VIC).
+For example, VIC=4 is 1280x720@60 aspect-ratio 16:9. This mode will be
+different than a non-CEA mode 1280x720@60 0:0. When the video mode
+1280x720@60 0:0 is applied, since its timing doesn't exactly match with the CEA
+information for VIC=4, it would be treated as a non-CEA mode. Also, while setting
+the HDMI-AVI-Inforframe, VIC parameter will be given as '0'. If video mode
+1280x720@60 16:9 is applied, its CEA timimgs matches with that of video mode with
+VIC=4, so the VIC parameter in HDMI-AVI-Infoframe will be set to 4.
+
+Many a times, an output may have both CEA and non-CEA modes, which are similar
+in all resepct, differing only in the aspect-ratio. A user can select a CEA mode
+by giving the aspect-ratio, along with the other arguments for the mode.
+By omitting the aspect-ratio, user can specify the non-CEA modes.
+This helps when certification testing is done, in tests like 7-27, the
+HDMI-analyzer applies a particular CEA mode, and expects the applied mode to be
+with exactly same timings, including the aspect-ratio and VIC field.
+
+The resolution can also be a detailed mode line as below.
+.TP
+\fBmode\fR=\fIdotclock hdisp hsyncstart hsyncend htotal \
+vdisp vsyncstart vsyncend vtotal hflag vflag\fR
+Use the given detailed mode line as the video mode for this output.
+The definition is the same as in
+.BR xorg.conf "(5), and " cvt (1)
+can generate detailed mode lines.
+.TP
+\fBtransform\fR=\fItransform\fR
+Transform for the output, which can be rotated in 90-degree steps
+and possibly flipped. Possible values are
+.BR normal ", " rotate-90 ", " rotate-180 ", " rotate-270 ", "
+.BR flipped ", " flipped-rotate-90 ", " flipped-rotate-180 ", and "
+.BR flipped-rotate-270 .
+.TP
+\fBgbm-format\fR=\fIformat\fR
+Set the DRM KMS framebuffer format for this specific output. If not set,
+.RB "the value from " gbm-format " option in " core " section is used"
+.RB "for SDR mode outputs and " xrgb2101010 " for other modes."
+.RI "For the possible values for " format " see "
+.BR gbm-format " option in " core " section."
+.RB "For SDR mode, see " eotf-mode " in " weston.ini (7).
+.TP
+\fBpixman-shadow\fR=\fIboolean\fR
+If using the Pixman-renderer, use shadow framebuffers. Defaults to
+.BR true .
+.TP
+\fBsame-as\fR=\fIname\fR
+Make this output (connector) a clone of another. The argument
+.IR name " is the "
+.BR name " value of another output section. The
+referred to output section must exist. When this key is present in an
+output section, all other keys have no effect on the configuration.
+
+NOTE: cms-colord plugin does not work correctly with this option. The plugin
+chooses an arbitrary monitor to load the color profile for, but the
+profile is applied equally to all cloned monitors regardless of their
+properties.
+.TP
+\fBforce-on\fR=\fItrue\fR
+Force the output to be enabled even if the connector is disconnected.
+Defaults to false. Note that
+.BR mode=off " will override " force-on=true .
+When a connector is disconnected, there is no EDID information to provide
+a list of video modes. Therefore a forced output should also have a
+detailed mode line specified.
+.TP
+\fBmax-bpc\fR=\fIN\fR
+.RB "Set \(dq" "max bpc" "\(dq KMS property to value"
+.IR N ,
+silenty clamped to the hardware driver supported range. This artificially
+limits the driver chosen link bits-per-channel which may be useful for working
+around sink hardware (e.g. monitor) limitations. The default is 16 which is
+practically unlimited. If you need to work around hardware issues, try a lower
+value like 8. A value of 0 means that the current max bpc will be reprogrammed.
+
+.SS Section remote-output
+.TP
+\fBname\fR=\fIname\fR
+Specify unique name for the output.
+.TP
+\fBmode\fR=\fImode\fR
+Specify the video mode for the output. The argument
+.I mode
+is a resolution setting, such as:
+.TP
+\fBmode\fR=\fIwidthxheight\fR
+.TP
+\fBmode\fR=\fIwidthxheight@refresh_rate
+If refresh_rate is not specified it will default to a 60Hz.
+.TP
+\fBhost\fR=\fIhost\fR
+Specify the host name or IP Address that the remote output will be
+transmitted to.
+.TP
+\fBport\fR=\fIport\fR
+Specify the port number to transmit the remote output to. Usable port range
+is 1-65533.
+.TP
+\fBgst-pipeline\fR=\fIpipeline\fR
+Specify the gstreamer pipeline. It is necessary that source is appsrc,
+its name is "src", and sink name is "sink" in
+.I pipeline\fR.
+Ignore port and host configuration if the gst-pipeline is specified.
+
+.
+.\" ***************************************************************
+.SH OPTIONS
+.
+When the DRM backend is loaded,
+.B weston
+will understand the following additional command line options.
+.TP
+.B \-\-current\-mode
+By default, use the current video mode of all outputs, instead of
+switching to the monitor preferred mode.
+.TP
+\fB\-\-drm\-device\fR=\fIcardN\fR
+Use the DRM device
+.I cardN
+instead of the default heuristics based on seat assignments and boot VGA
+status. For example, use
+.BR card0 .
+.TP
+\fB\-\-seat\fR=\fIseatid\fR
+Use graphics and input devices designated for seat
+.I seatid
+instead of the seat defined in the environment variable
+.BR XDG_SEAT ". If neither is specified, seat0 will be assumed."
+.TP
+.B \-\-continue\-without\-input
+Allow Weston to start without input devices. Used for testing purposes.
+.
+.\" ***************************************************************
+.SH ENVIRONMENT
+.
+.TP
+.B WESTON_LIBINPUT_LOG_PRIORITY
+The minimum libinput verbosity level to be printed to Weston's log.
+Valid values are
+.BR debug ", " info ", and " error ". Default is " info .
+.TP
+.B XDG_SEAT
+The seat Weston will start on, unless overridden on the command line.
+.
+.\" ***************************************************************
+.SH "SEE ALSO"
+.BR weston (1)
+.\".BR weston.ini (5)

@@ -1,0 +1,25 @@
+[package]
+name = "ldt_np_jni"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+ldt.workspace = true
+ldt_np_adv.workspace = true
+np_hkdf.workspace = true
+crypto_provider.workspace = true
+crypto_provider_default = {workspace = true, default-features = false}
+
+cfg-if.workspace = true
+jni.workspace = true
+
+[features]
+default = ["rustcrypto"]
+rustcrypto = ["crypto_provider_default/rustcrypto", "crypto_provider_default/std"]
+opensslbssl = ["crypto_provider_default/opensslbssl"]
+boringssl = ["crypto_provider_default/boringssl"]
+
+[lib]
+# JNI wants a .so or equivalent
+crate-type = ["cdylib"]

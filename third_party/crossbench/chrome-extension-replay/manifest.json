@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "version": "0.1.0",
+  "name": "crossbench extension",
+  "description": "DevTools extension for running Recordings in crossbench.",
+  "permissions": [],
+  "devtools_page": "devtools_page.html",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "minimum_chrome_version": "112.0.5569.0",
+  "icons": {
+    "128": "icon-128.png"
+  }
+}

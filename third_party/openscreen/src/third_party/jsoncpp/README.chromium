@@ -1,0 +1,13 @@
+Name: jsoncpp
+URL: https://github.com/open-source-parsers/jsoncpp
+Version: 1.9.4
+License: MIT
+License File: src/LICENSE
+Security Critical: yes
+Shipped: yes
+
+Description:
+JsonCpp is used for parsing and generating JSON data. This
+project is mirrored for Chrome from the public GitHub project, with a custom BUILD.gn
+to allow for building with our Ninja + GN configuration. The main project uses
+Meson or CMake for building.

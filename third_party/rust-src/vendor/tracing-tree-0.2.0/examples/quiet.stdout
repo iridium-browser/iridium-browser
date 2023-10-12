@@ -1,0 +1,28 @@
+1:main┐quiet::hierarchical-example version=0.1
+1:main├─┐quiet::server host="localhost", port=8080
+1:main│ ├─ms INFO quiet starting
+1:main│ ├─ms INFO quiet listening
+1:main│ ├─┐quiet::conn peer_addr="82.9.9.9", port=42381
+1:main│ │ ├─ms DEBUG quiet connected
+1:main│ │ ├─ms DEBUG quiet message received, length=2
+1:main│ ├─┘
+1:main│ ├─┐quiet::conn peer_addr="8.8.8.8", port=18230
+1:main│ │ ├─ms DEBUG quiet connected
+1:main│ ├─┘
+1:main│ ├─┐quiet::foomp 42 <- format string, normal_var=43
+1:main│ │ ├─ms ERROR quiet hello
+1:main│ ├─┘
+1:main│ ├─┐quiet::conn peer_addr="82.9.9.9", port=42381
+1:main│ │ ├─ms WARN quiet weak encryption requested, algo="xor"
+1:main│ │ ├─ms DEBUG quiet response sent, length=8
+1:main│ │ ├─ms DEBUG quiet disconnected
+1:main│ ├─┘
+1:main│ ├─┐quiet::conn peer_addr="8.8.8.8", port=18230
+1:main│ │ ├─ms DEBUG quiet message received, length=5
+1:main│ │ ├─ms DEBUG quiet response sent, length=8
+1:main│ │ ├─ms DEBUG quiet disconnected
+1:main│ ├─┘
+1:main│ ├─ms WARN quiet internal error
+1:main│ ├─ms INFO quiet exit
+1:main├─┘
+1:main┘

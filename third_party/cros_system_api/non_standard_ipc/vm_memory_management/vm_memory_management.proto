@@ -1,0 +1,196 @@
+// Copyright 2023 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// This non-standard IPC API was reviewed by the ChromeOS security team on
+// b:280015741
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+// This file defines messages for the VM Memory Management service
+package vm_tools.vm_memory_management;
+
+// VmMemoryManagement Protocol Overview
+//
+// A VM client of the VmMemoryManagementServer must open two connections to the
+// server. The first connection is the kills connection and handles initiating
+// kill requests from the client to the server and receiving kill decisions from
+// the server. The second connection is the stats connection which *must be
+// handled on a separate thread from the kills connection*. The stats connection
+// is used to inform the server of the client's MGLRU stats when a new
+// generation is created and also when the server requests the client's stats.
+//
+// Key:
+// '<-' client message to the server
+// '->' server message to a client
+//
+// Kills connection:
+// <- HANDSHAKE(Connection Type: KILLS)
+// CONNECTION_ACK ->
+// (
+//   (
+//     <- KILL_REQUEST
+//     KILL_DECISION ->
+//     <- KILL_REQUEST_LANTENCY
+//   )|(
+//     <- NO_KILL_CANDIDATES
+//   )
+// )*
+//
+// Stats connection:
+// <- HANDSHAKE(Connection Type: STATS)
+// CONNECTION_ACK ->
+// (
+//   (
+//     <- MGLRU_RESPONSE
+//   )|(
+//     MGLRU_REQUEST ->
+//     <- MGLRU_RESPONSE
+//   )
+// )*
+//
+// Note: Since the stats thread has both server initiated and client initiated
+// communication, there is a race between the client sending an un-prompted
+// MGLRU_RESPONSE at the same time as the server sends a MGLRU_REQUEST. This
+// race is acceptable because unlike a kill request, there is no correlation
+// between a specific MGLRU request and an MGLRU response. The response just
+// represents the best effort MGRLU stats at that point in time.
+
+enum ConnectionType {
+  CONNECTION_TYPE_UNSPECIFIED = 0;
+  CONNECTION_TYPE_KILLS = 1;
+  CONNECTION_TYPE_STATS = 2;
+}
+
+// The priority order of different resize reasons. The lower the number, the
+// higher the priority.
+enum ResizePriority {
+  option allow_alias = true;
+
+  RESIZE_PRIORITY_UNSPECIFIED = 0;
+  RESIZE_PRIORITY_HIGHEST = 1;
+  RESIZE_PRIORITY_BALLOON_STALL = 1;
+  RESIZE_PRIORITY_NO_KILL_CANDIDATES = 2;
+  RESIZE_PRIORITY_FOCUSED_TAB = 3;
+  RESIZE_PRIORITY_FOCUSED_APP = 4;
+  RESIZE_PRIORITY_PERCEPTIBLE_TAB = 5;
+  RESIZE_PRIORITY_PERCEPTIBLE_APP = 6;
+
+  // Intentionally the same priority.
+  RESIZE_PRIORITY_CACHED_TAB = 7;
+  RESIZE_PRIORITY_CACHED_APP = 7;
+
+  RESIZE_PRIORITY_MGLRU_RECLAIM = 8;
+  RESIZE_PRIORITY_LOWEST = 8;
+  RESIZE_PRIORITY_N_PRIORITIES = 9;
+}
+
+enum PacketType {
+  PACKET_TYPE_UNSPECIFIED = 0;
+  PACKET_TYPE_HANDSHAKE = 1;
+  PACKET_TYPE_CONNECTION_ACK = 2;
+  PACKET_TYPE_CONNECTION_NACK = 3;
+  PACKET_TYPE_KILL_REQUEST = 4;
+  PACKET_TYPE_KILL_DECISION = 5;
+  PACKET_TYPE_DECISION_LATENCY = 6;
+  PACKET_TYPE_MGLRU_REQUEST = 7;
+  PACKET_TYPE_MGLRU_RESPONSE = 8;
+  PACKET_TYPE_NO_KILL_CANDIDATES = 9;
+}
+
+message ConnectionHandshake {
+  // The type of this connection.
+  ConnectionType type = 1;
+}
+
+message KillDecisionRequest {
+  // The sequence number of this request.
+  uint32 sequence_num = 1;
+
+  // The size in KB of the candidate process.
+  uint32 size_kb = 2;
+
+  // The priority of the candidate process.
+  ResizePriority priority = 3;
+}
+
+message KillDecisionResponse {
+  // The sequence number of the corresponding request.
+  uint32 sequence_num = 1;
+
+  // The amount of memory (in KB) that was freed by the VM Memory Management
+  // Service. A value greater than 0 implies that the candidate process should
+  // not be killed.
+  uint32 size_freed_kb = 2;
+}
+
+message DecisionLatency {
+  // The sequence number of the corresponding request.
+  uint32 sequence_num = 1;
+
+  // The time in ms that the client was waiting on a response from the service.
+  uint32 latency_ms = 2;
+}
+
+// At a high level, MGLRU caching is organized as follows:
+// Memory Control Groups (memcg)
+//    Nodes
+//      Generations
+// The following messages are organized in the same way
+// to store the sizes of MGLRU generations
+
+// A single MGLRU generation
+message MglruGeneration {
+  // The sequence number of this generation
+  uint32 sequence_num = 1;
+
+  // The age of this generation in ms
+  uint32 timestamp_msec = 2;
+
+  // The number of KB of anonymous memory in this generation
+  uint32 anon_kb = 3;
+
+  // The number of pages of file cache in this generation
+  uint32 file_kb = 4;
+}
+
+// A single MGLRU node
+message MglruNode {
+  // The id of this node
+  uint32 id = 1;
+
+  // The generations in this node
+  repeated MglruGeneration generations = 2;
+}
+
+// A single memory control group
+message MglruMemcg {
+  // This id of this memory control group
+  uint32 id = 1;
+
+  // The nodes in this memory control group
+  repeated MglruNode nodes = 2;
+}
+
+// The point-in-time stats of the MGLRU
+message MglruStats {
+  // The current memory control groups
+  repeated MglruMemcg cgs = 1;
+}
+
+message MglruResponse {
+  // The stats of the client's MGLRU
+  MglruStats stats = 1;
+}
+
+message VmMemoryManagementPacket {
+  PacketType type = 1;
+  oneof payload {
+    ConnectionHandshake handshake = 2;
+    KillDecisionRequest kill_decision_request = 3;
+    KillDecisionResponse kill_decision_response = 4;
+    DecisionLatency decision_latency = 5;
+    MglruResponse mglru_response = 6;
+  }
+}

@@ -1,0 +1,40 @@
+[package]
+name = "ldt-np-adv-fuzz"
+version = "0.0.0"
+authors = ["Automatically generated"]
+publish = false
+edition = "2018"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+arbitrary = { version = "1.1.7", features = ["derive"] }
+crypto_provider_rustcrypto = { path = "../../../crypto/crypto_provider_rustcrypto", features = ["alloc"] }
+
+[dependencies.ldt_np_adv]
+path = ".."
+
+[dependencies.np_hkdf]
+path = "../../np_hkdf"
+[dependencies.xts_aes]
+path = "../../xts_aes"
+[dependencies.ldt]
+path = "../../ldt"
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "ldt-np-roundtrip"
+path = "fuzz_targets/ldt_np_roundtrip.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "ldt-np-decrypt"
+path = "fuzz_targets/ldt_np_decrypt.rs"
+test = false
+doc = false

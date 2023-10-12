@@ -1,0 +1,124 @@
+Alert: Testing properties under delay
+Alert: PASS: delay = false
+Alert: PASS: delay = true
+Alert: Testing properties under non-delay
+Alert: PASS: delay = true
+Alert: PASS: delay = false
+Alert: PASS: name = MyField
+Alert: PASS: name threw Field.name: Operation not supported.
+Alert: PASS: rect = 200,221,220,201
+Alert: PASS: rect = 100,121,120,101
+Alert: PASS: rect = 100,121,120,101
+Alert: PASS: rect = 200,221,220,201
+Alert: PASS: alignment = left
+Alert: PASS: alignment = left
+Alert: PASS: borderStyle = solid
+Alert: PASS: borderStyle = inset
+Alert: PASS: calcOrderIndex = -1
+Alert: PASS: calcOrderIndex = -1
+Alert: PASS: charLimit = 0
+Alert: PASS: charLimit = 0
+Alert: PASS: comb = false
+Alert: PASS: comb = false
+Alert: PASS: defaultStyle threw Field.defaultStyle: Operation not supported.
+Alert: PASS: defaultStyle threw Field.defaultStyle: Operation not supported.
+Alert: PASS: defaultValue = grue
+Alert: PASS: defaultValue = grue
+Alert: PASS: doNotScroll = false
+Alert: PASS: doNotScroll = false
+Alert: PASS: doNotSpellCheck = false
+Alert: PASS: doNotSpellCheck = false
+Alert: PASS: display = 2
+Alert: PASS: display = 3
+Alert: PASS: doc = [object global]
+Alert: PASS: doc threw Field.doc: Operation not supported.
+Alert: PASS: hidden = false
+Alert: PASS: hidden = true
+Alert: PASS: fileSelect = false
+Alert: PASS: fileSelect = false
+Alert: PASS: fillColor = T
+Alert: PASS: fillColor = T
+Alert: PASS: lineWidth = 1
+Alert: PASS: lineWidth = 4
+Alert: PASS: multiline = false
+Alert: PASS: multiline = false
+Alert: PASS: name = MyField.MyText
+Alert: PASS: name threw Field.name: Operation not supported.
+Alert: PASS: page = 0
+Alert: PASS: page threw Field.page: Cannot assign to readonly property.
+Alert: PASS: password = false
+Alert: PASS: password = false
+Alert: PASS: print = true
+Alert: PASS: print = false
+Alert: PASS: readonly = false
+Alert: PASS: readonly = true
+Alert: PASS: rect = 200,221,220,201
+Alert: PASS: rect threw Field.rect: Incorrect parameter value.
+Alert: PASS: richText = false
+Alert: PASS: richText = false
+Alert: PASS: richValue = undefined
+Alert: PASS: richValue = undefined
+Alert: PASS: rotation = 0
+Alert: PASS: rotation = 0
+Alert: PASS: source = undefined
+Alert: PASS: source = undefined
+Alert: PASS: strokeColor = T
+Alert: PASS: strokeColor = T
+Alert: PASS: submitName = undefined
+Alert: PASS: submitName = undefined
+Alert: PASS: textColor = T
+Alert: PASS: textColor = T
+Alert: PASS: textSize = 0
+Alert: PASS: textSize = 0
+Alert: PASS: type = text
+Alert: PASS: type threw Field.type: Operation not supported.
+Alert: PASS: userName = 
+Alert: PASS: userName = 
+Alert: PASS: value = bleen
+Alert: PASS: value = clams
+Alert: PASS: valueAsString = clams
+Alert: PASS: valueAsString threw Field.valueAsString: Operation not supported.
+Alert: PASS: buttonAlignX = 0
+Alert: PASS: buttonAlignX = 0
+Alert: PASS: buttonAlignY = 0
+Alert: PASS: buttonAlignY = 0
+Alert: PASS: buttonFitBounds = false
+Alert: PASS: buttonFitBounds = false
+Alert: PASS: buttonPosition = 4
+Alert: PASS: buttonPosition = 4
+Alert: PASS: buttonScaleHow = false
+Alert: PASS: buttonScaleHow = false
+Alert: PASS: buttonScaleWhen = 0
+Alert: PASS: buttonScaleWhen = 0
+Alert: PASS: highlight = invert
+Alert: PASS: highlight = invert
+Alert: PASS: type = button
+Alert: PASS: type threw Field.type: Operation not supported.
+Alert: PASS: buttonPosition = 7
+Alert: PASS: buttonPosition = 7
+Alert: PASS: exportValues = Yes
+Alert: PASS: exportValues threw Field.exportValues: Object no longer exists.
+Alert: PASS: radiosInUnison = false
+Alert: PASS: radiosInUnison = false
+Alert: PASS: style = circle
+Alert: PASS: style = circle
+Alert: PASS: type = radiobutton
+Alert: PASS: type threw Field.type: Operation not supported.
+Alert: PASS: value = Off
+Alert: PASS: value = Off
+Alert: PASS: valueAsString = Off
+Alert: PASS: valueAsString threw Field.valueAsString: Operation not supported.
+Alert: PASS: exportValues = Yes
+Alert: PASS: exportValues threw Field.exportValues: Object no longer exists.
+Alert: PASS: style = check
+Alert: PASS: style = check
+Alert: PASS: type = checkbox
+Alert: PASS: type threw Field.type: Operation not supported.
+Alert: PASS: value = Off
+Alert: PASS: value = Off
+Alert: PASS: valueAsString = Off
+Alert: PASS: valueAsString threw Field.valueAsString: Operation not supported.
+Alert: PASS: currentValueIndices = 2
+Alert: PASS: currentValueIndices = 1
+Alert: PASS: fileSelect = true
+Alert: PASS: fileSelect = true

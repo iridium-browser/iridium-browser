@@ -1,0 +1,11 @@
+Name: Tiny CBOR
+Short Name: tinycbor
+URL: https://chromium.googlesource.com/external/github.com/intel/tinycbor.git
+License: MIT
+License File: src/LICENSE
+Security Critical: yes
+Shipped: yes
+
+Description:
+This directory contains the source code of TinyCGBOR, which is a binary object
+representation library.

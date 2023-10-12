@@ -1,0 +1,179 @@
+// Copyright 2015 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+import "attestation_ca.proto";
+import "keystore.proto";
+
+package attestation;
+option go_package = "chromiumos/system_api/attestation_proto";
+
+// Holds TPM credentials that the attestation server will need to see. These
+// credentials must be cleared once the attestation server has certified the
+// AIK.
+message TPMCredentials {
+  reserved 3, 4, 7, 8;
+
+  // The key type of endorsement key stored in |endorsement_public_key| and
+  // |endorsement_credential|.
+  optional KeyType endorsement_key_type = 10 [default = KEY_TYPE_RSA];
+  // The DER encoded SubjectPublicKeyInfo for endorsement key.
+  optional bytes endorsement_public_key = 11;
+  // The DER encoded X.509 certificate of endorsement key.
+  optional bytes endorsement_credential = 2;
+
+  // The DER encoded RSAPublicKey for RSA endorsement key.
+  optional bytes legacy_endorsement_public_key = 1 [deprecated = true];
+  optional EncryptedData default_encrypted_endorsement_credential = 5
+      [deprecated = true];
+  optional EncryptedData test_encrypted_endorsement_credential = 6
+      [deprecated = true];
+
+  // Map of |endorsement_credential| encrypted with a public key associated with
+  // Chrome OS Privacy CA, by CA.
+  map<int32, EncryptedData> encrypted_endorsement_credentials = 9;
+}
+
+// Holds information relevant to a particular AIK.
+message IdentityKey {
+  // The key type of stored key.
+  optional KeyType identity_key_type = 5 [default = KEY_TYPE_RSA];
+  // The DER encoded public key. RSAPublicKey for RSA key. SubjectPublicKeyInfo
+  // for ECC key.
+  optional bytes identity_public_key_der = 1;
+  // The TPM-specific key blob that can be loaded back into the TPM.
+  optional bytes identity_key_blob = 2;
+  // A credential issued by the attestation server. (Now in
+  // IdentityCertificate.)
+  optional bytes identity_credential = 3 [deprecated = true];
+  // The computed enrollment ID, present only for enrolled devices.
+  optional bytes enrollment_id = 4 [deprecated = true];
+}
+
+// Holds information required to verify the binding of an AIK to an EK. This
+// information should be cleared once the attestation server has certified the
+// AIK. This is not used for TPM 2.0 attestation and if it exists, only the
+// public key fields are meaningful.
+message IdentityBinding {
+  // The binding data, as output by the TPM_MakeIdentity operation.
+  optional bytes identity_binding = 1;
+  // The AIK public key, DER encoded.
+  optional bytes identity_public_key_der = 2;
+  // The AIK public key, the raw TPM format. (TPM_PUBKEY for TPM 1.2,
+  // TPMT_PUBLIC for TPM 2.0).
+  optional bytes identity_public_key_tpm_format = 3;
+  // The label used during AIK creation.
+  optional bytes identity_label = 4;
+  // The PCA public key used during AIK creation, in TPM_PUBKEY form.
+  optional bytes pca_public_key = 5;
+}
+
+// Holds owner delegation information.
+message Delegation {
+  reserved 4;
+  reserved "can_read_internal_pub";
+  // The delegate owner blob.
+  optional bytes blob = 1;
+  // The authorization secret.
+  optional bytes secret = 2;
+  // Whether this delegate has permissions to call TPM_ResetLockValue.
+  optional bool has_reset_lock_permissions = 3;
+}
+
+// Holds information about a certified key.
+message CertifiedKey {
+  // The TPM-wrapped key blob.
+  optional bytes key_blob = 1;
+  // The public key in ASN.1 DER form.
+  optional bytes public_key = 2;
+  // The credential of the certified key in X.509 format.
+  optional bytes certified_key_credential = 3;
+  // The issuer intermediate CA certificate in X.509 format.
+  optional bytes intermediate_ca_cert = 4;
+  // A key name.  This is not necessarily a unique identifier.
+  optional bytes key_name = 5;
+  // An arbitrary payload associated with the key.
+  optional bytes payload = 6;
+  // Addtional intermediate CA certificates that helps chaining up to the root
+  // CA. See |AttestationCertificateResponse.additional_intermediate_ca_cert|
+  // for more detail.
+  repeated bytes additional_intermediate_ca_cert = 7;
+  // The public key in TPM_PUBKEY form (TPMT_PUBLIC for TPM 2.0).
+  optional bytes public_key_tpm_format = 8;
+  // The serialized TPM_CERTIFY_INFO for the certified key (TPMS_ATTEST for
+  // TPM 2.0).
+  optional bytes certified_key_info = 9;
+  // The signature of the TPM_CERTIFY_INFO or TPMS_ATTEST by the AIK.
+  optional bytes certified_key_proof = 10;
+  // The original key type specified when the key was created.
+  optional KeyType key_type = 11;
+  // The original key usage specified when the key was created.
+  optional KeyUsage key_usage = 12;
+}
+
+// Features of an identity (bitwise enumeration).
+enum IdentityFeatures {
+  // No identity features.
+  NO_IDENTITY_FEATURES = 0;
+  // This identity carries an EID.
+  IDENTITY_FEATURE_ENTERPRISE_ENROLLMENT_ID = 1;
+}
+
+// Holds all information that a client stores locally.
+message AttestationDatabase {
+  reserved 1, 9, 10, 11, 13;
+  optional TPMCredentials credentials = 2;
+
+  // These deprecated fields are now in identities and identity certificates.
+  optional IdentityBinding identity_binding = 3 [deprecated = true];
+  optional IdentityKey identity_key = 4 [deprecated = true];
+  optional Quote pcr0_quote = 5 [deprecated = true];
+  optional Quote pcr1_quote = 12 [deprecated = true];
+
+  optional Delegation delegate = 6;
+  repeated CertifiedKey device_keys = 7;
+
+  message TemporalIndexRecord {
+    optional bytes user_hash = 1;
+    optional bytes origin_hash = 2;
+    optional int32 temporal_index = 3;
+  }
+  repeated TemporalIndexRecord temporal_index_record = 8;
+
+  // Holds identity-related values generated by the TPM.
+  message Identity {
+    optional int32 features = 1;
+    optional IdentityBinding identity_binding = 2;
+    optional IdentityKey identity_key = 3;
+    // PCR quotes. Keys are PCR indices.
+    map<int32, Quote> pcr_quotes = 4;
+    // NVRAM quoted by AIK. Keys are values of NVRAMQuoteType.
+    map<int32, Quote> nvram_quotes = 5;
+  }
+
+  // The unique device EID.
+  optional bytes enrollment_id = 14;
+
+  // All the known identities. Identity 0 is guaranteed to exist and to have
+  // identity features of IDENTITY_FEATURE_ENTERPRISE_ENROLLMENT_ID.
+  repeated Identity identities = 15;
+
+  // Holds all identity-related value for a combination of Identity and ACA.
+  message IdentityCertificate {
+    // The Identity used for this certificate.
+    optional int32 identity = 1;
+    // The attestation server that this certificate was created with.
+    optional int32 aca = 2;
+    // A credential issued by the attestation server.
+    optional bytes identity_credential = 3;
+  }
+
+  // All the identity certificates we know of. Keys 0 and 1 are reserved
+  // for backwards compatibility and represent identity 0 enrolled with the
+  // default and test ACA respectively.
+  map<int32, IdentityCertificate> identity_certificates = 16;
+}

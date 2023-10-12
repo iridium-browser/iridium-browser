@@ -1,0 +1,20 @@
+[package]
+name = "ukey2_proto"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+protobuf.workspace = true
+
+[features]
+default = ["cargo"]
+cargo = []
+
+[dev-dependencies]
+diff = "0.1.13"
+
+[build-dependencies]
+protobuf-codegen.workspace = true
+

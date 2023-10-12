@@ -1,0 +1,66 @@
+name: Validate
+
+on: [push, pull_request]
+
+env:
+  FORCE_COLOR: true
+
+jobs:
+  build-swift:
+    name: Build Swift
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - name: Build
+      run: swift build
+
+  test-swift:
+    name: Test Swift
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - name: Test
+      run: swift test
+
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Build Connections
+      run: CC=clang CXX=clang++ bazel build --check_visibility=false //connections:core --spawn_strategy=standalone
+    - name: Build Presence
+      run: CC=clang CXX=clang++ bazel build --check_visibility=false //presence --spawn_strategy=standalone
+
+  build-rust-linux:
+    name: Build Rust on Linux
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Build FPP
+      run:  cargo build --manifest-path presence/fpp/fpp/Cargo.toml
+    - name: Build Bluetooth Module
+      run:  cargo test --manifest-path fastpair/rust/bluetooth/Cargo.toml
+    - name: Build Fast Pair
+      run:  cargo test --manifest-path fastpair/rust/demo/rust/Cargo.toml
+
+  build-rust-windows:
+    name: Build Rust on Windows
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Build Bluetooth Module
+      run:  cargo test --manifest-path fastpair/rust/bluetooth/Cargo.toml
+    - name: Build Fast Pair
+      run:  cargo test --manifest-path fastpair/rust/demo/rust/Cargo.toml
+  

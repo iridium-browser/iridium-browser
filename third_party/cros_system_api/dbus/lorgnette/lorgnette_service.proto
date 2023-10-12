@@ -1,0 +1,629 @@
+// Copyright 2020 The ChromiumOS Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+// This file defines messages used for interacting with the document scanner
+// utility, lorgnette.
+package lorgnette;
+option go_package = "chromiumos/system_api/lorgnette_proto";
+
+// Describes possible types of sources that can be supported by a scanner.
+enum SourceType {
+  SOURCE_UNSPECIFIED = 0;
+  SOURCE_PLATEN = 1;
+  SOURCE_ADF_SIMPLEX = 2;
+  SOURCE_ADF_DUPLEX = 3;
+
+  // SourceType used for the implicit default source on devices that do not
+  // expose a source option.
+  SOURCE_DEFAULT = 4;
+}
+
+// Dimensions of the scannable area, in mm.
+message ScannableArea {
+  double width = 1;
+  double height = 2;
+}
+
+// A source that can be scanned from for a scanner.
+message DocumentSource {
+  // The type of this source.
+  SourceType type = 1;
+
+  // The name for this source used by the scanner backend.
+  string name = 2;
+
+  // The dimensions of the scannable area for this source.
+  ScannableArea area = 3;
+
+  // Discrete scanning resolutions.
+  repeated uint32 resolutions = 4;
+
+  // Color modes to use for a document.
+  repeated ColorMode color_modes = 5;
+}
+
+// The color modes that may be supported for a particular scanner.
+enum ColorMode {
+  MODE_UNSPECIFIED = 0;
+  MODE_LINEART = 1;
+  MODE_GRAYSCALE = 2;
+  MODE_COLOR = 3;
+}
+
+// An object representing one scanner.
+message ScannerInfo {
+  // The name of the scanner, as reported by SANE.
+  string name = 1;
+
+  // The manufacturer of the scanner.
+  string manufacturer = 2;
+
+  // The particular model of scanner.
+  string model = 3;
+
+  // The type of the scanner, e.g. "video camera", "flatbed scanner".
+  string type = 4;
+}
+
+// Information returned from a ListScanners dbus request.
+message ListScannersResponse {
+  repeated ScannerInfo scanners = 1;
+}
+
+// Information returned from a GetScannerCapabilities dbus request.
+message ScannerCapabilities {
+  // Discrete scanning resolutions.
+  repeated uint32 resolutions = 1;
+
+  // Sources to scan a document from.
+  repeated DocumentSource sources = 2;
+
+  // Color modes to use for a document.
+  repeated ColorMode color_modes = 3;
+}
+
+// Specifies a region to be scanned.
+message ScanRegion {
+  // The coordinates of the top-left corner of the scan region, in mm.
+  double top_left_x = 1;
+  double top_left_y = 2;
+
+  // The coordinates of the bottom-right corner of the scan region, in mm.
+  double bottom_right_x = 3;
+  double bottom_right_y = 4;
+}
+
+// The image formats that scanned images can be returned as.
+enum ImageFormat {
+  // PNG. To preserve backwards-compatibility, unset ImageFormat fields will
+  // return PNGs.
+  IMAGE_FORMAT_PNG = 0;
+  // JPEG.
+  IMAGE_FORMAT_JPEG = 1;
+}
+
+// Settings for how lorgnette should perform a scan.
+message ScanSettings {
+  // The resolution, in DPI, to use for the scan.
+  uint32 resolution = 1;
+
+  reserved "source";
+  reserved 2;
+
+  // The color mode to use for the scan.
+  ColorMode color_mode = 3;
+
+  // The name of the source to scan the document from.
+  string source_name = 4;
+  //
+  // The region to be scanned.
+  ScanRegion scan_region = 5;
+
+  // The image format scanned images will be returned as.
+  ImageFormat image_format = 6;
+}
+
+// The status of a scan job.
+enum ScanState {
+  // Unknown state.
+  SCAN_STATE_UNSPECIFIED = 0;
+
+  // The scan job is currently running.
+  SCAN_STATE_IN_PROGRESS = 1;
+
+  // The scan job has completed successfully.
+  SCAN_STATE_COMPLETED = 2;
+
+  // The scan job failed.
+  SCAN_STATE_FAILED = 3;
+
+  // Scanning of the current page completed successfully.
+  SCAN_STATE_PAGE_COMPLETED = 4;
+
+  // The scan job was cancelled via a call to CancelScan.
+  SCAN_STATE_CANCELLED = 5;
+}
+
+// The failure mode of a scan job.
+enum ScanFailureMode {
+  // No failure occurred.
+  SCAN_FAILURE_MODE_NO_FAILURE = 0;
+
+  // An unknown or generic failure occurred.
+  SCAN_FAILURE_MODE_UNKNOWN = 1;
+
+  // The device is busy.
+  SCAN_FAILURE_MODE_DEVICE_BUSY = 2;
+
+  // The document feeder is jammed.
+  SCAN_FAILURE_MODE_ADF_JAMMED = 3;
+
+  // The document feeder is empty.
+  SCAN_FAILURE_MODE_ADF_EMPTY = 4;
+
+  // The flatbed cover is open.
+  SCAN_FAILURE_MODE_FLATBED_OPEN = 5;
+
+  // An error occurred while communicating with the device.
+  SCAN_FAILURE_MODE_IO_ERROR = 6;
+}
+
+// The result of a requested operation.  This captures both the potential SANE
+// errors and other internal errors.
+enum OperationResult {
+  // An unknown or generic failure occurred.
+  OPERATION_RESULT_UNKNOWN = 0;
+
+  // Operation succeeded.
+  OPERATION_RESULT_SUCCESS = 1;
+
+  // The operation is not supported.
+  OPERATION_RESULT_UNSUPPORTED = 2;
+
+  // The operation was cancelled.
+  OPERATION_RESULT_CANCELLED = 3;
+
+  // The device is busy.
+  OPERATION_RESULT_DEVICE_BUSY = 4;
+
+  // Data or argument is invalid.
+  OPERATION_RESULT_INVALID = 5;
+
+  // Value is the wrong type for the underlying option.
+  OPERATION_RESULT_WRONG_TYPE = 6;
+
+  // No more data is available.
+  OPERATION_RESULT_EOF = 7;
+
+  // The document feeder is jammed.
+  OPERATION_RESULT_ADF_JAMMED = 8;
+
+  // The document feeder is empty.
+  OPERATION_RESULT_ADF_EMPTY = 9;
+
+  // The flatbed cover is open.
+  OPERATION_RESULT_COVER_OPEN = 10;
+
+  // An error occurred while communicating with the device.
+  OPERATION_RESULT_IO_ERROR = 11;
+
+  // The device requires authentication.
+  OPERATION_RESULT_ACCESS_DENIED = 12;
+
+  // Not enough memory was available to complete the operation.
+  OPERATION_RESULT_NO_MEMORY = 13;
+
+  // The device was not reachable.
+  OPERATION_RESULT_UNREACHABLE = 14;
+
+  // The requested handle was not found.
+  OPERATION_RESULT_MISSING = 15;
+
+  // An internal error occurred.
+  OPERATION_RESULT_INTERNAL_ERROR = 16;
+}
+
+// Identifier of a scanner that can be passed to OpenScanner.  ScannerId values
+// are returned in ScannerInfo during discovery.
+message ScannerId {
+  // The SANE scanner string, e.g. airscan:escl:Scanner:https://...
+  string connection_string = 1;
+}
+
+// Unguessable token referring to an open scanner handle.  Scanner handles
+// are returned by OpenScanner and are passed to other functions that operate
+// on an open scanner.
+message ScannerHandle {
+  string token = 1;
+}
+
+// The type of a ScannerOption.  These correspond to SANE option types.
+enum OptionType {
+  TYPE_UNKNOWN = 0;
+  TYPE_BOOL = 1;
+  TYPE_INT = 2;
+  TYPE_FIXED = 3;
+  TYPE_STRING = 4;
+  TYPE_BUTTON = 5;
+  TYPE_GROUP = 6;
+}
+
+// The units for a ScannerOption.  These correspond to SANE unit types.
+enum OptionUnit {
+  UNIT_NONE = 0;
+  UNIT_PIXEL = 1;
+  UNIT_BIT = 2;
+  UNIT_MM = 3;
+  UNIT_DPI = 4;
+  UNIT_PERCENT = 5;
+  UNIT_MICROSECOND = 6;
+}
+
+// An option group and a list of options that belong to this group.  This is an
+// explicit representation of SANE's implicit SANE_TYPE_GROUP option behavior.
+// Unlike other option types, groups are not required to have a name or
+// description, so those fields are not present here.
+message OptionGroup {
+  // Human-readable short title for the group.
+  string title = 1;
+
+  // The names of options (not the options themselves) that are part of this
+  // group, in the order supplied by the backend.  The group option itself is
+  // not in this list.
+  repeated string members = 2;
+}
+
+// A constraint on the valid values for an option.  This represents the same
+// set of constraint types as SANE, except that INT and FIXED are handled as
+// separate types.  Splitting the two types matches the behavior of the option
+// value itself.
+message OptionConstraint {
+  enum ConstraintType {
+    CONSTRAINT_NONE = 0;
+    CONSTRAINT_INT_RANGE = 1;
+    CONSTRAINT_FIXED_RANGE = 2;
+    CONSTRAINT_INT_LIST = 3;
+    CONSTRAINT_FIXED_LIST = 4;
+    CONSTRAINT_STRING_LIST = 5;
+  }
+  ConstraintType constraint_type = 1;
+
+  message IntRange {
+    int32 min = 1;
+    int32 max = 2;
+    int32 quant = 3;
+  }
+  message FixedRange {
+    double min = 1;
+    double max = 2;
+    double quant = 3;
+  }
+  optional IntRange int_range = 2;      // Used for CONSTRAINT_INT_RANGE.
+  optional FixedRange fixed_range = 3;  // Used for CONSTRAINT_FIXED_RANGE.
+  repeated int32 valid_int = 4;         // Used for CONSTRAINT_INT_LIST.
+  repeated double valid_fixed = 5;      // Used for CONSTRAINT_FIXED_LIST.
+  repeated string valid_string = 6;     // Used for CONSTRAINT_STRING_LIST.
+}
+
+// A single scanner option and its value.  This is equivalent to a
+// SANE_Option_Descriptor plus a decoded response from
+// sane_control_option(SANE_ACTION_GET_VALUE, ...).
+message ScannerOption {
+  // The name of the option.  Not localized and not necessarily intended for
+  // display to the user.
+  string name = 1;
+
+  // The human-readable short title of the option.
+  string title = 2;
+
+  // A longer human-readable description of the option.  This may contain
+  // embedded newlines.  The frontend should re-wrap the text as needed.
+  string description = 3;
+
+  // The type of the option.  This affects the value, the legal constraint
+  // types, and the get/set behavior.
+  OptionType option_type = 4;
+
+  // The units used with this option's value.
+  OptionUnit unit = 5;
+
+  // A constraint on allowed values for this option.
+  optional OptionConstraint constraint = 6;
+
+  // Zero or more int values.  Represented as a separate type so unset can be
+  // distinguished from a zero-length list.
+  message IntValues {
+    repeated int32 value = 1;
+  }
+
+  // Zero or more fixed values.  Represented as a separate type so unset can be
+  // distinguished from a zero-length list.
+  message FixedValues {
+    repeated double value = 1;
+  }
+
+  oneof value {
+    bool bool_value = 7;          // Used when option_type == TYPE_BOOL.
+    IntValues int_value = 8;      // Used when option_type == TYPE_INT.
+    FixedValues fixed_value = 9;  // Used when option_type == TYPE_FIXED.
+    string string_value = 10;     // Used when option_type == TYPE_STRING.
+  }
+
+  // Detectable in software.  Corresponds to SANE_CAP_SOFT_DETECT.
+  bool detectable = 11;
+
+  // Settable in software.  Corresponds to SANE_CAP_SOFT_SELECT.
+  bool sw_settable = 12;
+
+  // Settable with physical user intervention, i.e. a hardware button or switch.
+  // Corresponds to SANE_CAP_HARD_SELECT.
+  bool hw_settable = 13;
+
+  // The backend can pick a value automatically.  Corresponds to
+  // SANE_CAP_AUTOMATIC.
+  bool auto_settable = 14;
+
+  // Option is emulated in the backend.  Corresponds to SANE_CAP_EMULATED.
+  bool emulated = 15;
+
+  // Option is active based on the current hardware configuration and/or other
+  // option settings.  Active options can have their value retrieved and set if
+  // the other flags indicate the appropriate capabilities.  Inactive options do
+  // not return a value and cannot be set.  This is the inverse of
+  // SANE_CAP_INACTIVE.
+  bool active = 16;
+
+  // Option is marked as advanced by the backend.  The option behavior is the
+  // same as a non-advanced option.  This is a hint that that UI might consider
+  // hiding this option by default.  Corresponds to SANE_CAP_ADVANCED.
+  bool advanced = 17;
+}
+
+// The available scanner options and their current values.
+message ScannerConfig {
+  // Scanner handle that this config applies to.
+  ScannerHandle scanner = 1;
+
+  // Mapping from option name to ScannerOption.  All options returned by the
+  // backend except groups will be in this map in some arbitrary order.
+  map<string, ScannerOption> options = 2;
+
+  // The option groups in the order supplied by the backend.  Entries in the
+  // members field can be looked up in the options field of this message.
+  repeated OptionGroup option_groups = 3;
+}
+
+// Information passed to a StartScan D-Bus request.
+// Used by lorgnette to initialize a new scan job.
+message StartScanRequest {
+  // The name of the device to scan from.
+  string device_name = 1;
+
+  // The settings to use for this scan.
+  ScanSettings settings = 2;
+}
+
+// Information returned from a StartScan D-Bus request.
+message StartScanResponse {
+  // The status of the scan.
+  ScanState state = 1;
+
+  // The failure reason if state is SCAN_STATE_FAILED.
+  string failure_reason = 2;
+
+  // A UUID identifying the scan job.
+  string scan_uuid = 3;
+
+  // The failure mode of the scan job.
+  ScanFailureMode scan_failure_mode = 4;
+}
+
+// Information passed to a GetNextImage D-Bus request.
+// Used by lorgnette to read image data for a scan job.
+message GetNextImageRequest {
+  // A UUID identifying the scan job.
+  string scan_uuid = 1;
+}
+
+// Information returned from a GetNextImage D-Bus request;
+message GetNextImageResponse {
+  // True if initiating this image fetch was successful.
+  bool success = 1;
+
+  // The failure reason if success is false.
+  string failure_reason = 2;
+
+  // The failure mode of the scan job.
+  ScanFailureMode scan_failure_mode = 3;
+}
+
+// Information passed to a CancelScan D-Bus request.
+// Used by lorgnette to find the scan job to cancel.
+message CancelScanRequest {
+  // A UUID identifying the scan job.
+  string scan_uuid = 1;
+}
+
+// Information returned from a CancelScan D-Bus request;
+message CancelScanResponse {
+  // True if requesting scan cancellation was successful.
+  bool success = 1;
+
+  // The failure reason if success is false.
+  string failure_reason = 2;
+}
+
+// Information sent with ScanStatus D-Bus signal.
+message ScanStatusChangedSignal {
+  // A UUID identifying the scan job.
+  string scan_uuid = 1;
+
+  // The status of the scan.
+  ScanState state = 2;
+
+  // The failure reason if state is SCAN_STATE_FAILED.
+  string failure_reason = 3;
+
+  // Scan progress from 0 to 100%.
+  uint32 progress = 4;
+
+  // The page field will be set to the page currently being scanned for
+  // SCAN_STATE_IN_PROGRESS, or the page that has just been completed for
+  // SCAN_STATE_PAGE_COMPLETED.
+  // Pages are 1-indexed.
+  uint32 page = 5;
+
+  // If state is SCAN_STATE_PAGE_COMPLETED and more_pages is true, the client
+  // should send another GetNextImage request in order to fetch the next page.
+  bool more_pages = 6;
+
+  // The failure mode of the scan job.
+  ScanFailureMode scan_failure_mode = 7;
+}
+
+message SetDebugConfigRequest {
+  // True if debugging should be enabled, or false if it should be disabled.
+  bool enabled = 1;
+}
+
+message SetDebugConfigResponse {
+  // True if changing the debug setup succeeded.
+  bool success = 1;
+
+  // The previous value of debugging.
+  bool old_enabled = 2;
+}
+
+// Policy for downloading additional backends with DLC.
+enum BackendDownloadPolicy {
+  // Download DLC if a scanner that needs additional backends is detected.
+  DOWNLOAD_IF_NEEDED = 0;
+
+  // Never download DLC even if a scanner that needs it is detected.
+  DOWNLOAD_NEVER = 1;
+
+  // Always download backends DLC even if no detected scanner needs it.
+  DOWNLOAD_ALWAYS = 2;
+}
+
+// Input parameter for the StartScannerDiscovery d-bus method.
+message StartScannerDiscoveryRequest {
+  // Identifier of this client.  If a new discovery session is requested for the
+  // same client, existing open handles will be invalidated.
+  string client_id = 1;
+
+  // Policy for downloading DLC containing additional backends.
+  BackendDownloadPolicy download_policy = 2;
+
+  // If true, only check for directly-connected scanners.  Note that signals
+  // may still be sent for network scanners if other discovery sessions are
+  // active.
+  bool local_only = 3;
+
+  // If true, only return the preferred backend for devices that are discovered
+  // by multiple backends.
+  bool preferred_only = 4;
+}
+
+// Response from the StartScannerDiscovery d-bus method.
+message StartScannerDiscoveryResponse {
+  // True if the session was successfully started.
+  bool started = 1;
+
+  // If started is true, an identifier for this session.  It will be included in
+  // signals and can be passed to StopScannerDiscovery.
+  string session_id = 2;
+}
+
+// Info sent with the ScannerListChanged signal when a discovery session
+// is active.
+message ScannerListChangedSignal {
+  enum ScannerListEvent {
+    // Placeholder for proto.  Should never be sent in normal operation.
+    UNKNOWN_EVENT = 0;
+
+    // A new scanner was added to the list.
+    SCANNER_ADDED = 1;
+
+    // Local enumeration is complete.  Additional events could still come later
+    // if devices are plugged or unplugged.
+    ENUM_COMPLETE = 2;
+
+    // A scanner was removed from the list.
+    SCANNER_REMOVED = 3;
+
+    // The discovery session is ending due to a timeout, a StopScannerDiscovery
+    // call, or a lorgnette restart.  No further signals should be expected for
+    // this session.  If a client wants to continue receiving device updates,
+    // it must start a new discovery session.
+    SESSION_ENDING = 4;
+  }
+
+  // The session this event belongs to.
+  string session_id = 1;
+
+  // What type of event this signal is reporting.
+  ScannerListEvent event_type = 2;
+
+  // For added/removed events, information about the affected scanner.
+  ScannerInfo scanner = 3;
+}
+
+// Input parameter for the StopScannerDiscovery d-bus method.
+message StopScannerDiscoveryRequest {
+  // Session identifier previously returned from StartScannerDiscovery.
+  string session_id = 1;
+}
+
+// Response from the StopScannerDiscovery d-bus method.
+message StopScannerDiscoveryResponse {
+  // True if the session was successfully stopped.  False if the session was not
+  // found or an error happened.  No further signals will be sent for the
+  // stopped session even if this returns false.
+  bool stopped = 1;
+}
+
+// Input parameter for the OpenScanner d-bus method.
+message OpenScannerRequest {
+  // Identifier of the scanner to be opened.  This should have been returned
+  // from a previous ScannerListChanged signal.
+  ScannerId scanner_id = 1;
+
+  // Identifier of the client opening the scanner.  This is used to ensure that
+  // the same scanner is not opened for two clients simultaneously.
+  string client_id = 2;
+}
+
+// Response from the OpenScanner d-bus method.
+message OpenScannerResponse {
+  // Identifier of the scanner passed to OpenScanner.
+  ScannerId scanner_id = 1;
+
+  // Result of opening the scanner.
+  OperationResult result = 2;
+
+  // If result is OPERATION_RESULT_SUCCESS, the current configuration of the
+  // scanner, including a handle to be used for future operations.
+  optional ScannerConfig config = 3;
+}
+
+// Input parameter for the CloseScanner d-bus method.
+message CloseScannerRequest {
+  // Scanner to be closed.  Must have been returned from a previous call to
+  // OpenScanner.
+  ScannerHandle scanner = 1;
+}
+
+// Response from the CloseScanner d-bus method.
+message CloseScannerResponse {
+  // Scanner handle that was passed to CloseScanner.
+  ScannerHandle scanner = 1;
+
+  // The result of closing the handle.  The handle should be assumed to be no
+  // longer valid even if the result is not OPERATION_RESULT_SUCCESS.
+  OperationResult result = 2;
+}

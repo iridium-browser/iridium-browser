@@ -18,6 +18,7 @@
 
 #include "cpp/cam/cam.h"
 #include "cpp/cam/hct.h"
+#include <cmath>
 
 namespace material_color_utilities {
 

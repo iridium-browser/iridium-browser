@@ -40,7 +40,7 @@ namespace {
 
 const char kAuraTransientParent[] = "aura-transient-parent";
 
-GskRenderNode* GetRenderNodeChild(GskRenderNode* node) {
+GskRenderNode* GetRenderNodeChild(const GskRenderNode* node) {
   switch (gsk_render_node_get_node_type(node)) {
     case GSK_TRANSFORM_NODE:
       return gsk_transform_node_get_child(node);
@@ -68,7 +68,7 @@ GskRenderNode* GetRenderNodeChild(GskRenderNode* node) {
 std::vector<GskRenderNode*> GetRenderNodeChildren(GskRenderNode* node) {
   std::vector<GskRenderNode*> result;
   size_t n_children = 0;
-  GskRenderNode* (*get_child)(GskRenderNode*, guint) = nullptr;
+  GskRenderNode* (*get_child)(const GskRenderNode*, guint) = nullptr;
   switch (gsk_render_node_get_node_type(node)) {
     case GSK_CONTAINER_NODE:
       n_children = gsk_container_node_get_n_children(node);
